@@ -10,7 +10,7 @@ namespace Fortwars
 	public class CombatRound : BaseRound
 	{
 		public override string RoundName => "Combat";
-		public override int RoundDuration => 30;
+		public override int RoundDuration => 120;
 
 		protected override void OnStart()
 		{
