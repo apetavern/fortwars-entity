@@ -16,3 +16,13 @@
     ]
 ]
 
+@SolidClass base(Trigger, Targetname) = func_flagzone :
+    "Players capture the flag in this area."
+[
+    Team(choices) : "Team" : 0 =
+    [
+        0 : "Red"
+        1 : "Blue"
+    ]
+]
+
