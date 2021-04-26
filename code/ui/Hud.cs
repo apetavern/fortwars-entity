@@ -12,9 +12,10 @@ namespace Fortwars.UI
 
 			RootPanel.StyleSheet.Load( "/ui/Hud.scss" );
 
-			RootPanel.AddChild<NameTags>();
+			RootPanel.AddChild<Sandbox.UI.NameTags>();
+			RootPanel.AddChild<KillFeed>();
 
-			RootPanel.AddChild<ChatBox>();
+			RootPanel.AddChild<Sandbox.UI.ChatBox>();
 			RootPanel.AddChild<Vitals>();
 			RootPanel.AddChild<RoundStatus>();
 			RootPanel.AddChild<BuildMenu>();

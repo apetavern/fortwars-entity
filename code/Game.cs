@@ -89,6 +89,24 @@ namespace Fortwars
 		{
 			Round?.OnPlayerKilled( player as Player );
 
+			Log.Info($"{player.Name} was killed");
+
+			if (player.LastAttacker != null)
+			{
+				if (player.LastAttacker is Player attackPlayer)
+				{
+					KillFeed.AddEntry(attackPlayer.SteamId, attackPlayer.Name, player.SteamId, player.Name, player.LastAttackerWeapon?.ClassInfo?.Name);
+				}
+				else
+				{
+					KillFeed.AddEntry((ulong)player.LastAttacker.NetworkIdent, player.LastAttacker.ToString(), player.SteamId, player.Name, "killed");
+				}
+			}
+			else
+			{
+				KillFeed.AddEntry((ulong)0, "", player.SteamId, player.Name, "died");
+			}
+
 			base.PlayerKilled( player );
 		}
 
