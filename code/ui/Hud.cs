@@ -11,6 +11,7 @@ namespace Fortwars.UI
 			if ( !IsClient ) return;
 
 			RootPanel.StyleSheet.Load( "/ui/Hud.scss" );
+			RootPanel.StyleSheet.Load("/ui/hud/BuildHelp.scss");
 
 			RootPanel.AddChild<Sandbox.UI.NameTags>();
 			RootPanel.AddChild<KillFeed>();
@@ -18,6 +19,7 @@ namespace Fortwars.UI
 			RootPanel.AddChild<Sandbox.UI.ChatBox>();
 			RootPanel.AddChild<Vitals>();
 			RootPanel.AddChild<RoundStatus>();
+			RootPanel.AddChild<BuildHelp>();
 			RootPanel.AddChild<BuildMenu>();
 		}
 	}
