@@ -16,6 +16,8 @@ namespace Fortwars
 
 		public virtual string Name => "";
 
+		public virtual Color Color => Color.Gray;
+
 		public virtual void OnPlayerSpawn( FortwarsPlayer player ) { }
 	}
 }

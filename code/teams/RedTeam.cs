@@ -7,6 +7,8 @@ namespace Fortwars
 	{
 		public override Team ID => Team.Red;
 		public override string Name => "Red Team";
+		public override Color Color => Color.Red;
+
 
 		public override void OnPlayerSpawn( FortwarsPlayer player )
 		{
