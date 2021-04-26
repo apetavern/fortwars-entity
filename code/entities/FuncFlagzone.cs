@@ -31,6 +31,8 @@ namespace Fortwars
             {
 				var player = other as Player;
 				Log.Info($"{player.Name} StartTouch flag belonging to team {Team}");
+
+				player.PlaySound("ctf_flag_pickup");
 			}
 		}
 
