@@ -1,0 +1,49 @@
+﻿using Sandbox;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Fortwars
+{
+	public class BuildRound : BaseRound
+	{
+		public override string RoundName => "Build";
+		public override int RoundDuration => 30;
+
+		protected override void OnStart()
+		{
+			Log.Info( "Started Build Round" );
+
+			if ( Host.IsServer )
+			{
+				Sandbox.Player.All.ForEach( ( player ) => (player as FortwarsPlayer).Respawn() );
+			}
+
+			// todo: enable the build wall brush
+		}
+
+		protected override void OnFinish()
+		{
+			Log.Info( "Finished Build Round" );
+		}
+
+		protected override void OnTimeUp()
+		{
+			Game.Instance.ChangeRound( new CombatRound() );
+		}
+
+		public override void OnPlayerKilled( Player player )
+		{
+			player.Respawn();
+
+			base.OnPlayerKilled( player );
+		}
+
+		public override void OnPlayerSpawn( Player player )
+		{
+			base.OnPlayerSpawn( player );
+		}
+	}
+}

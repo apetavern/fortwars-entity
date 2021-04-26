@@ -1,0 +1,18 @@
+@PointClass editormodel("models/citizen/citizen_v2_staging.vmdl") = info_player_teamspawn
+[
+    Team(choices) : "Team" : 0 =
+    [
+        0 : "Red"
+        1 : "Blue"
+    ]
+]
+
+@PointClass editormodel("models/rust_props/small_junk/toilet_paper.vmdl") = info_flag_spawn
+[
+    Team(choices) : "Team" : 0 =
+    [
+        0 : "Red"
+        1 : "Blue"
+    ]
+]
+

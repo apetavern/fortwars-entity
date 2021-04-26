@@ -1,0 +1,109 @@
+﻿rootpanel {
+    background-color: rgba( #333, 0 );
+    transition: background-color 0.2s ease-in;
+
+    &.buildmenuopen {
+        transition: background-color 0.3s ease-out;
+        background-color: rgba( #333, 0.9 );
+    }
+
+
+    &.devcamera {
+        display: none;
+    }
+}
+
+.hidden {
+    display: none;
+    opacity: 0;
+}
+
+vitals {
+    position: absolute;
+    bottom: 86px;
+    left: 120px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    // mix-blend-mode: overlay;
+
+    .health {
+        // color: rgb(85, 255, 0);
+        font-family: Roboto;
+        font-size: 36px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.85);
+        margin-left: 8px;
+    }
+
+    .segments {
+        panel {
+            width: 16px;
+            height: 36px;
+            background-color: rgb(85, 85, 85);
+            margin-right: 4px;
+            box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.85);
+        }
+    }
+
+    .hp-icon {
+        margin-left: 4px;
+        width: 36px;
+        height: 36px;
+        background-image: url( /ui/hud_icon_hp.png );
+        background-size: 100%;
+        background-image-tint: green;
+    }
+}
+
+roundstatus {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 40px;
+
+    label {
+        font-family: Roboto;
+        color: white;
+    }
+
+    panel.round-info {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        margin: 0 64px;
+        // background-color: rgba(0, 0, 0, 0.5);
+
+        label {
+            &.time {
+                font-size: 72px;
+                font-weight: bold;
+                text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.85);
+            }
+
+            &.phase {
+                font-size: 32px;
+                text-transform: uppercase; // todo: doesn't work
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.85);
+            }
+        }
+    }
+
+    label.score {
+        background-color: rgb(80, 80, 80);
+        padding: 8px 24px;
+        font-size: 48px;
+        text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.85);
+        box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.35);
+
+        &.score__blue {
+            background-color: rgba(0, 0, 255, 0.8);
+        }
+
+        &.score__red {
+            background-color: rgba(255, 0, 0, 0.8);
+        }
+    }
+}

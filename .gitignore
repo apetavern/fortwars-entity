@@ -1,0 +1,13 @@
+﻿# Sandbox
+code/accesslist.txt
+Properties
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Oo]bj/

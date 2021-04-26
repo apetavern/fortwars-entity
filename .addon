@@ -1,0 +1,21 @@
+{
+    "name": "Fortwars",
+    "version": "1.0",
+    "sharedassets": "*.*",
+    
+    "depends": 
+    [
+      "base",
+      "citizen",
+      "rust"
+    ],
+
+    "gamemodes":
+    [
+      {
+        "name": "fortwars",
+        "title": "Fortwars",
+        "description": "Build a fort then play capture the flag"
+      }
+    ]
+}
