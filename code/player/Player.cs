@@ -1,4 +1,5 @@
-﻿using Sandbox;
+using Sandbox;
+using Sandbox.UI;
 
 namespace Fortwars
 {
@@ -18,8 +19,17 @@ namespace Fortwars
 
 		public override void Respawn()
 		{
+			// assign random team
 			if (Team == null)
+            {
+				int team = Rand.Int(0, 1);
+				if (team == 0)
 				Team = Game.Instance.BlueTeam;
+				else
+					Team = Game.Instance.RedTeam;
+
+				ChatBox.AddInformation(Player.All, $"{Name} has joined {Team.Name}", $"avatar:{SteamId}");
+			}
 
 			SetModel( "models/citizen/citizen.vmdl" );
 
