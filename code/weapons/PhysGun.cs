@@ -58,13 +58,6 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 		}
 
 		bool grabEnabled = grabbing && input.Down( InputButton.Attack1 );
-		bool wantsToFreeze = input.Pressed( InputButton.Attack2 );
-
-		if ( IsClient && wantsToFreeze )
-		{
-			grabEnabled = false;
-			grabbing = false;
-		}
 
 		BeamActive = grabEnabled;
 
@@ -79,7 +72,7 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 				{
 					if ( heldBody.IsValid() )
 					{
-						UpdateGrab( input, eyePos, eyeRot, eyeDir, wantsToFreeze );
+						UpdateGrab( input, eyePos, eyeRot, eyeDir );
 					}
 					else
 					{
@@ -137,12 +130,6 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 		if ( body.BodyType == PhysicsBodyType.Keyframed )
 			return;
 
-		// Unfreeze
-		if ( body.BodyType == PhysicsBodyType.Static )
-		{
-			body.BodyType = PhysicsBodyType.Dynamic;
-		}
-
 		if ( IsBodyGrabbed( body ) )
 			return;
 
@@ -153,22 +140,8 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 		GrabbedBone = tr.Entity.PhysicsGroup.GetBodyIndex( body );
 	}
 
-	private void UpdateGrab( UserInput input, Vector3 eyePos, Rotation eyeRot, Vector3 eyeDir, bool wantsToFreeze )
+	private void UpdateGrab( UserInput input, Vector3 eyePos, Rotation eyeRot, Vector3 eyeDir )
 	{
-		if ( wantsToFreeze )
-		{
-			heldBody.BodyType = PhysicsBodyType.Static;
-
-			if ( GrabbedEntity.IsValid() )
-			{
-				var freezeEffect = Particles.Create( "particles/physgun_freeze.vpcf" );
-				freezeEffect.SetPos( 0, heldBody.Transform.PointToWorld( GrabbedPos ) );
-			}
-
-			GrabEnd();
-			return;
-		}
-
 		MoveTargetDistance( input.MouseWheel * TargetDistanceSpeed );
 
 		if ( input.Down( InputButton.Use ) )
@@ -262,6 +235,7 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 
 		heldBody.Wake();
 		heldBody.EnableAutoSleeping = false;
+		heldBody.BodyType = PhysicsBodyType.Dynamic;
 
 		holdJoint = PhysicsJoint.Weld
 			.From( holdBody )
@@ -273,6 +247,12 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 
 	private void GrabEnd()
 	{
+		if ( GrabbedEntity.IsValid() )
+		{
+			var freezeEffect = Particles.Create( "particles/physgun_freeze.vpcf" );
+			freezeEffect.SetPos( 0, heldBody.Transform.PointToWorld( GrabbedPos ) );
+		}
+
 		if ( holdJoint.IsValid() )
 		{
 			holdJoint.Remove();
@@ -281,6 +261,7 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 		if ( heldBody.IsValid() )
 		{
 			heldBody.EnableAutoSleeping = true;
+			heldBody.BodyType = PhysicsBodyType.Static;
 		}
 
 		heldBody = null;
