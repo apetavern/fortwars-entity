@@ -10,7 +10,7 @@ namespace Fortwars
 	public class CombatRound : BaseRound
 	{
 		public override string RoundName => "Combat";
-		public override int RoundDuration => 120;
+		public override int RoundDuration => 30;
 
 		protected override void OnStart()
 		{
@@ -21,7 +21,8 @@ namespace Fortwars
 				Player.All.ForEach( ( player ) => (player as Player).Respawn() );
 			}
 
-			// todo: disable the build wall brush
+			foreach (var wall in Entity.All.OfType<FuncWallToggle>())
+				wall.Hide();
 		}
 
 		protected override void OnFinish()

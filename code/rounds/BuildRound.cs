@@ -21,7 +21,8 @@ namespace Fortwars
 				Sandbox.Player.All.ForEach( ( player ) => (player as FortwarsPlayer).Respawn() );
 			}
 
-			// todo: enable the build wall brush
+			foreach (var wall in Entity.All.OfType<FuncWallToggle>())
+				wall.Show();
 		}
 
 		protected override void OnFinish()
