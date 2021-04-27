@@ -1,6 +1,8 @@
 ﻿# Sandbox
 code/accesslist.txt
 Properties
+.intermediate
+*.csproj
 
 # User-specific files
 *.rsuser
