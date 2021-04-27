@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using Sandbox.Joints;
+using System;
 using System.Linq;
 
 [Library( "physgun" )]
@@ -25,6 +26,7 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 	protected virtual float AngularDampingRatio => 1.0f;
 	protected virtual float TargetDistanceSpeed => 50.0f;
 	protected virtual float RotateSpeed => 0.2f;
+	protected virtual float RotateSnapDegree => 45.0f;
 
 	[Net] public bool BeamActive { get; set; }
 	[Net] public Entity GrabbedEntity { get; set; }
@@ -154,7 +156,7 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 			EnableAngularSpring( false );
 		}
 
-		GrabMove( eyePos, eyeDir, eyeRot );
+		GrabMove( eyePos, eyeDir, eyeRot, input.Down( InputButton.Run ) );
 	}
 
 	private void EnableAngularSpring( bool enabled )
@@ -269,13 +271,23 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 		grabbing = false;
 	}
 
-	private void GrabMove( Vector3 startPos, Vector3 dir, Rotation rot )
+	private void GrabMove( Vector3 startPos, Vector3 dir, Rotation rot, bool snapAngles )
 	{
 		if ( !heldBody.IsValid() )
 			return;
 
 		holdBody.Pos = startPos + dir * holdDistance;
 		holdBody.Rot = rot * heldRot;
+
+		if (snapAngles)
+        {
+			var angles = holdBody.Rot.Angles();
+			angles.yaw = MathF.Round(angles.yaw / RotateSnapDegree) * RotateSnapDegree;
+			angles.pitch = MathF.Round(angles.pitch / RotateSnapDegree) * RotateSnapDegree;
+			angles.roll = MathF.Round(angles.roll / RotateSnapDegree) * RotateSnapDegree;
+
+			holdBody.Rot = Rotation.From(angles);
+		}
 	}
 
 	private void MoveTargetDistance( float distance )
