@@ -15,6 +15,7 @@ namespace Fortwars.UI
 
 			RootPanel.AddChild<Sandbox.UI.NameTags>();
 			RootPanel.AddChild<KillFeed>();
+			RootPanel.AddChild<Scoreboard>();
 
 			RootPanel.AddChild<Sandbox.UI.ChatBox>();
 			RootPanel.AddChild<Vitals>();
