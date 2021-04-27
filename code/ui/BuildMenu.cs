@@ -30,11 +30,9 @@ public partial class BuildMenu : Panel
 		};
 
 		Canvas.AddItems( new string[] {
-			"citizen_props/concreteroaddivider01.vmdl",
-			"citizen_props/crate01.vmdl",
-			"rust_props/wooden_crates/wooden_crate_a.vmdl",
-			"rust_props/wooden_crates/wooden_crate_b.vmdl",
-			"rust_props/wooden_crates/wooden_crate_c.vmdl"
+			"fw.block_3x2.vmdl",
+			"fw.block_2x2.vmdl",
+			"fw.block_1x2.vmdl",
 		} );
 	}
 
