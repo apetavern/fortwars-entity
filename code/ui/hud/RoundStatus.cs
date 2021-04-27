@@ -41,6 +41,9 @@ namespace Fortwars.UI
 			Phase.Text = round.RoundName.ToUpper();
 			Time.Text = TimeSpan.FromSeconds( Math.Floor(round.TimeLeft) ).ToString( @"mm\:ss" );
 
+			BlueScore.Text = $"{game.BlueTeamScore}";
+			RedScore.Text = $"{game.RedTeamScore}";
+
 			// This is kinda UI, not sure where to put this
 			if (round.TimeLeft != lastTimeLeft)
 			{

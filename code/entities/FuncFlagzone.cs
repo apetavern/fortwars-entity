@@ -28,26 +28,12 @@ namespace Fortwars
 				return;
 
 			if (other is Player)
-            {
-				var player = other as Player;
-				Log.Info($"{player.Name} StartTouch flag belonging to team {Team}");
-
-				player.PlaySound("ctf_flag_pickup");
-			}
+				Game.Instance.OnPlayerTouchFlagzone(other as FortwarsPlayer, (Team)Team);
 		}
 
 		public override void EndTouch(Entity other)
 		{
 			base.EndTouch(other);
-
-			if (other.IsWorld)
-				return;
-
-			if (other is Player)
-			{
-				var player = other as Player;
-				Log.Info($"{player.Name} EndTouch flag belonging to team {Team}");
-			}
 		}
 
 	}

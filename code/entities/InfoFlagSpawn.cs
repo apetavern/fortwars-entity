@@ -3,7 +3,7 @@
 namespace Fortwars
 {
 	[Library( "info_flag_spawn" )]
-	public partial class InfoFlagSpawn : ModelEntity
+	public partial class InfoFlagSpawn : Entity
 	{
 		[HammerProp("team")]
 		public int Team { get; set; }
@@ -12,30 +12,12 @@ namespace Fortwars
 		{
 			base.Spawn();
 
-			MoveType = MoveType.Physics;
-			CollisionGroup = CollisionGroup.Interactive;
-			PhysicsEnabled = true;
-			UsePhysicsCollision = true;
-			EnableHideInFirstPerson = true;
-			EnableShadowInFirstPerson = true;
+			var flag = new FlagDisplay();
+			flag.WorldPos = WorldPos;
 
-			SetModel( "models/rust_props/small_junk/toilet_paper.vmdl" );
-			WorldScale = 5.0f;
-
-			if (Team == 0)
-            {
-				RenderColor = Color32.Red;
-            } else if (Team == 1)
-            {
-				RenderColor = Color32.Blue;
-            }
-
-			// Transmit = TransmitType.Never;
-
-			// 
-
-			Log.Info( "FlagSpawn created at: " + WorldPos );
-
+			// make sure our clients know where to render flags
+			// todo: probably better as a ClientRpc
+			Transmit = TransmitType.Never;
 		}
 	}
 }
