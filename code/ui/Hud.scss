@@ -14,7 +14,13 @@
 }
 
 label, text {
+    font-weight: 600;
     font-family: Poppins;
+}
+
+icon, iconpanel {
+    font-family: MaterialIconsRound;
+    font-size: 32px;
 }
 
 .hidden {
@@ -29,32 +35,12 @@ vitals {
     display: flex;
     flex-direction: row;
     align-items: center;
-    // mix-blend-mode: overlay;
+    color: white;
+    text-shadow: 0 0 5px rgba( black, 0.2 );
 
     .health {
-        // color: rgb(85, 255, 0);
-        font-size: 36px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.85);
+        font-size: 32px;
         margin-left: 8px;
-    }
-
-    .segments {
-        panel {
-            width: 16px;
-            height: 36px;
-            background-color: rgb(85, 85, 85);
-            margin-right: 4px;
-            box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.85);
-        }
-    }
-
-    .hp-icon {
-        margin-left: 4px;
-        width: 36px;
-        height: 36px;
-        background-image: url( /ui/hud_icon_hp.png );
-        background-size: 100%;
-        background-image-tint: green;
     }
 }
 
@@ -76,19 +62,18 @@ roundstatus {
         align-content: center;
         align-items: center;
         margin: 0 64px;
-        // background-color: rgba(0, 0, 0, 0.5);
 
         label {
             &.time {
                 font-size: 72px;
                 font-weight: bold;
-                text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.85);
+                text-shadow: 0 0 5px rgba( black, 0.2 );
             }
 
             &.phase {
                 font-size: 32px;
-                text-transform: uppercase; // todo: doesn't work
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.85);
+                text-transform: uppercase;
+                text-shadow: 0 0 5px rgba( black, 0.2 );
             }
         }
     }
@@ -97,8 +82,8 @@ roundstatus {
         background-color: rgb(80, 80, 80);
         padding: 8px 24px;
         font-size: 48px;
-        text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.85);
-        box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 0 5px rgba( black, 0.2 );
+        border-radius: 2px;
 
         &.score__blue {
             background-color: rgba(0, 0, 255, 0.8);
