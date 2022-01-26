@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System;
 
 namespace Fortwars
 {
@@ -29,7 +30,11 @@ namespace Fortwars
 			SceneObject.Rotation = Rotation.From( 45, Time.Now * 90f, 0 );
 
 			// actual origin is off-center, let's just center that
-			SceneObject.Position = Position + SceneObject.Rotation.Down * Scale * 3;
+			Vector3 centerOffset = SceneObject.Rotation.Down * 3f;
+
+			// bob up and down
+			Vector3 bobbingOffset = Vector3.Up * MathF.Sin( Time.Now * 2f );
+			SceneObject.Position = Position + (centerOffset + bobbingOffset) * Scale;
 		}
 	}
 }
