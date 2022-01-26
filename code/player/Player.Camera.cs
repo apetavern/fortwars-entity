@@ -5,9 +5,9 @@ namespace Fortwars
 {
 	partial class FortwarsPlayer
 	{
-		RealTimeSince timeSinceUpdatedFramerate;
-
-		Rotation lastCameraRot = Rotation.Identity;
+		private RealTimeSince timeSinceUpdatedFramerate;
+		private Vector3 lastCameraPos = Vector3.Zero;
+		private Rotation lastCameraRot = Rotation.Identity;
 
 		public override void PostCameraSetup( ref CameraSetup setup )
 		{
@@ -25,13 +25,6 @@ namespace Fortwars
 				// We could have a function that clamps a rotation to within x degrees of another rotation?
 				lastCameraRot = Rotation.Lerp( lastCameraRot, setup.Rotation, 1.0f - (allowance / angleDiffDegrees) );
 			}
-			else
-			{
-				//lastCameraRot = Rotation.Lerp( lastCameraRot, Camera.Rot, Time.Delta * 0.2f * angleDiffDegrees );
-			}
-
-			// uncomment for lazy cam
-			//camera.Rot = lastCameraRot;
 
 			if ( setup.Viewer != null )
 			{
@@ -41,7 +34,6 @@ namespace Fortwars
 			if ( timeSinceUpdatedFramerate > 1 )
 			{
 				timeSinceUpdatedFramerate = 0;
-				//UpdateFps( (int) (1.0f / Time.Delta) );
 			}
 		}
 
@@ -49,7 +41,6 @@ namespace Fortwars
 		float lean = 0;
 		float fov = 0;
 
-		private Vector3 lastCameraPos = Vector3.Zero;
 		private float lastHudOffset;
 
 		private void AddCameraEffects( ref CameraSetup setup )
