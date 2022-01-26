@@ -1,27 +1,24 @@
 ﻿buildhelp {
-    // background-color: rgba(0, 0, 0, 0.25);
-
     position: absolute;
     bottom: 86px;
     right: 120px;
     display: flex;
     flex-direction: column;
-
     font-size: 20px;
     color: white;
 
     .row {
         display: flex;
         flex-direction: row;
-        align-items: center;
         justify-content: space-between;
-
         margin-top: 4px;
 
-        .key {
-            background-color: rgba(0, 0, 0, 0.25);
-            padding: 8px;
-            font-family: monospace;
+        inputhint {
+            align-items: center;
+
+            .glyph {
+                margin-right: 4px;
+            }
         }
 
         .desc {

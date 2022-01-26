@@ -13,6 +13,10 @@
     }
 }
 
+label, text {
+    font-family: Poppins;
+}
+
 .hidden {
     display: none;
     opacity: 0;
@@ -29,7 +33,6 @@ vitals {
 
     .health {
         // color: rgb(85, 255, 0);
-        font-family: Roboto;
         font-size: 36px;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.85);
         margin-left: 8px;
@@ -64,7 +67,6 @@ roundstatus {
     padding-top: 40px;
 
     label {
-        font-family: Roboto;
         color: white;
     }
 

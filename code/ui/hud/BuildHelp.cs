@@ -1,4 +1,5 @@
-﻿using Sandbox.UI;
+﻿using Fortwars.UI.Elements.Generic;
+using Sandbox.UI;
 using Sandbox.UI.Construct;
 
 namespace Fortwars.UI
@@ -9,18 +10,15 @@ namespace Fortwars.UI
 		{
 			{
 				var row = Add.Panel( "row" );
-				row.Add.Label( "Q", "key" );
-				row.Add.Label( "Build Menu", "desc" );
+				row.Add.InputHint( Sandbox.InputButton.Menu, "Build Menu" );
 			}
 			{
 				var row = Add.Panel( "row" );
-				row.Add.Label( "E", "key" );
-				row.Add.Label( "Rotate", "desc" );
+				row.Add.InputHint( Sandbox.InputButton.Use, "Rotate" );
 			}
 			{
 				var row = Add.Panel( "row" );
-				row.Add.Label( "LMB", "key" );
-				row.Add.Label( "Move", "desc" );
+				row.Add.InputHint( Sandbox.InputButton.Attack1, "Move" );
 			}
 		}
 
