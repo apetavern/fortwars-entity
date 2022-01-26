@@ -1,9 +1,8 @@
 ﻿
-using System;
-
 using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
+using System;
 
 namespace Fortwars.UI
 {
@@ -39,15 +38,15 @@ namespace Fortwars.UI
 			if ( round == null ) return;
 
 			Phase.Text = round.RoundName.ToUpper();
-			Time.Text = TimeSpan.FromSeconds( Math.Floor(round.TimeLeft) ).ToString( @"mm\:ss" );
+			Time.Text = TimeSpan.FromSeconds( Math.Floor( round.TimeLeft ) ).ToString( @"mm\:ss" );
 
 			BlueScore.Text = $"{game.BlueTeamScore}";
 			RedScore.Text = $"{game.RedTeamScore}";
 
 			// This is kinda UI, not sure where to put this
-			if (round.TimeLeft != lastTimeLeft)
+			if ( round.TimeLeft != lastTimeLeft )
 			{
-				if (round.TimeLeft < 6.0f)
+				if ( round.TimeLeft < 6.0f )
 					Sound.FromScreen( "ui_countdown" );
 				lastTimeLeft = round.TimeLeft;
 			}
