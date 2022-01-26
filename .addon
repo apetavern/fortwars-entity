@@ -1,21 +1,13 @@
 {
-    "name": "Fortwars",
-    "version": "1.0",
-    "sharedassets": "*.*",
-    
-    "depends": 
-    [
-      "base",
-      "citizen",
-      "rust"
-    ],
-
-    "gamemodes":
-    [
-      {
-        "name": "fortwars",
-        "title": "Fortwars",
-        "description": "Build a fort then play capture the flag"
-      }
-    ]
+  "SharedAssets": "*.*",
+  "Title": "Fortwars",
+  "Type": "game",
+  "Org": "local",
+  "Ident": "fortwars",
+  "Schema": 1,
+  "HasAssets": true,
+  "AssetsPath": "",
+  "HasCode": true,
+  "CodePath": "code",
+  "RootNamespace": "Fortwars"
 }
