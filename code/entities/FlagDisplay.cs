@@ -20,11 +20,16 @@ namespace Fortwars
 			Scale = 5.0f;
 		}
 
-		[Event.Frame]
-		public virtual void OnFrame()
+		[Event.PreRender]
+		public virtual void OnPreRender()
 		{
-			// this.SceneObject
-			// just rotate it clientside ?
+			if ( this.SceneObject == null )
+				return;
+
+			SceneObject.Rotation = Rotation.From( 45, Time.Now * 90f, 0 );
+
+			// actual origin is off-center, let's just center that
+			SceneObject.Position = Position + SceneObject.Rotation.Down * Scale * 3;
 		}
 	}
 }
