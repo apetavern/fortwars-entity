@@ -20,15 +20,14 @@ namespace Fortwars
 					_team = value;
 
 					// make sure our player loadouts are set
-					_team.OnPlayerSpawn(this);
+					_team.OnPlayerSpawn( this );
 
 					if ( IsServer )
 					{
 						TeamID = _team.ID;
 
 						// You have to do this for now.
-						SetScore( "team", TeamID );
-						NetworkDirty( "TeamID", NetVarGroup.Net );
+						// Client.SetValue( "team", TeamID );
 					}
 				}
 			}

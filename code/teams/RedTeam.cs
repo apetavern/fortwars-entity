@@ -20,9 +20,9 @@ namespace Fortwars
 				player.AttachClothing( "models/citizen_clothes/shoes/trainers.vmdl" );
 				player.AttachClothing( "models/citizen_clothes/hat/hat_beret.red.vmdl" );
 
-				player.SetBodygroup( "Legs", 1 );
-				player.SetBodygroup( "Feet", 1 );
-				player.SetBodygroup( "Chest", 0 );
+				player.SetBodyGroup( "Legs", 1 );
+				player.SetBodyGroup( "Feet", 1 );
+				player.SetBodyGroup( "Chest", 0 );
 			}
 		}
 	}

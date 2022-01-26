@@ -1,0 +1,89 @@
+
+@BaseClass = BaseProperties_local_fortwars
+[
+	parentname(target_destination) [ group="Hierarchy" ] : "Parent" : : "The name of this entity's parent in the movement hierarchy. Entities with parents move with their parent."
+	parentAttachmentName(parentAttachment) [ group="Hierarchy" ] : "Parent Model Bone/Attachment Name" : : "The name of the bone or attachment to attach to on the entity's parent in the movement hierarchy. Use !bonemerge to use bone-merge style attachment."
+
+	useLocalOffset(boolean) [ group="Hierarchy" ] : "Use Model Attachment offsets" : 0 : "Whether to respect the specified local offset when doing the initial hierarchical attachment to its parent."
+	local.origin(vector) [ group="Hierarchy" ] : "Model Attachment position offset" : : "Offset in the local space of the parent model's attachment/bone to use in hierarchy. Not used if you are not using parent attachment."
+	local.angles(angle) [ group="Hierarchy" ] : "Model Attachment angular offset" : : "Angular offset in the local space of the parent model's attachment/bone to use in hierarchy. Not used if you are not using parent attachment."
+	local.scales(vector) [ group="Hierarchy" ] : "Model Attachment scale" : : "Scale in the local space of the parent model's attachment/bone to use in hierarchy. Not used if you are not using parent attachment."
+
+	targetname(target_source) : "Name" : : "The name that other entities refer to this entity by."
+	tags(tags) : "Tags" : "" : "A list of general purpose tags for this entity, for interactions with other entities such as triggers."
+]
+
+//
+// PhysGun
+//
+@PointClass base(BaseProperties_local_fortwars) = physgun : ""
+[
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+
+	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
+]
+
+//
+// Pistol
+//
+@PointClass base(BaseProperties_local_fortwars) = dm_pistol : ""
+[
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+
+	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
+]
+
+//
+// Fortwars.Game
+//
+@PointClass base(BaseProperties_local_fortwars) = fortwars : ""
+[
+]
+
+//
+// Fortwars.FlagDisplay
+//
+@PointClass base(BaseProperties_local_fortwars) = fw_flag : ""
+[
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+
+	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
+]
+
+//
+// Fortwars.FuncFlagzone
+//
+@PointClass base(BaseProperties_local_fortwars) = func_flagzone : ""
+[
+	team(integer) : "Team" : 0 : ""
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+
+	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
+]
+
+//
+// Fortwars.FuncWallToggle
+//
+@PointClass base(BaseProperties_local_fortwars) = func_wall_toggle : ""
+[
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+
+	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
+]
+
+//
+// Fortwars.InfoFlagSpawn
+//
+@PointClass base(BaseProperties_local_fortwars) = info_flag_spawn : ""
+[
+	team(integer) : "Team" : 0 : ""
+]
+
+//
+// Fortwars.InfoPlayerTeamspawn
+//
+@PointClass base(BaseProperties_local_fortwars) = info_player_teamspawn : ""
+[
+	team(integer) : "Team" : 0 : ""
+]
+

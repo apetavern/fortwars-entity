@@ -14,16 +14,16 @@ namespace Fortwars
 
 		public KillFeedEntry()
 		{
-			Left = Add.Label("", "left");
-			Icon = Add.Panel("icon");
-			Right = Add.Label("", "right");
+			Left = Add.Label( "", "left" );
+			Icon = Add.Panel( "icon" );
+			Right = Add.Label( "", "right" );
 
 			_ = RunAsync();
 		}
 
 		async Task RunAsync()
 		{
-			await Task.Delay(4000);
+			await Task.Delay( 4000 );
 			Delete();
 		}
 
@@ -37,26 +37,26 @@ namespace Fortwars
 		{
 			Current = this;
 
-			StyleSheet.Load("/ui/KillFeed.scss");
+			StyleSheet.Load( "/ui/KillFeed.scss" );
 		}
 
 		[ClientRpc]
-		public static void AddEntry(ulong lsteamid, string left, ulong rsteamid, string right, string method)
+		public static void AddEntry( long lsteamid, string left, long rsteamid, string right, string method )
 		{
-			if (Current == null)
+			if ( Current == null )
 				return;
 
-			Log.Info($"{left} killed {right} using {method}");
+			Log.Info( $"{left} killed {right} using {method}" );
 
 			var e = Current.AddChild<KillFeedEntry>();
 
-			e.AddClass(method);
+			e.AddClass( method );
 
 			e.Left.Text = left;
-			e.Left.SetClass("me", lsteamid == (Player.Local?.SteamId));
+			e.Left.SetClass( "me", lsteamid == (Local.Client?.PlayerId) );
 
 			e.Right.Text = right;
-			e.Right.SetClass("me", rsteamid == (Player.Local?.SteamId));
+			e.Right.SetClass( "me", rsteamid == (Local.Client?.PlayerId) );
 		}
 	}
 

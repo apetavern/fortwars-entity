@@ -9,7 +9,7 @@ namespace Fortwars
 		public override string Name => "Blue Team";
 		public override Color Color => Color.Blue;
 
-        public override void OnPlayerSpawn( FortwarsPlayer player )
+		public override void OnPlayerSpawn( FortwarsPlayer player )
 		{
 			if ( Host.IsServer )
 			{
@@ -19,9 +19,9 @@ namespace Fortwars
 				player.AttachClothing( "models/citizen_clothes/shoes/trainers.vmdl" );
 				player.AttachClothing( "models/citizen_clothes/hat/hat_woolly.vmdl" );
 
-				player.SetBodygroup( "Legs", 1 );
-				player.SetBodygroup( "Feet", 1 );
-				player.SetBodygroup( "Chest", 0 );
+				player.SetBodyGroup( "Legs", 1 );
+				player.SetBodyGroup( "Feet", 1 );
+				player.SetBodyGroup( "Chest", 0 );
 			}
 		}
 	}

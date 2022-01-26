@@ -26,7 +26,7 @@ public partial class BuildMenu : Panel
 			var file = (string)data;
 			var panel = cell.Add.Panel( "icon" );
 			panel.Style.Set( "background-image", $"url( /ui/models/{file}.png )" );
-			panel.AddEvent( "onclick", () => ConsoleSystem.Run( "spawn", "models/" + file ) );
+			panel.AddEventListener( "onclick", () => ConsoleSystem.Run( "spawn", "models/" + file ) );
 		};
 
 		Canvas.AddItems( new string[] {
@@ -40,7 +40,7 @@ public partial class BuildMenu : Panel
 	{
 		base.Tick();
 
-		Parent.SetClass( "buildmenuopen", Player.Local?.Input.Down( InputButton.Menu ) ?? false );
+		Parent.SetClass( "buildmenuopen", Input.Down( InputButton.Menu ) );
 	}
 
 }

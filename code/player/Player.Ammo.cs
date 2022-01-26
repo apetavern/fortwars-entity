@@ -1,12 +1,13 @@
 ﻿using Sandbox;
 using System;
+using System.Collections.Generic;
 
 namespace Fortwars
 {
 	partial class FortwarsPlayer
 	{
 		[Net]
-		public NetList<int> Ammo { get; set; } = new();
+		public IList<int> Ammo { get; set; }
 
 		public void ClearAmmo()
 		{
@@ -15,10 +16,26 @@ namespace Fortwars
 
 		public int AmmoCount( AmmoType type )
 		{
-
+			var iType = (int)type;
 			if ( Ammo == null ) return 0;
+			if ( Ammo.Count <= iType ) return 0;
 
-			return Ammo.Get( type );
+			return Ammo[(int)type];
+		}
+
+		public bool SetAmmo( AmmoType type, int amount )
+		{
+			var iType = (int)type;
+			if ( !Host.IsServer ) return false;
+			if ( Ammo == null ) return false;
+
+			while ( Ammo.Count <= iType )
+			{
+				Ammo.Add( 0 );
+			}
+
+			Ammo[(int)type] = amount;
+			return true;
 		}
 
 		public bool GiveAmmo( AmmoType type, int amount )
@@ -26,28 +43,26 @@ namespace Fortwars
 			if ( !Host.IsServer ) return false;
 			if ( Ammo == null ) return false;
 
-			var currentAmmo = AmmoCount( type );
-			return Ammo.Set( type, currentAmmo + amount );
+			SetAmmo( type, AmmoCount( type ) + amount );
+			return true;
 		}
 
 		public int TakeAmmo( AmmoType type, int amount )
 		{
-			//if ( Ammo == null ) return 0;
+			if ( Ammo == null ) return 0;
 
-			var available = Ammo.Get( type );
-			amount = Math.Min( Ammo.Get( type ), amount );
+			var available = AmmoCount( type );
+			amount = Math.Min( available, amount );
 
-			Ammo.Set( type, available - amount );
-			NetworkDirty( "Ammo", NetVarGroup.Net );
-
+			SetAmmo( type, available - amount );
 			return amount;
 		}
 	}
-}
 
-public enum AmmoType
-{
-	Pistol,
-	Buckshot,
-	Crossbow
+	public enum AmmoType
+	{
+		Pistol,
+		Buckshot,
+		Crossbow
+	}
 }

@@ -4,12 +4,14 @@ using System;
 using System.Linq;
 
 [Library( "physgun" )]
-public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPlayerInput
+public partial class PhysGun : Carriable, IUse
 {
 	public override string ViewModelPath => "weapons/rust_pistol/v_rust_pistol.vmdl";
 
 	protected PhysicsBody holdBody;
+	protected PhysicsBody velBody;
 	protected WeldJoint holdJoint;
+	protected WeldJoint velJoint;
 
 	protected PhysicsBody heldBody;
 	protected Vector3 heldPos;
@@ -26,7 +28,7 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 	protected virtual float AngularDampingRatio => 1.0f;
 	protected virtual float TargetDistanceSpeed => 50.0f;
 	protected virtual float RotateSpeed => 0.2f;
-	protected virtual float RotateSnapDegree => 45.0f;
+	protected virtual float RotateSnapAt => 45.0f;
 
 	[Net] public bool BeamActive { get; set; }
 	[Net] public Entity GrabbedEntity { get; set; }
@@ -45,21 +47,29 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 		SetInteractsAs( CollisionLayer.Debris );
 	}
 
-	public void OnPlayerControlTick( Player owner )
+	public override void Simulate( Client client )
 	{
-		if ( owner == null ) return;
+		if ( Owner is not Player owner ) return;
 
-		var input = owner.Input;
 		var eyePos = owner.EyePos;
 		var eyeDir = owner.EyeRot.Forward;
-		var eyeRot = Rotation.From( new Angles( 0.0f, owner.EyeAng.yaw, 0.0f ) );
+		var eyeRot = Rotation.From( new Angles( 0.0f, owner.EyeRot.Angles().yaw, 0.0f ) );
 
-		if ( !grabbing && input.Pressed( InputButton.Attack1 ) )
+		if ( Input.Pressed( InputButton.Attack1 ) )
 		{
-			grabbing = true;
+			(Owner as AnimEntity)?.SetAnimBool( "b_attack", true );
+
+			if ( !grabbing )
+				grabbing = true;
 		}
 
-		bool grabEnabled = grabbing && input.Down( InputButton.Attack1 );
+		bool grabEnabled = grabbing && Input.Down( InputButton.Attack1 );
+		bool wantsToFreeze = Input.Pressed( InputButton.Attack2 );
+
+		if ( GrabbedEntity.IsValid() && wantsToFreeze )
+		{
+			(Owner as AnimEntity)?.SetAnimBool( "b_attack", true );
+		}
 
 		BeamActive = grabEnabled;
 
@@ -74,7 +84,7 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 				{
 					if ( heldBody.IsValid() )
 					{
-						UpdateGrab( input, eyePos, eyeRot, eyeDir );
+						UpdateGrab( eyePos, eyeRot, eyeDir, wantsToFreeze );
 					}
 					else
 					{
@@ -85,12 +95,17 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 				{
 					GrabEnd();
 				}
+
+				if ( !grabbing && Input.Pressed( InputButton.Reload ) )
+				{
+					TryUnfreezeAll( owner, eyePos, eyeRot, eyeDir );
+				}
 			}
 		}
 
 		if ( BeamActive )
 		{
-			owner.Input.MouseWheel = 0;
+			Input.MouseWheel = 0;
 		}
 	}
 
@@ -102,24 +117,61 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 		return false;
 	}
 
+	private void TryUnfreezeAll( Player owner, Vector3 eyePos, Rotation eyeRot, Vector3 eyeDir )
+	{
+		var tr = Trace.Ray( eyePos, eyePos + eyeDir * MaxTargetDistance )
+			.UseHitboxes()
+			.Ignore( owner, false )
+			.HitLayer( CollisionLayer.Debris )
+			.Run();
+
+		if ( !tr.Hit || !tr.Entity.IsValid() || tr.Entity.IsWorld ) return;
+
+		var rootEnt = tr.Entity.Root;
+		if ( !rootEnt.IsValid() ) return;
+
+		var physicsGroup = rootEnt.PhysicsGroup;
+		if ( physicsGroup == null ) return;
+
+		bool unfrozen = false;
+
+		for ( int i = 0; i < physicsGroup.BodyCount; ++i )
+		{
+			var body = physicsGroup.GetBody( i );
+			if ( !body.IsValid() ) continue;
+
+			if ( body.BodyType == PhysicsBodyType.Static )
+			{
+				body.BodyType = PhysicsBodyType.Dynamic;
+				unfrozen = true;
+			}
+		}
+
+		if ( unfrozen )
+		{
+			var freezeEffect = Particles.Create( "particles/physgun_freeze.vpcf" );
+			freezeEffect.SetPosition( 0, tr.EndPos );
+		}
+	}
+
 	private void TryStartGrab( Player owner, Vector3 eyePos, Rotation eyeRot, Vector3 eyeDir )
 	{
 		var tr = Trace.Ray( eyePos, eyePos + eyeDir * MaxTargetDistance )
 			.UseHitboxes()
-			.Ignore( owner )
+			.Ignore( owner, false )
 			.HitLayer( CollisionLayer.Debris )
 			.Run();
 
-		if ( !tr.Hit || !tr.Body.IsValid() || tr.Entity.IsWorld ) return;
+		if ( !tr.Hit || !tr.Entity.IsValid() || tr.Entity.IsWorld || tr.StartedSolid ) return;
 
 		var rootEnt = tr.Entity.Root;
 		var body = tr.Body;
 
-		if ( tr.Entity.Parent.IsValid() )
+		if ( !body.IsValid() || tr.Entity.Parent.IsValid() )
 		{
 			if ( rootEnt.IsValid() && rootEnt.PhysicsGroup != null )
 			{
-				body = rootEnt.PhysicsGroup.GetBody( 0 );
+				body = (rootEnt.PhysicsGroup.BodyCount > 0 ? rootEnt.PhysicsGroup.GetBody( 0 ) : null);
 			}
 		}
 
@@ -127,10 +179,16 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 			return;
 
 		//
-		// Don't move keyframed 
+		// Don't move keyframed, unless it's a player
 		//
-		if ( body.BodyType == PhysicsBodyType.Keyframed )
+		if ( body.BodyType == PhysicsBodyType.Keyframed && rootEnt is not Player )
 			return;
+
+		// Unfreeze
+		if ( body.BodyType == PhysicsBodyType.Static )
+		{
+			body.BodyType = PhysicsBodyType.Dynamic;
+		}
 
 		if ( IsBodyGrabbed( body ) )
 			return;
@@ -140,31 +198,64 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 		GrabbedEntity = rootEnt;
 		GrabbedPos = body.Transform.PointToLocal( tr.EndPos );
 		GrabbedBone = tr.Entity.PhysicsGroup.GetBodyIndex( body );
+
+		Client?.Pvs.Add( GrabbedEntity );
 	}
 
-	private void UpdateGrab( UserInput input, Vector3 eyePos, Rotation eyeRot, Vector3 eyeDir )
+	private void UpdateGrab( Vector3 eyePos, Rotation eyeRot, Vector3 eyeDir, bool wantsToFreeze )
 	{
-		MoveTargetDistance( input.MouseWheel * TargetDistanceSpeed );
-
-		if ( input.Down( InputButton.Use ) )
+		if ( wantsToFreeze )
 		{
-			EnableAngularSpring( true );
-			DoRotate( eyeRot, input.MouseDelta * RotateSpeed );
+			if ( heldBody.BodyType == PhysicsBodyType.Dynamic )
+			{
+				heldBody.BodyType = PhysicsBodyType.Static;
+			}
+
+			if ( GrabbedEntity.IsValid() )
+			{
+				var freezeEffect = Particles.Create( "particles/physgun_freeze.vpcf" );
+				freezeEffect.SetPosition( 0, heldBody.Transform.PointToWorld( GrabbedPos ) );
+			}
+
+			GrabEnd();
+			return;
+		}
+
+		MoveTargetDistance( Input.MouseWheel * TargetDistanceSpeed );
+
+		bool rotating = Input.Down( InputButton.Use );
+		bool snapping = false;
+
+		if ( rotating )
+		{
+			EnableAngularSpring( Input.Down( InputButton.Run ) ? 100.0f : 0.0f );
+			DoRotate( eyeRot, Input.MouseDelta * RotateSpeed );
+
+			snapping = Input.Down( InputButton.Run );
 		}
 		else
 		{
-			EnableAngularSpring( false );
+			DisableAngularSpring();
 		}
 
-		GrabMove( eyePos, eyeDir, eyeRot, input.Down( InputButton.Run ) );
+		GrabMove( eyePos, eyeDir, eyeRot, snapping );
 	}
 
-	private void EnableAngularSpring( bool enabled )
+	private void EnableAngularSpring( float scale )
 	{
-		if ( holdJoint.IsValid() )
+		if ( holdJoint.IsValid )
 		{
-			holdJoint.AngularDampingRatio = enabled ? AngularDampingRatio : 0.0f;
-			holdJoint.AngularFrequency = enabled ? AngularFrequency : 0.0f;
+			holdJoint.AngularDampingRatio = AngularDampingRatio * scale;
+			holdJoint.AngularFrequency = AngularFrequency * scale;
+		}
+	}
+
+	private void DisableAngularSpring()
+	{
+		if ( holdJoint.IsValid )
+		{
+			holdJoint.AngularDampingRatio = 0.0f;
+			holdJoint.AngularFrequency = 0.0f;
 		}
 	}
 
@@ -175,8 +266,19 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 
 		if ( !holdBody.IsValid() )
 		{
-			holdBody = PhysicsWorld.AddBody();
-			holdBody.BodyType = PhysicsBodyType.Keyframed;
+			holdBody = new PhysicsBody
+			{
+				BodyType = PhysicsBodyType.Keyframed
+			};
+		}
+
+		if ( !velBody.IsValid() )
+		{
+			velBody = new PhysicsBody
+			{
+				BodyType = PhysicsBodyType.Dynamic,
+				EnableAutoSleeping = false
+			};
 		}
 	}
 
@@ -188,6 +290,9 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 
 			holdBody?.Remove();
 			holdBody = null;
+
+			velBody?.Remove();
+			velBody = null;
 		}
 
 		KillEffects();
@@ -230,14 +335,16 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 		holdDistance = Vector3.DistanceBetween( startPos, grabPos );
 		holdDistance = holdDistance.Clamp( MinTargetDistance, MaxTargetDistance );
 		heldPos = heldBody.Transform.PointToLocal( grabPos );
-		heldRot = rot.Inverse * heldBody.Rot;
+		heldRot = rot.Inverse * heldBody.Rotation;
 
-		holdBody.Pos = grabPos;
-		holdBody.Rot = heldBody.Rot;
+		holdBody.Position = grabPos;
+		holdBody.Rotation = heldBody.Rotation;
+
+		velBody.Position = grabPos;
+		velBody.Rotation = heldBody.Rotation;
 
 		heldBody.Wake();
 		heldBody.EnableAutoSleeping = false;
-		heldBody.BodyType = PhysicsBodyType.Dynamic;
 
 		holdJoint = PhysicsJoint.Weld
 			.From( holdBody )
@@ -245,26 +352,33 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 			.WithLinearSpring( LinearFrequency, LinearDampingRatio, 0.0f )
 			.WithAngularSpring( 0.0f, 0.0f, 0.0f )
 			.Create();
+
+		velJoint = PhysicsJoint.Weld
+			.From( holdBody )
+			.To( velBody )
+			.WithLinearSpring( LinearFrequency, LinearDampingRatio, 0.0f )
+			.WithAngularSpring( 0.0f, 0.0f, 0.0f )
+			.Create();
 	}
 
 	private void GrabEnd()
 	{
-		if ( GrabbedEntity.IsValid() )
-		{
-			var freezeEffect = Particles.Create( "particles/physgun_freeze.vpcf" );
-			freezeEffect.SetPos( 0, heldBody.Transform.PointToWorld( GrabbedPos ) );
-		}
-
-		if ( holdJoint.IsValid() )
+		if ( holdJoint.IsValid )
 		{
 			holdJoint.Remove();
+		}
+
+		if ( velJoint.IsValid )
+		{
+			velJoint.Remove();
 		}
 
 		if ( heldBody.IsValid() )
 		{
 			heldBody.EnableAutoSleeping = true;
-			heldBody.BodyType = PhysicsBodyType.Static;
 		}
+
+		Client?.Pvs.Remove( GrabbedEntity );
 
 		heldBody = null;
 		GrabbedEntity = null;
@@ -276,17 +390,33 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 		if ( !heldBody.IsValid() )
 			return;
 
-		holdBody.Pos = startPos + dir * holdDistance;
-		holdBody.Rot = rot * heldRot;
+		holdBody.Position = startPos + dir * holdDistance;
 
-		if (snapAngles)
-        {
-			var angles = holdBody.Rot.Angles();
-			angles.yaw = MathF.Round(angles.yaw / RotateSnapDegree) * RotateSnapDegree;
-			angles.pitch = MathF.Round(angles.pitch / RotateSnapDegree) * RotateSnapDegree;
-			angles.roll = MathF.Round(angles.roll / RotateSnapDegree) * RotateSnapDegree;
+		if ( GrabbedEntity is Player player )
+		{
+			player.Velocity = velBody.Velocity;
+			player.Position = holdBody.Position - heldPos;
 
-			holdBody.Rot = Rotation.From(angles);
+			var controller = player.GetActiveController();
+			if ( controller != null )
+			{
+				controller.Velocity = velBody.Velocity;
+			}
+
+			return;
+		}
+
+		holdBody.Rotation = rot * heldRot;
+
+		if ( snapAngles )
+		{
+			var angles = holdBody.Rotation.Angles();
+
+			holdBody.Rotation = Rotation.From(
+				MathF.Round( angles.pitch / RotateSnapAt ) * RotateSnapAt,
+				MathF.Round( angles.yaw / RotateSnapAt ) * RotateSnapAt,
+				MathF.Round( angles.roll / RotateSnapAt ) * RotateSnapAt
+			);
 		}
 	}
 
@@ -306,7 +436,7 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 		heldRot = localRot * heldRot;
 	}
 
-	public void BuildInput( ClientInput owner )
+	public override void BuildInput( InputBuilder owner )
 	{
 		if ( !GrabbedEntity.IsValid() )
 			return;
@@ -316,7 +446,17 @@ public partial class PhysGun : Carriable, IPlayerControllable, IFrameUpdate, IPl
 
 		if ( owner.Down( InputButton.Use ) )
 		{
-			owner.ViewAngles = owner.LastViewAngles;
+			owner.ViewAngles = owner.OriginalViewAngles;
 		}
+	}
+
+	public bool OnUse( Entity user )
+	{
+		throw new NotImplementedException();
+	}
+
+	public bool IsUsable( Entity user )
+	{
+		return Owner == null || HeldBody.IsValid();
 	}
 }

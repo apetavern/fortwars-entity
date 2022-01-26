@@ -1,11 +1,5 @@
-﻿using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Threading.Tasks;
+﻿using Fortwars;
+using Sandbox;
 
 partial class BaseDmWeapon : BaseWeapon
 {
@@ -15,16 +9,16 @@ partial class BaseDmWeapon : BaseWeapon
 	public virtual int Bucket => 1;
 	public virtual int BucketWeight => 100;
 
-	[NetPredicted]
+	[Net, Predicted]
 	public int AmmoClip { get; set; }
 
-	[NetPredicted]
+	[Net, Predicted]
 	public TimeSince TimeSinceReload { get; set; }
 
-	[NetPredicted]
+	[Net, Predicted]
 	public bool IsReloading { get; set; }
 
-	[NetPredicted]
+	[Net, Predicted]
 	public TimeSince TimeSinceDeployed { get; set; }
 
 
@@ -54,7 +48,7 @@ partial class BaseDmWeapon : BaseWeapon
 
 		PickupTrigger = new PickupTrigger();
 		PickupTrigger.Parent = this;
-		PickupTrigger.WorldPos = WorldPos;
+		PickupTrigger.Position = Position;
 	}
 
 	public override void Reload()
@@ -76,18 +70,18 @@ partial class BaseDmWeapon : BaseWeapon
 		}
 
 		IsReloading = true;
-		Owner.SetAnimParam( "b_reload", true );
+		(Owner as AnimEntity)?.SetAnimBool( "b_reload", true );
 		StartReloadEffects();
 	}
 
-	public override void OnPlayerControlTick( Player owner )
+	public override void Simulate( Client owner )
 	{
 		if ( TimeSinceDeployed < 0.6f )
 			return;
 
 		if ( !IsReloading )
 		{
-			base.OnPlayerControlTick( owner );
+			base.Simulate( owner );
 		}
 
 		if ( IsReloading && TimeSinceReload > ReloadTime )
@@ -113,7 +107,7 @@ partial class BaseDmWeapon : BaseWeapon
 	[ClientRpc]
 	public virtual void StartReloadEffects()
 	{
-		ViewModelEntity?.SetAnimParam( "reload", true );
+		ViewModelEntity?.SetAnimBool( "reload", true );
 
 		// TODO - player third person model reload
 	}
@@ -161,13 +155,13 @@ partial class BaseDmWeapon : BaseWeapon
 
 		Particles.Create( "particles/pistol_muzzleflash.vpcf", EffectEntity, "muzzle" );
 
-		if ( Owner == Player.Local )
+		if ( Owner == Local.Pawn )
 		{
 			new Sandbox.ScreenShake.Perlin();
 		}
 
-		ViewModelEntity?.SetAnimParam( "fire", true );
-		CrosshairPanel?.OnEvent( "fire" );
+		ViewModelEntity?.SetAnimBool( "fire", true );
+		CrosshairPanel?.CreateEvent( "fire" );
 	}
 
 	/// <summary>
@@ -228,7 +222,7 @@ partial class BaseDmWeapon : BaseWeapon
 			return;
 
 		ViewModelEntity = new ViewModel();
-		ViewModelEntity.WorldPos = WorldPos;
+		ViewModelEntity.Position = Position;
 		ViewModelEntity.Owner = Owner;
 		ViewModelEntity.EnableViewmodelRendering = true;
 		ViewModelEntity.SetModel( ViewModelPath );
@@ -236,10 +230,10 @@ partial class BaseDmWeapon : BaseWeapon
 
 	public override void CreateHudElements()
 	{
-		if ( Hud.CurrentPanel == null ) return;
+		if ( Local.Hud == null ) return;
 
 		CrosshairPanel = new Crosshair();
-		CrosshairPanel.Parent = Hud.CurrentPanel;
+		CrosshairPanel.Parent = Local.Hud;
 		CrosshairPanel.AddClass( ClassInfo.Name );
 	}
 

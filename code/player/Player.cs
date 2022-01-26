@@ -3,7 +3,7 @@ using Sandbox.UI;
 
 namespace Fortwars
 {
-	public partial class FortwarsPlayer : BasePlayer
+	public partial class FortwarsPlayer : Sandbox.Player
 	{
 		DamageInfo LastDamage;
 
@@ -20,21 +20,21 @@ namespace Fortwars
 		public override void Respawn()
 		{
 			// assign random team
-			if (Team == null)
-            {
-				int team = Rand.Int(0, 1);
-				if (team == 0)
-				Team = Game.Instance.BlueTeam;
+			if ( Team == null )
+			{
+				int team = Rand.Int( 0, 1 );
+				if ( team == 0 )
+					Team = Game.Instance.BlueTeam;
 				else
 					Team = Game.Instance.RedTeam;
 
-				ChatBox.AddInformation(Player.All, $"{Name} has joined {Team.Name}", $"avatar:{SteamId}");
+				// ChatBox.AddInformation( To.Everyone, $"{Name} has joined {Team.Name}", $"avatar:{Client.PlayerId}" );
 			}
 
 			SetModel( "models/citizen/citizen.vmdl" );
 
 			// Allow Team class to dress the player
-			if (Team != null)
+			if ( Team != null )
 			{
 				Team.OnPlayerSpawn( this );
 			}
@@ -62,11 +62,11 @@ namespace Fortwars
 			EnableShadowInFirstPerson = true;
 
 			Inventory.DeleteContents();
-			if (Game.Instance.Round is BuildRound)
+			if ( Game.Instance.Round is BuildRound )
 			{
 				Inventory.Add( new PhysGun(), true );
 			}
-			if (Game.Instance.Round is CombatRound)
+			if ( Game.Instance.Round is CombatRound )
 			{
 				Inventory.Add( new Pistol(), true );
 			}
@@ -95,14 +95,16 @@ namespace Fortwars
 			EnableDrawing = false;
 		}
 
-		protected override void Tick()
+		public override void Simulate( Client owner )
 		{
-			base.Tick();
+			base.Simulate( owner );
 
 			if ( Input.ActiveChild != null )
 			{
 				ActiveChild = Input.ActiveChild;
 			}
+
+			SimulateActiveChild( owner, ActiveChild );
 
 			if ( LifeState != LifeState.Alive )
 				return;
@@ -138,7 +140,7 @@ namespace Fortwars
 			if ( info.Attacker is FortwarsPlayer attacker && attacker != this )
 			{
 				// Note - sending this only to the attacker!
-				attacker.DidDamage( attacker, info.Position, info.Damage, ((float)Health).LerpInverse( 100, 0 ) );
+				attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, ((float)Health).LerpInverse( 100, 0 ) );
 			}
 
 			// TookDamage( this, info.Weapon.IsValid() ? info.Weapon.WorldPos : info.Attacker.WorldPos );

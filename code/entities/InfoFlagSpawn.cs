@@ -5,7 +5,7 @@ namespace Fortwars
 	[Library( "info_flag_spawn" )]
 	public partial class InfoFlagSpawn : Entity
 	{
-		[HammerProp("team")]
+		[Property( "team" )]
 		public int Team { get; set; }
 
 		public override void Spawn()
@@ -13,7 +13,7 @@ namespace Fortwars
 			base.Spawn();
 
 			var flag = new FlagDisplay();
-			flag.WorldPos = WorldPos;
+			flag.Position = Position;
 
 			// make sure our clients know where to render flags
 			// todo: probably better as a ClientRpc

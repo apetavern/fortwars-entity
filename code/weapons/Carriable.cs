@@ -10,7 +10,7 @@ public partial class Carriable : BaseCarriable
 			return;
 
 		ViewModelEntity = new ViewModel();
-		ViewModelEntity.WorldPos = WorldPos;
+		ViewModelEntity.Position = Position;
 		ViewModelEntity.Owner = Owner;
 		ViewModelEntity.EnableViewmodelRendering = true;
 		ViewModelEntity.SetModel( ViewModelPath );

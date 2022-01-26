@@ -3,7 +3,7 @@ using System;
 
 namespace Fortwars
 {
-	public abstract partial class BaseRound : NetworkClass
+	public abstract partial class BaseRound : BaseNetworkable
 	{
 		public virtual int RoundDuration => 0;
 		public virtual string RoundName => "";
@@ -13,7 +13,7 @@ namespace Fortwars
 		{
 			get
 			{
-				if (Host.IsClient)
+				if ( Host.IsClient )
 				{
 					return RoundEndTime - Game.Instance.ServerTime;
 				}
@@ -26,7 +26,7 @@ namespace Fortwars
 		{
 			if ( Host.IsServer && RoundDuration > 0 )
 			{
-				RoundEndTime = (float)Math.Floor(Time.Now + RoundDuration);
+				RoundEndTime = (float)Math.Floor( Time.Now + RoundDuration );
 			}
 
 			OnStart();

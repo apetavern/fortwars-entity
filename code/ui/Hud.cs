@@ -4,14 +4,14 @@ using Sandbox.UI;
 namespace Fortwars.UI
 {
 	[Library]
-	public partial class FortwarsHUD : Hud
+	public partial class FortwarsHUD : HudEntity<RootPanel>
 	{
 		public FortwarsHUD()
 		{
 			if ( !IsClient ) return;
 
 			RootPanel.StyleSheet.Load( "/ui/Hud.scss" );
-			RootPanel.StyleSheet.Load("/ui/hud/BuildHelp.scss");
+			RootPanel.StyleSheet.Load( "/ui/hud/BuildHelp.scss" );
 
 			RootPanel.AddChild<Sandbox.UI.NameTags>();
 			RootPanel.AddChild<KillFeed>();

@@ -1,6 +1,5 @@
 using Sandbox;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,10 +27,6 @@ namespace Fortwars
 			ChangeRound( new BuildRound() );
 		}
 
-		public override Player CreatePlayer() => new FortwarsPlayer();
-
-
-
 		public async Task StartSecondTimer()
 		{
 			while ( true )
@@ -57,13 +52,22 @@ namespace Fortwars
 			base.PostLevelLoaded();
 		}
 
+		public override void ClientJoined( Client cl )
+		{
+			base.ClientJoined( cl );
+
+			var player = new FortwarsPlayer();
+			player.Respawn();
+
+			cl.Pawn = player;
+		}
+
 		private void OnSecond()
 		{
 			// this is shite, need Time.Now to reflect server time clientside
 			if ( IsServer )
 			{
 				ServerTime = Time.Now;
-				NetworkDirty( "ServerTime", NetVarGroup.Net );
 			}
 
 			Round?.OnSecond();
@@ -85,65 +89,24 @@ namespace Fortwars
 			}
 		}
 
-		public override void PlayerKilled( Player player )
-		{
-			Round?.OnPlayerKilled( player as Player );
-
-			Log.Info($"{player.Name} was killed");
-
-			if (player.LastAttacker != null)
-			{
-				if (player.LastAttacker is Player attackPlayer)
-				{
-					KillFeed.AddEntry(attackPlayer.SteamId, attackPlayer.Name, player.SteamId, player.Name, player.LastAttackerWeapon?.ClassInfo?.Name);
-				}
-				else
-				{
-					KillFeed.AddEntry((ulong)player.LastAttacker.NetworkIdent, player.LastAttacker.ToString(), player.SteamId, player.Name, "killed");
-				}
-			}
-			else
-			{
-				KillFeed.AddEntry((ulong)0, "", player.SteamId, player.Name, "died");
-			}
-
-			base.PlayerKilled( player );
-		}
-
-		public override void PlayerRespawn( Player player )
-		{
-			Log.Info( $"Finding spawnpoint for {player.Name} on TeamID: {(int)(player as FortwarsPlayer).TeamID}" );
-
-			var spawnpoints = Entity.All.OfType<InfoPlayerTeamspawn>().Where( x => x.Team == (int)(player as FortwarsPlayer).TeamID);
-			var randomSpawn = spawnpoints.OrderBy( x => Guid.NewGuid() ).FirstOrDefault();
-
-			if ( randomSpawn == null )
-			{
-				Log.Warning( "Couldn't find spawnpoint!" );
-				return;
-			}
-
-			player.WorldPos = randomSpawn.WorldPos;
-			player.WorldRot = randomSpawn.WorldRot;
-		}
-
 		[ServerCmd( "spawn" )]
 		public static void Spawn( string modelname )
 		{
 			var owner = ConsoleSystem.Caller;
+			var player = owner.Pawn;
 
 			if ( ConsoleSystem.Caller == null )
 				return;
 
-			var tr = Trace.Ray( owner.EyePos, owner.EyePos + owner.EyeRot.Forward * 500 )
+			var tr = Trace.Ray( player.EyePos, player.EyePos + player.EyeRot.Forward * 500 )
 				.UseHitboxes()
-				.Ignore( owner )
+				.Ignore( player )
 				.Size( 2 )
 				.Run();
 
 			var ent = new Prop();
-			ent.WorldPos = tr.EndPos;
-			ent.WorldRot = Rotation.From( new Angles( 0, owner.EyeAng.yaw, 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
+			ent.Position = tr.EndPos;
+			ent.Rotation = Rotation.From( new Angles( 0, player.EyeRot.Yaw(), 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
 			ent.SetModel( modelname );
 
 			// Drop to floor
@@ -152,10 +115,9 @@ namespace Fortwars
 				var p = ent.PhysicsBody.FindClosestPoint( tr.EndPos );
 
 				var delta = p - tr.EndPos;
-				ent.PhysicsBody.Pos -= delta;
+				ent.PhysicsBody.Position -= delta;
 				//DebugOverlay.Line( p, tr.EndPos, 10, false );
 			}
-
 		}
 	}
 }
