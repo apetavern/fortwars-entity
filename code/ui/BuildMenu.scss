@@ -45,7 +45,6 @@
             height: 100%;
             background-position: center;
             background-size: cover;
-            background-color: #ccc;
             background-image: url( /ui/entity/spawnicon.png );
             border: 2px solid transparent;
             transition: all 150ms ease;
@@ -59,8 +58,6 @@
             }
 
             &:hover {
-                color: #fff;
-                background-color: #fff;
                 border: 2px solid white;
             }
 
