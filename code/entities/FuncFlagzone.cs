@@ -35,6 +35,5 @@ namespace Fortwars
 		{
 			base.EndTouch( other );
 		}
-
 	}
 }

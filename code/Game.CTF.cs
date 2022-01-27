@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using Sandbox.UI;
+using System.Linq;
 
 namespace Fortwars
 {
@@ -62,6 +63,8 @@ namespace Fortwars
 				BlueFlagCarrier = player;
 			}
 
+			HideFlag( enemyTeam.ID );
+
 			ChatBox.AddInformation( To.Everyone, $"{player.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}" );
 
 			player.PlaySound( "ctf_flag_pickup" );
@@ -80,6 +83,8 @@ namespace Fortwars
 				// Up the team score
 				RedTeamScore++;
 
+				ShowFlag( Team.Blue );
+
 				// Announce
 				ChatBox.AddInformation( To.Everyone, $"{player.Name} scored for {RedTeam.Name}", $"avatar:{player.Client.PlayerId}" );
 			}
@@ -92,6 +97,8 @@ namespace Fortwars
 				// Up the team score
 				BlueTeamScore++;
 
+				ShowFlag( Team.Red );
+
 				// Announce
 				ChatBox.AddInformation( To.Everyone, $"{player.Name} scored for {BlueTeam.Name}", $"avatar:{player.Client.PlayerId}" );
 			}
@@ -103,12 +110,14 @@ namespace Fortwars
 			{
 				ChatBox.AddInformation( To.Everyone, $"{player.Name} dropped {BlueTeam.Name} flag", $"avatar:{player.Client.PlayerId}" );
 				BlueFlagCarrier = null;
+				ShowFlag( Team.Blue );
 				return;
 			}
 			if ( player == RedFlagCarrier )
 			{
 				ChatBox.AddInformation( To.Everyone, $"{player.Name} dropped {RedTeam.Name} flag", $"avatar:{player.Client.PlayerId}" );
 				RedFlagCarrier = null;
+				ShowFlag( Team.Red );
 				return;
 			}
 		}
@@ -117,6 +126,19 @@ namespace Fortwars
 		{
 			RedFlagCarrier = null;
 			BlueFlagCarrier = null;
+
+			ShowFlag( Team.Red );
+			ShowFlag( Team.Blue );
+		}
+
+		private void ShowFlag( Team team )
+		{
+			(Entity.All.First( e => e is InfoFlagSpawn flagSpawn && flagSpawn.Team == (int)team ) as InfoFlagSpawn)?.ShowFlag();
+		}
+
+		private void HideFlag( Team team )
+		{
+			(Entity.All.First( e => e is InfoFlagSpawn flagSpawn && flagSpawn.Team == (int)team ) as InfoFlagSpawn)?.HideFlag();
 		}
 	}
 }
