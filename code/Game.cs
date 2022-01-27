@@ -56,7 +56,7 @@ namespace Fortwars
 		{
 			base.ClientJoined( cl );
 
-			var player = new FortwarsPlayer();
+			var player = new FortwarsPlayer( cl );
 			player.Respawn();
 
 			cl.Pawn = player;

@@ -5,6 +5,7 @@ namespace Fortwars
 	public partial class FortwarsPlayer : Sandbox.Player
 	{
 		DamageInfo LastDamage;
+		public Clothing.Container Clothing = new();
 
 		public bool IsSpectator
 		{
@@ -14,6 +15,12 @@ namespace Fortwars
 		public FortwarsPlayer()
 		{
 			Inventory = new Inventory( this );
+		}
+
+		public FortwarsPlayer( Client cl ) : this()
+		{
+			// Load clothing from client data
+			Clothing.LoadFromClient( cl );
 		}
 
 		public override void Respawn()
@@ -57,8 +64,15 @@ namespace Fortwars
 
 			EnableAllCollisions = true;
 			EnableDrawing = true;
+
+			// Draw clothes etc
+			foreach ( var child in Children )
+				child.EnableDrawing = true;
+
 			EnableHideInFirstPerson = true;
 			EnableShadowInFirstPerson = true;
+
+			Clothing.DressEntity( this );
 
 			Inventory.DeleteContents();
 			if ( Game.Instance.Round is BuildRound )
@@ -77,7 +91,6 @@ namespace Fortwars
 		{
 			base.OnKilled();
 
-			//
 			Inventory.DropActive();
 
 			//
@@ -91,7 +104,12 @@ namespace Fortwars
 			Camera = new SpectateRagdollCamera();
 
 			EnableAllCollisions = false;
+
 			EnableDrawing = false;
+
+			// Don't draw clothes etc
+			foreach ( var child in Children )
+				child.EnableDrawing = false;
 		}
 
 		public override void Simulate( Client owner )
