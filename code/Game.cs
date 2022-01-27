@@ -77,7 +77,7 @@ namespace Fortwars
 				}
 				else
 				{
-					KillFeed.AddEntry( pawn.LastAttacker.NetworkIdent, pawn.LastAttacker.ToString(), pawn.Client.PlayerId, pawn.Name, "killed" );
+					KillFeed.AddEntry( pawn.LastAttacker.NetworkIdent, pawn.LastAttacker.ToString(), pawn.Client.PlayerId, pawn.Client.Name, "killed" );
 				}
 			}
 			else
