@@ -133,12 +133,12 @@ namespace Fortwars
 
 		private void ShowFlag( Team team )
 		{
-			(Entity.All.First( e => e is InfoFlagSpawn flagSpawn && flagSpawn.Team == (int)team ) as InfoFlagSpawn)?.ShowFlag();
+			(Entity.All.First( e => e is InfoFlagSpawn flagSpawn && flagSpawn.Team == team ) as InfoFlagSpawn)?.ShowFlag();
 		}
 
 		private void HideFlag( Team team )
 		{
-			(Entity.All.First( e => e is InfoFlagSpawn flagSpawn && flagSpawn.Team == (int)team ) as InfoFlagSpawn)?.HideFlag();
+			(Entity.All.First( e => e is InfoFlagSpawn flagSpawn && flagSpawn.Team == team ) as InfoFlagSpawn)?.HideFlag();
 		}
 	}
 }

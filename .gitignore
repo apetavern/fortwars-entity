@@ -14,3 +14,6 @@ Properties
 # Build results
 [Oo]bj/
 .vs/
+
+# VRAD artifacts
+_bakeresourcecache/

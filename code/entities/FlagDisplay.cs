@@ -1,9 +1,7 @@
 ﻿using Sandbox;
-using System;
 
 namespace Fortwars
 {
-	[Library( "fw_flag" )]
 	public partial class FlagDisplay : ModelEntity
 	{
 		public override void Spawn()

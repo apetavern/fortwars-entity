@@ -7,6 +7,13 @@ namespace Fortwars
 	{
 		[Net] public Vector3 CenterOffset { get; set; }
 
+		[Net] float RandomOffset { get; set; }
+
+		public BobbingComponent()
+		{
+			RandomOffset = Rand.Float( 0, 360 );
+		}
+
 		// TODO: move this to an entity component "BobComponent"
 		[Event.PreRender]
 		public virtual void OnPreRender()
@@ -17,7 +24,7 @@ namespace Fortwars
 			if ( sceneObject == null )
 				return;
 
-			sceneObject.Rotation = Rotation.From( 45, Time.Now * 90f, 0 );
+			sceneObject.Rotation = Rotation.From( 45, (Time.Now * 90f) + RandomOffset, 0 );
 
 			// actual origin is off-center, let's just center that
 			Vector3 centerOffset = CenterOffset * sceneObject.Rotation;

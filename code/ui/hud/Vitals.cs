@@ -1,4 +1,5 @@
-﻿using Sandbox.UI;
+﻿using Sandbox;
+using Sandbox.UI;
 using Sandbox.UI.Construct;
 
 namespace Fortwars.UI
@@ -12,6 +13,7 @@ namespace Fortwars.UI
 			var icon = Add.Icon( "favorite" );
 			var segmentsContainer = Add.Panel( "segments" );
 			Health = Add.Label( "100", "health" );
+			Health.Bind( "text", () => Local.Pawn.Health.CeilToInt() );
 		}
 	}
 }

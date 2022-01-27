@@ -2,11 +2,16 @@
 
 namespace Fortwars
 {
+	/// <summary>
+	/// This is where the flag spawns.
+	/// </summary>
 	[Library( "info_flag_spawn" )]
+	[Hammer.EntityTool( "Flag Spawn", "FortWars" )]
+	[Hammer.EditorModel( "models/rust_props/small_junk/toilet_paper.vmdl" )]
 	public partial class InfoFlagSpawn : Entity
 	{
-		[Property( "team" )]
-		public int Team { get; set; }
+		[Property]
+		public Team Team { get; set; }
 
 		private FlagDisplay flag;
 

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace Fortwars
 {
-	[Library( "fortwars", Title = "Fortwars" )]
 	partial class Game : Sandbox.Game
 	{
 		public static Game Instance
@@ -119,7 +118,7 @@ namespace Fortwars
 		{
 			Log.Info( $"Finding spawnpoint for {pawn.Name} on TeamID: {(int)(pawn as FortwarsPlayer).TeamID}" );
 
-			var spawnpoints = Entity.All.OfType<InfoPlayerTeamspawn>().Where( x => x.Team == (int)(pawn as FortwarsPlayer).TeamID );
+			var spawnpoints = Entity.All.OfType<InfoPlayerTeamspawn>().Where( x => x.Team == (pawn as FortwarsPlayer).TeamID );
 			var randomSpawn = spawnpoints.OrderBy( x => Guid.NewGuid() ).FirstOrDefault();
 
 			if ( randomSpawn == null )
