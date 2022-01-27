@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System.Linq;
 
 namespace Fortwars
 {
@@ -13,8 +14,7 @@ namespace Fortwars
 
 			if ( Host.IsServer )
 			{
-				foreach ( var player in Player.All )
-					(player as FortwarsPlayer)?.Respawn();
+				Player.All.ToList().ForEach( ( player ) => (player as FortwarsPlayer)?.Respawn() );
 			}
 		}
 
