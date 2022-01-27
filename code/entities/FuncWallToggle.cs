@@ -17,12 +17,16 @@ namespace Fortwars
 
 		public void Show()
 		{
+			// TODO: Why does changing EnableAllCollisions do fuck all
+			CollisionGroup = CollisionGroup.Default;
 			EnableAllCollisions = true;
 			EnableDrawing = true;
 		}
 
 		public void Hide()
 		{
+			// TODO: Ditto
+			CollisionGroup = CollisionGroup.Never;
 			EnableAllCollisions = false;
 			EnableDrawing = false;
 		}
