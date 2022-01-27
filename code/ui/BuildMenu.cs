@@ -28,14 +28,17 @@ public partial class BuildMenu : Panel
 		{
 			var file = (string)data;
 			var panel = cell.Add.Panel( "icon" );
-			panel.Style.Set( "background-image", $"url( /ui/models/{file}_c.png )" );
-			panel.AddEventListener( "onclick", () => ConsoleSystem.Run( "spawn", "models/" + file ) );
+			panel.Style.Set( "background-image", $"url( /ui/models/blocks/{file.Replace( ".vmdl", "" )}.png )" );
+			panel.AddEventListener( "onclick", () => ConsoleSystem.Run( "spawn", "models/blocks/" + file ) );
 		};
 
 		Canvas.AddItems( new string[] {
-			"fw.block_3x2.vmdl",
-			"fw.block_2x2.vmdl",
-			"fw.block_1x2.vmdl",
+			"fw_3x2.vmdl",
+			"fw_1x2.vmdl",
+			"fw_1x4.vmdl",
+			"fw_1x1x1.vmdl",
+			"fw_1x2x1.vmdl",
+
 		} );
 
 		BindClass( "active", () => Input.Down( InputButton.Menu ) );

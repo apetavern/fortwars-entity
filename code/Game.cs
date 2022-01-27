@@ -151,6 +151,10 @@ namespace Fortwars
 			ent.Position = tr.EndPos;
 			ent.Rotation = Rotation.From( new Angles( 0, player.EyeRot.Yaw(), 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
 			ent.SetModel( modelname );
+			if ( (player as FortwarsPlayer).TeamID == Team.Red )
+			{
+				ent.SetMaterialGroup( 1 );
+			}
 
 			// Drop to floor
 			if ( ent.PhysicsBody != null && ent.PhysicsGroup.BodyCount == 1 )
