@@ -1,6 +1,6 @@
 # FortWars for s&box
  
-This is a continuation of [matt's FortWars gamemode](https://github.com/themasterminds/sbox-fortwars) with updates for API changes as well as tweaks and improvements to gameplay.
+This is a continuation of [Matt's FortWars gamemode](https://github.com/themasterminds/sbox-fortwars) with updates for API changes as well as tweaks and improvements to gameplay.
 
 ## What is FortWars?
 
