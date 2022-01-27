@@ -28,7 +28,7 @@ public partial class BuildMenu : Panel
 		{
 			var file = (string)data;
 			var panel = cell.Add.Panel( "icon" );
-			panel.Style.Set( "background-image", $"url( /ui/models/{file.Replace( ".vmdl", "" )}_c.png )" );
+			panel.Style.Set( "background-image", $"url( /ui/models/blocks/{file.Replace( ".vmdl", "" )}.png )" );
 			panel.AddEventListener( "onclick", () => ConsoleSystem.Run( "spawn", "models/blocks/" + file ) );
 		};
 
