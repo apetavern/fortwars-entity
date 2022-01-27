@@ -5,6 +5,8 @@ using Sandbox.UI.Tests;
 [Library]
 public partial class BuildMenu : Panel
 {
+	// TODO: This could probably be done better as a radial menu, since we won't have tons of stuff to choose from anyway
+
 	public static BuildMenu Instance;
 
 	VirtualScrollPanel Canvas;
@@ -20,7 +22,8 @@ public partial class BuildMenu : Panel
 		Add.Panel();
 
 		Canvas.Layout.AutoColumns = true;
-		Canvas.Layout.ItemSize = new Vector2( 100, 100 );
+		Canvas.Layout.ItemWidth = 256;
+		Canvas.Layout.ItemHeight = 256;
 		Canvas.OnCreateCell = ( cell, data ) =>
 		{
 			var file = (string)data;
@@ -34,13 +37,7 @@ public partial class BuildMenu : Panel
 			"fw.block_2x2.vmdl",
 			"fw.block_1x2.vmdl",
 		} );
+
+		BindClass( "active", () => Input.Down( InputButton.Menu ) );
 	}
-
-	public override void Tick()
-	{
-		base.Tick();
-
-		Parent.SetClass( "buildmenuopen", Input.Down( InputButton.Menu ) );
-	}
-
 }

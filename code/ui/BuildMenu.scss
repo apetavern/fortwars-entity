@@ -3,14 +3,24 @@
     right: 0px;
     top: 0px;
     bottom: 0px;
-    margin: 100px;
+    margin: 250px 100px;
     margin-bottom: 200px;
-    border-radius: 5px;
+    border-radius: 2px;
     pointer-events: none;
-    transition: all 0.1s ease-out;
     position: absolute;
     font-family: poppins;
     opacity: 0;
+    background-color: rgba( #333, 0 );
+    transform: scale( 1.1 );
+    transition: all 150ms ease;
+
+    &.active {
+        pointer-events: all;
+        opacity: 1;
+        transform: scale( 1 );
+        background-color: rgba( #333, 0.9 );
+    }
+
 
     .canvas {
         overflow: scroll;
@@ -26,7 +36,7 @@
         }
 
         .icon {
-            border-radius: 16px;
+            border-radius: 2px;
             color: rgba( #fff, 0.5 );
             font-size: 12px;
             text-align: center;
@@ -37,6 +47,8 @@
             background-size: cover;
             background-color: #ccc;
             background-image: url( /ui/entity/spawnicon.png );
+            border: 2px solid transparent;
+            transition: all 150ms ease;
 
             label {
                 font-size: 9px;
@@ -49,17 +61,11 @@
             &:hover {
                 color: #fff;
                 background-color: #fff;
+                border: 2px solid white;
             }
 
             &:active {
             }
         }
     }
-}
-
-.buildmenuopen buildmenu {
-    transition: all 0.2s ease-out;
-    pointer-events: all;
-    opacity: 1;
-    transform: scale( 1 );
 }
