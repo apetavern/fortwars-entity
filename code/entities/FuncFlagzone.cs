@@ -2,11 +2,17 @@
 
 namespace Fortwars
 {
+	/// <summary>
+	/// Players capture the flag in this area.
+	/// </summary>
 	[Library( "func_flagzone" )]
-	public partial class FuncFlagzone : ModelEntity
+	[Hammer.Solid]
+	[Hammer.RenderFields]
+	[Hammer.VisGroup( Hammer.VisGroup.Dynamic )]
+	public partial class FuncFlagzone : BrushEntity
 	{
-		[Property( "team" )]
-		public int Team { get; set; }
+		[Property]
+		public Team Team { get; set; }
 
 		public override void Spawn()
 		{
@@ -28,7 +34,7 @@ namespace Fortwars
 				return;
 
 			if ( other is Player )
-				Game.Instance.OnPlayerTouchFlagzone( other as FortwarsPlayer, (Team)Team );
+				Game.Instance.OnPlayerTouchFlagzone( other as FortwarsPlayer, Team );
 		}
 
 		public override void EndTouch( Entity other )

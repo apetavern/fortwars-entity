@@ -3,7 +3,10 @@
 namespace Fortwars
 {
 	[Library( "func_wall_toggle" )]
-	public partial class FuncWallToggle : ModelEntity
+	[Hammer.Solid]
+	[Hammer.RenderFields]
+	[Hammer.VisGroup( Hammer.VisGroup.Dynamic )]
+	public partial class FuncWallToggle : BrushEntity
 	{
 		public override void Spawn()
 		{
