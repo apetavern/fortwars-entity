@@ -62,6 +62,32 @@ namespace Fortwars
 			cl.Pawn = player;
 		}
 
+		public override void OnKilled( Entity pawn )
+		{
+			Round?.OnPlayerKilled( pawn as Player );
+			PlayerDropFlag( pawn as FortwarsPlayer );
+
+			Log.Info( $"{pawn.Name} was killed" );
+
+			if ( pawn.LastAttacker != null )
+			{
+				if ( pawn.LastAttacker is Player attackPlayer )
+				{
+					KillFeed.AddEntry( attackPlayer.Client.PlayerId, attackPlayer.Client.Name, pawn.Client.PlayerId, pawn.Client.Name, pawn.LastAttackerWeapon?.ClassInfo?.Name );
+				}
+				else
+				{
+					KillFeed.AddEntry( pawn.LastAttacker.NetworkIdent, pawn.LastAttacker.ToString(), pawn.Client.PlayerId, pawn.Name, "killed" );
+				}
+			}
+			else
+			{
+				KillFeed.AddEntry( 0, "", pawn.Client.PlayerId, pawn.Client.Name, "died" );
+			}
+
+			base.OnKilled( pawn );
+		}
+
 		private void OnSecond()
 		{
 			// this is shite, need Time.Now to reflect server time clientside
