@@ -56,10 +56,36 @@ namespace Fortwars
 		{
 			base.ClientJoined( cl );
 
-			var player = new FortwarsPlayer();
+			var player = new FortwarsPlayer( cl );
 			player.Respawn();
 
 			cl.Pawn = player;
+		}
+
+		public override void OnKilled( Entity pawn )
+		{
+			Round?.OnPlayerKilled( pawn as Player );
+			PlayerDropFlag( pawn as FortwarsPlayer );
+
+			Log.Info( $"{pawn.Name} was killed" );
+
+			if ( pawn.LastAttacker != null )
+			{
+				if ( pawn.LastAttacker is Player attackPlayer )
+				{
+					KillFeed.AddEntry( attackPlayer.Client.PlayerId, attackPlayer.Client.Name, pawn.Client.PlayerId, pawn.Client.Name, pawn.LastAttackerWeapon?.ClassInfo?.Name );
+				}
+				else
+				{
+					KillFeed.AddEntry( pawn.LastAttacker.NetworkIdent, pawn.LastAttacker.ToString(), pawn.Client.PlayerId, pawn.Client.Name, "killed" );
+				}
+			}
+			else
+			{
+				KillFeed.AddEntry( 0, "", pawn.Client.PlayerId, pawn.Client.Name, "died" );
+			}
+
+			base.OnKilled( pawn );
 		}
 
 		private void OnSecond()
@@ -87,6 +113,23 @@ namespace Fortwars
 					Round.Start();
 				}
 			}
+		}
+
+		public override void MoveToSpawnpoint( Entity pawn )
+		{
+			Log.Info( $"Finding spawnpoint for {pawn.Name} on TeamID: {(int)(pawn as FortwarsPlayer).TeamID}" );
+
+			var spawnpoints = Entity.All.OfType<InfoPlayerTeamspawn>().Where( x => x.Team == (int)(pawn as FortwarsPlayer).TeamID );
+			var randomSpawn = spawnpoints.OrderBy( x => Guid.NewGuid() ).FirstOrDefault();
+
+			if ( randomSpawn == null )
+			{
+				Log.Warning( "Couldn't find spawnpoint!" );
+				return;
+			}
+
+			pawn.Position = randomSpawn.Position;
+			pawn.Rotation = randomSpawn.Rotation;
 		}
 
 		[ServerCmd( "spawn" )]

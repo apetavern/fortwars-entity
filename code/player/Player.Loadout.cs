@@ -1,7 +1,4 @@
-﻿using Sandbox;
-using System;
-
-namespace Fortwars
+﻿namespace Fortwars
 {
 	partial class FortwarsPlayer
 	{

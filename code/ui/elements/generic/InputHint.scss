@@ -1,0 +1,39 @@
+InputHint {
+    align-items: center;
+
+    .glyph {
+    }
+
+    .action {
+        margin-left: 8px;
+        font-size: 16px;
+        color: white;
+        font-weight: bold;
+    }
+
+    flex-direction: row;
+
+    &.small {
+        margin-right: 0px;
+        margin-left: 0px;
+
+        .action {
+            display: none;
+        }
+    }
+
+    &.invert {
+        .action {
+            margin-right: 8px;
+        }
+
+        flex-direction: row-reverse;
+    }
+
+
+    &.noaction {
+        .action {
+            display: none;
+        }
+    }
+}

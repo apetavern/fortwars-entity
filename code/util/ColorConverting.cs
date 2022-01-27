@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Fortwars
+﻿namespace Fortwars
 {
 	static class ColorConvert
 	{

@@ -31,16 +31,17 @@ namespace Fortwars
 			// Copy the clothes over
 			foreach ( var child in Children )
 			{
-				if ( child is ModelEntity e )
-				{
-					var model = e.GetModelName();
-					if ( model != null && !model.Contains( "clothes" ) ) // Uck we 're better than this, entity tags, entity type or something?
-						continue;
+				if ( !child.Tags.Has( "clothes" ) ) continue;
+				if ( child is not ModelEntity e ) continue;
 
-					var clothing = new ModelEntity();
-					clothing.SetModel( model );
-					clothing.SetParent( ent, true );
-				}
+				var model = e.GetModelName();
+
+				var clothing = new ModelEntity();
+				clothing.SetModel( model );
+				clothing.SetParent( ent, true );
+				clothing.RenderColor = e.RenderColor;
+				clothing.CopyBodyGroups( e );
+				clothing.CopyMaterialGroup( e );
 			}
 
 			ent.PhysicsGroup.AddVelocity( force );
@@ -57,7 +58,6 @@ namespace Fortwars
 					ent.PhysicsGroup.AddVelocity( force );
 				}
 			}
-
 
 			Corpse = ent;
 

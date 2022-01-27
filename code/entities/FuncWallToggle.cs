@@ -9,22 +9,26 @@ namespace Fortwars
 		{
 			base.Spawn();
 
-			SetupPhysicsFromModel(PhysicsMotionType.Static);
+			SetupPhysicsFromModel( PhysicsMotionType.Static );
 			CollisionGroup = CollisionGroup.Default;
 			EnableAllCollisions = true;
 			EnableTouch = true;
 		}
 
 		public void Show()
-        {
+		{
+			// TODO: Why does changing EnableAllCollisions do fuck all
+			CollisionGroup = CollisionGroup.Default;
 			EnableAllCollisions = true;
 			EnableDrawing = true;
-        }
+		}
 
 		public void Hide()
-        {
+		{
+			// TODO: Ditto
+			CollisionGroup = CollisionGroup.Never;
 			EnableAllCollisions = false;
 			EnableDrawing = false;
-        }
+		}
 	}
 }

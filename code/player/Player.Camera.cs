@@ -1,16 +1,13 @@
 ﻿using Sandbox;
 using System;
-using System.Linq;
-using System.Numerics;
-using System.Threading;
 
 namespace Fortwars
 {
 	partial class FortwarsPlayer
 	{
-		RealTimeSince timeSinceUpdatedFramerate;
-
-		Rotation lastCameraRot = Rotation.Identity;
+		private RealTimeSince timeSinceUpdatedFramerate;
+		private Vector3 lastCameraPos = Vector3.Zero;
+		private Rotation lastCameraRot = Rotation.Identity;
 
 		public override void PostCameraSetup( ref CameraSetup setup )
 		{
@@ -28,13 +25,6 @@ namespace Fortwars
 				// We could have a function that clamps a rotation to within x degrees of another rotation?
 				lastCameraRot = Rotation.Lerp( lastCameraRot, setup.Rotation, 1.0f - (allowance / angleDiffDegrees) );
 			}
-			else
-			{
-				//lastCameraRot = Rotation.Lerp( lastCameraRot, Camera.Rot, Time.Delta * 0.2f * angleDiffDegrees );
-			}
-
-			// uncomment for lazy cam
-			//camera.Rot = lastCameraRot;
 
 			if ( setup.Viewer != null )
 			{
@@ -44,13 +34,14 @@ namespace Fortwars
 			if ( timeSinceUpdatedFramerate > 1 )
 			{
 				timeSinceUpdatedFramerate = 0;
-				//UpdateFps( (int) (1.0f / Time.Delta) );
 			}
 		}
 
 		float walkBob = 0;
 		float lean = 0;
 		float fov = 0;
+
+		private float lastHudOffset;
 
 		private void AddCameraEffects( ref CameraSetup setup )
 		{
@@ -69,7 +60,7 @@ namespace Fortwars
 			setup.Position += left * MathF.Sin( walkBob * 0.6f ) * speed * 1;
 
 			// Camera lean
-			lean = lean.LerpTo( Velocity.Dot( setup.Rotation.Right ) * 0.03f, Time.Delta * 15.0f );
+			lean = lean.LerpTo( Velocity.Dot( setup.Rotation.Right ) * 0.01f, Time.Delta * 15.0f );
 
 			var appliedLean = lean;
 			appliedLean += MathF.Sin( walkBob ) * speed * 0.2f;
@@ -81,11 +72,19 @@ namespace Fortwars
 
 			setup.FieldOfView += fov;
 
-			//	var tx = new Sandbox.UI.PanelTransform();
-			//	tx.AddRotation( 0, 0, lean * -0.1f );
+			var tx = new Sandbox.UI.PanelTransform();
+			tx.AddRotation( 0, 0, lean * -0.1f );
 
-			//	Hud.CurrentPanel.Style.Transform = tx;
-			//	Hud.CurrentPanel.Style.Dirty();
+			var zOffset = (lastCameraPos - setup.Position).z * 8f;
+			zOffset = zOffset.Clamp( -32, 32 );
+			zOffset = lastHudOffset.LerpTo( zOffset, 25.0f * Time.Delta );
+			tx.AddTranslateY( zOffset );
+
+			Local.Hud.Style.Transform = tx;
+			Local.Hud.Style.Dirty();
+
+			lastCameraPos = setup.Position;
+			lastHudOffset = zOffset;
 		}
 	}
 }

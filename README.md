@@ -9,7 +9,7 @@ basic todo:
 * [ ] UI: React to RPCs to show frags, captures.
 * [ ] UI: Ammo count, weapon select, etc..
 * [ ] Balance teams properly
-* [ ] Display flag properly, waiting for some form of clientside transformations of entities in IFrameUpdate.
+* [X] Display flag properly, waiting for some form of clientside transformations of entities in IFrameUpdate.
 * [ ] Win state
 * [ ] Cleanup code, just learning how the API works after all
 
