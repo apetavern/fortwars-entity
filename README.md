@@ -22,3 +22,16 @@ Capture the flag battle between two teams, build up your fort in the build round
 Far future:
 
 * [ ] Different gamemodes to CTF
+
+## TODO, modelling edition
+
+Weapons:
+* [ ] p90
+* [ ] awp
+* [ ] ak47
+* [ ] m4a1s
+* [ ] mp7
+* [ ] p2000
+* [ ] usp-s
+* [ ] revolver
+* [ ] deagle
