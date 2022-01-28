@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace FortWars;
+namespace Fortwars;
 
 public partial class FortwarsWeapon : BaseCarriable
 {
@@ -148,7 +148,7 @@ public partial class FortwarsWeapon : BaseCarriable
 
 	public override void SimulateAnimator( PawnAnimator anim )
 	{
-		anim.SetParam( "holdtype", 2 );
+		anim.SetParam( "holdtype", (int)WeaponAsset.HoldType );
 		anim.SetParam( "aimat_weight", 1.0f );
 		anim.SetParam( "holdtype_handedness", 0 );
 	}

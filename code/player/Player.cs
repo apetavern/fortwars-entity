@@ -1,4 +1,3 @@
-using FortWars;
 using Sandbox;
 
 namespace Fortwars

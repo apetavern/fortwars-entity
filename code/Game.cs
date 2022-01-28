@@ -1,5 +1,4 @@
 using Fortwars.UI;
-using FortWars;
 using Sandbox;
 using System;
 using System.Linq;

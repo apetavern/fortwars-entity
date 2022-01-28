@@ -1,5 +1,5 @@
 //
-// FortWars.WeaponAsset
+// Fortwars.WeaponAsset
 //
 @BaseClass = fwweapon : ""
 [
@@ -7,6 +7,16 @@
 	worldmodel(resource:vmdl) { group = "Meta" } : "World Model" :  : ""
 	viewmodel(resource:vmdl) { group = "Meta" } : "View Model" :  : ""
 	movementspeedmultiplier(float) { group = "Meta" } : "Movement Speed Multiplier" : "1" : ""
+	holdtype(choices) { group = "Meta" } : "Hold Type" : 1 : "" =
+	[
+		0 : "None"
+		1 : "Pistol"
+		2 : "Rifle"
+		3 : "Shotgun"
+		4 : "Hold Item"
+		5 : "Melee Punch"
+		6 : "Melee Weapons"
+	]
 	firemode(choices) { group = "Shooting" } : "Fire Mode" : 0 : "" =
 	[
 		0 : "Burst"

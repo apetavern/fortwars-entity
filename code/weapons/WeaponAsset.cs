@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 using System.ComponentModel;
 
-namespace FortWars;
+namespace Fortwars;
 
 [Library( "fwweapon" ), AutoGenerate]
 public class WeaponAsset : Asset
@@ -20,6 +20,20 @@ public class WeaponAsset : Asset
 
 	[Property, Category( "Meta" ), Range( 0.1f, 1.0f )]
 	public float MovementSpeedMultiplier { get; set; } = 1.0f;
+
+	public enum HoldTypes
+	{
+		None,
+		Pistol,
+		Rifle,
+		Shotgun,
+		HoldItem,
+		MeleePunch,
+		MeleeWeapons
+	}
+
+	[Property, Category( "Meta" )]
+	public HoldTypes HoldType { get; set; } = HoldTypes.Pistol;
 
 	//
 	// Shooting

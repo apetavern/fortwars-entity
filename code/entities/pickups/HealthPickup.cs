@@ -1,5 +1,4 @@
-﻿using FortWars;
-using Sandbox;
+﻿using Sandbox;
 
 namespace Fortwars
 {
