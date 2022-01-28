@@ -168,12 +168,19 @@ public partial class FortwarsWeapon : BaseCarriable
 
 	public virtual bool CanPrimaryAttack()
 	{
-		if ( WeaponAsset.FireMode == WeaponAsset.FireModes.SemiAuto &&
-			!Owner.IsValid() || !Input.Down( InputButton.Attack1 ) )
+		if ( !Owner.IsValid() )
 			return false;
 
-		else if ( !Owner.IsValid() || !Input.Pressed( InputButton.Attack1 ) )
-			return false;
+		if ( WeaponAsset.FireMode == WeaponAsset.FireModes.SemiAuto )
+		{
+			if ( !Input.Down( InputButton.Attack1 ) )
+				return false;
+		}
+		else
+		{
+			if ( !Input.Pressed( InputButton.Attack1 ) )
+				return false;
+		}
 
 		var rate = WeaponAsset.RPM / 60f;
 		if ( rate <= 0 ) return true;
