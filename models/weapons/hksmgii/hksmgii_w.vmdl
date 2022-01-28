@@ -14,10 +14,6 @@
 						remaps = 
 						[
 							{
-								from = "phong1.vmat"
-								to = "models/weapons/hksmgii/materials/hksmgii.vmat"
-							},
-							{
 								from = "magbullet.vmat"
 								to = "models/weapons/hksmgii/materials/hksmgiimag.vmat"
 							},
@@ -40,12 +36,25 @@
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						parent_bone = ""
+						parent_bone = "hold_R"
 						import_filter = 
 						{
 							exclude_by_default = false
 							exception_list = [  ]
 						}
+					},
+				]
+			},
+			{
+				_class = "Skeleton"
+				children = 
+				[
+					{
+						_class = "Bone"
+						name = "hold_R"
+						origin = [ 0.0, 0.0, 0.0 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						do_not_discard = true
 					},
 				]
 			},

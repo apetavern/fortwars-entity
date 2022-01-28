@@ -18,12 +18,8 @@
 								to = "models/citizen/skin/citizen_skin04.vmat"
 							},
 							{
-								from = "magbullet2.vmat"
+								from = "magbullet.vmat"
 								to = "models/weapons/hksmgii/materials/hksmgiimag.vmat"
-							},
-							{
-								from = "phong4.vmat"
-								to = "models/weapons/hksmgii/materials/hksmgii.vmat"
 							},
 						]
 						use_global_default = false
@@ -81,14 +77,24 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						source_filename = "models/weapons/hksmgii/hksmgii_v.fbx"
-						start_frame = 1
-						end_frame = 2
+						start_frame = 5
+						end_frame = 6
 						framerate = -1.0
 						take = 0
 						reverse = false
 					},
 				]
 				default_root_bone_name = ""
+			},
+			{
+				_class = "ModelModifierList"
+				children = 
+				[
+					{
+						_class = "ModelModifier_Translate"
+						translation = [ 10.0, -10.0, -135.0 ]
+					},
+				]
 			},
 		]
 		model_archetype = ""
