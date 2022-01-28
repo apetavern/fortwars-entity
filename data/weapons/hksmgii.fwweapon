@@ -1,0 +1,37 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		weaponname = "My weapon"
+		worldmodel = resource:"models/weapons/hksmgii/hksmgii_w.vmdl"
+		viewmodel = resource:"models/weapons/hksmgii/hksmgii_v.vmdl"
+		movementspeedmultiplier = 1.0
+		holdtype = "1"
+		firemode = "2"
+		rpm = 750.0
+		firstshotdelay = 0.0
+		shotdelay = 0.0
+		range = 16384
+		shotcount = 1
+		recoilx = -0.1
+		recoily = -0.25
+		firstshotalwaysaccurate = true
+		spread = 0.01
+		spreadshotincrease = 0.01
+		spreadchangetime = 1.0
+		aimaccuracymult = 1.0
+		maxammo = 30
+		extraammo = 60
+		reloadtime = 3.0
+		postreloadtime = 0.5
+		maxdamage = 15.0
+		mindamage = 8.0
+		damagedropoffdistance = 256
+		headshotmultiplier = 1.5
+		kickbacksize = 1.5
+		kickbacklength = 1.0
+		kickbackspeed = 1.5
+		kickbackrotation = 0.9
+		firesound = "rust_pistol.shoot"
+	}
+}
