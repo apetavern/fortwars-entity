@@ -53,8 +53,8 @@
 						_class = "Attachment"
 						name = "muzzle"
 						parent_bone = "Base"
-						relative_origin = [ -0.156065, 11.708235, 31.323776 ]
-						relative_angles = [ 0.0, 0.0, 0.0 ]
+						relative_origin = [ -0.156069, 11.708255, 31.323792 ]
+						relative_angles = [ -87.165337, 170.035263, 101.884361 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -132,7 +132,7 @@
 						source_filename = "models/weapons/hkusp/hkusp_v.fbx"
 						start_frame = 7
 						end_frame = 19
-						framerate = 40.0
+						framerate = 45.0
 						take = 0
 						reverse = false
 					},
@@ -153,7 +153,7 @@
 						source_filename = "models/weapons/hkusp/hkusp_v.fbx"
 						start_frame = 23
 						end_frame = 35
-						framerate = 40.0
+						framerate = 45.0
 						take = 0
 						reverse = false
 					},
@@ -174,7 +174,49 @@
 						source_filename = "models/weapons/hkusp/hkusp_v.fbx"
 						start_frame = 39
 						end_frame = 51
-						framerate = 40.0
+						framerate = 45.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "deploy"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/hkusp/hkusp_v.fbx"
+						start_frame = 59
+						end_frame = 79
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "reload"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/hkusp/hkusp_v.fbx"
+						start_frame = 79
+						end_frame = 129
+						framerate = -1.0
 						take = 0
 						reverse = false
 					},
@@ -184,6 +226,6 @@
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
-		anim_graph_name = ""
+		anim_graph_name = "models/weapons/hkusp/hkusp_v.vanmgrph"
 	}
 }
