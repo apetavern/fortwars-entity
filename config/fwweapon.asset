@@ -17,7 +17,7 @@
 	rpm(float) { group = "Shooting" } : "RPM" : 600 : ""
 	firstshotdelay(float) { group = "Shooting" } : "First Shot Delay" : 0 : ""
 	shotdelay(float) { group = "Shooting" } : "Shot Delay" : 0 : ""
-	range(integer) { group = "Shooting" } : "Range" : 512 : ""
+	range(integer) { group = "Shooting" } : "Range" : 16384 : ""
 	shotcount(integer) { group = "Shooting" } : "Shot Count" : 1 : ""
 	recoilx(float) { group = "Shooting" } : "Recoil X" : "0.2" : ""
 	recoily(float) { group = "Shooting" } : "Recoil Y" : "1" : ""

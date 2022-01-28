@@ -10,7 +10,7 @@
 		rpm = 900.0
 		firstshotdelay = 0.0
 		shotdelay = 0.0
-		range = 512
+		range = 16384
 		shotcount = 1
 		recoilx = 0.05
 		recoily = -0.1
