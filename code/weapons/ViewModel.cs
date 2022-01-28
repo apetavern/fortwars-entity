@@ -5,6 +5,9 @@ namespace Fortwars
 {
 	public class ViewModel : BaseViewModel
 	{
+		[ClientVar( "fw_viewmodel_fov", Help = "Viewmodel field of view" )]
+		public static float ViewmodelFov { get; set; }
+
 		protected float SwingInfluence => 0.05f;
 		protected float ReturnSpeed => 5.0f;
 		protected float MaxOffsetLength => 20.0f;
@@ -71,7 +74,7 @@ namespace Fortwars
 			camSetup.ViewModel.FieldOfView = FinalFov;
 
 			TargetPos = 0;
-			TargetFov = 65;
+			TargetFov = ViewmodelFov;
 			TargetRot = Rotation.Identity;
 			LerpSpeed = 10f;
 
