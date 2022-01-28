@@ -19,6 +19,7 @@ namespace Fortwars.UI
 
 			RootPanel.AddChild<Sandbox.UI.ChatBox>();
 			RootPanel.AddChild<Vitals>();
+			RootPanel.AddChild<Ammo>();
 			RootPanel.AddChild<RoundStatus>();
 			RootPanel.AddChild<BuildHelp>();
 			RootPanel.AddChild<BuildMenu>();

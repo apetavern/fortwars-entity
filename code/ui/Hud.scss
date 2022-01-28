@@ -20,16 +20,23 @@ icon, iconpanel {
 }
 
 vitals {
+    left: 120px;
+}
+
+ammo {
+    right: 120px;
+}
+
+vitals, ammo {
     position: absolute;
     bottom: 86px;
-    left: 120px;
     display: flex;
     flex-direction: row;
     align-items: center;
     color: white;
     text-shadow: 0 0 5px rgba( black, 0.2 );
 
-    .health {
+    label {
         font-size: 32px;
         margin-left: 8px;
     }
