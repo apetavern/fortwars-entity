@@ -106,6 +106,22 @@ metadata
 ]
 
 //
+// Fortwars.InfoAmmoSpawn
+//
+@PointClass base(BaseProperties_local_fortwars) editormodel( "models/rust_props/small_junk/carton_box.vmdl" ) 
+metadata
+{
+	entity_tool_name = "Ammo Spawn"
+	entity_tool_group = "FortWars"
+}
+= info_ammo_spawn : ""
+[
+	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
+
+	input SetColor(string) : "Sets the color of this entity. Format is '255 255 255 255'."
+]
+
+//
 // Fortwars.InfoHealthSpawn
 //
 @PointClass base(BaseProperties_local_fortwars) editormodel( "models/sbox_props/burger_box/burger_box.vmdl" ) 

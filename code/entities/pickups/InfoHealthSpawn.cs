@@ -1,5 +1,4 @@
-﻿using Fortwars.entities.pickups;
-using Sandbox;
+﻿using Sandbox;
 
 namespace Fortwars
 {

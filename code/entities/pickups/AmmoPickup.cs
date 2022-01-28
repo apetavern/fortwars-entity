@@ -1,10 +1,8 @@
-﻿using FortWars;
-using Sandbox;
+﻿using Sandbox;
 
 namespace Fortwars
 {
-	// todo: base pickup
-	internal class HealthPickup : ModelEntity
+	internal class AmmoPickup : ModelEntity
 	{
 		public override void Spawn()
 		{
@@ -13,8 +11,8 @@ namespace Fortwars
 			float bboxSize = 4;
 			SetupPhysicsFromAABB( PhysicsMotionType.Static, new Vector3( -bboxSize ), new Vector3( bboxSize ) );
 
-			SetModel( "models/sbox_props/burger_box/burger_box.vmdl" );
-			Scale = 3.0f;
+			SetModel( "models/rust_props/small_junk/carton_box.vmdl" );
+			Scale = 1.5f;
 			CollisionGroup = CollisionGroup.Trigger;
 			EnableSolidCollisions = false;
 			EnableTouch = true;
@@ -26,11 +24,11 @@ namespace Fortwars
 		{
 			base.StartTouch( other );
 
-			if ( other is not FortwarsPlayer { ActiveChild: FortwarsWeapon weapon } )
+			if ( other is not FortwarsPlayer player )
 				return;
 
-			weapon.ReserveAmmo += weapon.WeaponAsset.MaxAmmo * 2;
-
+			player.Health += 50f;
+			player.Health = player.Health.Clamp( 0, 100 );
 			this.Delete();
 		}
 	}
