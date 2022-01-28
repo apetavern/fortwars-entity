@@ -19,6 +19,10 @@ namespace Fortwars.UI
 				var row = Add.Panel( "row" );
 				row.Add.InputHint( Sandbox.InputButton.Attack1, "Move" );
 			}
+			{
+				var row = Add.Panel( "row" );
+				row.Add.InputHint( Sandbox.InputButton.Flashlight, "Developer Menu" );
+			}
 		}
 
 		public override void Tick()

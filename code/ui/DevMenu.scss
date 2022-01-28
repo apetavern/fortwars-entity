@@ -1,0 +1,86 @@
+﻿label.title, text.title {
+    font-size: 48px;
+    padding: 25px 0;
+    color: white;
+}
+
+label.subtitle, text.subtitle {
+    font-size: 32px;
+    padding: 12px 0;
+    color: white;
+}
+
+label.minititle, text.minititle {
+    padding: 10px 0;
+    color: white;
+}
+
+text, label {
+    font-family: Poppins;
+    font-weight: 700;
+    color: white;
+    font-size: 20px;
+}
+
+icon, iconpanel {
+    font-family: MaterialIconsRound;
+    color: #333;
+    font-size: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: rgba( white, 0.5 );
+    margin: 4px 0;
+    border-radius: 2px;
+    transition: all 150ms ease;
+    align-items: center;
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgba( white, 0.25 );
+        sound-in: ui.button.over;
+    }
+
+    &:active {
+        sound-in: ui.button.press;
+    }
+
+    label {
+        color: #333;
+    }
+}
+
+
+DevMenu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 500px;
+    background-color: rgba( #333, 0.75 );
+    backdrop-filter: blur( 10px );
+    z-index: 1000;
+    flex-direction: column;
+    transform: translate( -50px );
+    opacity: 0;
+    padding: 10px 25px;
+    transition: all 150ms ease;
+    overflow: scroll;
+
+    &.visible {
+        transform: translate( 0 );
+        pointer-events: all;
+        opacity: 1;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    button {
+        iconpanel {
+            margin-right: 8px;
+        }
+    }
+}

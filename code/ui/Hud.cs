@@ -1,4 +1,5 @@
-﻿using Sandbox;
+﻿using Arena.UI;
+using Sandbox;
 using Sandbox.UI;
 
 namespace Fortwars.UI
@@ -23,6 +24,8 @@ namespace Fortwars.UI
 			RootPanel.AddChild<RoundStatus>();
 			RootPanel.AddChild<BuildHelp>();
 			RootPanel.AddChild<BuildMenu>();
+
+			RootPanel.AddChild<DevMenu>();
 		}
 	}
 }
