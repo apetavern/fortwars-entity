@@ -3,6 +3,7 @@ code/accesslist.txt
 Properties
 .intermediate
 *.csproj
+*.bat
 
 # User-specific files
 *.rsuser
@@ -17,3 +18,16 @@ Properties
 
 # VRAD artifacts
 _bakeresourcecache/
+*_bakeresourcecache.vpk
+
+# Compiled files
+*.vanmgrph_c
+*.vmat_c
+*.vmdl_c
+*.vsnd_c
+*.vtex_c
+*.zip
+*.vpk
+*.vpcf_c
+*.fgd
+*.vpost_c
