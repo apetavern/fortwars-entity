@@ -16,7 +16,7 @@
 		recoily = -0.1
 		firstshotalwaysaccurate = true
 		spread = 0.05
-		spreadshotincrease = 0.0
+		spreadshotincrease = 0.01
 		spreadchangetime = 1.0
 		aimaccuracymult = 1.0
 		maxammo = 12
@@ -32,5 +32,6 @@
 		kickbackspeed = 1.0
 		kickbackrotation = 0.6
 		firesound = "rust_pistol.shoot"
+		holdtype = "1"
 	}
 }
