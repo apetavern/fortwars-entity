@@ -26,12 +26,12 @@ Far future:
 ## TODO, modelling edition
 
 Weapons:
-* [X] usp-s
+* [X] usp
+* [ ] mp5
 * [ ] p90
 * [ ] awp
 * [ ] ak47
 * [ ] m4a1s
-* [ ] mp7
 * [ ] p2000
 * [ ] revolver
 * [ ] deagle
