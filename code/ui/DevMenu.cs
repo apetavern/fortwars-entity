@@ -28,6 +28,21 @@ namespace Arena.UI
 				ConsoleSystem.Run( "kill" );
 			} );
 
+			buttons.Add.ButtonWithIcon( "Reload HUD", "refresh", "button", () =>
+			{
+				ConsoleSystem.Run( "recreatehud" );
+			} );
+
+			//
+			// Game
+			//
+			buttons.Add.Label( "Game", "subtitle" );
+
+			buttons.Add.ButtonWithIcon( "Give tons of ammo", "gamepad", "button", () =>
+			{
+				ConsoleSystem.Run( "give_ammo 10000" );
+			} );
+
 			BindClass( "visible", () => Input.Down( InputButton.Flashlight ) );
 		}
 	}

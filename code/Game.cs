@@ -1,3 +1,5 @@
+using Fortwars.UI;
+using FortWars;
 using Sandbox;
 using System;
 using System.Linq;
@@ -15,10 +17,12 @@ namespace Fortwars
 		// shit hack, ideally Time.Now should be synced with server
 		[Net] public float ServerTime { get; private set; }
 
+		private FortwarsHUD hud;
+
 		public Game()
 		{
 			if ( IsServer )
-				new UI.FortwarsHUD();
+				hud = new UI.FortwarsHUD();
 
 			_ = StartTickTimer();
 
@@ -129,6 +133,25 @@ namespace Fortwars
 
 			pawn.Position = randomSpawn.Position;
 			pawn.Rotation = randomSpawn.Rotation;
+		}
+
+		[ServerCmd( "recreatehud" )]
+		public static void RecreateHud()
+		{
+			Instance.hud?.Delete();
+			Instance.hud = new();
+		}
+
+		[ServerCmd( "give_ammo" )]
+		public static void GiveAmmo( int amount )
+		{
+			var owner = ConsoleSystem.Caller;
+			var player = owner.Pawn;
+
+			if ( player.ActiveChild is not FortwarsWeapon weapon )
+				return;
+
+			weapon.ReserveAmmo += amount;
 		}
 
 		[ServerCmd( "spawn" )]
