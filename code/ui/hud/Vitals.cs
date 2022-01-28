@@ -11,7 +11,6 @@ namespace Fortwars.UI
 		public Vitals()
 		{
 			var icon = Add.Icon( "favorite" );
-			var segmentsContainer = Add.Panel( "segments" );
 			Health = Add.Label( "100", "health" );
 			Health.Bind( "text", () => Local.Pawn.Health.CeilToInt() );
 		}
