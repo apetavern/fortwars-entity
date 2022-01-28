@@ -19,8 +19,8 @@
 		spreadshotincrease = 0.0
 		spreadchangetime = 1.0
 		aimaccuracymult = 1.0
-		maxammo = 30
-		extraammo = 90
+		maxammo = 12
+		extraammo = 24
 		reloadtime = 2.0
 		postreloadtime = 0.5
 		maxdamage = 20.0
