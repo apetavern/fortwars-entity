@@ -70,6 +70,27 @@
 						weight_list_name = ""
 						fade_in_time = 0.2
 						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/hksmgii/hksmgii_v.fbx"
+						start_frame = 3
+						end_frame = 9
+						framerate = 1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "deploy"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
 						looping = false
 						delta = false
 						worldSpace = false
@@ -77,8 +98,92 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						source_filename = "models/weapons/hksmgii/hksmgii_v.fbx"
-						start_frame = 5
-						end_frame = 6
+						start_frame = 14
+						end_frame = 29
+						framerate = 20.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "fire1"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/hksmgii/hksmgii_v.fbx"
+						start_frame = 29
+						end_frame = 44
+						framerate = 40.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "fire2"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/hksmgii/hksmgii_v.fbx"
+						start_frame = 44
+						end_frame = 59
+						framerate = 40.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "fire3"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/hksmgii/hksmgii_v.fbx"
+						start_frame = 59
+						end_frame = 74
+						framerate = 40.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "reload"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/hksmgii/hksmgii_v.fbx"
+						start_frame = 74
+						end_frame = 174
 						framerate = -1.0
 						take = 0
 						reverse = false
@@ -96,9 +201,24 @@
 					},
 				]
 			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "muzzle"
+						parent_bone = "Base"
+						relative_origin = [ 0.0, 13.0334, 50.6712 ]
+						relative_angles = [ -90.0, -90.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
-		anim_graph_name = ""
+		anim_graph_name = "models/weapons/hksmgii/hksmgii_v.vanmgrph"
 	}
 }
