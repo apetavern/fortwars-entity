@@ -1,0 +1,43 @@
+//
+// FortWars.WeaponAsset
+//
+@BaseClass = fwweapon : ""
+[
+	weaponname(string) { group = "Meta" } : "Weapon Name" : "My weapon" : ""
+	worldmodel(resource:vmdl) { group = "Meta" } : "World Model" :  : ""
+	viewmodel(resource:vmdl) { group = "Meta" } : "View Model" :  : ""
+	movementspeedmultiplier(float) { group = "Meta" } : "Movement Speed Multiplier" : "1" : ""
+	firemode(choices) { group = "Shooting" } : "Fire Mode" : 0 : "" =
+	[
+		0 : "Burst"
+		1 : "Single"
+		2 : "Semi Auto"
+		3 : "Bolt Action"
+	]
+	rpm(float) { group = "Shooting" } : "RPM" : 600 : ""
+	firstshotdelay(float) { group = "Shooting" } : "First Shot Delay" : 0 : ""
+	shotdelay(float) { group = "Shooting" } : "Shot Delay" : 0 : ""
+	range(integer) { group = "Shooting" } : "Range" : 512 : ""
+	shotcount(integer) { group = "Shooting" } : "Shot Count" : 1 : ""
+	recoilx(float) { group = "Shooting" } : "Recoil X" : "0.2" : ""
+	recoily(float) { group = "Shooting" } : "Recoil Y" : "1" : ""
+	firstshotalwaysaccurate(boolean) { group = "Accuracy" } : "First Shot Always Accurate" : 1 : ""
+	spread(float) { group = "Accuracy" } : "Spread" : "0.1" : ""
+	spreadshotincrease(float) { group = "Accuracy" } : "Spread Shot Increase" : "0.05" : ""
+	spreadchangetime(float) { group = "Accuracy" } : "Spread Change Time" : "0.01" : ""
+	aimaccuracymult(float) { group = "Accuracy" } : "Aim Accuracy Mult" : "1" : ""
+	maxammo(integer) { group = "Ammo" } : "Max Ammo" : 30 : ""
+	extraammo(integer) { group = "Ammo" } : "Extra Ammo" : 90 : ""
+	reloadtime(float) { group = "Ammo" } : "Reload Time" : "3" : ""
+	postreloadtime(float) { group = "Ammo" } : "Post Reload Time" : "0.5" : ""
+	maxdamage(float) { group = "Damage" } : "Max Damage" : "20" : ""
+	mindamage(float) { group = "Damage" } : "Min Damage" : "10" : ""
+	damagedropoffdistance(integer) { group = "Damage" } : "Damage Drop Off Distance" : 256 : ""
+	headshotmultiplier(float) { group = "Damage" } : "Headshot Multiplier" : "1.5" : ""
+	kickbacksize(float) { group = "View Kick" } : "Kickback Size" : "1" : ""
+	kickbacklength(float) { group = "View Kick" } : "Kickback Length" : "1" : ""
+	kickbackspeed(float) { group = "View Kick" } : "Kickback Speed" : "1" : ""
+	kickbackrotation(float) { group = "View Kick" } : "Kickback Rotation" : "0.6" : ""
+	firesound(sound) { group = "Audio" } : "Fire Sound" : "rust_pistol.shoot" : ""
+]
+

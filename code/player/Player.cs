@@ -1,3 +1,4 @@
+using FortWars;
 using Sandbox;
 
 namespace Fortwars
@@ -81,7 +82,7 @@ namespace Fortwars
 			}
 			if ( Game.Instance.Round is CombatRound )
 			{
-				Inventory.Add( new Pistol(), true );
+				Inventory.Add( FortwarsWeapon.FromPath( "/data/weapons/usp.fwweapon" ), true );
 			}
 
 			base.Respawn();
