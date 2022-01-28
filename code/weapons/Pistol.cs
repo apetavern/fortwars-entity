@@ -2,7 +2,7 @@
 
 partial class Pistol : BaseDmWeapon
 {
-	public override string ViewModelPath => "weapons/rust_pistol/v_rust_pistol.vmdl";
+	public override string ViewModelPath => "models/weapons/hkusp/hkusp_v.vmdl";
 
 	public override float PrimaryRate => 15.0f;
 	public override float SecondaryRate => 1.0f;
@@ -14,8 +14,8 @@ partial class Pistol : BaseDmWeapon
 	{
 		base.Spawn();
 
-		SetModel( "weapons/rust_pistol/rust_pistol.vmdl" );
-		AmmoClip = 12;
+		SetModel( "models/weapons/hkusp/hkusp_w.vmdl" );
+		AmmoClip = 120;
 	}
 
 	public override bool CanPrimaryAttack()
