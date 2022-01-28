@@ -102,11 +102,24 @@ public partial class FortwarsWeapon : BaseCarriable
 		if ( string.IsNullOrEmpty( WeaponAsset.ViewModel ) )
 			return;
 
-		ViewModelEntity = new ViewModel();
+		ViewModelEntity = new ViewModel( this );
 		ViewModelEntity.Position = Position;
 		ViewModelEntity.Owner = Owner;
 		ViewModelEntity.EnableViewmodelRendering = true;
 		ViewModelEntity.SetModel( WeaponAsset.ViewModel );
+	}
+
+	public float GetTuckDist()
+	{
+		var trace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward * 32 )
+			.Ignore( this )
+			.Ignore( Owner )
+			.Run();
+
+		if ( !trace.Entity.IsValid() )
+			return -1;
+
+		return trace.Distance;
 	}
 
 	public virtual bool CanReload()
@@ -349,6 +362,7 @@ public partial class FortwarsWeapon : BaseCarriable
 			);
 		}
 
+		(ViewModelEntity as ViewModel)?.OnFire();
 		ViewModelEntity?.SetAnimBool( "fire", true );
 		CrosshairPanel?.CreateEvent( "fire" );
 	}

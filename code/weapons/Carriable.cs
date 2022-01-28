@@ -9,7 +9,7 @@ public partial class Carriable : BaseCarriable
 		if ( string.IsNullOrEmpty( ViewModelPath ) )
 			return;
 
-		ViewModelEntity = new ViewModel();
+		ViewModelEntity = new BaseViewModel();
 		ViewModelEntity.Position = Position;
 		ViewModelEntity.Owner = Owner;
 		ViewModelEntity.EnableViewmodelRendering = true;
