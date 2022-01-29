@@ -52,12 +52,21 @@ namespace Fortwars
 		{
 			if ( Host.IsServer )
 			{
-				if ( RoundEndTime > 0 && Time.Now >= RoundEndTime )
+				if ( skipRound || (RoundEndTime > 0 && Time.Now >= RoundEndTime) )
 				{
 					RoundEndTime = 0f;
 					OnTimeUp();
+					skipRound = false;
 				}
 			}
+		}
+
+		bool skipRound = false;
+
+		[ServerCmd( "fw_round_skip" )]
+		public static void SkipRound()
+		{
+			Game.Instance.Round.skipRound = true;
 		}
 
 		protected virtual void OnStart() { }
