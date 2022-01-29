@@ -1,15 +1,11 @@
 ﻿using Sandbox;
 using Sandbox.UI;
-using Sandbox.UI.Tests;
+using System;
 
 [Library]
 public partial class BuildMenu : Panel
 {
-	// TODO: This could probably be done better as a radial menu, since we won't have tons of stuff to choose from anyway
-
 	public static BuildMenu Instance;
-
-	VirtualScrollPanel Canvas;
 
 	public BuildMenu()
 	{
@@ -17,29 +13,36 @@ public partial class BuildMenu : Panel
 
 		StyleSheet.Load( "/ui/BuildMenu.scss" );
 
-		AddChild( out Canvas, "canvas" );
-
-		Add.Panel();
-
-		Canvas.Layout.AutoColumns = true;
-		Canvas.Layout.ItemWidth = 256;
-		Canvas.Layout.ItemHeight = 256;
-		Canvas.OnCreateCell = ( cell, data ) =>
-		{
-			var file = (string)data;
-			var panel = cell.Add.Panel( "icon" );
-			panel.Style.Set( "background-image", $"url( /ui/models/blocks/{file.Replace( ".vmdl", "" )}.png )" );
-			panel.AddEventListener( "onclick", () => ConsoleSystem.Run( "spawn", "models/blocks/" + file ) );
-		};
-
-		Canvas.AddItems( new string[] {
+		var inner = Add.Panel( "inner" );
+		var files = new string[] {
 			"fw_3x2.vmdl",
 			"fw_1x2.vmdl",
 			"fw_1x4.vmdl",
 			"fw_1x1x1.vmdl",
-			"fw_1x2x1.vmdl",
+			"fw_1x2x1.vmdl"
+		};
 
-		} );
+		float angleIncrement = 360f / files.Length;
+		angleIncrement = MathX.DegreeToRadian( angleIncrement );
+
+		int index = 0;
+		foreach ( var file in files )
+		{
+			Vector2 frac = new Vector2( MathF.Sin( angleIncrement * index ), MathF.Cos( angleIncrement * index ) );
+
+			frac = (1.0f + frac) / 2.0f;
+
+			var panel = inner.Add.Panel( "icon" );
+			panel.Style.Set( "background-image", $"url( /ui/models/blocks/{file.Replace( ".vmdl", "" )}.png )" );
+			panel.AddEventListener( "onclick", () => ConsoleSystem.Run( "spawn", "models/blocks/" + file ) );
+
+			panel.Style.Left = Length.Fraction( frac.x );
+			panel.Style.Top = Length.Fraction( frac.y );
+
+			Log.Trace( frac );
+
+			index++;
+		}
 
 		BindClass( "active", () => Input.Down( InputButton.Menu ) );
 	}
