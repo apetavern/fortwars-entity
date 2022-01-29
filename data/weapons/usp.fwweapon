@@ -7,7 +7,7 @@
 		viewmodel = resource:"models/weapons/hkusp/hkusp_v.vmdl"
 		movementspeedmultiplier = 0.95
 		firemode = "1"
-		rpm = 900.0
+		rpm = 600.0
 		firstshotdelay = 0.0
 		shotdelay = 0.0
 		range = 16384
@@ -19,13 +19,13 @@
 		spreadshotincrease = 0.01
 		spreadchangetime = 1.0
 		aimaccuracymult = 1.0
-		maxammo = 12
-		extraammo = 24
+		maxammo = 18
+		extraammo = 36
 		reloadtime = 2.0
 		postreloadtime = 0.5
-		maxdamage = 20.0
-		mindamage = 10.0
-		damagedropoffdistance = 256
+		maxdamage = 16.0
+		mindamage = 8.0
+		damagedropoffdistance = 512
 		headshotmultiplier = 1.5
 		kickbacksize = 1.0
 		kickbacklength = 1.0

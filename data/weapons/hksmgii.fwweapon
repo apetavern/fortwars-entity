@@ -8,7 +8,7 @@
 		movementspeedmultiplier = 1.0
 		holdtype = "2"
 		firemode = "2"
-		rpm = 750.0
+		rpm = 800.0
 		firstshotdelay = 0.0
 		shotdelay = 0.0
 		range = 16384
@@ -20,11 +20,11 @@
 		spreadshotincrease = 0.01
 		spreadchangetime = 1.0
 		aimaccuracymult = 1.0
-		maxammo = 30
-		extraammo = 60
+		maxammo = 45
+		extraammo = 90
 		reloadtime = 3.0
 		postreloadtime = 0.5
-		maxdamage = 15.0
+		maxdamage = 16.0
 		mindamage = 8.0
 		damagedropoffdistance = 256
 		headshotmultiplier = 1.5
