@@ -9,6 +9,8 @@ namespace Fortwars
 
 		[Net] public Team TeamID { get; set; }
 
+		[Net] public float MaxHealth { get; set; }
+
 		public override void Spawn()
 		{
 			base.Spawn();
@@ -41,8 +43,8 @@ namespace Fortwars
 			{
 				var blockNode = model.GetData<BlockNode>();
 
-				Health += blockNode.AdditionalHealth;
-				Log.Trace( Health );
+				MaxHealth = BlockMaterial.BaseHealth + blockNode.AdditionalHealth;
+				Health = MaxHealth;
 			}
 		}
 

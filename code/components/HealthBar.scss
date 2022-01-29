@@ -1,0 +1,22 @@
+﻿HealthBar {
+    font-size: 48px;
+    font-color: white;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: Poppins;
+    font-weight: 600;
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba( black, 0.1 );
+
+    .inner {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        background-color: #f0f;
+        background: linear-gradient( to right, #02F049, #02B036 );
+        z-index: -1;
+        border-radius: 2px;
+    }
+}
