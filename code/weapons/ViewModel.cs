@@ -31,6 +31,8 @@ namespace Fortwars
 			Weapon = weapon;
 		}
 
+		public ViewModel() { }
+
 		public void OnFire()
 		{
 			using ( Prediction.Off() )
@@ -80,14 +82,13 @@ namespace Fortwars
 
 			float bobCycleTime = BobCycleTime;
 
-			if ( DoTucking() )
+			if ( Weapon.IsValid() && DoTucking() )
 				return;
 
 			if ( DoSprinting() )
 				bobCycleTime *= 2;
 
 			DoBobbing( bobCycleTime );
-
 			DoShootOffset();
 		}
 

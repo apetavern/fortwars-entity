@@ -1,4 +1,5 @@
-﻿using Sandbox;
+﻿using Fortwars;
+using Sandbox;
 
 public partial class Carriable : BaseCarriable
 {
@@ -9,7 +10,7 @@ public partial class Carriable : BaseCarriable
 		if ( string.IsNullOrEmpty( ViewModelPath ) )
 			return;
 
-		ViewModelEntity = new BaseViewModel();
+		ViewModelEntity = new ViewModel();
 		ViewModelEntity.Position = Position;
 		ViewModelEntity.Owner = Owner;
 		ViewModelEntity.EnableViewmodelRendering = true;
