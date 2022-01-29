@@ -306,22 +306,6 @@ public partial class FortwarsWeapon : Carriable
 				.Run();
 
 		yield return tr;
-
-		float penDist = 512f;
-		float penOffset = 12f;
-
-		var penStart = tr.EndPos + (tr.Direction * penOffset);
-		var penEnd = start + (tr.Direction * penDist);
-		var penTr = Trace.Ray( penStart, penEnd )
-				.UseHitboxes()
-				.HitLayer( CollisionLayer.Water, !InWater )
-				.Ignore( Owner )
-				.Ignore( this )
-				.Size( radius )
-				.Run();
-
-		if ( tr.Entity != null && (penTr.Entity != tr.Entity || tr.Entity.IsWorld) )
-			yield return penTr;
 	}
 
 	public virtual ModelEntity GetEffectModel()
