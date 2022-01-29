@@ -1,9 +1,9 @@
-﻿using Sandbox.UI;
+﻿using Fortwars;
+using Sandbox;
+using Sandbox.UI;
 
 public class Crosshair : Panel
 {
-	int fireCounter;
-
 	public Crosshair()
 	{
 		StyleSheet.Load( "/ui/hud/Crosshair.scss" );
@@ -20,15 +20,11 @@ public class Crosshair : Panel
 		base.Tick();
 		this.PositionAtCrosshair();
 
-		SetClass( "fire", fireCounter > 0 );
+		if ( Local.Pawn.ActiveChild is not FortwarsWeapon weapon )
+			return;
 
-		if ( fireCounter > 0 )
-			fireCounter--;
-	}
-
-	[PanelEvent]
-	public void FireEvent()
-	{
-		fireCounter += 2;
+		float size = 64 + weapon.GetCrosshairSize();
+		Style.Width = size;
+		Style.Height = size;
 	}
 }
