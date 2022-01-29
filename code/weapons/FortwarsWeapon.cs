@@ -1,12 +1,11 @@
-﻿using Fortwars;
-using Sandbox;
+﻿using Sandbox;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Fortwars;
 
-public partial class FortwarsWeapon : BaseCarriable
+public partial class FortwarsWeapon : Carriable
 {
 	//
 	// Realtime variables
