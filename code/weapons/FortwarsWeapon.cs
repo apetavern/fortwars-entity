@@ -196,7 +196,7 @@ public partial class FortwarsWeapon : Carriable
 			( "XHair size", GetCrosshairSize() ),
 		};
 
-		Vector2 offset = new Vector2( 100, 500 );
+		Vector2 offset = new Vector2( 100, 250 );
 
 		for ( int i = 0; i < vals.Length; i++ )
 		{
