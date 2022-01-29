@@ -13,20 +13,11 @@ label, text {
 
 icon, iconpanel {
     font-family: MaterialIconsRound;
-    font-size: 32px;
 }
 
 .hidden {
     display: none;
     opacity: 0;
-}
-
-vitals {
-    left: 120px;
-}
-
-ammo {
-    right: 120px;
 }
 
 .popup-panel {
@@ -130,21 +121,6 @@ ammo {
             pointer-events: none;
             opacity: 0.2;
         }
-    }
-}
-
-vitals, ammo {
-    position: absolute;
-    bottom: 86px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: white;
-    text-shadow: 0 0 5px rgba( black, 0.2 );
-
-    label {
-        font-size: 32px;
-        margin-left: 8px;
     }
 }
 
