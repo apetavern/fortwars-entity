@@ -2,11 +2,11 @@
 {
 	data = 
 	{
-		weaponname = "My weapon"
+		weaponname = "HK SMGII"
 		worldmodel = resource:"models/weapons/hksmgii/hksmgii_w.vmdl"
 		viewmodel = resource:"models/weapons/hksmgii/hksmgii_v.vmdl"
 		movementspeedmultiplier = 1.0
-		holdtype = "1"
+		holdtype = "2"
 		firemode = "2"
 		rpm = 750.0
 		firstshotdelay = 0.0
@@ -32,6 +32,6 @@
 		kickbacklength = 1.0
 		kickbackspeed = 1.5
 		kickbackrotation = 0.9
-		firesound = "rust_pistol.shoot"
+		firesound = "rust_smg.shoot"
 	}
 }
