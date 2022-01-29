@@ -2,6 +2,7 @@
 using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
+using System.ComponentModel;
 
 namespace Arena.UI
 {
@@ -48,12 +49,20 @@ namespace Arena.UI
 
 			var row = buttons.Add.Panel();
 			var dropdown = new DropDown( row );
-			foreach ( var file in FileSystem.Mounted.FindFile( "data/", "*.fwweapon", true ) )
+
+			AddEventListener( "onopen", () =>
 			{
-				Log.Trace( file );
-				var asset = WeaponAsset.FromPath<WeaponAsset>( "data/" + file );
-				dropdown.Options.Add( new Option( asset.WeaponName, file ) );
-			}
+				dropdown.Options.Clear();
+
+				foreach ( var file in FileSystem.Mounted.FindFile( "data/", "*.fwweapon", true ) )
+				{
+					var asset = WeaponAsset.FromPath<WeaponAsset>( "data/" + file );
+					if ( asset == null )
+						continue;
+
+					dropdown.Options.Add( new Option( asset.WeaponName, file ) );
+				}
+			} );
 
 			row.Add.ButtonWithIcon( "Spawn", "gamepad", "button", () =>
 			{
@@ -61,6 +70,16 @@ namespace Arena.UI
 			} );
 
 			BindClass( "visible", () => Input.Down( InputButton.Flashlight ) );
+		}
+
+		public override void Tick()
+		{
+			base.Tick();
+
+			if ( Input.Pressed( InputButton.Flashlight ) )
+			{
+				CreateEvent( "onopen" );
+			}
 		}
 
 		[ServerCmd( "spawn_weapon" )]
