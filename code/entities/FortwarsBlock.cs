@@ -5,7 +5,6 @@ namespace Fortwars
 {
 	public partial class FortwarsBlock : Prop
 	{
-		[Net] public BlockType BlockType { get; set; }
 		[Net] public BlockMaterial BlockMaterial { get; set; } = BlockMaterial.Metal;
 
 		[Net] public Team TeamID { get; set; }
@@ -40,9 +39,9 @@ namespace Fortwars
 
 			if ( IsServer )
 			{
-				BlockType = BlockType.FromModelName( model.Name );
+				var blockNode = model.GetData<BlockNode>();
 
-				Health += BlockType.AdditionalHealth;
+				Health += blockNode.AdditionalHealth;
 				Log.Trace( Health );
 			}
 		}

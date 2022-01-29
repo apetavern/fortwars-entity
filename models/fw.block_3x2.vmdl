@@ -13,7 +13,10 @@
 						_class = "PhysicsHullFromRender"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_group = ""
+						collision_interact_as = ""
+						collision_interact_with = ""
+						collision_interact_exclude = ""
 						faceMergeAngle = 20.0
 						maxHullVertices = 32
 					},
@@ -37,6 +40,21 @@
 						{
 							exclude_by_default = false
 							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "GenericGameData"
+						game_class = "fw_block_node"
+						game_keys = 
+						{
+							name = "3x2"
+							basehealth = 30
 						}
 					},
 				]
