@@ -35,5 +35,4 @@
 			panel.Style.Dirty();
 		}
 	}
-
 }

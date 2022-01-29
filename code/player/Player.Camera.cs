@@ -5,7 +5,6 @@ namespace Fortwars
 {
 	partial class FortwarsPlayer
 	{
-		private RealTimeSince timeSinceUpdatedFramerate;
 		private Vector3 lastCameraPos = Vector3.Zero;
 		private Rotation lastCameraRot = Rotation.Identity;
 
@@ -29,11 +28,6 @@ namespace Fortwars
 			if ( setup.Viewer != null )
 			{
 				AddCameraEffects( ref setup );
-			}
-
-			if ( timeSinceUpdatedFramerate > 1 )
-			{
-				timeSinceUpdatedFramerate = 0;
 			}
 		}
 
