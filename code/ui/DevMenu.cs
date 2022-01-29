@@ -1,4 +1,5 @@
-﻿using Sandbox;
+﻿using Fortwars;
+using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
@@ -43,7 +44,39 @@ namespace Arena.UI
 				ConsoleSystem.Run( "give_ammo 10000" );
 			} );
 
+			buttons.Add.Label( "Spawn Weapon", "minitext" );
+
+			var row = buttons.Add.Panel();
+			var dropdown = new DropDown( row );
+			foreach ( var file in FileSystem.Mounted.FindFile( "data/", "*.fwweapon", true ) )
+			{
+				Log.Trace( file );
+				var asset = WeaponAsset.FromPath<WeaponAsset>( "data/" + file );
+				dropdown.Options.Add( new Option( asset.WeaponName, file ) );
+			}
+
+			row.Add.ButtonWithIcon( "Spawn", "gamepad", "button", () =>
+			{
+				ConsoleSystem.Run( $"spawn_weapon data/{dropdown.Value}" );
+			} );
+
 			BindClass( "visible", () => Input.Down( InputButton.Flashlight ) );
+		}
+
+		[ServerCmd( "spawn_weapon" )]
+		public static void SpawnWeapon( string path )
+		{
+			var caller = ConsoleSystem.Caller;
+			var player = caller.Pawn;
+
+			var tr = Trace.Ray( player.EyePos, player.EyePos + player.EyeRot.Forward * 1024 ).WorldOnly().Run();
+
+			if ( !tr.Hit )
+				return;
+
+			Log.Trace( $"Spawning {path}" );
+			var weapon = FortwarsWeapon.FromPath( path );
+			weapon.Position = tr.EndPos + tr.Normal * 16;
 		}
 	}
 }

@@ -28,13 +28,17 @@ icon, iconpanel {
     font-size: 20px;
 }
 
-button {
+button, dropdown {
     padding: 10px 20px;
     background-color: rgba( white, 0.5 );
     margin: 4px 0;
     border-radius: 2px;
     transition: all 150ms ease;
     align-items: center;
+
+    iconpanel {
+        margin-right: 8px;
+    }
 
     &:hover {
         cursor: pointer;
@@ -51,6 +55,10 @@ button {
     }
 }
 
+dropdown {
+    flex-grow: 1;
+    margin-right: 4px;
+}
 
 DevMenu {
     position: absolute;
@@ -76,11 +84,5 @@ DevMenu {
 
     .buttons {
         flex-direction: column;
-    }
-
-    button {
-        iconpanel {
-            margin-right: 8px;
-        }
     }
 }
