@@ -1,0 +1,19 @@
+﻿vitals {
+    position: absolute;
+    bottom: 86px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    text-shadow: 0 0 5px rgba( black, 0.2 );
+    left: 120px;
+
+    label {
+        font-size: 64px;
+        margin-left: 16px;
+    }
+
+    iconpanel {
+        font-size: 64px;
+    }
+}
