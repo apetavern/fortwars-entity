@@ -25,10 +25,11 @@ namespace Fortwars
 		{
 			base.StartTouch( other );
 
-			if ( other is not FortwarsPlayer { ActiveChild: FortwarsWeapon weapon } )
+			if ( other is not FortwarsPlayer player )
 				return;
 
-			weapon.ReserveAmmo += weapon.WeaponAsset.MaxAmmo * 2;
+			player.Health += 50f;
+			player.Health = player.Health.Clamp( 0, 100 );
 
 			this.Delete();
 		}
