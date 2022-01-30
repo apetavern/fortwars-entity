@@ -81,7 +81,7 @@ namespace Fortwars
 			}
 			if ( Game.Instance.Round is CombatRound )
 			{
-				Inventory.Add( FortwarsWeapon.FromPath( "/data/weapons/rpg.fwweapon" ), true );
+				Inventory.Add( FortwarsWeapon.FromPath( "/data/weapons/usp.fwweapon" ), true );
 			}
 
 			base.Respawn();
