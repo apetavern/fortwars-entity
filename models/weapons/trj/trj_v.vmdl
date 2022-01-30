@@ -177,6 +177,141 @@
 					{
 						_class = "AnimFile"
 						name = "reload"
+						children = 
+						[
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 21
+								event_keys = 
+								{
+									name = "ui.button.over"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 37
+								event_keys = 
+								{
+									name = "ui.button.deny"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 57
+								event_keys = 
+								{
+									name = "rust_smg.clipin"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 37
+								event_keys = 
+								{
+									name = "rust_smg.clipout"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 109
+								event_keys = 
+								{
+									name = "rust_smg.boltshut"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 115
+								event_keys = 
+								{
+									name = "ui.button.deny"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 117
+								event_keys = 
+								{
+									name = "ui.button.deny"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 119
+								event_keys = 
+								{
+									name = "ui.button.deny"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 121
+								event_keys = 
+								{
+									name = "ui.button.deny"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 123
+								event_keys = 
+								{
+									name = "ui.button.deny"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 125
+								event_keys = 
+								{
+									name = "ui.button.deny"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+						]
 						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
