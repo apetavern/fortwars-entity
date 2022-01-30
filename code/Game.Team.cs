@@ -16,6 +16,7 @@
 				return _redTeam;
 			}
 		}
+
 		public BlueTeam BlueTeam
 		{
 			get

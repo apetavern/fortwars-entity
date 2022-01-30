@@ -4,6 +4,8 @@ namespace Fortwars
 {
 	public class Pickup : ModelEntity
 	{
+		public Spawner Spawner { get; set; }
+
 		public override void Spawn()
 		{
 			base.Spawn();
@@ -16,6 +18,14 @@ namespace Fortwars
 			EnableTouch = true;
 
 			Components.Add<BobbingComponent>( new() );
+		}
+
+		protected override void OnDestroy()
+		{
+			if ( IsServer )
+				Spawner.ResetSpawnTimer();
+
+			base.OnDestroy();
 		}
 	}
 }
