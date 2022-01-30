@@ -4,6 +4,26 @@ rootpanel {
     &.devcamera {
         display: none;
     }
+
+    &.red-team {
+        label, text, icon, iconpanel {
+            color: #FF8B82;
+        }
+
+        inputhint .glyph {
+            background-image-tint: #FF8B82;
+        }
+    }
+
+    &.blue-team {
+        label, text, icon, iconpanel {
+            color: #75FFFC;
+        }
+
+        inputhint .glyph {
+            background-image-tint: #75FFFC;
+        }
+    }
 }
 
 label, text {
@@ -132,10 +152,6 @@ roundstatus {
     justify-content: center;
     padding-top: 40px;
 
-    label {
-        color: white;
-    }
-
     panel.round-info {
         display: flex;
         flex-direction: column;
@@ -144,6 +160,8 @@ roundstatus {
         margin: 0 64px;
 
         label {
+            color: white;
+
             &.time {
                 font-size: 72px;
                 font-weight: bold;
@@ -164,6 +182,7 @@ roundstatus {
         font-size: 48px;
         box-shadow: 0 0 5px rgba( black, 0.2 );
         border-radius: 2px;
+        color: white;
 
         &.score__blue {
             background-color: rgba(0, 0, 255, 0.8);

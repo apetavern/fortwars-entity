@@ -1,14 +1,13 @@
 ﻿buildmenu {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 25%;
+    left: 37.5%;
     opacity: 0;
     background-color: rgba( white, 0 );
     transition: all 150ms ease;
     border-radius: 100%;
     width: 25%;
     aspect-ratio: 1;
-    transform: translate( -50% -50% );
 
     &.active {
         pointer-events: all;

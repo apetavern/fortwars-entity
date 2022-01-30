@@ -16,6 +16,9 @@ namespace Fortwars
 		{
 			base.StartTouch( other );
 
+			if ( !IsServer )
+				return;
+
 			if ( other is not FortwarsPlayer player )
 				return;
 
