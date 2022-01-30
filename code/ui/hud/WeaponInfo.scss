@@ -13,6 +13,11 @@ weaponinfo {
     background-color: $text;
     box-shadow: 0 0 5px rgba( black, 0.5 );
     border: 5px red;
+    opacity: 0;
+
+    &.visible {
+        opacity: 1;
+    }
 
     .current {
         font-size: 64px;

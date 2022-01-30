@@ -28,6 +28,9 @@ namespace Fortwars.UI
 					return "0";
 				return weapon.ReserveAmmo;
 			} );
+
+
+			BindClass( "visible", () => Local.Pawn.ActiveChild is FortwarsWeapon );
 		}
 	}
 }
