@@ -24,6 +24,8 @@ namespace Fortwars.UI
 			RootPanel.AddChild<BuildHelp>();
 			RootPanel.AddChild<BuildMenu>();
 
+			RootPanel.AddChild<VoiceList>();
+
 			RootPanel.AddChild<DevMenu>();
 
 			RootPanel.BindClass( "red-team", () => (Local.Pawn as FortwarsPlayer).TeamID == Team.Red );

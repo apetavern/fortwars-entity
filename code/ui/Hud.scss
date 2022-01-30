@@ -1,4 +1,4 @@
-﻿$accent: blue;
+﻿@import "/ui/_Common.scss";
 
 rootpanel {
     &.devcamera {
@@ -12,7 +12,7 @@ label, text {
 }
 
 icon, iconpanel {
-    font-family: MaterialIconsRound;
+    font-family: MaterialIcons;
 }
 
 .hidden {
@@ -36,7 +36,7 @@ icon, iconpanel {
         font-weight: 600;
         padding: 8px 12px;
         align-items: center;
-        background-color: $accent;
+        background-color: white;
         flex-shrink: 0;
 
         .iconpanel {
@@ -110,7 +110,7 @@ icon, iconpanel {
         white-space: nowrap;
 
         .iconpanel {
-            color: $accent;
+            color: black;
         }
 
         &:hover, &.active {
@@ -162,14 +162,14 @@ roundstatus {
         font-size: 48px;
         box-shadow: 0 0 5px rgba( black, 0.2 );
         border-radius: 2px;
-        color: white;
+        color: $text;
 
         &.score__blue {
-            background-color: rgba(0, 0, 255, 0.8);
+            background-color: $blue-team;
         }
 
         &.score__red {
-            background-color: rgba(255, 0, 0, 0.8);
+            background-color: $red-team;
         }
     }
 }

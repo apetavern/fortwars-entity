@@ -8,11 +8,9 @@ vitals {
     align-items: center;
     left: 120px;
     padding: 10px 20px;
-    color: white;
     border-radius: 2px;
-    background-color: $text;
+    color: $text;
     box-shadow: 0 0 5px rgba( black, 0.5 );
-    border: 5px red;
 
     label {
         font-size: 64px;
@@ -26,12 +24,12 @@ vitals {
 
 .red-team {
     vitals {
-        border: $red-team;
+        background-color: $red-team;
     }
 }
 
 .blue-team {
     vitals {
-        border: $blue-team;
+        background-color: $blue-team;
     }
 }
