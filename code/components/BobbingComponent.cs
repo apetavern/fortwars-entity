@@ -14,7 +14,6 @@ namespace Fortwars
 			RandomOffset = Rand.Float( 0, 360 );
 		}
 
-		// TODO: move this to an entity component "BobComponent"
 		[Event.PreRender]
 		public virtual void OnPreRender()
 		{
