@@ -28,7 +28,7 @@ namespace Fortwars
 			// assign random team
 			if ( Team == null )
 			{
-				int team = Rand.Int( 0, 1 );
+				int team = Client.All.Count % 2;
 				if ( team == 0 )
 					Team = Game.Instance.BlueTeam;
 				else
