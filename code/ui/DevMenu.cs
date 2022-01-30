@@ -4,7 +4,7 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System.ComponentModel;
 
-namespace Arena.UI
+namespace Fortwars
 {
 	public class DevMenu : Panel
 	{

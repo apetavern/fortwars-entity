@@ -10,7 +10,6 @@ namespace Fortwars
 		[ServerVar( "fw_min_players", Help = "The minimum players required to start." )]
 		public static int MinPlayers { get; set; } = 1;
 
-
 		public void ChangeRound( BaseRound round )
 		{
 			Assert.NotNull( round );

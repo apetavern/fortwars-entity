@@ -1,5 +1,4 @@
-﻿using Arena.UI;
-using Sandbox;
+﻿using Sandbox;
 using Sandbox.UI;
 
 namespace Fortwars.UI
