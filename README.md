@@ -12,9 +12,15 @@ Capture the flag battle between two teams, build up your fort in the build round
 * [X] SetMaterial based on Player team (waiting for API binding)
 * [X] Proper weapons (Alex has a nice framework for this)
 * [X] UI: Radial build menu
+* [ ] Balance teams properly
 * [ ] UI: Ammo count, weapon select, etc..
 * [ ] UI: React to RPCs to show frags, captures.
-* [ ] Balance teams properly
+* [ ] Money / shop system - buy weapons, extra build slots, etc.
+* [ ] Classes
+  * [ ] medic w/ medkit
+  * [ ] engineer w/ repair tool
+  * [ ] support w/ ammo box
+  * [ ] assault w/ stim shot
 * [ ] Win state
 * [ ] Cleanup code, just learning how the API works after all
 * [ ] Multiple different types of building materials
