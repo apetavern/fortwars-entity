@@ -18,7 +18,6 @@ public class Crosshair : Panel
 	public override void Tick()
 	{
 		base.Tick();
-		this.PositionAtCrosshair();
 
 		if ( Local.Pawn.ActiveChild is not FortwarsWeapon weapon )
 			return;
