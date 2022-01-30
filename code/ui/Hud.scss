@@ -4,26 +4,6 @@ rootpanel {
     &.devcamera {
         display: none;
     }
-
-    &.red-team {
-        label, text, icon, iconpanel {
-            color: #FF8B82;
-        }
-
-        inputhint .glyph {
-            background-image-tint: #FF8B82;
-        }
-    }
-
-    &.blue-team {
-        label, text, icon, iconpanel {
-            color: #75FFFC;
-        }
-
-        inputhint .glyph {
-            background-image-tint: #75FFFC;
-        }
-    }
 }
 
 label, text {

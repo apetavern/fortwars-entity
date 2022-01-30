@@ -1,12 +1,18 @@
-﻿vitals {
+﻿@import "/ui/_Common.scss";
+
+vitals {
     position: absolute;
     bottom: 86px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    color: white;
-    text-shadow: 0 0 5px rgba( black, 0.2 );
     left: 120px;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 2px;
+    background-color: $text;
+    box-shadow: 0 0 5px rgba( black, 0.5 );
+    border: 5px red;
 
     label {
         font-size: 64px;
@@ -15,5 +21,17 @@
 
     iconpanel {
         font-size: 64px;
+    }
+}
+
+.red-team {
+    vitals {
+        border: $red-team;
+    }
+}
+
+.blue-team {
+    vitals {
+        border: $blue-team;
     }
 }
