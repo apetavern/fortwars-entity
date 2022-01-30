@@ -7,22 +7,12 @@ namespace Fortwars.UI
 	{
 		public BuildHelp()
 		{
-			{
-				var row = Add.Panel( "row" );
-				row.Add.InputHint( Sandbox.InputButton.Menu, "Build Menu" );
-			}
-			{
-				var row = Add.Panel( "row" );
-				row.Add.InputHint( Sandbox.InputButton.Use, "Rotate" );
-			}
-			{
-				var row = Add.Panel( "row" );
-				row.Add.InputHint( Sandbox.InputButton.Attack1, "Move" );
-			}
-			{
-				var row = Add.Panel( "row" );
-				row.Add.InputHint( Sandbox.InputButton.Flashlight, "Developer Menu" );
-			}
+			Add.InputHint( Sandbox.InputButton.Attack1, "Move" );
+			Add.InputHint( Sandbox.InputButton.Attack2, "Freeze" );
+			Add.InputHint( Sandbox.InputButton.Use, "Rotate" );
+			Add.InputHint( Sandbox.InputButton.Run, "Snap" );
+			Add.InputHint( Sandbox.InputButton.Menu, "Build Menu" );
+			Add.InputHint( Sandbox.InputButton.Flashlight, "Developer Menu" );
 		}
 
 		public override void Tick()

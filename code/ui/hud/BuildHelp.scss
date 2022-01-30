@@ -7,18 +7,12 @@
     font-size: 20px;
     color: white;
 
-    .row {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+    inputhint {
         margin-top: 8px;
+        align-items: center;
 
-        inputhint {
-            align-items: center;
-
-            .glyph {
-                margin-right: 8px;
-            }
+        .glyph {
+            margin-right: 8px;
         }
     }
 }
