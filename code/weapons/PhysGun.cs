@@ -1,4 +1,5 @@
-﻿using Sandbox;
+﻿using Fortwars;
+using Sandbox;
 using Sandbox.Joints;
 using System;
 using System.Linq;
@@ -177,10 +178,7 @@ public partial class PhysGun : Carriable, IUse
 		if ( !body.IsValid() )
 			return;
 
-		//
-		// Don't move keyframed, unless it's a player
-		//
-		if ( body.BodyType == PhysicsBodyType.Keyframed && rootEnt is not Player )
+		if ( rootEnt is not FortwarsBlock )
 			return;
 
 		// Unfreeze
