@@ -1,18 +1,41 @@
-﻿buildhelp {
+﻿@import "/ui/_Common.scss";
+
+buildhelp {
     position: absolute;
-    top: 50%;
+    bottom: 225px;
     left: 120px;
     display: flex;
     flex-direction: column;
     font-size: 20px;
     color: white;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 2px;
+    background-color: $text;
+    box-shadow: 0 0 5px rgba( black, 0.5 );
+    border: 5px red;
 
     inputhint {
-        margin-top: 8px;
+        &:not(:first-child) {
+            margin-top: 8px;
+        }
+
         align-items: center;
 
         .glyph {
             margin-right: 8px;
         }
+    }
+}
+
+.red-team {
+    buildhelp {
+        border: $red-team;
+    }
+}
+
+.blue-team {
+    buildhelp {
+        border: $blue-team;
     }
 }
