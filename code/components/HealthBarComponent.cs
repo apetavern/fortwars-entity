@@ -27,8 +27,8 @@ namespace Fortwars
 		public void FrameUpdate()
 		{
 			var transform = Entity.Transform;
-			var bbox = Entity.PhysicsBody?.GetBounds() ?? new BBox();
-			transform.Position = bbox.Center;
+			var localCenter = Entity.PhysicsBody?.LocalMassCenter ?? Vector3.Zero;
+			transform.Position = transform.Position + (localCenter * transform.Rotation);
 			transform.Rotation = Rotation.LookAt( -CurrentView.Rotation.Forward );
 
 			healthBar.Transform = transform;
@@ -37,6 +37,8 @@ namespace Fortwars
 		[Event.Frame]
 		public static void SystemUpdate()
 		{
+			float maxDistance = 256f;
+
 			foreach ( var entity in Sandbox.Entity.All.OfType<FortwarsBlock>() )
 			{
 				void Remove()
@@ -45,13 +47,13 @@ namespace Fortwars
 					existingHealthBar?.Remove();
 				}
 
-				if ( entity.Position.Distance( CurrentView.Position ) > 512 )
+				if ( entity.Position.Distance( CurrentView.Position ) > maxDistance )
 				{
 					Remove();
 					continue;
 				}
 
-				var tr = Trace.Ray( Local.Pawn.EyePos, Local.Pawn.EyePos + Local.Pawn.EyeRot.Forward * 512 ).Ignore( Local.Pawn ).Run();
+				var tr = Trace.Ray( Local.Pawn.EyePos, Local.Pawn.EyePos + Local.Pawn.EyeRot.Forward * maxDistance ).Ignore( Local.Pawn ).Run();
 				if ( tr.Entity != entity )
 				{
 					Remove();
