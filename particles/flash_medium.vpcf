@@ -1507,7 +1507,7 @@
 				}
 			}
 			m_bFogParticles = true
-			m_hTexture = resource:"particles/flash.vtex"
+			m_hTexture = resource:"materials/effects/muzzleflash_blue.vtex"
 			m_bCannotBeRefracted = false
 			m_bGammaCorrectVertexColors = false
 			m_flRadiusScale = 
@@ -1555,13 +1555,6 @@
 					m_vDomainMaxs = [ 0.0, 0.0 ]
 				}
 			}
-		},
-	]
-	m_Children = 
-	[
-		{
-			m_ChildRef = resource:"particles/barrel_smoke.vpcf"
-			m_bDisableChild = true
 		},
 	]
 }
