@@ -22,6 +22,9 @@ namespace Fortwars
 			if ( other is not FortwarsPlayer player )
 				return;
 
+			if ( player.Health >= 100 )
+				return;
+
 			player.Health += 50f;
 			player.Health = player.Health.Clamp( 0, 100 );
 
