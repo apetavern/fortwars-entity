@@ -49,5 +49,8 @@
 	kickbackspeed(float) { group = "View Kick" } : "Kickback Speed" : "1" : ""
 	kickbackrotation(float) { group = "View Kick" } : "Kickback Rotation" : "0.6" : ""
 	firesound(sound) { group = "Audio" } : "Fire Sound" : "rust_pistol.shoot" : ""
+	useprojectile(boolean) { group = "Projectile" } : "Use Projectile" : 0 : ""
+	projectilemodel(resource:vmdl) { group = "Projectile" } : "Projectile Model" :  : ""
+	projectilespeed(float) { group = "Projectile" } : "Projectile Speed" : 1 : ""
 ]
 

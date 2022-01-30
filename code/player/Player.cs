@@ -81,7 +81,7 @@ namespace Fortwars
 			}
 			if ( Game.Instance.Round is CombatRound )
 			{
-				Inventory.Add( FortwarsWeapon.FromPath( "/data/weapons/hksmgii.fwweapon" ), true );
+				Inventory.Add( FortwarsWeapon.FromPath( "/data/weapons/rpg.fwweapon" ), true );
 			}
 
 			base.Respawn();
@@ -145,12 +145,7 @@ namespace Fortwars
 		{
 			LastDamage = info;
 
-			// hack - hitbox 0 is head
-			// we should be able to get this from somewhere
-			if ( info.HitboxIndex == 0 )
-			{
-				info.Damage *= 2.0f;
-			}
+			// TODO: Headshots
 
 			base.TakeDamage( info );
 

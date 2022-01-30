@@ -55,6 +55,8 @@ public partial class FortwarsWeapon : Carriable
 
 		CollisionGroup = CollisionGroup.Weapon;
 		SetInteractsAs( CollisionLayer.Debris );
+
+		Components.Add<BobbingComponent>( new() );
 	}
 
 	public override void Simulate( Client player )
@@ -110,6 +112,9 @@ public partial class FortwarsWeapon : Carriable
 
 	public float GetTuckDist()
 	{
+		if ( !Owner.IsValid() )
+			return -1;
+
 		var trace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward * 32 )
 			.Ignore( this )
 			.Ignore( Owner )
@@ -220,6 +225,40 @@ public partial class FortwarsWeapon : Carriable
 	}
 
 	/// <summary>
+	/// Shoot a single projectile
+	/// </summary>
+	public virtual void ShootProjectile()
+	{
+		if ( !TakeAmmo() )
+			return;
+
+		recoil += new Vector2( WeaponAsset.RecoilY, WeaponAsset.RecoilX );
+		spread += WeaponAsset.SpreadShotIncrease;
+
+		ShootEffects();
+		PlaySound( WeaponAsset.FireSound );
+
+		var forward = Owner.EyeRot.Forward;
+
+		if ( TimeSincePrimaryAttack < 3 || !WeaponAsset.FirstShotAlwaysAccurate )
+		{
+			forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * (WeaponAsset.Spread + spread) * 0.25f;
+			forward = forward.Normal;
+		}
+
+		if ( !IsServer ) return;
+		var projectile = new Projectile();
+		projectile.Rotation = Owner.EyeRot;
+		projectile.Position = Owner.EyePos;
+		projectile.SetModel( WeaponAsset.ProjectileModel );
+		projectile.Speed = WeaponAsset.ProjectileSpeed;
+
+		projectile.Velocity = projectile.Rotation.Forward * WeaponAsset.ProjectileSpeed; // Initial velocity
+
+		projectile.Owner = Owner;
+	}
+
+	/// <summary>
 	/// Shoot a single bullet
 	/// </summary>
 	public virtual void ShootBullet()
@@ -281,7 +320,14 @@ public partial class FortwarsWeapon : Carriable
 				await Task.DelayRealtimeSeconds( WeaponAsset.ShotDelay );
 			}
 
-			ShootBullet();
+			if ( WeaponAsset.UseProjectile )
+			{
+				ShootProjectile();
+			}
+			else
+			{
+				ShootBullet();
+			}
 		}
 	}
 

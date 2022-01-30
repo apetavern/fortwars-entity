@@ -138,4 +138,16 @@ public class WeaponAsset : Asset
 	//
 	[Property, Category( "Audio" ), FGDType( "sound" )]
 	public string FireSound { get; set; } = "rust_pistol.shoot";
+
+	//
+	// Projectile
+	//
+	[Property, Category( "Projectile" )]
+	public bool UseProjectile { get; set; } = false;
+
+	[Property, Category( "Projectile" ), ResourceType( "vmdl" )]
+	public string ProjectileModel { get; set; }
+
+	[Property, Category( "Projectile" )]
+	public float ProjectileSpeed { get; set; } = 1;
 }
