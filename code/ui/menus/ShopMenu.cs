@@ -6,21 +6,6 @@ namespace Fortwars
 {
 	public class ShopMenu : Panel
 	{
-		struct ShopItem
-		{
-			public ShopItem( string name, string description, int cost )
-			{
-				Name = name;
-				Description = description;
-				Cost = cost;
-			}
-
-			public string Name { get; set; }
-			public string Description { get; set; }
-			public int Cost { get; set; }
-
-		}
-
 		public ShopMenu()
 		{
 			StyleSheet.Load( "/ui/menus/ShopMenu.scss" );
@@ -38,10 +23,10 @@ namespace Fortwars
 
 				var categories = new (string, string)[]
 				{
-					( "Guns", "clear" ),
-					( "Grenades", "auto_awesome" ),
+					( "Upgrades", "upgrade" ),
+					( "Weapons", "clear" ),
 					( "Refills", "refresh" ),
-					( "Materials", "home" ),
+					( "Materials", "construction" ),
 				};
 
 				foreach ( var item in categories )
@@ -81,12 +66,8 @@ namespace Fortwars
 
 				foreach ( var item in items )
 				{
-					var itemPanel = itemContainer.Add.Button( "", "item" );
-					itemPanel.Add.Image( "tools/images/common/generic_hud_warning.png", "icon" );
-
-					var itemMeta = itemPanel.Add.Panel( "item-meta" );
-					itemMeta.Add.Label( item.Name, "subtitle" );
-					itemMeta.Add.Label( "$20000", "cost" );
+					var itemPanel = new ShopUpgradePanel( item );
+					itemPanel.Parent = itemContainer;
 				}
 			}
 
@@ -101,6 +82,57 @@ namespace Fortwars
 				itemInfo.Add.Label( "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "description" );
 
 				itemInfo.Add.Button( "BUY", "buy-button" );
+			}
+		}
+	}
+
+	public struct ShopItem
+	{
+		public ShopItem( string name, string description, int cost )
+		{
+			Name = name;
+			Description = description;
+			Cost = cost;
+		}
+
+		public string Name { get; set; }
+		public string Description { get; set; }
+		public int Cost { get; set; }
+
+	}
+
+	public class ShopItemPanel : Panel
+	{
+		public ShopItemPanel( ShopItem item )
+		{
+			Add.Image( "tools/images/common/generic_hud_warning.png", "icon" );
+
+			var itemMeta = Add.Panel( "item-meta" );
+			itemMeta.Add.Label( item.Name, "subtitle" );
+			itemMeta.Add.Label( "$20000", "cost" );
+		}
+	}
+
+	public class ShopUpgradePanel : Panel
+	{
+		public ShopUpgradePanel( ShopItem item )
+		{
+			Add.Image( "tools/images/common/generic_hud_warning.png", "icon" );
+
+			var itemMeta = Add.Panel( "item-meta" );
+			itemMeta.Add.Label( item.Name, "subtitle" );
+			itemMeta.AddChild<UpgradeBar>();
+		}
+
+		class UpgradeBar : Panel
+		{
+			public UpgradeBar()
+			{
+				for ( int i = 0; i < 5; i++ )
+				{
+					var section = Add.Panel( "upgrade-section" );
+					section.Add.Label( $"${i * 1000}", "requirement" );
+				}
 			}
 		}
 	}
