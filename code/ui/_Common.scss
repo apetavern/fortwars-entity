@@ -2,3 +2,33 @@
 $blue-team: #75FFFC;
 
 $text: #333;
+
+label.title, text.title {
+    font-size: 48px;
+    padding: 25px 0;
+    color: white;
+}
+
+label.subtitle, text.subtitle {
+    font-size: 32px;
+    padding: 12px 0;
+    color: white;
+}
+
+label.minititle, text.minititle {
+    padding: 10px 0;
+    color: white;
+}
+
+text, label {
+    font-family: ChakraPetch;
+    font-weight: 700;
+    color: white;
+    font-size: 20px;
+}
+
+icon, iconpanel {
+    font-family: MaterialIconsRound;
+    color: #333;
+    font-size: 20px;
+}

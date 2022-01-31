@@ -1,0 +1,137 @@
+﻿@import "/UI/_Common.scss";
+
+$border-color: rgba( black, 0.25 );
+
+ShopMenu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba( $text, 0.9 );
+    padding: 50px 80px;
+    z-index: 100;
+    backdrop-filter: blur( 20px );
+    flex-direction: column;
+    pointer-events: all;
+}
+
+.top {
+    padding-bottom: 25px;
+}
+
+image {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.item-container {
+    padding: 0 20px 0 10px;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    overflow: scroll;
+    border-right: 1px solid $border-color;
+
+    button.item {
+        image {
+            margin-right: 20px;
+        }
+
+        .item-meta {
+            flex-direction: column;
+        }
+
+        border-radius: 2px;
+        box-shadow: 0 0 5px rgba( black, 0.2 );
+        flex-direction: row;
+        justify-content: space-evenly;
+        background-color: rgba( black, 0.5 );
+        margin: 5px;
+        align-items: center;
+        padding: 10px;
+        flex-grow: 1;
+        flex-shrink: 0;
+        width: 100%;
+        border: 4px solid transparent;
+        cursor: pointer;
+        transition: border 150ms ease;
+
+        &:hover {
+            border: rgba( white, 0.5 );
+        }
+    }
+}
+
+.left-container {
+    flex-grow: 1;
+    padding-right: 20px;
+    flex-direction: column;
+    width: 1000px;
+    overflow: scroll;
+    border-right: 1px solid $border-color;
+
+    button.category {
+        padding: 20px 40px;
+        background-color: rgba( black, 0.5 );
+        border: 4px solid transparent;
+        transition: border 150ms ease;
+        cursor: pointer;
+        margin: 5px 0;
+        border-radius: 2px;
+        align-items: center;
+
+        icon, iconpanel {
+            color: white;
+            font-size: 32px;
+            margin-right: 8px;
+        }
+
+        &:hover {
+            border: rgba( white, 0.5 );
+        }
+    }
+}
+
+.item-info {
+    width: 1000px;
+    padding-left: 20px;
+    flex-grow: 1;
+    flex-direction: column;
+
+    image {
+        height: 50%;
+        flex-grow: 0;
+        margin-bottom: 10px;
+    }
+
+    .cost {
+        font-size: 24px;
+    }
+
+    label {
+        padding: 5px 0;
+    }
+
+    .buy-button {
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient( to right, #A4FF8F, #7AB36D );
+        padding: 0 20px;
+        box-shadow: 0 0 5px rgba( black, 0.2 );
+        border-radius: 2px;
+        margin-top: 10px;
+        border: 4px solid transparent;
+        transition: border 150ms ease;
+        cursor: pointer;
+
+        &:hover {
+            border: rgba( white, 0.5 );
+        }
+
+        label, text {
+            font-size: 48px;
+            color: $text;
+        }
+    }
+}
