@@ -161,7 +161,7 @@ PS
 		PS_OUTPUT o = PS_FinalCombiner( material );
         float3 vPositionWs = i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz;
         float2 vPositionUv = (i.vPositionSs.xy - g_vViewportOffset) / g_vRenderTargetSize;
-		
+
 		float2 timeOffset = float2( g_flTime, g_flTime );
 		float2 noisePos = ( vPositionWs.xy + vPositionWs.xz + vPositionWs.yz ) / 3.0f;
 
@@ -187,6 +187,12 @@ PS
 		colNoise /= 3.0f;
 		colNoise = (colNoise + 1.0f) / 2.0f;
 		o.vColor.xyz = Lighten( o.vColor, o.vColor * ( colNoise.x + colNoise.y ) ).xyz;
+
+		float distance = length( vPositionWs - g_vCameraPositionWs );
+		distance -= 8;
+		distance /= 8;
+		distance = clamp( distance, 0, 1 );
+		o.vColor.a *= distance;
 
 		return o;
 	}
