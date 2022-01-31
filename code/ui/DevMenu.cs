@@ -45,6 +45,11 @@ namespace Fortwars
 				ConsoleSystem.Run( "give_ammo 10000" );
 			} );
 
+			buttons.Add.ButtonWithIcon( "Show shop UI", "storefront", "button", () =>
+			{
+				Local.Hud.AddChild<ShopMenu>();
+			} );
+
 			buttons.Add.Label( "Spawn Weapon", "minitext" );
 
 			var row = buttons.Add.Panel();
@@ -67,11 +72,6 @@ namespace Fortwars
 			row.Add.ButtonWithIcon( "Spawn", "gamepad", "button", () =>
 			{
 				ConsoleSystem.Run( $"spawn_weapon data/{dropdown.Value}" );
-			} );
-
-			buttons.Add.ButtonWithIcon( "Show shop UI", "storefront", "button", () =>
-			{
-				Local.Hud.AddChild<ShopMenu>();
 			} );
 
 			BindClass( "visible", () => Input.Down( InputButton.Flashlight ) );
