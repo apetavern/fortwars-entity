@@ -7,7 +7,7 @@ Layer0
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "C:/Program Files (x86)/Steam/steamapps/common/sbox/addons/fortwars/content_src/materials/dev/dev_measuregeneric_red.png"
+	TextureColor "materials/dev/dev_measuregeneric_red.png"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
