@@ -31,3 +31,6 @@ _bakeresourcecache/
 *.vpcf_c
 *.fgd
 *.vpost_c
+
+# Allowlist
+!*_dev.vpk
