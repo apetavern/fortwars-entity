@@ -14,6 +14,10 @@ weaponinfo {
     box-shadow: 0 0 5px rgba( black, 0.5 );
     opacity: 0;
 
+    label {
+        color: $text;
+    }
+
     &.visible {
         opacity: 1;
     }

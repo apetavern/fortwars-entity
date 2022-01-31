@@ -9,7 +9,11 @@ vitals {
     left: 120px;
     padding: 10px 20px;
     border-radius: 2px;
-    color: $text;
+
+    label {
+        color: $text;
+    }
+
     box-shadow: 0 0 5px rgba( black, 0.5 );
 
     label {
