@@ -53,7 +53,7 @@ namespace Fortwars
 					continue;
 				}
 
-				var tr = Trace.Ray( Local.Pawn.EyePos, Local.Pawn.EyePos + Local.Pawn.EyeRot.Forward * maxDistance ).Ignore( Local.Pawn ).Run();
+				var tr = Trace.Ray( CurrentView.Position, CurrentView.Position + CurrentView.Rotation.Forward * maxDistance ).Ignore( Local.Pawn ).Run();
 				if ( tr.Entity != entity )
 				{
 					Remove();
