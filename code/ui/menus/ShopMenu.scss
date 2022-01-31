@@ -27,19 +27,51 @@ image {
 }
 
 .item-container {
-    padding: 0 20px 0 10px;
+    padding: 0 20 0 10px; // what???
     flex-wrap: wrap;
     flex-grow: 1;
     overflow: scroll;
     border-right: 1px solid $border-color;
 
-    button.item {
+    ShopItemPanel, ShopUpgradePanel {
         image {
             margin-right: 20px;
         }
 
         .item-meta {
             flex-direction: column;
+            width: 100%;
+
+            .subtitle {
+                padding-top: 0;
+                margin-top: -20px; // what
+            }
+
+            UpgradeBar {
+                width: 100%;
+                margin: 0px 0px 10px 0px;
+                background: linear-gradient( to right, #02F049, #02B036 );
+                height: 4px;
+
+                .upgrade-section {
+                    flex-grow: 1;
+                    border-right: 4px solid rgba( black, 0.5 );
+                    justify-content: flex-end;
+                    width: 20%;
+
+                    &:not(:first-child) {
+                        background-color: rgba( black, 0.9 );
+
+                        .requirement {
+                            opacity: 0.1;
+                        }
+                    }
+
+                    .requirement {
+                        top: 8px;
+                    }
+                }
+            }
         }
 
         border-radius: 2px;
@@ -49,7 +81,7 @@ image {
         background-color: rgba( black, 0.5 );
         margin: 5px;
         align-items: center;
-        padding: 10px;
+        padding: 10px 25px;
         flex-grow: 1;
         flex-shrink: 0;
         width: 100%;
