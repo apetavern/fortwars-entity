@@ -34,7 +34,7 @@ public partial class BuildMenu : Panel
 
 			var panel = inner.Add.Panel( "icon" );
 			panel.Style.Set( "background-image", $"url( /ui/models/blocks/{file.Replace( ".vmdl", "" )}.png )" );
-			panel.AddEventListener( "onclick", () => ConsoleSystem.Run( "spawn", "models/blocks/" + file ) );
+			panel.AddEventListener( "onclick", () => ConsoleSystem.Run( "spawn", "models/blocks/wood/" + file ) );
 
 			panel.Style.Left = Length.Fraction( frac.x );
 			panel.Style.Top = Length.Fraction( frac.y );
