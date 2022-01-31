@@ -7,7 +7,7 @@ Layer0
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "materials/fortwars/fw_block_red_rubber.psd"
+	TextureColor "materials/fortwars/fw_block_red_metal.psd"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
@@ -26,7 +26,7 @@ Layer0
 	TextureNormal "materials/default/default_normal.tga"
 
 	//---- Roughness ----
-	TextureRoughness "materials/fortwars/fw_block_blue.png"
+	TextureRoughness "materials/fortwars/fw_block_rough.png"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
