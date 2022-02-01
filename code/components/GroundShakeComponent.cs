@@ -8,16 +8,21 @@ namespace Fortwars
 	/// </summary>
 	public class GroundShakeComponent : EntityComponent<FortwarsBlock>
 	{
-		TimeSince timeSinceLastShake;
-		bool wasShakingLastFrame;
-		float massScale => 0.0025f;
-		float strengthScale => 0.01f;
-		float strengthMax => 10;
+		private TimeSince timeSinceLastShake;
+		private bool wasShakingLastFrame;
+
+		// when we multiply shake strength with mass, what should we scale it by
+		private float massScale => 0.0025f;
+
+		private float strengthScale => 0.01f;
+		private float strengthMax => 10;
 
 		[Event.Frame]
 		public void FrameUpdate()
 		{
 			var velocity = Entity.Velocity;
+
+			// do a sweep to check if we're colliding with the world
 			var tr = Trace.Sweep( Entity.PhysicsBody, Entity.Transform ).WorldOnly().Run();
 
 			if ( timeSinceLastShake < 0.2f )
@@ -46,15 +51,10 @@ namespace Fortwars
 		{
 			foreach ( var entity in Sandbox.Entity.All.OfType<FortwarsBlock>() )
 			{
-				void Remove()
+				if ( !entity.IsValid() )
 				{
 					var existingGroundShake = entity.Components.Get<GroundShakeComponent>();
 					existingGroundShake?.Remove();
-				}
-
-				if ( !entity.IsValid() )
-				{
-					Remove();
 					continue;
 				}
 

@@ -3,6 +3,9 @@ using System;
 
 namespace Fortwars
 {
+	/// <summary>
+	/// Bob the entity's scene object up and down, and rotate it, over time
+	/// </summary>
 	public partial class BobbingComponent : EntityComponent
 	{
 		[Net] public Vector3 CenterOffset { get; set; }
@@ -11,6 +14,8 @@ namespace Fortwars
 
 		public BobbingComponent()
 		{
+			// random offsets help make things look less uniform, adds variety
+			// this is mostly for ents that spawn on map load
 			RandomOffset = Rand.Float( 0, 360 );
 		}
 
@@ -20,7 +25,7 @@ namespace Fortwars
 			if ( Entity is not ModelEntity { SceneObject: SceneObject sceneObject } )
 				return;
 
-			if ( sceneObject == null )
+			if ( !sceneObject.IsValid() )
 				return;
 
 			sceneObject.Rotation = Rotation.From( 45, (Time.Now * 90f) + RandomOffset, 0 );

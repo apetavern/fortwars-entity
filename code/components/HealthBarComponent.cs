@@ -25,6 +25,10 @@ namespace Fortwars
 		public void FrameUpdate()
 		{
 			var transform = Entity.Transform;
+
+			// we use the physicsbody's local mass center and add it to the transform position
+			// rather than the physicsbody's mass center, because the latter has no interpolation
+			// whereas the former does - and therefore looks nice and smooth
 			var localCenter = Entity.PhysicsBody?.LocalMassCenter ?? Vector3.Zero;
 			transform.Position = transform.Position + (localCenter * transform.Rotation);
 			transform.Rotation = Rotation.LookAt( -CurrentView.Rotation.Forward );
@@ -35,6 +39,7 @@ namespace Fortwars
 		[Event.Frame]
 		public static void SystemUpdate()
 		{
+			// how far away can we see the health bars
 			float maxDistance = 256f;
 
 			foreach ( var entity in Sandbox.Entity.All.OfType<FortwarsBlock>() )
@@ -51,7 +56,11 @@ namespace Fortwars
 					continue;
 				}
 
-				var tr = Trace.Ray( CurrentView.Position, CurrentView.Position + CurrentView.Rotation.Forward * maxDistance ).Ignore( Local.Pawn ).Run();
+				// can the camera actually SEE the entity - or is there something between us
+				var tr = Trace.Ray( CurrentView.Position, CurrentView.Position + CurrentView.Rotation.Forward * maxDistance )
+					.Ignore( Local.Pawn )
+					.Run();
+
 				if ( tr.Entity != entity )
 				{
 					Remove();
