@@ -72,7 +72,6 @@ namespace Fortwars
 				else if ( player.TeamID != (Owner as FortwarsPlayer).TeamID || Owner == player )
 					shouldDoDamage = true;
 
-				Log.Trace( distanceFactor );
 				if ( shouldDoDamage )
 					ent.TakeDamage( DamageInfo.Explosion( tr.EndPos, tr.Normal * 32, 25 * distanceFactor ) );
 

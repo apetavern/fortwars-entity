@@ -103,7 +103,6 @@ namespace Fortwars
 			if ( !tr.Hit )
 				return;
 
-			Log.Trace( $"Spawning {path}" );
 			var weapon = FortwarsWeapon.FromPath( path );
 			weapon.Position = tr.EndPos + tr.Normal * 16;
 		}

@@ -39,8 +39,6 @@ public partial class BuildMenu : Panel
 			panel.Style.Left = Length.Fraction( frac.x );
 			panel.Style.Top = Length.Fraction( frac.y );
 
-			Log.Trace( frac );
-
 			index++;
 		}
 

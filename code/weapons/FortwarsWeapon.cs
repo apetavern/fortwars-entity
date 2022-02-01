@@ -33,9 +33,6 @@ public partial class FortwarsWeapon : Carriable
 	{
 		var weaponAsset = Asset.FromPath<WeaponAsset>( assetPath );
 
-		Log.Trace( $"Loaded weapon {assetPath}" );
-		Log.Trace( weaponAsset.WeaponName );
-
 		var weapon = new FortwarsWeapon()
 		{
 			WeaponAsset = weaponAsset
