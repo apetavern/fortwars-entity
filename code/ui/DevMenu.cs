@@ -20,40 +20,22 @@ namespace Fortwars
 			//
 			buttons.Add.Label( "General", "subtitle" );
 
-			buttons.Add.ButtonWithIcon( "Spawn a bot", "smart_toy", "button", () =>
-			{
-				ConsoleSystem.Run( "bot_add 0 0" );
-			} );
+			buttons.Add.ButtonWithIcon( "Spawn a bot", "smart_toy", "button", () => ConsoleSystem.Run( "bot_add 0 0" ) );
 
-			buttons.Add.ButtonWithIcon( "Suicide", "clear", "button", () =>
-			{
-				ConsoleSystem.Run( "kill" );
-			} );
+			buttons.Add.ButtonWithIcon( "Suicide", "clear", "button", () => ConsoleSystem.Run( "kill" ) );
 
-			buttons.Add.ButtonWithIcon( "Reload HUD", "refresh", "button", () =>
-			{
-				ConsoleSystem.Run( "recreatehud" );
-			} );
+			buttons.Add.ButtonWithIcon( "Reload HUD", "refresh", "button", () => ConsoleSystem.Run( "recreatehud" ) );
 
 			//
 			// Game
 			//
 			buttons.Add.Label( "Game", "subtitle" );
 
-			buttons.Add.ButtonWithIcon( "Give tons of ammo", "gamepad", "button", () =>
-			{
-				ConsoleSystem.Run( "give_ammo 10000" );
-			} );
+			buttons.Add.ButtonWithIcon( "Give tons of ammo", "gamepad", "button", () => ConsoleSystem.Run( "give_ammo 10000" ) );
 
-			buttons.Add.ButtonWithIcon( "Show shop UI", "storefront", "button", () =>
-			{
-				Local.Hud.AddChild<ShopMenu>();
-			} );
+			buttons.Add.ButtonWithIcon( "Show shop UI", "storefront", "button", () => Local.Hud.AddChild<ShopMenu>() );
 
-			buttons.Add.ButtonWithIcon( "Skip round", "fast_forward", "button", () =>
-			{
-				ConsoleSystem.Run( "fw_round_skip" );
-			} );
+			buttons.Add.ButtonWithIcon( "Skip round", "fast_forward", "button", () => ConsoleSystem.Run( "fw_round_skip" ) );
 
 			buttons.Add.Label( "Spawn Weapon", "minitext" );
 
@@ -74,10 +56,7 @@ namespace Fortwars
 				}
 			} );
 
-			row.Add.ButtonWithIcon( "Spawn", "gamepad", "button", () =>
-			{
-				ConsoleSystem.Run( $"spawn_weapon data/{dropdown.Value}" );
-			} );
+			row.Add.ButtonWithIcon( "Spawn", "gamepad", "button", () => ConsoleSystem.Run( $"spawn_weapon data/{dropdown.Value}" ) );
 
 			BindClass( "visible", () => Input.Down( InputButton.Flashlight ) );
 		}
