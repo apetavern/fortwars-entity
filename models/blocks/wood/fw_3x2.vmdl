@@ -33,15 +33,16 @@
 				children = 
 				[
 					{
-						_class = "PhysicsHullFromRender"
+						_class = "PhysicsShapeBox"
 						parent_bone = ""
-						surface_prop = "wood.sheet"
+						surface_prop = "default"
 						collision_group = ""
 						collision_interact_as = ""
 						collision_interact_with = ""
 						collision_interact_exclude = ""
-						faceMergeAngle = 20.0
-						maxHullVertices = 32
+						origin = [ -0.04578, 0.044275, 41.320992 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 6.31346, 120.255615, 81.453293 ]
 					},
 				]
 			},
