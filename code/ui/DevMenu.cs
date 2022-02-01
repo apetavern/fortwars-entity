@@ -50,6 +50,11 @@ namespace Fortwars
 				Local.Hud.AddChild<ShopMenu>();
 			} );
 
+			buttons.Add.ButtonWithIcon( "Skip round", "fast_forward", "button", () =>
+			{
+				ConsoleSystem.Run( "fw_round_skip" );
+			} );
+
 			buttons.Add.Label( "Spawn Weapon", "minitext" );
 
 			var row = buttons.Add.Panel();
