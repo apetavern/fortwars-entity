@@ -235,15 +235,9 @@ public partial class FortwarsWeapon : Carriable
 		ShootEffects();
 		PlaySound( WeaponAsset.FireSound );
 
-		var forward = Owner.EyeRot.Forward;
+		if ( !IsServer )
+			return;
 
-		if ( TimeSincePrimaryAttack < 3 || !WeaponAsset.FirstShotAlwaysAccurate )
-		{
-			forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * (WeaponAsset.Spread + spread) * 0.25f;
-			forward = forward.Normal;
-		}
-
-		if ( !IsServer ) return;
 		var projectile = new Projectile();
 		projectile.Rotation = Owner.EyeRot;
 		projectile.Position = Owner.EyePos;
@@ -263,9 +257,6 @@ public partial class FortwarsWeapon : Carriable
 		if ( !TakeAmmo() )
 			return;
 
-		recoil += new Vector2( WeaponAsset.RecoilY, WeaponAsset.RecoilX );
-		spread += WeaponAsset.SpreadShotIncrease;
-
 		ShootEffects();
 		PlaySound( WeaponAsset.FireSound );
 
@@ -276,6 +267,9 @@ public partial class FortwarsWeapon : Carriable
 			forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * (WeaponAsset.Spread + spread) * 0.25f;
 			forward = forward.Normal;
 		}
+
+		recoil += new Vector2( WeaponAsset.RecoilY, WeaponAsset.RecoilX );
+		spread += WeaponAsset.SpreadShotIncrease;
 
 		//
 		// ShootBullet is coded in a way where we can have bullets pass through shit
@@ -418,6 +412,6 @@ public partial class FortwarsWeapon : Carriable
 
 	public float GetCrosshairSize()
 	{
-		return (256 * (spread + WeaponAsset.Spread)).Clamp( 16, 512 );
+		return (384 * (spread + WeaponAsset.Spread)).Clamp( 16, 512 );
 	}
 }

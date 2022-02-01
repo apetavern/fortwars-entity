@@ -22,7 +22,7 @@ public class Crosshair : Panel
 		if ( Local.Pawn.ActiveChild is not FortwarsWeapon weapon )
 			return;
 
-		float size = 64 + weapon.GetCrosshairSize();
+		float size = 32 + weapon.GetCrosshairSize();
 		Style.Width = size;
 		Style.Height = size;
 	}
