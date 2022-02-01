@@ -35,7 +35,7 @@
 					{
 						_class = "PhysicsHullFromRender"
 						parent_bone = ""
-						surface_prop = "default"
+						surface_prop = "wood.sheet"
 						collision_group = ""
 						collision_interact_as = ""
 						collision_interact_with = ""
