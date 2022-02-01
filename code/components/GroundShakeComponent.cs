@@ -8,8 +8,11 @@ namespace Fortwars
 	/// </summary>
 	public class GroundShakeComponent : EntityComponent<FortwarsBlock>
 	{
-		TimeSince timeSinceLast;
-		bool wasIntersectingLastFrame;
+		TimeSince timeSinceLastShake;
+		bool wasShakingLastFrame;
+		float massScale => 0.0025f;
+		float strengthScale => 0.01f;
+		float strengthMax => 10;
 
 		[Event.Frame]
 		public void FrameUpdate()
@@ -17,30 +20,24 @@ namespace Fortwars
 			var velocity = Entity.Velocity;
 			var tr = Trace.Sweep( Entity.PhysicsBody, Entity.Transform ).WorldOnly().Run();
 
-			if ( timeSinceLast < 0.2f )
+			if ( timeSinceLastShake < 0.2f )
 				return;
 
-			if ( tr.Hit && velocity.Length > 1 && !wasIntersectingLastFrame )
+			if ( tr.Hit && velocity.Length > 1 && !wasShakingLastFrame )
 			{
-				var shakeStrength = 512 - Vector3.DistanceBetween( CurrentView.Position, Entity.PhysicsBody.MassCenter );
-				shakeStrength /= 512f;
-				shakeStrength = shakeStrength.Clamp( 0, 1 );
-
+				var shakeStrength = Vector3.DistanceBetween( CurrentView.Position, Entity.PhysicsBody.MassCenter ).LerpInverse( 512, 0 );
 				shakeStrength *= velocity.Length;
-				shakeStrength *= Entity.PhysicsBody.Mass * 0.0025f;
-
-				shakeStrength *= 0.01f;
-				shakeStrength = shakeStrength.Clamp( 0, 10 );
-
-				Log.Trace( shakeStrength );
+				shakeStrength *= Entity.PhysicsBody.Mass * massScale;
+				shakeStrength *= strengthScale;
+				shakeStrength = shakeStrength.Clamp( 0, strengthMax );
 
 				_ = new Sandbox.ScreenShake.Perlin( 0.5f, 1f, shakeStrength );
-				timeSinceLast = 0;
-				wasIntersectingLastFrame = true;
+				timeSinceLastShake = 0;
+				wasShakingLastFrame = true;
 			}
 			else
 			{
-				wasIntersectingLastFrame = false;
+				wasShakingLastFrame = false;
 			}
 		}
 
