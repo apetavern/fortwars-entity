@@ -50,28 +50,30 @@ namespace Fortwars
 
 		public virtual void AttackPrimary()
 		{
-			(ViewModelEntity)?.SetAnimBool( "fire", true );
-			(ViewModelEntity)?.SetAnimBool( "hit", true );
+
+
 
 			foreach ( var tr in TraceHit( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward * 72f ) )
 			{
 				DebugOverlay.Sphere( tr.EndPos, 4f, Color.Green, false, 5f );
 
-				if ( !tr.Hit )
-					return;
 
-
-				if ( tr.Entity is FortwarsBlock block )
-				{
-					if ( block.TeamID == (Owner as FortwarsPlayer).TeamID )
+				(ViewModelEntity)?.SetAnimBool( "hit", tr.Hit );
+				if ( tr.Hit ) { 
+					if ( tr.Entity is FortwarsBlock block )
 					{
-						block.Heal( 10, tr.EndPos );
-						continue;
+						if ( block.TeamID == (Owner as FortwarsPlayer).TeamID )
+						{
+							block.Heal( 10, tr.EndPos );
+							continue;
+						}
 					}
-				}
 
-				tr.Entity.TakeDamage( DamageInfo.Generic( 10 ) );
+					tr.Entity.TakeDamage( DamageInfo.Generic( 10 ) );
+				}
 			}
+			
+			(ViewModelEntity)?.SetAnimBool( "fire", true );
 		}
 
 		public virtual IEnumerable<TraceResult> TraceHit( Vector3 start, Vector3 end, float radius = 2.0f )
@@ -88,6 +90,15 @@ namespace Fortwars
 					.Run();
 
 			yield return tr;
+		}
+
+		public override void SimulateAnimator( PawnAnimator anim )
+		{
+			anim.SetParam( "holdtype", 4 );
+			anim.SetParam( "aimat_weight", 1.0f );
+			anim.SetParam( "holdtype_handedness", 1 );
+			anim.SetParam( "holdtype_pose_hand", 0.07f );
+			anim.SetParam( "holdtype_attack", 1 );
 		}
 	}
 }
