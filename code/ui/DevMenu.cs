@@ -13,6 +13,8 @@ namespace Fortwars
 			StyleSheet.Load( "/UI/DevMenu.scss" );
 			Add.Label( "Developer Menu", "title" );
 
+			ConsoleSystem.Run( "sv_cheats 1" );
+
 			var buttons = Add.Panel( "buttons" );
 
 			//
