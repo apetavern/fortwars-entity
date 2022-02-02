@@ -25,8 +25,11 @@ namespace Fortwars.UI
 			RedScore = Add.Label( "0", "score" );
 
 			// feature request: add multiple classes via constructor
-			BlueScore.AddClass( "score__blue" );
-			RedScore.AddClass( "score__red" );
+			BlueScore.AddClass( "score blue" );
+			RedScore.AddClass( "score red" );
+
+			Add.Label( "Red", "red team" );
+			Add.Label( "Blue", "blue team" );
 		}
 
 		public override void Tick()

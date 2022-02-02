@@ -15,6 +15,8 @@ namespace Fortwars.UI
 			var icon = Add.Icon( "favorite" );
 			Health = Add.Label( "100", "health" );
 			Health.Bind( "text", () => Local.Pawn.Health.CeilToInt() );
+
+			Add.Label( $"Team {(Local.Pawn as FortwarsPlayer).TeamID}", "team" );
 		}
 	}
 }

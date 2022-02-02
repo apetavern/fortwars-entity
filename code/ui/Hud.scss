@@ -126,11 +126,15 @@ icon, iconpanel {
 
 roundstatus {
     display: flex;
-    width: 100%;
+    width: 500px;
     flex-direction: row;
     align-items: flex-start;
     justify-content: center;
-    padding-top: 60px;
+    padding-top: 0px;
+    top: 75px;
+    left: 50%;
+    height: 150px;
+    transform: translate( -50% );
 
     panel.round-info {
         display: flex;
@@ -158,6 +162,20 @@ roundstatus {
         }
     }
 
+    .team {
+        position: absolute;
+        bottom: 40px;
+        text-transform: uppercase;
+    }
+
+    .blue.team {
+        left: 0;
+    }
+
+    .red.team {
+        right: 0;
+    }
+
     label.score {
         background-color: rgb(80, 80, 80);
         padding: 8px 24px;
@@ -165,12 +183,13 @@ roundstatus {
         box-shadow: 0 0 5px rgba( black, 0.2 );
         border-radius: 2px;
         color: $text;
+        text-align: center;
 
-        &.score__blue {
+        &.score.blue {
             background-color: $blue-team;
         }
 
-        &.score__red {
+        &.score.red {
             background-color: $red-team;
         }
     }
