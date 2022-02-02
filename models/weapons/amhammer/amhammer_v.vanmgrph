@@ -108,7 +108,7 @@
 			{
 				_class = "CSequenceAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ -336.0, 48.0 ]
+				m_vecPosition = [ -528.0, -32.0 ]
 				m_nNodeID = 
 				{
 					m_id = 53686929
@@ -161,6 +161,28 @@
 				m_sNote = ""
 				m_tagSpans = [  ]
 				m_sequenceName = "hit2"
+				m_playbackSpeed = 1.0
+				m_bLoop = false
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 413127507
+			}
+			value = 
+			{
+				_class = "CSequenceAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ -528.0, 32.0 ]
+				m_nNodeID = 
+				{
+					m_id = 413127507
+				}
+				m_networkMode = "ClientSimulate"
+				m_sNote = ""
+				m_tagSpans = [  ]
+				m_sequenceName = "miss1"
 				m_playbackSpeed = 1.0
 				m_bLoop = false
 			}
@@ -492,7 +514,7 @@
 						m_name = "miss"
 						m_childNodeID = 
 						{
-							m_id = 4294967295
+							m_id = 413127507
 						}
 						m_stateID = 
 						{
