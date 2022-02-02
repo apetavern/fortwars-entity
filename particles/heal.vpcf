@@ -11,13 +11,13 @@
 	m_Emitters = 
 	[
 		{
-			_class = "C_OP_ContinuousEmitter"
-			m_flEmitRate = 
+			_class = "C_OP_InstantaneousEmitter"
+			m_nParticlesToEmit = 
 			{
 				m_nType = "PF_TYPE_CONTROL_POINT_COMPONENT"
 				m_nMapType = "PF_MAP_TYPE_DIRECT"
-				m_flLiteralValue = 5.0
-				m_nControlPoint = 2
+				m_flLiteralValue = 100.0
+				m_nControlPoint = 1
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
 				m_nVectorComponent = 0
@@ -43,10 +43,10 @@
 				m_bNoiseImgPreviewLive = true
 				m_nInputMode = "PF_INPUT_MODE_CLAMPED"
 				m_flMultFactor = 1.0
-				m_flInput0 = 0.0
-				m_flInput1 = 1.0
-				m_flOutput0 = 0.0
-				m_flOutput1 = 1.0
+				m_flInput0 = 1.0
+				m_flInput1 = 100.0
+				m_flOutput0 = 1.0
+				m_flOutput1 = 5.0
 				m_nBiasType = "PF_BIAS_TYPE_STANDARD"
 				m_flBiasParameter = 0.0
 				m_Curve = 

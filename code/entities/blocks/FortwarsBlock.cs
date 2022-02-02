@@ -58,10 +58,28 @@ namespace Fortwars
 			if ( Game.Instance.Round is not BuildRound )
 			{
 				base.TakeDamage( info );
-
-				float t = MathF.Abs( ( Health / MaxHealth ) - 1f );
-				RenderColor = Color.Lerp( Color.White, Color.Black, t );
+				UpdateRenderColor();
 			}
+		}
+
+		public void Heal( float amount, Vector3 position )
+		{
+			if ( Health + amount < MaxHealth )
+			{
+				var healParticles = Particles.Create( "particles/heal.vpcf", position );
+				healParticles.SetPositionComponent( 1, 0, 2f );
+			}
+
+			Health += amount;
+			Health = Health.Clamp( 0, MaxHealth );
+
+			UpdateRenderColor();
+		}
+
+		private void UpdateRenderColor()
+		{
+			float t = MathF.Abs( (Health / MaxHealth) - 1f );
+			RenderColor = Color.Lerp( Color.White, Color.Black, t );
 		}
 
 		//TODO: Override OnKilled for custom gibs, in the Prop class it creates gibs and decides if it should explode or not.
