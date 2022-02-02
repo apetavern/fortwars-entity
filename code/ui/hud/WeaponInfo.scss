@@ -4,22 +4,25 @@ weaponinfo {
     position: absolute;
     right: 120px;
     bottom: 86px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding: 10px 20px;
-    color: white;
-    border-radius: 2px;
-    color: $text;
-    box-shadow: 0 0 5px rgba( black, 0.5 );
-    opacity: 0;
+    flex-direction: row;
+
+    .ammopanel {
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 10px 20px;
+        color: white;
+        border-radius: 2px;
+        color: $text;
+        box-shadow: 0 0 5px rgba( black, 0.5 );
+        opacity: 0;
+
+        &.visible {
+            opacity: 1;
+        }
+    }
 
     label {
         color: $text;
-    }
-
-    &.visible {
-        opacity: 1;
     }
 
     .current {
@@ -32,13 +35,13 @@ weaponinfo {
 }
 
 .red-team {
-    weaponinfo {
+    weaponinfo .ammopanel {
         background-color: $red-team;
     }
 }
 
 .blue-team {
-    weaponinfo {
+    weaponinfo .ammopanel {
         background-color: $blue-team;
     }
 }
