@@ -23,7 +23,7 @@ public class Crosshair : Panel
 			return;
 
 		float size = 32 + weapon.GetCrosshairSize();
-		Style.FontSize = size;
-		Style.FontSize = size;
+		Style.Width = size;
+		Style.Height = size;
 	}
 }
