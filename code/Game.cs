@@ -16,7 +16,7 @@ namespace Fortwars
 		// shit hack, ideally Time.Now should be synced with server
 		[Net] public float ServerTime { get; private set; }
 
-		private FortwarsHUD hud;
+		private static FortwarsHUD hud;
 
 		public Game()
 		{
@@ -137,8 +137,8 @@ namespace Fortwars
 		[ServerCmd( "recreatehud" )]
 		public static void RecreateHud()
 		{
-			Instance.hud?.Delete();
-			Instance.hud = new();
+			hud?.Delete();
+			hud = new();
 		}
 
 		[ServerCmd( "give_ammo" )]
