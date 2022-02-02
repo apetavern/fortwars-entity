@@ -31,5 +31,22 @@ namespace Fortwars
 				}
 			}
 		}
+
+		[ServerCmd( "fw_team_swap" )]
+		public static void TeamSwapCommand()
+		{
+			var player = ConsoleSystem.Caller.Pawn as FortwarsPlayer;
+			switch ( player.TeamID )
+			{
+				case Fortwars.Team.Invalid:
+				case Fortwars.Team.Red:
+					player.TeamID = Fortwars.Team.Blue;
+					break;
+				case Fortwars.Team.Blue:
+					player.TeamID = Fortwars.Team.Red;
+					break;
+			}
+			player.Respawn();
+		}
 	}
 }
