@@ -142,7 +142,7 @@ namespace Fortwars
 
 		public override void Tick()
 		{
-			Angle = (showIcon.IconWorldPosition() - CurrentView.Position).EulerAngles.yaw;
+			Angle = (showIcon.IconWorldPosition() - CurrentView.Position).EulerAngles.yaw + 270;
 			base.Tick();
 		}
 	}
