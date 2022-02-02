@@ -2,8 +2,17 @@
 
 namespace Fortwars
 {
-	public partial class FlagDisplay : ModelEntity
+	public partial class FlagDisplay : ModelEntity, IShowIcon
 	{
+		[Net] public Team Team { get; set; }
+
+		#region Icons
+		Vector3 IShowIcon.IconWorldPosition() => this.Position;
+		string IShowIcon.CustomClassName() => Team.ToString();
+		string IShowIcon.NonDiegeticIcon() => "flag";
+		string IShowIcon.SpatialIcon() => "flag";
+		#endregion
+
 		public override void Spawn()
 		{
 			base.Spawn();

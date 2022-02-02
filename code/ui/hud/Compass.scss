@@ -8,24 +8,24 @@ compass {
     width: 500px;
     transform: translate( -50% );
 
-    compasspoint, labelledcompasspoint {
+    .compass-point {
         position: absolute;
         width: 2px;
-        height: 5px;
-        background-color: white;
+        height: 16px;
     }
 
-    compasspoint {
+    .compass-point {
         background-color: rgba( white, 0.2 );
     }
 
-    labelledcompasspoint {
-        height: 10px;
+    labelledcompasspoint.compass-point {
+        height: 32px;
         justify-content: center;
         align-items: center;
+        background-color: white;
 
         label {
-            top: 10px;
+            top: 32px;
             text-shadow: 0 0 5px rgba( black, 0.2 );
         }
 
@@ -38,6 +38,28 @@ compass {
         label {
             position: absolute;
             font-size: 24px;
+        }
+    }
+
+    iconcompasspoint.compass-point {
+        top: 0px;
+        transform: translate( -50% );
+        z-index: 10;
+        background-color: transparent;
+        text-align: center;
+
+        iconpanel {
+            font-size: 32px;
+        }
+
+        &.red iconpanel {
+            text-shadow: 0 0 2px $red-team;
+            color: $red-team;
+        }
+
+        &.blue iconpanel {
+            text-shadow: 0 0 2px $blue-team;
+            color: $blue-team;
         }
     }
 }

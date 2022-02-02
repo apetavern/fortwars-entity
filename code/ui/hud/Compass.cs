@@ -3,11 +3,13 @@ using Sandbox.UI.Construct;
 using Sandbox.UI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Fortwars
 {
 	public class Compass : Panel
 	{
+		private List<IconCompassPoint> worldIcons = new();
 		private List<CompassPoint> compassPoints = new();
 
 		public Compass()
@@ -19,8 +21,6 @@ namespace Fortwars
 			{
 				var compassPoint = new LabelledCompassPoint( this, i );
 				compassPoint.Angle = i * 45f;
-
-				compassPoint.Parent = this;
 				compassPoints.Add( compassPoint );
 			}
 
@@ -34,8 +34,6 @@ namespace Fortwars
 				var compassPoint = new LabelledCompassPoint( this, i, "small" );
 				compassPoint.Label.Text = (i * angleIncrement).CeilToInt().ToString();
 				compassPoint.Angle = i * angleIncrement;
-
-				compassPoint.Parent = this;
 				compassPoints.Add( compassPoint );
 			}
 
@@ -52,6 +50,27 @@ namespace Fortwars
 				compassPoints.Add( compassPoint );
 			}
 		}
+
+		public override void Tick()
+		{
+			base.Tick();
+
+			var existingIcons = worldIcons.Select( i => i.showIcon ).ToList();
+
+			// TODO: This doesn't support entity deletion and probably should
+
+			foreach ( var showIconInterface in Entity.All.OfType<IShowIcon>().ToList() )
+			{
+				if ( existingIcons.Contains( showIconInterface ) )
+					continue;
+
+				if ( string.IsNullOrEmpty( showIconInterface.NonDiegeticIcon() ) )
+					continue;
+
+				var iconCompassPoint = new IconCompassPoint( this, showIconInterface );
+				worldIcons.Add( iconCompassPoint );
+			}
+		}
 	}
 
 	class CompassPoint : Panel
@@ -60,6 +79,7 @@ namespace Fortwars
 
 		public CompassPoint( Panel parent )
 		{
+			AddClass( "compass-point" );
 			Parent = parent;
 		}
 
@@ -82,12 +102,31 @@ namespace Fortwars
 				float playerAng = player.EyeRot.Yaw();
 				float relativeAngle = CalcRelativeAngle( playerAng, Angle );
 
-				float position = relativeAngle.LerpInverse( -45f, 45f );
+				float position = relativeAngle.LerpInverse( -45, 45 );
 				Style.Left = Length.Fraction( position );
 
 				float t = (position <= 0.5f) ? position : (1.0f - position);
-				Style.Opacity = 0.0f.LerpTo( 1.0f, t );
+				Style.Opacity = MathF.Pow( 0.0f.LerpTo( 1.0f, t ), 0.5f );
 			}
+		}
+	}
+
+	class IconCompassPoint : CompassPoint
+	{
+		public IconPanel Icon { get; set; }
+		public IShowIcon showIcon { get; set; }
+		public IconCompassPoint( Panel parent, IShowIcon entity ) : base( parent )
+		{
+			AddClass( entity.CustomClassName() );
+
+			Icon = Add.Icon( entity.NonDiegeticIcon() );
+			showIcon = entity;
+		}
+
+		public override void Tick()
+		{
+			Angle = (showIcon.IconWorldPosition() - CurrentView.Position).EulerAngles.yaw;
+			base.Tick();
 		}
 	}
 

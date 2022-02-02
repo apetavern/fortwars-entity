@@ -21,6 +21,7 @@ namespace Fortwars
 
 			flag = new FlagDisplay();
 			flag.Position = Position;
+			flag.Team = Team;
 
 			// make sure our clients know where to render flags
 			// todo: probably better as a ClientRpc
