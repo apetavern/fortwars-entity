@@ -45,8 +45,8 @@
 						_class = "Attachment"
 						name = "hammertip"
 						parent_bone = "base"
-						relative_origin = [ -7.958927, 56.094772, 26.557652 ]
-						relative_angles = [ 69.114365, 150.15329, 166.221756 ]
+						relative_origin = [ 0.0, 51.0, 13.0 ]
+						relative_angles = [ 90.0, 90.0, 90.0 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -181,6 +181,19 @@
 									tags = ""
 								}
 							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_GENERIC_EVENT"
+								event_frame = 5
+								event_keys = 
+								{
+									TypeName = "hit"
+									Int = 0
+									Float = 0.0
+									Vector = [ 0.0, 0.0, 0.0 ]
+									StringData = ""
+								}
+							},
 						]
 						activity_name = ""
 						activity_weight = 1
@@ -236,6 +249,19 @@
 									tags = ""
 								}
 							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_GENERIC_EVENT"
+								event_frame = 5
+								event_keys = 
+								{
+									TypeName = "hit"
+									Int = 0
+									Float = 0.0
+									Vector = [ 0.0, 0.0, 0.0 ]
+									StringData = ""
+								}
+							},
 						]
 						activity_name = ""
 						activity_weight = 1
@@ -289,6 +315,19 @@
 									stop_on_seq_change = false
 									use_layer_sequence = false
 									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_GENERIC_EVENT"
+								event_frame = 5
+								event_keys = 
+								{
+									TypeName = "hit"
+									Int = 0
+									Float = 0.0
+									Vector = [ 0.0, 0.0, 0.0 ]
+									StringData = ""
 								}
 							},
 						]
