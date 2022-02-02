@@ -7,6 +7,9 @@ compass {
     height: 50px;
     width: 1000px;
     transform: translate( -50% );
+    background-image: radial-gradient( rgba( black, 0.5 ), rgba( black, 0 ) 50% );
+    background-position: 0 -100%;
+    background-size: 100% 200%;
 
     .compass-point {
         position: absolute;
@@ -39,10 +42,10 @@ compass {
 
         label {
             top: 32px;
-            text-shadow: 0 0 5px rgba( black, 0.2 );
         }
 
         &.small {
+
             label {
                 font-size: 16px;
             }
