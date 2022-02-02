@@ -53,7 +53,7 @@ namespace Fortwars
 			var player = Owner as FortwarsPlayer;
 			foreach ( var tr in TraceHit( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward * 72f ) )
 			{
-				ViewModelEntity.SetAnimBool( "hit", tr.Hit );
+				ViewModelEntity?.SetAnimBool( "hit", tr.Hit );
 
 				if ( !tr.Hit )
 					continue;
@@ -67,7 +67,7 @@ namespace Fortwars
 				tr.Entity.TakeDamage( DamageInfo.Generic( 10 ) );
 			}
 
-			ViewModelEntity.SetAnimBool( "fire", true );
+			ViewModelEntity?.SetAnimBool( "fire", true );
 		}
 
 		public virtual IEnumerable<TraceResult> TraceHit( Vector3 start, Vector3 end, float radius = 2.0f )
