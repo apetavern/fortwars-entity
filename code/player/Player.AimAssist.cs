@@ -79,10 +79,11 @@ namespace Fortwars
 
 				var diff = input.ViewAngles - delta.EulerAngles;
 				float distT = dist.LerpInverse( AimAssistDistanceMax, AimAssistDistanceMin );
-				float t = (input.AnalogLook.Length + input.AnalogMove.Length) * angDist.LerpInverse( AimAssistAngleMax * distT, 0 ) * distT;
+				float t = ((input.AnalogLook.Length * 2) + input.AnalogMove.Length) * angDist.LerpInverse( AimAssistAngleMax * distT, 0 ) * distT;
 
 				var targetAngles = delta.EulerAngles;
-				input.ViewAngles = Angles.Lerp( input.ViewAngles, targetAngles, AimAssistStrength * Time.Delta * t );
+				targetAngles = Angles.Lerp( input.ViewAngles, targetAngles, AimAssistStrength * Time.Delta * t );
+				input.ViewAngles = input.ViewAngles.WithYaw( targetAngles.yaw );
 			}
 		}
 	}
