@@ -7,10 +7,28 @@ using System.Linq;
 
 namespace Fortwars
 {
+	public static class PlayerExtensions
+	{
+		public static float CalcRelativeYaw( this Player player, float angle )
+		{
+			float mod( float a, float n ) => (a % n + n) % n;
+			float length = player.EyeRot.Yaw() - angle;
+
+			float d = mod( Math.Abs( length ), 360 );
+			float r = d > 180 ? 360 - d : d;
+			r *= (length >= 0 && length <= 180) || (length <= -180 && length >= -360) ? 1 : -1;
+			r -= 90;
+
+			return r;
+		}
+	}
+
 	public class Compass : Panel
 	{
 		private List<IconCompassPoint> worldIcons = new();
 		private List<CompassPoint> compassPoints = new();
+
+		private Label currentFacing;
 
 		public Compass()
 		{
@@ -26,13 +44,13 @@ namespace Fortwars
 
 			// Angle numbers
 			float angleIncrement = 15f;
-			for ( int i = 0; i < (360 / angleIncrement); i++ )
+			for ( int i = 0; i < 360.0f / angleIncrement; i++ )
 			{
-				if ( i % 3 == 0 )
+				if ( i % (360 / (8 * angleIncrement)) == 0 )
 					continue;
 
 				var compassPoint = new LabelledCompassPoint( this, i, "small" );
-				compassPoint.Label.Text = (i * angleIncrement).CeilToInt().ToString();
+				compassPoint.Label.Text = (360 - (i * angleIncrement)).CeilToInt().ToString();
 				compassPoint.Angle = i * angleIncrement;
 				compassPoints.Add( compassPoint );
 			}
@@ -40,7 +58,7 @@ namespace Fortwars
 			// Ticks
 			for ( int i = 0; i < 360; i++ )
 			{
-				if ( i % 15 == 0 )
+				if ( i % angleIncrement == 0 )
 					continue;
 
 				var compassPoint = new CompassPoint( this );
@@ -49,6 +67,9 @@ namespace Fortwars
 
 				compassPoints.Add( compassPoint );
 			}
+
+			Add.Icon( "keyboard_arrow_up", "current-facing-icon" );
+			currentFacing = Add.Label( "0", "current-facing" );
 		}
 
 		public override void Tick()
@@ -58,7 +79,6 @@ namespace Fortwars
 			var existingIcons = worldIcons.Select( i => i.showIcon ).ToList();
 
 			// TODO: This doesn't support entity deletion and probably should
-
 			foreach ( var showIconInterface in Entity.All.OfType<IShowIcon>().ToList() )
 			{
 				if ( existingIcons.Contains( showIconInterface ) )
@@ -69,6 +89,16 @@ namespace Fortwars
 
 				var iconCompassPoint = new IconCompassPoint( this, showIconInterface );
 				worldIcons.Add( iconCompassPoint );
+			}
+
+			if ( Local.Pawn is FortwarsPlayer player )
+			{
+				float relativeAngle = player.CalcRelativeYaw( 0 );
+				if ( relativeAngle < 0 )
+					relativeAngle += 360f;
+				relativeAngle = 360 - relativeAngle;
+
+				currentFacing.Text = relativeAngle.CeilToInt().ToString();
 			}
 		}
 	}
@@ -83,24 +113,11 @@ namespace Fortwars
 			Parent = parent;
 		}
 
-		public float CalcRelativeAngle( float a, float b )
-		{
-			float mod( float a, float n ) => (a % n + n) % n;
-			float length = a - b;
-
-			float d = mod( Math.Abs( length ), 360 );
-			float r = d > 180 ? 360 - d : d;
-			r *= (length >= 0 && length <= 180) || (length <= -180 && length >= -360) ? 1 : -1;
-
-			return r;
-		}
-
 		public override void Tick()
 		{
 			if ( Local.Pawn is FortwarsPlayer player )
 			{
-				float playerAng = player.EyeRot.Yaw();
-				float relativeAngle = CalcRelativeAngle( playerAng, Angle );
+				float relativeAngle = player.CalcRelativeYaw( Angle );
 
 				float position = relativeAngle.LerpInverse( -45, 45 );
 				Style.Left = Length.Fraction( position );
@@ -147,21 +164,21 @@ namespace Fortwars
 			switch ( index )
 			{
 				case 0:
-					return "E";
-				case 1:
-					return "NE";
-				case 2:
 					return "N";
-				case 3:
+				case 1:
 					return "NW";
-				case 4:
+				case 2:
 					return "W";
-				case 5:
+				case 3:
 					return "SW";
-				case 6:
+				case 4:
 					return "S";
-				case 7:
+				case 5:
 					return "SE";
+				case 6:
+					return "E";
+				case 7:
+					return "NE";
 			}
 
 			return "?";

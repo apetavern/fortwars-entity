@@ -51,7 +51,7 @@ namespace Fortwars
 		public virtual void AttackPrimary()
 		{
 			var player = Owner as FortwarsPlayer;
-			foreach ( var tr in TraceHit( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward * 72f ) )
+			foreach ( var tr in TraceHit( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward * 128f ) )
 			{
 				ViewModelEntity?.SetAnimBool( "hit", tr.Hit );
 

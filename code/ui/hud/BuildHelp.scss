@@ -8,8 +8,12 @@ buildhelp {
     flex-direction: column;
     font-size: 20px;
     color: white;
-    color: white;
     border-radius: 2px;
+    opacity: 0;
+
+    &.visible {
+        opacity: 1;
+    }
 
     inputhint {
         &:not(:first-child) {
@@ -21,5 +25,17 @@ buildhelp {
         .glyph {
             margin-right: 8px;
         }
+    }
+}
+
+.red-team {
+    buildhelp inputhint image {
+        background-image-tint: $red-team;
+    }
+}
+
+.blue-team {
+    buildhelp inputhint image {
+        background-image-tint: $blue-team;
     }
 }

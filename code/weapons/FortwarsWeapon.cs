@@ -64,8 +64,6 @@ public partial class FortwarsWeapon : Carriable
 		if ( spread.AlmostEqual( 0 ) )
 			spread = 0;
 
-		DrawDebug();
-
 		if ( IsReloading )
 		{
 			if ( TimeSinceReload > WeaponAsset.ReloadTime )

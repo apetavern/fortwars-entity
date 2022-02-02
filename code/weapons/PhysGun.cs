@@ -4,6 +4,7 @@ using Sandbox.Joints;
 using System;
 using System.Linq;
 
+[Library( "physgun", Title = "Manipulator" )]
 public partial class PhysGun : Carriable, IUse
 {
 	public override string ViewModelPath => "models/weapons/hkusp/hkusp_v.vmdl";

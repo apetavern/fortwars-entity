@@ -5,17 +5,30 @@ compass {
     top: 0;
     left: 50%;
     height: 50px;
-    width: 500px;
+    width: 1000px;
     transform: translate( -50% );
 
     .compass-point {
         position: absolute;
         width: 2px;
         height: 16px;
+        background-color: rgba( white, 0.2 );
     }
 
-    .compass-point {
-        background-color: rgba( white, 0.2 );
+    .current-facing {
+        position: absolute;
+        bottom: -48px;
+        left: 50%;
+        transform: translate( -50% );
+    }
+
+    .current-facing-icon {
+        position: absolute;
+        bottom: -32px;
+        left: 50%;
+        transform: translate( -50% );
+        font-size: 32px;
+        color: white;
     }
 
     labelledcompasspoint.compass-point {

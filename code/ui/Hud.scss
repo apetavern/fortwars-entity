@@ -125,15 +125,14 @@ icon, iconpanel {
 }
 
 roundstatus {
-    display: flex;
+    position: absolute;
     width: 500px;
     flex-direction: row;
     align-items: flex-start;
     justify-content: center;
-    padding-top: 0px;
-    top: 75px;
+    bottom: 86px;
+    height: 100px;
     left: 50%;
-    height: 150px;
     transform: translate( -50% );
 
     panel.round-info {
@@ -141,6 +140,7 @@ roundstatus {
         flex-direction: column;
         align-content: center;
         align-items: center;
+        top: -20px;
         margin: 0 64px;
 
         label {
@@ -164,7 +164,7 @@ roundstatus {
 
     .team {
         position: absolute;
-        bottom: 40px;
+        bottom: -10px;
         text-transform: uppercase;
     }
 
