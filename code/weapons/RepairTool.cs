@@ -50,30 +50,24 @@ namespace Fortwars
 
 		public virtual void AttackPrimary()
 		{
-
-
-
+			var player = Owner as FortwarsPlayer;
 			foreach ( var tr in TraceHit( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward * 72f ) )
 			{
-				DebugOverlay.Sphere( tr.EndPos, 4f, Color.Green, false, 5f );
+				ViewModelEntity.SetAnimBool( "hit", tr.Hit );
 
+				if ( !tr.Hit )
+					continue;
 
-				(ViewModelEntity)?.SetAnimBool( "hit", tr.Hit );
-				if ( tr.Hit ) { 
-					if ( tr.Entity is FortwarsBlock block )
-					{
-						if ( block.TeamID == (Owner as FortwarsPlayer).TeamID )
-						{
-							block.Heal( 10, tr.EndPos );
-							continue;
-						}
-					}
-
-					tr.Entity.TakeDamage( DamageInfo.Generic( 10 ) );
+				if ( tr.Entity is FortwarsBlock block && block.TeamID == player.TeamID )
+				{
+					block.Heal( 10, tr.EndPos );
+					continue;
 				}
+
+				tr.Entity.TakeDamage( DamageInfo.Generic( 10 ) );
 			}
-			
-			(ViewModelEntity)?.SetAnimBool( "fire", true );
+
+			ViewModelEntity.SetAnimBool( "fire", true );
 		}
 
 		public virtual IEnumerable<TraceResult> TraceHit( Vector3 start, Vector3 end, float radius = 2.0f )
