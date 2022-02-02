@@ -16,9 +16,9 @@
 		recoilx = -0.1
 		recoily = -0.25
 		firstshotalwaysaccurate = true
-		spread = 0.01
-		spreadshotincrease = 0.01
-		spreadchangetime = 1.0
+		spread = 0.1
+		spreadshotincrease = 0.05
+		spreadchangetime = 4.0
 		aimaccuracymult = 1.0
 		maxammo = 45
 		extraammo = 90
@@ -33,5 +33,8 @@
 		kickbackspeed = 1.5
 		kickbackrotation = 0.9
 		firesound = "rust_smg.shoot"
+		useprojectile = false
+		projectilemodel = resource:""
+		projectilespeed = 1.0
 	}
 }
