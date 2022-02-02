@@ -69,16 +69,16 @@ namespace Fortwars
 			var tx = new Sandbox.UI.PanelTransform();
 			tx.AddRotation( 0, 0, lean * -0.1f );
 
-			var zOffset = (lastCameraPos - setup.Position).z * 8f;
-			zOffset = zOffset.Clamp( -32, 32 );
-			zOffset = lastHudOffset.LerpTo( zOffset, 25.0f * Time.Delta );
-			tx.AddTranslateY( zOffset );
+			//var zOffset = (lastCameraPos - setup.Position).z * 8f;
+			//zOffset = zOffset.Clamp( -32, 32 );
+			//zOffset = lastHudOffset.LerpTo( zOffset, 25.0f * Time.Delta );
+			//tx.AddTranslateY( zOffset );
 
-			Local.Hud.Style.Transform = tx;
-			Local.Hud.Style.Dirty();
+			//Local.Hud.Style.Transform = tx;
+			//Local.Hud.Style.Dirty();
 
 			lastCameraPos = setup.Position;
-			lastHudOffset = zOffset;
+			// lastHudOffset = zOffset;
 		}
 	}
 }
