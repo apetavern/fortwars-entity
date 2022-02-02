@@ -23,6 +23,7 @@ namespace Fortwars.UI
 			RootPanel.AddChild<BuildHelp>();
 			RootPanel.AddChild<BuildMenu>();
 			RootPanel.AddChild<InventoryBar>();
+			RootPanel.AddChild<Compass>();
 
 			RootPanel.AddChild<DevMenu>();
 

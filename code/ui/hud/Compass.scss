@@ -1,0 +1,64 @@
+﻿@import "/ui/_Common.scss";
+
+compass {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 50px;
+    width: 500px;
+    transform: translate( -50% );
+
+    compasspoint, labelledcompasspoint {
+        position: absolute;
+        width: 2px;
+        height: 5px;
+        background-color: white;
+    }
+
+    compasspoint {
+        background-color: rgba( white, 0.2 );
+    }
+
+    labelledcompasspoint {
+        height: 10px;
+        justify-content: center;
+        align-items: center;
+
+        label {
+            top: 10px;
+            text-shadow: 0 0 5px rgba( black, 0.2 );
+        }
+
+        &.small {
+            label {
+                font-size: 16px;
+            }
+        }
+
+        label {
+            position: absolute;
+            font-size: 24px;
+        }
+    }
+}
+
+
+.red-team {
+    labelledcompasspoint:not(.small) {
+        background-color: $red-team;
+
+        label {
+            color: $red-team;
+        }
+    }
+}
+
+.blue-team {
+    labelledcompasspoint:not(.small) {
+        background-color: $blue-team;
+
+        label {
+            color: $blue-team;
+        }
+    }
+}
