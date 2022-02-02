@@ -17,16 +17,17 @@ namespace Fortwars.UI
 			RootPanel.AddChild<KillFeed>();
 			RootPanel.AddChild<Scoreboard>();
 
-			RootPanel.AddChild<Sandbox.UI.ChatBox>();
 			RootPanel.AddChild<Vitals>();
 			RootPanel.AddChild<WeaponInfo>();
 			RootPanel.AddChild<RoundStatus>();
 			RootPanel.AddChild<BuildHelp>();
 			RootPanel.AddChild<BuildMenu>();
-
-			RootPanel.AddChild<VoiceList>();
+			RootPanel.AddChild<InventoryBar>();
 
 			RootPanel.AddChild<DevMenu>();
+
+			RootPanel.AddChild<Sandbox.UI.ChatBox>();
+			RootPanel.AddChild<VoiceList>();
 
 			RootPanel.BindClass( "red-team", () => (Local.Pawn as FortwarsPlayer).TeamID == Team.Red );
 			RootPanel.BindClass( "blue-team", () => (Local.Pawn as FortwarsPlayer).TeamID == Team.Blue );

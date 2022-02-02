@@ -37,6 +37,9 @@ namespace Fortwars
 
 			buttons.Add.ButtonWithIcon( "Skip round", "fast_forward", "button", () => ConsoleSystem.Run( "fw_round_skip" ) );
 
+			buttons.Add.ButtonWithIcon( "Give physgun", "add", "button", () => ConsoleSystem.Run( "fw_inventory_give physgun" ) );
+			buttons.Add.ButtonWithIcon( "Give repair tool", "add", "button", () => ConsoleSystem.Run( "fw_inventory_give repairtool" ) );
+
 			buttons.Add.Label( "Spawn Weapon", "minitext" );
 
 			var row = buttons.Add.Panel();

@@ -1,0 +1,45 @@
+﻿@import "/ui/_Common.scss";
+
+InventoryBar {
+    position: absolute;
+    bottom: 86px;
+    left: 50%;
+    transform: translate( -50% );
+    width: 384px;
+    justify-content: space-between;
+    align-items: center;
+
+    InventoryIcon {
+        box-shadow: 0 0 5px rgba( black, 0.5 );
+        border: 4px solid rgba( $text, 0 );
+        margin: 0 5px;
+        flex-grow: 1;
+        flex-shrink: 1;
+        aspect-ratio: 1;
+        width: 10%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 2px;
+
+        label {
+            color: $text;
+        }
+
+        &.active {
+            border: $text;
+        }
+    }
+}
+
+.red-team {
+    InventoryIcon {
+        background-color: $red-team;
+    }
+}
+
+.blue-team {
+    InventoryIcon {
+        background-color: $blue-team;
+    }
+}

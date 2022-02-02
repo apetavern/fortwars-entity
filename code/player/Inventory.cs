@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Fortwars
 {
@@ -13,51 +14,24 @@ namespace Fortwars
 
 		public override bool Add( Entity ent, bool makeActive = false )
 		{
-			/*var player = Owner as DeathmatchPlayer;
-			var weapon = ent as BaseDmWeapon;
-			var notices = !player.SupressPickupNotices;
-
-			//
-			// We don't want to pick up the same weapon twice
-			// But we'll take the ammo from it Winky Face
-			//
-			if ( weapon != null && IsCarryingType( ent.GetType() ) )
-			{
-				var ammo = weapon.AmmoClip;
-				var ammoType = weapon.AmmoType;
-
-				if ( ammo > 0 )
-				{
-					player.GiveAmmo( ammoType, ammo );
-
-					if ( notices )
-					{
-						Sound.FromWorld( "dm.pickup_ammo", ent.WorldPos );
-						PickupFeed.OnPickup( player, $"+{ammo} {ammoType}" );
-					}
-				}
-
-				ItemRespawn.Taken( ent );
-
-				// Despawn it
-				ent.Delete();
+			if ( List.Count >= 3 )
 				return false;
-			}
 
-			if ( weapon != null && notices )
-			{
-				Sound.FromWorld( "dm.pickup_weapon", ent.WorldPos );
-				PickupFeed.OnPickup( player, $"{ent.ClassInfo.Title}" );
-			}
-
-
-			ItemRespawn.Taken( ent );*/
 			return base.Add( ent, makeActive );
 		}
 
 		public bool IsCarryingType( Type t )
 		{
 			return List.Any( x => x.GetType() == t );
+		}
+
+		[AdminCmd( "fw_inventory_give" )]
+		public static void GiveCommand( string itemName )
+		{
+			var player = ConsoleSystem.Caller.Pawn;
+			var item = Library.Create<Entity>( itemName );
+			player.Inventory.Add( item );
+			Log.Info( $"Gave {player.Client.Name} 1x {itemName}" );
 		}
 	}
 }
