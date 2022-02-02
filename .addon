@@ -1,8 +1,7 @@
 {
-  "SharedAssets": "*.*",
   "Title": "Fortwars",
   "Type": "game",
-  "Org": "local",
+  "Org": "apetavern",
   "Ident": "fortwars",
   "Schema": 1,
   "HasAssets": true,
