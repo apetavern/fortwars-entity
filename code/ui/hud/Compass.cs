@@ -122,7 +122,7 @@ namespace Fortwars
 				Style.Left = Length.Fraction( position );
 
 				float t = (position <= 0.5f) ? position : (1.0f - position);
-				Style.Opacity = MathF.Pow( 0.0f.LerpTo( 1.0f, t ), 0.5f );
+				Style.Opacity = MathF.Sqrt( 0.0f.LerpTo( 1.0f, t ) ) * 2;
 			}
 		}
 	}
