@@ -12,10 +12,10 @@ namespace Fortwars
 		public static float CalcRelativeYaw( this Player player, float angle )
 		{
 			float mod( float a, float n ) => (a % n + n) % n;
-			float length = player.EyeRot.Yaw() - angle;
+			float length = player.EyeRot.Yaw() - Compass.AngleOffset - angle;
 
 			float d = mod( Math.Abs( length ), 360 );
-			float r = d > 180 ? 360 - d : d;
+			float r = (d > 180) ? 360 - d : d;
 			r *= (length >= 0 && length <= 180) || (length <= -180 && length >= -360) ? 1 : -1;
 
 			return r;
@@ -24,6 +24,12 @@ namespace Fortwars
 
 	public class Compass : Panel
 	{
+		/// <summary>
+		/// HACK: This is used for a stupid way of getting
+		/// north to be 0
+		/// </summary>
+		public static float AngleOffset = 90f;
+
 		private List<IconCompassPoint> worldIcons = new();
 		private List<CompassPoint> compassPoints = new();
 
@@ -141,7 +147,7 @@ namespace Fortwars
 
 		public override void Tick()
 		{
-			Angle = (showIcon.IconWorldPosition() - CurrentView.Position).EulerAngles.yaw;
+			Angle = (showIcon.IconWorldPosition() - CurrentView.Position).EulerAngles.yaw - Compass.AngleOffset;
 
 			float distance = Vector3.DistanceBetween( showIcon.IconWorldPosition(), CurrentView.Position );
 			float scale = distance.LerpInverse( 1024, 0 ) + 1.0f;
