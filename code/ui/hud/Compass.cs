@@ -17,7 +17,6 @@ namespace Fortwars
 			float d = mod( Math.Abs( length ), 360 );
 			float r = d > 180 ? 360 - d : d;
 			r *= (length >= 0 && length <= 180) || (length <= -180 && length >= -360) ? 1 : -1;
-			r -= 90;
 
 			return r;
 		}
@@ -142,7 +141,13 @@ namespace Fortwars
 
 		public override void Tick()
 		{
-			Angle = (showIcon.IconWorldPosition() - CurrentView.Position).EulerAngles.yaw + 270;
+			Angle = (showIcon.IconWorldPosition() - CurrentView.Position).EulerAngles.yaw;
+
+			float distance = Vector3.DistanceBetween( showIcon.IconWorldPosition(), CurrentView.Position );
+			float scale = distance.LerpInverse( 1024, 0 ) + 1.0f;
+
+			Icon.Style.FontSize = 32 * scale;
+
 			base.Tick();
 		}
 	}

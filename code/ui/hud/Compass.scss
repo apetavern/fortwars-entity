@@ -61,17 +61,11 @@ compass {
         background-color: transparent;
         text-align: center;
 
-        iconpanel {
-            font-size: 32px;
-        }
-
         &.red iconpanel {
-            text-shadow: 0 0 2px $red-team;
             color: $red-team;
         }
 
         &.blue iconpanel {
-            text-shadow: 0 0 2px $blue-team;
             color: $blue-team;
         }
     }
