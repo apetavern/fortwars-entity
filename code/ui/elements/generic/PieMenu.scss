@@ -1,7 +1,6 @@
-﻿
-@import "/ui/_Common.scss";
+﻿@import "/ui/_Common.scss";
 
-buildmenu {
+.pie-menu {
     position: absolute;
     top: 0;
     left: 0;
@@ -78,6 +77,14 @@ buildmenu {
             bottom: -64px;
         }
 
+        .item-icon {
+            position: absolute;
+            font-size: 64px;
+            color: white;
+            text-align: center;
+            transform: translate(-50% -50%);
+        }
+
         .icon {
             border-radius: 2px;
             background-position: center;
@@ -112,21 +119,21 @@ buildmenu {
 }
 
 .red-team {
-    buildmenu .wrapper .selected {
+    .pie-menu .wrapper .selected {
         border-top: $red-team;
     }
 
-    buildmenu .wrapper .center {
+    .pie-menu .wrapper .center {
         background-color: $red-team;
     }
 }
 
 .blue-team {
-    buildmenu .wrapper .selected {
+    .pie-menu .wrapper .selected {
         border-top: $blue-team;
     }
 
-    buildmenu .wrapper .center {
+    .pie-menu .wrapper .center {
         background-color: $blue-team;
     }
 }
