@@ -1,0 +1,234 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "ModelModifierList"
+				children = 
+				[
+					{
+						_class = "ModelModifier_Translate"
+						translation = [ 15.0, 0.0, -135.0 ]
+					},
+				]
+			},
+			{
+				_class = "JiggleBoneList"
+				children = 
+				[
+					{
+						_class = "JiggleBone"
+						jiggle_root_bone = "jigglepoint"
+						jiggle_type = 1
+						has_yaw_constraint = false
+						has_pitch_constraint = true
+						has_angle_constraint = false
+						has_base_spring = true
+						allow_flex_length = true
+						invert_axes = false
+						has_collision = false
+						cloth_collision_layer0 = true
+						cloth_collision_layer1 = true
+						cloth_collision_layer2 = true
+						cloth_collision_layer3 = true
+						length = 5.0
+						tip_mass = 0.0
+						angle_limit = 0.0
+						min_yaw = 0.0
+						max_yaw = 0.0
+						yaw_friction = 0.0
+						yaw_bounce = 0.0
+						min_pitch = -5.0
+						max_pitch = 5.0
+						pitch_friction = 0.0
+						pitch_bounce = 0.1
+						base_mass = 0.0
+						base_stiffness = 0.0
+						base_damping = 0.0
+						base_left_min = 0.0
+						base_left_max = 0.0
+						base_left_friction = 0.0
+						base_up_min = 0.0
+						base_up_max = 0.0
+						base_up_friction = 0.0
+						base_forward_min = 0.0
+						base_forward_max = 0.0
+						base_forward_friction = 0.0
+						yaw_stiffness = 0.0
+						yaw_damping = 0.0
+						pitch_stiffness = 0.0
+						pitch_damping = 0.0
+						along_stiffness = 0.0
+						along_damping = 0.0
+						radius0 = 1.0
+						radius1 = 1.856297
+						point0 = [ 0.0, 0.0, 0.0 ]
+						point1 = [ 10.0, 0.0, 0.0 ]
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "citizen_skin.vmat"
+								to = "models/citizen/skin/citizen_skin04.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+					{
+						_class = "MaterialGroup"
+						name = "red"
+						remaps = 
+						[
+							{
+								from = "models/items/bogroll/materials/bogroll.vmat"
+								to = "models/items/bogroll/materials/bogroll_red.vmat"
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "hitpoint"
+						parent_bone = "base"
+						relative_origin = [ 1.713047, -10.592073, 10.92728 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "models/items/bogroll/bogroll_v.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"pCylinder2",
+								"Arms",
+							]
+						}
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "deploy"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/items/bogroll/bogroll_v.fbx"
+						start_frame = 4
+						end_frame = 14
+						framerate = 10.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "idle"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/items/bogroll/bogroll_v.fbx"
+						start_frame = 14
+						end_frame = 24
+						framerate = 2.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "fire1"
+						children = 
+						[
+							{
+								_class = "AnimEvent"
+								event_class = "AE_GENERIC_EVENT"
+								event_frame = 4
+								event_keys = 
+								{
+									TypeName = "impact"
+									Int = 0
+									Float = 0.0
+									Vector = [ 0.0, 0.0, 0.0 ]
+									StringData = ""
+								}
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/items/bogroll/bogroll_v.fbx"
+						start_frame = 34
+						end_frame = 45
+						framerate = 15.0
+						take = 0
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = "models/items/bogroll/bogroll_v.vanmgrph"
+	}
+}
