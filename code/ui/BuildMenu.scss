@@ -44,8 +44,9 @@ buildmenu {
             justify-content: center;
             flex-direction: column;
 
-            .description {
+            label.description {
                 font-size: 16px;
+                text-align: center;
             }
 
             .image {
