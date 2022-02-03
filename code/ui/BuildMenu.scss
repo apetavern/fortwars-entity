@@ -1,52 +1,107 @@
-﻿buildmenu {
+﻿
+@import "/ui/_Common.scss";
+
+buildmenu {
     position: absolute;
-    top: 25%;
-    left: 37.5%;
-    opacity: 0;
-    background-color: rgba( white, 0 );
-    transition: all 150ms ease;
-    border-radius: 100%;
-    width: 25%;
-    aspect-ratio: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+
+    .wrapper {
+        opacity: 0;
+        transform: scale(1.1);
+        transition: all 150ms ease;
+        border-radius: 100%;
+        width: 650px;
+        height: 650px;
+        aspect-ratio: 1;
+        border: 128px solid white;
+
+        .selected {
+            border-radius: 100%;
+            border: 128px solid transparent;
+            border-top: black;
+            left: -128px;
+            right: -128px;
+            bottom: -128px;
+            top: -128px;
+            position: absolute;
+        }
+
+        .center {
+            position: absolute;
+            left: 16px;
+            right: 16px;
+            bottom: 16px;
+            top: 16px;
+            border-radius: 100%;
+            background-color: rgba( black, 0.9 );
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            .description {
+                font-size: 16px;
+            }
+
+            .image {
+                font-size: 64px;
+                color: white;
+            }
+        }
+
+        .inner {
+            position: absolute;
+            top: -64px;
+            left: -64px;
+            right: -64px;
+            bottom: -64px;
+        }
+
+        .icon {
+            border-radius: 2px;
+            color: rgba( #fff, 0.5 );
+            background-position: center;
+            background-size: cover;
+            border: 2px solid transparent;
+            transition: all 150ms ease;
+            position: absolute;
+            width: 128px;
+            height: 128px;
+            transform: translate( -50% -50% );
+            border-radius: 100%;
+
+            label {
+                font-size: 9px;
+                position: absolute;
+                bottom: -17px;
+                left: 0;
+                right: 0;
+            }
+        }
+    }
 
     &.active {
-        pointer-events: all;
-        opacity: 1;
-        background-color: rgba( white, 0.2 );
-    }
-
-    .inner {
-        position: absolute;
-        top: 96px;
-        left: 96px;
-        right: 96px;
-        bottom: 96px;
-    }
-
-    .icon {
-        border-radius: 2px;
-        color: rgba( #fff, 0.5 );
-        cursor: pointer;
-        background-position: center;
-        background-size: cover;
-        border: 2px solid transparent;
-        transition: all 150ms ease;
-        position: absolute;
-        width: 128px;
-        height: 128px;
-        transform: translate( -50% -50% );
-        border-radius: 100%;
-
-        label {
-            font-size: 9px;
-            position: absolute;
-            bottom: -17px;
-            left: 0;
-            right: 0;
+        .wrapper {
+            opacity: 1;
+            pointer-events: all;
+            transform: scale(1.0 );
         }
+    }
+}
 
-        &:hover {
-            border: 2px solid white;
-        }
+.red-team {
+    buildmenu .wrapper .selected {
+        border-top: $red-team;
+    }
+}
+
+.blue-team {
+    buildmenu .wrapper .selected {
+        border-top: $blue-team;
     }
 }
