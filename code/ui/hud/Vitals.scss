@@ -2,11 +2,11 @@
 
 vitals {
     position: absolute;
-    bottom: 86px;
+    left: $safe-area-x;
+    bottom: $safe-area-y;
     display: flex;
     flex-direction: row;
     align-items: center;
-    left: 120px;
     padding: 10px 20px;
     border-radius: 2px;
 

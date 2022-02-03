@@ -2,8 +2,8 @@
 
 weaponinfo {
     position: absolute;
-    right: 120px;
-    bottom: 86px;
+    right: $safe-area-x;
+    bottom: $safe-area-y;
     flex-direction: row;
 
     .ammopanel {
