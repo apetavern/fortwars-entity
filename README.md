@@ -33,11 +33,11 @@ Far future:
 Weapons:
 * [X] USP
 * [X] SMG II
+* [X] revolver
 * [ ] p90
 * [ ] awp
 * [ ] ak47
 * [ ] m4a1s
 * [ ] p2000
-* [ ] revolver
 * [ ] deagle
 * [ ] block manipulator (custom physgun)
