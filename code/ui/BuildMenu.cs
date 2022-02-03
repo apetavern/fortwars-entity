@@ -6,19 +6,6 @@ using System.Threading.Tasks;
 
 namespace Fortwars
 {
-	struct BuildMenuItem
-	{
-		public string Path { get; set; }
-		public string Name { get; set; }
-		public string Description { get; set; }
-		public BuildMenuItem( string path, string name, string description )
-		{
-			Path = path;
-			Name = name;
-			Description = description;
-		}
-	}
-
 	[Library]
 	public partial class BuildMenu : Panel
 	{
@@ -30,7 +17,21 @@ namespace Fortwars
 		private Label currentName;
 		private Label currentDescription;
 
-		private BuildMenuItem[] files = new BuildMenuItem[] {
+		private struct BuildMenuItem
+		{
+			public string Path { get; set; }
+			public string Name { get; set; }
+			public string Description { get; set; }
+			public BuildMenuItem( string path, string name, string description )
+			{
+				Path = path;
+				Name = name;
+				Description = description;
+			}
+		}
+
+		private BuildMenuItem[] items => new BuildMenuItem[]
+		{
 			new ("fw_3x2.vmdl", "3x2", "A wide panel good for defences"),
 			new ("fw_1x2.vmdl", "1x2", "A medium panel good for entrances"),
 			new ("fw_1x4.vmdl", "1x4", "A tall panel good for ledges"),
@@ -46,6 +47,9 @@ namespace Fortwars
 			wrapper = Add.Panel( "wrapper" );
 			selection = wrapper.Add.Panel( "selected" );
 
+			//
+			// Center - item info
+			//
 			{
 				var center = wrapper.Add.Panel( "center" );
 				center.Add.Icon( "question_mark", "image" );
@@ -53,14 +57,17 @@ namespace Fortwars
 				currentDescription = center.Add.Label( "Lorem ipsum dolor sit amet", "description" );
 			}
 
+			//
+			// Inner - item icons
+			//
 			{
 				var inner = wrapper.Add.Panel( "inner" );
 
-				float angleIncrement = 360f / files.Length;
+				float angleIncrement = 360f / items.Length;
 				angleIncrement = MathX.DegreeToRadian( angleIncrement );
 
 				int index = 0;
-				foreach ( var file in files )
+				foreach ( var file in items )
 				{
 					Vector2 frac = new Vector2( MathF.Sin( angleIncrement * index ), MathF.Cos( angleIncrement * index ) );
 
@@ -79,24 +86,45 @@ namespace Fortwars
 			BindClass( "active", () => Input.Down( InputButton.Menu ) );
 		}
 
+		private PanelTransform CreateStandardPanelTransform()
+		{
+			var panelTransform = new PanelTransform();
+			panelTransform.AddScale( 1.025f );
+			return panelTransform;
+		}
+
+		private float GetCurrentAngle()
+		{
+			Vector2 relativeMousePos = Mouse.Position - wrapper.Box.Rect.Center;
+			float ang = MathF.Atan2( relativeMousePos.y, relativeMousePos.x )
+				.RadianToDegree();
+
+			ang = ang.SnapToGrid( 72f ) + 35f + 70f;
+
+
+			return ang;
+		}
+
+		private BuildMenuItem? GetCurrentItem()
+		{
+			var ang = GetCurrentAngle();
+			int selectedIndex = (ang.UnsignedMod( 360.0f ) / 72f).FloorToInt();
+			var selectedItem = items[selectedIndex];
+
+			return selectedItem;
+		}
+
 		protected override void OnEvent( PanelEvent e )
 		{
 			base.OnEvent( e );
 
 			if ( e.Name == "onclick" )
 			{
-				Vector2 relativeMousePos = Mouse.Position - wrapper.Box.Rect.Center;
-				float ang = MathF.Atan2( relativeMousePos.y, relativeMousePos.x )
-					.RadianToDegree();
-
-				ang = ang.SnapToGrid( 72f ) + 35f + 70f;
-				int selectedIndex = (ang.UnsignedMod( 360.0f ) / 72f).FloorToInt();
-				var selectedItem = files[selectedIndex];
-				ConsoleSystem.Run( "spawn", "models/blocks/wood/" + selectedItem.Path );
+				ConsoleSystem.Run( "spawn", "models/blocks/wood/" + GetCurrentItem()?.Path );
 			}
 		}
 
-		float targetAngle = 0f;
+		float lerpedAngle = 0f;
 
 		public override void Tick()
 		{
@@ -104,34 +132,27 @@ namespace Fortwars
 
 			if ( IsVisible )
 			{
-				Vector2 relativeMousePos = Mouse.Position - wrapper.Box.Rect.Center;
-				float ang = MathF.Atan2( relativeMousePos.y, relativeMousePos.x )
-					.RadianToDegree();
+				float angle = GetCurrentAngle();
+				var selectedItem = GetCurrentItem();
 
-				ang = ang.SnapToGrid( 72f ) + 35f + 70f;
+				float deltaAngle = lerpedAngle.NormalizeDegrees() - angle.NormalizeDegrees();
+				lerpedAngle = lerpedAngle.LerpToAngle( angle, 50f * Time.Delta );
 
-				float delta = targetAngle.NormalizeDegrees() - ang.NormalizeDegrees();
-				targetAngle = targetAngle.LerpToAngle( ang, 50f * Time.Delta );
-
-				int selectedIndex = (ang.UnsignedMod( 360.0f ) / 72f).FloorToInt();
-				var selectedItem = files[selectedIndex];
-
-				if ( MathF.Abs( delta ) > 0.5f )
+				if ( MathF.Abs( deltaAngle ) > 0.5f )
 				{
-					currentName.Text = selectedItem.Name;
-					currentDescription.Text = selectedItem.Description;
+					currentName.Text = selectedItem?.Name ?? "None";
+					currentDescription.Text = selectedItem?.Description ?? "Select something";
 
-					var tx = new PanelTransform();
-					tx.AddRotation( 0, 0, targetAngle );
-					tx.AddScale( 1.025f );
-					selection.Style.Transform = tx;
+					var panelTransform = CreateStandardPanelTransform();
+					panelTransform.AddRotation( 0, 0, lerpedAngle );
+					selection.Style.Transform = panelTransform;
 
-					_ = ShrinkEffect();
+					_ = ApplyShrinkEffect();
 				}
 			}
 		}
 
-		private async Task ShrinkEffect()
+		private async Task ApplyShrinkEffect()
 		{
 			wrapper.AddClass( "shrink" );
 			await Task.DelaySeconds( Time.Delta );
