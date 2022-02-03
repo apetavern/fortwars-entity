@@ -41,11 +41,11 @@ namespace Fortwars
 
 			public static BuildMenuItem[] Items => new BuildMenuItem[]
 			{
-				new ("fw_3x2.vmdl", "0 3x2", "A wide panel good for defences"),
-				new ("fw_1x2.vmdl", "1 1x2", "A medium panel good for entrances"),
-				new ("fw_1x4.vmdl", "2 1x4", "A tall panel good for ledges"),
-				new ("fw_1x1x1.vmdl", "3 1x1x1", "A thicc block good for climbing"),
-				new ("fw_1x2x1.vmdl", "4 1x2x1", "A thicc block good for cover"),
+				new ("fw_3x2.vmdl", "3x2", "A wide panel good for defences"),
+				new ("fw_1x2.vmdl", "1x2", "A medium panel good for entrances"),
+				new ("fw_1x4.vmdl", "1x4", "A tall panel good for ledges"),
+				new ("fw_1x1x1.vmdl", "1x1x1", "A thicc block good for climbing"),
+				new ("fw_1x2x1.vmdl", "1x2x1", "A thicc block good for cover")
 			};
 		}
 
@@ -60,6 +60,7 @@ namespace Fortwars
 		private void OnClick()
 		{
 			ConsoleSystem.Run( "spawn", "models/blocks/wood/" + GetCurrentItem()?.Path );
+			_ = ApplyShrinkEffect();
 		}
 
 		public override void OnDeleted()
@@ -76,19 +77,20 @@ namespace Fortwars
 
 		private float AngleIncrement => 360f / BuildMenuItem.Items.Length;
 
+		/// <summary>
+		/// Puts icons on the wheel so the player knows what they're selecting
+		/// </summary>
 		private void BuildIcons()
 		{
 			int index = -1;
 			foreach ( var file in BuildMenuItem.Items )
 			{
-				Vector2 frac = MathExtension.InverseAtan2( (AngleIncrement * index) + 15f );
+				Vector2 frac = MathExtension.InverseAtan2( AngleIncrement * index );
 
-				frac = (1.0f + frac) / 2.0f;
+				frac = (1.0f + frac) / 2.0f; // Normalize from -1,1 to 0,1
 
 				var panel = Inner.Add.Panel( "icon" );
 				panel.Style.Set( "background-image", $"url( /ui/models/blocks/{file.Path.Replace( ".vmdl", "" )}.png )" );
-
-				panel.Add.Label( frac.ToString() );
 
 				panel.Style.Left = Length.Fraction( frac.x );
 				panel.Style.Top = Length.Fraction( frac.y );
@@ -118,7 +120,8 @@ namespace Fortwars
 			float ang = MathF.Atan2( relativeMousePos.y, relativeMousePos.x )
 				.RadianToDegree();
 
-			ang = ang.SnapToGrid( AngleIncrement ) + 35f + 70f;
+			float centerOffset = AngleIncrement / 4f; // makes it so icon appears in center
+			ang = ang.SnapToGrid( AngleIncrement ) + AngleIncrement + centerOffset;
 
 			return ang;
 		}
@@ -161,6 +164,7 @@ namespace Fortwars
 				CurrentDescription = selectedItem?.Description ?? "Select something";
 
 				var panelTransform = CreateStandardPanelTransform();
+
 				panelTransform.AddRotation( 0, 0, lerpedSelectionAngle );
 				Selection.Style.Transform = panelTransform;
 
