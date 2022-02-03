@@ -5,8 +5,14 @@ namespace Fortwars
 	public static class VirtualCursor
 	{
 		public static Vector2 Position { get; set; }
+
+		/// <summary>
+		/// Mark this every time you use the cursor, otherwise the player's view won't lock
+		/// </summary>
 		public static bool InUse { get; set; }
-		public static bool UsingController => Input.UsingController;
+
+		[ClientVar( "fw_virtualcursor_debug" )]
+		public static bool Debug { get; set; } = false;
 
 		public static void Reset( Vector2? newPosition = null )
 		{
@@ -16,13 +22,9 @@ namespace Fortwars
 		public static void Update()
 		{
 			if ( Input.UsingController )
-			{
 				Position = Input.GetAnalog( InputAnalog.Look ) * new Vector2( 1, -1 );
-			}
 			else
-			{
 				Position += Mouse.Delta;
-			}
 		}
 
 		[Event.Frame]
@@ -31,7 +33,8 @@ namespace Fortwars
 			if ( !InUse )
 				return;
 
-			DebugOverlay.ScreenText( (Screen.Size * 0.5f) + Position, Position.ToString(), Time.Delta );
+			if ( Debug )
+				DebugOverlay.ScreenText( (Screen.Size * 0.5f) + Position, Position.ToString(), Time.Delta );
 
 			Update();
 
