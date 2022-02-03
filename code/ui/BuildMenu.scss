@@ -19,7 +19,8 @@ buildmenu {
         width: 650px;
         height: 650px;
         aspect-ratio: 1;
-        border: 128px solid white;
+        border: 128px solid $text;
+        box-shadow: 0 0 25px rgba( black, 0.1 );
 
         .selected {
             border-radius: 100%;
@@ -30,6 +31,7 @@ buildmenu {
             bottom: -128px;
             top: -128px;
             position: absolute;
+            box-shadow: 0 0 25px rgba( black, 0.1 );
         }
 
         .center {
@@ -43,15 +45,20 @@ buildmenu {
             align-items: center;
             justify-content: center;
             flex-direction: column;
+            box-shadow: 0 0 25px rgba( black, 0.1 );
 
-            label.description {
-                font-size: 16px;
-                text-align: center;
+            label {
+                color: $text;
+
+                &.description {
+                    font-size: 16px;
+                    text-align: center;
+                }
             }
 
             .image {
                 font-size: 64px;
-                color: white;
+                color: $text;
             }
         }
 
@@ -101,10 +108,18 @@ buildmenu {
     buildmenu .wrapper .selected {
         border-top: $red-team;
     }
+
+    buildmenu .wrapper .center {
+        background-color: $red-team;
+    }
 }
 
 .blue-team {
     buildmenu .wrapper .selected {
         border-top: $blue-team;
+    }
+
+    buildmenu .wrapper .center {
+        background-color: $blue-team;
     }
 }
