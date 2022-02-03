@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using Sandbox.UI;
+using Sandbox.UI.Construct;
 using System;
 using System.Threading.Tasks;
 
@@ -40,11 +41,11 @@ namespace Fortwars
 
 			public static BuildMenuItem[] Items => new BuildMenuItem[]
 			{
-				new ("fw_3x2.vmdl", "3x2", "A wide panel good for defences"),
-				new ("fw_1x2.vmdl", "1x2", "A medium panel good for entrances"),
-				new ("fw_1x4.vmdl", "1x4", "A tall panel good for ledges"),
-				new ("fw_1x1x1.vmdl", "1x1x1", "A thicc block good for climbing"),
-				new ("fw_1x2x1.vmdl", "1x2x1", "A thicc block good for cover"),
+				new ("fw_3x2.vmdl", "0 3x2", "A wide panel good for defences"),
+				new ("fw_1x2.vmdl", "1 1x2", "A medium panel good for entrances"),
+				new ("fw_1x4.vmdl", "2 1x4", "A tall panel good for ledges"),
+				new ("fw_1x1x1.vmdl", "3 1x1x1", "A thicc block good for climbing"),
+				new ("fw_1x2x1.vmdl", "4 1x2x1", "A thicc block good for cover"),
 			};
 		}
 
@@ -72,20 +73,21 @@ namespace Fortwars
 			BuildIcons();
 		}
 
+		private float AngleIncrement => 360f / BuildMenuItem.Items.Length;
+
 		private void BuildIcons()
 		{
-			float angleIncrement = 360f / BuildMenuItem.Items.Length;
-			angleIncrement = MathX.DegreeToRadian( angleIncrement );
-
-			int index = 0;
+			int index = -1;
 			foreach ( var file in BuildMenuItem.Items )
 			{
-				Vector2 frac = new Vector2( MathF.Sin( angleIncrement * index ), MathF.Cos( angleIncrement * index ) );
+				Vector2 frac = MathExtension.InverseAtan2( (AngleIncrement * index) + 15f );
 
 				frac = (1.0f + frac) / 2.0f;
 
 				var panel = Inner.Add.Panel( "icon" );
 				panel.Style.Set( "background-image", $"url( /ui/models/blocks/{file.Path.Replace( ".vmdl", "" )}.png )" );
+
+				panel.Add.Label( frac.ToString() );
 
 				panel.Style.Left = Length.Fraction( frac.x );
 				panel.Style.Top = Length.Fraction( frac.y );
@@ -115,7 +117,7 @@ namespace Fortwars
 			float ang = MathF.Atan2( relativeMousePos.y, relativeMousePos.x )
 				.RadianToDegree();
 
-			ang = ang.SnapToGrid( 72f ) + 35f + 70f;
+			ang = ang.SnapToGrid( AngleIncrement ) + 35f + 70f;
 
 			return ang;
 		}
@@ -127,7 +129,7 @@ namespace Fortwars
 		{
 			var ang = GetCurrentAngle();
 
-			int selectedIndex = (ang.UnsignedMod( 360.0f ) / 72f).FloorToInt();
+			int selectedIndex = (ang.UnsignedMod( 360.0f ) / AngleIncrement).FloorToInt();
 			var selectedItem = BuildMenuItem.Items[selectedIndex];
 
 			return selectedItem;

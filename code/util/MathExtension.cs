@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System;
 
 namespace Fortwars
 {
@@ -34,6 +35,23 @@ namespace Fortwars
 			target = self + distance;
 
 			return self.LerpTo( target, delta );
+		}
+
+		/// <summary>
+		/// Does the opposite of what Atan2 does.
+		/// <para>Finds the point (x, y) from the <paramref name="angle"/> given</para>
+		/// </summary>
+		/// <param name="angle">Degrees</param>
+		public static Vector2 InverseAtan2( float angle, float length = 1f )
+		{
+			Vector2 res = new();
+
+			float theta = angle * (MathF.PI / 180f);
+
+			res.x = length * MathF.Cos( theta );
+			res.y = length * MathF.Sin( theta );
+
+			return res;
 		}
 	}
 }
