@@ -187,7 +187,7 @@
 								event_frame = 5
 								event_keys = 
 								{
-									TypeName = "hit"
+									TypeName = "impact"
 									Int = 0
 									Float = 0.0
 									Vector = [ 0.0, 0.0, 0.0 ]
@@ -255,7 +255,7 @@
 								event_frame = 5
 								event_keys = 
 								{
-									TypeName = "hit"
+									TypeName = "impact"
 									Int = 0
 									Float = 0.0
 									Vector = [ 0.0, 0.0, 0.0 ]
@@ -323,7 +323,7 @@
 								event_frame = 5
 								event_keys = 
 								{
-									TypeName = "hit"
+									TypeName = "impact"
 									Int = 0
 									Float = 0.0
 									Vector = [ 0.0, 0.0, 0.0 ]
