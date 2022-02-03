@@ -1,7 +1,9 @@
-﻿using Sandbox;
+﻿using Fortwars;
+using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
+using System.Threading.Tasks;
 
 [Library]
 public partial class BuildMenu : Panel
@@ -69,21 +71,29 @@ public partial class BuildMenu : Panel
 		{
 			Vector2 relativeMousePos = Mouse.Position - wrapper.Box.Rect.Center;
 			float ang = MathF.Atan2( relativeMousePos.y, relativeMousePos.x )
-				.RadianToDegree().NormalizeDegrees();
+				.RadianToDegree();
 
 			ang = ang.SnapToGrid( 72f ) + 35f + 70f;
-			ang = ang.NormalizeDegrees();
 
-			float delta = targetAngle - ang;
+			float delta = targetAngle.NormalizeDegrees() - ang.NormalizeDegrees();
+			targetAngle = targetAngle.LerpToAngle( ang, 50f * Time.Delta );
 
 			if ( MathF.Abs( delta ) > 0.5f )
 			{
-				targetAngle = ang.NormalizeDegrees();
-
 				var tx = new PanelTransform();
 				tx.AddRotation( 0, 0, targetAngle );
+				tx.AddScale( 1.025f );
 				selection.Style.Transform = tx;
+
+				_ = ShrinkEffect();
 			}
 		}
+	}
+
+	private async Task ShrinkEffect()
+	{
+		wrapper.AddClass( "shrink" );
+		await Task.DelaySeconds( Time.Delta );
+		wrapper.RemoveClass( "shrink" );
 	}
 }

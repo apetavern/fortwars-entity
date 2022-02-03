@@ -64,16 +64,14 @@ buildmenu {
 
         .icon {
             border-radius: 2px;
-            color: rgba( #fff, 0.5 );
             background-position: center;
             background-size: cover;
-            border: 2px solid transparent;
-            transition: all 150ms ease;
             position: absolute;
             width: 128px;
             height: 128px;
             transform: translate( -50% -50% );
             border-radius: 100%;
+            opacity: 1;
 
             label {
                 font-size: 9px;
@@ -89,7 +87,11 @@ buildmenu {
         .wrapper {
             opacity: 1;
             pointer-events: all;
-            transform: scale(1.0 );
+            transform: scale( 1.0 );
+
+            &.shrink {
+                transform: scale( 0.9 );
+            }
         }
     }
 }
