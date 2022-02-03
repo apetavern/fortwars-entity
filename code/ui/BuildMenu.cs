@@ -68,7 +68,6 @@ namespace Fortwars
 
 					var panel = inner.Add.Panel( "icon" );
 					panel.Style.Set( "background-image", $"url( /ui/models/blocks/{file.Path.Replace( ".vmdl", "" )}.png )" );
-					panel.AddEventListener( "onclick", () => ConsoleSystem.Run( "spawn", "models/blocks/wood/" + file ) );
 
 					panel.Style.Left = Length.Fraction( frac.x );
 					panel.Style.Top = Length.Fraction( frac.y );
@@ -78,6 +77,23 @@ namespace Fortwars
 			}
 
 			BindClass( "active", () => Input.Down( InputButton.Menu ) );
+		}
+
+		protected override void OnEvent( PanelEvent e )
+		{
+			base.OnEvent( e );
+
+			if ( e.Name == "onclick" )
+			{
+				Vector2 relativeMousePos = Mouse.Position - wrapper.Box.Rect.Center;
+				float ang = MathF.Atan2( relativeMousePos.y, relativeMousePos.x )
+					.RadianToDegree();
+
+				ang = ang.SnapToGrid( 72f ) + 35f + 70f;
+				int selectedIndex = (ang.UnsignedMod( 360.0f ) / 72f).FloorToInt();
+				var selectedItem = files[selectedIndex];
+				ConsoleSystem.Run( "spawn", "models/blocks/wood/" + selectedItem.Path );
+			}
 		}
 
 		float targetAngle = 0f;
