@@ -14,7 +14,7 @@ buildmenu {
     .wrapper {
         opacity: 0;
         transform: scale(1.1);
-        transition: all 150ms ease;
+        transition: all 100ms ease;
         border-radius: 100%;
         width: 650px;
         height: 650px;
@@ -94,7 +94,6 @@ buildmenu {
     &.active {
         .wrapper {
             opacity: 1;
-            pointer-events: all;
             transform: scale( 1.0 );
 
             &.shrink {

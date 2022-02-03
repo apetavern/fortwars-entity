@@ -10,8 +10,21 @@ namespace Fortwars
 		{
 			base.BuildInput( input );
 
-			if ( !input.UsingMouse )
+			if ( VirtualCursor.InUse )
+			{
+				input.StopProcessing = true;
+				input.ViewAngles = input.OriginalViewAngles;
+			}
+
+			if ( input.UsingController )
+			{
 				AimAssistInput( input, this );
+
+				if ( Input.Down( InputButton.Menu ) )
+				{
+					input.StopProcessing = true; // TODO
+				}
+			}
 		}
 
 		private struct PlayerAimAssistEntry

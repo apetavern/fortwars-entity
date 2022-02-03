@@ -98,11 +98,13 @@ namespace Fortwars
 		}
 
 		/// <summary>
-		/// Get the current angle based on the mouse position, relative to the center of the menu
+		/// Get the current angle based on the mouse position, relative to the center of the menu.
+		/// Returns <see langword="null"/> if we're not really looking at anything
 		/// </summary>
 		private float GetCurrentAngle()
 		{
-			Vector2 relativeMousePos = Mouse.Position - wrapper.Box.Rect.Center;
+			Vector2 relativeMousePos = VirtualCursor.Position;
+
 			float ang = MathF.Atan2( relativeMousePos.y, relativeMousePos.x )
 				.RadianToDegree();
 
@@ -117,6 +119,7 @@ namespace Fortwars
 		private BuildMenuItem? GetCurrentItem()
 		{
 			var ang = GetCurrentAngle();
+
 			int selectedIndex = (ang.UnsignedMod( 360.0f ) / 72f).FloorToInt();
 			var selectedItem = items[selectedIndex];
 
@@ -137,26 +140,31 @@ namespace Fortwars
 		{
 			base.Tick();
 
-			if ( IsVisible )
+			if ( !HasClass( "active" ) )
 			{
-				float angle = GetCurrentAngle();
-				var selectedItem = GetCurrentItem();
+				VirtualCursor.Reset();
+				return;
+			}
 
-				// Interpolate angle here because scss transition does a shit job of it
-				float deltaAngle = lerpedSelectionAngle.NormalizeDegrees() - angle.NormalizeDegrees();
-				lerpedSelectionAngle = lerpedSelectionAngle.LerpToAngle( angle, 50f * Time.Delta );
+			VirtualCursor.InUse = true;
 
-				if ( MathF.Abs( deltaAngle ) > 0.5f )
-				{
-					currentName.Text = selectedItem?.Name ?? "None";
-					currentDescription.Text = selectedItem?.Description ?? "Select something";
+			var angle = GetCurrentAngle();
+			var selectedItem = GetCurrentItem();
 
-					var panelTransform = CreateStandardPanelTransform();
-					panelTransform.AddRotation( 0, 0, lerpedSelectionAngle );
-					selection.Style.Transform = panelTransform;
+			// Interpolate angle here because scss transition does a shit job of it
+			float deltaAngle = lerpedSelectionAngle.NormalizeDegrees() - angle.NormalizeDegrees();
+			lerpedSelectionAngle = lerpedSelectionAngle.LerpToAngle( angle, 50f * Time.Delta );
 
-					_ = ApplyShrinkEffect();
-				}
+			if ( MathF.Abs( deltaAngle ) > 0.5f )
+			{
+				currentName.Text = selectedItem?.Name ?? "None";
+				currentDescription.Text = selectedItem?.Description ?? "Select something";
+
+				var panelTransform = CreateStandardPanelTransform();
+				panelTransform.AddRotation( 0, 0, lerpedSelectionAngle );
+				selection.Style.Transform = panelTransform;
+
+				_ = ApplyShrinkEffect();
 			}
 		}
 
