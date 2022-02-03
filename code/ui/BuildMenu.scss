@@ -1,52 +1,132 @@
-﻿buildmenu {
+﻿
+@import "/ui/_Common.scss";
+
+buildmenu {
     position: absolute;
-    top: 25%;
-    left: 37.5%;
-    opacity: 0;
-    background-color: rgba( white, 0 );
-    transition: all 150ms ease;
-    border-radius: 100%;
-    width: 25%;
-    aspect-ratio: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+
+    .wrapper {
+        opacity: 0;
+        transform: scale(1.1);
+        transition: all 100ms ease;
+        border-radius: 100%;
+        width: 650px;
+        height: 650px;
+        aspect-ratio: 1;
+        border: 128px solid $text;
+        box-shadow: 0 0 25px rgba( black, 0.1 );
+
+        .selected {
+            border-radius: 100%;
+            border: 20% solid transparent;
+            border-top: 20% black;
+            left: -128px;
+            right: -128px;
+            bottom: -128px;
+            top: -128px;
+            position: absolute;
+            box-shadow: 0 0 25px rgba( black, 0.1 );
+        }
+
+        .center {
+            position: absolute;
+            left: 16px;
+            right: 16px;
+            bottom: 16px;
+            top: 16px;
+            border-radius: 100%;
+            background-color: rgba( black, 0.9 );
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            box-shadow: 0 0 25px rgba( black, 0.1 );
+
+            label {
+                color: $text;
+
+                &.description {
+                    font-size: 16px;
+                    text-align: center;
+                }
+            }
+
+            .image {
+                font-size: 64px;
+                color: $text;
+            }
+
+            .controls {
+                padding-top: 16px;
+
+                inputhint .glyph {
+                    background-image-tint: $text;
+                }
+            }
+        }
+
+        .inner {
+            position: absolute;
+            top: -64px;
+            left: -64px;
+            right: -64px;
+            bottom: -64px;
+        }
+
+        .icon {
+            border-radius: 2px;
+            background-position: center;
+            background-size: cover;
+            position: absolute;
+            width: 128px;
+            height: 128px;
+            transform: translate( -50% -50% );
+            border-radius: 100%;
+            opacity: 1;
+
+            label {
+                font-size: 9px;
+                position: absolute;
+                bottom: -17px;
+                left: 0;
+                right: 0;
+            }
+        }
+    }
 
     &.active {
-        pointer-events: all;
-        opacity: 1;
-        background-color: rgba( white, 0.2 );
+        .wrapper {
+            opacity: 1;
+            transform: scale( 1.0 );
+
+            &.shrink {
+                transform: scale( 0.9 );
+            }
+        }
+    }
+}
+
+.red-team {
+    buildmenu .wrapper .selected {
+        border-top: $red-team;
     }
 
-    .inner {
-        position: absolute;
-        top: 96px;
-        left: 96px;
-        right: 96px;
-        bottom: 96px;
+    buildmenu .wrapper .center {
+        background-color: $red-team;
+    }
+}
+
+.blue-team {
+    buildmenu .wrapper .selected {
+        border-top: $blue-team;
     }
 
-    .icon {
-        border-radius: 2px;
-        color: rgba( #fff, 0.5 );
-        cursor: pointer;
-        background-position: center;
-        background-size: cover;
-        border: 2px solid transparent;
-        transition: all 150ms ease;
-        position: absolute;
-        width: 128px;
-        height: 128px;
-        transform: translate( -50% -50% );
-        border-radius: 100%;
-
-        label {
-            font-size: 9px;
-            position: absolute;
-            bottom: -17px;
-            left: 0;
-            right: 0;
-        }
-
-        &:hover {
-            border: 2px solid white;
-        }
+    buildmenu .wrapper .center {
+        background-color: $blue-team;
     }
 }
