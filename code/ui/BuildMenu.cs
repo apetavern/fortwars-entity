@@ -62,8 +62,9 @@ namespace Fortwars
 			ConsoleSystem.Run( "spawn", "models/blocks/wood/" + GetCurrentItem()?.Path );
 		}
 
-		~BuildMenu()
+		public override void OnDeleted()
 		{
+			base.OnDeleted();
 			VirtualCursor.OnClick -= OnClick;
 		}
 
