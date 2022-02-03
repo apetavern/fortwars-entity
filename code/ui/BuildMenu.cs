@@ -1,4 +1,5 @@
-﻿using Sandbox;
+﻿using Fortwars.UI.Elements.Generic;
+using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
@@ -6,15 +7,24 @@ using System.Threading.Tasks;
 
 namespace Fortwars
 {
+	[UseTemplate]
 	public partial class BuildMenu : Panel
 	{
 		public static BuildMenu Instance;
 
-		private Panel selection;
-		private Panel wrapper;
+		public Panel Selection { get; set; }
+		public Panel Wrapper { get; set; }
 
-		private Label currentName;
-		private Label currentDescription;
+		//
+		// @text
+		//
+		public string CurrentName { get; set; }
+		public string CurrentDescription { get; set; }
+
+		//
+		// @ref
+		//
+		public Panel Inner { get; set; }
 
 		private float lerpedSelectionAngle = 0f;
 
@@ -43,48 +53,35 @@ namespace Fortwars
 		public BuildMenu()
 		{
 			Instance = this;
-			StyleSheet.Load( "/ui/BuildMenu.scss" );
-
-			wrapper = Add.Panel( "wrapper" );
-			selection = wrapper.Add.Panel( "selected" );
-
-			//
-			// Center - item info
-			//
-			{
-				var center = wrapper.Add.Panel( "center" );
-				center.Add.Icon( "question_mark", "image" );
-				currentName = center.Add.Label( "Name", "subtitle" );
-				currentDescription = center.Add.Label( "Lorem ipsum dolor sit amet", "description" );
-			}
-
-			//
-			// Inner - item icons
-			//
-			{
-				var inner = wrapper.Add.Panel( "inner" );
-
-				float angleIncrement = 360f / items.Length;
-				angleIncrement = MathX.DegreeToRadian( angleIncrement );
-
-				int index = 0;
-				foreach ( var file in items )
-				{
-					Vector2 frac = new Vector2( MathF.Sin( angleIncrement * index ), MathF.Cos( angleIncrement * index ) );
-
-					frac = (1.0f + frac) / 2.0f;
-
-					var panel = inner.Add.Panel( "icon" );
-					panel.Style.Set( "background-image", $"url( /ui/models/blocks/{file.Path.Replace( ".vmdl", "" )}.png )" );
-
-					panel.Style.Left = Length.Fraction( frac.x );
-					panel.Style.Top = Length.Fraction( frac.y );
-
-					index++;
-				}
-			}
-
 			BindClass( "active", () => Input.Down( InputButton.Menu ) );
+		}
+
+		protected override void PostTemplateApplied()
+		{
+			base.PostTemplateApplied();
+			BuildIcons();
+		}
+
+		private void BuildIcons()
+		{
+			float angleIncrement = 360f / items.Length;
+			angleIncrement = MathX.DegreeToRadian( angleIncrement );
+
+			int index = 0;
+			foreach ( var file in items )
+			{
+				Vector2 frac = new Vector2( MathF.Sin( angleIncrement * index ), MathF.Cos( angleIncrement * index ) );
+
+				frac = (1.0f + frac) / 2.0f;
+
+				var panel = Inner.Add.Panel( "icon" );
+				panel.Style.Set( "background-image", $"url( /ui/models/blocks/{file.Path.Replace( ".vmdl", "" )}.png )" );
+
+				panel.Style.Left = Length.Fraction( frac.x );
+				panel.Style.Top = Length.Fraction( frac.y );
+
+				index++;
+			}
 		}
 
 		/// <summary>
@@ -157,12 +154,12 @@ namespace Fortwars
 
 			if ( MathF.Abs( deltaAngle ) > 0.5f )
 			{
-				currentName.Text = selectedItem?.Name ?? "None";
-				currentDescription.Text = selectedItem?.Description ?? "Select something";
+				CurrentName = selectedItem?.Name ?? "None";
+				CurrentDescription = selectedItem?.Description ?? "Select something";
 
 				var panelTransform = CreateStandardPanelTransform();
 				panelTransform.AddRotation( 0, 0, lerpedSelectionAngle );
-				selection.Style.Transform = panelTransform;
+				Selection.Style.Transform = panelTransform;
 
 				_ = ApplyShrinkEffect();
 			}
@@ -170,9 +167,9 @@ namespace Fortwars
 
 		private async Task ApplyShrinkEffect()
 		{
-			wrapper.AddClass( "shrink" );
+			Wrapper.AddClass( "shrink" );
 			await Task.DelaySeconds( Time.Delta );
-			wrapper.RemoveClass( "shrink" );
+			Wrapper.RemoveClass( "shrink" );
 		}
 	}
 }

@@ -60,6 +60,14 @@ buildmenu {
                 font-size: 64px;
                 color: $text;
             }
+
+            .controls {
+                padding-top: 16px;
+
+                inputhint .glyph {
+                    background-image-tint: $text;
+                }
+            }
         }
 
         .inner {
