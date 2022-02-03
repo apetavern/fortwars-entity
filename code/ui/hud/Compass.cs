@@ -12,7 +12,7 @@ namespace Fortwars
 		public static float CalcRelativeYaw( this Player player, float angle )
 		{
 			float mod( float a, float n ) => (a % n + n) % n;
-			float length = player.EyeRot.Yaw() - Compass.AngleOffset - angle;
+			float length = CurrentView.Rotation.Yaw() - Compass.AngleOffset - angle;
 
 			float d = mod( Math.Abs( length ), 360 );
 			float r = (d > 180) ? 360 - d : d;
