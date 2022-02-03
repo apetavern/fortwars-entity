@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Fortwars
 {
-	[Library]
 	public partial class BuildMenu : Panel
 	{
 		public static BuildMenu Instance;
@@ -16,6 +15,8 @@ namespace Fortwars
 
 		private Label currentName;
 		private Label currentDescription;
+
+		private float lerpedSelectionAngle = 0f;
 
 		private struct BuildMenuItem
 		{
@@ -86,6 +87,9 @@ namespace Fortwars
 			BindClass( "active", () => Input.Down( InputButton.Menu ) );
 		}
 
+		/// <summary>
+		/// Create a panel transform with all the shit we'd usually put in SCSS
+		/// </summary>
 		private PanelTransform CreateStandardPanelTransform()
 		{
 			var panelTransform = new PanelTransform();
@@ -93,6 +97,9 @@ namespace Fortwars
 			return panelTransform;
 		}
 
+		/// <summary>
+		/// Get the current angle based on the mouse position, relative to the center of the menu
+		/// </summary>
 		private float GetCurrentAngle()
 		{
 			Vector2 relativeMousePos = Mouse.Position - wrapper.Box.Rect.Center;
@@ -101,10 +108,12 @@ namespace Fortwars
 
 			ang = ang.SnapToGrid( 72f ) + 35f + 70f;
 
-
 			return ang;
 		}
 
+		/// <summary>
+		/// Get the current <see cref="BuildMenuItem"/> based on the value returned from <see cref="GetCurrentAngle"/>
+		/// </summary>
 		private BuildMenuItem? GetCurrentItem()
 		{
 			var ang = GetCurrentAngle();
@@ -124,8 +133,6 @@ namespace Fortwars
 			}
 		}
 
-		float lerpedAngle = 0f;
-
 		public override void Tick()
 		{
 			base.Tick();
@@ -135,8 +142,9 @@ namespace Fortwars
 				float angle = GetCurrentAngle();
 				var selectedItem = GetCurrentItem();
 
-				float deltaAngle = lerpedAngle.NormalizeDegrees() - angle.NormalizeDegrees();
-				lerpedAngle = lerpedAngle.LerpToAngle( angle, 50f * Time.Delta );
+				// Interpolate angle here because scss transition does a shit job of it
+				float deltaAngle = lerpedSelectionAngle.NormalizeDegrees() - angle.NormalizeDegrees();
+				lerpedSelectionAngle = lerpedSelectionAngle.LerpToAngle( angle, 50f * Time.Delta );
 
 				if ( MathF.Abs( deltaAngle ) > 0.5f )
 				{
@@ -144,7 +152,7 @@ namespace Fortwars
 					currentDescription.Text = selectedItem?.Description ?? "Select something";
 
 					var panelTransform = CreateStandardPanelTransform();
-					panelTransform.AddRotation( 0, 0, lerpedAngle );
+					panelTransform.AddRotation( 0, 0, lerpedSelectionAngle );
 					selection.Style.Transform = panelTransform;
 
 					_ = ApplyShrinkEffect();
