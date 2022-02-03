@@ -22,6 +22,9 @@ namespace Fortwars
 		{
 			var velocity = Entity.Velocity;
 
+			if ( !Entity.IsValid() || !Entity.PhysicsBody.IsValid() )
+				return;
+
 			// do a sweep to check if we're colliding with the world
 			var tr = Trace.Sweep( Entity.PhysicsBody, Entity.Transform ).WorldOnly().Run();
 
