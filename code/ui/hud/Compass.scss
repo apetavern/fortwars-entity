@@ -14,7 +14,7 @@ compass {
     .compass-point {
         position: absolute;
         width: 2px;
-        height: 16px;
+        height: 8px;
         background-color: rgba( white, 0.2 );
     }
 
@@ -45,8 +45,10 @@ compass {
         }
 
         &.small {
+            height: 24px;
 
             label {
+                top: 24px;
                 font-size: 16px;
             }
         }
