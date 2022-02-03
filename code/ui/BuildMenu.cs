@@ -17,6 +17,7 @@ namespace Fortwars
 		//
 		// @text
 		//
+		public string CurrentIcon { get; set; }
 		public string CurrentName { get; set; }
 		public string CurrentDescription { get; set; }
 
@@ -32,20 +33,22 @@ namespace Fortwars
 			public string Path { get; set; }
 			public string Name { get; set; }
 			public string Description { get; set; }
-			public BuildMenuItem( string path, string name, string description )
+			public string Icon { get; set; }
+			public BuildMenuItem( string path, string name, string description, string icon = "question_mark" )
 			{
 				Path = path;
 				Name = name;
 				Description = description;
+				Icon = icon;
 			}
 
 			public static BuildMenuItem[] Items => new BuildMenuItem[]
 			{
-				new ("fw_3x2.vmdl", "3x2", "A wide panel good for defences"),
-				new ("fw_1x2.vmdl", "1x2", "A medium panel good for entrances"),
-				new ("fw_1x4.vmdl", "1x4", "A tall panel good for ledges"),
-				new ("fw_1x1x1.vmdl", "1x1x1", "A thicc block good for climbing"),
-				new ("fw_1x2x1.vmdl", "1x2x1", "A thicc block good for cover")
+				new ("fw_3x2.vmdl", "3x2", "A wide panel good for defences", "crop_5_4"),
+				new ("fw_1x2.vmdl", "1x2", "A medium panel good for entrances", "crop_portrait"),
+				new ("fw_1x4.vmdl", "1x4", "A tall panel good for ledges", "crop_7_5"),
+				new ("fw_1x1x1.vmdl", "1x1x1", "A thicc block good for climbing", "view_in_ar"),
+				new ("fw_1x2x1.vmdl", "1x2x1", "A thicc block good for cover", "view_in_ar"),
 			};
 		}
 
@@ -160,6 +163,7 @@ namespace Fortwars
 
 			if ( MathF.Abs( deltaAngle ) > 0.5f )
 			{
+				CurrentIcon = selectedItem?.Icon ?? "question_mark";
 				CurrentName = selectedItem?.Name ?? "None";
 				CurrentDescription = selectedItem?.Description ?? "Select something";
 
