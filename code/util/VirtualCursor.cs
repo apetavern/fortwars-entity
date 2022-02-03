@@ -14,6 +14,9 @@ namespace Fortwars
 		[ClientVar( "fw_virtualcursor_debug" )]
 		public static bool Debug { get; set; } = false;
 
+		public delegate void ClickEvent();
+		public static ClickEvent OnClick { get; set; }
+
 		public static void Reset( Vector2? newPosition = null )
 		{
 			Position = newPosition ?? Vector2.Zero;

@@ -12,6 +12,20 @@ namespace Fortwars
 
 			if ( VirtualCursor.InUse )
 			{
+				// This is a bit of a shit way of doing things but nothing else
+				// I tried seemed to work. pointer-events: auto; did nothing,
+				// capturing the event manually here seems to be the best way of
+				// solving things right now
+				//
+				// We could probably put in a feature request at some point
+				// or even move this to VirtualCursor itself somewhere just to make
+				// things a bit more modular?
+				if ( input.Pressed( InputButton.Attack1 ) )
+				{
+					VirtualCursor.OnClick?.Invoke();
+				}
+				input.ClearButton( InputButton.Attack1 );
+
 				input.StopProcessing = true;
 				input.ViewAngles = input.OriginalViewAngles;
 			}
@@ -19,11 +33,6 @@ namespace Fortwars
 			if ( input.UsingController )
 			{
 				AimAssistInput( input, this );
-
-				if ( Input.Down( InputButton.Menu ) )
-				{
-					input.StopProcessing = true; // TODO
-				}
 			}
 		}
 

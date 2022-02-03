@@ -1,7 +1,5 @@
-﻿using Fortwars.UI.Elements.Generic;
-using Sandbox;
+﻿using Sandbox;
 using Sandbox.UI;
-using Sandbox.UI.Construct;
 using System;
 using System.Threading.Tasks;
 
@@ -39,21 +37,33 @@ namespace Fortwars
 				Name = name;
 				Description = description;
 			}
-		}
 
-		private BuildMenuItem[] items => new BuildMenuItem[]
-		{
-			new ("fw_3x2.vmdl", "3x2", "A wide panel good for defences"),
-			new ("fw_1x2.vmdl", "1x2", "A medium panel good for entrances"),
-			new ("fw_1x4.vmdl", "1x4", "A tall panel good for ledges"),
-			new ("fw_1x1x1.vmdl", "1x1x1", "A thicc block good for climbing"),
-			new ("fw_1x2x1.vmdl", "1x2x1", "A thicc block good for cover"),
-		};
+			public static BuildMenuItem[] Items => new BuildMenuItem[]
+			{
+				new ("fw_3x2.vmdl", "3x2", "A wide panel good for defences"),
+				new ("fw_1x2.vmdl", "1x2", "A medium panel good for entrances"),
+				new ("fw_1x4.vmdl", "1x4", "A tall panel good for ledges"),
+				new ("fw_1x1x1.vmdl", "1x1x1", "A thicc block good for climbing"),
+				new ("fw_1x2x1.vmdl", "1x2x1", "A thicc block good for cover"),
+			};
+		}
 
 		public BuildMenu()
 		{
 			Instance = this;
 			BindClass( "active", () => Input.Down( InputButton.Menu ) );
+
+			VirtualCursor.OnClick += OnClick;
+		}
+
+		private void OnClick()
+		{
+			ConsoleSystem.Run( "spawn", "models/blocks/wood/" + GetCurrentItem()?.Path );
+		}
+
+		~BuildMenu()
+		{
+			VirtualCursor.OnClick -= OnClick;
 		}
 
 		protected override void PostTemplateApplied()
@@ -64,11 +74,11 @@ namespace Fortwars
 
 		private void BuildIcons()
 		{
-			float angleIncrement = 360f / items.Length;
+			float angleIncrement = 360f / BuildMenuItem.Items.Length;
 			angleIncrement = MathX.DegreeToRadian( angleIncrement );
 
 			int index = 0;
-			foreach ( var file in items )
+			foreach ( var file in BuildMenuItem.Items )
 			{
 				Vector2 frac = new Vector2( MathF.Sin( angleIncrement * index ), MathF.Cos( angleIncrement * index ) );
 
@@ -118,19 +128,9 @@ namespace Fortwars
 			var ang = GetCurrentAngle();
 
 			int selectedIndex = (ang.UnsignedMod( 360.0f ) / 72f).FloorToInt();
-			var selectedItem = items[selectedIndex];
+			var selectedItem = BuildMenuItem.Items[selectedIndex];
 
 			return selectedItem;
-		}
-
-		protected override void OnEvent( PanelEvent e )
-		{
-			base.OnEvent( e );
-
-			if ( e.Name == "onclick" )
-			{
-				ConsoleSystem.Run( "spawn", "models/blocks/wood/" + GetCurrentItem()?.Path );
-			}
 		}
 
 		public override void Tick()
