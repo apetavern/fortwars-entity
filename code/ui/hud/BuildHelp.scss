@@ -17,6 +17,10 @@ buildhelp {
     }
 
     inputhint {
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        width: 250px;
+
         &:not(:first-child) {
             margin-top: 8px;
         }
