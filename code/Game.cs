@@ -153,8 +153,8 @@ namespace Fortwars
 			weapon.ReserveAmmo += amount;
 		}
 
-		[ServerCmd( "spawn" )]
-		public static void Spawn( string modelname )
+		[ServerCmd( "fw_spawn" )]
+		public static void Spawn( string blockName )
 		{
 			var owner = ConsoleSystem.Caller;
 			var player = owner.Pawn;
@@ -171,7 +171,7 @@ namespace Fortwars
 			var ent = new FortwarsBlock();
 			ent.Position = tr.EndPos;
 			ent.Rotation = Rotation.From( new Angles( 0, player.EyeRot.Yaw(), 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
-			ent.SetModel( modelname );
+			ent.SetModel( $"models/blocks/wood/fw_{blockName}.vmdl" );
 			ent.TeamID = (player as FortwarsPlayer).TeamID;
 			ent.OnTeamIDChanged();
 

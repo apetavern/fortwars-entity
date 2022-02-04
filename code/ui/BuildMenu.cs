@@ -21,7 +21,7 @@ namespace Fortwars
 
 		private void OnClick()
 		{
-			ConsoleSystem.Run( "spawn", $"models/blocks/wood/fw_{GetCurrentItem()?.Name}.vmdl" );
+			ConsoleSystem.Run( $"fw_spawn {GetCurrentItem()?.Name}" );
 			_ = ApplyShrinkEffect();
 		}
 
