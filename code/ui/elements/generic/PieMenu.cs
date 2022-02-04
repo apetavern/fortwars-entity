@@ -2,6 +2,7 @@
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
+using System.Collections.Generic;
 
 namespace Fortwars
 {
@@ -61,6 +62,7 @@ namespace Fortwars
 		}
 
 		private float AngleIncrement => 360f / Items.Length;
+		private List<Panel> icons = new();
 
 		/// <summary>
 		/// Puts icons on the wheel so the player knows what they're selecting
@@ -78,6 +80,8 @@ namespace Fortwars
 
 				panel.Style.Left = Length.Fraction( frac.x );
 				panel.Style.Top = Length.Fraction( frac.y );
+
+				icons.Add( panel );
 
 				index++;
 			}
@@ -110,14 +114,18 @@ namespace Fortwars
 			return ang;
 		}
 
+		protected int GetCurrentIndex()
+		{
+			var ang = GetCurrentAngle();
+			return (ang.UnsignedMod( 360.0f ) / AngleIncrement).FloorToInt();
+		}
+
 		/// <summary>
 		/// Get the current <see cref="Item"/> based on the value returned from <see cref="GetCurrentAngle"/>
 		/// </summary>
 		protected Item? GetCurrentItem()
 		{
-			var ang = GetCurrentAngle();
-
-			int selectedIndex = (ang.UnsignedMod( 360.0f ) / AngleIncrement).FloorToInt();
+			int selectedIndex = GetCurrentIndex();
 			var selectedItem = Items[selectedIndex];
 
 			return selectedItem;
@@ -137,6 +145,11 @@ namespace Fortwars
 
 			var angle = GetCurrentAngle();
 			var selectedItem = GetCurrentItem();
+
+			for ( int i = 0; i < icons.Count; i++ )
+			{
+				icons[i].SetClass( "active", i == GetCurrentIndex() );
+			}
 
 			// Interpolate angle here because scss transition does a shit job of it
 			float deltaAngle = lerpedSelectionAngle.NormalizeDegrees() - angle.NormalizeDegrees();

@@ -9,10 +9,12 @@
     align-items: center;
     justify-content: center;
     z-index: 10;
+    background-color: rgba( $background, 0 );
+    transition: all 100ms ease;
 
     .wrapper {
         opacity: 0;
-        transform: scale(1.1);
+        transform: scale( 1.1 );
         transition: all 100ms ease;
         border-radius: 100%;
         width: 650px;
@@ -83,6 +85,10 @@
             color: white;
             text-align: center;
             transform: translate(-50% -50%);
+
+            &.active {
+                color: $background;
+            }
         }
 
         .icon {
@@ -107,6 +113,8 @@
     }
 
     &.active {
+        background-color: rgba( $background, 0.5 );
+
         .wrapper {
             opacity: 1;
             transform: scale( 1.0 );
