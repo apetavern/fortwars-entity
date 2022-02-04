@@ -162,6 +162,9 @@ namespace Fortwars
 			if ( ConsoleSystem.Caller == null )
 				return;
 
+			if ( !player.IsValid() || player.LifeState != LifeState.Alive )
+				return;
+
 			var tr = Trace.Ray( player.EyePos, player.EyePos + player.EyeRot.Forward * 500 )
 				.UseHitboxes()
 				.Ignore( player )
