@@ -22,6 +22,7 @@ InventoryBar {
         flex-grow: 1;
         background: linear-gradient( to left, $background, rgba( $background, 0 ) );
         border-right: 4px transparent;
+        transition: all 150ms ease;
 
         label {
             color: $background;
