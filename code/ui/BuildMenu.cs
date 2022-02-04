@@ -28,6 +28,7 @@ namespace Fortwars
 		protected override void OnChange()
 		{
 			_ = ApplyShrinkEffect();
+			PlaySound( "ui_tick" );
 		}
 
 		private async Task ApplyShrinkEffect()

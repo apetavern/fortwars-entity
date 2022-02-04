@@ -134,6 +134,7 @@ namespace Fortwars
 			return selectedItem;
 		}
 
+		int lastIndex;
 		public override void Tick()
 		{
 			base.Tick();
@@ -148,17 +149,18 @@ namespace Fortwars
 
 			var angle = GetCurrentAngle();
 			var selectedItem = GetCurrentItem();
+			int selectedIndex = GetCurrentIndex();
 
 			for ( int i = 0; i < icons.Count; i++ )
 			{
-				icons[i].SetClass( "active", i == GetCurrentIndex() );
+				icons[i].SetClass( "active", i == selectedIndex );
 			}
 
 			// Interpolate angle here because scss transition does a shit job of it
 			float deltaAngle = lerpedSelectionAngle.NormalizeDegrees() - angle.NormalizeDegrees();
 			lerpedSelectionAngle = lerpedSelectionAngle.LerpToAngle( angle, 50f * Time.Delta );
 
-			if ( MathF.Abs( deltaAngle ) > 0.5f )
+			if ( MathF.Abs( deltaAngle ) >= 0.5f )
 			{
 				CurrentIcon = selectedItem?.Icon ?? "question_mark";
 				CurrentName = selectedItem?.Name ?? "None";
@@ -172,8 +174,11 @@ namespace Fortwars
 				BuildHint.Style.Display = DisplayMode.None;
 				BuildError.Style.Display = DisplayMode.Flex;
 
-				OnChange();
+				if ( lastIndex != selectedIndex )
+					OnChange();
 			}
+
+			lastIndex = GetCurrentIndex();
 		}
 
 		protected virtual void OnChange()
