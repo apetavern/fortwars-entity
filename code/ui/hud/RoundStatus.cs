@@ -28,8 +28,8 @@ namespace Fortwars.UI
 			// scores.Add.Label( "Blue", "blue team" );
 
 			var RoundInfo = Add.Panel( "round-info" );
-			Time = RoundInfo.Add.Label( "00:00", "time" );
 			Phase = RoundInfo.Add.Label( "Unknown", "phase" );
+			Time = RoundInfo.Add.Label( "00:00", "time" );
 		}
 
 		public override void Tick()

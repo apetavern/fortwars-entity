@@ -13,12 +13,12 @@ roundstatus {
 
     panel.round-info {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
         flex-grow: 1;
         width: 100%;
-        margin-top: 10px;
+        margin-top: 5px;
         background-color: $background;
         padding: 10px 20px;
         border-bottom: 4px solid transparent;
@@ -26,18 +26,18 @@ roundstatus {
         box-shadow: 0 0 5px rgba( black, 0.2 );
 
         label {
+            width: 50%;
+            text-align: center;
+            flex-grow: 0;
+            flex-shrink: 1;
             color: white;
 
             &.time {
-                font-size: 32px;
                 font-weight: bold;
                 text-shadow: 0 0 5px rgba( black, 0.2 );
-                width: 250px;
-                text-align: center;
             }
 
             &.phase {
-                font-size: 24px;
                 text-transform: uppercase;
                 text-shadow: 0 0 5px rgba( black, 0.2 );
             }
@@ -66,13 +66,14 @@ roundstatus {
 
         label.score {
             background-color: rgb(80, 80, 80);
-            font-size: 32px;
+            font-size: 24px;
             box-shadow: 0 0 5px rgba( black, 0.2 );
             border-radius: 2px;
             color: $background;
             text-align: center;
             flex-shrink: 0;
             flex-grow: 1;
+            padding: 5px 10px;
 
             &.score.blue {
                 background-color: $blue-team;
