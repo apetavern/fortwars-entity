@@ -63,7 +63,7 @@ namespace Fortwars
 
 		bool skipRound = false;
 
-		[ServerCmd( "fw_round_skip" )]
+		[AdminCmd( "fw_round_skip" )]
 		public static void SkipRound()
 		{
 			Game.Instance.Round.skipRound = true;

@@ -77,7 +77,7 @@ namespace Fortwars
 			}
 		}
 
-		[ServerCmd( "spawn_weapon" )]
+		[AdminCmd( "spawn_weapon" )]
 		public static void SpawnWeapon( string path )
 		{
 			var caller = ConsoleSystem.Caller;
