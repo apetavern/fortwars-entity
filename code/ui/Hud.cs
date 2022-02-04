@@ -21,7 +21,7 @@ namespace Fortwars.UI
 			RootPanel.AddChild<WeaponInfo>();
 			RootPanel.AddChild<RoundStatus>();
 			RootPanel.AddChild<BuildHelp>();
-			RootPanel.AddChild<BuildMenu>();
+			RootPanel.AddChild<BuildWheel>();
 			RootPanel.AddChild<Compass>();
 
 			RootPanel.AddChild<DevMenu>();

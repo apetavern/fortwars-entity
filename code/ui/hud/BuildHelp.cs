@@ -1,5 +1,4 @@
-﻿using Fortwars.UI.Elements.Generic;
-using Sandbox.UI;
+﻿using Sandbox.UI;
 
 namespace Fortwars.UI
 {

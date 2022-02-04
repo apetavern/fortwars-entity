@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Fortwars
 {
-	public partial class BuildMenu : PieMenu
+	public partial class BuildWheel : RadialWheel
 	{
 		public override Item[] Items => new Item[]
 		{
@@ -14,7 +14,7 @@ namespace Fortwars
 			new ("1x2x1", "A thicc block good for cover", "view_in_ar"),
 		};
 
-		public BuildMenu() : base()
+		public BuildWheel() : base()
 		{
 			VirtualCursor.OnClick += OnClick;
 		}

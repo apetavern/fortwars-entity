@@ -4,7 +4,6 @@ using Sandbox.UI.Construct;
 
 public class Scoreboard : Sandbox.UI.Scoreboard<ScoreboardEntry>
 {
-
 	public Scoreboard()
 	{
 		StyleSheet.Load( "/ui/Scoreboard.scss" );

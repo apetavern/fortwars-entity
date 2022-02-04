@@ -3,7 +3,7 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
 
-namespace Fortwars.UI.Elements.Generic
+namespace Fortwars
 {
 	[UseTemplate]
 	public partial class InputHint : Panel

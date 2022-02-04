@@ -1,5 +1,4 @@
-﻿using Fortwars.UI.Elements.Generic;
-using Sandbox;
+﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
@@ -8,7 +7,7 @@ using System.Collections.Generic;
 namespace Fortwars
 {
 	[UseTemplate]
-	public partial class PieMenu : Panel
+	public partial class RadialWheel : Panel
 	{
 		public Panel Selector { get; set; }
 		public Panel Wrapper { get; set; }
@@ -45,9 +44,9 @@ namespace Fortwars
 
 		public virtual Item[] Items { get; }
 
-		public PieMenu()
+		public RadialWheel()
 		{
-			SetTemplate( "ui/elements/generic/PieMenu.html" );
+			SetTemplate( "ui/elements/generic/RadialWheel.html" );
 			AddClass( "pie-menu" );
 
 			BindClass( "active", () => Input.Down( InputButton.Menu ) );

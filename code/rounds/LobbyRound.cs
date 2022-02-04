@@ -6,7 +6,7 @@ namespace Fortwars
 	public class LobbyRound : BaseRound
 	{
 		public override string RoundName => "Lobby";
-		public override int RoundDuration => 600;
+		public override int RoundDuration => 60;
 
 		protected override void OnStart()
 		{
