@@ -96,7 +96,7 @@ namespace Fortwars
 		private PanelTransform CreateStandardPanelTransform()
 		{
 			var panelTransform = new PanelTransform();
-			panelTransform.AddScale( 1.025f );
+			panelTransform.AddScale( 1.05f );
 			return panelTransform;
 		}
 
