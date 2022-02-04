@@ -18,18 +18,18 @@ namespace Fortwars.UI
 
 		public RoundStatus()
 		{
-			BlueScore = Add.Label( "0", "score" );
+			StyleSheet.Load( "/ui/hud/RoundStatus.scss" );
+
+			var scores = Add.Panel( "scores" );
+			BlueScore = scores.Add.Label( "0", "score blue" );
+			RedScore = scores.Add.Label( "0", "score red" );
+
+			// scores.Add.Label( "Red", "red team" );
+			// scores.Add.Label( "Blue", "blue team" );
+
 			var RoundInfo = Add.Panel( "round-info" );
 			Time = RoundInfo.Add.Label( "00:00", "time" );
 			Phase = RoundInfo.Add.Label( "Unknown", "phase" );
-			RedScore = Add.Label( "0", "score" );
-
-			// feature request: add multiple classes via constructor
-			BlueScore.AddClass( "score blue" );
-			RedScore.AddClass( "score red" );
-
-			Add.Label( "Red", "red team" );
-			Add.Label( "Blue", "blue team" );
 		}
 
 		public override void Tick()
