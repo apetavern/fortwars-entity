@@ -1,0 +1,42 @@
+﻿@import "/ui/menus/_Common.scss";
+
+ClassMenu {
+    background-color: red;
+}
+
+.classes {
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    padding-bottom: 200px;
+
+    button.class {
+        width: 250px;
+        background-color: rgba( white, 0.2 );
+        margin: 0px 10px;
+        padding: 10px 20px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 2px;
+        border: 2px solid transparent;
+        transition: all 150ms ease;
+
+        .class-count {
+            position: absolute;
+            bottom: -32px;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+
+        iconpanel {
+            color: white;
+            margin-right: 8px;
+        }
+
+        &:hover {
+            cursor: pointer;
+            border: white;
+        }
+    }
+}

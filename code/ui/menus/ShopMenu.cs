@@ -1,5 +1,4 @@
-﻿using Sandbox;
-using Sandbox.UI;
+﻿using Sandbox.UI;
 using Sandbox.UI.Construct;
 
 namespace Fortwars
@@ -8,7 +7,9 @@ namespace Fortwars
 	{
 		public ShopMenu()
 		{
-			StyleSheet.Load( "/ui/menus/ShopMenu.scss" );
+			StyleSheet.Load( "ui/menus/ShopMenu.scss" );
+
+			AddClass( "menu" );
 
 			var top = Add.Panel( "top" );
 			top.Add.Label( "SHOP", "title" );

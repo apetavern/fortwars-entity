@@ -141,7 +141,7 @@ namespace Fortwars
 			hud = new();
 		}
 
-		[ServerCmd( "give_ammo" )]
+		[ServerCmd( "fw_give_ammo" )]
 		public static void GiveAmmo( int amount )
 		{
 			var owner = ConsoleSystem.Caller;

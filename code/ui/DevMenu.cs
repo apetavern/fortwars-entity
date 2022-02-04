@@ -1,8 +1,6 @@
-﻿using Fortwars;
-using Sandbox;
+﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-using System.ComponentModel;
 
 namespace Fortwars
 {
@@ -21,27 +19,31 @@ namespace Fortwars
 			// General
 			//
 			buttons.Add.Label( "General", "subtitle" );
-
 			buttons.Add.ButtonWithIcon( "Spawn a bot", "smart_toy", "button", () => ConsoleSystem.Run( "bot_add 0 0" ) );
-
 			buttons.Add.ButtonWithIcon( "Suicide", "clear", "button", () => ConsoleSystem.Run( "kill" ) );
 
+			//
+			// UI
+			//
+			buttons.Add.Label( "UI", "subtitle" );
+			buttons.Add.ButtonWithIcon( "Show shop UI", "storefront", "button", () => Local.Hud.AddChild<ShopMenu>() );
+			buttons.Add.ButtonWithIcon( "Show class select", "sports_martial_arts", "button", () => Local.Hud.AddChild<ClassMenu>() );
 			buttons.Add.ButtonWithIcon( "Reload HUD", "refresh", "button", () => ConsoleSystem.Run( "recreatehud" ) );
 
 			//
 			// Game
 			//
 			buttons.Add.Label( "Game", "subtitle" );
-
-			buttons.Add.ButtonWithIcon( "Give tons of ammo", "gamepad", "button", () => ConsoleSystem.Run( "give_ammo 10000" ) );
-
-			buttons.Add.ButtonWithIcon( "Show shop UI", "storefront", "button", () => Local.Hud.AddChild<ShopMenu>() );
-
 			buttons.Add.ButtonWithIcon( "Skip round", "fast_forward", "button", () => ConsoleSystem.Run( "fw_round_skip" ) );
+			buttons.Add.ButtonWithIcon( "Switch teams", "loop", "button", () => ConsoleSystem.Run( "fw_team_swap" ) );
 
+			//
+			// Weapons
+			//
+			buttons.Add.Label( "Weapons", "subtitle" );
+			buttons.Add.ButtonWithIcon( "Give ammo", "gamepad", "button", () => ConsoleSystem.Run( "fw_give_ammo 10000" ) );
 			buttons.Add.ButtonWithIcon( "Give physgun", "add", "button", () => ConsoleSystem.Run( "fw_inventory_give physgun" ) );
 			buttons.Add.ButtonWithIcon( "Give repair tool", "add", "button", () => ConsoleSystem.Run( "fw_inventory_give repairtool" ) );
-			buttons.Add.ButtonWithIcon( "Switch teams", "loop", "button", () => ConsoleSystem.Run( "fw_team_swap" ) );
 
 			buttons.Add.Label( "Spawn Weapon", "minitext" );
 
