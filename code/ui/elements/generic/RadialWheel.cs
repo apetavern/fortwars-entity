@@ -15,13 +15,13 @@ namespace Fortwars
 		//
 		// @text
 		//
-		public string CurrentIcon { get; set; }
 		public string CurrentName { get; set; }
 		public string CurrentDescription { get; set; }
 
 		//
 		// @ref
 		//
+		public Image CurrentImage { get; set; }
 		public Panel Inner { get; set; }
 		public InputHint BuildHint { get; set; }
 		public RichLabel BuildError { get; set; }
@@ -78,7 +78,7 @@ namespace Fortwars
 
 				frac = (1.0f + frac) / 2.0f; // Normalize from -1,1 to 0,1
 
-				var panel = Inner.Add.Icon( item.Icon, "item-icon" );
+				var panel = Inner.Add.Image( item.Icon, "item-icon" );
 
 				panel.Style.Left = Length.Fraction( frac.x );
 				panel.Style.Top = Length.Fraction( frac.y );
@@ -161,7 +161,7 @@ namespace Fortwars
 
 			if ( MathF.Abs( deltaAngle ) >= 0.5f )
 			{
-				CurrentIcon = selectedItem?.Icon ?? "question_mark";
+				CurrentImage.SetTexture( selectedItem?.Icon ?? "" );
 				CurrentName = selectedItem?.Name ?? "None";
 				CurrentDescription = selectedItem?.Description ?? "Select something";
 
@@ -170,8 +170,8 @@ namespace Fortwars
 				panelTransform.AddRotation( 0, 0, lerpedSelectionAngle );
 				Selector.Style.Transform = panelTransform;
 
-				BuildHint.Style.Display = DisplayMode.None;
-				BuildError.Style.Display = DisplayMode.Flex;
+				BuildError.Style.Display = DisplayMode.None;
+				BuildHint.Style.Display = DisplayMode.Flex;
 
 				if ( lastIndex != selectedIndex )
 					OnChange();

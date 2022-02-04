@@ -42,14 +42,14 @@
             bottom: 16px;
             top: 16px;
             border-radius: 100%;
-            background-color: rgba( black, 0.9 );
             align-items: center;
             justify-content: center;
             flex-direction: column;
+            background-color: rgba( $background, 0.5 );
             box-shadow: 0 0 25px rgba( black, 0.1 );
 
-            label {
-                color: $background;
+            label, icon.image {
+                color: white;
 
                 &.description {
                     font-size: 16px;
@@ -67,11 +67,7 @@
             }
 
             .controls {
-                padding-top: 16px;
-
-                inputhint .glyph {
-                    background-image-tint: $background;
-                }
+                padding-top: 8px;
             }
         }
 
@@ -85,39 +81,37 @@
 
         .item-icon {
             position: absolute;
+            width: 96px;
+            aspect-ratio: 1;
             font-size: 64px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
             color: white;
             text-align: center;
             transform: translate(-50% -50%);
+            transition: all 150ms ease;
 
             &.active {
                 color: $background;
+                background-image-tint: red;
+                transform-origin: center;
             }
         }
 
-        .icon {
-            border-radius: 2px;
+        .image {
+            width: 96px;
+            aspect-ratio: 1;
+            font-size: 64px;
+            background-size: contain;
+            background-repeat: no-repeat;
             background-position: center;
-            background-size: cover;
-            position: absolute;
-            width: 128px;
-            height: 128px;
-            transform: translate( -50% -50% );
-            border-radius: 100%;
-            opacity: 1;
-
-            label {
-                font-size: 9px;
-                position: absolute;
-                bottom: -17px;
-                left: 0;
-                right: 0;
-            }
         }
     }
 
     &.active {
         background-color: rgba( $background, 0.5 );
+        backdrop-filter: blur( 10px );
 
         .wrapper {
             opacity: 1;
@@ -135,9 +129,17 @@
         border-top: $red-team;
     }
 
-    .pie-menu .wrapper .center {
-        background-color: $red-team;
+    .pie-menu .wrapper .item-icon.active {
+        background-image-tint: $red-team;
     }
+    /*    .pie-menu .wrapper .center {
+        label, icon {
+            color: $red-team;
+        }
+    }*/
+    /*.pie-menu .wrapper .center {
+        background-color: $red-team;
+    }*/
 }
 
 .blue-team {
@@ -145,7 +147,10 @@
         border-top: $blue-team;
     }
 
-    .pie-menu .wrapper .center {
-        background-color: $blue-team;
+    .pie-menu .wrapper .item-icon.active {
+        background-image-tint: $blue-team;
     }
+    /*.pie-menu .wrapper .center {
+        background-color: $blue-team;
+    }*/
 }
