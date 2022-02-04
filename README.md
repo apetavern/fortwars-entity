@@ -13,7 +13,7 @@ Capture the flag battle between two teams, build up your fort in the build round
 * [X] Proper weapons (Alex has a nice framework for this)
 * [X] UI: Radial build menu
 * [X] UI: Ammo count, weapon select, etc..
-* [ ] Balance teams properly
+* [X] Balance teams properly
 * [ ] UI: React to RPCs to show frags, captures.
 * [ ] Money / shop system - buy weapons, extra build slots, etc.
 * [ ] Classes
