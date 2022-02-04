@@ -12,7 +12,6 @@ namespace Fortwars.UI
 			Add.InputHint( Sandbox.InputButton.Use, "Rotate" );
 			Add.InputHint( Sandbox.InputButton.Run, "Snap" );
 			Add.InputHint( Sandbox.InputButton.Menu, "Build Menu" );
-			Add.InputHint( Sandbox.InputButton.Flashlight, "Developer Menu" );
 
 			BindClass( "visible", () => Game.Instance.Round is BuildRound );
 		}
