@@ -51,12 +51,18 @@ namespace Fortwars
 		public virtual void AttackPrimary()
 		{
 			var player = Owner as FortwarsPlayer;
+			player.SetAnimBool( "b_attack", true );
 			foreach ( var tr in TraceHit( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward * 128f ) )
 			{
 				ViewModelEntity?.SetAnimBool( "hit", tr.Hit );
 
 				if ( !tr.Hit )
+				{
+					MissEffects();
 					continue;
+				}
+
+				HitEffects();
 
 				if ( tr.Entity is FortwarsBlock block && block.TeamID == player.TeamID )
 				{
@@ -68,6 +74,18 @@ namespace Fortwars
 			}
 
 			ViewModelEntity?.SetAnimBool( "fire", true );
+		}
+
+		[ClientRpc]
+		private void MissEffects()
+		{
+			_ = new Sandbox.ScreenShake.Perlin( 1.0f, 0.1f, 4.0f, 1.0f );
+		}
+
+		[ClientRpc]
+		private void HitEffects()
+		{
+			_ = new Sandbox.ScreenShake.Perlin( 0.25f, 4.0f, 4.0f, 0.5f );
 		}
 
 		public virtual IEnumerable<TraceResult> TraceHit( Vector3 start, Vector3 end, float radius = 2.0f )
