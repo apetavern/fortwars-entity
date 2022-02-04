@@ -64,7 +64,7 @@ namespace Fortwars
 					continue;
 				}
 
-				tr.Entity.TakeDamage( DamageInfo.Generic( 10 ) );
+				tr.Entity.TakeDamage( DamageInfo.FromBullet( tr.EndPos, -tr.Normal * 10f, 10 ) );
 			}
 
 			ViewModelEntity?.SetAnimBool( "fire", true );

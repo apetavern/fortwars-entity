@@ -9,9 +9,11 @@ vitals {
     align-items: center;
     padding: 10px 20px;
     border-radius: 2px;
+    background-color: $background;
+    border-left: 4px solid transparent;
 
     label {
-        color: $text;
+        color: $background;
     }
 
     box-shadow: 0 0 5px rgba( black, 0.5 );
@@ -37,12 +39,20 @@ vitals {
 
 .red-team {
     vitals {
-        background-color: $red-team;
+        border-left: $red-team;
+    }
+
+    label, iconpanel {
+        color: $red-team;
     }
 }
 
 .blue-team {
     vitals {
-        background-color: $blue-team;
+        border-left: $blue-team;
+    }
+
+    label, iconpanel {
+        color: $blue-team;
     }
 }

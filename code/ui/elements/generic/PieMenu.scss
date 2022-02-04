@@ -18,7 +18,7 @@
         width: 650px;
         height: 650px;
         aspect-ratio: 1;
-        border: 128px solid $text;
+        border: 128px solid $background;
         box-shadow: 0 0 25px rgba( black, 0.1 );
 
         .selected {
@@ -47,7 +47,7 @@
             box-shadow: 0 0 25px rgba( black, 0.1 );
 
             label {
-                color: $text;
+                color: $background;
 
                 &.description {
                     font-size: 16px;
@@ -57,14 +57,14 @@
 
             .image {
                 font-size: 64px;
-                color: $text;
+                color: $background;
             }
 
             .controls {
                 padding-top: 16px;
 
                 inputhint .glyph {
-                    background-image-tint: $text;
+                    background-image-tint: $background;
                 }
             }
         }

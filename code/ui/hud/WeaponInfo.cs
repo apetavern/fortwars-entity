@@ -11,8 +11,10 @@ namespace Fortwars.UI
 
 		public WeaponInfo()
 		{
-			var ammoPanel = Add.Panel( "ammopanel" );
 			StyleSheet.Load( "/ui/hud/WeaponInfo.scss" );
+
+			var ammoPanel = Add.Panel( "ammopanel" );
+			ammoPanel.BindClass( "visible", () => Local.Pawn.ActiveChild is FortwarsWeapon );
 
 			Current = ammoPanel.Add.Label( "0", "current" );
 			Current.Bind( "text", () =>
@@ -29,8 +31,6 @@ namespace Fortwars.UI
 					return "0";
 				return weapon.ReserveAmmo;
 			} );
-
-			ammoPanel.BindClass( "visible", () => Local.Pawn.ActiveChild is FortwarsWeapon );
 
 			AddChild<InventoryBar>();
 		}

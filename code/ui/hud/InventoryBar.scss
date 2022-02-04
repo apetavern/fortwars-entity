@@ -5,11 +5,11 @@ InventoryBar {
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    margin: -2px;
-    margin-left: 5px;
+    margin: -3px;
+    margin-right: 5px;
+    transition: all 150ms ease;
 
     InventoryIcon {
-        box-shadow: 0 0 5px rgba( black, 0.5 );
         margin: 2px 0;
         width: 100%;
         flex-direction: row;
@@ -18,11 +18,13 @@ InventoryBar {
         border-radius: 2px;
         flex-wrap: wrap;
         padding: 5px 20px;
-        opacity: 0.5;
+        opacity: 0.25;
         flex-grow: 1;
+        background: linear-gradient( to left, $background, rgba( $background, 0 ) );
+        border-right: 4px transparent;
 
         label {
-            color: $text;
+            color: $background;
         }
 
         &.active {
@@ -33,12 +35,24 @@ InventoryBar {
 
 .red-team {
     InventoryIcon {
-        background-color: $red-team;
+        &.active {
+            border-right: $red-team;
+        }
+
+        label {
+            color: $red-team;
+        }
     }
 }
 
 .blue-team {
     InventoryIcon {
-        background-color: $blue-team;
+        &.active {
+            border-right: $blue-team;
+        }
+
+        label {
+            color: $blue-team;
+        }
     }
 }

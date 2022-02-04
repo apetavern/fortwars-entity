@@ -12,7 +12,7 @@ namespace Fortwars.UI
 		{
 			StyleSheet.Load( "/ui/hud/Vitals.scss" );
 
-			var icon = Add.Icon( "favorite" );
+			var icon = Add.Icon( "add_box" );
 			Health = Add.Label( "100", "health" );
 			Health.Bind( "text", () => Local.Pawn.Health.CeilToInt() );
 

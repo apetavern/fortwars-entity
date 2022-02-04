@@ -182,9 +182,10 @@ roundstatus {
         font-size: 48px;
         box-shadow: 0 0 5px rgba( black, 0.2 );
         border-radius: 2px;
-        color: $text;
+        color: $background;
         text-align: center;
         flex-shrink: 0;
+        width: 75px;
 
         &.score.blue {
             background-color: $blue-team;

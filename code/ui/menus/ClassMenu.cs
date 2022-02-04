@@ -16,7 +16,7 @@ namespace Fortwars
 			var classes = Add.Panel( "classes" );
 			foreach ( var classType in Fortwars.Class.Classes )
 			{
-				var classButton = classes.Add.ButtonWithIcon( classType.Name, classType.Icon, "class" );
+				var classButton = classes.Add.ButtonWithIcon( classType.Name, classType.Icon, "class", () => Delete() );
 				classButton.Add.Label( "0 / 0", "class-count" );
 			}
 		}

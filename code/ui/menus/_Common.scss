@@ -8,7 +8,7 @@ $border-color: rgba( black, 0.25 );
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba( $text, 0.9 );
+    background-color: rgba( $background, 0.9 );
     padding: 50px 80px;
     z-index: 100;
     backdrop-filter: blur( 20px );
@@ -163,7 +163,7 @@ image {
 
         label, text {
             font-size: 48px;
-            color: $text;
+            color: $background;
         }
     }
 }
