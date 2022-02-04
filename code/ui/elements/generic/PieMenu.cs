@@ -1,4 +1,5 @@
-﻿using Sandbox;
+﻿using Fortwars.UI.Elements.Generic;
+using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
@@ -23,6 +24,8 @@ namespace Fortwars
 		// @ref
 		//
 		public Panel Inner { get; set; }
+		public InputHint BuildHint { get; set; }
+		public RichLabel BuildError { get; set; }
 
 		private float lerpedSelectionAngle = 0f;
 
@@ -165,6 +168,9 @@ namespace Fortwars
 
 				panelTransform.AddRotation( 0, 0, lerpedSelectionAngle );
 				Selector.Style.Transform = panelTransform;
+
+				BuildHint.Style.Display = DisplayMode.None;
+				BuildError.Style.Display = DisplayMode.Flex;
 
 				OnChange();
 			}

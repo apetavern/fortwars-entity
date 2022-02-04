@@ -1,0 +1,13 @@
+﻿richlabel {
+    label, text {
+        font-weight: 500;
+
+        &.bold {
+            font-weight: 900;
+        }
+
+        &.highlight {
+            color: #ff00ff;
+        }
+    }
+}

@@ -10,7 +10,8 @@
             <label @text="CurrentDescription" class="description"></label>
 
             <div class="controls">
-                <inputhint button="Attack1">Build</inputhint>
+                <richlabel @ref="BuildError">You need ^r^b5 more wood^r to build this.</richlabel>
+                <inputhint @ref="BuildHint" button="Attack1">Build</inputhint>
             </div>
         </div>
 
