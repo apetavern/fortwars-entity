@@ -89,22 +89,27 @@ namespace Fortwars
 
 		public override void OnKilled()
 		{
-			Inventory.DropActive();
+			BecomeRagdollOnClient( Position,
+						 Rotation,
+						 Velocity,
+						 LastDamage.Flags,
+						 LastDamage.Position,
+						 LastDamage.Force,
+						 GetHitboxBone( LastDamage.HitboxIndex ) );
 
 			base.OnKilled();
+
+			Inventory.DropActive();
 
 			//
 			// Delete any items we didn't drop
 			//
 			Inventory.DeleteContents();
 
-			BecomeRagdollOnClient( LastDamage.Force, GetHitboxBone( LastDamage.HitboxIndex ) );
-
 			Controller = null;
 			Camera = new SpectateRagdollCamera();
 
 			EnableAllCollisions = false;
-
 			EnableDrawing = false;
 
 			// Don't draw clothes etc
