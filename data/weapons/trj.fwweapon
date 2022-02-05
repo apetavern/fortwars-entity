@@ -27,9 +27,9 @@
 		mindamage = 25.0
 		damagedropoffdistance = 512
 		headshotmultiplier = 2.5
-		kickbacksize = 10.0
+		kickbacksize = 8.0
 		kickbacklength = 1.0
-		kickbackspeed = 1.0
+		kickbackspeed = 1.5
 		kickbackrotation = 2.0
 		firesound = "rust_pumpshotgun.shoot"
 		holdtype = "1"
