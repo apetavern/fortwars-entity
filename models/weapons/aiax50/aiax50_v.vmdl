@@ -303,7 +303,7 @@
 						source_filename = "models/weapons/aiax50/aiax50_v.fbx"
 						start_frame = 99
 						end_frame = 159
-						framerate = 45.0
+						framerate = 35.0
 						take = 0
 						reverse = false
 					},
