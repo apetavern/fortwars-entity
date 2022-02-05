@@ -11,6 +11,9 @@ namespace Fortwars
 		[Net] public FortwarsPlayer RedFlagCarrier { get; set; }
 		[Net] public FortwarsPlayer BlueFlagCarrier { get; set; }
 
+		[Net] public BogRoll RedFlagRoll { get; set; }
+		[Net] public BogRoll BlueFlagRoll { get; set; }
+
 		/**
 		 * Called when a Player walks into a Team's flagzone.
 		 */
@@ -32,6 +35,7 @@ namespace Fortwars
 					return;
 
 				PlayerScoreFlag( player );
+				player.ActiveChild.Delete();//Has to be the flag from the checks before this.
 				return;
 			}
 
@@ -39,6 +43,10 @@ namespace Fortwars
 
 			// Check if the enemy flag is actually here
 			if ( (player.Team is BlueTeam && RedFlagCarrier != null) || (player.Team is RedTeam && BlueFlagCarrier != null) )
+				return;
+
+			// Check if the flag exists in the world
+			if ( (player.Team is BlueTeam && RedFlagRoll != null) || (player.Team is RedTeam && BlueFlagRoll != null) )
 				return;
 
 			PlayerPickupEnemyFlag( player );
@@ -56,14 +64,44 @@ namespace Fortwars
 			if ( enemyTeam is RedTeam )
 			{
 				RedFlagCarrier = player;
+				RedFlagRoll = new BogRoll();
+				RedFlagRoll.Team = Team.Red;
+				player.Inventory.Add( RedFlagRoll, true );
+			}
+
+			if ( enemyTeam is BlueTeam )
+			{
+				BlueFlagCarrier = player;
+				BlueFlagRoll = new BogRoll();
+				BlueFlagRoll.Team = Team.Blue;
+				player.Inventory.Add( BlueFlagRoll, true );
+			}
+
+			HideFlag( enemyTeam.ID );
+
+			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}" );
+
+			player.PlaySound( "ctf_flag_pickup" );
+		}
+
+		public void PlayerPickupEnemyFlagFloor( FortwarsPlayer player )
+		{
+			BaseTeam enemyTeam = player.TeamID switch
+			{
+				Team.Blue => RedTeam,
+				Team.Red => BlueTeam,
+				_ => RedTeam, // shit but shutiup
+			};
+
+			if ( enemyTeam is RedTeam )
+			{
+				RedFlagCarrier = player;
 			}
 
 			if ( enemyTeam is BlueTeam )
 			{
 				BlueFlagCarrier = player;
 			}
-
-			HideFlag( enemyTeam.ID );
 
 			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}" );
 
@@ -110,12 +148,30 @@ namespace Fortwars
 			{
 				ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {BlueTeam.Name} flag", $"avatar:{player.Client.PlayerId}" );
 				BlueFlagCarrier = null;
-				ShowFlag( Team.Blue );
+				//ShowFlag( Team.Blue );
 				return;
 			}
 			if ( player == RedFlagCarrier )
 			{
 				ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {RedTeam.Name} flag", $"avatar:{player.Client.PlayerId}" );
+				RedFlagCarrier = null;
+				//ShowFlag( Team.Red );
+				return;
+			}
+		}
+
+		public void ReturnFlag( Team Team )
+		{
+			if ( Team == Team.Blue )
+			{
+				ChatBox.AddInformation( To.Everyone, $"{BlueTeam.Name} flag returned");
+				BlueFlagCarrier = null;
+				ShowFlag( Team.Blue );
+				return;
+			}
+			if ( Team == Team.Red )
+			{
+				ChatBox.AddInformation( To.Everyone, $"{RedTeam.Name} flag returned" );
 				RedFlagCarrier = null;
 				ShowFlag( Team.Red );
 				return;

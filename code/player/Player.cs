@@ -89,9 +89,9 @@ namespace Fortwars
 
 		public override void OnKilled()
 		{
-			base.OnKilled();
-
 			Inventory.DropActive();
+
+			base.OnKilled();
 
 			//
 			// Delete any items we didn't drop

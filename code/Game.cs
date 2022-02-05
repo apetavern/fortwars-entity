@@ -67,6 +67,10 @@ namespace Fortwars
 		public override void OnKilled( Entity pawn )
 		{
 			Round?.OnPlayerKilled( pawn as Player );
+			if( (pawn as FortwarsPlayer).ActiveChild is BogRoll )
+			{
+				(pawn as FortwarsPlayer).Inventory.DropActive();
+			}
 			PlayerDropFlag( pawn as FortwarsPlayer );
 
 			Log.Info( $"{pawn.Name} was killed" );

@@ -53,14 +53,27 @@
 				[
 					{
 						_class = "PhysicsHullFromRender"
+						disabled = true
 						parent_bone = "hold_R"
 						surface_prop = "default"
 						collision_group = ""
 						collision_interact_as = ""
 						collision_interact_with = ""
 						collision_interact_exclude = ""
-						faceMergeAngle = 20.0
-						maxHullVertices = 32
+						faceMergeAngle = 8.97
+						maxHullVertices = 35
+					},
+					{
+						_class = "PhysicsShapeCylinder"
+						parent_bone = "hold_R"
+						surface_prop = "default"
+						collision_group = ""
+						collision_interact_as = ""
+						collision_interact_with = ""
+						collision_interact_exclude = ""
+						radius = 10.0
+						point0 = [ 0.0, 0.0, -10.0 ]
+						point1 = [ 0.0, 0.0, 10.0 ]
 					},
 				]
 			},

@@ -346,7 +346,7 @@
 						m_name = "fire"
 						m_childNodeID = 
 						{
-							m_id = 4294967295
+							m_id = 1572769492
 						}
 						m_stateID = 
 						{
@@ -362,6 +362,28 @@
 				]
 				m_bBlockWaningTags = false
 				m_bLockStateWhenWaning = false
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 1572769492
+			}
+			value = 
+			{
+				_class = "CSequenceAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ -320.0, 16.0 ]
+				m_nNodeID = 
+				{
+					m_id = 1572769492
+				}
+				m_networkMode = "ClientSimulate"
+				m_sNote = ""
+				m_tagSpans = [  ]
+				m_sequenceName = "fire1"
+				m_playbackSpeed = 1.0
+				m_bLoop = false
 			}
 		},
 		{
