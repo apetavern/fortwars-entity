@@ -153,6 +153,14 @@ namespace Fortwars
 			return true;
 		}
 
+		public override void OnAnimEventGeneric( string name, int intData, float floatData, Vector3 vectorData, string stringData )
+		{
+			if ( name.Contains( "shake" ) )
+			{
+				_ = new Sandbox.ScreenShake.Perlin( 1f, 1f, floatData );
+			}
+		}
+
 		protected Vector3 CalcSwingOffset( float pitchDelta, float yawDelta )
 		{
 			Vector3 swingVelocity = new Vector3( 0, yawDelta, pitchDelta );
