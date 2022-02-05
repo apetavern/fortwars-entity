@@ -224,6 +224,80 @@
 						take = 0
 						reverse = false
 					},
+					{
+						_class = "AnimFile"
+						name = "pull_back"
+						children = 
+						[
+							{
+								_class = "AnimEvent"
+								event_class = "AE_GENERIC_EVENT"
+								event_frame = 4
+								event_keys = 
+								{
+									TypeName = "impact"
+									Int = 0
+									Float = 0.0
+									Vector = [ 0.0, 0.0, 0.0 ]
+									StringData = ""
+								}
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/items/bogroll/bogroll_v.fbx"
+						start_frame = 49
+						end_frame = 53
+						framerate = 15.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "throw"
+						children = 
+						[
+							{
+								_class = "AnimEvent"
+								event_class = "AE_GENERIC_EVENT"
+								event_frame = 4
+								event_keys = 
+								{
+									TypeName = "impact"
+									Int = 0
+									Float = 0.0
+									Vector = [ 0.0, 0.0, 0.0 ]
+									StringData = ""
+								}
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/items/bogroll/bogroll_v.fbx"
+						start_frame = 35
+						end_frame = 40
+						framerate = 15.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},

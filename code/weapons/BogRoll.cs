@@ -1,5 +1,7 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
+using System;
+using System.Threading.Tasks;
 
 namespace Fortwars
 {
@@ -75,9 +77,10 @@ namespace Fortwars
 		{
 			if ( Parent != null && Parent.ActiveChild != this )
 			{
-				CantPickup = true;
-				Game.Instance.PlayerDropFlag( Owner as FortwarsPlayer );
-				( Parent as FortwarsPlayer).Inventory.Drop( this );
+				//CantPickup = true;
+				//Game.Instance.PlayerDropFlag( Owner as FortwarsPlayer );
+				//( Parent as FortwarsPlayer).Inventory.Drop( this );
+				ThrowRoll();
 			}
 			else if( Parent != null && Parent.ActiveChild == this )
 			{
@@ -130,6 +133,16 @@ namespace Fortwars
 					AttackPrimary();
 				}
 			}
+
+			if ( CanSecondaryAttack() )
+			{
+				using ( LagCompensation() )
+				{
+					AttackSecondary();
+				}
+			}
+
+			
 		}
 
 		public virtual bool CanPrimaryAttack()
@@ -140,6 +153,47 @@ namespace Fortwars
 			if ( rate <= 0 ) return true;
 
 			return TimeSincePrimaryAttack > (1 / rate);
+		}
+
+		public virtual bool CanSecondaryAttack()
+		{
+			if ( !Owner.IsValid() || !Input.Down( InputButton.Attack2 ) ) {
+				HoldingSecondary = false;
+				TimeSinceHoldingSecondary = 0f;
+				return false;
+			}
+
+			return true;
+		}
+
+		async Task DoThrowDelayed()
+		{
+			await Task.DelaySeconds( 0.2175f );
+
+			ThrowRoll();
+		}
+
+
+		public void ThrowRoll()
+		{
+			CantPickup = true;
+			if ( IsServer )
+				Game.Instance.PlayerDropFlag( Owner as FortwarsPlayer );
+			Vector3 throwdir = (Parent as FortwarsPlayer).EyeRot.Forward + (Vector3.Up / 3f);
+
+			(Parent as FortwarsPlayer).Inventory.Drop( this );
+
+			Velocity = throwdir * 300f * (1f + Math.Clamp( TimeSinceHoldingSecondary, 0, 2f ));
+		}
+
+		[Net]bool HoldingSecondary { get; set; }
+		[Net] TimeSince TimeSinceHoldingSecondary { get; set; }
+
+		public virtual void AttackSecondary()
+		{
+			HoldingSecondary = true;
+			ViewModelEntity?.SetAnimBool( "pull", HoldingSecondary );
+			ViewModelEntity?.SetAnimFloat( "pullamount", Math.Clamp( TimeSinceHoldingSecondary/2f, 0, 1f ) );
 		}
 
 		public virtual void AttackPrimary()
@@ -168,6 +222,12 @@ namespace Fortwars
 			}
 
 			ViewModelEntity?.SetAnimBool( "fire", true );
+
+			if ( HoldingSecondary )
+			{
+				DoThrowDelayed();
+				ViewModelEntity?.SetAnimBool( "throw", true );
+			}
 		}
 
 		[ClientRpc]
