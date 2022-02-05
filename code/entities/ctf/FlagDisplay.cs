@@ -4,7 +4,7 @@ namespace Fortwars
 {
 	public partial class FlagDisplay : ModelEntity, IShowIcon
 	{
-		[Net] public Team Team { get; set; }
+		[Net,Change("OnTeamChange")] public Team Team { get; set; }
 
 		#region Icons
 		Vector3 IShowIcon.IconWorldPosition() => this.Position;
@@ -24,11 +24,27 @@ namespace Fortwars
 			EnableHideInFirstPerson = true;
 			EnableShadowInFirstPerson = true;
 
-			SetModel( "models/rust_props/small_junk/toilet_paper.vmdl" );
-			Scale = 5.0f;
+			SetModel( "models/items/bogroll/bogroll_w.vmdl" );
+			Scale = 1.5f;
 
 			var bobbingComponent = Components.Create<BobbingComponent>();
-			bobbingComponent.CenterOffset = Vector3.Down * 3f;
+		}
+
+		public void OnTeamChange()
+		{
+			switch ( Team )
+			{
+				case Team.Invalid:
+					break;
+				case Team.Red:
+					SetMaterialGroup( 1 );
+					break;
+				case Team.Blue:
+					SetMaterialGroup( 0 );
+					break;
+				default:
+					break;
+			}
 		}
 	}
 }
