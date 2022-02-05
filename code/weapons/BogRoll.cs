@@ -183,7 +183,7 @@ namespace Fortwars
 
 			(Parent as FortwarsPlayer).Inventory.Drop( this );
 
-			Velocity = throwdir * 300f * (1f + Math.Clamp( TimeSinceHoldingSecondary, 0, 2f ));
+			Velocity = throwdir * 300f * (1f + Math.Clamp( TimeSinceHoldingSecondary/2f, 0, 2f ));
 		}
 
 		[Net]bool HoldingSecondary { get; set; }
@@ -193,7 +193,7 @@ namespace Fortwars
 		{
 			HoldingSecondary = true;
 			ViewModelEntity?.SetAnimBool( "pull", HoldingSecondary );
-			ViewModelEntity?.SetAnimFloat( "pullamount", Math.Clamp( TimeSinceHoldingSecondary/2f, 0, 1f ) );
+			ViewModelEntity?.SetAnimFloat( "pullamount", Math.Clamp( TimeSinceHoldingSecondary/4f, 0, 1f ) );
 		}
 
 		public virtual void AttackPrimary()
