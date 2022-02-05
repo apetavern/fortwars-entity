@@ -100,7 +100,7 @@ namespace Fortwars
 			var caller = ConsoleSystem.Caller;
 			var player = caller.Pawn;
 
-			player.Inventory.Add( FortwarsWeapon.FromPath( path ));
+			player.Inventory.Add( FortwarsWeapon.FromPath( path ), true );
 		}
 	}
 }
