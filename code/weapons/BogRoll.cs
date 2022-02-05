@@ -49,6 +49,10 @@ namespace Fortwars
 
 		public override bool CanCarry( Entity carrier )
 		{
+			if( RespawntimerStarted && ( carrier as FortwarsPlayer).TeamID == Team )
+			{
+				TimeSinceDropped += Time.Delta;
+			}
 			return !CantPickup && (carrier as FortwarsPlayer).TeamID != Team;
 		}
 
