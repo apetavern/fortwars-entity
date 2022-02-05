@@ -97,7 +97,7 @@ namespace Fortwars
 			// Todo: this is a bit hacky. We should probably make a custom player controller with an "isSprinting" property/field
 			if ( Local.Pawn is Player { Controller: { Velocity: { Length: > 250 } } } player && Input.Down( InputButton.Run ) )
 			{
-				TargetRot = Rotation.From( 10, 25, 0 );
+				TargetRot = Rotation.From( 15, 5, 0 );
 				TargetPos = Vector3.Backward * 6f;
 				return true;
 			}
