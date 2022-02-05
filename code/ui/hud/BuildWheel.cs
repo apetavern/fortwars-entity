@@ -34,7 +34,7 @@ namespace Fortwars
 		private async Task ApplyShrinkEffect()
 		{
 			Wrapper.AddClass( "shrink" );
-			await Task.DelaySeconds( 0.150f );
+			await Task.DelaySeconds( 0.050f );
 			Wrapper.RemoveClass( "shrink" );
 		}
 	}

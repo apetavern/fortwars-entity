@@ -53,5 +53,7 @@ namespace Fortwars
 
 			return res;
 		}
+
+		public static byte ColorComponentToByte( this float v ) => (byte)MathF.Floor( (v >= 1.0f) ? 255f : v * 256.0f );
 	}
 }
