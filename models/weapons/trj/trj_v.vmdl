@@ -242,7 +242,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_CL_PLAYSOUND"
-								event_frame = 115
+								event_frame = 122
 								event_keys = 
 								{
 									name = "ui.button.deny"
@@ -254,7 +254,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_CL_PLAYSOUND"
-								event_frame = 117
+								event_frame = 124
 								event_keys = 
 								{
 									name = "ui.button.deny"
@@ -266,7 +266,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_CL_PLAYSOUND"
-								event_frame = 119
+								event_frame = 126
 								event_keys = 
 								{
 									name = "ui.button.deny"
@@ -278,7 +278,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_CL_PLAYSOUND"
-								event_frame = 121
+								event_frame = 128
 								event_keys = 
 								{
 									name = "ui.button.deny"
@@ -290,7 +290,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_CL_PLAYSOUND"
-								event_frame = 123
+								event_frame = 130
 								event_keys = 
 								{
 									name = "ui.button.deny"
@@ -302,7 +302,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_CL_PLAYSOUND"
-								event_frame = 125
+								event_frame = 132
 								event_keys = 
 								{
 									name = "ui.button.deny"
