@@ -11,7 +11,7 @@
 				[
 					{
 						_class = "ModelModifier_Translate"
-						translation = [ 10.0, 5.0, -140.0 ]
+						translation = [ 10.0, -15.0, -135.0 ]
 					},
 				]
 			},
@@ -180,6 +180,19 @@
 									tags = ""
 								}
 							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_GENERIC_EVENT"
+								event_frame = 15
+								event_keys = 
+								{
+									TypeName = "shake"
+									Int = 0
+									Float = 3.0
+									Vector = [ 0.0, 0.0, 0.0 ]
+									StringData = ""
+								}
+							},
 						]
 						activity_name = ""
 						activity_weight = 1
@@ -247,6 +260,32 @@
 									stop_on_seq_change = false
 									use_layer_sequence = false
 									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_GENERIC_EVENT"
+								event_frame = 17
+								event_keys = 
+								{
+									TypeName = "shake"
+									Int = 0
+									Float = 3.0
+									Vector = [ 0.0, 0.0, 0.0 ]
+									StringData = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_GENERIC_EVENT"
+								event_frame = 47
+								event_keys = 
+								{
+									TypeName = "shake"
+									Int = 0
+									Float = 3.0
+									Vector = [ 0.0, 0.0, 0.0 ]
+									StringData = ""
 								}
 							},
 						]
