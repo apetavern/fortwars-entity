@@ -2,7 +2,7 @@
 {
 	data = 
 	{
-		weaponname = "Accuracy International AX50"
+		weaponname = "AX50"
 		worldmodel = resource:"models/weapons/aiax50/aiax50_w.vmdl"
 		viewmodel = resource:"models/weapons/aiax50/aiax50_v.vmdl"
 		movementspeedmultiplier = 0.95
