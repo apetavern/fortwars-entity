@@ -311,6 +311,32 @@
 									tags = ""
 								}
 							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_GENERIC_EVENT"
+								event_frame = 110
+								event_keys = 
+								{
+									TypeName = "shake"
+									Int = 0
+									Float = 1.5
+									Vector = [ 0.0, 0.0, 0.0 ]
+									StringData = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_GENERIC_EVENT"
+								event_frame = 80
+								event_keys = 
+								{
+									TypeName = "shake"
+									Int = 0
+									Float = 1.0
+									Vector = [ 0.0, 0.0, 0.0 ]
+									StringData = ""
+								}
+							},
 						]
 						activity_name = ""
 						activity_weight = 1
