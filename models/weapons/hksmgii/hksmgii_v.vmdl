@@ -220,6 +220,45 @@
 									tags = ""
 								}
 							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_GENERIC_EVENT"
+								event_frame = 18
+								event_keys = 
+								{
+									TypeName = "shake"
+									Int = 0
+									Float = 2.0
+									Vector = [ 0.0, 0.0, 0.0 ]
+									StringData = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_GENERIC_EVENT"
+								event_frame = 49
+								event_keys = 
+								{
+									TypeName = "shake"
+									Int = 0
+									Float = 2.0
+									Vector = [ 0.0, 0.0, 0.0 ]
+									StringData = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_GENERIC_EVENT"
+								event_frame = 81
+								event_keys = 
+								{
+									TypeName = "shake"
+									Int = 0
+									Float = 3.0
+									Vector = [ 0.0, 0.0, 0.0 ]
+									StringData = ""
+								}
+							},
 						]
 						activity_name = ""
 						activity_weight = 1
