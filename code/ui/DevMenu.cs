@@ -64,6 +64,8 @@ namespace Fortwars
 
 			row.Add.ButtonWithIcon( "Spawn", "gamepad", "button", () => ConsoleSystem.Run( $"spawn_weapon data/{dropdown.Value}" ) );
 
+			row.Add.ButtonWithIcon( "Give", "backpack", "button", () => ConsoleSystem.Run( $"give_weapon data/{dropdown.Value}" ) );
+
 			BindClass( "visible", () => Input.Down( InputButton.Flashlight ) );
 		}
 
@@ -90,6 +92,15 @@ namespace Fortwars
 
 			var weapon = FortwarsWeapon.FromPath( path );
 			weapon.Position = tr.EndPos + tr.Normal * 16;
+		}
+
+		[AdminCmd( "give_weapon" )]
+		public static void GiveWeapon( string path )
+		{
+			var caller = ConsoleSystem.Caller;
+			var player = caller.Pawn;
+
+			player.Inventory.Add( FortwarsWeapon.FromPath( path ));
 		}
 	}
 }
