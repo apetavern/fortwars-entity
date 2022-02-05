@@ -11,7 +11,7 @@
 				[
 					{
 						_class = "ModelModifier_Translate"
-						translation = [ 10.0, -15.0, -135.0 ]
+						translation = [ 50.0, -10.0, -150.0 ]
 					},
 				]
 			},

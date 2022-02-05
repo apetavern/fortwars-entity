@@ -6,7 +6,7 @@ namespace Fortwars
 	public class ViewModel : BaseViewModel
 	{
 		[ClientVar( "fw_viewmodel_fov", Help = "Viewmodel field of view", Min = 50f, Max = 90f )]
-		public static float ViewmodelFov { get; set; } = 80f;
+		public static float ViewmodelFov { get; set; } = 60f;
 
 		protected float SwingInfluence => 0.05f;
 		protected float ReturnSpeed => 5.0f;
