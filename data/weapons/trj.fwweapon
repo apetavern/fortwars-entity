@@ -8,12 +8,12 @@
 		movementspeedmultiplier = 0.95
 		firemode = "1"
 		rpm = 60.0
-		firstshotdelay = 0.1
-		shotdelay = 0.1
+		firstshotdelay = 0.0
+		shotdelay = 0.0
 		range = 16384
 		shotcount = 1
 		recoilx = 0.3
-		recoily = -0.3
+		recoily = -2.0
 		firstshotalwaysaccurate = true
 		spread = 0.01
 		spreadshotincrease = 0.1
@@ -27,7 +27,7 @@
 		mindamage = 25.0
 		damagedropoffdistance = 512
 		headshotmultiplier = 2.5
-		kickbacksize = 8.0
+		kickbacksize = 2.0
 		kickbacklength = 1.0
 		kickbackspeed = 1.5
 		kickbackrotation = 2.0
