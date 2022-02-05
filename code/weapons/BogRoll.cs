@@ -56,6 +56,20 @@ namespace Fortwars
 			return !CantPickup && (carrier as FortwarsPlayer).TeamID != Team;
 		}
 
+		public override void TakeDamage( DamageInfo info )
+		{
+			base.TakeDamage( info );
+		}
+
+		protected override void OnDestroy()
+		{
+			if ( IsServer )
+			{
+				Game.Instance.ReturnFlag( Team );
+			}
+			base.OnDestroy();
+		}
+
 		[Event.Tick.Server]//Server tick so the bogroll can keep track of drop time.
 		public void Tick()
 		{
@@ -78,7 +92,6 @@ namespace Fortwars
 
 			if ( RespawntimerStarted && TimeSinceDropped > 15f )
 			{
-				Game.Instance.ReturnFlag( Team );
 				Delete();
 			}
 		}
