@@ -30,7 +30,7 @@
 		kickbacksize = 2.0
 		kickbacklength = 1.0
 		kickbackspeed = 1.5
-		kickbackrotation = 2.0
+		kickbackrotation = 4.0
 		firesound = "rust_pumpshotgun.shoot"
 		holdtype = "1"
 		useprojectile = false
