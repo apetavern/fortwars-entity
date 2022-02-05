@@ -28,6 +28,7 @@ namespace Fortwars
 			Scale = 1.5f;
 
 			var bobbingComponent = Components.Create<BobbingComponent>();
+			bobbingComponent.PositionOffset = Vector3.Up * 10f;
 		}
 
 		public void OnTeamChange()

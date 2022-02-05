@@ -10,6 +10,8 @@ namespace Fortwars
 	{
 		[Net] public Vector3 CenterOffset { get; set; }
 
+		[Net] public Vector3 PositionOffset { get; set; }
+
 		[Net] float RandomOffset { get; set; }
 
 		public BobbingComponent()
@@ -35,7 +37,7 @@ namespace Fortwars
 
 			// bob up and down
 			Vector3 bobbingOffset = Vector3.Up * MathF.Sin( Time.Now * 2f );
-			sceneObject.Position = Entity.Position + (centerOffset + bobbingOffset) * Entity.Scale;
+			sceneObject.Position = Entity.Position + (centerOffset + bobbingOffset + PositionOffset) * Entity.Scale;
 		}
 	}
 }
