@@ -5,7 +5,7 @@
 		weaponname = "HK SMGII"
 		worldmodel = resource:"models/weapons/hksmgii/hksmgii_w.vmdl"
 		viewmodel = resource:"models/weapons/hksmgii/hksmgii_v.vmdl"
-		movementspeedmultiplier = 1.0
+		movementspeedmultiplier = 0.95
 		holdtype = "2"
 		firemode = "2"
 		rpm = 800.0

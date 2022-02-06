@@ -5,7 +5,7 @@
 		weaponname = "AX50"
 		worldmodel = resource:"models/weapons/aiax50/aiax50_w.vmdl"
 		viewmodel = resource:"models/weapons/aiax50/aiax50_v.vmdl"
-		movementspeedmultiplier = 0.95
+		movementspeedmultiplier = 0.75
 		firemode = "3"
 		rpm = 60.0
 		firstshotdelay = 0.0
