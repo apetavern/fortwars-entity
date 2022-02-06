@@ -72,14 +72,12 @@ namespace Fortwars
 			base.OnDestroy();
 		}
 
-		[Event.Tick.Server]//Server tick so the bogroll can keep track of drop time.
+		// Server tick so the bogroll can keep track of drop time.
+		[Event.Tick.Server]
 		public void Tick()
 		{
 			if ( Parent != null && Parent.ActiveChild != this )
 			{
-				//CantPickup = true;
-				//Game.Instance.PlayerDropFlag( Owner as FortwarsPlayer );
-				//( Parent as FortwarsPlayer).Inventory.Drop( this );
 				ThrowRoll();
 			}
 			else if ( Parent != null && Parent.ActiveChild == this )
@@ -141,8 +139,6 @@ namespace Fortwars
 					AttackSecondary();
 				}
 			}
-
-
 		}
 
 		public virtual bool CanPrimaryAttack()
@@ -213,12 +209,6 @@ namespace Fortwars
 
 				HitEffects();
 
-				/*if ( tr.Entity is FortwarsBlock block && block.TeamID == player.TeamID )
-				{
-					block.Heal( 10, tr.EndPos );
-					continue;
-				}*/
-
 				tr.Entity.TakeDamage( DamageInfo.FromBullet( tr.EndPos, -tr.Normal * 10f, 10 ) );
 			}
 
@@ -226,7 +216,7 @@ namespace Fortwars
 
 			if ( HoldingSecondary )
 			{
-				DoThrowDelayed();
+				_ = DoThrowDelayed();
 				ViewModelEntity?.SetAnimBool( "throw", true );
 			}
 		}
