@@ -19,6 +19,7 @@ namespace Fortwars
 		// @ref
 		//
 		public Panel Wrapper { get; set; }
+		public Panel Cursor { get; set; }
 		public Image CurrentImage { get; set; }
 		public Panel Inner { get; set; }
 		public InputHint BuildHint { get; set; }
@@ -27,22 +28,8 @@ namespace Fortwars
 		//
 		// Runtime
 		//
-		private float lerpedSelectionAngle = 0f;
 		private PieSelector selector;
-
-		public struct Item
-		{
-			public string Icon { get; set; }
-			public string Name { get; set; }
-			public string Description { get; set; }
-
-			public Item( string name, string description, string icon = "question_mark" )
-			{
-				Name = name;
-				Description = description;
-				Icon = icon;
-			}
-		}
+		public int SelectedIndex { get; set; }
 
 		public virtual Item[] Items { get; }
 
@@ -69,11 +56,11 @@ namespace Fortwars
 			// when there's changes etc.
 			//
 			selector?.Delete();
-			selector = new PieSelector( Items.Length );
+			selector = new PieSelector( this );
 			selector.Parent = Wrapper;
 		}
 
-		private float AngleIncrement => 360f / Items.Length;
+		public float AngleIncrement => 360f / Items.Length;
 		private List<Panel> icons = new();
 
 		/// <summary>
@@ -81,7 +68,7 @@ namespace Fortwars
 		/// </summary>
 		private void BuildIcons()
 		{
-			int index = -1;
+			int index = 0;
 			foreach ( var item in Items )
 			{
 				Vector2 frac = MathExtension.InverseAtan2( AngleIncrement * index );
@@ -97,16 +84,6 @@ namespace Fortwars
 
 				index++;
 			}
-		}
-
-		/// <summary>
-		/// Create a panel transform with all the shit we'd usually put in SCSS
-		/// </summary>
-		private PanelTransform CreateStandardPanelTransform()
-		{
-			var panelTransform = new PanelTransform();
-			panelTransform.AddScale( 1.05f );
-			return panelTransform;
 		}
 
 		/// <summary>
@@ -142,7 +119,6 @@ namespace Fortwars
 			return selectedItem;
 		}
 
-		int lastIndex;
 		public override void Tick()
 		{
 			base.Tick();
@@ -155,127 +131,48 @@ namespace Fortwars
 
 			VirtualCursor.InUse = true;
 
-			var angle = GetCurrentAngle();
-			var selectedItem = GetCurrentItem();
-			int selectedIndex = GetCurrentIndex();
+			UpdateWheel();
+			UpdateCursor();
+		}
+
+		private void UpdateWheel()
+		{
+			var newSelectedItem = GetCurrentItem();
+			int newSelectedIndex = GetCurrentIndex();
 
 			for ( int i = 0; i < icons.Count; i++ )
 			{
-				icons[i].SetClass( "active", i == selectedIndex );
+				icons[i].SetClass( "active", i == newSelectedIndex );
 			}
 
-			// Interpolate angle here because scss transition does a shit job of it
-			float deltaAngle = lerpedSelectionAngle.NormalizeDegrees() - angle.NormalizeDegrees();
-			lerpedSelectionAngle = lerpedSelectionAngle.LerpToAngle( angle, 50f * Time.Delta );
-
-			if ( MathF.Abs( deltaAngle ) >= 0.5f )
+			if ( newSelectedIndex != SelectedIndex )
 			{
-				CurrentImage.SetTexture( selectedItem?.Icon ?? "" );
-				CurrentName = selectedItem?.Name ?? "None";
-				CurrentDescription = selectedItem?.Description ?? "Select something";
+				SelectedIndex = newSelectedIndex;
 
-				var panelTransform = CreateStandardPanelTransform();
+				CurrentImage.SetTexture( newSelectedItem?.Icon ?? "" );
+				CurrentName = newSelectedItem?.Name ?? "None";
+				CurrentDescription = newSelectedItem?.Description ?? "Select something";
 
-				panelTransform.AddRotation( 0, 0, lerpedSelectionAngle + AngleIncrement );
-				selector.Style.Transform = panelTransform;
-
-				BuildError.Style.Display = DisplayMode.None;
-				BuildHint.Style.Display = DisplayMode.Flex;
-
-				if ( lastIndex != selectedIndex )
-					OnChange();
+				OnChange();
 			}
+		}
 
-			lastIndex = GetCurrentIndex();
+		private void UpdateCursor()
+		{
+			float mul = 1f;
+
+			if ( Input.UsingController )
+				mul = 188f; // Show cursor in the gap between the center and the outer ring
+
+			Vector2 virtualCursorPos = mul * VirtualCursor.Position;
+			Cursor.Style.Opacity = virtualCursorPos.Length.LerpInverse( 128, 188 );
+
+			virtualCursorPos += Box.Rect.Size / 2.0f * ScaleFromScreen;
+
+			Cursor.Style.Left = virtualCursorPos.x;
+			Cursor.Style.Top = virtualCursorPos.y;
 		}
 
 		protected virtual void OnChange() { }
-	}
-
-	public class PieSelector : Panel
-	{
-		int itemCount;
-		public PieSelector( int itemCount )
-		{
-			this.itemCount = itemCount;
-		}
-
-		public override void OnParentChanged()
-		{
-			base.OnParentChanged();
-			GenerateTexture();
-		}
-
-		public override void OnHotloaded()
-		{
-			base.OnHotloaded();
-			GenerateTexture();
-		}
-
-		private void GenerateTexture()
-		{
-			int width = 2048;
-			int height = 2048;
-			int stride = 4;
-
-			Vector2 circleSize = new Vector2( width, height );
-			Vector2 circleCenter = circleSize / 2.0f;
-			float circleRadius = width / 2f;
-
-			// RGBA texture
-			byte[] textureData = new byte[width * height * 4];
-			void SetPixel( int x, int y, Color col )
-			{
-				textureData[((x + (y * width)) * stride) + 0] = col.r.ColorComponentToByte();
-				textureData[((x + (y * width)) * stride) + 1] = col.g.ColorComponentToByte();
-				textureData[((x + (y * width)) * stride) + 2] = col.b.ColorComponentToByte();
-				textureData[((x + (y * width)) * stride) + 3] = col.a.ColorComponentToByte();
-			}
-
-			//
-			// Is this pixel in a circle
-			//
-			bool InCircle( int x, int y, float radius )
-			{
-				return MathF.Pow( x - circleCenter.x, 2 ) + MathF.Pow( y - circleCenter.y, 2 ) < MathF.Pow( radius, 2 );
-			}
-
-			//
-			// Is this pixel in a segment of the pie
-			//
-			bool InSegment( int x, int y )
-			{
-				float angleIncrement = 360 / itemCount;
-				float angle = MathF.Atan2( circleCenter.y - y, circleCenter.x - x ).RadianToDegree().NormalizeDegrees();
-
-				// We do this to offset everything to match array indexing at 0
-				return angle < angleIncrement;
-			}
-
-			for ( int x = 0; x < width; x++ )
-			{
-				for ( int y = 0; y < height; y++ )
-				{
-					if ( InCircle( x, y, circleRadius ) && // Outer ring
-						!InCircle( x, y, circleRadius * 0.6f ) && // Inner ring
-						InSegment( x, y ) ) // Pie segment
-					{
-						SetPixel( x, y, Color.White );
-					}
-					else
-					{
-						SetPixel( x, y, Color.White * 0.0f );
-					}
-				}
-			}
-
-			var newTexture = Texture.Create( width, height )
-				.WithStaticUsage()
-				.WithData( textureData )
-				.WithName( "PieSelector" )
-				.Finish();
-
-			Style.BackgroundImage = newTexture;
-		}
 	}
 }

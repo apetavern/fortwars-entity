@@ -124,6 +124,17 @@
     }
 }
 
+.cursor {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    background-color: white;
+    border: 2px solid gray;
+    transform: translate( -50% -50% );
+    opacity: 1;
+}
+
 .red-team {
     .pie-menu .wrapper pieselector {
         background-image-tint: $red-team;
