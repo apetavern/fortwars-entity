@@ -90,7 +90,7 @@ namespace Fortwars
 		/// Get the current angle based on the mouse position, relative to the center of the menu.
 		/// Returns <see langword="null"/> if we're not really looking at anything
 		/// </summary>
-		protected float GetCurrentAngle()
+		private float GetCurrentAngle()
 		{
 			Vector2 relativeMousePos = VirtualCursor.Position;
 

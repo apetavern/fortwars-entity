@@ -109,6 +109,17 @@
         }
     }
 
+    .cursor {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border-radius: 100%;
+        background-color: white;
+        border: 2px solid gray;
+        transform: translate( -50% -50% );
+        display: none;
+    }
+
     &.active {
         background-color: rgba( $background, 0.5 );
         backdrop-filter: blur( 10px );
@@ -121,18 +132,11 @@
                 transform: scale( 0.95 );
             }
         }
-    }
-}
 
-.cursor {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    border-radius: 100%;
-    background-color: white;
-    border: 2px solid gray;
-    transform: translate( -50% -50% );
-    opacity: 1;
+        .cursor {
+            display: flex;
+        }
+    }
 }
 
 .red-team {
