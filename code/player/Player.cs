@@ -58,7 +58,7 @@ namespace Fortwars
 				return;
 			}
 
-			Controller = new WalkController();
+			Controller = new PlayerController();
 			Animator = new StandardPlayerAnimator();
 			Camera = new FirstPersonCamera();
 
@@ -160,7 +160,7 @@ namespace Fortwars
 
 					if ( Using == null )
 					{
-						if(ActiveChild is not PhysGun)
+						if ( ActiveChild is not PhysGun )
 							UseFail();
 						return;
 					}

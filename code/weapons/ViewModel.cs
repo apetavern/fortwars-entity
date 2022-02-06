@@ -85,6 +85,9 @@ namespace Fortwars
 			if ( Weapon.IsValid() && DoTucking() )
 				return;
 
+			DoDucking();
+			DoSliding();
+
 			if ( DoSprinting() )
 				bobCycleTime *= 2;
 
@@ -94,11 +97,34 @@ namespace Fortwars
 
 		private bool DoSprinting()
 		{
-			// Todo: this is a bit hacky. We should probably make a custom player controller with an "isSprinting" property/field
-			if ( Local.Pawn is Player { Controller: { Velocity: { Length: > 250 } } } player && Input.Down( InputButton.Run ) )
+			if ( Local.Pawn is Player { Controller: PlayerController { IsSprinting: true } } player )
 			{
 				TargetRot = Rotation.From( 15, 5, 0 );
 				TargetPos = Vector3.Backward * 6f;
+				return true;
+			}
+
+			return false;
+		}
+
+		private bool DoSliding()
+		{
+			if ( Local.Pawn is Player { Controller: PlayerController { DuckSlide: { IsActive: true, IsActiveSlide: true } } } player )
+			{
+				TargetRot = Rotation.From( 5, 0, -20 );
+				TargetPos = Vector3.Left * 5;
+				return true;
+			}
+
+			return false;
+		}
+
+		private bool DoDucking()
+		{
+			if ( Local.Pawn is Player { Controller: PlayerController { DuckSlide: { IsActive: true, IsActiveSlide: false } } } player )
+			{
+				TargetRot = Rotation.From( 5, 0, -15 );
+				TargetPos = Vector3.Zero;
 				return true;
 			}
 
