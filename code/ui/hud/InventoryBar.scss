@@ -43,6 +43,10 @@ InventoryBar {
         label {
             color: $red-team;
         }
+
+        inputhint image {
+            background-image-tint: $red-team;
+        }
     }
 }
 
@@ -54,6 +58,10 @@ InventoryBar {
 
         label {
             color: $blue-team;
+        }
+
+        inputhint image {
+            background-image-tint: $blue-team;
         }
     }
 }

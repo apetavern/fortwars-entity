@@ -11,6 +11,8 @@ buildhelp {
     border-radius: 2px;
     opacity: 0;
     align-items: flex-end;
+    padding: 0 22px;
+    width: 265px;
 
     &.visible {
         opacity: 1;
@@ -19,7 +21,7 @@ buildhelp {
     inputhint {
         flex-direction: row-reverse;
         justify-content: space-between;
-        width: 250px;
+        width: 100%;
 
         &:not(:first-child) {
             margin-top: 8px;

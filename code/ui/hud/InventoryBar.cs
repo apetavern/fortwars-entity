@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
+using System;
 using System.Collections.Generic;
 
 namespace Fortwars
@@ -110,17 +111,19 @@ namespace Fortwars
 			SetActiveSlot( input, inventory, nextSlot );
 		}
 	}
+
 	public class InventoryIcon : Panel
 	{
 		public Entity TargetEnt;
 		public Label Label;
-		public Label Number;
 
 		public InventoryIcon( int i, Panel parent )
 		{
 			Parent = parent;
 			Label = Add.Label( "empty", "item-name" );
-			Number = Add.Label( $"{i}", "slot-number" );
+
+			var inputButton = (InputButton)Enum.Parse( typeof( InputButton ), $"Slot{i}" );
+			Add.InputHint( inputButton, "", "slot-number" );
 		}
 
 		public void Clear()
