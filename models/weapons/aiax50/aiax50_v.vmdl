@@ -11,7 +11,16 @@
 				[
 					{
 						_class = "ModelModifier_Translate"
-						translation = [ 50.0, -10.0, -150.0 ]
+						translation = [ 40.0, -5.0, -145.0 ]
+					},
+					{
+						_class = "ModelModifier_ScaleAndMirror"
+						scale = 1.0
+						mirror_x = false
+						mirror_y = false
+						mirror_z = false
+						flip_bone_forward = false
+						swap_left_and_right_bones = false
 					},
 				]
 			},
