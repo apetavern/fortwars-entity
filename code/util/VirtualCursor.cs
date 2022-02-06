@@ -27,7 +27,7 @@ namespace Fortwars
 			if ( Input.UsingController )
 				Position = Input.GetAnalog( InputAnalog.Look ) * new Vector2( 1, -1 );
 			else
-				Position += Mouse.Delta;
+				Position += Mouse.Delta * Time.Delta * 500;
 		}
 
 		[Event.Frame]
