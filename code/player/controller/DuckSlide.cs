@@ -133,11 +133,13 @@ namespace Fortwars
 			{
 				if ( IsActiveSlide )
 					eyeHeight = eyeHeight.LerpTo( 0.4f, 20f * Time.Delta );
-
-				eyeHeight = eyeHeight.LerpTo( 0.5f, 10f * Time.Delta );
+				else
+					eyeHeight = eyeHeight.LerpTo( 0.5f, 10f * Time.Delta );
 			}
-
-			eyeHeight = eyeHeight.LerpTo( 1.0f, 50f * Time.Delta );
+			else
+			{
+				eyeHeight = eyeHeight.LerpTo( 1.0f, 50f * Time.Delta );
+			}
 		}
 
 
