@@ -4,7 +4,7 @@ namespace Fortwars
 {
 	public partial class FlagDisplay : ModelEntity, IShowIcon
 	{
-		[Net,Change("OnTeamChange")] public Team Team { get; set; }
+		[Net, Change( "OnTeamChange" )] public Team Team { get; set; }
 
 		#region Icons
 		Vector3 IShowIcon.IconWorldPosition() => this.Position;

@@ -164,7 +164,7 @@ namespace Fortwars
 		{
 			if ( Team == Team.Blue )
 			{
-				ChatBox.AddInformation( To.Everyone, $"{BlueTeam.Name} flag returned");
+				ChatBox.AddInformation( To.Everyone, $"{BlueTeam.Name} flag returned" );
 				BlueFlagCarrier = null;
 				ShowFlag( Team.Blue );
 				return;

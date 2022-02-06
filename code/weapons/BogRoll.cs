@@ -1,6 +1,6 @@
 ﻿using Sandbox;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Fortwars
@@ -36,7 +36,7 @@ namespace Fortwars
 		{
 			carrier.Inventory.SetActive( this );
 
-			if (Team == Team.Blue && Game.Instance.BlueFlagCarrier != carrier as FortwarsPlayer )
+			if ( Team == Team.Blue && Game.Instance.BlueFlagCarrier != carrier as FortwarsPlayer )
 			{
 				Game.Instance.PlayerPickupEnemyFlagFloor( carrier as FortwarsPlayer );
 			}
@@ -51,7 +51,7 @@ namespace Fortwars
 
 		public override bool CanCarry( Entity carrier )
 		{
-			if( RespawntimerStarted && ( carrier as FortwarsPlayer).TeamID == Team )
+			if ( RespawntimerStarted && (carrier as FortwarsPlayer).TeamID == Team )
 			{
 				TimeSinceDropped += Time.Delta;
 			}
@@ -82,7 +82,7 @@ namespace Fortwars
 				//( Parent as FortwarsPlayer).Inventory.Drop( this );
 				ThrowRoll();
 			}
-			else if( Parent != null && Parent.ActiveChild == this )
+			else if ( Parent != null && Parent.ActiveChild == this )
 			{
 				RespawntimerStarted = false;
 			}
@@ -142,7 +142,7 @@ namespace Fortwars
 				}
 			}
 
-			
+
 		}
 
 		public virtual bool CanPrimaryAttack()
@@ -157,7 +157,8 @@ namespace Fortwars
 
 		public virtual bool CanSecondaryAttack()
 		{
-			if ( !Owner.IsValid() || !Input.Down( InputButton.Attack2 ) ) {
+			if ( !Owner.IsValid() || !Input.Down( InputButton.Attack2 ) )
+			{
 				HoldingSecondary = false;
 				TimeSinceHoldingSecondary = 0f;
 				return false;
@@ -183,17 +184,17 @@ namespace Fortwars
 
 			(Parent as FortwarsPlayer).Inventory.Drop( this );
 
-			Velocity = throwdir * 300f * (1f + Math.Clamp( TimeSinceHoldingSecondary/2f, 0, 2f ));
+			Velocity = throwdir * 300f * (1f + Math.Clamp( TimeSinceHoldingSecondary / 2f, 0, 2f ));
 		}
 
-		[Net]bool HoldingSecondary { get; set; }
+		[Net] bool HoldingSecondary { get; set; }
 		[Net] TimeSince TimeSinceHoldingSecondary { get; set; }
 
 		public virtual void AttackSecondary()
 		{
 			HoldingSecondary = true;
 			ViewModelEntity?.SetAnimBool( "pull", HoldingSecondary );
-			ViewModelEntity?.SetAnimFloat( "pullamount", Math.Clamp( TimeSinceHoldingSecondary/4f, 0, 1f ) );
+			ViewModelEntity?.SetAnimFloat( "pullamount", Math.Clamp( TimeSinceHoldingSecondary / 4f, 0, 1f ) );
 		}
 
 		public virtual void AttackPrimary()
