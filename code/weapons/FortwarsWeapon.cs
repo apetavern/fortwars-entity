@@ -13,6 +13,7 @@ public partial class FortwarsWeapon : Carriable
 	private float spread = 0;
 	private Vector2 recoil = 0;
 	private TimeSince TimeSinceReload { get; set; }
+	public bool IsAiming => Input.Down( InputButton.Attack2 );
 
 	//
 	// Networked variables
@@ -407,27 +408,8 @@ public partial class FortwarsWeapon : Carriable
 
 		inputBuilder.ViewAngles += recoil;
 
-		if ( Input.Down( InputButton.Attack2 ) )
-		{
+		if ( IsAiming )
 			inputBuilder.ViewAngles = Angles.Lerp( inputBuilder.OriginalViewAngles, inputBuilder.ViewAngles, WeaponAsset.AimFovMult );
-		}
-	}
-
-	float fov = 90f;
-	public override void PostCameraSetup( ref CameraSetup camSetup )
-	{
-		base.PostCameraSetup( ref camSetup );
-
-		if ( Input.Down( InputButton.Attack2 ) )
-		{
-			fov = fov.LerpTo( 90f * WeaponAsset.AimFovMult, 10f * Time.Delta );
-		}
-		else
-		{
-			fov = fov.LerpTo( 90f, 10f * Time.Delta );
-		}
-
-		camSetup.FieldOfView = fov;
 	}
 
 	private float CalcDamage( float distance, bool isHeadshot )
