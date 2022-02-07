@@ -82,19 +82,16 @@ PS
     CreateTexture2D( g_tReticle ) < Channel( RGBA, None( ReticleTexture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); >;
     TextureAttribute( g_tReticle, g_tReticle );
 
-    CreateInputTexture2D( MaskTexture, Srgb, 8, "", "",  "Textures", Default3( 1, 1, 1 ) );
-    CreateTexture2D( g_tMask ) < Channel( RGBA, None( MaskTexture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); >;
-    TextureAttribute( g_tMask, g_tMask );
-
     CreateTexture2D( g_tScopeRT ) < Attribute( "ScopeRT" ); SrgbRead( false ); Filter( MIN_MAG_MIP_LINEAR );  >;
 
 	float g_flReticleScale < UiType( Slider ); Default( 2.5f ); UiGroup( "Reticle" ); >;
 	float2 g_flReticleOffset < UiType( Slider ); Default2( 0.25f, 0.79f ); UiGroup( "Reticle" ); Range2( 0.0f, 0.0f, 1.0f, 1.0f ); >;
 	float g_flReticleCircleScale < UiType( Slider ); Default( 2.0f ); UiGroup( "Reticle" ); >;
+
+	float g_flMaskStrength < UiType( Slider ); Default( 0.5f ); UiGroup( "Mask" ); >;
+	float g_flMaskPower < UiType( Slider ); Default( 2.0f ); UiGroup( "Mask" ); >;
 	
-	float g_flMaskScale < UiType( Slider ); Default( 1.0f ); UiGroup( "Mask" ); >;
-	float2 g_vMaskOffset1 < UiType( Slider ); Default2( 0.0f, 0.0f ); UiGroup( "Mask" ); Range2( -1.0f, -1.0f, 1.0f, 1.0f ); >;
-	float2 g_vMaskOffset2 < UiType( Slider ); Default2( 0.0f, 0.0f ); UiGroup( "Mask" ); Range2( -1.0f, -1.0f, 1.0f, 1.0f ); >;
+	float2 g_flMaskOffset < UiType( Slider ); Default2( 0.0f, 0.0f ); UiGroup( "Mask" ); Range2( -1.0f, -1.0f, 1.0f, 1.0f ); >;
 
 	//
 	// Main
@@ -102,17 +99,17 @@ PS
 	PS_OUTPUT MainPs( PixelInput i )
 	{
 		FinalCombinerInput_t material = PS_SharedStandardProcessing( i );
-		PS_OUTPUT o = PS_FinalCombiner( material );
 
+		PS_OUTPUT o = PS_FinalCombiner( material );
         float2 vPositionUvWithOffset = ( ( i.vPositionSs.xy ) - g_vViewportOffset ) / g_vRenderTargetSize;
         float fAspectRatio = g_vViewportSize.y / g_vViewportSize.x;
 
 		//
 		// Circle mask
 		//
-		float2 vCircleMaskUvs = vPositionUvWithOffset * g_flMaskScale * float2( 1.0f, fAspectRatio );
-		vCircleMaskUvs += g_vMaskOffset1 + g_vMaskOffset2;
-		float fMaskMix = Tex2D( g_tMask, vCircleMaskUvs );
+		float2 vCircleMaskUvs = (vPositionUvWithOffset - 0.5f) * float2( 1.0f, fAspectRatio );
+		vCircleMaskUvs += g_flMaskOffset;
+		float fMaskMix = 1.0f - saturate( pow( length( vCircleMaskUvs * g_flMaskStrength ), g_flMaskPower ) );
 
 		//
 		// Reticle texture
@@ -125,9 +122,10 @@ PS
 		//
 		// Put it all together
 		//
-		o.vColor = Tex2D( g_tScopeRT, vPositionUvWithOffset );
+		o.vColor = Tex2D( g_tScopeRT, vPositionUvWithOffset * pow( fMaskMix, 0.025f ) );
         o.vColor.xyz = SrgbGammaToLinear( o.vColor.xyz * vReticleColor.xyz );
 		o.vColor.xyz *= fMaskMix;
+		o.vColor.z *= pow( fMaskMix, 2 ); // We want the outer edge to look green/yellow
 
         o.vColor.a = 1.0;
 		return o;
