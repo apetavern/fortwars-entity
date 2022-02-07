@@ -9,6 +9,9 @@ namespace Fortwars
 		Texture depthTexture;
 
 		private Vector2 textureSize;
+		private float fieldOfView = 25f;
+		const float baseFov = 50f;
+
 		public ScopeRenderTarget()
 		{
 			textureSize = Screen.Size / 2f;
@@ -51,13 +54,22 @@ namespace Fortwars
 			if ( sceneObject == null )
 				return;
 
+			if ( Input.Down( InputButton.Attack2 ) )
+			{
+				fieldOfView = fieldOfView.LerpTo( weapon.WeaponAsset.AimFovMult * baseFov, 10 * Time.Delta );
+			}
+			else
+			{
+				fieldOfView = fieldOfView.LerpTo( baseFov, 10 * Time.Delta );
+			}
+
 			Render.DrawScene( colorTexture,
 					depthTexture,
 					textureSize,
 					SceneWorld.Current,
 					CurrentView.Position,
 					CurrentView.Rotation.Angles(),
-					weapon.WeaponAsset.AimFovMult * 25f,
+					fieldOfView,
 					zNear: 1,
 					zFar: 25000 );
 
