@@ -63,6 +63,8 @@ public partial class FortwarsWeapon : Carriable
 		if ( spread.AlmostEqual( 0 ) )
 			spread = 0;
 
+		ViewModelEntity?.SetAnimBool( "aiming", IsAiming );
+
 		if ( IsReloading )
 		{
 			if ( TimeSinceReload > WeaponAsset.ReloadTime )
@@ -95,8 +97,18 @@ public partial class FortwarsWeapon : Carriable
 	{
 		base.CreateHudElements();
 
-		SniperScopePanel = new ScopeRenderTarget();
-		SniperScopePanel.Parent = Local.Hud;
+		if ( WeaponAsset.UseRenderTarget )
+		{
+			SniperScopePanel = new ScopeRenderTarget();
+			SniperScopePanel.Parent = Local.Hud;
+		}
+	}
+
+	public override void DestroyHudElements()
+	{
+		base.DestroyHudElements();
+
+		SniperScopePanel?.Delete();
 	}
 
 	public override void CreateViewModel()

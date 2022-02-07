@@ -27,4 +27,11 @@ public partial class Carriable : BaseCarriable
 		CrosshairPanel.Parent = Local.Hud;
 		CrosshairPanel.AddClass( ClassInfo.Name );
 	}
+
+	public override void DestroyHudElements()
+	{
+		base.DestroyHudElements();
+
+		CrosshairPanel?.Delete();
+	}
 }

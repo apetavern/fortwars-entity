@@ -35,6 +35,9 @@ public class WeaponAsset : Asset
 	[Property, Category( "Meta" )]
 	public HoldTypes HoldType { get; set; } = HoldTypes.Pistol;
 
+	[Property, Category( "Meta" )]
+	public bool UseRenderTarget { get; set; } = false;
+
 	//
 	// Shooting
 	//

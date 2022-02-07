@@ -17,6 +17,7 @@
 		5 : "Melee Punch"
 		6 : "Melee Weapons"
 	]
+	userendertarget(boolean) { group = "Meta" } : "Use Render Target" : 0 : ""
 	firemode(choices) { group = "Shooting" } : "Fire Mode" : 0 : "" =
 	[
 		0 : "Burst"

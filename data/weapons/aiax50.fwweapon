@@ -39,5 +39,6 @@
 		aimposition = [ -20.0, 29.7, 8.3 ]
 		aimrotation = [ 1.65, -4.0, 0.0 ]
 		aimfovmult = 0.25
+		userendertarget = true
 	}
 }
