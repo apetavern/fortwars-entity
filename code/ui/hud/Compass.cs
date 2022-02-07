@@ -60,19 +60,6 @@ namespace Fortwars
 				compassPoints.Add( compassPoint );
 			}
 
-			// Ticks
-			for ( int i = 0; i < 360; i++ )
-			{
-				if ( i % angleIncrement == 0 )
-					continue;
-
-				var compassPoint = new CompassPoint( this );
-				compassPoint.Angle = i;
-				compassPoint.Parent = this;
-
-				compassPoints.Add( compassPoint );
-			}
-
 			Add.Icon( "keyboard_arrow_up", "current-facing-icon" );
 			currentFacing = Add.Label( "0", "current-facing" );
 		}
