@@ -42,7 +42,7 @@
 							},
 							{
 								from = "lenses.vmat"
-								to = "materials/glass/sbox_glass.vmat"
+								to = "materials/sniper_scope.vmat"
 							},
 							{
 								from = "mag.vmat"
@@ -74,12 +74,8 @@
 						parent_bone = ""
 						import_filter = 
 						{
-							exclude_by_default = true
-							exception_list = 
-							[
-								"Arms",
-								"polySurface13",
-							]
+							exclude_by_default = false
+							exception_list = [  ]
 						}
 					},
 				]
@@ -103,7 +99,7 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						source_filename = "models/weapons/aiax50/aiax50_v.fbx"
-						start_frame = 9
+						start_frame = 19
 						end_frame = 19
 						framerate = 2.0
 						take = 0
@@ -329,6 +325,24 @@
 						parent_bone = "base"
 						relative_origin = [ 0.0, 16.000013, 178.000046 ]
 						relative_angles = [ -90.0, 90.0, -180.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "scope_start"
+						parent_bone = "base"
+						relative_origin = [ -0.08843, 28.001831, -6.223209 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "scope_end"
+						parent_bone = "base"
+						relative_origin = [ 0.116209, 28.055859, 61.615608 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
 					},

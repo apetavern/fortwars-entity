@@ -24,6 +24,14 @@ InventoryBar {
         border-right: 4px transparent;
         transition: all 150ms ease;
 
+        .item-name {
+            flex-grow: 1;
+        }
+
+        .ammo {
+            margin-right: 8px;
+        }
+
         label {
             color: $background;
         }

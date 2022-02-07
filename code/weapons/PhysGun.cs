@@ -42,7 +42,7 @@ public partial class PhysGun : Carriable, IUse
 	{
 		base.Spawn();
 
-		SetModel( "models/weapons/hkusp/hkusp_w.vmdl" );
+		SetModel( "models/weapons/manipulator/manipulator_w.vmdl" );
 
 		CollisionGroup = CollisionGroup.Weapon;
 		SetInteractsAs( CollisionLayer.Debris );

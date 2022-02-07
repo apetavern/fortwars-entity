@@ -15,26 +15,29 @@
 		recoilx = 0.4
 		recoily = -3.0
 		firstshotalwaysaccurate = true
-		spread = 0.01
-		spreadshotincrease = 0.1
+		spread = 0.0
+		spreadshotincrease = 0.0
 		spreadchangetime = 1.0
 		aimaccuracymult = 1.0
 		maxammo = 5
 		extraammo = 30
 		reloadtime = 2.0
 		postreloadtime = 0.5
-		maxdamage = 75.0
-		mindamage = 50.0
+		maxdamage = 1500.0
+		mindamage = 500.0
 		damagedropoffdistance = 1024
 		headshotmultiplier = 2.0
-		kickbacksize = 6.0
+		kickbacksize = 3.0
 		kickbacklength = 1.0
 		kickbackspeed = 1.5
-		kickbackrotation = 2.0
+		kickbackrotation = 0.8
 		firesound = "rust_pumpshotgun.shootdouble"
 		holdtype = "2"
 		useprojectile = false
 		projectilemodel = resource:""
 		projectilespeed = 1.0
+		aimposition = [ -20.0, 29.7, 8.3 ]
+		aimrotation = [ 1.65, -4.0, 0.0 ]
+		aimfovmult = 0.25
 	}
 }

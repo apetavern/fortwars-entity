@@ -85,8 +85,20 @@ public class WeaponAsset : Asset
 	[Property, Category( "Accuracy" )]
 	public float SpreadChangeTime { get; set; } = 0.01f;
 
-	[Property, Category( "Accuracy" )]
+	//
+	// ADS
+	//
+	[Property, Category( "ADS" )]
 	public float AimAccuracyMult { get; set; } = 1.0f;
+
+	[Property, Category( "ADS" )]
+	public Vector3 AimPosition { get; set; }
+
+	[Property, Category( "ADS" )]
+	public Angles AimRotation { get; set; }
+
+	[Property, Category( "ADS" )]
+	public float AimFovMult { get; set; } = 0.5f;
 
 	//
 	// Ammo
