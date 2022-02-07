@@ -40,7 +40,7 @@ Layer0
 	TextureAmbientOcclusionB "materials/fw_grass/fw_grass_ambientocclusion.png"
 	TextureBlendMaskB "materials/fw_grass/fw_grass_height.png"
 	TextureColorB "materials/fw_grass/fw_grass_basecolor.png"
-	TextureMetalnessB "materials/default/default_metal.tga"
+	TextureMetalnessB "[0.649000 0.649000 0.649000 0.000000]"
 	TextureNormalB "materials/fw_grass/fw_grass_normal.png"
 	TextureRoughnessB "materials/fw_grass/fw_grass_roughness.png"
 	TextureTintMaskB "[0.000000 0.000000 0.000000 0.000000]"
