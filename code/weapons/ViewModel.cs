@@ -92,17 +92,19 @@ namespace Fortwars
 			}
 
 			DoDucking();
-			DoSliding();
 
 			if ( DoSprinting() )
 				bobCycleTime *= 2;
+
+			if ( DoSliding() )
+				return;
 
 			DoBobbing( bobCycleTime );
 		}
 
 		private bool DoADS()
 		{
-			if ( Weapon != null && Input.Down( InputButton.Attack2 ) )
+			if ( Weapon != null && Weapon.IsAiming )
 			{
 				TargetPos = Weapon.WeaponAsset.AimPosition;
 				TargetRot = Weapon.WeaponAsset.AimRotation.ToRotation();
@@ -130,8 +132,8 @@ namespace Fortwars
 		{
 			if ( Local.Pawn is Player { Controller: PlayerController { DuckSlide: { IsActive: true, IsActiveSlide: true } } } player )
 			{
-				TargetRot = Rotation.From( 5, 0, -20 );
-				TargetPos = Vector3.Left * 5;
+				TargetRot = Rotation.From( 5, 0, -25 );
+				TargetPos = Vector3.Zero;
 				return true;
 			}
 
@@ -169,7 +171,6 @@ namespace Fortwars
 			offset -= ShootOffset;
 
 			Vector2 maskOffset = new Vector2( offset.y, offset.z ) * 0.1f * (10 * offset.x + 1f);
-			DebugOverlay.ScreenText( 0, maskOffset.ToString() );
 			SceneObject.SetValue( "maskOffset", new Vector2( maskOffset.x, maskOffset.y ) );
 
 			if ( Owner.GroundEntity == null )

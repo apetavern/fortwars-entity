@@ -54,14 +54,10 @@ namespace Fortwars
 			if ( sceneObject == null )
 				return;
 
-			if ( Input.Down( InputButton.Attack2 ) )
-			{
+			if ( weapon.IsAiming )
 				fieldOfView = fieldOfView.LerpTo( weapon.WeaponAsset.AimFovMult * baseFov, 10 * Time.Delta );
-			}
 			else
-			{
 				fieldOfView = fieldOfView.LerpTo( baseFov, 10 * Time.Delta );
-			}
 
 			Render.DrawScene( colorTexture,
 					depthTexture,
