@@ -88,10 +88,10 @@ PS
 	float2 g_flReticleOffset < UiType( Slider ); Default2( 0.25f, 0.79f ); UiGroup( "Reticle" ); Range2( 0.0f, 0.0f, 1.0f, 1.0f ); >;
 	float g_flReticleCircleScale < UiType( Slider ); Default( 2.0f ); UiGroup( "Reticle" ); >;
 
-	// float3 SrgbGammaToLinear(float3 c) {
-	// 	c = max(c, 0);
-	// 	return c < 0.04045f ? c * 0.0773993805 : pow(c * 0.9478672986 + 0.0521327014, 2.4);
-	// }
+	float g_flMaskStrength < UiType( Slider ); Default( 0.5f ); UiGroup( "Mask" ); >;
+	float g_flMaskPower < UiType( Slider ); Default( 2.0f ); UiGroup( "Mask" ); >;
+	
+	float2 g_flMaskOffset < UiType( Slider ); Default2( 0.0f, 0.0f ); UiGroup( "Mask" ); Range2( -1.0f, -1.0f, 1.0f, 1.0f ); >;
 
 	//
 	// Main
@@ -102,19 +102,32 @@ PS
 
 		PS_OUTPUT o = PS_FinalCombiner( material );
         float2 vPositionUvWithOffset = ( ( i.vPositionSs.xy ) - g_vViewportOffset ) / g_vRenderTargetSize;
-
-        // Screen aspect ratio
         float fAspectRatio = g_vViewportSize.y / g_vViewportSize.x;
 
+		//
+		// Circle mask
+		//
+		float2 vCircleMaskUvs = (vPositionUvWithOffset - 0.5f) * float2( 1.0f, fAspectRatio );
+		vCircleMaskUvs += g_flMaskOffset;
+		float fMaskMix = 1.0f - saturate( pow( length( vCircleMaskUvs * g_flMaskStrength ), g_flMaskPower ) );
+
+		//
+		// Reticle texture
+		//
         float2 vPositionUv = ( i.vPositionSs.xy - g_vViewportOffset ) / g_vRenderTargetSize;
         float2 vReticleUvs = float2( vPositionUv.x, ( vPositionUv.y * fAspectRatio ) ) * g_flReticleScale;
         vReticleUvs += g_flReticleOffset;
         float4 vReticleColor = Tex2D( g_tReticle, vReticleUvs );
 
-		o.vColor = Tex2D( g_tScopeRT, vPositionUvWithOffset + float2( -0.21f, 0.0f ) ); // who fucking knows man
+		//
+		// Put it all together
+		//
+		o.vColor = Tex2D( g_tScopeRT, vPositionUvWithOffset * pow( fMaskMix, 0.025f ) + float2( -0.21f, 0.0f ) ); // who fucking knows man
         o.vColor.xyz = SrgbGammaToLinear( o.vColor.xyz * vReticleColor.xyz );
+		o.vColor.xyz *= fMaskMix;
+		o.vColor.z *= pow( fMaskMix, 2 ); // We want the outer edge to look green/yellow
+
         o.vColor.a = 1.0;
-		
 		return o;
 	}
 }

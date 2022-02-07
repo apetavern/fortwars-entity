@@ -12,8 +12,12 @@ Layer0
 	//---- Fade ----
 	g_flFadeExponent "1.000"
 
+	//---- Mask ----
+	g_flMaskOffset "[0.000 0.000]"
+	g_flMaskPower "16.000"
+	g_flMaskStrength "4.500"
+
 	//---- Reticle ----
-	g_flReticleCircleOpacityPower "16.000"
 	g_flReticleOffset "[0.751 0.073]"
 	g_flReticleScale "1.500"
 
@@ -29,4 +33,9 @@ Layer0
 
 	//---- Translucent ----
 	TextureTranslucency "materials/default/default_trans.tga"
+
+	DynamicParams
+	{
+		g_flMaskOffset "maskOffset"
+	}
 }
