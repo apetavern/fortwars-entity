@@ -42,14 +42,14 @@
 			m_pLayerMask = null
 			m_params = 
 			{
-				m_flExposureBias = 0.6344
-				m_flShoulderStrength = 0.1178
-				m_flLinearStrength = 0.3558
-				m_flLinearAngle = 0.1008
-				m_flToeStrength = 0.2067
-				m_flToeNum = 0.0072
-				m_flToeDenom = 0.2981
-				m_flWhitePoint = 3.966
+				m_flExposureBias = 0.5576
+				m_flShoulderStrength = 0.113
+				m_flLinearStrength = 0.3389
+				m_flLinearAngle = 0.096
+				m_flToeStrength = 0.2091
+				m_flToeNum = 0.0023
+				m_flToeDenom = 0.2956
+				m_flWhitePoint = 3.894
 			}
 		},
 	]

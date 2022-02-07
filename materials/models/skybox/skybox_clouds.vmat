@@ -4,6 +4,9 @@ Layer0
 {
 	shader "tarps.vfx"
 
+	//---- Translucent ----
+	F_TRANSLUCENT 1
+
 	//---- Ambient Occlusion ----
 	TextureAmbientOcclusion "materials/default/default_ao.tga"
 
@@ -44,6 +47,10 @@ Layer0
 	g_nScaleTexCoordUByModelScaleAxis "0"
 	g_nScaleTexCoordVByModelScaleAxis "0"
 	g_vTexCoordOffset "[0.000 0.000]"
-	g_vTexCoordScale "[5.000 5.000]"
-	g_vTexCoordScrollSpeed "[0.010 0.010]"
+	g_vTexCoordScale "[1.000 1.000]"
+	g_vTexCoordScrollSpeed "[0.000 0.000]"
+
+	//---- Translucent ----
+	g_flOpacityScale "1.000"
+	TextureTranslucency "materials/models/skybox/skybox_clouds_mask.png"
 }
