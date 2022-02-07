@@ -53,8 +53,6 @@ public partial class FortwarsWeapon : Carriable
 
 		CollisionGroup = CollisionGroup.Weapon;
 		SetInteractsAs( CollisionLayer.Debris );
-
-		Components.Add<BobbingComponent>( new() );
 	}
 
 	public override void Simulate( Client player )
