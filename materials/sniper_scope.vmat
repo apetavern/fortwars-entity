@@ -13,9 +13,9 @@ Layer0
 	g_flFadeExponent "1.000"
 
 	//---- Mask ----
-	g_flMaskOffset "[0.000 0.000]"
-	g_flMaskPower "16.000"
-	g_flMaskStrength "4.500"
+	g_flMaskScale "1.500"
+	g_vMaskOffset1 "[0.000 0.000]"
+	g_vMaskOffset2 "[0.751 0.073]"
 
 	//---- Reticle ----
 	g_flReticleOffset "[0.751 0.073]"
@@ -29,6 +29,7 @@ Layer0
 	g_vTexCoordScrollSpeed "[0.000 0.000]"
 
 	//---- Textures ----
+	MaskTexture "textures/sniper_mask.png"
 	ReticleTexture "textures/sniper_reticle.png"
 
 	//---- Translucent ----
@@ -36,6 +37,6 @@ Layer0
 
 	DynamicParams
 	{
-		g_flMaskOffset "maskOffset"
+		g_vMaskOffset1 "maskOffset"
 	}
 }
