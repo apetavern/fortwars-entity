@@ -21,8 +21,6 @@ namespace Fortwars
 
 		private bool activated;
 
-		private Vector3 ViewmodelOffset => new( -2, 5, 1 );
-
 		private Vector3 ShootOffset { get; set; }
 		private FortwarsWeapon Weapon { get; set; }
 
@@ -70,7 +68,7 @@ namespace Fortwars
 			Rotation *= FinalRot;
 
 			FinalPos = FinalPos.LerpTo( TargetPos, LerpSpeed * Time.Delta );
-			Position += (FinalPos + ViewmodelOffset) * Rotation;
+			Position += FinalPos * Rotation;
 
 			FinalFov = FinalFov.LerpTo( TargetFov, LerpSpeed * Time.Delta );
 			camSetup.ViewModel.FieldOfView = FinalFov;
@@ -85,14 +83,37 @@ namespace Fortwars
 			if ( Weapon.IsValid() && DoTucking() )
 				return;
 
+			DoShootOffset();
+
+			if ( DoADS() )
+			{
+				DoBobbing( bobCycleTime );
+				return;
+			}
+
 			DoDucking();
-			DoSliding();
 
 			if ( DoSprinting() )
 				bobCycleTime *= 2;
 
+			if ( DoSliding() )
+				return;
+
 			DoBobbing( bobCycleTime );
-			DoShootOffset();
+		}
+
+		private bool DoADS()
+		{
+			if ( Weapon != null && Weapon.IsAiming )
+			{
+				TargetPos = Weapon.WeaponAsset.AimPosition;
+				TargetRot = Weapon.WeaponAsset.AimRotation.ToRotation();
+				TargetFov = Weapon.WeaponAsset.AimFovMult * ViewmodelFov;
+
+				return true;
+			}
+
+			return false;
 		}
 
 		private bool DoSprinting()
@@ -111,8 +132,8 @@ namespace Fortwars
 		{
 			if ( Local.Pawn is Player { Controller: PlayerController { DuckSlide: { IsActive: true, IsActiveSlide: true } } } player )
 			{
-				TargetRot = Rotation.From( 5, 0, -20 );
-				TargetPos = Vector3.Left * 5;
+				TargetRot = Rotation.From( 5, 0, -25 );
+				TargetPos = Vector3.Zero;
 				return true;
 			}
 
@@ -148,6 +169,16 @@ namespace Fortwars
 			var offset = CalcSwingOffset( pitchDelta, yawDelta );
 			offset += CalcBobbingOffset( playerVelocity, bobCycleTime );
 			offset -= ShootOffset;
+
+			Vector2 maskOffset = new Vector2( offset.y, offset.z ) * 0.1f * (10 * offset.x + 1f);
+			SceneObject.SetValue( "maskOffset", new Vector2( maskOffset.x, maskOffset.y ) );
+
+			if ( Owner.GroundEntity == null )
+			{
+				offset += new Vector3( 0, 0, -2.5f );
+				newPitch -= 2.5f;
+			}
+
 			TargetPos += offset;
 
 			lastPitch = newPitch;

@@ -13,6 +13,7 @@ public partial class FortwarsWeapon : Carriable
 	private float spread = 0;
 	private Vector2 recoil = 0;
 	private TimeSince TimeSinceReload { get; set; }
+	public bool IsAiming => Input.Down( InputButton.Attack2 );
 
 	//
 	// Networked variables
@@ -52,8 +53,6 @@ public partial class FortwarsWeapon : Carriable
 
 		CollisionGroup = CollisionGroup.Weapon;
 		SetInteractsAs( CollisionLayer.Debris );
-
-		Components.Add<BobbingComponent>( new() );
 	}
 
 	public override void Simulate( Client player )
@@ -89,6 +88,15 @@ public partial class FortwarsWeapon : Carriable
 			TimeSincePrimaryAttack = 0;
 			AttackPrimary();
 		}
+	}
+
+	ScopeRenderTarget SniperScopePanel;
+	public override void CreateHudElements()
+	{
+		base.CreateHudElements();
+
+		SniperScopePanel = new ScopeRenderTarget();
+		SniperScopePanel.Parent = Local.Hud;
 	}
 
 	public override void CreateViewModel()
@@ -397,6 +405,9 @@ public partial class FortwarsWeapon : Carriable
 		base.BuildInput( inputBuilder );
 
 		inputBuilder.ViewAngles += recoil;
+
+		if ( IsAiming )
+			inputBuilder.ViewAngles = Angles.Lerp( inputBuilder.OriginalViewAngles, inputBuilder.ViewAngles, WeaponAsset.AimFovMult );
 	}
 
 	private float CalcDamage( float distance, bool isHeadshot )

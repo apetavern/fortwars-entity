@@ -18,7 +18,7 @@ namespace Fortwars
 			base.Spawn();
 
 			MoveType = MoveType.Physics;
-			CollisionGroup = CollisionGroup.Weapon;
+			CollisionGroup = CollisionGroup.Interactive;
 			PhysicsEnabled = true;
 			UsePhysicsCollision = true;
 			EnableHideInFirstPerson = true;

@@ -304,6 +304,24 @@
 						weight = 1.0
 						ignore_rotation = false
 					},
+					{
+						_class = "Attachment"
+						name = "scope_start"
+						parent_bone = "base"
+						relative_origin = [ -0.001707, 22.515614, -2.812691 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "scope_end"
+						parent_bone = "base"
+						relative_origin = [ 0.060688, 22.205482, 46.086681 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
 				]
 			},
 		]

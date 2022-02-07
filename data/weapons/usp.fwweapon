@@ -36,5 +36,8 @@
 		useprojectile = false
 		projectilemodel = resource:""
 		projectilespeed = 1.0
+		aimposition = [ -20.0, 25.25, 4.0 ]
+		aimrotation = [ -1.75, -1.225, 0.0 ]
+		aimfovmult = 0.5
 	}
 }

@@ -14,7 +14,8 @@ public class Crosshair : Panel
 			p.AddClass( $"el{i}" );
 		}
 
-		BindClass( "visible", () => !VirtualCursor.InUse );
+		// TODO: Link to weapon
+		BindClass( "visible", () => !VirtualCursor.InUse && !Input.Down( InputButton.Attack2 ) );
 	}
 
 	public override void Tick()
