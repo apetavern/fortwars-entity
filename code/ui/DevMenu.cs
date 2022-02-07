@@ -33,6 +33,7 @@ namespace Fortwars
 			//
 			buttons.Add.Label( "Game", "subtitle" );
 			buttons.Add.ButtonWithIcon( "Skip round", "fast_forward", "button", () => ConsoleSystem.Run( "fw_round_skip" ) );
+			buttons.Add.ButtonWithIcon( "Extend round", "timer", "button", () => ConsoleSystem.Run( "fw_round_extend" ) );
 			buttons.Add.ButtonWithIcon( "Switch teams", "loop", "button", () => ConsoleSystem.Run( "fw_team_swap" ) );
 
 			//

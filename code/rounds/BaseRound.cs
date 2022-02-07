@@ -69,6 +69,12 @@ namespace Fortwars
 			Game.Instance.Round.skipRound = true;
 		}
 
+		[AdminCmd( "fw_round_extend" )]
+		public static void ExtendRound()
+		{
+			Game.Instance.Round.RoundEndTime += 600;
+		}
+
 		protected virtual void OnStart() { }
 
 		protected virtual void OnFinish() { }
