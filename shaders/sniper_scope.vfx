@@ -122,7 +122,7 @@ PS
 		//
 		// Put it all together
 		//
-		o.vColor = Tex2D( g_tScopeRT, vPositionUvWithOffset * pow( fMaskMix, 0.025f ) + float2( -0.21f, 0.0f ) ); // who fucking knows man
+		o.vColor = Tex2D( g_tScopeRT, vPositionUvWithOffset * pow( fMaskMix, 0.025f ) );
         o.vColor.xyz = SrgbGammaToLinear( o.vColor.xyz * vReticleColor.xyz );
 		o.vColor.xyz *= fMaskMix;
 		o.vColor.z *= pow( fMaskMix, 2 ); // We want the outer edge to look green/yellow

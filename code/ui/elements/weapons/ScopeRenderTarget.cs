@@ -8,9 +8,10 @@ namespace Fortwars
 		Texture colorTexture;
 		Texture depthTexture;
 
+		private Vector2 textureSize;
 		public ScopeRenderTarget()
 		{
-			Vector2 textureSize = Screen.Size / 2f;
+			textureSize = Screen.Size / 2f;
 
 			colorTexture = Texture.CreateRenderTarget()
 						 .WithSize( (int)textureSize.x, (int)textureSize.y )
@@ -52,7 +53,7 @@ namespace Fortwars
 
 			Render.DrawScene( colorTexture,
 					depthTexture,
-					new Vector2( 500, 500 ),
+					textureSize,
 					SceneWorld.Current,
 					CurrentView.Position,
 					CurrentView.Rotation.Angles(),
