@@ -1,0 +1,44 @@
+﻿@import "/ui/_Common.scss";
+
+Resources {
+    position: absolute;
+    top: $safe-area-y;
+    left: $safe-area-x;
+    flex-direction: column;
+    background: linear-gradient( to right, $background, rgba( $background, 0 ) );
+    border-left: 4px solid transparent;
+    border-radius: 2px;
+    padding: 10px 20px;
+
+    Resource {
+        width: 250px;
+        align-items: center;
+
+        .name {
+            width: 50%;
+            margin-right: 4px;
+            text-transform: uppercase;
+        }
+    }
+}
+
+
+.red-team {
+    Resources {
+        border-left: $red-team;
+    }
+
+    label, iconpanel {
+        color: $red-team;
+    }
+}
+
+.blue-team {
+    Resources {
+        border-left: $blue-team;
+    }
+
+    label, iconpanel {
+        color: $blue-team;
+    }
+}

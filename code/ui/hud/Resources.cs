@@ -1,4 +1,5 @@
-﻿using Sandbox.UI;
+﻿using Sandbox;
+using Sandbox.UI;
 using Sandbox.UI.Construct;
 
 namespace Fortwars
@@ -7,8 +8,18 @@ namespace Fortwars
 	{
 		public Resources()
 		{
-			var wood = new Resource( "wood" );
-			wood.Parent = this;
+			StyleSheet.Load( "/ui/hud/Resources.scss" );
+
+			AddResource( "wood" );
+			AddResource( "steel" );
+			AddResource( "feathers" );
+			AddResource( "rubber" );
+		}
+
+		private void AddResource( string name )
+		{
+			var resource = new Resource( name );
+			resource.Parent = this;
 		}
 
 		class Resource : Panel
