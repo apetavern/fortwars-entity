@@ -149,10 +149,16 @@ public class WeaponAsset : Asset
 	public float KickbackRotation { get; set; } = 0.6f;
 
 	//
-	// Audio
+	// Effects
 	//
-	[Property, Category( "Audio" ), FGDType( "sound" )]
+	[Property, Category( "Effects" ), FGDType( "sound" )]
 	public string FireSound { get; set; } = "rust_pistol.shoot";
+
+	[Property, Category( "Effects" ), ResourceType( "vpcf" )]
+	public string FireParticles { get; set; } = "particles/flash_medium.vpcf";
+
+	[Property, Category( "Effects" ), ResourceType( "vpcf" )]
+	public string TracerParticles { get; set; } = "particles/tracer_large.vpcf";
 
 	//
 	// Projectile

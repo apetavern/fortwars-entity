@@ -384,7 +384,7 @@ public partial class FortwarsWeapon : Carriable
 
 		var effectEntity = firingViewModel;
 		var muzzle = effectEntity.GetAttachment( "muzzle" );
-		var tracer = Particles.Create( "particles/tracer_large.vpcf" );
+		var tracer = Particles.Create( WeaponAsset.TracerParticles );
 
 		tracer.SetPosition( 1, muzzle.GetValueOrDefault().Position );
 		tracer.SetPosition( 2, end );
@@ -395,7 +395,7 @@ public partial class FortwarsWeapon : Carriable
 	{
 		Host.AssertClient();
 
-		Particles.Create( "particles/flash_medium.vpcf", EffectEntity, "muzzle" );
+		Particles.Create( WeaponAsset.FireParticles, EffectEntity, "muzzle" );
 
 		if ( IsLocalPawn )
 		{
