@@ -67,7 +67,7 @@ namespace Fortwars
 
 			row.Add.ButtonWithIcon( "Give", "backpack", "button", () => ConsoleSystem.Run( $"give_weapon data/{dropdown.Value}" ) );
 
-			BindClass( "visible", () => Input.Down( InputButton.Flashlight ) );
+			BindClass( "visible", () => Input.Down( InputButton.Flashlight ) && Global.CheatsEnabled() );
 		}
 
 		public override void Tick()
