@@ -363,30 +363,11 @@ public partial class FortwarsWeapon : Carriable
 		yield return tr;
 	}
 
-	public virtual ModelEntity GetEffectModel()
-	{
-		ModelEntity effectModel = ViewModelEntity;
-
-		if ( (IsLocalPawn && !Owner.IsFirstPersonMode) || !IsLocalPawn )
-		{
-			effectModel = EffectEntity;
-		}
-
-		return effectModel;
-	}
-
 	[ClientRpc]
 	protected void TracerEffects( Vector3 end )
 	{
-		ModelEntity firingViewModel = GetEffectModel();
-
-		if ( firingViewModel == null ) return;
-
-		var effectEntity = firingViewModel;
-		var muzzle = effectEntity.GetAttachment( "muzzle" );
 		var tracer = Particles.Create( WeaponAsset.TracerParticles );
-
-		tracer.SetPosition( 1, muzzle.GetValueOrDefault().Position );
+		tracer.SetPosition( 1, EffectEntity.GetAttachment( "muzzle" )?.Position ?? default );
 		tracer.SetPosition( 2, end );
 	}
 
