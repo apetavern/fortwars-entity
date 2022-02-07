@@ -15,17 +15,27 @@ namespace Fortwars
 			entity = Entity;
 
 			if ( Host.IsServer )
+			{
 				entity.SetInteractsExclude( CollisionLayer.Player );
+				entity.Tags.Add( "nocollide" );
+			}
 			else
+			{
 				entity.RenderColor = entity.RenderColor.WithAlpha( 0.5f );
+			}
 		}
 
 		protected override void OnDeactivate()
 		{
 			if ( Host.IsServer )
+			{
 				entity.SetInteractsWith( CollisionLayer.Player );
+				entity.Tags.Remove( "nocollide" );
+			}
 			else
+			{
 				entity.RenderColor = entity.RenderColor.WithAlpha( 1.0f );
+			}
 		}
 
 		[Event.Tick.Server]

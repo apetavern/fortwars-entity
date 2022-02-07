@@ -2,15 +2,8 @@
 
 namespace Fortwars
 {
-	public class PlayerController : BasePlayerController
+	public partial class PlayerController : BasePlayerController
 	{
-		public override void FrameSimulate()
-		{
-			base.FrameSimulate();
-
-			SetEyeTransform();
-		}
-
 		TimeSince CoyoteTime = 0;
 
 		//
@@ -34,8 +27,8 @@ namespace Fortwars
 		public float ForwardSpeed => Velocity.Dot( EyeRot.Forward );
 		public bool IsSprinting => Input.Down( InputButton.Run ) && IsGrounded && ForwardSpeed > 100f;
 
-
 		public DuckSlide DuckSlide { get; private set; }
+		public float EyeHeight { get; set; } = 1.0f;
 
 		public PlayerController()
 		{
@@ -48,6 +41,7 @@ namespace Fortwars
 
 			moveHelper.Trace = moveHelper.Trace
 									  .Size( new Vector3( -16, -16, 0 ), new Vector3( 16, 16, 64 ) )
+									  .WithoutTags( "nocollide" )
 									  .Ignore( Pawn );
 
 			moveHelper.GroundBounce = 0.0f;
@@ -120,7 +114,9 @@ namespace Fortwars
 
 		private void SetEyeTransform()
 		{
-			EyePosLocal = Vector3.Up * Height * DuckSlide.GetEyeHeight();
+			EyeHeight = EyeHeight.LerpTo( DuckSlide.GetEyeHeight(), 2.5f * Time.Delta );
+
+			EyePosLocal = Vector3.Up * Height * EyeHeight;
 			EyeRot = Input.Rotation;
 		}
 

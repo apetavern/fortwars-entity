@@ -3,13 +3,13 @@
 namespace Fortwars
 {
 	[Library]
-	public class DuckSlide : BaseNetworkable
+	public partial class DuckSlide : BaseNetworkable
 	{
 
 		public PlayerController Controller;
 
-		public bool IsActive; // replicate
-		public bool IsActiveSlide;
+		[Net, Predicted] public bool IsActive { get; set; }
+		[Net, Predicted] public bool IsActiveSlide { get; set; }
 
 		public DuckSlide( PlayerController controller )
 		{
@@ -21,8 +21,6 @@ namespace Fortwars
 		public virtual void PreTick()
 		{
 			bool wants = Input.Down( InputButton.Duck );
-
-			SetEyeHeight();
 
 			if ( wants != IsActive )
 			{
@@ -71,8 +69,7 @@ namespace Fortwars
 			// HACK: Fix - Controller.GroundAngle always returns 46, not sure why.
 			float angle = Vector3.GetAngle( Vector3.Up, Controller.GroundNormal );
 			float tAngle = angle.LerpInverse( 0, 15f );
-			float force = 6.0f.LerpTo( 4.0f, tAngle );
-			Controller.Velocity += (direction * distance * force);
+			Controller.Velocity += (direction * distance * 8.0f);
 
 			IsActiveSlide = true;
 		}
@@ -122,32 +119,28 @@ namespace Fortwars
 			if ( !IsActiveSlide ) return 1;
 
 			float tAngle = angle.LerpInverse( 15f, 0f );
-			float friction = 0.10f.LerpTo( 0.25f, tAngle );
+			float friction = 0.3f;
 
 			return friction;
 		}
 
-		private void SetEyeHeight()
+		public virtual float GetEyeHeight()
 		{
 			if ( IsActive )
 			{
 				if ( IsActiveSlide )
-					eyeHeight = eyeHeight.LerpTo( 0.4f, 20f * Time.Delta );
+				{
+					return 0.4f;
+				}
 				else
-					eyeHeight = eyeHeight.LerpTo( 0.5f, 10f * Time.Delta );
+				{
+					return 0.5f;
+				}
 			}
 			else
 			{
-				eyeHeight = eyeHeight.LerpTo( 1.0f, 50f * Time.Delta );
+				return 1.0f;
 			}
-		}
-
-
-		float eyeHeight = 1.0f;
-
-		public virtual float GetEyeHeight()
-		{
-			return eyeHeight;
 		}
 	}
 }
