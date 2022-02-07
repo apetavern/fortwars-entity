@@ -19,7 +19,7 @@ namespace Fortwars.UI
 
 			RootPanel.AddChild<Vitals>();
 			RootPanel.AddChild<Resources>();
-			RootPanel.AddChild<WeaponInfo>();
+			RootPanel.AddChild<InventoryBar>();
 			RootPanel.AddChild<RoundStatus>();
 			RootPanel.AddChild<BuildHelp>();
 			RootPanel.AddChild<BuildWheel>();

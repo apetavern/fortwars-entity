@@ -48,11 +48,13 @@ namespace Fortwars
 			{
 				inventoryIcon.Label.Text = weapon.WeaponAsset.WeaponName;
 				inventoryIcon.AmmoLabel.Text = $"{weapon.CurrentClip} / {weapon.ReserveAmmo}";
+				inventoryIcon.AmmoLabel.SetClass( "visible", true );
 			}
 			else
 			{
 				inventoryIcon.Label.Text = ent.ClassInfo.Title;
-				inventoryIcon.AmmoLabel.Text = $"0 / 0";
+				inventoryIcon.AmmoLabel.Text = $"";
+				inventoryIcon.AmmoLabel.SetClass( "visible", false );
 			}
 
 			inventoryIcon.SetClass( "active", ent.IsActiveChild() );
@@ -128,7 +130,7 @@ namespace Fortwars
 		{
 			Parent = parent;
 			Label = Add.Label( "empty", "item-name" );
-			AmmoLabel = Add.Label( "0/0", "ammo" );
+			AmmoLabel = Add.Label( "0 / 0", "ammo" );
 
 			var inputButton = (InputButton)Enum.Parse( typeof( InputButton ), $"Slot{i}" );
 			Add.InputHint( inputButton, "", "slot-number" );
@@ -137,6 +139,7 @@ namespace Fortwars
 		public void Clear()
 		{
 			Label.Text = "";
+			AmmoLabel.SetClass( "visible", false );
 			SetClass( "active", false );
 		}
 	}

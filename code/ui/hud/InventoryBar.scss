@@ -1,13 +1,15 @@
 ﻿@import "/ui/_Common.scss";
 
 InventoryBar {
-    width: 250px;
+    width: 300px;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    margin: -3px;
-    margin-right: 5px;
+    padding-right: 5px;
     transition: all 150ms ease;
+    position: absolute;
+    bottom: $safe-area-y;
+    right: $safe-area-x;
 
     InventoryIcon {
         margin: 2px 0;
@@ -17,7 +19,7 @@ InventoryBar {
         justify-content: space-between;
         border-radius: 2px;
         flex-wrap: wrap;
-        padding: 5px 20px;
+        padding: 10px 20px;
         opacity: 0.25;
         flex-grow: 1;
         background: linear-gradient( to left, $background, rgba( $background, 0 ) );
@@ -30,6 +32,11 @@ InventoryBar {
 
         .ammo {
             margin-right: 8px;
+            display: none;
+
+            &.visible {
+                display: flex;
+            }
         }
 
         label {

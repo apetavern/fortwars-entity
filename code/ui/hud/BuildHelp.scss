@@ -2,7 +2,7 @@
 
 buildhelp {
     position: absolute;
-    bottom: 200px;
+    bottom: 225px;
     right: $safe-area-x;
     display: flex;
     flex-direction: column;
@@ -11,8 +11,8 @@ buildhelp {
     border-radius: 2px;
     opacity: 0;
     align-items: flex-end;
-    padding: 0 22px;
-    width: 265px;
+    padding: 0px 22px;
+    width: 310px;
 
     &.visible {
         opacity: 1;
@@ -24,7 +24,7 @@ buildhelp {
         width: 100%;
 
         &:not(:first-child) {
-            margin-top: 8px;
+            margin-top: 10px;
         }
 
         align-items: center;
