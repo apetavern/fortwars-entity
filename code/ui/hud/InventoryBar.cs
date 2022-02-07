@@ -45,9 +45,15 @@ namespace Fortwars
 			inventoryIcon.TargetEnt = ent;
 
 			if ( ent is FortwarsWeapon weapon )
+			{
 				inventoryIcon.Label.Text = weapon.WeaponAsset.WeaponName;
+				inventoryIcon.AmmoLabel.Text = $"{weapon.CurrentClip} / {weapon.ReserveAmmo}";
+			}
 			else
+			{
 				inventoryIcon.Label.Text = ent.ClassInfo.Title;
+				inventoryIcon.AmmoLabel.Text = $"0 / 0";
+			}
 
 			inventoryIcon.SetClass( "active", ent.IsActiveChild() );
 		}
@@ -116,11 +122,13 @@ namespace Fortwars
 	{
 		public Entity TargetEnt;
 		public Label Label;
+		public Label AmmoLabel;
 
 		public InventoryIcon( int i, Panel parent )
 		{
 			Parent = parent;
 			Label = Add.Label( "empty", "item-name" );
+			AmmoLabel = Add.Label( "0/0", "ammo" );
 
 			var inputButton = (InputButton)Enum.Parse( typeof( InputButton ), $"Slot{i}" );
 			Add.InputHint( inputButton, "", "slot-number" );

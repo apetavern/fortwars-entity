@@ -91,6 +91,15 @@ public partial class FortwarsWeapon : Carriable
 		}
 	}
 
+	SniperScopeRT SniperScopePanel;
+	public override void CreateHudElements()
+	{
+		base.CreateHudElements();
+
+		SniperScopePanel = new SniperScopeRT();
+		SniperScopePanel.Parent = Local.Hud;
+	}
+
 	public override void CreateViewModel()
 	{
 		Host.AssertClient();
@@ -397,6 +406,28 @@ public partial class FortwarsWeapon : Carriable
 		base.BuildInput( inputBuilder );
 
 		inputBuilder.ViewAngles += recoil;
+
+		if ( Input.Down( InputButton.Attack2 ) )
+		{
+			inputBuilder.ViewAngles = Angles.Lerp( inputBuilder.OriginalViewAngles, inputBuilder.ViewAngles, WeaponAsset.AimFovMult );
+		}
+	}
+
+	float fov = 90f;
+	public override void PostCameraSetup( ref CameraSetup camSetup )
+	{
+		base.PostCameraSetup( ref camSetup );
+
+		if ( Input.Down( InputButton.Attack2 ) )
+		{
+			fov = fov.LerpTo( 90f * WeaponAsset.AimFovMult, 10f * Time.Delta );
+		}
+		else
+		{
+			fov = fov.LerpTo( 90f, 10f * Time.Delta );
+		}
+
+		camSetup.FieldOfView = fov;
 	}
 
 	private float CalcDamage( float distance, bool isHeadshot )

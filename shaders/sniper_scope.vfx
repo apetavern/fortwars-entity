@@ -1,0 +1,120 @@
+//=========================================================================================================================
+// Optional
+//=========================================================================================================================
+HEADER
+{
+	CompileTargets = ( IS_SM_50 && ( PC || VULKAN ) );
+	Description = "Sniper scope shader";
+}
+
+//=========================================================================================================================
+// Optional
+//=========================================================================================================================
+FEATURES
+{
+    #include "common/features.hlsl"
+}
+
+//=========================================================================================================================
+// Optional
+//=========================================================================================================================
+MODES
+{
+	VrForward();													// Indicates this shader will be used for main rendering
+	Depth( "vr_depth_only.vfx" ); 									// Shader that will be used for shadowing and depth prepass
+	ToolsVis( S_MODE_TOOLS_VIS ); 									// Ability to see in the editor
+	ToolsWireframe( "vr_tools_wireframe.vfx" ); 					// Allows for mat_wireframe to work
+	ToolsShadingComplexity( "vr_tools_shading_complexity.vfx" ); 	// Shows how expensive drawing is in debug view
+}
+
+//=========================================================================================================================
+COMMON
+{
+	#include "common/shared.hlsl"
+    #define S_TRANSLUCENT 1
+    #define BLEND_MODE_ALREADY_SET
+}
+
+//=========================================================================================================================
+
+struct VertexInput
+{
+	#include "common/vertexinput.hlsl"
+};
+
+//=========================================================================================================================
+
+struct PixelInput
+{
+	#include "common/pixelinput.hlsl"
+};
+
+//=========================================================================================================================
+
+VS
+{
+	#include "common/vertex.hlsl"
+	//
+	// Main
+	//
+	PixelInput MainVs( INSTANCED_SHADER_PARAMS( VS_INPUT i ) )
+	{
+		PixelInput o = ProcessVertex( i );
+		// Add your vertex manipulation functions here
+		return FinalizeVertex( o );
+	}
+}
+
+//=========================================================================================================================
+
+PS
+{
+  	// #include "common/pixel.hlsl"
+    // #include "common.fxc"
+	#include "vr_shared_standard_ps_code.fxc"
+	  
+    RenderState( BlendEnable, true );
+    RenderState( SrcBlend, SRC_ALPHA );
+    RenderState( DstBlend, INV_SRC_ALPHA );
+    RenderState(AlphaToCoverageEnable, true);
+
+    CreateInputTexture2D( ReticleTexture, Srgb, 8, "", "",  "Textures", Default3( 1, 1, 1 ) );
+    CreateTexture2D( g_tReticle ) < Channel( RGBA, None( ReticleTexture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); >;
+    TextureAttribute( g_tReticle, g_tReticle );
+
+    CreateTexture2D( g_tScopeRT ) < Attribute( "ScopeRT" ); SrgbRead( false ); Filter( MIN_MAG_MIP_LINEAR );  >;
+
+	float g_flReticleScale < UiType( Slider ); Default( 2.5f ); UiGroup( "Reticle" ); >;
+	float2 g_flReticleOffset < UiType( Slider ); Default2( 0.25f, 0.79f ); UiGroup( "Reticle" ); Range2( 0.0f, 0.0f, 1.0f, 1.0f ); >;
+	float g_flReticleCircleScale < UiType( Slider ); Default( 2.0f ); UiGroup( "Reticle" ); >;
+
+	// float3 SrgbGammaToLinear(float3 c) {
+	// 	c = max(c, 0);
+	// 	return c < 0.04045f ? c * 0.0773993805 : pow(c * 0.9478672986 + 0.0521327014, 2.4);
+	// }
+
+	//
+	// Main
+	//
+	PS_OUTPUT MainPs( PixelInput i )
+	{
+		FinalCombinerInput_t material = PS_SharedStandardProcessing( i );
+
+		PS_OUTPUT o = PS_FinalCombiner( material );
+        float2 vPositionUvWithOffset = ( ( i.vPositionSs.xy ) - g_vViewportOffset ) / g_vRenderTargetSize;
+
+        // Screen aspect ratio
+        float fAspectRatio = g_vViewportSize.y / g_vViewportSize.x;
+
+        float2 vPositionUv = ( i.vPositionSs.xy - g_vViewportOffset ) / g_vRenderTargetSize;
+        float2 vReticleUvs = float2( vPositionUv.x, ( vPositionUv.y * fAspectRatio ) ) * g_flReticleScale;
+        vReticleUvs += g_flReticleOffset;
+        float4 vReticleColor = Tex2D( g_tReticle, vReticleUvs );
+
+		o.vColor = Tex2D( g_tScopeRT, vPositionUvWithOffset + float2( -0.21f, 0.0f ) ); // who fucking knows man
+        o.vColor.xyz = SrgbGammaToLinear( o.vColor.xyz * vReticleColor.xyz );
+        o.vColor.a = 1.0;
+		
+		return o;
+	}
+}

@@ -21,8 +21,6 @@ namespace Fortwars
 
 		private bool activated;
 
-		private Vector3 ViewmodelOffset => new( -2, 5, 1 );
-
 		private Vector3 ShootOffset { get; set; }
 		private FortwarsWeapon Weapon { get; set; }
 
@@ -70,7 +68,7 @@ namespace Fortwars
 			Rotation *= FinalRot;
 
 			FinalPos = FinalPos.LerpTo( TargetPos, LerpSpeed * Time.Delta );
-			Position += (FinalPos + ViewmodelOffset) * Rotation;
+			Position += FinalPos * Rotation;
 
 			FinalFov = FinalFov.LerpTo( TargetFov, LerpSpeed * Time.Delta );
 			camSetup.ViewModel.FieldOfView = FinalFov;
@@ -85,6 +83,14 @@ namespace Fortwars
 			if ( Weapon.IsValid() && DoTucking() )
 				return;
 
+			DoShootOffset();
+
+			if ( DoADS() )
+			{
+				DoBobbing( bobCycleTime );
+				return;
+			}
+
 			DoDucking();
 			DoSliding();
 
@@ -92,7 +98,20 @@ namespace Fortwars
 				bobCycleTime *= 2;
 
 			DoBobbing( bobCycleTime );
-			DoShootOffset();
+		}
+
+		private bool DoADS()
+		{
+			if ( Weapon != null && Input.Down( InputButton.Attack2 ) )
+			{
+				TargetPos = Weapon.WeaponAsset.AimPosition;
+				TargetRot = Weapon.WeaponAsset.AimRotation.ToRotation();
+				TargetFov = Weapon.WeaponAsset.AimFovMult * ViewmodelFov;
+
+				return true;
+			}
+
+			return false;
 		}
 
 		private bool DoSprinting()
@@ -148,6 +167,13 @@ namespace Fortwars
 			var offset = CalcSwingOffset( pitchDelta, yawDelta );
 			offset += CalcBobbingOffset( playerVelocity, bobCycleTime );
 			offset -= ShootOffset;
+
+			if ( Owner.GroundEntity == null )
+			{
+				offset += new Vector3( 0, 0, -2.5f );
+				newPitch -= 2.5f;
+			}
+
 			TargetPos += offset;
 
 			lastPitch = newPitch;
