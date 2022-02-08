@@ -265,7 +265,7 @@ namespace Fortwars
 		public virtual void StepMove()
 		{
 			MoveHelper mover = new MoveHelper( Position, Velocity );
-			mover.Trace = mover.Trace.Size( mins, maxs ).Ignore( Pawn );
+			mover.Trace = mover.Trace.Size( mins, maxs ).WithoutTags( "nocollide" ).Ignore( Pawn );
 			mover.MaxStandableAngle = GroundAngle;
 
 			mover.TryMoveWithStep( Time.Delta, StepSize );
@@ -277,7 +277,7 @@ namespace Fortwars
 		public virtual void Move()
 		{
 			MoveHelper mover = new MoveHelper( Position, Velocity );
-			mover.Trace = mover.Trace.Size( mins, maxs ).Ignore( Pawn );
+			mover.Trace = mover.Trace.Size( mins, maxs ).WithoutTags( "nocollide" ).Ignore( Pawn );
 			mover.MaxStandableAngle = GroundAngle;
 
 			mover.TryMove( Time.Delta );
@@ -447,6 +447,7 @@ namespace Fortwars
 						.HitLayer( CollisionLayer.All, false )
 						.HitLayer( CollisionLayer.LADDER, true )
 						.Ignore( Pawn )
+						.WithoutTags( "nocollide" )
 						.Run();
 
 			IsTouchingLadder = false;
@@ -567,6 +568,28 @@ namespace Fortwars
 			GroundEntity = null;
 			GroundNormal = Vector3.Up;
 			SurfaceFriction = 1.0f;
+		}
+
+		public override TraceResult TraceBBox( Vector3 start, Vector3 end, Vector3 mins, Vector3 maxs, float liftFeet = 0.0f )
+		{
+			if ( liftFeet > 0 )
+			{
+				start += Vector3.Up * liftFeet;
+				maxs = maxs.WithZ( maxs.z - liftFeet );
+			}
+
+			var tr = Trace.Ray( start + TraceOffset, end + TraceOffset )
+						.Size( mins, maxs )
+						.HitLayer( CollisionLayer.All, false )
+						.HitLayer( CollisionLayer.Solid, true )
+						.HitLayer( CollisionLayer.GRATE, true )
+						.HitLayer( CollisionLayer.PLAYER_CLIP, true )
+						.Ignore( Pawn )
+						.WithoutTags( "nocollide" )
+						.Run();
+
+			tr.EndPos -= TraceOffset;
+			return tr;
 		}
 
 		/// <summary>
