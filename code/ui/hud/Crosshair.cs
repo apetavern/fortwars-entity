@@ -14,8 +14,13 @@ public class Crosshair : Panel
 			p.AddClass( $"el{i}" );
 		}
 
-		// TODO: Link to weapon
-		BindClass( "visible", () => !VirtualCursor.InUse && !Input.Down( InputButton.Attack2 ) );
+		BindClass( "visible", () =>
+		{
+			if ( VirtualCursor.InUse )
+				return false;
+
+			return Local.Pawn.ActiveChild is not FortwarsWeapon { IsAiming: true };
+		} );
 	}
 
 	public override void Tick()
