@@ -37,25 +37,22 @@ namespace Fortwars
 			}
 
 			if ( IsActive )
+			{
 				Controller.SetTag( "ducked" );
+
+				if ( IsActiveSlide )
+					Controller.EyePosLocal = Controller.EyePosLocal.LerpTo( new Vector3( 0, 0, 32 ), 50f * Time.Delta );
+				else
+					Controller.EyePosLocal = Controller.EyePosLocal.LerpTo( new Vector3( 0, 0, 32 ), 25f * Time.Delta );
+			}
+			else
+				Controller.EyePosLocal = Controller.EyePosLocal.LerpTo( new Vector3( 0, 0, 64 ), 25f * Time.Delta );
 
 			if ( IsActiveSlide && Controller.Velocity.Length <= MinimumSlideSpeed )
 				TryUnDuck();
 
 			if ( !Controller.GroundEntity.IsValid() )
 				IsActiveSlide = false;
-		}
-
-		public float GetEyeHeight()
-		{
-			if ( IsActive )
-			{
-				if ( IsActiveSlide )
-					return 0.4f;
-				else
-					return 0.5f;
-			}
-			return 1.0f;
 		}
 
 		protected virtual void TrySlide()

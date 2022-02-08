@@ -89,7 +89,7 @@ namespace Fortwars
 
 		public override void Simulate()
 		{
-			EyePosLocal = Vector3.Up * (EyeHeight * DuckSlide.GetEyeHeight() * Pawn.Scale);
+			EyePosLocal = Vector3.Up * (EyeHeight * Pawn.Scale);
 			UpdateBBox();
 
 			EyePosLocal += TraceOffset;
