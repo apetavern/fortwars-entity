@@ -7,7 +7,7 @@ using System.Linq;
 [Library( "physgun", Title = "Manipulator" )]
 public partial class PhysGun : Carriable, IUse
 {
-	public override string ViewModelPath => "models/weapons/hkusp/hkusp_v.vmdl";
+	public override string ViewModelPath => "models/weapons/manipulator/manipulator_v.vmdl";
 
 	protected PhysicsBody holdBody;
 	protected PhysicsBody velBody;
@@ -48,8 +48,35 @@ public partial class PhysGun : Carriable, IUse
 		SetInteractsAs( CollisionLayer.Debris );
 	}
 
+	public void UpdateViewmodel()
+	{
+		bool wantsToFreeze = Input.Pressed( InputButton.Attack2 );
+		bool rotating = Input.Down( InputButton.Use );
+
+		ViewModelEntity?.SetAnimBool( "fire", BeamActive );
+
+		if ( GrabbedEntity.IsValid() && rotating)
+		{
+			ViewModelEntity?.SetAnimFloat( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickFB" ), -(Input.MouseDelta.y * RotateSpeed),Time.Delta) );
+			ViewModelEntity?.SetAnimFloat( "joystickLR", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickLR" ), (Input.MouseDelta.x * RotateSpeed), Time.Delta ) );
+			ViewModelEntity?.SetAnimBool( "snap", Input.Down( InputButton.Run ) );
+		}
+		else
+		{
+			ViewModelEntity?.SetAnimFloat( "joystickFB", 0f );
+			ViewModelEntity?.SetAnimFloat( "joystickLR", 0f );
+			ViewModelEntity?.SetAnimBool( "snap", false );
+		}
+
+		if ( GrabbedEntity.IsValid() && wantsToFreeze )
+		{
+			ViewModelEntity?.SetAnimBool( "freeze", true );
+		}
+	}
+
 	public override void Simulate( Client client )
 	{
+		UpdateViewmodel();
 		if ( Owner is not Player owner ) return;
 
 		var eyePos = owner.EyePos;
@@ -214,7 +241,7 @@ public partial class PhysGun : Carriable, IUse
 				var freezeEffect = Particles.Create( "particles/physgun_freeze.vpcf" );
 				freezeEffect.SetPosition( 0, heldBody.Transform.PointToWorld( GrabbedPos ) );
 			}
-
+			ViewModelEntity?.SetAnimBool( "freeze", true );
 			GrabEnd();
 			return;
 		}
