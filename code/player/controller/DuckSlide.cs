@@ -7,15 +7,15 @@ namespace Fortwars
 	{
 		public BasePlayerController Controller;
 
-		public bool IsActive;
-		public bool IsActiveSlide;
+		public bool IsActive { get; private set; }
+		public bool IsActiveSlide { get; private set; }
+
+		private float MinimumSlideSpeed => 250f;
 
 		public DuckSlide( BasePlayerController controller )
 		{
 			Controller = controller;
 		}
-
-		float MinimumSlideSpeed => 200;
 
 		public virtual void PreTick()
 		{
