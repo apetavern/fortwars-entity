@@ -42,3 +42,13 @@ Weapons:
 * [ ] p2000
 * [ ] deagle
 
+Blocks:
+* [X] Wood
+* [ ] Metal
+* [ ] Rubber
+* [ ] Sticky?
+
+Props:
+* [X] Store touchscreen
+* [ ] ??
+
