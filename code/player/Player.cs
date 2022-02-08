@@ -58,7 +58,7 @@ namespace Fortwars
 				return;
 			}
 
-			Controller = new PlayerController();
+			Controller = new FortwarsWalkController();
 			Animator = new StandardPlayerAnimator();
 			Camera = new FirstPersonCamera();
 
@@ -74,15 +74,7 @@ namespace Fortwars
 
 			Clothing.DressEntity( this );
 
-			Inventory.DeleteContents();
-			if ( Game.Instance.Round is BuildRound )
-			{
-				Inventory.Add( new PhysGun(), true );
-			}
-			if ( Game.Instance.Round is CombatRound )
-			{
-				Inventory.Add( FortwarsWeapon.FromPath( "/data/weapons/aiax50.fwweapon" ), true );
-			}
+			Game.Instance.Round.SetupInventory( this );
 
 			base.Respawn();
 		}
