@@ -21,7 +21,7 @@ namespace Fortwars
 		[Net] public float AirControl { get; set; } = 5.0f;
 		[Net] public bool AutoJump { get; set; } = false;
 
-		public DuckSlide Duck { get; private set; }
+		public DuckSlide DuckSlide { get; private set; }
 		public Unstuck Unstuck { get; private set; }
 		public bool IsSwimming { get; set; } = false;
 		private bool IsGrounded => GroundEntity != null;
@@ -30,7 +30,7 @@ namespace Fortwars
 
 		public FortwarsWalkController()
 		{
-			Duck = new DuckSlide( this );
+			DuckSlide = new DuckSlide( this );
 			Unstuck = new Unstuck( this );
 		}
 
@@ -72,7 +72,7 @@ namespace Fortwars
 			var mins = new Vector3( -girth, -girth, 0 ) * Pawn.Scale;
 			var maxs = new Vector3( +girth, +girth, BodyHeight ) * Pawn.Scale;
 
-			Duck.UpdateBBox( ref mins, ref maxs, Pawn.Scale );
+			DuckSlide.UpdateBBox( ref mins, ref maxs, Pawn.Scale );
 
 			SetBBox( mins, maxs );
 		}
@@ -127,7 +127,7 @@ namespace Fortwars
 
 				if ( GroundEntity != null )
 				{
-					ApplyFriction( GroundFriction * SurfaceFriction * Duck.GetFrictionMultiplier() );
+					ApplyFriction( GroundFriction * SurfaceFriction * DuckSlide.GetFrictionMultiplier() );
 				}
 			}
 
@@ -146,7 +146,7 @@ namespace Fortwars
 			WishVelocity = WishVelocity.Normal * inSpeed;
 			WishVelocity *= GetWishSpeed();
 
-			Duck.PreTick();
+			DuckSlide.PreTick();
 
 			bool bStayOnGround = false;
 			if ( IsSwimming )
@@ -203,7 +203,7 @@ namespace Fortwars
 
 		public virtual float GetWishSpeed()
 		{
-			var ws = Duck.GetWishSpeed();
+			var ws = DuckSlide.GetWishSpeed();
 			if ( ws >= 0 ) return ws;
 
 			if ( Input.Down( InputButton.Run ) )
@@ -367,7 +367,7 @@ namespace Fortwars
 
 			float startz = Velocity.z;
 
-			if ( Duck.IsActive )
+			if ( DuckSlide.IsActive )
 				flMul *= 0.8f;
 
 			Velocity = Velocity.WithZ( startz + flMul * flGroundFactor );

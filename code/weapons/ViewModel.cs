@@ -130,7 +130,7 @@ namespace Fortwars
 
 		private bool DoSliding()
 		{
-			if ( Local.Pawn is Player { Controller: FortwarsWalkController { Duck: { IsActive: true, IsActiveSlide: true } } } player )
+			if ( Local.Pawn is Player { Controller: FortwarsWalkController { DuckSlide: { IsActive: true, IsActiveSlide: true } } } player )
 			{
 				TargetRot = Rotation.From( 0, 0, -35 );
 				TargetPos = Vector3.Down * 16f + Vector3.Left * 16f;
@@ -142,7 +142,7 @@ namespace Fortwars
 
 		private bool DoDucking()
 		{
-			if ( Local.Pawn is Player { Controller: FortwarsWalkController { Duck: { IsActive: true, IsActiveSlide: false } } } player )
+			if ( Local.Pawn is Player { Controller: FortwarsWalkController { DuckSlide: { IsActive: true, IsActiveSlide: false } } } player )
 			{
 				TargetRot = Rotation.From( 5, 0, -15 );
 				TargetPos = Vector3.Zero;
