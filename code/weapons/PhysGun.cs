@@ -55,9 +55,9 @@ public partial class PhysGun : Carriable, IUse
 
 		ViewModelEntity?.SetAnimBool( "fire", BeamActive );
 
-		if ( GrabbedEntity.IsValid() && rotating)
+		if ( GrabbedEntity.IsValid() && rotating )
 		{
-			ViewModelEntity?.SetAnimFloat( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickFB" ), -(Input.MouseDelta.y * RotateSpeed),Time.Delta) );
+			ViewModelEntity?.SetAnimFloat( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickFB" ), -(Input.MouseDelta.y * RotateSpeed), Time.Delta ) );
 			ViewModelEntity?.SetAnimFloat( "joystickLR", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickLR" ), (Input.MouseDelta.x * RotateSpeed), Time.Delta ) );
 			ViewModelEntity?.SetAnimBool( "snap", Input.Down( InputButton.Run ) );
 		}
