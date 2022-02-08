@@ -5,7 +5,7 @@ namespace Fortwars
 {
 	public partial class FortwarsBlock : Prop
 	{
-		[Net] public BlockMaterial BlockMaterial { get; set; } = BlockMaterial.Steel;
+		[Net] public BlockMaterial BlockMaterial { get; set; } = BlockMaterial.Wood;
 
 		[Net] public Team TeamID { get; set; }
 
