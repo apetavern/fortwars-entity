@@ -28,7 +28,7 @@ namespace Fortwars
 		/// <summary>
 		/// Basic, has lower health but you can spawn lots of them
 		/// </summary>
-		public static readonly BlockMaterial Wood = new BlockMaterial( Type.Wood, 50, 50 );
+		public static readonly BlockMaterial Wood = new BlockMaterial( Type.Wood, 50, 25 );
 
 		/// <summary>
 		/// Basically just bounce pads, you can't have many of these but they're fun
@@ -38,7 +38,7 @@ namespace Fortwars
 		/// <summary>
 		/// Ol' reliable, plenty of health but use them wisely
 		/// </summary>
-		public static readonly BlockMaterial Steel = new BlockMaterial( Type.Metal, 100, 25 );
+		public static readonly BlockMaterial Steel = new BlockMaterial( Type.Metal, 100, 10 );
 
 		public BlockMaterial( Type id, int baseHealth, int playerLimit )
 		{
