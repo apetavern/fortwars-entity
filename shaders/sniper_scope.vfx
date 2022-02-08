@@ -88,7 +88,7 @@ PS
     CreateTexture2D( g_tScopeRT ) < Attribute( "ScopeRT" ); SrgbRead( false ); Filter( MIN_MAG_MIP_LINEAR ); >;
 
 	float g_flReticleScale < UiType( Slider ); Default( 2.5f ); UiGroup( "Reticle" ); >;
-	float2 g_flReticleOffset < UiType( Slider ); Default2( 0.25f, 0.79f ); UiGroup( "Reticle" ); Range2( 0.0f, 0.0f, 1.0f, 1.0f ); >;
+	float2 g_vReticleOffset < UiType( Slider ); Default2( 0.5f, 0.5f ); UiGroup( "Reticle" ); Range2( 0.0f, 0.0f, 1.0f, 1.0f ); >;
 	float g_flReticleCircleScale < UiType( Slider ); Default( 2.0f ); UiGroup( "Reticle" ); >;
 	float g_flReticleLiveOffsetMul < UiType( Slider ); Default( 0.25f ); Range( 0.0f, 2.0f ); UiGroup( "Reticle" ); >;
 	
@@ -130,14 +130,14 @@ PS
 		// Circle mask
 		//
 		float2 vCircleMaskUvs = float2( squareUvs.x, squareUvs.y ) * g_flMaskScale;
-        vCircleMaskUvs += g_flReticleOffset + ( g_vMaskOffset * g_flMaskLiveOffsetMul );
+        vCircleMaskUvs += g_vReticleOffset + ( g_vMaskOffset * g_flMaskLiveOffsetMul );
 		float fMaskMix = Tex2D( g_tMask, vCircleMaskUvs );
 
 		//
 		// Reticle texture
 		//
         float2 vReticleUvs = float2( squareUvs.x, squareUvs.y ) * g_flReticleScale;
-        vReticleUvs += g_flReticleOffset - ( g_vMaskOffset * g_flReticleLiveOffsetMul );
+        vReticleUvs += g_vReticleOffset - ( g_vMaskOffset * g_flReticleLiveOffsetMul );
         float4 vReticleColor = Tex2D( g_tReticle, vReticleUvs );
 
 		//
