@@ -191,7 +191,8 @@ namespace Fortwars
 		{
 			LastDamage = info;
 
-			// TODO: Headshots
+			if ( (HitboxIndex)info.HitboxIndex == HitboxIndex.Head )
+				info.Damage *= 2.0f;
 
 			base.TakeDamage( info );
 
