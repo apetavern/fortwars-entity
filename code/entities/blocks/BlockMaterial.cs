@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sandbox;
+using System;
+using System.Linq;
 
 namespace Fortwars
 {
@@ -15,6 +17,14 @@ namespace Fortwars
 		public int BaseHealth { get; set; }
 		public int PlayerLimit { get; set; }
 
+		public int GetBuiltCount( Client client )
+		{
+			var blockMaterial = this;
+			return Entity.All.OfType<FortwarsBlock>().Where( e => e.Client == client && e.BlockMaterial == blockMaterial ).Count();
+		}
+
+		public int GetRemainingCount( Client client ) => PlayerLimit - GetBuiltCount( client );
+
 		/// <summary>
 		/// Basic, has lower health but you can spawn lots of them
 		/// </summary>
@@ -28,7 +38,7 @@ namespace Fortwars
 		/// <summary>
 		/// Ol' reliable, plenty of health but use them wisely
 		/// </summary>
-		public static readonly BlockMaterial Metal = new BlockMaterial( Type.Metal, 100, 25 );
+		public static readonly BlockMaterial Steel = new BlockMaterial( Type.Metal, 100, 25 );
 
 		public BlockMaterial( Type id, int baseHealth, int playerLimit )
 		{
@@ -37,12 +47,20 @@ namespace Fortwars
 			PlayerLimit = playerLimit;
 		}
 
+		public static bool operator ==( BlockMaterial a, BlockMaterial b ) => a.Equals( b );
+		public static bool operator !=( BlockMaterial a, BlockMaterial b ) => !(a == b);
+
 		public bool Equals( BlockMaterial other )
 		{
 			if ( other.ID == this.ID )
 				return true;
 
 			return false;
+		}
+
+		public override bool Equals( object obj )
+		{
+			return obj is BlockMaterial && Equals( (BlockMaterial)obj );
 		}
 	}
 }

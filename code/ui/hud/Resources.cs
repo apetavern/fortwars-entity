@@ -10,28 +10,27 @@ namespace Fortwars
 		{
 			StyleSheet.Load( "/ui/hud/Resources.scss" );
 
-			AddResource( "wood" );
-			AddResource( "steel" );
-			AddResource( "feathers" );
-			AddResource( "rubber" );
+			AddResource( "wood", BlockMaterial.Wood );
+			AddResource( "steel", BlockMaterial.Steel );
+			AddResource( "rubber", BlockMaterial.Rubber );
 		}
 
-		private void AddResource( string name )
+		private void AddResource( string name, BlockMaterial resourceType )
 		{
-			var resource = new Resource( name );
+			var resource = new Resource( name, resourceType );
 			resource.Parent = this;
 		}
 
 		class Resource : Panel
 		{
-			string name;
+			private Label count;
+			private Label limit;
 
-			Label count;
-			Label limit;
+			private BlockMaterial resourceType;
 
-			public Resource( string name )
+			public Resource( string name, BlockMaterial resourceType )
 			{
-				this.name = name;
+				this.resourceType = resourceType;
 
 				Add.Label( name, "name" );
 				count = Add.Label( "20", "count" );
@@ -42,7 +41,9 @@ namespace Fortwars
 			public override void Tick()
 			{
 				base.Tick();
-				limit.Text = Game.Instance.WoodPerPlayer.ToString();
+
+				count.Text = resourceType.GetRemainingCount( Local.Client ).ToString();
+				limit.Text = resourceType.PlayerLimit.ToString();
 			}
 		}
 	}
