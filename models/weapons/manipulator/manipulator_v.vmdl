@@ -348,6 +348,143 @@
 						take = 0
 						reverse = false
 					},
+					{
+						_class = "AnimFile"
+						name = "dialmove"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/manipulator/manipulator_v.fbx"
+						start_frame = 49
+						end_frame = 51
+						framerate = 20.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "joystickrightforward"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "triggerpress"
+								frame = 0
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/manipulator/manipulator_v.fbx"
+						start_frame = 38
+						end_frame = 38
+						framerate = 20.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "joystickleftforward"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "triggerpress"
+								frame = 0
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/manipulator/manipulator_v.fbx"
+						start_frame = 39
+						end_frame = 39
+						framerate = 20.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "joystickbackright"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "triggerpress"
+								frame = 0
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/manipulator/manipulator_v.fbx"
+						start_frame = 40
+						end_frame = 40
+						framerate = 20.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "joystickbackleft"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "triggerpress"
+								frame = 0
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/manipulator/manipulator_v.fbx"
+						start_frame = 41
+						end_frame = 41
+						framerate = 20.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},
@@ -472,6 +609,32 @@
 							{
 								bone = "prong3_1"
 								weight = 1.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "dial"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "joint3"
+								weight = 1.0
+							},
+							{
+								bone = "joystick"
+								weight = 0.0
+							},
+							{
+								bone = "joystickbutton"
+								weight = 0.0
+							},
+							{
+								bone = "joysticktrigger"
+								weight = 0.0
 							},
 						]
 						master_morph_weight = -1.0

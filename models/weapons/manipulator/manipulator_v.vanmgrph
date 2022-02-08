@@ -110,6 +110,23 @@
 				m_bPredicted = false
 				m_bDefaultValue = false
 			},
+			{
+				_class = "CFloatAnimParameter"
+				m_name = "dialpos"
+				m_id = 
+				{
+					m_id = 1379042893
+				}
+				m_previewButton = "ANIMPARAM_BUTTON_NONE"
+				m_bNetwork = false
+				m_bUseMostRecentValue = false
+				m_bAutoReset = false
+				m_bPredicted = false
+				m_fDefaultValue = 0.0
+				m_fMinValue = 0.0
+				m_fMaxValue = 1.0
+				m_bInterpolate = false
+			},
 		]
 	}
 	m_pTagManager = 
@@ -244,7 +261,7 @@
 			{
 				_class = "CSequenceAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ -304.0, -240.0 ]
+				m_vecPosition = [ -32.0, -256.0 ]
 				m_nNodeID = 
 				{
 					m_id = 374296773
@@ -287,7 +304,7 @@
 			{
 				_class = "CBlend2DAnimNode"
 				m_sName = "joystickblend"
-				m_vecPosition = [ -864.0, -64.0 ]
+				m_vecPosition = [ -848.0, -64.0 ]
 				m_nNodeID = 
 				{
 					m_id = 485118100
@@ -338,9 +355,9 @@
 				m_damping = 
 				{
 					_class = "CAnimInputDamping"
-					m_speedFunction = "NoDamping"
+					m_speedFunction = "Constant"
 					m_fSpeedScale = 1.0
-					m_fMinSpeed = 10.0
+					m_fMinSpeed = 100.0
 					m_fMaxTension = 1000.0
 				}
 			}
@@ -386,7 +403,7 @@
 			{
 				_class = "CSequenceAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ -304.0, -64.0 ]
+				m_vecPosition = [ -32.0, -48.0 ]
 				m_nNodeID = 
 				{
 					m_id = 858363153
@@ -395,6 +412,28 @@
 				m_sNote = ""
 				m_tagSpans = [  ]
 				m_sequenceName = "freeze"
+				m_playbackSpeed = 1.0
+				m_bLoop = false
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 947592726
+			}
+			value = 
+			{
+				_class = "CSequenceAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ -624.0, 160.0 ]
+				m_nNodeID = 
+				{
+					m_id = 947592726
+				}
+				m_networkMode = "ClientSimulate"
+				m_sNote = ""
+				m_tagSpans = [  ]
+				m_sequenceName = "dialmove"
 				m_playbackSpeed = 1.0
 				m_bLoop = false
 			}
@@ -456,6 +495,46 @@
 		{
 			key = 
 			{
+				m_id = 1069378347
+			}
+			value = 
+			{
+				_class = "CBoneMaskAnimNode"
+				m_sName = "dial"
+				m_vecPosition = [ -128.0, -160.0 ]
+				m_nNodeID = 
+				{
+					m_id = 1069378347
+				}
+				m_networkMode = "ClientSimulate"
+				m_sNote = ""
+				m_weightListName = "dial"
+				m_child1ID = 
+				{
+					m_id = 1734192504
+				}
+				m_child2ID = 
+				{
+					m_id = 1402657058
+				}
+				m_blendSpace = "BlendSpace_Parent"
+				m_bUseBlendScale = false
+				m_blendValueSource = "Parameter"
+				m_blendParameter = 
+				{
+					m_id = 4294967295
+				}
+				m_timingBehavior = "UseChild2"
+				m_flTimingBlend = 0.5
+				m_flRootMotionBlend = 0.0
+				m_footMotionTiming = "Child1"
+				m_bResetChild1 = true
+				m_bResetChild2 = true
+			}
+		},
+		{
+			key = 
+			{
 				m_id = 1204686832
 			}
 			value = 
@@ -472,6 +551,33 @@
 				m_sequenceName = "joysticknothing_add"
 				m_nFrameIndex = 0
 				m_tagSpans = [  ]
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 1402657058
+			}
+			value = 
+			{
+				_class = "CCycleControlAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ -448.0, 160.0 ]
+				m_nNodeID = 
+				{
+					m_id = 1402657058
+				}
+				m_networkMode = "ClientSimulate"
+				m_sNote = ""
+				m_childID = 
+				{
+					m_id = 947592726
+				}
+				m_valueSource = "Parameter"
+				m_param = 
+				{
+					m_id = 1379042893
+				}
 			}
 		},
 		{
@@ -598,7 +704,7 @@
 			{
 				_class = "CRootAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ 176.0, -176.0 ]
+				m_vecPosition = [ 448.0, -176.0 ]
 				m_nNodeID = 
 				{
 					m_id = 1651456018
@@ -727,7 +833,7 @@
 			{
 				_class = "CStateMachineAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ -112.0, -176.0 ]
+				m_vecPosition = [ 160.0, -176.0 ]
 				m_nNodeID = 
 				{
 					m_id = 1870379595
@@ -830,7 +936,7 @@
 						m_name = "states"
 						m_childNodeID = 
 						{
-							m_id = 1734192504
+							m_id = 1069378347
 						}
 						m_stateID = 
 						{
