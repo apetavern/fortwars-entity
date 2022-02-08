@@ -4,8 +4,7 @@ namespace Fortwars
 {
 	partial class Game
 	{
-		[Net] public BaseRound Round { get; private set; }
-		private BaseRound _lastRound;
+		[Net, Change( nameof( OnRoundChange ) )] public BaseRound Round { get; private set; }
 
 		[ServerVar( "fw_min_players", Help = "The minimum players required to start." )]
 		public static int MinPlayers { get; set; } = 1;
