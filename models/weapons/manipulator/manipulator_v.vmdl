@@ -319,6 +319,35 @@
 						take = 0
 						reverse = false
 					},
+					{
+						_class = "AnimFile"
+						name = "prongmove"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "joysticknothing"
+								frame = 0
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/manipulator/manipulator_v.fbx"
+						start_frame = 48
+						end_frame = 48
+						framerate = 20.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},
