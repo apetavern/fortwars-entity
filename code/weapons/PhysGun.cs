@@ -260,11 +260,14 @@ public partial class PhysGun : Carriable, IUse
 			}
 		}
 
-		if ( !body.IsValid() )
-			return;
+		if ( !body.IsValid() ) return;
 
-		if ( rootEnt is not FortwarsBlock )
-			return;
+
+		if ( rootEnt is not FortwarsBlock ) return;
+
+
+		if ( (rootEnt as FortwarsBlock).TeamID != (owner as FortwarsPlayer).TeamID ) return; //Gotta make sure the block is actually our team's, can't fuck with enemy blocks.
+
 
 		// Unfreeze
 		if ( body.BodyType == PhysicsBodyType.Static )
