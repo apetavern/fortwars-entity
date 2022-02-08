@@ -100,7 +100,7 @@ namespace Fortwars
 
 		public virtual float GetWishSpeed()
 		{
-			if ( IsActive ) return 85f;
+			if ( IsActive ) return 200f;
 			return -1f;
 		}
 
