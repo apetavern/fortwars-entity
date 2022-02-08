@@ -86,6 +86,7 @@ PS
 	float g_flReticleScale < UiType( Slider ); Default( 2.5f ); UiGroup( "Reticle" ); >;
 	float2 g_flReticleOffset < UiType( Slider ); Default2( 0.25f, 0.79f ); UiGroup( "Reticle" ); Range2( 0.0f, 0.0f, 1.0f, 1.0f ); >;
 	float g_flReticleCircleScale < UiType( Slider ); Default( 2.0f ); UiGroup( "Reticle" ); >;
+	float g_flReticleLiveOffsetMul < UiType( Slider ); Default( 0.25f ); Range( 0.0f, 2.0f ); UiGroup( "Reticle" ); >;
 
 	float g_flMaskStrength < UiType( Slider ); Default( 0.5f ); UiGroup( "Mask" ); >;
 	float g_flMaskPower < UiType( Slider ); Default( 2.0f ); UiGroup( "Mask" ); >;
@@ -115,7 +116,7 @@ PS
 		//
         float2 vPositionUv = ( i.vPositionSs.xy - g_vViewportOffset ) / g_vRenderTargetSize;
         float2 vReticleUvs = float2( vPositionUv.x, ( vPositionUv.y * fAspectRatio ) ) * g_flReticleScale;
-        vReticleUvs += g_flReticleOffset - ( g_vMaskOffset * 0.25f );
+        vReticleUvs += g_flReticleOffset - ( g_vMaskOffset * g_flReticleLiveOffsetMul );
         float4 vReticleColor = Tex2D( g_tReticle, vReticleUvs );
 
 		//

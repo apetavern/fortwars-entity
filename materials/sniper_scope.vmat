@@ -21,6 +21,7 @@ Layer0
 	TextureTranslucency "materials/default/default_trans.tga"
 
 	//---- Reticle ----
+	g_flReticleLiveOffsetMul "0.500"
 	g_flReticleOffset "[0.751 0.073]"
 	g_flReticleScale "1.500"
 
