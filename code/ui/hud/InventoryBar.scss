@@ -40,7 +40,7 @@ InventoryBar {
         }
 
         label {
-            color: $background;
+            color: white;
         }
 
         &.active {
@@ -55,10 +55,6 @@ InventoryBar {
             border-right: $red-team;
         }
 
-        label {
-            color: $red-team;
-        }
-
         inputhint image {
             background-image-tint: $red-team;
         }
@@ -69,10 +65,6 @@ InventoryBar {
     InventoryIcon {
         &.active {
             border-right: $blue-team;
-        }
-
-        label {
-            color: $blue-team;
         }
 
         inputhint image {

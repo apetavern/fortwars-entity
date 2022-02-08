@@ -20,16 +20,16 @@ namespace Fortwars
 		{
 			StyleSheet.Load( "/ui/hud/RoundStatus.scss" );
 
-			var scores = Add.Panel( "scores" );
-			BlueScore = scores.Add.Label( "0", "score blue" );
-			RedScore = scores.Add.Label( "0", "score red" );
-
 			// scores.Add.Label( "Red", "red team" );
 			// scores.Add.Label( "Blue", "blue team" );
 
 			var RoundInfo = Add.Panel( "round-info" );
 			Phase = RoundInfo.Add.Label( "Unknown", "phase" );
 			Time = RoundInfo.Add.Label( "00:00", "time" );
+
+			var scores = Add.Panel( "scores" );
+			BlueScore = scores.Add.Label( "0", "score blue" );
+			RedScore = scores.Add.Label( "0", "score red" );
 		}
 
 		public override void Tick()

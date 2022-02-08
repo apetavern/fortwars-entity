@@ -13,15 +13,13 @@ vitals {
     border-left: 4px solid transparent;
 
     label {
-        color: $background;
-    }
-
-    label {
+        color: white;
         font-size: 64px;
         margin-left: 16px;
     }
 
     iconpanel {
+        color: white;
         font-size: 64px;
     }
 
@@ -39,18 +37,10 @@ vitals {
     vitals {
         border-left: $red-team;
     }
-
-    label, iconpanel {
-        color: $red-team;
-    }
 }
 
 .blue-team {
     vitals {
         border-left: $blue-team;
-    }
-
-    label, iconpanel {
-        color: $blue-team;
     }
 }
