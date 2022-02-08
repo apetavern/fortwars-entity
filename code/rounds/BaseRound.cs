@@ -48,6 +48,11 @@ namespace Fortwars
 
 		public virtual void OnTick() { }
 
+		public virtual void SetupInventory( Player player )
+		{
+			player.Inventory.DeleteContents();
+		}
+
 		public virtual void OnSecond()
 		{
 			if ( Host.IsServer )
@@ -74,6 +79,7 @@ namespace Fortwars
 		{
 			Game.Instance.Round.RoundEndTime += 600;
 		}
+
 
 		protected virtual void OnStart() { }
 

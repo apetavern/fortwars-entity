@@ -16,12 +16,19 @@ namespace Fortwars
 			{
 				Player.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) =>
 				{
+					SetupInventory( player );
 					Game.Instance.MoveToSpawnpoint( player );
 				} );
 			}
 
 			foreach ( var wall in Entity.All.OfType<FuncWallToggle>() )
 				wall.Show();
+		}
+
+		public override void SetupInventory( Player player )
+		{
+			base.SetupInventory( player );
+			player.Inventory.Add( new PhysGun(), true );
 		}
 
 		protected override void OnFinish()

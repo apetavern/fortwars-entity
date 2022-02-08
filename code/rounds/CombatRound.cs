@@ -17,12 +17,19 @@ namespace Fortwars
 			{
 				Player.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) =>
 				{
+					SetupInventory( player );
 					Game.Instance.MoveToSpawnpoint( player );
 				} );
 			}
 
 			foreach ( var wall in Entity.All.OfType<FuncWallToggle>() )
 				wall.Hide();
+		}
+
+		public override void SetupInventory( Player player )
+		{
+			base.SetupInventory( player );
+			player.Inventory.Add( FortwarsWeapon.FromPath( "/data/weapons/aiax50.fwweapon" ), true );
 		}
 
 		protected override void OnFinish()
