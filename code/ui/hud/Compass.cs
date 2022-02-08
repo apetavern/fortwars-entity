@@ -24,10 +24,10 @@ namespace Fortwars
 
 	public class Compass : Panel
 	{
-		/// <summary>
-		/// HACK: This is used for a stupid way of getting
-		/// north to be 0
-		/// </summary>
+		//
+		// This is used for a stupid way of getting
+		// north to be 0
+		//
 		public static float AngleOffset = 90f;
 
 		private List<IconCompassPoint> worldIcons = new();
@@ -85,9 +85,7 @@ namespace Fortwars
 
 			if ( Local.Pawn is FortwarsPlayer player )
 			{
-				float relativeAngle = player.CalcRelativeYaw( 0 );
-				if ( relativeAngle < 0 )
-					relativeAngle += 360f;
+				float relativeAngle = player.CalcRelativeYaw( 0 ).NormalizeDegrees();
 				relativeAngle = 360 - relativeAngle;
 
 				currentFacing.Text = relativeAngle.CeilToInt().ToString();
