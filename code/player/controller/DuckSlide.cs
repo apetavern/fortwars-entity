@@ -34,8 +34,6 @@ namespace Fortwars
 					$"Wants != IsActive: {wants != IsActive}" );
 			}
 
-			Log.Trace( Host.IsServer );
-
 			if ( wants != IsActive )
 			{
 				if ( wants )
