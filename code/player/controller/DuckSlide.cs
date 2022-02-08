@@ -7,15 +7,16 @@ namespace Fortwars
 	{
 		public PlayerController Controller;
 
-		public bool IsActive { get; set; }
-		public bool IsActiveSlide { get; set; }
+		public bool IsActive { get; private set; }
+		public bool IsActiveSlide { get; private set; }
+
+		private float MinimumSlideSpeed => 250;
+		private TimeSince timeSinceLastSlide = 0;
 
 		public DuckSlide( PlayerController controller )
 		{
 			Controller = controller;
 		}
-
-		float MinimumSlideSpeed => 250;
 
 		public virtual void PreTick()
 		{
@@ -29,14 +30,17 @@ namespace Fortwars
 					$"IsActiveSlide: {IsActiveSlide}\n" +
 					$"Wants: {wants}\n" +
 					$"Controller Velocity: {Controller.Velocity.Length}\n" +
-					$"Grounded: {Controller.GroundEntity != null}" );
+					$"Grounded: {Controller.GroundEntity != null}\n" +
+					$"Wants != IsActive: {wants != IsActive}" );
 			}
+
+			Log.Trace( Host.IsServer );
 
 			if ( wants != IsActive )
 			{
 				if ( wants )
 				{
-					if ( Controller.Velocity.Length > 100 && Controller.GroundEntity != null )
+					if ( Controller.Velocity.Length > MinimumSlideSpeed && Controller.GroundEntity != null )
 						TrySlide();
 					else
 						TryDuck();
@@ -48,103 +52,66 @@ namespace Fortwars
 			}
 
 			if ( IsActive )
-			{
 				Controller.SetTag( "ducked" );
-
-				if ( IsActiveSlide )
-				{
-					Controller.EyePosLocal = Controller.EyePosLocal.LerpTo( new Vector3( 0, 0, 32 ), 7.5f * Time.Delta );
-				}
-				else
-				{
-					Controller.EyePosLocal = Controller.EyePosLocal.LerpTo( new Vector3( 0, 0, 32 ), 25 * Time.Delta );
-				}
-			}
 
 			if ( IsActiveSlide && Controller.Velocity.Length <= MinimumSlideSpeed )
 				TryUnDuck();
 
 			if ( !Controller.GroundEntity.IsValid() )
-				IsActiveSlide = false;
+				TryUnDuck();
 		}
 
-		protected virtual void TrySlide()
+		private void TrySlide()
 		{
-			IsActive = true;
+			if ( timeSinceLastSlide < 3 )
+				return;
 
 			float distance = 64;
 			var direction = Controller.Pawn.EyeRot.Forward;
 
-			// HACK: Fix - Controller.GroundAngle always returns 46, not sure why.
-			float angle = Vector3.GetAngle( Vector3.Up, Controller.GroundNormal );
-			float tAngle = angle.LerpInverse( 0, 15f );
 			Controller.Velocity += (direction * distance * 8.0f);
 
+			IsActive = true;
 			IsActiveSlide = true;
 		}
 
-		protected virtual void TryDuck()
+		private void TryDuck()
 		{
 			IsActive = true;
 		}
 
-		protected virtual void TryUnDuck()
+		private void TryUnDuck()
 		{
-			var pm = Controller.TraceBBox( Controller.Position, Controller.Position, originalMins, originalMaxs );
-			if ( pm.StartedSolid ) return;
-
 			if ( IsActiveSlide && Controller.Velocity.Length > MinimumSlideSpeed ) return;
+
+			if ( IsActiveSlide )
+				timeSinceLastSlide = 0;
 
 			IsActive = false;
 			IsActiveSlide = false;
 		}
 
-		// Uck, saving off the bbox kind of sucks
-		// and we should probably be changing the bbox size in PreTick
-		Vector3 originalMins;
-		Vector3 originalMaxs;
-
-		public virtual void UpdateBBox( ref Vector3 mins, ref Vector3 maxs, float scale )
-		{
-			originalMins = mins;
-			originalMaxs = maxs;
-
-			if ( IsActive )
-				maxs = maxs.WithZ( 36 * scale );
-		}
-
-		public virtual float GetWishSpeed()
+		public float GetWishSpeed()
 		{
 			if ( IsActive && IsActiveSlide ) return 0;
 			if ( IsActive ) return 0.5f;
 			return 1;
 		}
 
-		public virtual float GetFrictionMultiplier()
+		public float GetFrictionMultiplier()
 		{
-			// HACK: Fix - Controller.GroundAngle always returns 46, not sure why.
-			float angle = Vector3.GetAngle( Vector3.Up, Controller.GroundNormal );
-
-			if ( !IsActiveSlide ) return 1;
-
-			float tAngle = angle.LerpInverse( 15f, 0f );
-			float friction = 0.2f;
-
-			return friction;
+			if ( IsActiveSlide ) return 0.2f;
+			return 1;
 		}
 
-		public virtual float GetEyeHeight()
+		public float GetEyeHeight()
 		{
 			if ( IsActive )
 			{
 				if ( IsActiveSlide )
-				{
 					return 0.2f;
-				}
 				else
-				{
 					return 0.5f;
-				}
 			}
 			else
 			{
