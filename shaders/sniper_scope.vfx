@@ -93,6 +93,22 @@ PS
 	
 	float2 g_vMaskOffset < UiType( Slider ); Default2( 0.0f, 0.0f ); UiGroup( "Mask" ); Range2( -1.0f, -1.0f, 1.0f, 1.0f ); >;
 
+	float2 CalcSquareUvs( float2 uvs ) 
+	{
+        float fAspectRatio = g_vViewportSize.y / g_vViewportSize.x;
+
+		float2 location = float2( 0.5f, 0.5f );
+		float width = 0.25f;
+		float height = 0.25f;
+
+		uvs.y *= fAspectRatio;
+		location.y *= fAspectRatio;
+		float x = location.x - uvs.x;
+		float y = location.y - uvs.y;
+		
+		return float2( -x, -y );
+	}
+
 	//
 	// Main
 	//
@@ -104,6 +120,10 @@ PS
         float2 vPositionUvWithOffset = ( ( i.vPositionSs.xy ) - g_vViewportOffset ) / g_vRenderTargetSize;
         float fAspectRatio = g_vViewportSize.y / g_vViewportSize.x;
 
+		// TODO: UVs are fixed but scaling is still wacky
+		float2 squareUvs = CalcSquareUvs( vPositionUvWithOffset );
+		o.vColor = float4( squareUvs.x, squareUvs.y, 0.0f, 1.0f );
+
 		//
 		// Circle mask
 		//
@@ -114,8 +134,7 @@ PS
 		//
 		// Reticle texture
 		//
-        float2 vPositionUv = ( i.vPositionSs.xy - g_vViewportOffset ) / g_vRenderTargetSize;
-        float2 vReticleUvs = float2( vPositionUv.x, ( vPositionUv.y * fAspectRatio ) ) * g_flReticleScale;
+        float2 vReticleUvs = float2( squareUvs.x, squareUvs.y ) * g_flReticleScale;
         vReticleUvs += g_flReticleOffset - ( g_vMaskOffset * g_flReticleLiveOffsetMul );
         float4 vReticleColor = Tex2D( g_tReticle, vReticleUvs );
 
@@ -128,6 +147,7 @@ PS
 		o.vColor.z *= pow( fMaskMix, 2 ); // We want the outer edge to look green/yellow
 
         o.vColor.a = 1.0;
+
 		return o;
 	}
 }

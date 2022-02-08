@@ -22,7 +22,7 @@ Layer0
 
 	//---- Reticle ----
 	g_flReticleLiveOffsetMul "0.500"
-	g_flReticleOffset "[0.751 0.073]"
+	g_flReticleOffset "[0.078 0.751]"
 	g_flReticleScale "1.500"
 
 	//---- Texture Coordinates ----
