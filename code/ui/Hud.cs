@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 
-namespace Fortwars.UI
+namespace Fortwars
 {
 	[Library]
 	public partial class FortwarsHUD : HudEntity<RootPanel>

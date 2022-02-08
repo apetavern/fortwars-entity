@@ -1,6 +1,6 @@
 ﻿using Sandbox.UI;
 
-namespace Fortwars.UI
+namespace Fortwars
 {
 	public class BuildHelp : Panel
 	{

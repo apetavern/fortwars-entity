@@ -1,4 +1,3 @@
-using Fortwars.UI;
 using Sandbox;
 using System;
 using System.Linq;
@@ -21,7 +20,7 @@ namespace Fortwars
 		public Game()
 		{
 			if ( IsServer )
-				hud = new UI.FortwarsHUD();
+				hud = new FortwarsHUD();
 
 			_ = StartTickTimer();
 

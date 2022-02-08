@@ -1,4 +1,7 @@
-﻿namespace Sandbox.UI
+﻿using Sandbox;
+using Sandbox.UI;
+
+namespace Fortwars
 {
 	public static class PanelExtension
 	{

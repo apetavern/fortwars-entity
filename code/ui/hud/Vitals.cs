@@ -2,7 +2,7 @@
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace Fortwars.UI
+namespace Fortwars
 {
 	public class Vitals : Panel
 	{

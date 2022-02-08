@@ -4,7 +4,7 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
 
-namespace Fortwars.UI
+namespace Fortwars
 {
 	public class RoundStatus : Panel
 	{
