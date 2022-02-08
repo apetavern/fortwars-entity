@@ -58,7 +58,7 @@ namespace Fortwars
 				return;
 			}
 
-			Controller = new PlayerController();
+			Controller = new FortwarsWalkController();
 			Animator = new StandardPlayerAnimator();
 			Camera = new FirstPersonCamera();
 

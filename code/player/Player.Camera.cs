@@ -50,7 +50,7 @@ namespace Fortwars
 				walkBob += Time.Delta * 25.0f * speed;
 			}
 
-			if ( Controller is PlayerController { DuckSlide: { IsActiveSlide: true } } )
+			if ( Controller is FortwarsWalkController { Duck: { IsActiveSlide: true } } )
 			{
 				walkBob = 0f;
 				_ = new Sandbox.ScreenShake.Perlin( 0.5f, 1f, 0.25f, 0.6f );

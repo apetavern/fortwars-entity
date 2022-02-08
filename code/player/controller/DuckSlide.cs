@@ -5,40 +5,27 @@ namespace Fortwars
 	[Library]
 	public partial class DuckSlide : BaseNetworkable
 	{
-		public PlayerController Controller;
+		public BasePlayerController Controller;
 
-		public bool IsActive { get; private set; }
-		public bool IsActiveSlide { get; private set; }
+		public bool IsActive;
+		public bool IsActiveSlide;
 
-		private float MinimumSlideSpeed => 250;
-		private TimeSince timeSinceLastSlide = 0;
-
-		public DuckSlide( PlayerController controller )
+		public DuckSlide( BasePlayerController controller )
 		{
 			Controller = controller;
 		}
+
+		float MinimumSlideSpeed => 200;
 
 		public virtual void PreTick()
 		{
 			bool wants = Input.Down( InputButton.Duck );
 
-			if ( BasePlayerController.Debug )
-			{
-				DebugOverlay.ScreenText( new Vector2( 32, (Host.IsClient) ? 250 : 500 ),
-					$"Server: {Host.IsServer}\n" +
-					$"IsActive: {IsActive}\n" +
-					$"IsActiveSlide: {IsActiveSlide}\n" +
-					$"Wants: {wants}\n" +
-					$"Controller Velocity: {Controller.Velocity.Length}\n" +
-					$"Grounded: {Controller.GroundEntity != null}\n" +
-					$"Wants != IsActive: {wants != IsActive}" );
-			}
-
 			if ( wants != IsActive )
 			{
 				if ( wants )
 				{
-					if ( Controller.Velocity.Length > MinimumSlideSpeed && Controller.GroundEntity != null )
+					if ( Controller.Velocity.Cross( Vector3.Up ).Length > MinimumSlideSpeed && Controller.GroundEntity != null )
 						TrySlide();
 					else
 						TryDuck();
@@ -50,71 +37,77 @@ namespace Fortwars
 			}
 
 			if ( IsActive )
+			{
 				Controller.SetTag( "ducked" );
+
+				if ( IsActiveSlide )
+					Controller.EyePosLocal = Controller.EyePosLocal.LerpTo( new Vector3( 0, 0, 32 ), 50f * Time.Delta );
+				else
+					Controller.EyePosLocal = Controller.EyePosLocal.LerpTo( new Vector3( 0, 0, 32 ), 25f * Time.Delta );
+			}
+			else
+				Controller.EyePosLocal = Controller.EyePosLocal.LerpTo( new Vector3( 0, 0, 64 ), 25f * Time.Delta );
 
 			if ( IsActiveSlide && Controller.Velocity.Length <= MinimumSlideSpeed )
 				TryUnDuck();
 
 			if ( !Controller.GroundEntity.IsValid() )
-				TryUnDuck();
+				IsActiveSlide = false;
 		}
 
-		private void TrySlide()
+		protected virtual void TrySlide()
 		{
-			if ( timeSinceLastSlide < 3 )
-				return;
+			IsActive = true;
 
 			float distance = 64;
 			var direction = Controller.Pawn.EyeRot.Forward;
 
-			Controller.Velocity += (direction * distance * 8.0f);
+			float force = 8.0f;
+			Controller.Velocity += direction * distance * force;
 
-			IsActive = true;
 			IsActiveSlide = true;
 		}
 
-		private void TryDuck()
+		protected virtual void TryDuck()
 		{
 			IsActive = true;
 		}
 
-		private void TryUnDuck()
+		protected virtual void TryUnDuck()
 		{
-			if ( IsActiveSlide && Controller.Velocity.Length > MinimumSlideSpeed ) return;
+			var pm = Controller.TraceBBox( Controller.Position, Controller.Position, originalMins, originalMaxs );
+			if ( pm.StartedSolid ) return;
 
-			if ( IsActiveSlide )
-				timeSinceLastSlide = 0;
+			if ( IsActiveSlide && Controller.Velocity.Length > MinimumSlideSpeed ) return;
 
 			IsActive = false;
 			IsActiveSlide = false;
 		}
 
-		public float GetWishSpeed()
-		{
-			if ( IsActive && IsActiveSlide ) return 0;
-			if ( IsActive ) return 0.5f;
-			return 1;
-		}
+		// Uck, saving off the bbox kind of sucks
+		// and we should probably be changing the bbox size in PreTick
+		Vector3 originalMins;
+		Vector3 originalMaxs;
 
-		public float GetFrictionMultiplier()
+		public virtual void UpdateBBox( ref Vector3 mins, ref Vector3 maxs, float scale )
 		{
-			if ( IsActiveSlide ) return 0.2f;
-			return 1;
-		}
+			originalMins = mins;
+			originalMaxs = maxs;
 
-		public float GetEyeHeight()
-		{
 			if ( IsActive )
-			{
-				if ( IsActiveSlide )
-					return 0.2f;
-				else
-					return 0.5f;
-			}
-			else
-			{
-				return 1.0f;
-			}
+				maxs = maxs.WithZ( 36 * scale );
+		}
+
+		public virtual float GetWishSpeed()
+		{
+			if ( IsActive ) return 85f;
+			return -1f;
+		}
+
+		public virtual float GetFrictionMultiplier()
+		{
+			if ( IsActiveSlide ) return 0.25f;
+			return 1.0f;
 		}
 	}
 }
