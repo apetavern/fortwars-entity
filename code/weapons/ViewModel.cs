@@ -132,8 +132,8 @@ namespace Fortwars
 		{
 			if ( Local.Pawn is Player { Controller: PlayerController { DuckSlide: { IsActive: true, IsActiveSlide: true } } } player )
 			{
-				TargetRot = Rotation.From( 5, 0, -25 );
-				TargetPos = Vector3.Zero;
+				TargetRot = Rotation.From( 0, 0, -35 );
+				TargetPos = Vector3.Down * 16f + Vector3.Left * 16f;
 				return true;
 			}
 
