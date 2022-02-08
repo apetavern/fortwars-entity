@@ -4,43 +4,39 @@ vitals {
     position: absolute;
     left: $safe-area-x;
     bottom: $safe-area-y;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 10px 20px;
-    border-radius: 2px;
-    background: linear-gradient( to right, $background, rgba( $background, 0 ) );
-    border-left: 4px solid transparent;
+    flex-direction: column;
+    width: 150px;
 
-    label {
-        color: white;
-        font-size: 64px;
-        margin-left: 16px;
-    }
+    VitalsPanel {
+        margin-top: 10px;
+        width: 100%;
+        padding: 10px 20px;
+        border-radius: 2px;
+        background: linear-gradient( to right, $background, rgba( $background, 0 ) );
+        border-left: 4px solid transparent;
+        flex-direction: row;
+        align-items: center;
 
-    iconpanel {
-        color: white;
-        font-size: 64px;
-    }
+        label {
+            color: white;
+            margin-left: 16px;
+        }
 
-    .team {
-        position: absolute;
-        bottom: -32px;
-        font-size: 20px;
-        left: -20px;
-        color: white;
-        text-transform: uppercase;
+        iconpanel {
+            color: white;
+            font-size: 32px;
+        }
     }
 }
 
 .red-team {
-    vitals {
+    vitals vitalspanel {
         border-left: $red-team;
     }
 }
 
 .blue-team {
-    vitals {
+    vitals vitalspanel {
         border-left: $blue-team;
     }
 }

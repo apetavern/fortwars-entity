@@ -1,20 +1,29 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
+using System;
 
 namespace Fortwars
 {
 	public class Vitals : Panel
 	{
-		public Label Health;
-
 		public Vitals()
 		{
 			StyleSheet.Load( "/ui/hud/Vitals.scss" );
 
-			var icon = Add.Icon( "add_box" );
-			Health = Add.Label( "100", "health" );
-			Health.Bind( "text", () => Local.Pawn.Health.CeilToInt() );
+			_ = new VitalsPanel( this, "add_box", () => Local.Pawn.Health.CeilToInt() );
+		}
+
+		class VitalsPanel : Panel
+		{
+			public VitalsPanel( Panel parent, string icon, Func<object> textBinding )
+			{
+				var iconPanel = Add.Icon( icon );
+				var label = Add.Label( "100" );
+				label.Bind( "text", textBinding );
+
+				Parent = parent;
+			}
 		}
 	}
 }
