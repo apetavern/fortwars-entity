@@ -105,11 +105,14 @@ namespace Fortwars
 
 		public override void Tick()
 		{
+			const float maxAngle = 110;
+
 			if ( Local.Pawn is FortwarsPlayer player )
 			{
 				float relativeAngle = player.CalcRelativeYaw( Angle );
 
-				float position = relativeAngle.LerpInverse( -45, 45 );
+				float halfMaxAngle = maxAngle / 2.0f;
+				float position = relativeAngle.LerpInverse( -halfMaxAngle, halfMaxAngle );
 				Style.Left = Length.Fraction( position );
 
 				float t = (position <= 0.5f) ? position : (1.0f - position);
