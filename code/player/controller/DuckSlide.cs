@@ -10,7 +10,7 @@ namespace Fortwars
 		public bool IsActive { get; private set; }
 		public bool IsActiveSlide { get; private set; }
 
-		private float MinimumSlideSpeed => 250f;
+		private float MinimumSlideSpeed => 200f;
 
 		public DuckSlide( FortwarsWalkController controller )
 		{
