@@ -5,11 +5,9 @@ namespace Fortwars
 {
 	public partial class FortwarsPlayer
 	{
-		[Event.Frame]
-		public static void OnFrame()
+		[Event.Tick.Client]
+		public static void OnClientTick()
 		{
-			Host.AssertClient();
-
 			Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( player =>
 			{
 				if ( player.IsLocalPawn )
