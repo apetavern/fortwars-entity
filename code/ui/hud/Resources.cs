@@ -26,14 +26,23 @@ namespace Fortwars
 		{
 			string name;
 
+			Label count;
+			Label limit;
+
 			public Resource( string name )
 			{
 				this.name = name;
 
 				Add.Label( name, "name" );
-				Add.Label( "20", "count" );
+				count = Add.Label( "20", "count" );
 				Add.Label( "/", "separator" );
-				Add.Label( "20", "max" );
+				limit = Add.Label( "20", "limit" );
+			}
+
+			public override void Tick()
+			{
+				base.Tick();
+				limit.Text = Game.Instance.WoodPerPlayer.ToString();
 			}
 		}
 	}
