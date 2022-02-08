@@ -50,5 +50,5 @@ Blocks:
 
 Props:
 * [X] Store touchscreen
-* [ ] ??
+* [X] Bogroll (With viewmodel)
 
