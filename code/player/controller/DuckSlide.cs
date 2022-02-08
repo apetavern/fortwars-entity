@@ -5,14 +5,14 @@ namespace Fortwars
 	[Library]
 	public partial class DuckSlide : BaseNetworkable
 	{
-		public BasePlayerController Controller;
+		public FortwarsWalkController Controller;
 
 		public bool IsActive { get; private set; }
 		public bool IsActiveSlide { get; private set; }
 
 		private float MinimumSlideSpeed => 250f;
 
-		public DuckSlide( BasePlayerController controller )
+		public DuckSlide( FortwarsWalkController controller )
 		{
 			Controller = controller;
 		}
@@ -25,7 +25,7 @@ namespace Fortwars
 			{
 				if ( wants )
 				{
-					if ( Controller.Velocity.Cross( Vector3.Up ).Length > MinimumSlideSpeed && Controller.GroundEntity != null )
+					if ( Controller.ForwardSpeed > MinimumSlideSpeed && Controller.GroundEntity != null )
 						TrySlide();
 					else
 						TryDuck();
