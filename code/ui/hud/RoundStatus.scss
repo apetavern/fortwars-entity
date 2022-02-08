@@ -10,6 +10,7 @@ roundstatus {
     left: 50%;
     transform: translate( -50% );
     transform-origin: 0% 0%;
+    background: linear-gradient( to bottom, $background, rgba( $background, 0 ) );
 
     panel.round-info {
         display: flex;
@@ -19,9 +20,7 @@ roundstatus {
         flex-grow: 1;
         width: 100%;
         margin-top: 5px;
-        background-color: $background;
-        padding: 10px 20px;
-        border-bottom: 4px solid transparent;
+        padding: 10px 0;
         border-radius: 2px;
         box-shadow: 0 0 5px rgba( black, 0.2 );
 
@@ -30,7 +29,6 @@ roundstatus {
             text-align: center;
             flex-grow: 0;
             flex-shrink: 1;
-            color: white;
 
             &.time {
                 font-weight: bold;
@@ -65,9 +63,7 @@ roundstatus {
         flex-grow: 1;
 
         label.score {
-            background-color: rgb(80, 80, 80);
             font-size: 24px;
-            box-shadow: 0 0 5px rgba( black, 0.2 );
             border-radius: 2px;
             color: $background;
             text-align: center;
@@ -77,24 +73,13 @@ roundstatus {
 
             &.score.blue {
                 background-color: $blue-team;
+                border-radius: 0 0 0 2px;
             }
 
             &.score.red {
                 background-color: $red-team;
+                border-radius: 0 0 2px 0;
             }
         }
-    }
-}
-
-
-.red-team {
-    roundstatus panel.round-info {
-        border-bottom: $red-team;
-    }
-}
-
-.blue-team {
-    roundstatus panel.round-info {
-        border-bottom: $blue-team;
     }
 }

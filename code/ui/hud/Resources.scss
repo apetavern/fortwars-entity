@@ -27,18 +27,10 @@ Resources {
     Resources {
         border-left: $red-team;
     }
-
-    label, iconpanel {
-        color: $red-team;
-    }
 }
 
 .blue-team {
     Resources {
         border-left: $blue-team;
-    }
-
-    label, iconpanel {
-        color: $blue-team;
     }
 }
