@@ -31,13 +31,14 @@ Far future:
 ## TODO, modelling edition
 
 Weapons:
-* [X] USP
-* [X] SMG II
-* [X] revolver
+* [X] USP (pistol)
+* [X] SMG II (submachine gun)
+* [X] TRJ (revolver)
+* [X] block manipulator (custom physgun)
+* [X] AX50 (sniper)
 * [ ] p90
-* [ ] awp
 * [ ] ak47
 * [ ] m4a1s
 * [ ] p2000
 * [ ] deagle
-* [ ] block manipulator (custom physgun)
+
