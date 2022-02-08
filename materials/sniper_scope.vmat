@@ -7,15 +7,18 @@ Layer0
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "materials/default/default_color.tga"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
 
 	//---- Mask ----
-	g_flMaskOffset "[0.000 0.000]"
 	g_flMaskPower "16.000"
 	g_flMaskStrength "4.500"
+	g_vMaskOffset "[0.000 0.000]"
+
+	//---- Material ----
+	TextureColor "materials/default/default_color.tga"
+	TextureTranslucency "materials/default/default_trans.tga"
 
 	//---- Reticle ----
 	g_flReticleOffset "[0.751 0.073]"
@@ -31,11 +34,8 @@ Layer0
 	//---- Textures ----
 	ReticleTexture "textures/sniper_reticle.png"
 
-	//---- Translucent ----
-	TextureTranslucency "materials/default/default_trans.tga"
-
 	DynamicParams
 	{
-		g_flMaskOffset "maskOffset"
+		g_vMaskOffset "maskOffset"
 	}
 }
