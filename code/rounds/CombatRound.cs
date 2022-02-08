@@ -15,7 +15,10 @@ namespace Fortwars
 
 			if ( Host.IsServer )
 			{
-				Player.All.ToList().ForEach( ( player ) => (player as FortwarsPlayer)?.Respawn() );
+				Player.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) =>
+				{
+					Game.Instance.MoveToSpawnpoint( player );
+				} );
 			}
 
 			foreach ( var wall in Entity.All.OfType<FuncWallToggle>() )
