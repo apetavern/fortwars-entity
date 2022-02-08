@@ -14,6 +14,15 @@ namespace Fortwars
 		protected float BobCycleTime => 7.0f;
 		protected Vector3 BobDirection => new( 0.0f, 0.5f, 1.0f );
 
+		private Vector3 TargetPos = 0;
+		private Vector3 FinalPos = 0;
+		private float TargetFov = 0;
+		private float FinalFov = 0;
+		private Rotation TargetRot = Rotation.Identity;
+		private Rotation FinalRot = Rotation.Identity;
+
+		private float LerpSpeed = 10f;
+
 		private Vector3 swingOffset;
 		private float lastPitch;
 		private float lastYaw;
@@ -36,15 +45,6 @@ namespace Fortwars
 			using ( Prediction.Off() )
 				ShootOffset -= Vector3.Backward * 2;
 		}
-
-		Vector3 TargetPos = 0;
-		Vector3 FinalPos = 0;
-		float TargetFov = 0;
-		float FinalFov = 0;
-		Rotation TargetRot = Rotation.Identity;
-		Rotation FinalRot = Rotation.Identity;
-
-		float LerpSpeed = 10f;
 
 		public override void PostCameraSetup( ref CameraSetup camSetup )
 		{
