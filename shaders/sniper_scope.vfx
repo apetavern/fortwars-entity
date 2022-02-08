@@ -78,10 +78,14 @@ PS
     RenderState(AlphaToCoverageEnable, true);
 
     CreateInputTexture2D( ReticleTexture, Srgb, 8, "", "",  "Textures", Default3( 1, 1, 1 ) );
-    CreateTexture2D( g_tReticle ) < Channel( RGBA, None( ReticleTexture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); >;
+    CreateTexture2D( g_tReticle ) < Channel( RGBA, None( ReticleTexture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); AddressU( CLAMP ); AddressV( CLAMP ); >;
     TextureAttribute( g_tReticle, g_tReticle );
 
-    CreateTexture2D( g_tScopeRT ) < Attribute( "ScopeRT" ); SrgbRead( false ); Filter( MIN_MAG_MIP_LINEAR );  >;
+    CreateInputTexture2D( MaskTexture, Srgb, 8, "", "",  "Textures", Default3( 1, 1, 1 ) );
+    CreateTexture2D( g_tMask ) < Channel( RGBA, None( MaskTexture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); AddressU( CLAMP ); AddressV( CLAMP ); >;
+    TextureAttribute( g_tMask, g_tMask );
+
+    CreateTexture2D( g_tScopeRT ) < Attribute( "ScopeRT" ); SrgbRead( false ); Filter( MIN_MAG_MIP_LINEAR ); >;
 
 	float g_flReticleScale < UiType( Slider ); Default( 2.5f ); UiGroup( "Reticle" ); >;
 	float2 g_flReticleOffset < UiType( Slider ); Default2( 0.25f, 0.79f ); UiGroup( "Reticle" ); Range2( 0.0f, 0.0f, 1.0f, 1.0f ); >;
@@ -91,10 +95,6 @@ PS
 	float g_flMaskLiveOffsetMul < UiType( Slider ); Default( 1.5f ); Range( 0.0f, 2.0f ); UiGroup( "Mask" ); >;
 	float g_flMaskScale < UiType( Slider ); Default( 1.0f ); UiGroup( "Mask" ); >;
 	float2 g_vMaskOffset < UiType( Slider ); Default2( 0.0f, 0.0f ); UiGroup( "Mask" ); Range2( -1.0f, -1.0f, 1.0f, 1.0f ); >;
-
-    CreateInputTexture2D( MaskTexture, Srgb, 8, "", "",  "Textures", Default3( 1, 1, 1 ) );
-    CreateTexture2D( g_tMask ) < Channel( RGBA, None( MaskTexture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); >;
-    TextureAttribute( g_tMask, g_tMask );
 
 	float2 CalcSquareUvs( float2 uvs ) 
 	{
