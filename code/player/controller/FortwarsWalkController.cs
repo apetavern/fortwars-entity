@@ -23,11 +23,10 @@ namespace Fortwars
 
 		public DuckSlide Duck { get; private set; }
 		public Unstuck Unstuck { get; private set; }
-		public bool Swimming { get; set; } = false;
+		public bool IsSwimming { get; set; } = false;
 		private bool IsGrounded => GroundEntity != null;
-		private bool IsSwimming => Pawn.WaterLevel.Fraction > 0.1f;
-		public float ForwardSpeed => Velocity.Dot( EyeRot.Forward );
 		public bool IsSprinting => Input.Down( InputButton.Run ) && IsGrounded && ForwardSpeed > 100f;
+		public float ForwardSpeed => Velocity.Dot( EyeRot.Forward );
 
 		public FortwarsWalkController()
 		{
@@ -46,7 +45,6 @@ namespace Fortwars
 
 			return new BBox( mins, maxs );
 		}
-
 
 		// Duck body height 32
 		// Eye Height 64
@@ -97,57 +95,22 @@ namespace Fortwars
 			EyePosLocal += TraceOffset;
 			EyeRot = Input.Rotation;
 
-			RestoreGroundPos();
-
-			//Velocity += BaseVelocity * ( 1 + Time.Delta * 0.5f );
-			//BaseVelocity = Vector3.Zero;
-
-			//Rot = Rotation.LookAt( Input.Rotation.Forward.WithZ( 0 ), Vector3.Up );
-
 			if ( Unstuck.TestAndFix() )
 				return;
 
-			// Check Stuck
-			// Unstuck - or return if stuck
-
-			// Set Ground Entity to null if  falling faster then 250
-
-			// store water level to compare later
-
-			// if not on ground, store fall velocity
-
-			// player->UpdateStepSound( player->m_pSurfaceData, mv->GetAbsOrigin(), mv->m_vecVelocity )
-
-
-			// RunLadderMode
-
 			CheckLadder();
-			Swimming = Pawn.WaterLevel.Fraction > 0.6f;
+			IsSwimming = Pawn.WaterLevel.Fraction > 0.6f;
 
 			//
 			// Start Gravity
 			//
-			if ( !Swimming && !IsTouchingLadder )
+			if ( !IsSwimming && !IsTouchingLadder )
 			{
 				Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;
 				Velocity += new Vector3( 0, 0, BaseVelocity.z ) * Time.Delta;
 
 				BaseVelocity = BaseVelocity.WithZ( 0 );
 			}
-
-
-			/*
-             if (player->m_flWaterJumpTime)
-	            {
-		            WaterJump();
-		            TryPlayerMove();
-		            // See if we are still in water?
-		            CheckWater();
-		            return;
-	            }
-            */
-
-			// if ( underwater ) do underwater movement
 
 			if ( AutoJump ? Input.Down( InputButton.Jump ) : Input.Pressed( InputButton.Jump ) )
 			{
@@ -175,7 +138,7 @@ namespace Fortwars
 			var inSpeed = WishVelocity.Length.Clamp( 0, 1 );
 			WishVelocity *= Input.Rotation.Angles().WithPitch( 0 ).ToRotation();
 
-			if ( !Swimming && !IsTouchingLadder )
+			if ( !IsSwimming && !IsTouchingLadder )
 			{
 				WishVelocity = WishVelocity.WithZ( 0 );
 			}
@@ -186,7 +149,7 @@ namespace Fortwars
 			Duck.PreTick();
 
 			bool bStayOnGround = false;
-			if ( Swimming )
+			if ( IsSwimming )
 			{
 				ApplyFriction( 1 );
 				WaterMove();
@@ -208,11 +171,10 @@ namespace Fortwars
 			CategorizePosition( bStayOnGround );
 
 			// FinishGravity
-			if ( !Swimming && !IsTouchingLadder )
+			if ( !IsSwimming && !IsTouchingLadder )
 			{
 				Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;
 			}
-
 
 			if ( GroundEntity != null )
 			{
@@ -220,11 +182,6 @@ namespace Fortwars
 			}
 
 			// CheckFalling(); // fall damage etc
-
-			// Land Sound
-			// Swim Sounds
-
-			SaveGroundPos();
 
 			if ( Debug )
 			{
@@ -266,14 +223,6 @@ namespace Fortwars
 			Velocity = Velocity.WithZ( 0 );
 			Accelerate( wishdir, wishspeed, 0, Acceleration );
 			Velocity = Velocity.WithZ( 0 );
-
-			//   Player.SetAnimParam( "forward", Input.Forward );
-			//   Player.SetAnimParam( "sideward", Input.Right );
-			//   Player.SetAnimParam( "wishspeed", wishspeed );
-			//    Player.SetAnimParam( "walkspeed_scale", 2.0f / 190.0f );
-			//   Player.SetAnimParam( "runspeed_scale", 2.0f / 320.0f );
-
-			//  DebugOverlay.Text( 0, Pos + Vector3.Up * 100, $"forward: {Input.Forward}\nsideward: {Input.Right}" );
 
 			// Add in any base velocity to the current velocity.
 			Velocity += BaseVelocity;
@@ -372,13 +321,6 @@ namespace Fortwars
 		/// </summary>
 		public virtual void ApplyFriction( float frictionAmount = 1.0f )
 		{
-			// If we are in water jump cycle, don't apply friction
-			//if ( player->m_flWaterJumpTime )
-			//   return;
-
-			// Not on ground - no friction
-
-
 			// Calculate speed
 			var speed = Velocity.Length;
 			if ( speed < 0.1f ) return;
@@ -399,43 +341,17 @@ namespace Fortwars
 				newspeed /= speed;
 				Velocity *= newspeed;
 			}
-
-			// mv->m_outWishVel -= (1.f-newspeed) * mv->m_vecVelocity;
 		}
 
 		public virtual void CheckJumpButton()
 		{
-			//if ( !player->CanJump() )
-			//    return false;
-
-
-			/*
-            if ( player->m_flWaterJumpTime )
-            {
-                player->m_flWaterJumpTime -= gpGlobals->frametime();
-                if ( player->m_flWaterJumpTime < 0 )
-                    player->m_flWaterJumpTime = 0;
-
-                return false;
-            }*/
-
-
-
 			// If we are in the water most of the way...
-			if ( Swimming )
+			if ( IsSwimming )
 			{
 				// swimming, not jumping
 				ClearGroundEntity();
 
 				Velocity = Velocity.WithZ( 100 );
-
-				// play swimming sound
-				//  if ( player->m_flSwimSoundTime <= 0 )
-				{
-					// Don't play sound again for 1 second
-					//   player->m_flSwimSoundTime = 1000;
-					//   PlaySwimSound();
-				}
 
 				return;
 			}
@@ -443,29 +359,10 @@ namespace Fortwars
 			if ( GroundEntity == null )
 				return;
 
-			/*
-            if ( player->m_Local.m_bDucking && (player->GetFlags() & FL_DUCKING) )
-                return false;
-            */
-
-			/*
-            // Still updating the eye position.
-            if ( player->m_Local.m_nDuckJumpTimeMsecs > 0u )
-                return false;
-            */
 
 			ClearGroundEntity();
 
-			// player->PlayStepSound( (Vector &)mv->GetAbsOrigin(), player->m_pSurfaceData, 1.0, true );
-
-			// MoveHelper()->PlayerSetAnimation( PLAYER_JUMP );
-
 			float flGroundFactor = 1.0f;
-			//if ( player->m_pSurfaceData )
-			{
-				//   flGroundFactor = g_pPhysicsQuery->GetGameSurfaceproperties( player->m_pSurfaceData )->m_flJumpFactor;
-			}
-
 			float flMul = 268.3281572999747f * 1.2f;
 
 			float startz = Velocity.z;
@@ -476,12 +373,6 @@ namespace Fortwars
 			Velocity = Velocity.WithZ( startz + flMul * flGroundFactor );
 
 			Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;
-
-			// mv->m_outJumpVel.z += mv->m_vecVelocity[2] - startz;
-			// mv->m_outStepHeight += 0.15f;
-
-			// don't jump again until released
-			//mv->m_nOldButtons |= IN_JUMP;
 
 			AddEvent( "jump" );
 
@@ -574,7 +465,6 @@ namespace Fortwars
 			Move();
 		}
 
-
 		public virtual void CategorizePosition( bool bStayOnGround )
 		{
 			SurfaceFriction = 1.0f;
@@ -608,7 +498,7 @@ namespace Fortwars
 				point.z -= StepSize;
 			}
 
-			if ( bMovingUpRapidly || Swimming ) // or ladder and moving up
+			if ( bMovingUpRapidly || IsSwimming ) // or ladder and moving up
 			{
 				ClearGroundEntity();
 				return;
@@ -662,16 +552,6 @@ namespace Fortwars
 			{
 				BaseVelocity = GroundEntity.Velocity;
 			}
-
-			/*
-              	m_vecGroundUp = pm.m_vHitNormal;
-	            player->m_surfaceProps = pm.m_pSurfaceProperties->GetNameHash();
-	            player->m_pSurfaceData = pm.m_pSurfaceProperties;
-	            const CPhysSurfaceProperties *pProp = pm.m_pSurfaceProperties;
-
-	            const CGameSurfaceProperties *pGameProps = g_pPhysicsQuery->GetGameSurfaceproperties( pProp );
-	            player->m_chTextureType = (int8)pGameProps->m_nLegacyGameMaterial;
-            */
 		}
 
 		/// <summary>
@@ -716,29 +596,7 @@ namespace Fortwars
 			if ( trace.StartedSolid ) return;
 			if ( Vector3.GetAngle( Vector3.Up, trace.Normal ) > GroundAngle ) return;
 
-			// This is incredibly hacky. The real problem is that trace returning that strange value we can't network over.
-			// float flDelta = fabs( mv->GetAbsOrigin().z - trace.m_vEndPos.z );
-			// if ( flDelta > 0.5f * DIST_EPSILON )
-
 			Position = trace.EndPos;
 		}
-
-		void RestoreGroundPos()
-		{
-			if ( GroundEntity == null || GroundEntity.IsWorld )
-				return;
-
-			//var Position = GroundEntity.Transform.ToWorld( GroundTransform );
-			//Pos = Position.Position;
-		}
-
-		void SaveGroundPos()
-		{
-			if ( GroundEntity == null || GroundEntity.IsWorld )
-				return;
-
-			//GroundTransform = GroundEntity.Transform.ToLocal( new Transform( Pos, Rot ) );
-		}
-
 	}
 }
