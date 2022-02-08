@@ -49,6 +49,8 @@ public partial class PhysGun : Carriable, IUse
 		SetInteractsAs( CollisionLayer.Debris );
 	}
 
+	float DesiredDialPos;
+
 	public void UpdateViewmodel()
 	{
 		bool wantsToFreeze = Input.Pressed( InputButton.Attack2 );
@@ -64,8 +66,8 @@ public partial class PhysGun : Carriable, IUse
 		}
 		else
 		{
-			ViewModelEntity?.SetAnimFloat( "joystickFB", 0f );
-			ViewModelEntity?.SetAnimFloat( "joystickLR", 0f );
+			ViewModelEntity?.SetAnimFloat( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickFB" ), 0f, 0.1f ) );
+			ViewModelEntity?.SetAnimFloat( "joystickLR", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickLR" ), 0f, 0.1f ) );
 			ViewModelEntity?.SetAnimBool( "snap", false );
 		}
 
@@ -74,7 +76,26 @@ public partial class PhysGun : Carriable, IUse
 			ViewModelEntity?.SetAnimBool( "freeze", true );
 		}
 
+		if ( GrabbedEntity.IsValid() )
+		{
+			DesiredDialPos = 0.5f;
+			if ( !rotating )
+			{
+				DesiredDialPos += Rand.Float() * 0.1f;
+			}
+			else
+			{
+				DesiredDialPos += Rand.Float() * 0.15f * (1 + (Input.MouseDelta.Length/20f));
+			}
+		}
+		else
+		{
+			DesiredDialPos = 0f;
+		}
+
 		ViewModelEntity?.SetAnimBool( "cangrab", CanGrab );
+
+		ViewModelEntity?.SetAnimFloat( "dialpos", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "dialpos" ), DesiredDialPos, 0.5f ) );
 	}
 
 	public void UpdateCanGrab(Player owner, Vector3 eyePos, Rotation eyeRot, Vector3 eyeDir)
