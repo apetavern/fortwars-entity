@@ -22,7 +22,7 @@ public partial class PhysGun : Carriable, IUse
 	protected bool grabbing;
 
 	protected virtual float MinTargetDistance => 0.0f;
-	protected virtual float MaxTargetDistance => 10000.0f;
+	protected virtual float MaxTargetDistance => 512.0f;
 	protected virtual float LinearFrequency => 20.0f;
 	protected virtual float LinearDampingRatio => 1.0f;
 	protected virtual float AngularFrequency => 20.0f;
@@ -85,7 +85,7 @@ public partial class PhysGun : Carriable, IUse
 			}
 			else
 			{
-				DesiredDialPos += Rand.Float() * 0.15f * (1 + (Input.MouseDelta.Length/20f));
+				DesiredDialPos += Rand.Float() * 0.15f * (1 + (Input.MouseDelta.Length / 20f));
 			}
 		}
 		else
@@ -98,18 +98,19 @@ public partial class PhysGun : Carriable, IUse
 		ViewModelEntity?.SetAnimFloat( "dialpos", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "dialpos" ), DesiredDialPos, 0.5f ) );
 	}
 
-	public void UpdateCanGrab(Player owner, Vector3 eyePos, Rotation eyeRot, Vector3 eyeDir)
+	public void UpdateCanGrab( Player owner, Vector3 eyePos, Rotation eyeRot, Vector3 eyeDir )
 	{
 		if ( GrabbedEntity.IsValid() )
 		{
 			CanGrab = true;
 			return;
 		}
+
 		var tr = Trace.Ray( eyePos, eyePos + eyeDir * MaxTargetDistance )
-		.UseHitboxes()
-		.Ignore( owner, false )
-		.HitLayer( CollisionLayer.Debris )
-		.Run();
+			.UseHitboxes()
+			.Ignore( owner, false )
+			.HitLayer( CollisionLayer.Debris )
+			.Run();
 
 		if ( !tr.Hit || !tr.Entity.IsValid() || tr.Entity.IsWorld || tr.StartedSolid )
 		{
@@ -140,7 +141,7 @@ public partial class PhysGun : Carriable, IUse
 			return;
 		}
 
-		if((rootEnt as FortwarsBlock).TeamID != (owner as FortwarsPlayer).TeamID )
+		if ( (rootEnt as FortwarsBlock).TeamID != (owner as FortwarsPlayer).TeamID )
 		{
 			CanGrab = false;
 			return;
@@ -152,7 +153,7 @@ public partial class PhysGun : Carriable, IUse
 	public override void Simulate( Client client )
 	{
 		UpdateViewmodel();
-		
+
 		if ( Owner is not Player owner ) return;
 
 		var eyePos = owner.EyePos;
