@@ -35,6 +35,7 @@ public partial class PhysGun : Carriable, IUse
 	[Net] public Entity GrabbedEntity { get; set; }
 	[Net] public int GrabbedBone { get; set; }
 	[Net] public Vector3 GrabbedPos { get; set; }
+	[Net] public bool CanGrab { get; set; }
 
 	public PhysicsBody HeldBody => heldBody;
 
@@ -72,16 +73,72 @@ public partial class PhysGun : Carriable, IUse
 		{
 			ViewModelEntity?.SetAnimBool( "freeze", true );
 		}
+
+		ViewModelEntity?.SetAnimBool( "cangrab", CanGrab );
+	}
+
+	public void UpdateCanGrab(Player owner, Vector3 eyePos, Rotation eyeRot, Vector3 eyeDir)
+	{
+		if ( GrabbedEntity.IsValid() )
+		{
+			CanGrab = true;
+			return;
+		}
+		var tr = Trace.Ray( eyePos, eyePos + eyeDir * MaxTargetDistance )
+		.UseHitboxes()
+		.Ignore( owner, false )
+		.HitLayer( CollisionLayer.Debris )
+		.Run();
+
+		if ( !tr.Hit || !tr.Entity.IsValid() || tr.Entity.IsWorld || tr.StartedSolid )
+		{
+			CanGrab = false;
+			return;
+		}
+
+		var rootEnt = tr.Entity.Root;
+		var body = tr.Body;
+
+		if ( !body.IsValid() || tr.Entity.Parent.IsValid() )
+		{
+			if ( rootEnt.IsValid() && rootEnt.PhysicsGroup != null )
+			{
+				body = (rootEnt.PhysicsGroup.BodyCount > 0 ? rootEnt.PhysicsGroup.GetBody( 0 ) : null);
+			}
+		}
+
+		if ( !body.IsValid() )
+		{
+			CanGrab = false;
+			return;
+		}
+
+		if ( rootEnt is not FortwarsBlock )
+		{
+			CanGrab = false;
+			return;
+		}
+
+		if((rootEnt as FortwarsBlock).TeamID != (owner as FortwarsPlayer).TeamID )
+		{
+			CanGrab = false;
+			return;
+		}
+
+		CanGrab = true;
 	}
 
 	public override void Simulate( Client client )
 	{
 		UpdateViewmodel();
+		
 		if ( Owner is not Player owner ) return;
 
 		var eyePos = owner.EyePos;
 		var eyeDir = owner.EyeRot.Forward;
 		var eyeRot = Rotation.From( new Angles( 0.0f, owner.EyeRot.Angles().yaw, 0.0f ) );
+
+		UpdateCanGrab( owner, eyePos, eyeRot, eyeDir );
 
 		if ( Input.Pressed( InputButton.Attack1 ) )
 		{
