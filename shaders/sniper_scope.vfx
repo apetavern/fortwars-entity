@@ -87,11 +87,14 @@ PS
 	float2 g_flReticleOffset < UiType( Slider ); Default2( 0.25f, 0.79f ); UiGroup( "Reticle" ); Range2( 0.0f, 0.0f, 1.0f, 1.0f ); >;
 	float g_flReticleCircleScale < UiType( Slider ); Default( 2.0f ); UiGroup( "Reticle" ); >;
 	float g_flReticleLiveOffsetMul < UiType( Slider ); Default( 0.25f ); Range( 0.0f, 2.0f ); UiGroup( "Reticle" ); >;
-
-	float g_flMaskStrength < UiType( Slider ); Default( 0.5f ); UiGroup( "Mask" ); >;
-	float g_flMaskPower < UiType( Slider ); Default( 2.0f ); UiGroup( "Mask" ); >;
 	
+	float g_flMaskLiveOffsetMul < UiType( Slider ); Default( 1.5f ); Range( 0.0f, 2.0f ); UiGroup( "Mask" ); >;
+	float g_flMaskScale < UiType( Slider ); Default( 1.0f ); UiGroup( "Mask" ); >;
 	float2 g_vMaskOffset < UiType( Slider ); Default2( 0.0f, 0.0f ); UiGroup( "Mask" ); Range2( -1.0f, -1.0f, 1.0f, 1.0f ); >;
+
+    CreateInputTexture2D( MaskTexture, Srgb, 8, "", "",  "Textures", Default3( 1, 1, 1 ) );
+    CreateTexture2D( g_tMask ) < Channel( RGBA, None( MaskTexture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); >;
+    TextureAttribute( g_tMask, g_tMask );
 
 	float2 CalcSquareUvs( float2 uvs ) 
 	{
@@ -122,14 +125,13 @@ PS
 
 		// TODO: UVs are fixed but scaling is still wacky
 		float2 squareUvs = CalcSquareUvs( vPositionUvWithOffset );
-		o.vColor = float4( squareUvs.x, squareUvs.y, 0.0f, 1.0f );
 
 		//
 		// Circle mask
 		//
-		float2 vCircleMaskUvs = (vPositionUvWithOffset - 0.5f) * float2( 1.0f, fAspectRatio );
-		vCircleMaskUvs += g_vMaskOffset;
-		float fMaskMix = 1.0f - saturate( pow( length( vCircleMaskUvs * g_flMaskStrength ), g_flMaskPower ) );
+		float2 vCircleMaskUvs = float2( squareUvs.x, squareUvs.y ) * g_flMaskScale;
+        vCircleMaskUvs += g_flReticleOffset + ( g_vMaskOffset * g_flMaskLiveOffsetMul );
+		float fMaskMix = Tex2D( g_tMask, vCircleMaskUvs );
 
 		//
 		// Reticle texture
@@ -141,10 +143,10 @@ PS
 		//
 		// Put it all together
 		//
-		o.vColor = Tex2D( g_tScopeRT, vPositionUvWithOffset * pow( fMaskMix, 0.025f ) );
+		o.vColor = Tex2D( g_tScopeRT, vPositionUvWithOffset );
         o.vColor.xyz = SrgbGammaToLinear( o.vColor.xyz * vReticleColor.xyz );
 		o.vColor.xyz *= fMaskMix;
-		o.vColor.z *= pow( fMaskMix, 2 ); // We want the outer edge to look green/yellow
+		o.vColor.xy *= sqrt( fMaskMix );
 
         o.vColor.a = 1.0;
 
