@@ -5,11 +5,10 @@ namespace Fortwars
 	[Library]
 	public partial class DuckSlide : BaseNetworkable
 	{
-
 		public PlayerController Controller;
 
-		[Net, Predicted] public bool IsActive { get; set; }
-		[Net, Predicted] public bool IsActiveSlide { get; set; }
+		public bool IsActive { get; set; }
+		public bool IsActiveSlide { get; set; }
 
 		public DuckSlide( PlayerController controller )
 		{
@@ -22,11 +21,22 @@ namespace Fortwars
 		{
 			bool wants = Input.Down( InputButton.Duck );
 
+			if ( BasePlayerController.Debug )
+			{
+				DebugOverlay.ScreenText( new Vector2( 32, (Host.IsClient) ? 250 : 500 ),
+					$"Server: {Host.IsServer}\n" +
+					$"IsActive: {IsActive}\n" +
+					$"IsActiveSlide: {IsActiveSlide}\n" +
+					$"Wants: {wants}\n" +
+					$"Controller Velocity: {Controller.Velocity.Length}\n" +
+					$"Grounded: {Controller.GroundEntity != null}" );
+			}
+
 			if ( wants != IsActive )
 			{
 				if ( wants )
 				{
-					if ( Controller.Velocity.Cross( Vector3.Up ).Length > MinimumSlideSpeed && Controller.Velocity.Length > 100 && Controller.GroundEntity != null )
+					if ( Controller.Velocity.Length > 100 && Controller.GroundEntity != null )
 						TrySlide();
 					else
 						TryDuck();
@@ -44,7 +54,6 @@ namespace Fortwars
 				if ( IsActiveSlide )
 				{
 					Controller.EyePosLocal = Controller.EyePosLocal.LerpTo( new Vector3( 0, 0, 32 ), 7.5f * Time.Delta );
-					float t = Controller.Velocity.Dot( Controller.Rotation.Forward ).LerpInverse( 0, 300 );
 				}
 				else
 				{
@@ -119,7 +128,7 @@ namespace Fortwars
 			if ( !IsActiveSlide ) return 1;
 
 			float tAngle = angle.LerpInverse( 15f, 0f );
-			float friction = 0.3f;
+			float friction = 0.2f;
 
 			return friction;
 		}
@@ -130,7 +139,7 @@ namespace Fortwars
 			{
 				if ( IsActiveSlide )
 				{
-					return 0.4f;
+					return 0.2f;
 				}
 				else
 				{
