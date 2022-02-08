@@ -19,7 +19,7 @@ namespace Fortwars
 			if ( !IsServer )
 				return;
 
-			if ( other is not FortwarsPlayer { ActiveChild: FortwarsWeapon weapon } )
+			if ( other.ActiveChild is not FortwarsWeapon weapon )
 				return;
 
 			weapon.ReserveAmmo += weapon.WeaponAsset.MaxAmmo * 2;
