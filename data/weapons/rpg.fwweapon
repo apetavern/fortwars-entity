@@ -3,10 +3,10 @@
 	data = 
 	{
 		weaponname = "RPG"
-		worldmodel = resource:"materials/models/editor/proxy_helper.vmdl"
+		worldmodel = resource:"models/weapons/rpg/rpg_w.vmdl"
 		viewmodel = resource:"models/weapons/hkusp/hkusp_v.vmdl"
 		movementspeedmultiplier = 0.75
-		holdtype = "1"
+		holdtype = "2"
 		firemode = "1"
 		rpm = 6000.0
 		firstshotdelay = 0.0
@@ -34,7 +34,13 @@
 		kickbackrotation = 0.6
 		firesound = "rust_flashlight.attack"
 		useprojectile = true
-		projectilemodel = resource:"models/light_arrow.vmdl"
+		projectilemodel = resource:"models/weapons/rpg/rpgrocket.vmdl"
 		projectilespeed = 1000.0
+		userendertarget = false
+		aimposition = [ 0.0, 0.0, 0.0 ]
+		aimrotation = [ 0.0, 0.0, 0.0 ]
+		aimfovmult = 0.5
+		fireparticles = resource:"particles/flash_medium.vpcf"
+		tracerparticles = resource:"particles/tracer_large.vpcf"
 	}
 }
