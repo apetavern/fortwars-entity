@@ -4,7 +4,7 @@
 Jake K - Programmer  
 Trundler - Programmer  
 Alex - Programmer  
-ShadowBrain - Artist (Models, Animations)
+ShadowBrain - Artist (Models, Animations)   
 Willow - Artist (Maps, Particles)
 
 ### Other
