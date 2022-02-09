@@ -12,7 +12,7 @@ HEADER
 //=========================================================================================================================
 FEATURES
 {
-    #include "common/features.hlsl"
+	#include "common/features.hlsl"
 }
 
 //=========================================================================================================================
@@ -31,8 +31,8 @@ MODES
 COMMON
 {
 	#include "common/shared.hlsl"
-    #define S_TRANSLUCENT 1
-    #define BLEND_MODE_ALREADY_SET
+	#define S_TRANSLUCENT 1
+	#define BLEND_MODE_ALREADY_SET
 }
 
 //=========================================================================================================================
@@ -70,22 +70,22 @@ VS
 PS
 {
   	#include "common/pixel.hlsl"
-    #include "common.fxc"
+	#include "common.fxc"
 	  
-    RenderState( BlendEnable, true );
-    RenderState( SrcBlend, SRC_ALPHA );
-    RenderState( DstBlend, INV_SRC_ALPHA );
-    RenderState(AlphaToCoverageEnable, true);
+	RenderState( BlendEnable, true );
+	RenderState( SrcBlend, SRC_ALPHA );
+	RenderState( DstBlend, INV_SRC_ALPHA );
+	RenderState(AlphaToCoverageEnable, true);
 
-    CreateInputTexture2D( ReticleTexture, Srgb, 8, "", "",  "Textures", Default3( 1, 1, 1 ) );
-    CreateTexture2D( g_tReticle ) < Channel( RGBA, None( ReticleTexture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); AddressU( CLAMP ); AddressV( CLAMP ); >;
-    TextureAttribute( g_tReticle, g_tReticle );
+	CreateInputTexture2D( ReticleTexture, Srgb, 8, "", "",  "Textures", Default3( 1, 1, 1 ) );
+	CreateTexture2D( g_tReticle ) < Channel( RGBA, None( ReticleTexture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); AddressU( CLAMP ); AddressV( CLAMP ); >;
+	TextureAttribute( g_tReticle, g_tReticle );
 
-    CreateInputTexture2D( MaskTexture, Srgb, 8, "", "",  "Textures", Default3( 1, 1, 1 ) );
-    CreateTexture2D( g_tMask ) < Channel( RGBA, None( MaskTexture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); AddressU( CLAMP ); AddressV( CLAMP ); >;
-    TextureAttribute( g_tMask, g_tMask );
+	CreateInputTexture2D( MaskTexture, Srgb, 8, "", "",  "Textures", Default3( 1, 1, 1 ) );
+	CreateTexture2D( g_tMask ) < Channel( RGBA, None( MaskTexture ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); AddressU( CLAMP ); AddressV( CLAMP ); >;
+	TextureAttribute( g_tMask, g_tMask );
 
-    CreateTexture2D( g_tScopeRT ) < Attribute( "ScopeRT" ); SrgbRead( false ); Filter( MIN_MAG_MIP_LINEAR ); >;
+	CreateTexture2D( g_tScopeRT ) < Attribute( "ScopeRT" ); SrgbRead( false ); >;
 
 	float g_flReticleScale < UiType( Slider ); Default( 2.5f ); UiGroup( "Reticle" ); >;
 	float2 g_vReticleOffset < UiType( Slider ); Default2( 0.5f, 0.5f ); UiGroup( "Reticle" ); Range2( 0.0f, 0.0f, 1.0f, 1.0f ); >;
@@ -98,7 +98,7 @@ PS
 
 	float2 CalcSquareUvs( float2 uvs ) 
 	{
-        float fAspectRatio = g_vViewportSize.y / g_vViewportSize.x;
+		float fAspectRatio = g_vViewportSize.y / g_vViewportSize.x;
 
 		float2 location = float2( 0.5f, 0.5f );
 		float width = 0.25f;
@@ -120,8 +120,8 @@ PS
 		Material material = GatherMaterial( i );
 		PixelOutput o = FinalizePixelMaterial( i, material );
 
-        float2 vPositionUvWithOffset = ( ( i.vPositionSs.xy ) - g_vViewportOffset ) / g_vRenderTargetSize;
-        float fAspectRatio = g_vViewportSize.y / g_vViewportSize.x;
+		float2 vPositionUvWithOffset = ( ( i.vPositionSs.xy ) - g_vViewportOffset ) / g_vRenderTargetSize;
+		float fAspectRatio = g_vViewportSize.y / g_vViewportSize.x;
 
 		// TODO: UVs are fixed but scaling is still wacky
 		float2 squareUvs = CalcSquareUvs( vPositionUvWithOffset );
@@ -130,25 +130,25 @@ PS
 		// Circle mask
 		//
 		float2 vCircleMaskUvs = float2( squareUvs.x, squareUvs.y ) * g_flMaskScale;
-        vCircleMaskUvs += g_vReticleOffset + ( g_vMaskOffset * g_flMaskLiveOffsetMul );
+		vCircleMaskUvs += g_vReticleOffset + ( g_vMaskOffset * g_flMaskLiveOffsetMul );
 		float fMaskMix = Tex2D( g_tMask, vCircleMaskUvs );
 
 		//
 		// Reticle texture
 		//
-        float2 vReticleUvs = float2( squareUvs.x, squareUvs.y ) * g_flReticleScale;
-        vReticleUvs += g_vReticleOffset - ( g_vMaskOffset * g_flReticleLiveOffsetMul );
-        float4 vReticleColor = Tex2D( g_tReticle, vReticleUvs );
+		float2 vReticleUvs = float2( squareUvs.x, squareUvs.y ) * g_flReticleScale;
+		vReticleUvs += g_vReticleOffset - ( g_vMaskOffset * g_flReticleLiveOffsetMul );
+		float4 vReticleColor = Tex2D( g_tReticle, vReticleUvs );
 
 		//
 		// Put it all together
 		//
 		o.vColor = Tex2D( g_tScopeRT, vPositionUvWithOffset );
-        o.vColor.xyz = SrgbGammaToLinear( o.vColor.xyz * vReticleColor.xyz );
+		o.vColor.xyz = SrgbGammaToLinear( o.vColor.xyz * vReticleColor.xyz );
 		o.vColor.xyz *= fMaskMix;
 		o.vColor.xy *= sqrt( fMaskMix );
 
-        o.vColor.a = 1.0;
+		o.vColor.a = 1.0;
 
 		return o;
 	}
