@@ -95,6 +95,8 @@ PS
 	float g_flMaskLiveOffsetMul < UiType( Slider ); Default( 1.5f ); Range( 0.0f, 2.0f ); UiGroup( "Mask" ); >;
 	float g_flMaskScale < UiType( Slider ); Default( 1.0f ); UiGroup( "Mask" ); >;
 	float2 g_vMaskOffset < UiType( Slider ); Default2( 0.0f, 0.0f ); UiGroup( "Mask" ); Range2( -1.0f, -1.0f, 1.0f, 1.0f ); >;
+	
+	float g_flScreenLiveOffsetMul < UiType( Slider ); Default( 0.25f ); Range( 0.0f, 2.0f ); UiGroup( "Misc" ); >;
 
 	float2 CalcSquareUvs( float2 uvs ) 
 	{
@@ -143,7 +145,8 @@ PS
 		//
 		// Put it all together
 		//
-		o.vColor = Tex2D( g_tScopeRT, vPositionUvWithOffset );
+		float2 vScreenUvs = vPositionUvWithOffset - ( g_vMaskOffset * g_flScreenLiveOffsetMul );
+		o.vColor = Tex2D( g_tScopeRT, vScreenUvs );
 		o.vColor.xyz = SrgbGammaToLinear( o.vColor.xyz * vReticleColor.xyz );
 		o.vColor.xyz *= fMaskMix;
 		o.vColor.xy *= sqrt( fMaskMix );
