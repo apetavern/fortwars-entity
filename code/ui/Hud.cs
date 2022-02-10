@@ -24,6 +24,7 @@ namespace Fortwars
 			RootPanel.AddChild<BuildHelp>();
 			RootPanel.AddChild<BuildWheel>();
 			RootPanel.AddChild<Compass>();
+			RootPanel.AddChild<CrosshairCustomizer>();
 
 			RootPanel.AddChild<DevMenu>();
 
