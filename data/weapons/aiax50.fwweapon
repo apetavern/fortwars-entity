@@ -17,7 +17,7 @@
 		firstshotalwaysaccurate = true
 		spread = 0.0
 		spreadshotincrease = 1.0
-		spreadchangetime = 1.0
+		spreadchangetime = 4.0
 		aimaccuracymult = 1.0
 		maxammo = 5
 		extraammo = 30
