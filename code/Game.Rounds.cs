@@ -9,6 +9,20 @@ namespace Fortwars
 		[ServerVar( "fw_min_players", Help = "The minimum players required to start." )]
 		public static int MinPlayers { get; set; } = 1;
 
+		[Net] public int BestOf { get; set; } = 3;
+		[Net]
+		public int RoundsToWin
+		{
+			get
+			{
+				return MathX.CeilToInt( (float)BestOf / 2 );
+			}
+		}
+		[Net] public int BlueWins { get; set; } = 0;
+		[Net] public int RedWins { get; set; } = 0;
+
+		public Team WinningTeam { get; set; } = Team.Invalid;
+
 		public void ChangeRound( BaseRound round )
 		{
 			Assert.NotNull( round );

@@ -187,6 +187,20 @@ namespace Fortwars
 			ShowFlag( Team.Blue );
 		}
 
+		public void CleanupCTF()
+		{
+			// Reset Score
+			RedTeamScore = 0;
+			BlueTeamScore = 0;
+
+			// Return Flags
+			ReturnFlag( Team.Red );
+			ReturnFlag( Team.Blue );
+
+			// Reset Flags
+			ResetFlags();
+		}
+
 		private void ShowFlag( Team team )
 		{
 			(Entity.All.First( e => e is InfoFlagSpawn flagSpawn && flagSpawn.Team == team ) as InfoFlagSpawn)?.ShowFlag();

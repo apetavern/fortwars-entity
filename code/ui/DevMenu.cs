@@ -44,6 +44,8 @@ namespace Fortwars
 			buttons.Add.ButtonWithIcon( "Give ammo", "gamepad", "button", () => ConsoleSystem.Run( "fw_give_ammo 10000" ) );
 			buttons.Add.ButtonWithIcon( "Give physgun", "add", "button", () => ConsoleSystem.Run( "fw_inventory_give physgun" ) );
 			buttons.Add.ButtonWithIcon( "Give repair tool", "add", "button", () => ConsoleSystem.Run( "fw_inventory_give repairtool" ) );
+			buttons.Add.ButtonWithIcon( "Give medkit", "add", "button", () => ConsoleSystem.Run( "fw_inventory_give medkittool" ) );
+			buttons.Add.ButtonWithIcon( "Give ammokit", "add", "button", () => ConsoleSystem.Run( "fw_inventory_give ammokittool" ) );
 
 			buttons.Add.Label( "Spawn Weapon", "minitext" );
 
