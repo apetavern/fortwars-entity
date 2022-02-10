@@ -5,21 +5,22 @@ namespace Fortwars
 	[Library]
 	public partial class FortwarsWalkController : BasePlayerController
 	{
-		[Net] public float SprintSpeed { get; set; } = 400f;
-		[Net] public float DefaultSpeed { get; set; } = 300f;
-		[Net] public float Acceleration { get; set; } = 7.5f;
-		[Net] public float AirAcceleration { get; set; } = 1.0f;
-		[Net] public float GroundFriction { get; set; } = 8.0f;
-		[Net] public float StopSpeed { get; set; } = 100.0f;
-		[Net] public float GroundAngle { get; set; } = 46.0f;
-		[Net] public float StepSize { get; set; } = 18.0f;
-		[Net] public float MaxNonJumpVelocity { get; set; } = 140.0f;
-		[Net] public float BodyGirth { get; set; } = 32.0f;
-		[Net] public float BodyHeight { get; set; } = 72.0f;
-		[Net] public float EyeHeight { get; set; } = 64.0f;
-		[Net] public float Gravity { get; set; } = 800.0f;
-		[Net] public float AirControl { get; set; } = 5.0f;
-		[Net] public bool AutoJump { get; set; } = false;
+		public float SprintSpeed => 400f;
+		public float DefaultSpeed => 300f;
+		public float Acceleration => 8.0f;
+		public float AirAcceleration => 8.0f;
+		public float GroundFriction => 8.0f;
+		public float StopSpeed => 100.0f;
+		public float DistEpsilon => 0.03125f;
+		public float GroundAngle => 46.0f;
+		public float StepSize => 18.0f;
+		public float MaxNonJumpVelocity => 128.0f;
+		public float BodyGirth => 32.0f;
+		public float BodyHeight => 72.0f;
+		public float EyeHeight => 64.0f;
+		public float Gravity => 800.0f;
+		public bool AutoJump => true;
+		public float AirControl => 100.0f;
 
 		public DuckSlide DuckSlide { get; private set; }
 		public Unstuck Unstuck { get; private set; }
