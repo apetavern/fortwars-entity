@@ -1,6 +1,4 @@
-﻿using Sandbox;
-
-namespace Fortwars
+﻿namespace Fortwars
 {
 	public partial class EndRound : BaseRound
 	{

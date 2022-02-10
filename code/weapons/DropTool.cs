@@ -10,7 +10,7 @@ namespace Fortwars
 
 		public override string ViewModelPath => "models/items/medkit/medkit_v.vmdl";
 
-		[Net]public bool IsAmmo { get; set; }
+		[Net] public bool IsAmmo { get; set; }
 
 		public float DropTimeDelay = 15f;
 
@@ -162,7 +162,7 @@ namespace Fortwars
 		public override void ActiveStart( Entity ent )
 		{
 			base.ActiveStart( ent );
-			
+
 		}
 
 		public override void SimulateAnimator( PawnAnimator anim )

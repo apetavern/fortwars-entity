@@ -22,7 +22,7 @@ namespace Fortwars
 
 		protected override void OnDestroy()
 		{
-			if ( IsServer  && Spawner.IsValid())
+			if ( IsServer && Spawner.IsValid() )
 				Spawner.ResetSpawnTimer();
 
 			base.OnDestroy();
