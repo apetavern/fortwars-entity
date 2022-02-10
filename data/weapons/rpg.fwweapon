@@ -4,7 +4,7 @@
 	{
 		weaponname = "RPG"
 		worldmodel = resource:"models/weapons/rpg/rpg_w.vmdl"
-		viewmodel = resource:"models/weapons/hkusp/hkusp_v.vmdl"
+		viewmodel = resource:"models/weapons/rpg/rpg_v.vmdl"
 		movementspeedmultiplier = 0.75
 		holdtype = "2"
 		firemode = "1"
@@ -21,8 +21,8 @@
 		spreadchangetime = 0.01
 		aimaccuracymult = 1.0
 		maxammo = 4
-		extraammo = 10
-		reloadtime = 1.0
+		extraammo = 12
+		reloadtime = 3.0
 		postreloadtime = 0.5
 		maxdamage = 20.0
 		mindamage = 10.0
@@ -32,12 +32,12 @@
 		kickbacklength = 1.0
 		kickbackspeed = 1.0
 		kickbackrotation = 0.6
-		firesound = "rust_flashlight.attack"
+		firesound = "rust_pumpshotgun.shootdouble"
 		useprojectile = true
 		projectilemodel = resource:"models/weapons/rpg/rpgrocket.vmdl"
 		projectilespeed = 1000.0
 		userendertarget = false
-		aimposition = [ 0.0, 0.0, 0.0 ]
+		aimposition = [ -15.0, 7.0, -2.5 ]
 		aimrotation = [ 0.0, 0.0, 0.0 ]
 		aimfovmult = 0.5
 		fireparticles = resource:"particles/flash_medium.vpcf"
