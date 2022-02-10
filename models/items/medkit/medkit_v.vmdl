@@ -35,6 +35,17 @@
 						use_global_default = false
 						global_default_material = ""
 					},
+					{
+						_class = "MaterialGroup"
+						name = "ammo"
+						remaps = 
+						[
+							{
+								from = "models/items/medkit/materials/medkit.vmat"
+								to = "models/items/medkit/materials/ammokit.vmat"
+							},
+						]
+					},
 				]
 			},
 			{
@@ -109,8 +120,29 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						source_filename = "models/items/medkit/medkit_v.fbx"
-						start_frame = 19
-						end_frame = 19
+						start_frame = 15
+						end_frame = 20
+						framerate = 1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "throw"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/items/medkit/medkit_v.fbx"
+						start_frame = 20
+						end_frame = 35
 						framerate = -1.0
 						take = 0
 						reverse = false
