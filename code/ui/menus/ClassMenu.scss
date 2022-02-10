@@ -4,14 +4,41 @@ ClassMenu {
     background-color: red;
 }
 
+.main {
+    height: 50%;
+    width: 100%;
+    flex-grow: 1;
+    margin: -50px 0;
+
+    ClassPreviewPanel, ClassPreviewPanel > ScenePanel {
+        width: 100%;
+        height: 100%;
+        flex-grow: 1;
+    }
+}
+
+ClassInfo {
+    position: absolute;
+    top: 50%;
+    left: 75px;
+    width: 400px;
+    flex-direction: column;
+    transform: translate( 0 -50% );
+}
+
 .classes {
     align-items: center;
     justify-content: center;
     flex-grow: 1;
-    padding-bottom: 200px;
+    background: linear-gradient( to bottom, black 0%, black 25%, rgba( black, 0 ) );
+    padding: 100px 0;
+    padding-top: 200px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
 
     button.class {
-        width: 250px;
         background-color: rgba( white, 0.2 );
         margin: 0px 10px;
         padding: 10px 20px;
@@ -20,6 +47,7 @@ ClassMenu {
         border-radius: 2px;
         border: 2px solid transparent;
         transition: all 150ms ease;
+        flex-direction: column-reverse;
 
         .class-count {
             position: absolute;
