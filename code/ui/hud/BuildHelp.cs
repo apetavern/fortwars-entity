@@ -14,14 +14,5 @@ namespace Fortwars
 
 			BindClass( "visible", () => Game.Instance.Round is BuildRound );
 		}
-
-		public override void Tick()
-		{
-			var game = Game.Instance;
-			if ( game == null ) return;
-
-			var round = game.Round;
-			if ( round == null ) return;
-		}
 	}
 }
