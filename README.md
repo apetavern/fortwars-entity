@@ -53,4 +53,8 @@ Blocks:
 Props:
 * [X] Store touchscreen
 * [X] Bogroll (With viewmodel)
+* [X] Repair tool
+* [ ] Medkit
+* [ ] Deployable ammo
+* [ ] Stim shot
 
