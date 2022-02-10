@@ -36,6 +36,7 @@ Weapons:
 * [X] TRJ (revolver)
 * [X] block manipulator (custom physgun)
 * [X] AX50 (sniper)
+* [X] RPG (rocket launcher)
 * [ ] p90
 * [ ] ak47
 * [ ] m4a1s
