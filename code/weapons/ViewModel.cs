@@ -216,6 +216,16 @@ namespace Fortwars
 			{
 				_ = new Sandbox.ScreenShake.Perlin( 1f, 1f, floatData );
 			}
+
+			if ( name.Contains( "projectile_added" ) )
+			{
+				ConsoleSystem.Run( "fw_loadprojectile " + intData );
+				if ( Weapon.CurrentClip == Weapon.WeaponAsset.MaxAmmo - 1 || Weapon.ReserveAmmo <= 1 )
+				{
+					Weapon.OnReloadFinish();
+					SetAnimBool( "endreload", true );
+				}
+			}
 		}
 
 		protected Vector3 CalcSwingOffset( float pitchDelta, float yawDelta )
