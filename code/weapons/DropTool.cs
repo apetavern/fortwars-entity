@@ -167,12 +167,24 @@ namespace Fortwars
 
 		public override void SimulateAnimator( PawnAnimator anim )
 		{
-			Scale = 0.25f;
-			anim.SetParam( "holdtype", 4 );
-			anim.SetParam( "aimat_weight", 1.0f );
-			anim.SetParam( "holdtype_handedness", 0 );
-			anim.SetParam( "holdtype_pose_hand", 0f );
-			anim.SetParam( "holdtype_attack", 1 );
+			if ( TimeSinceLastDrop < DropTimeDelay )
+			{
+				EnableDrawing = false;
+				anim.SetParam( "holdtype", 0);
+				anim.SetParam( "aimat_weight", 1.0f );
+				anim.SetParam( "holdtype_handedness", 0 );
+				anim.SetParam( "holdtype_pose_hand", 0f );
+				anim.SetParam( "holdtype_attack", 1 );
+			}
+			else
+			{
+				EnableDrawing = true;
+				anim.SetParam( "holdtype", 4 );
+				anim.SetParam( "aimat_weight", 1.0f );
+				anim.SetParam( "holdtype_handedness", 0 );
+				anim.SetParam( "holdtype_pose_hand", 0f );
+				anim.SetParam( "holdtype_attack", 1 );
+			}
 		}
 	}
 }
