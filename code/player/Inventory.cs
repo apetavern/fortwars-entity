@@ -11,6 +11,14 @@ namespace Fortwars
 
 		}
 
+		public override Entity DropActive()
+		{
+			if ( Active is FortwarsWeapon weapon )
+				return null;
+
+			return base.DropActive();
+		}
+
 		public override bool Add( Entity ent, bool makeActive = false )
 		{
 			if ( List.Count >= 3 )
