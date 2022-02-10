@@ -8,7 +8,7 @@ namespace Fortwars
 
 		float ThrowSpeed = 100f;
 
-		[Net]bool Landed { get; set; }
+		[Net] bool Landed { get; set; }
 
 		public override void Spawn()
 		{
@@ -29,7 +29,7 @@ namespace Fortwars
 			Velocity += ThrowSpeed * Rotation.Forward * Time.Delta;
 			Velocity += PhysicsWorld.Gravity * 0.5f * Time.Delta;
 
-			Rotation = Rotation.LookAt( -Velocity.Normal.WithZ(0), Vector3.Up );
+			Rotation = Rotation.LookAt( -Velocity.Normal.WithZ( 0 ), Vector3.Up );
 
 			var target = Position + Velocity * Time.Delta;
 			var tr = Trace.Ray( Position, target ).Ignore( Owner ).Run();
