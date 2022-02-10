@@ -15,7 +15,7 @@
 						[
 							{
 								from = "phong2.vmat"
-								to = "models/items/medkit/materials/ammokit.vmat"
+								to = "models/items/medkit/materials/medkit.vmat"
 							},
 						]
 						use_global_default = false
