@@ -67,7 +67,11 @@ public partial class FortwarsWeapon : Carriable
 
 		if ( IsReloading )
 		{
-			if ( TimeSinceReload > WeaponAsset.ReloadTime )
+			if ( WeaponAsset.UseProjectile )
+			{
+				OnProjectileReload();
+			}
+			else if ( TimeSinceReload > WeaponAsset.ReloadTime )
 			{
 				OnReloadFinish();
 			}
@@ -172,7 +176,31 @@ public partial class FortwarsWeapon : Carriable
 		anim.SetParam( "holdtype_handedness", 0 );
 	}
 
-	public virtual void OnReloadFinish()
+	private void OnProjectileReload()
+	{
+		var amount = Math.Min( ReserveAmmo, WeaponAsset.MaxAmmo - CurrentClip );
+
+		if ( amount <= 0 )
+		{
+			ViewModelEntity?.SetAnimBool( "endreload", true );
+		}
+
+		if ( TimeSinceReload < WeaponAsset.ReloadTime )
+			return;
+
+		if ( amount > 0 )
+		{
+			ReserveAmmo--;
+			CurrentClip++;
+			TimeSinceReload = 0;
+		}
+		else
+		{
+			IsReloading = false;
+		}
+	}
+
+	private void OnReloadFinish()
 	{
 		var amount = Math.Min( ReserveAmmo, WeaponAsset.MaxAmmo - CurrentClip );
 
@@ -180,9 +208,8 @@ public partial class FortwarsWeapon : Carriable
 		{
 			ReserveAmmo -= amount;
 			CurrentClip += amount;
+			IsReloading = false;
 		}
-
-		IsReloading = false;
 	}
 
 	public virtual bool CanPrimaryAttack()
@@ -246,6 +273,9 @@ public partial class FortwarsWeapon : Carriable
 	{
 		if ( !TakeAmmo() )
 			return;
+
+		ViewModelEntity?.SetAnimBool( "endreload", true );
+		IsReloading = false;
 
 		recoil += new Vector2( WeaponAsset.RecoilY, WeaponAsset.RecoilX );
 		spread += WeaponAsset.SpreadShotIncrease;

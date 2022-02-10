@@ -22,9 +22,9 @@
 		aimaccuracymult = 1.0
 		maxammo = 4
 		extraammo = 12
-		reloadtime = 3.0
-		postreloadtime = 0.5
-		maxdamage = 40.0
+		reloadtime = 0.75
+		postreloadtime = 0.0
+		maxdamage = 25.0
 		mindamage = 15.0
 		damagedropoffdistance = 256
 		headshotmultiplier = 1.5
