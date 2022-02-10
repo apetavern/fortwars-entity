@@ -292,6 +292,7 @@ public partial class FortwarsWeapon : Carriable
 		projectile.Position = Owner.EyePos;
 		projectile.SetModel( WeaponAsset.ProjectileModel );
 		projectile.Speed = WeaponAsset.ProjectileSpeed;
+		projectile.Weapon = this;
 
 		projectile.Velocity = projectile.Rotation.Forward * WeaponAsset.ProjectileSpeed; // Initial velocity
 

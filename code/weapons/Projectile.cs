@@ -8,6 +8,9 @@ namespace Fortwars
 	{
 		public float Speed { get; set; }
 		private Vector3 Forward { get; set; }
+
+		public FortwarsWeapon Weapon;
+
 		public override void Spawn()
 		{
 			base.Spawn();
@@ -73,7 +76,7 @@ namespace Fortwars
 					shouldDoDamage = true;
 
 				if ( shouldDoDamage )
-					ent.TakeDamage( DamageInfo.Explosion( tr.EndPos, tr.Normal * 32, 25 * distanceFactor ) );
+					ent.TakeDamage( DamageInfo.Explosion( tr.EndPos, tr.Normal * 32, Weapon.WeaponAsset.MaxDamage * distanceFactor ) );
 
 				ent.ApplyAbsoluteImpulse( dir * force );
 			}
