@@ -55,21 +55,6 @@ public partial class FortwarsWeapon : Carriable
 		SetInteractsAs( CollisionLayer.Debris );
 	}
 
-	[ServerCmd("fw_loadprojectile")]
-	public static void LoadProjectile(int amount )
-	{
-		Entity pawn = ConsoleSystem.Caller.Pawn;
-		FortwarsWeapon weapon = pawn.ActiveChild as FortwarsWeapon;
-		weapon.CurrentClip += amount;
-		weapon.ReserveAmmo -= amount;
-
-		if ( weapon.CurrentClip == weapon.WeaponAsset.MaxAmmo-1 ||  weapon.ReserveAmmo <= 1)
-		{
-			weapon.OnReloadFinish();
-			weapon.ViewModelEntity?.SetAnimBool( "endreload", true );
-		}
-	}
-
 	public override void Simulate( Client player )
 	{
 		recoil = Vector2.Lerp( recoil, 0, Time.Delta * 25 );
@@ -85,15 +70,6 @@ public partial class FortwarsWeapon : Carriable
 			if ( TimeSinceReload > WeaponAsset.ReloadTime )
 			{
 				OnReloadFinish();
-			}
-			else if(WeaponAsset.UseProjectile)
-			{
-				if( CanPrimaryAttack() && CurrentClip > 0 )
-				{
-					ViewModelEntity?.SetAnimBool( "endreload", true );
-					OnReloadFinish();
-					return;
-				}
 			}
 			else
 			{
@@ -113,11 +89,6 @@ public partial class FortwarsWeapon : Carriable
 		{
 			TimeSincePrimaryAttack = 0;
 			AttackPrimary();
-			if ( WeaponAsset.UseProjectile )
-			{
-				ViewModelEntity?.SetAnimBool( "endreload", true );
-				OnReloadFinish();
-			}
 		}
 	}
 
@@ -203,14 +174,12 @@ public partial class FortwarsWeapon : Carriable
 
 	public virtual void OnReloadFinish()
 	{
-		if ( !WeaponAsset.UseProjectile ) { 
-			var amount = Math.Min( ReserveAmmo, WeaponAsset.MaxAmmo - CurrentClip );
+		var amount = Math.Min( ReserveAmmo, WeaponAsset.MaxAmmo - CurrentClip );
 
-			if ( amount > 0 )
-			{
-				ReserveAmmo -= amount;
-				CurrentClip += amount;
-			}
+		if ( amount > 0 )
+		{
+			ReserveAmmo -= amount;
+			CurrentClip += amount;
 		}
 
 		IsReloading = false;
