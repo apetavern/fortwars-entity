@@ -39,7 +39,41 @@ namespace Fortwars
 
 		protected override void OnTimeUp()
 		{
-			Game.Instance.ChangeRound( new BuildRound() );
+			var game = Game.Instance;
+			if ( game == null ) return;
+
+			// Assign a score point to winning team. Do nothing on draw.
+			if ( game.RedTeamScore > game.BlueTeamScore )
+			{
+				game.RedWins++;
+			}
+			else if ( game.RedTeamScore < game.BlueTeamScore )
+			{
+				game.BlueWins++;
+			}
+
+			// Set winning team.
+			if ( game.BlueWins == game.RoundsToWin )
+			{
+				game.WinningTeam = Team.Blue;
+			}
+			else if ( game.RedWins == game.RoundsToWin )
+			{
+				game.WinningTeam = Team.Red;
+			}
+
+			// Cleanup game.
+			game.CleanupCTF();
+
+			// If a team one, set round to EndRound.
+			if ( game.WinningTeam != Team.Invalid )
+			{
+				game.ChangeRound( new EndRound() );
+				return;
+			}
+
+			// Otherwise, go back into BuildRound for another round.
+			game.ChangeRound( new BuildRound() );
 		}
 
 		public override void OnPlayerKilled( Player player )
