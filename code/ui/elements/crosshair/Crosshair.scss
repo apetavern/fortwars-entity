@@ -15,7 +15,7 @@
     }
 
     .el0 {
-        background-color: white;
+        // background-color: white;
         border-radius: 1000px;
         width: 6px;
         height: 6px;
@@ -23,21 +23,21 @@
 
     &.fortwarsweapon {
         .el0, .el1, .el2, .el3 {
-            background-color: white;
+            /*background-color: white;*/
             border-radius: 0;
         }
 
         .el0, .el1 {
-            width: 8px;
+            // width: 8px;
             top: 50%;
-            height: 2px;
+            // height: 2px;
             transform: translateY( -50% );
         }
 
         .el2, .el3 {
-            width: 2px;
+            // width: 2px;
             left: 50%;
-            height: 8px;
+            // height: 8px;
             transform: translateX( -50% );
         }
 
