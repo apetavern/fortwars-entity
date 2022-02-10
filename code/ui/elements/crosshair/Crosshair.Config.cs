@@ -31,14 +31,14 @@
 			public static CrosshairConfig Default => new CrosshairConfig()
 			{
 				Style = CrosshairStyle.Dynamic,
-				Size = 64,
-				Gap = 16,
+				Size = 32,
+				Gap = 32,
 
-				Thickness = 4,
+				Thickness = 2,
 				Opacity = 1.0f,
-				Color = new Color( 1, 0, 1 ),
+				Color = new Color( 1, 1, 1 ),
 
-				Outline = true,
+				Outline = false,
 				OutlineColor = Color.Black
 			};
 		}

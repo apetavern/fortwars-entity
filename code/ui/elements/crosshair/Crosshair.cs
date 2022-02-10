@@ -44,11 +44,12 @@ public partial class Crosshair : Panel
 	/// </summary>
 	private void Build()
 	{
-		StyleSheet.Parse( "crosshair.fortwarsweapon {" +
+		var generatedStyle = ("crosshair.fortwarsweapon {" +
 
 			".el0, .el1, .el2, .el3 {" +
 			$"background-color: {Config.Color.Hex};" +
-			$"border: {(Config.Outline ? $"1px solid {Config.OutlineColor}" : "none")};" +
+			$"border: {(Config.Outline ? $"2px solid {Config.OutlineColor.Hex}" : "none")};" +
+			$"opacity: {Config.Opacity};" +
 			"}" +
 
 			//
@@ -69,11 +70,11 @@ public partial class Crosshair : Panel
 			"}" +
 
 			".el0 {" +
-			$"right: {Config.Size}px;" +
+			$"right: {Config.Size + 8}px;" +
 			"}" +
 
 			".el1 {" +
-			$"left: {Config.Size}px;" +
+			$"left: {Config.Size + 8}px;" +
 			"}" +
 
 			".el2 {" +
@@ -84,7 +85,12 @@ public partial class Crosshair : Panel
 			$"top: {Config.Size}px;" +
 			"}" +
 
-		"}" );
+		"}");
+
+		Tick();
+
+		Log.Trace( generatedStyle );
+		StyleSheet.Parse( generatedStyle );
 	}
 
 	public override void Tick()

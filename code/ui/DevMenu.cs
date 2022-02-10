@@ -27,6 +27,7 @@ namespace Fortwars
 			buttons.Add.ButtonWithIcon( "Show shop UI", "storefront", "button", () => Local.Hud.AddChild<ShopMenu>() );
 			buttons.Add.ButtonWithIcon( "Show class select", "sports_martial_arts", "button", () => Local.Hud.AddChild<ClassMenu>() );
 			buttons.Add.ButtonWithIcon( "Reload HUD", "refresh", "button", () => ConsoleSystem.Run( "recreatehud" ) );
+			buttons.Add.ButtonWithIcon( "Show crosshair customization", "palette", "button", () => Local.Hud.AddChild<CrosshairCustomizer>() );
 
 			//
 			// Game
