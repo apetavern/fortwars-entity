@@ -51,6 +51,7 @@ namespace Fortwars
 		public virtual void SetupInventory( Player player )
 		{
 			player.Inventory.DeleteContents();
+			(player as FortwarsPlayer).Class?.AssignLoadout( player.Inventory as Inventory );
 		}
 
 		public virtual void OnSecond()

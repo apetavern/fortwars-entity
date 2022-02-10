@@ -34,11 +34,33 @@ namespace Fortwars
 				Animate();
 			}
 
+			Vector3 lookPos, headPos, aimPos;
+
 			public void Animate()
 			{
 				citizen.Update( Time.Delta );
-				citizen.SetAnimBool( "grounded", true );
-				citizen.SetAnimFloat( "incline", 0f );
+
+				// Get mouse position
+				var mousePosition = Mouse.Position;
+
+				// subtract what we think is about the player's eye position
+				mousePosition.x -= Box.Rect.width * 0.475f;
+				mousePosition.y -= Box.Rect.height * 0.3f;
+				mousePosition /= ScaleToScreen;
+
+				// convert it to an imaginary world position
+				var worldpos = new Vector3( 200, mousePosition.x, -mousePosition.y );
+
+				// convert that to local space for the model
+				lookPos = citizen.Transform.PointToLocal( worldpos );
+				headPos = Vector3.Lerp( headPos, citizen.Transform.PointToLocal( worldpos ), Time.Delta * 20.0f );
+				aimPos = Vector3.Lerp( aimPos, citizen.Transform.PointToLocal( worldpos ), Time.Delta * 5.0f );
+
+				citizen.SetAnimBool( "b_grounded", true );
+				citizen.SetAnimVector( "aim_eyes", lookPos );
+				citizen.SetAnimVector( "aim_head", headPos );
+				citizen.SetAnimVector( "aim_body", aimPos );
+				citizen.SetAnimFloat( "aim_body_weight", 1.0f );
 			}
 
 			public void Build()

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Sandbox;
+using System.Collections.Generic;
 
 namespace Fortwars
 {
+	[Library( "fwclass_assault" )]
 	public partial class AssaultClass : Class
 	{
 		public override string Name => "Assault";
@@ -13,7 +15,7 @@ namespace Fortwars
 
 		public override List<string> Loadout => new()
 		{
-			"/some/path/to/rpg"
+			"data/weapons/rpg.fwweapon"
 		};
 	}
 }

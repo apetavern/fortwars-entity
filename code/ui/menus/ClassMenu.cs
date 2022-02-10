@@ -1,4 +1,5 @@
-﻿using Sandbox.UI;
+﻿using Sandbox;
+using Sandbox.UI;
 using Sandbox.UI.Construct;
 
 namespace Fortwars
@@ -17,19 +18,20 @@ namespace Fortwars
 			main.AddChild<ClassPreviewPanel>();
 
 			var classes = Add.Panel( "classes" );
-			var classArray = new Class[]
+			var classArray = new string[]
 			{
-				new AssaultClass(),
-				new MedicClass(),
-				new SupportClass(),
-				new EngineerClass()
+				"fwclass_assault",
+				"fwclass_medic",
+				"fwclass_support",
+				"fwclass_engineer"
 			};
 
 			classInfo = AddChild<ClassInfo>();
 
-			foreach ( var classType in classArray )
+			foreach ( var classId in classArray )
 			{
-				var classButton = classes.Add.Button( classType.Name, "class", () => Delete() );
+				var classType = Library.Create<Class>( classId );
+				var classButton = classes.Add.Button( classType.Name, "class", () => SetClass( classId ) );
 				classButton.Add.Image( "ui/icons/placeholder.png", "class-icon" );
 				classButton.Add.Label( "0 / 0", "class-count" );
 
@@ -38,6 +40,20 @@ namespace Fortwars
 					classInfo.Update( classType );
 				} );
 			}
+		}
+
+		[ServerCmd( "fw_change_class" )]
+		public static void ChangeClass( string classId )
+		{
+			var pawn = ConsoleSystem.Caller.Pawn as FortwarsPlayer;
+			var classType = Library.Create<Class>( classId );
+			pawn.AssignClass( classType );
+		}
+
+		private void SetClass( string classId )
+		{
+			Delete();
+			ConsoleSystem.Run( $"fw_change_class {classId}" );
 		}
 
 		class ClassInfo : Panel
@@ -53,10 +69,10 @@ namespace Fortwars
 				loadout = Add.Label( "Class Loadout" );
 			}
 
-			public void Update( Class @class )
+			public void Update( Class classType )
 			{
-				name.Text = @class.Name;
-				description.Text = @class.Description;
+				name.Text = classType.Name;
+				description.Text = classType.Description;
 			}
 		}
 	}
