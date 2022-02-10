@@ -2,7 +2,7 @@
 
 namespace Fortwars
 {
-	public class Pickup : ModelEntity
+	public class Pickup : AnimEntity
 	{
 		public Spawner Spawner { get; set; }
 
@@ -22,7 +22,7 @@ namespace Fortwars
 
 		protected override void OnDestroy()
 		{
-			if ( IsServer )
+			if ( IsServer  && Spawner.IsValid())
 				Spawner.ResetSpawnTimer();
 
 			base.OnDestroy();
