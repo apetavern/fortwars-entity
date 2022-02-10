@@ -1,0 +1,14 @@
+﻿@import "/ui/_Common.scss";
+
+WipText {
+    position: absolute;
+    bottom: 125px;
+    left: 50%;
+    transform: translate( -50% );
+    text-transform: uppercase;
+
+    label.wip {
+        font-size: 24px;
+        opacity: 0.5;
+    }
+}
