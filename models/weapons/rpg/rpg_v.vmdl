@@ -33,7 +33,7 @@
 							},
 							{
 								from = "reticle.vmat"
-								to = "materials/glass/glass_a.vmat"
+								to = "materials/rpg_reticle.vmat"
 							},
 							{
 								from = "rocket.vmat"
