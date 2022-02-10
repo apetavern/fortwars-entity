@@ -89,7 +89,7 @@ public partial class Crosshair : Panel
 
 		Tick();
 
-		Log.Trace( generatedStyle );
+		// Log.Trace( generatedStyle );
 		StyleSheet.Parse( generatedStyle );
 	}
 
