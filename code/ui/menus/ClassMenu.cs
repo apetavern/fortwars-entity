@@ -14,9 +14,18 @@ namespace Fortwars
 			Add.Label( "Lorem ipsum dolor sit amet", "subtitle" );
 
 			var classes = Add.Panel( "classes" );
-			foreach ( var classType in Fortwars.Class.Classes )
+
+			var classArray = new Class[]
 			{
-				var classButton = classes.Add.ButtonWithIcon( classType.Name, classType.Icon, "class", () => Delete() );
+				new AssaultClass(),
+				new MedicClass(),
+				new SupportClass(),
+				new EngineerClass()
+			};
+
+			foreach ( var classType in classArray )
+			{
+				var classButton = classes.Add.ButtonWithIcon( classType.Name, classType.IconPath, "class", () => Delete() );
 				classButton.Add.Label( "0 / 0", "class-count" );
 			}
 		}

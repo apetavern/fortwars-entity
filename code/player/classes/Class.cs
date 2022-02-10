@@ -9,8 +9,17 @@ namespace Fortwars
 		public virtual string IconPath { get; set; }
 		public virtual List<string> Loadout { get; set; }
 
-		public abstract void AssignLoadout( Inventory inventory );
+		public virtual void AssignLoadout( Inventory inventory )
+		{
+			foreach ( string weaponPath in Loadout )
+			{
+				inventory.Add( FortwarsWeapon.FromPath( weaponPath ) );
+			}
+		}
 
-		public abstract void Cleanup( Inventory inventory );
+		public virtual void Cleanup( Inventory inventory )
+		{
+			inventory.DeleteContents();
+		}
 	}
 }

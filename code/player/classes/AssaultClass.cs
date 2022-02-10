@@ -4,22 +4,16 @@ namespace Fortwars
 {
 	public partial class AssaultClass : Class
 	{
-		public override string Name { get; set; } = Consts.AssaultName;
-		public override string Description { get; set; } = Consts.AssaultDescription;
-		public override string IconPath { get; set; } = Consts.AssaultIconPath;
-		public override List<string> Loadout { get; set; } = Consts.AssaultLoadout;
+		public override string Name => "Assault";
+		public override string Description =>
+			"With high damage and a strong resolve, " +
+			"the Assault class will help your team " +
+			"clear enemies with relative ease.";
+		public override string IconPath => "/textures/icons/assault.png";
 
-		public override void AssignLoadout( Inventory inventory )
+		public override List<string> Loadout => new()
 		{
-			foreach ( string weaponPath in Loadout )
-			{
-				inventory.Add( FortwarsWeapon.FromPath( weaponPath ) );
-			}
-		}
-
-		public override void Cleanup( Inventory inventory )
-		{
-			inventory.DeleteContents();
-		}
+			"/some/path/to/rpg"
+		};
 	}
 }
