@@ -58,12 +58,17 @@ namespace Fortwars
 
 				if ( !tr.Hit )
 				{
-					Log.Trace( Client );
-					MissEffects( To.Single( Client ) );
+					if ( IsLocalPawn )
+					{
+						MissEffects();
+					}
 					continue;
 				}
 
-				HitEffects( To.Single( Client ) );
+				if ( IsLocalPawn )
+				{
+					HitEffects();
+				}
 
 				if ( tr.Entity is FortwarsBlock block && block.TeamID == player.TeamID )
 				{
