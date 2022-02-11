@@ -39,6 +39,10 @@
 								from = "rocket.vmat"
 								to = "models/weapons/rpg/materials/rpgrocket.vmat"
 							},
+							{
+								from = "reticleglass.vmat"
+								to = "materials/glass/glass_a.vmat"
+							},
 						]
 						use_global_default = false
 						global_default_material = ""
@@ -100,6 +104,7 @@
 								"pCylinder2",
 								"pCube5",
 								"Arms",
+								"pPlane1",
 							]
 						}
 					},
