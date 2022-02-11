@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Fortwars
 {
@@ -89,6 +90,11 @@ namespace Fortwars
 
 		public void DoDrop()
 		{
+			if ( IsServer )
+			{
+				Entity.All.OfType<Pickup>().Where( e => e.Client == this.Client ).ToList().ForEach( e => e.Delete() );
+			}
+
 			if ( !IsAmmo )
 			{
 				var projectile = new BigHealthPickup();
@@ -106,8 +112,8 @@ namespace Fortwars
 				projectile.Velocity = projectile.Rotation.Forward * 250f;
 
 				projectile.Owner = Owner;
-
 			}
+
 			Dropped = false;
 		}
 
