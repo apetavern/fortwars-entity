@@ -43,7 +43,7 @@ namespace Fortwars
 		public void OnFire()
 		{
 			using ( Prediction.Off() )
-				ShootOffset -= Vector3.Backward * 2;
+				ShootOffset -= Vector3.Backward * 16f;
 		}
 
 		public override void PostCameraSetup( ref CameraSetup camSetup )
@@ -205,7 +205,7 @@ namespace Fortwars
 
 		private bool DoShootOffset()
 		{
-			ShootOffset = ShootOffset.LerpTo( Vector3.Zero, 2.5f * Time.Delta );
+			ShootOffset = ShootOffset.LerpTo( Vector3.Zero, 20f * Time.Delta );
 
 			return true;
 		}
