@@ -26,6 +26,7 @@ namespace Fortwars
 		{
 			if ( Landed )
 			{
+				SetAnimBool( "deployed", true );
 				Scale = 0.4f;
 				return;
 			}
