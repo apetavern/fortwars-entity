@@ -23,7 +23,7 @@ namespace Fortwars
 			RootPanel.AddChild<RoundStatus>();
 			RootPanel.AddChild<BuildHelp>();
 			RootPanel.AddChild<BuildWheel>();
-			//RootPanel.AddChild<BuildWheelMetal>();
+			RootPanel.AddChild<BuildWheelMetal>();
 			RootPanel.AddChild<Compass>();
 			RootPanel.AddChild<WipText>();
 			RootPanel.AddChild<Victory>();

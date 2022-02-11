@@ -123,7 +123,7 @@ namespace Fortwars
 
 			if ( !HasClass( "active" ) )
 			{
-				VirtualCursor.Reset();
+				//VirtualCursor.Reset(); //Temporary to fix multiple wheels
 				return;
 			}
 
