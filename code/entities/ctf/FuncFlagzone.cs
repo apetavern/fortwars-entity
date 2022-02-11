@@ -33,6 +33,9 @@ namespace Fortwars
 			if ( other.IsWorld )
 				return;
 
+			if ( Game.Instance.Round is not CombatRound )
+				return;
+
 			if ( other is Player )
 				Game.Instance.OnPlayerTouchFlagzone( other as FortwarsPlayer, Team );
 		}
