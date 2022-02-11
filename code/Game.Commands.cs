@@ -50,8 +50,19 @@ namespace Fortwars
 			var ent = new FortwarsBlock();
 			ent.Position = tr.EndPos;
 			ent.Rotation = Rotation.From( new Angles( 0, player.EyeRot.Yaw(), 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
-			ent.SetModel( $"models/blocks/wood/fw_{blockName}.vmdl" );
-			ent.SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
+			
+
+			if ( blockName.Contains( "metal" ) )
+			{
+				ent.BlockMaterial = BlockMaterial.Steel;
+				ent.SetModel( $"models/blocks/fw_{blockName}.vmdl" );
+				ent.SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
+			}
+			else
+			{
+				ent.SetModel( $"models/blocks/wood/fw_{blockName}.vmdl" );
+				ent.SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
+			}
 
 			ent.TeamID = (player as FortwarsPlayer).TeamID;
 			ent.Owner = player;
