@@ -14,6 +14,8 @@ namespace Fortwars
 
 		[Net] float RandomOffset { get; set; }
 
+		[Net] public bool NoPitch { get; set; }
+
 		public BobbingComponent()
 		{
 			// random offsets help make things look less uniform, adds variety
@@ -30,7 +32,7 @@ namespace Fortwars
 			if ( !sceneObject.IsValid() )
 				return;
 
-			sceneObject.Rotation = Rotation.From( 45, (Time.Now * 90f) + RandomOffset, 0 );
+			sceneObject.Rotation = Rotation.From( NoPitch ? 0 : 45, (Time.Now * 90f) + RandomOffset, 0 );
 
 			// actual origin is off-center, let's just center that
 			Vector3 centerOffset = CenterOffset * sceneObject.Rotation;
