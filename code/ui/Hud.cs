@@ -26,6 +26,8 @@ namespace Fortwars
 			RootPanel.AddChild<Compass>();
 			RootPanel.AddChild<WipText>();
 
+			RootPanel.AddChild<ClassMenu>();
+
 			RootPanel.AddChild<DevMenu>();
 
 			RootPanel.AddChild<Sandbox.UI.ChatBox>();
