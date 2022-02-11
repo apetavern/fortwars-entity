@@ -9,6 +9,7 @@ namespace Fortwars
 		{
 			StyleSheet.Load( "/ui/hud/WipText.scss" );
 			Add.Label( "Fortwars work-in-progress", "subtitle wip" );
+			Add.Image( "ui/misc/logo.png", "logo" );
 		}
 	}
 }
