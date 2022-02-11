@@ -1,0 +1,35 @@
+﻿@import "/ui/_Common.scss";
+
+hitmarker {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+
+    hitmarkerinstance {
+        width: 128px;
+        height: 128px;
+        opacity: 1;
+        position: absolute;
+        transition: all 100ms ease;
+        background-image: url( /ui/misc/hit.png );
+        background-size: 100%;
+
+        &.kill {
+            background-image-tint: #f00;
+        }
+
+        &:intro {
+            opacity: 0;
+            transform: scale( 2 );
+        }
+
+        &:outro {
+            opacity: 0;
+        }
+    }
+}

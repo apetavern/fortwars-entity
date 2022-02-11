@@ -58,6 +58,7 @@ namespace Fortwars
 
 				if ( !tr.Hit )
 				{
+					Log.Trace( Client );
 					MissEffects( To.Single( Client ) );
 					continue;
 				}
