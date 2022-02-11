@@ -29,7 +29,7 @@ namespace Fortwars
 		public override void SetupInventory( Player player )
 		{
 			base.SetupInventory( player );
-			player.Inventory.Add( FortwarsWeapon.FromPath( "/data/weapons/aiax50.fwweapon" ), true );
+			(player as FortwarsPlayer).Class?.AssignLoadout( player.Inventory as Inventory );
 		}
 
 		protected override void OnFinish()
