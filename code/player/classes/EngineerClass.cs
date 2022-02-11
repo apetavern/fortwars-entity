@@ -13,7 +13,12 @@ namespace Fortwars
 			"and gigantic brain!";
 		public override string IconPath => "/textures/icons/engineer.png";
 
-		public override List<string> Loadout => new()
+		public override List<string> BuildLoadout => new()
+		{
+			"repairtool"
+		};
+
+		public override List<string> CombatLoadout => new()
 		{
 			"fw:data/weapons/hksmgii.fwweapon",
 			"fw:data/weapons/trj.fwweapon",

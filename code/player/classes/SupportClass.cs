@@ -13,7 +13,12 @@ namespace Fortwars
 			"as you can think of.";
 		public override string IconPath => "/textures/icons/support.png";
 
-		public override List<string> Loadout => new()
+		public override List<string> BuildLoadout => new()
+		{
+			"ammokittool"
+		};
+
+		public override List<string> CombatLoadout => new()
 		{
 			"fw:data/weapons/aiax50.fwweapon",
 			"fw:data/weapons/usp.fwweapon",

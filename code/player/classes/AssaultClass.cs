@@ -13,7 +13,9 @@ namespace Fortwars
 			"clear enemies with relative ease.";
 		public override string IconPath => "/textures/icons/assault.png";
 
-		public override List<string> Loadout => new()
+		public override List<string> BuildLoadout => new();
+
+		public override List<string> CombatLoadout => new()
 		{
 			"fw:data/weapons/hksmgii.fwweapon",
 			"fw:data/weapons/trj.fwweapon",

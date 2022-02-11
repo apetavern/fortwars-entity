@@ -28,7 +28,9 @@ namespace Fortwars
 		public override void SetupInventory( Player player )
 		{
 			base.SetupInventory( player );
+
 			player.Inventory.Add( new PhysGun(), true );
+			(player as FortwarsPlayer).Class?.AssignBuildLoadout( player.Inventory as Inventory );
 		}
 
 		protected override void OnFinish()
