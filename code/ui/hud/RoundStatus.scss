@@ -82,4 +82,26 @@ roundstatus {
             }
         }
     }
+
+    .wins {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+
+        .point {
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            background-color: white;
+            margin: 8px;
+
+            &.blue {
+                background-color: $blue-team;
+            }
+
+            &.red {
+                background-color: $red-team;
+            }
+        }
+    }
 }
