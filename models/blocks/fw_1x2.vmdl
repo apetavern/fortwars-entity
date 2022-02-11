@@ -80,7 +80,7 @@
 						game_keys = 
 						{
 							name = "1x2"
-							additionalhealth = 10
+							additionalhealth = 20
 						}
 					},
 				]
