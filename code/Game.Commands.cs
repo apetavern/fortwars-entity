@@ -48,6 +48,7 @@ namespace Fortwars
 			ent.Position = tr.EndPos;
 			ent.Rotation = Rotation.From( new Angles( 0, player.EyeRot.Yaw(), 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
 			ent.SetModel( $"models/blocks/wood/fw_{blockName}.vmdl" );
+			ent.SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 
 			ent.TeamID = (player as FortwarsPlayer).TeamID;
 			ent.Owner = player;

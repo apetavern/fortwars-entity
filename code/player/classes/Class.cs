@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Sandbox;
+using System.Collections.Generic;
 
 namespace Fortwars
 {
@@ -13,7 +14,14 @@ namespace Fortwars
 		{
 			foreach ( string weaponPath in Loadout )
 			{
-				inventory.Add( FortwarsWeapon.FromPath( weaponPath ) );
+				if ( weaponPath.StartsWith( "fw:" ) )
+				{
+					inventory.Add( FortwarsWeapon.FromPath( weaponPath.Remove( 0, 3 ) ) );
+				}
+				else
+				{
+					inventory.Add( Library.Create<Carriable>( weaponPath ) );
+				}
 			}
 		}
 

@@ -21,7 +21,7 @@ namespace Fortwars
 
 		public override bool Add( Entity ent, bool makeActive = false )
 		{
-			if ( List.Count >= 3 )
+			if ( List.Count >= 3 && ent is not BogRoll )
 				return false;
 
 			return base.Add( ent, makeActive );

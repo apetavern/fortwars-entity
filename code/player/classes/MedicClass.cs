@@ -15,7 +15,9 @@ namespace Fortwars
 
 		public override List<string> Loadout => new()
 		{
-			"data/weapons/hksmgii.fwweapon"
+			"fw:data/weapons/hksmgii.fwweapon",
+			"fw:data/weapons/usp.fwweapon",
+			"medkittool"
 		};
 	}
 }

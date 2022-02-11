@@ -15,7 +15,9 @@ namespace Fortwars
 
 		public override List<string> Loadout => new()
 		{
-			"data/weapons/aiax50.fwweapon"
+			"fw:data/weapons/aiax50.fwweapon",
+			"fw:data/weapons/usp.fwweapon",
+			"ammokittool"
 		};
 	}
 }
