@@ -15,6 +15,7 @@
 			// Eventually, we will map vote so resetting this will be redundant.
 			Game.Instance.BlueWins = 0;
 			Game.Instance.RedWins = 0;
+			Game.Instance.WinningTeam = Team.Invalid;
 			Game.Instance.ChangeRound( new BuildRound() );
 		}
 	}

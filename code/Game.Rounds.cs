@@ -21,7 +21,7 @@ namespace Fortwars
 		[Net] public int BlueWins { get; set; } = 0;
 		[Net] public int RedWins { get; set; } = 0;
 
-		public Team WinningTeam { get; set; } = Team.Invalid;
+		[Net] public Team WinningTeam { get; set; } = Team.Invalid;
 
 		public void ChangeRound( BaseRound round )
 		{
