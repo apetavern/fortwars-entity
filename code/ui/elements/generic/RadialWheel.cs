@@ -37,8 +37,6 @@ namespace Fortwars
 		{
 			SetTemplate( "ui/elements/generic/RadialWheel.html" );
 			AddClass( "pie-menu" );
-
-			BindClass( "active", () => Input.Down( InputButton.Menu ) );
 		}
 
 		public override void OnDeleted()

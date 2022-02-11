@@ -29,6 +29,9 @@ namespace Fortwars
 			var owner = ConsoleSystem.Caller;
 			var player = owner.Pawn;
 
+			if ( Instance.Round is not BuildRound )
+				return;
+
 			if ( ConsoleSystem.Caller == null )
 				return;
 
