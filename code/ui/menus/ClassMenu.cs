@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
+using System.Collections.Generic;
 
 namespace Fortwars
 {
@@ -73,6 +74,24 @@ namespace Fortwars
 			{
 				name.Text = classType.Name;
 				description.Text = classType.Description;
+
+				string loadoutStr = "";
+
+				void AddItems( List<string> items )
+				{
+					foreach ( var item in items )
+					{
+						loadoutStr += $"+ {item}\n";
+					}
+				}
+
+				loadoutStr += "\nCombat phase:\n";
+				AddItems( classType.CombatLoadout );
+
+				loadoutStr += "\nBuild phase:\n";
+				AddItems( classType.BuildLoadout );
+
+				loadout.Text = loadoutStr;
 			}
 		}
 	}

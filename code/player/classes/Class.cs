@@ -23,16 +23,9 @@ namespace Fortwars
 
 		private void AssignLoadout( List<string> items, Inventory inventory )
 		{
-			foreach ( string weaponPath in items )
+			foreach ( string itemPath in items )
 			{
-				if ( weaponPath.StartsWith( "fw:" ) )
-				{
-					inventory.Add( FortwarsWeapon.FromPath( weaponPath.Remove( 0, 3 ) ) );
-				}
-				else
-				{
-					inventory.Add( Library.Create<Carriable>( weaponPath ) );
-				}
+				inventory.Add( ItemUtils.GetItem( itemPath ) );
 			}
 		}
 
