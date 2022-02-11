@@ -7,7 +7,7 @@
 		viewmodel = resource:"models/weapons/trj/trj_v.vmdl"
 		movementspeedmultiplier = 0.95
 		firemode = "1"
-		rpm = 60.0
+		rpm = 300.0
 		firstshotdelay = 0.0
 		shotdelay = 0.0
 		range = 16384
