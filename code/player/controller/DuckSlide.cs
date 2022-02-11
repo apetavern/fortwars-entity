@@ -63,6 +63,12 @@ namespace Fortwars
 
 		protected virtual void TrySlide()
 		{
+			//
+			// TEMP/TODO: Sliding is disabled for the public playtest
+			//
+			TryDuck();
+			return;
+
 			IsActive = true;
 
 			float distance = 64;
