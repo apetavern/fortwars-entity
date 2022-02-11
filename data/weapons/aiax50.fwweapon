@@ -25,7 +25,7 @@
 		postreloadtime = 0.5
 		maxdamage = 50.0
 		mindamage = 50.0
-		damagedropoffdistance = 1024
+		damagedropoffdistance = 100000
 		headshotmultiplier = 2.0
 		kickbacksize = 3.0
 		kickbacklength = 1.0

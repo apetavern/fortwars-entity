@@ -23,9 +23,9 @@
 		extraammo = 36
 		reloadtime = 2.0
 		postreloadtime = 0.5
-		maxdamage = 40.0
-		mindamage = 25.0
-		damagedropoffdistance = 512
+		maxdamage = 50.0
+		mindamage = 30.0
+		damagedropoffdistance = 1024
 		headshotmultiplier = 2.5
 		kickbacksize = 2.0
 		kickbacklength = 1.0
@@ -39,5 +39,8 @@
 		aimposition = [ -20.0, 27.4, 4.25 ]
 		aimrotation = [ -0.125, -1.5, 1.0 ]
 		aimfovmult = 0.75
+		userendertarget = false
+		fireparticles = resource:"particles/flash_medium.vpcf"
+		tracerparticles = resource:"particles/tracer_large.vpcf"
 	}
 }
