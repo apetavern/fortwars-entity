@@ -18,6 +18,8 @@ namespace Fortwars
 			SetBodyGroup( 0, 1 );
 			SetMaterialGroup( "ammo" );
 			Scale = 0.4f;
+
+			Components.Get<BobbingComponent>().NoPitch = true;
 		}
 
 		[Event.Tick.Server]
@@ -25,6 +27,7 @@ namespace Fortwars
 		{
 			if ( Landed )
 			{
+				Scale = 0.4f;
 				return;
 			}
 			Velocity += ThrowSpeed * Rotation.Forward * Time.Delta;
