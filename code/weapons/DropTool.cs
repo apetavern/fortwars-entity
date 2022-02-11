@@ -131,18 +131,6 @@ namespace Fortwars
 			ViewModelEntity?.SetAnimBool( "fire", true );
 		}
 
-		[ClientRpc]
-		private void MissEffects()
-		{
-			_ = new Sandbox.ScreenShake.Perlin( 1.0f, 0.1f, 4.0f, 1.0f );
-		}
-
-		[ClientRpc]
-		private void HitEffects()
-		{
-			_ = new Sandbox.ScreenShake.Perlin( 0.25f, 4.0f, 4.0f, 0.5f );
-		}
-
 		public virtual IEnumerable<TraceResult> TraceHit( Vector3 start, Vector3 end, float radius = 2.0f )
 		{
 			bool InWater = Physics.TestPointContents( start, CollisionLayer.Water );
@@ -170,7 +158,7 @@ namespace Fortwars
 			if ( TimeSinceLastDrop < DropTimeDelay )
 			{
 				EnableDrawing = false;
-				anim.SetParam( "holdtype", 0);
+				anim.SetParam( "holdtype", 0 );
 				anim.SetParam( "aimat_weight", 1.0f );
 				anim.SetParam( "holdtype_handedness", 0 );
 				anim.SetParam( "holdtype_pose_hand", 0f );

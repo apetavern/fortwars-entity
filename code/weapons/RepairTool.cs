@@ -58,11 +58,11 @@ namespace Fortwars
 
 				if ( !tr.Hit )
 				{
-					MissEffects();
+					MissEffects( To.Single( Client ) );
 					continue;
 				}
 
-				HitEffects();
+				HitEffects( To.Single( Client ) );
 
 				if ( tr.Entity is FortwarsBlock block && block.TeamID == player.TeamID )
 				{
