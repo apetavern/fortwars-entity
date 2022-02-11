@@ -27,8 +27,6 @@ namespace Fortwars
 			var target = Position + Velocity * Time.Delta;
 			var tr = Trace.Ray( Position, target ).Ignore( Owner ).Run();
 
-			DebugOverlay.Line( tr.StartPos, tr.EndPos );
-
 			if ( tr.Hit )
 			{
 				Explode( tr );
