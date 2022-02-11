@@ -17,10 +17,10 @@ namespace Fortwars
 		{
 			base.Spawn();
 
-			MoveType = MoveType.Physics;
+			MoveType = MoveType.None;
 			CollisionGroup = CollisionGroup.Interactive;
-			PhysicsEnabled = true;
-			UsePhysicsCollision = true;
+			PhysicsEnabled = false;
+			UsePhysicsCollision = false;
 			EnableHideInFirstPerson = true;
 			EnableShadowInFirstPerson = true;
 
