@@ -30,6 +30,17 @@
 						use_global_default = false
 						global_default_material = ""
 					},
+					{
+						_class = "MaterialGroup"
+						name = "red"
+						remaps = 
+						[
+							{
+								from = "materials/fortwars/fw_block_steel.vmat"
+								to = "materials/fortwars/fw_block_steel_red.vmat"
+							},
+						]
+					},
 				]
 			},
 			{
@@ -54,6 +65,23 @@
 								"pSphere21",
 							]
 						}
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsHullFromRender"
+						parent_bone = ""
+						surface_prop = "metal.sheet"
+						collision_group = ""
+						collision_interact_as = ""
+						collision_interact_with = ""
+						collision_interact_exclude = ""
+						faceMergeAngle = 20.0
+						maxHullVertices = 32
 					},
 				]
 			},

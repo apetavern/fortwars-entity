@@ -30,6 +30,17 @@
 						use_global_default = false
 						global_default_material = ""
 					},
+					{
+						_class = "MaterialGroup"
+						name = "red"
+						remaps = 
+						[
+							{
+								from = "materials/fortwars/fw_block_steel.vmat"
+								to = "materials/fortwars/fw_block_steel_red.vmat"
+							},
+						]
+					},
 				]
 			},
 			{
@@ -39,7 +50,7 @@
 					{
 						_class = "PhysicsHullFromRender"
 						parent_bone = ""
-						surface_prop = "default"
+						surface_prop = "metal.sheet"
 						collision_group = ""
 						collision_interact_as = ""
 						collision_interact_with = ""
