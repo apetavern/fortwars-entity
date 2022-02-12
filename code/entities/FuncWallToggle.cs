@@ -12,7 +12,7 @@ namespace Fortwars
 		{
 			base.Spawn();
 
-			SetupPhysicsFromModel( PhysicsMotionType.Static );
+			SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
 			CollisionGroup = CollisionGroup.Default;
 			EnableAllCollisions = true;
 			EnableTouch = true;
