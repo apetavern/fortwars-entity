@@ -192,8 +192,7 @@ namespace Fortwars
 			}
 
 			base.TakeDamage( info );
-
-			// TookDamage( this, info.Weapon.IsValid() ? info.Weapon.WorldPos : info.Attacker.WorldPos );
+			TookDamage( To.Single( Client ), info.Weapon.IsValid() ? info.Weapon.Position : info.Attacker.Position );
 		}
 
 		[ClientRpc]
@@ -208,9 +207,9 @@ namespace Fortwars
 		[ClientRpc]
 		public void TookDamage( Vector3 pos )
 		{
-			//DebugOverlay.Sphere( pos, 5.0f, Color.Red, false, 50.0f );
-
-			// DamageIndicator.Current?.OnHit( pos );
+			DebugOverlay.Sphere( pos, 2f, Color.Red, false, 5f );
+			Log.Trace( pos );
+			DamageIndicator.Current?.OnHit( pos );
 		}
 	}
 }

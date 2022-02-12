@@ -4,12 +4,13 @@ namespace Fortwars
 {
 	public static class DamageInfoExtension
 	{
-		public static DamageInfo FromFall( float damage )
+		public static DamageInfo FromFall( float damage, Entity attacker )
 		{
 			return new DamageInfo
 			{
 				Flags = DamageFlags.Fall,
-				Damage = damage
+				Damage = damage,
+				Attacker = attacker
 			};
 		}
 
