@@ -12,5 +12,16 @@ namespace Fortwars
 				Damage = damage
 			};
 		}
+
+		public static DamageInfo FromProjectile( float damage, Vector3 force, Entity attacker )
+		{
+			return new DamageInfo
+			{
+				Flags = DamageFlags.Blast,
+				Damage = damage,
+				Attacker = attacker,
+				Force = force,
+			};
+		}
 	}
 }
