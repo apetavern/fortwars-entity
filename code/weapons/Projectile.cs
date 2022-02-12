@@ -47,8 +47,6 @@ namespace Fortwars
 			foreach ( var overlap in overlaps )
 			{
 				if ( overlap is not ModelEntity ent || !ent.IsValid() ) continue;
-				//if ( ent is FortwarsBlock && ent.PhysicsBody.BodyType == PhysicsBodyType.Static ) // Unfreeze block
-				//	ent.PhysicsBody.BodyType = PhysicsBodyType.Dynamic;
 				if ( ent.LifeState != LifeState.Alive || !ent.PhysicsBody.IsValid() || ent.IsWorld ) continue;
 
 				var dir = (overlap.Position - tr.EndPos).Normal;
@@ -58,6 +56,7 @@ namespace Fortwars
 
 				var distanceFactor = 1.0f - Math.Clamp( dist / radius, 0, 1 );
 				var force = distanceFactor * ent.PhysicsBody.Mass;
+				force *= 0.5f; // Scale so it's not as strong
 
 				if ( ent.GroundEntity != null )
 				{
