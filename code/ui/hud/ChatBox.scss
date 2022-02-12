@@ -55,7 +55,6 @@ ChatEntry {
     transform: scale( 1 );
     width: 100%;
     align-items: center;
-    border-radius: 10px;
 
     &:intro {
         opacity: 0;
@@ -77,14 +76,8 @@ ChatEntry {
     }
 
     &.information {
-        background-color: rgba( $background, 0.5 );
-
-        &:hover {
-            background-color: rgba( $background, 1 );
-        }
-
         .message {
-            color: red;
+            color: $background;
         }
     }
 
@@ -121,5 +114,18 @@ ChatEntry {
 
     &.noavatar image {
         display: none;
+    }
+}
+
+
+.red-team {
+    .information {
+        background-color: rgba( $red-team, 0.5 );
+    }
+}
+
+.blue-team {
+    .information {
+        background-color: rgba( $blue-team, 0.5 );
     }
 }

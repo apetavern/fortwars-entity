@@ -79,7 +79,7 @@ namespace Fortwars
 
 			HideFlag( enemyTeam.ID );
 
-			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}" );
+			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
 
 			player.PlaySound( "ctf_flag_pickup" );
 		}
@@ -103,7 +103,7 @@ namespace Fortwars
 				BlueFlagCarrier = player;
 			}
 
-			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}" );
+			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
 
 			player.PlaySound( "ctf_flag_pickup" );
 		}
@@ -124,7 +124,7 @@ namespace Fortwars
 				ShowFlag( Team.Blue );
 
 				// Announce
-				ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {RedTeam.Name}", $"avatar:{player.Client.PlayerId}" );
+				ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {RedTeam.Name}", $"avatar:{player.Client.PlayerId}", true );
 			}
 
 			if ( player == RedFlagCarrier )
@@ -138,7 +138,7 @@ namespace Fortwars
 				ShowFlag( Team.Red );
 
 				// Announce
-				ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {BlueTeam.Name}", $"avatar:{player.Client.PlayerId}" );
+				ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {BlueTeam.Name}", $"avatar:{player.Client.PlayerId}", true );
 			}
 		}
 
@@ -146,14 +146,14 @@ namespace Fortwars
 		{
 			if ( player == BlueFlagCarrier )
 			{
-				ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {BlueTeam.Name} flag", $"avatar:{player.Client.PlayerId}" );
+				ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {BlueTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
 				BlueFlagCarrier = null;
 				//ShowFlag( Team.Blue );
 				return;
 			}
 			if ( player == RedFlagCarrier )
 			{
-				ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {RedTeam.Name} flag", $"avatar:{player.Client.PlayerId}" );
+				ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {RedTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
 				RedFlagCarrier = null;
 				//ShowFlag( Team.Red );
 				return;
@@ -164,14 +164,14 @@ namespace Fortwars
 		{
 			if ( Team == Team.Blue )
 			{
-				ChatBox.AddInformation( To.Everyone, $"{BlueTeam.Name} flag returned" );
+				ChatBox.AddInformation( To.Everyone, $"{BlueTeam.Name} flag returned", null, true );
 				BlueFlagCarrier = null;
 				ShowFlag( Team.Blue );
 				return;
 			}
 			if ( Team == Team.Red )
 			{
-				ChatBox.AddInformation( To.Everyone, $"{RedTeam.Name} flag returned" );
+				ChatBox.AddInformation( To.Everyone, $"{RedTeam.Name} flag returned", null, true );
 				RedFlagCarrier = null;
 				ShowFlag( Team.Red );
 				return;
