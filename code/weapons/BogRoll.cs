@@ -176,7 +176,7 @@ namespace Fortwars
 			CantPickup = true;
 			if ( IsServer )
 				Game.Instance.PlayerDropFlag( Owner as FortwarsPlayer );
-			Vector3 throwdir = (Parent as FortwarsPlayer).EyeRot.Forward + (Vector3.Up / 3f);
+			Vector3 throwdir = (Parent as FortwarsPlayer).EyeRotation.Forward + (Vector3.Up / 3f);
 
 			(Parent as FortwarsPlayer).Inventory.Drop( this );
 
@@ -197,7 +197,7 @@ namespace Fortwars
 		{
 			var player = Owner as FortwarsPlayer;
 			player.SetAnimBool( "b_attack", true );
-			foreach ( var tr in TraceHit( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward * 128f ) )
+			foreach ( var tr in TraceHit( Owner.EyePosition, Owner.EyePosition + Owner.EyeRotation.Forward * 128f ) )
 			{
 				ViewModelEntity?.SetAnimBool( "hit", tr.Hit );
 

@@ -134,7 +134,7 @@ public partial class FortwarsWeapon : Carriable
 		if ( !Owner.IsValid() )
 			return -1;
 
-		var trace = Trace.Ray( Owner.EyePos, Owner.EyePos + Owner.EyeRot.Forward * 32 )
+		var trace = Trace.Ray( Owner.EyePosition, Owner.EyePosition + Owner.EyeRotation.Forward * 32 )
 			.Ignore( this )
 			.Ignore( Owner )
 			.Run();
@@ -287,8 +287,8 @@ public partial class FortwarsWeapon : Carriable
 			return;
 
 		var projectile = new Projectile();
-		projectile.Rotation = Owner.EyeRot;
-		projectile.Position = Owner.EyePos;
+		projectile.Rotation = Owner.EyeRotation;
+		projectile.Position = Owner.EyePosition;
 		projectile.SetModel( WeaponAsset.ProjectileModel );
 		projectile.Speed = WeaponAsset.ProjectileSpeed;
 		projectile.Weapon = this;
@@ -309,7 +309,7 @@ public partial class FortwarsWeapon : Carriable
 		ShootEffects();
 		PlaySound( WeaponAsset.FireSound );
 
-		var forward = Owner.EyeRot.Forward;
+		var forward = Owner.EyeRotation.Forward;
 
 		if ( TimeSincePrimaryAttack < 3 || !WeaponAsset.FirstShotAlwaysAccurate )
 		{
@@ -324,7 +324,7 @@ public partial class FortwarsWeapon : Carriable
 		// ShootBullet is coded in a way where we can have bullets pass through shit
 		// or bounce off shit, in which case it'll return multiple results
 		//
-		foreach ( var tr in TraceBullet( Owner.EyePos, Owner.EyePos + forward * WeaponAsset.Range, 1f ) )
+		foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * WeaponAsset.Range, 1f ) )
 		{
 			tr.Surface.DoBulletImpact( tr );
 

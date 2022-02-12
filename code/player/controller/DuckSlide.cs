@@ -36,7 +36,7 @@ namespace Fortwars
 				}
 			}
 
-			UpdateEyePos();
+			UpdateEyePosition();
 
 			if ( IsActive )
 				Controller.SetTag( "ducked" );
@@ -48,7 +48,7 @@ namespace Fortwars
 				IsActiveSlide = false;
 		}
 
-		private void UpdateEyePos()
+		private void UpdateEyePosition()
 		{
 			if ( IsActive )
 			{
@@ -72,7 +72,7 @@ namespace Fortwars
 			IsActive = true;
 
 			float distance = 64;
-			var direction = Controller.Pawn.EyeRot.Forward;
+			var direction = Controller.Pawn.EyeRotation.Forward;
 
 			float force = 8.0f;
 			Controller.Velocity += direction * distance * force;

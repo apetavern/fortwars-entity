@@ -41,10 +41,10 @@ namespace Fortwars
 			if ( blockName.Contains( "metal" ) && BlockMaterial.Steel.GetRemainingCount( owner ) <= 0 )
 				return;
 
-			if (BlockMaterial.Wood.GetRemainingCount( owner ) <= 0 )
+			if ( BlockMaterial.Wood.GetRemainingCount( owner ) <= 0 )
 				return;
 
-			var tr = Trace.Ray( player.EyePosition, player.EyePosition + player.EyeRotation.Forward * 500 )
+			var tr = Trace.Ray( player.EyePosition, player.EyePosition + player.Rotation.Forward * 500 )
 				.UseHitboxes()
 				.Ignore( player )
 				.Size( 2 )
@@ -52,8 +52,8 @@ namespace Fortwars
 
 			var ent = new FortwarsBlock();
 			ent.Position = tr.EndPos;
-			ent.Rotation = Rotation.From( new Angles( 0, player.EyeRotation.Yaw(), 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
-			
+			ent.Rotation = Rotation.From( new Angles( 0, player.Rotation.Yaw(), 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
+
 
 			if ( blockName.Contains( "metal" ) )
 			{
