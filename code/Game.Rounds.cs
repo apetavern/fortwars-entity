@@ -10,7 +10,7 @@ namespace Fortwars
 		public static int MinPlayers { get; set; } = 1;
 
 		[Net] public int BestOf { get; set; } = 3;
-		[Net]
+
 		public int RoundsToWin
 		{
 			get
@@ -18,6 +18,7 @@ namespace Fortwars
 				return MathX.CeilToInt( (float)BestOf / 2 );
 			}
 		}
+
 		[Net] public int BlueWins { get; set; } = 0;
 		[Net] public int RedWins { get; set; } = 0;
 
