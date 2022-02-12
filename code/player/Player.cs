@@ -4,7 +4,7 @@ namespace Fortwars
 {
 	public partial class FortwarsPlayer : Sandbox.Player
 	{
-		DamageInfo LastDamage;
+		public DamageInfo LastDamage { get; private set; }
 		public Clothing.Container Clothing = new();
 
 		public bool IsSpectator

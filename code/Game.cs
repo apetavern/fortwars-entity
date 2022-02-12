@@ -55,11 +55,13 @@ namespace Fortwars
 		public override void OnKilled( Entity pawn )
 		{
 			Round?.OnPlayerKilled( pawn as Player );
-			if ( (pawn as FortwarsPlayer).ActiveChild is BogRoll )
-			{
-				(pawn as FortwarsPlayer).Inventory.DropActive();
-			}
-			PlayerDropFlag( pawn as FortwarsPlayer );
+
+			var player = pawn as FortwarsPlayer;
+
+			if ( player.ActiveChild is BogRoll )
+				player.Inventory.DropActive();
+
+			PlayerDropFlag( player );
 
 			Log.Info( $"{pawn.Name} was killed" );
 
@@ -76,7 +78,14 @@ namespace Fortwars
 			}
 			else
 			{
-				KillFeed.AddEntry( 0, "", pawn.Client.PlayerId, pawn.Client.Name, "died" );
+				if ( player.LastDamage.Flags.HasFlag( DamageFlags.Fall ) )
+				{
+					KillFeed.AddEntry( 0, "Fall Damage", pawn.Client.PlayerId, pawn.Client.Name, "killed" );
+				}
+				else
+				{
+					KillFeed.AddEntry( 0, "", pawn.Client.PlayerId, pawn.Client.Name, "died" );
+				}
 			}
 
 			base.OnKilled( pawn );
@@ -84,6 +93,7 @@ namespace Fortwars
 
 		private void OnSecond()
 		{
+			// TODO: Validate this
 			// this is shite, need Time.Now to reflect server time clientside
 			if ( IsServer )
 			{
