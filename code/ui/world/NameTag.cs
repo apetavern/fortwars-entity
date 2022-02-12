@@ -9,23 +9,27 @@ namespace Fortwars
 	/// </summary>
 	public class NameTag : WorldPanel
 	{
-		public Panel Avatar;
-		public Label NameLabel;
+		public Panel avatar;
+		public Label nameLabel;
+		public Panel healthPanel;
 
-		internal NameTag( string title, long? steamid )
+		public NameTag( string title, long? steamid )
 		{
 			StyleSheet.Load( "/ui/world/NameTag.scss" );
 
+			var inner = Add.Panel( "inner" );
+			nameLabel = inner.Add.Label( title, "title" );
+
 			if ( steamid != null )
 			{
-				Avatar = Add.Panel( "avatar" );
-				Avatar.Style.SetBackgroundImage( $"avatar:{steamid}" );
+				avatar = inner.Add.Panel( "avatar" );
+				avatar.Style.SetBackgroundImage( $"avatar:{steamid}" );
 			}
 
-			NameLabel = Add.Label( title, "title" );
+			healthPanel = Add.Panel( "health-bar" );
 
-			// this is the actual size and shape of the world panel
-			PanelBounds = new Rect( -500, -100, 1000, 200 );
+			Vector2 size = new Vector2( 750, 200 );
+			PanelBounds = new Rect( -(size / 2).x, -(size / 2).y, size.x, size.y );
 		}
 	}
 }

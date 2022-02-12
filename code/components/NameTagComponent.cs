@@ -36,7 +36,13 @@ internal class NameTagComponent : EntityComponent<FortwarsPlayer>
 		tx.Position += Vector3.Up * 10.0f;
 		tx.Rotation = Rotation.LookAt( -CurrentView.Rotation.Forward );
 
+		NameTag.SetClass( "visible", (Entity as FortwarsPlayer)?.TeamID == (Local.Pawn as FortwarsPlayer)?.TeamID );
+
 		NameTag.Transform = tx;
+
+		NameTag.healthPanel.Style.Width = Length.Percent( Entity.Health );
+		NameTag.WorldScale = CurrentView.Position.Distance( NameTag.Position ) * 0.005f;
+		NameTag.WorldScale = NameTag.WorldScale.Clamp( 1f, 5f );
 	}
 
 	/// <summary>
