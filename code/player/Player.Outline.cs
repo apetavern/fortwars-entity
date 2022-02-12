@@ -8,25 +8,23 @@ namespace Fortwars
 		[Event.Tick.Client]
 		public static void OnClientTick()
 		{
+			var localPlayer = Local.Pawn as FortwarsPlayer;
+
 			Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( player =>
 			{
 				if ( player.IsLocalPawn )
 					return;
 
-				player.GlowActive = true;
-				player.GlowState = GlowStates.On;
-
-				switch ( player.TeamID )
+				if ( player.TeamID != localPlayer.TeamID )
 				{
-					case Fortwars.Team.Invalid:
-						player.GlowActive = false;
-						break;
-					case Fortwars.Team.Red:
-						player.GlowColor = Color.Red;
-						break;
-					case Fortwars.Team.Blue:
-						player.GlowColor = Color.Blue;
-						break;
+					player.GlowActive = true;
+					player.GlowState = GlowStates.On;
+					player.GlowColor = Color.Red;
+				}
+				else
+				{
+					player.GlowActive = false;
+					player.GlowState = GlowStates.Off;
 				}
 			} );
 		}
