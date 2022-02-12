@@ -492,12 +492,26 @@ public partial class PhysGun : Carriable, IUse
 		grabbing = false;
 	}
 
+	bool StopPushing;
+
 	private void GrabMove( Vector3 startPos, Vector3 dir, Rotation rot, bool snapAngles )
 	{
 		if ( !heldBody.IsValid() )
 			return;
 
-		holdBody.Position = startPos + dir * holdDistance;
+		TraceResult walltr = Trace.Ray( heldBody.Transform.PointToWorld( heldPos ), startPos + dir * holdDistance ).Ignore( heldBody.Entity ).Run();
+
+		StopPushing = walltr.Hit;
+
+		if ( walltr.Hit )
+		{
+			DebugOverlay.Line( heldBody.Transform.PointToWorld( heldPos ), startPos + dir * holdDistance, Color.Red );
+		}
+
+		if ( !StopPushing )
+		{
+			holdBody.Position = startPos + dir * holdDistance;
+		}
 
 		if ( GrabbedEntity is Player player )
 		{
