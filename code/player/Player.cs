@@ -186,13 +186,16 @@ namespace Fortwars
 			if ( (HitboxIndex)info.HitboxIndex == HitboxIndex.Head )
 				info.Damage *= 2.0f;
 
-			base.TakeDamage( info );
-
 			if ( info.Attacker is FortwarsPlayer attacker && attacker != this )
 			{
+				if ( attacker.TeamID == this.TeamID )
+					return; // No team damage
+
 				// Note - sending this only to the attacker!
 				attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, ((float)Health).LerpInverse( 100, 0 ) );
 			}
+
+			base.TakeDamage( info );
 
 			// TookDamage( this, info.Weapon.IsValid() ? info.Weapon.WorldPos : info.Attacker.WorldPos );
 		}
