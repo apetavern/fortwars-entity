@@ -13,7 +13,6 @@ namespace Fortwars
 			RootPanel.StyleSheet.Load( "/ui/Hud.scss" );
 			RootPanel.StyleSheet.Load( "/ui/hud/BuildHelp.scss" );
 
-			RootPanel.AddChild<Sandbox.UI.NameTags>();
 			RootPanel.AddChild<KillFeed>();
 			RootPanel.AddChild<Scoreboard>();
 
