@@ -170,15 +170,19 @@ namespace Fortwars
 			ThrowRoll();
 		}
 
-
 		public void ThrowRoll()
 		{
-			CantPickup = true;
-			if ( IsServer )
-				Game.Instance.PlayerDropFlag( Owner as FortwarsPlayer );
-			Vector3 throwdir = (Parent as FortwarsPlayer).EyeRotation.Forward + (Vector3.Up / 3f);
+			if ( Owner is not FortwarsPlayer player )
+				return;
 
-			(Parent as FortwarsPlayer).Inventory.Drop( this );
+			CantPickup = true;
+
+			if ( IsServer )
+				Game.Instance.PlayerDropFlag( player );
+
+			Vector3 throwdir = player.EyeRotation.Forward + (Vector3.Up / 3f);
+
+			player.Inventory.Drop( this );
 
 			Velocity = throwdir * 300f * (1f + Math.Clamp( TimeSinceHoldingSecondary / 2f, 0, 2f ));
 		}
