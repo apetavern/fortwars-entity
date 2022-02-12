@@ -23,6 +23,11 @@
 		/// <summary>
 		/// Position to place the icon (will be calculated for compass)
 		/// </summary>
-		public Vector3 IconWorldPosition();
+		Vector3 IconWorldPosition();
+
+		/// <summary>
+		/// Should we draw the icon?
+		/// </summary>
+		bool DrawIcon();
 	}
 }

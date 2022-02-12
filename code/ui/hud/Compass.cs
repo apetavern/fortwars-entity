@@ -131,6 +131,8 @@ namespace Fortwars
 
 			Icon = Add.Icon( entity.NonDiegeticIcon() );
 			showIcon = entity;
+
+			BindClass( "visible", entity.DrawIcon );
 		}
 
 		public override void Tick()

@@ -65,6 +65,11 @@ compass {
         z-index: 10;
         background-color: transparent;
         text-align: center;
+        display: none;
+
+        &.visible {
+            display: flex;
+        }
 
         &.red iconpanel {
             color: $red-team;

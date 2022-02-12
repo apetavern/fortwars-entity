@@ -7,10 +7,42 @@ namespace Fortwars
 		[Net, Change( "OnTeamChange" )] public Team Team { get; set; }
 
 		#region Icons
-		Vector3 IShowIcon.IconWorldPosition() => this.Position;
+		private FortwarsPlayer GetCarrier()
+		{
+			FortwarsPlayer carrier = null;
+
+			switch ( Team )
+			{
+				case Team.Invalid:
+					carrier = null;
+					break;
+				case Team.Red:
+					carrier = Game.Instance.RedFlagCarrier;
+					break;
+				case Team.Blue:
+					carrier = Game.Instance.BlueFlagCarrier;
+					break;
+			}
+
+			return carrier;
+		}
+
+		Vector3 IShowIcon.IconWorldPosition()
+		{
+			var carrier = GetCarrier();
+
+			if ( carrier == null || !carrier.IsValid )
+				return this.Position;
+			else
+				return carrier.Position;
+		}
+
+		bool IShowIcon.DrawIcon() => !GetCarrier()?.IsLocalPawn ?? true;
+
 		string IShowIcon.CustomClassName() => Team.ToString();
 		string IShowIcon.NonDiegeticIcon() => "flag";
 		string IShowIcon.SpatialIcon() => "flag";
+
 		#endregion
 
 		public override void Spawn()
