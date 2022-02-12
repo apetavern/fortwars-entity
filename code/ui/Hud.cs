@@ -32,7 +32,7 @@ namespace Fortwars
 
 			RootPanel.AddChild<DevMenu>();
 
-			RootPanel.AddChild<Sandbox.UI.ChatBox>();
+			RootPanel.AddChild<ChatBox>();
 			RootPanel.AddChild<VoiceList>();
 
 			RootPanel.BindClass( "red-team", () => (Local.Pawn as FortwarsPlayer).TeamID == Team.Red );

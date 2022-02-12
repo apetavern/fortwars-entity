@@ -1,0 +1,125 @@
+﻿@import "/ui/_Common.scss";
+
+ChatBox {
+    position: absolute;
+    bottom: 250px;
+    left: $safe-area-x;
+    z-index: 100;
+    flex-direction: column;
+    width: 500px;
+    font-size: 13px;
+    border-radius: 2px;
+    pointer-events: none;
+
+    textentry {
+        opacity: 0;
+        color: white;
+        padding: 15px 25px;
+        backdrop-filter: brightness( 0.5 );
+        font-size: 14px;
+        flex-shrink: 0;
+        flex-grow: 0;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        border-radius: 0 0px 2px 2px;
+    }
+
+    .canvas {
+        flex-direction: column;
+        align-items: flex-start;
+        height: 400px;
+        overflow: scroll;
+        margin-bottom: 50px;
+    }
+
+    &.open {
+        pointer-events: all;
+        background-color: rgba( $background, 0.5 );
+
+        textentry {
+            opacity: 1;
+        }
+    }
+}
+
+ChatEntry {
+    margin-bottom: 5px;
+    color: white;
+    transition: all 0.1s ease-out;
+    opacity: 1;
+    flex-shrink: 0;
+    flex-grow: 0;
+    padding: 15px 20px;
+    max-width: 100%;
+    transform: scale( 1 );
+    width: 100%;
+    align-items: center;
+    border-radius: 10px;
+
+    &:intro {
+        opacity: 0;
+    }
+
+    &.hide {
+        opacity: 0;
+        transition: all 1s ease-out;
+    }
+
+    &.expired {
+        opacity: 0;
+        transition: all 0.2s ease-out;
+    }
+
+    &.show {
+        opacity: 1;
+        transition: all 0.2s ease-out;
+    }
+
+    &.information {
+        background-color: rgba( $background, 0.5 );
+
+        &:hover {
+            background-color: rgba( $background, 1 );
+        }
+
+        .message {
+            color: red;
+        }
+    }
+
+    &:outro {
+        opacity: 0;
+        transition: all 2s ease-out;
+    }
+
+    image {
+        width: 24px;
+        height: 24px;
+        min-height: 24px;
+        border-radius: 100px;
+        margin-right: 4px;
+    }
+
+    .name {
+        padding-right: 10px;
+        font-weight: 600;
+        font-size: 14px;
+        color: #c0fb2e;
+        flex-shrink: 0;
+    }
+
+    .message {
+        color: white;
+        font-size: 14px;
+        flex-grow: 1;
+    }
+
+    &.noname .name {
+        display: none;
+    }
+
+    &.noavatar image {
+        display: none;
+    }
+}
