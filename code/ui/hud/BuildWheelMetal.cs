@@ -18,7 +18,7 @@ namespace Fortwars
 		{
 			VirtualCursor.OnClick += OnClick;
 
-			BindClass( "active", () => Input.Down( InputButton.Menu ) && Input.Down(InputButton.Use) && Game.Instance.Round is BuildRound );
+			BindClass( "active", () => Input.Down( InputButton.Menu ) && Input.Down( InputButton.Use ) && Game.Instance.Round is BuildRound );
 		}
 
 		private void OnClick()

@@ -3,120 +3,120 @@ using System.Collections.Generic;
 
 namespace Fortwars
 {
-    [Library( "repairtool", Title = "Repair Tool" )]
-    public partial class RepairTool : Carriable
-    {
-        public virtual float PrimaryRate => 2.0f;
+	[Library( "repairtool", Title = "Repair Tool" )]
+	public partial class RepairTool : Carriable
+	{
+		public virtual float PrimaryRate => 2.0f;
 
-        public override string ViewModelPath => "models/weapons/amhammer/amhammer_v.vmdl";
+		public override string ViewModelPath => "models/weapons/amhammer/amhammer_v.vmdl";
 
-        public override void Spawn()
-        {
-            base.Spawn();
+		public override void Spawn()
+		{
+			base.Spawn();
 
-            CollisionGroup = CollisionGroup.Weapon; // so players touch it as a trigger but not as a solid
-            SetInteractsAs( CollisionLayer.Debris ); // so player movement doesn't walk into it
+			CollisionGroup = CollisionGroup.Weapon; // so players touch it as a trigger but not as a solid
+			SetInteractsAs( CollisionLayer.Debris ); // so player movement doesn't walk into it
 
-            SetModel( "models/weapons/amhammer/amhammer_w.vmdl" );
-        }
+			SetModel( "models/weapons/amhammer/amhammer_w.vmdl" );
+		}
 
-        [Net, Predicted]
-        public TimeSince TimeSincePrimaryAttack { get; set; }
+		[Net, Predicted]
+		public TimeSince TimeSincePrimaryAttack { get; set; }
 
-        public override void Simulate( Client player )
-        {
-            if ( !Owner.IsValid() )
-                return;
+		public override void Simulate( Client player )
+		{
+			if ( !Owner.IsValid() )
+				return;
 
-            if ( CanPrimaryAttack() )
-            {
-                using ( LagCompensation() )
-                {
-                    TimeSincePrimaryAttack = 0;
-                    AttackPrimary();
-                }
-            }
-        }
+			if ( CanPrimaryAttack() )
+			{
+				using ( LagCompensation() )
+				{
+					TimeSincePrimaryAttack = 0;
+					AttackPrimary();
+				}
+			}
+		}
 
-        public virtual bool CanPrimaryAttack()
-        {
-            if ( !Owner.IsValid() || !Input.Down( InputButton.Attack1 ) ) return false;
+		public virtual bool CanPrimaryAttack()
+		{
+			if ( !Owner.IsValid() || !Input.Down( InputButton.Attack1 ) ) return false;
 
-            var rate = PrimaryRate;
-            if ( rate <= 0 ) return true;
+			var rate = PrimaryRate;
+			if ( rate <= 0 ) return true;
 
-            return TimeSincePrimaryAttack > (1 / rate);
-        }
+			return TimeSincePrimaryAttack > (1 / rate);
+		}
 
-        public virtual void AttackPrimary()
-        {
-            var player = Owner as FortwarsPlayer;
-            player.SetAnimBool( "b_attack", true );
-            foreach ( var tr in TraceHit( Owner.EyePosition, Owner.EyePosition + Owner.EyeRotation.Forward * 128f ) )
-            {
-                ViewModelEntity?.SetAnimBool( "hit", tr.Hit );
+		public virtual void AttackPrimary()
+		{
+			var player = Owner as FortwarsPlayer;
+			player.SetAnimBool( "b_attack", true );
+			foreach ( var tr in TraceHit( Owner.EyePosition, Owner.EyePosition + Owner.EyeRotation.Forward * 128f ) )
+			{
+				ViewModelEntity?.SetAnimBool( "hit", tr.Hit );
 
-                if ( !tr.Hit )
-                {
-                    if ( IsLocalPawn )
-                    {
-                        MissEffects();
-                    }
-                    continue;
-                }
+				if ( !tr.Hit )
+				{
+					if ( IsLocalPawn )
+					{
+						MissEffects();
+					}
+					continue;
+				}
 
-                if ( IsLocalPawn )
-                {
-                    HitEffects();
-                }
+				if ( IsLocalPawn )
+				{
+					HitEffects();
+				}
 
-                if ( tr.Entity is FortwarsBlock block && block.TeamID == player.TeamID )
-                {
-                    block.Heal( 10, tr.EndPos );
-                    continue;
-                }
+				if ( tr.Entity is FortwarsBlock block && block.TeamID == player.TeamID )
+				{
+					block.Heal( 10, tr.EndPos );
+					continue;
+				}
 
-                tr.Entity.TakeDamage( DamageInfo.FromBullet( tr.EndPos, -tr.Normal * 10f, 10 ) );
-            }
+				tr.Entity.TakeDamage( DamageInfo.FromBullet( tr.EndPos, -tr.Normal * 10f, 10 ) );
+			}
 
-            ViewModelEntity?.SetAnimBool( "fire", true );
-        }
+			ViewModelEntity?.SetAnimBool( "fire", true );
+		}
 
-        [ClientRpc]
-        private void MissEffects()
-        {
-            _ = new Sandbox.ScreenShake.Perlin( 1.0f, 0.1f, 4.0f, 1.0f );
-        }
+		[ClientRpc]
+		private void MissEffects()
+		{
+			_ = new Sandbox.ScreenShake.Perlin( 1.0f, 0.1f, 4.0f, 1.0f );
+		}
 
-        [ClientRpc]
-        private void HitEffects()
-        {
-            _ = new Sandbox.ScreenShake.Perlin( 0.25f, 4.0f, 4.0f, 0.5f );
-        }
+		[ClientRpc]
+		private void HitEffects()
+		{
+			_ = new Sandbox.ScreenShake.Perlin( 0.25f, 4.0f, 4.0f, 0.5f );
+		}
 
-        public virtual IEnumerable<TraceResult> TraceHit( Vector3 start, Vector3 end, float radius = 2.0f )
-        {
-            bool InWater = Physics.TestPointContents( start, CollisionLayer.Water );
+		public virtual IEnumerable<TraceResult> TraceHit( Vector3 start, Vector3 end, float radius = 2.0f )
+		{
+			bool InWater = Physics.TestPointContents( start, CollisionLayer.Water );
 
-            var tr = Trace.Ray( start, end )
-                    .UseHitboxes()
-                    .HitLayer( CollisionLayer.Water, !InWater )
-                    .HitLayer( CollisionLayer.Debris )
-                    .Ignore( Owner )
-                    .Ignore( this )
-                    .Size( radius )
-                    .Run();
+			var tr = Trace.Ray( start, end )
+					.UseHitboxes()
+					.HitLayer( CollisionLayer.Water, !InWater )
+					.HitLayer( CollisionLayer.Debris )
+					.Ignore( Owner )
+					.Ignore( this )
+					.Size( radius )
+					.Run();
 
-            yield return tr;
-        }
+			yield return tr;
+		}
 
-        public override void SimulateAnimator( PawnAnimator anim )
-        {
-            anim.SetParam( "holdtype", 4 );
-            anim.SetParam( "aimat_weight", 1.0f );
-            anim.SetParam( "holdtype_handedness", 1 );
-            anim.SetParam( "holdtype_pose_hand", 0.07f );
-            anim.SetParam( "holdtype_attack", 1 );
-        }
-    }
+		public override void SimulateAnimator( PawnAnimator anim )
+		{
+			anim.SetParam( "holdtype", 4 );
+			anim.SetParam( "aimat_weight", 1.0f );
+			anim.SetParam( "holdtype_handedness", 1 );
+			anim.SetParam( "holdtype_pose_hand", 0.07f );
+			anim.SetParam( "holdtype_attack", 1 );
+		}
+	}
 }

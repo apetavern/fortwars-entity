@@ -23,9 +23,9 @@ namespace Fortwars
 
 		private void OnClick()
 		{
-			if(!HasClass("active"))
-			{ 
-				return; 
+			if ( !HasClass( "active" ) )
+			{
+				return;
 			}
 			ConsoleSystem.Run( $"fw_spawn {GetCurrentItem()?.Name}" );
 			_ = ApplyShrinkEffect();
