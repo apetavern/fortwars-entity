@@ -383,7 +383,7 @@ public partial class PhysGun : Carriable, IUse
 		{
 			velBody = new PhysicsBody
 			{
-				BodyType = PhysicsBodyType.Dynamic,
+				BodyType = PhysicsBodyType.Static,
 				EnableAutoSleeping = false
 			};
 		}
@@ -483,6 +483,7 @@ public partial class PhysGun : Carriable, IUse
 		if ( heldBody.IsValid() )
 		{
 			heldBody.EnableAutoSleeping = true;
+			heldBody.BodyType = PhysicsBodyType.Static;
 		}
 
 		Client?.Pvs.Remove( GrabbedEntity );
