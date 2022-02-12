@@ -17,7 +17,7 @@ namespace Fortwars
 				Player.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) =>
 				{
 					SetupInventory( player );
-					Game.Instance.MoveToSpawnpoint( player );
+					player.Reset();
 				} );
 			}
 

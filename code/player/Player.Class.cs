@@ -9,7 +9,7 @@
 			Class?.Cleanup( Inventory as Inventory );
 			Class = newClass;
 
-			Game.Instance.MoveToSpawnpoint( this );
+			this.Reset();
 			Game.Instance.Round.SetupInventory( this );
 		}
 	}

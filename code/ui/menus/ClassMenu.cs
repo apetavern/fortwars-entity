@@ -2,6 +2,7 @@
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Fortwars
 {
@@ -41,6 +42,25 @@ namespace Fortwars
 					classInfo.Update( classType );
 				} );
 			}
+		}
+
+		[Event.Tick.Client]
+		public static void OnClientTick()
+		{
+			if ( Input.Pressed( InputButton.View ) )
+			{
+				ShowMenu();
+			}
+		}
+
+		public static void ShowMenu()
+		{
+			// Do we already have the class menu shown?
+			if ( Local.Hud.Children.ToList().OfType<ClassMenu>().Count() > 0 )
+				return;
+
+			// No class menu, let's add one
+			Local.Hud.AddChild<ClassMenu>();
 		}
 
 		[ServerCmd( "fw_change_class" )]

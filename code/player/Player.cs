@@ -124,18 +124,6 @@ namespace Fortwars
 				return;
 
 			TickPlayerUse();
-
-			if ( Input.Pressed( InputButton.View ) )
-			{
-				if ( Camera is ThirdPersonCamera )
-				{
-					Camera = new FirstPersonCamera();
-				}
-				else
-				{
-					Camera = new ThirdPersonCamera();
-				}
-			}
 		}
 
 		protected override void TickPlayerUse()
@@ -177,6 +165,14 @@ namespace Fortwars
 
 				StopUsing();
 			}
+		}
+
+		public void Reset()
+		{
+			Host.AssertServer();
+
+			Health = 100;
+			Game.Instance.MoveToSpawnpoint( this );
 		}
 
 		public override void TakeDamage( DamageInfo info )
