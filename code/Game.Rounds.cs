@@ -11,13 +11,7 @@ namespace Fortwars
 
 		[Net] public int BestOf { get; set; } = 3;
 
-		public int RoundsToWin
-		{
-			get
-			{
-				return MathX.CeilToInt( (float)BestOf / 2 );
-			}
-		}
+		public int RoundsToWin => MathX.CeilToInt( (float)BestOf / 2 );
 
 		[Net] public int BlueWins { get; set; } = 0;
 		[Net] public int RedWins { get; set; } = 0;
