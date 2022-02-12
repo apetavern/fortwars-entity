@@ -411,17 +411,19 @@ public partial class FortwarsWeapon : Carriable
 
 		if ( IsLocalPawn )
 		{
-			new Sandbox.ScreenShake.Perlin(
-				WeaponAsset.KickbackLength * (IsAiming ? 0.5f : 1.0f),
-				WeaponAsset.KickbackSpeed * (IsAiming ? 0.5f : 1.0f),
-				WeaponAsset.KickbackSize * (IsAiming ? 0.5f : 1.0f),
-				WeaponAsset.KickbackRotation * (IsAiming ? 0.5f : 1.0f)
-			);
+			//new Sandbox.ScreenShake.Perlin(
+			//	WeaponAsset.KickbackLength * (IsAiming ? 0.5f : 1.0f),
+			//	WeaponAsset.KickbackSpeed * (IsAiming ? 0.5f : 1.0f),
+			//	WeaponAsset.KickbackSize * (IsAiming ? 0.5f : 1.0f),
+			//	WeaponAsset.KickbackRotation * (IsAiming ? 0.5f : 1.0f)
+			//);
 		}
 
 		(ViewModelEntity as ViewModel)?.OnFire();
+
 		if ( !IsAiming )
 			ViewModelEntity?.SetAnimBool( "fire", true );
+
 		CrosshairPanel?.CreateEvent( "fire" );
 	}
 
