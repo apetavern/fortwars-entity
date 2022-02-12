@@ -72,7 +72,7 @@ namespace Fortwars
 
 				if ( tr.Entity is FortwarsBlock block && block.TeamID == player.TeamID )
 				{
-					block.Heal( 10, tr.EndPos );
+					block.Heal( 50, tr.EndPos );
 					continue;
 				}
 
