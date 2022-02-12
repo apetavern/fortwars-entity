@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System;
 
 namespace Fortwars
 {
@@ -88,8 +89,12 @@ namespace Fortwars
 			EyeRot = Input.Rotation;
 		}
 
+		public float FallVelocity { get; private set; } = 0;
+
 		public override void Simulate()
 		{
+			FallVelocity = -Pawn.Velocity.z;
+
 			EyePosLocal = Vector3.Up * (EyeHeight * Pawn.Scale);
 			UpdateBBox();
 
@@ -185,7 +190,7 @@ namespace Fortwars
 				Velocity = Velocity.WithZ( 0 );
 			}
 
-			// CheckFalling(); // fall damage etc
+			CheckFalling(); // fall damage etc
 
 			if ( Debug )
 			{
@@ -202,7 +207,66 @@ namespace Fortwars
 				DebugOverlay.ScreenText( lineOffset + 4, $" SurfaceFriction: {SurfaceFriction}" );
 				DebugOverlay.ScreenText( lineOffset + 5, $"    WishVelocity: {WishVelocity}" );
 			}
+		}
 
+		public float FallPunchThreshold => 303.0f;
+		public float PlayerLandOnFloatingObject => 173;
+		public float PlayerMaxSafeFallSpeed => 526.5f;
+		public float PlayerMinBounceSpeed => 173;
+
+		private void CheckFalling()
+		{
+			if ( GroundEntity == null || FallVelocity <= 0 )
+				return;
+
+			float fallVelocity = FallVelocity;
+
+			if ( Pawn.LifeState != LifeState.Dead && fallVelocity >= FallPunchThreshold )
+			{
+				float soundVolume = 0.5f;
+
+				if ( Pawn.WaterLevel.IsInWater )
+				{
+					// landed in water
+				}
+				else
+				{
+					if ( GroundEntity.WaterLevel.IsInWater )
+					{
+						FallVelocity -= PlayerLandOnFloatingObject;
+					}
+
+					if ( GroundEntity.Velocity.z < 0.0f )
+					{
+						FallVelocity += GroundEntity.Velocity.z;
+						FallVelocity = MathF.Max( 0.1f, FallVelocity );
+					}
+
+					if ( FallVelocity > PlayerMaxSafeFallSpeed )
+					{
+						TakeFallDamage();
+					}
+					else if ( FallVelocity > PlayerMaxSafeFallSpeed / 2 )
+					{
+						// soundVolume = 0.85;
+					}
+					else if ( FallVelocity < PlayerMinBounceSpeed )
+					{
+						// soundVolume = 0;
+					}
+				}
+
+				// PlayerRoughLandingEffects( soundVolume );
+			}
+		}
+
+		float PlayerFatalFallSpeed = 1024f;
+		float DamageForFallSpeed => 100.0f / (PlayerFatalFallSpeed - PlayerMaxSafeFallSpeed);
+
+		private void TakeFallDamage()
+		{
+			float fallDamage = (FallVelocity - PlayerMaxSafeFallSpeed) * DamageForFallSpeed;
+			Pawn.TakeDamage( DamageInfo.Generic( fallDamage ) );
 		}
 
 		public virtual float GetWishSpeed()
