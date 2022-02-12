@@ -260,7 +260,7 @@ namespace Fortwars
 		private void TakeFallDamage()
 		{
 			float fallDamage = (FallVelocity - PlayerMaxSafeFallSpeed) * DamageForFallSpeed;
-			Pawn.TakeDamage( DamageInfo.Generic( fallDamage ) );
+			Pawn.TakeDamage( DamageInfoExtension.FromFall( fallDamage ) );
 		}
 
 		public virtual float GetWishSpeed()
