@@ -190,7 +190,7 @@ namespace Fortwars
 				Velocity = Velocity.WithZ( 0 );
 			}
 
-			CheckFalling(); // fall damage etc
+			CheckFalling();
 
 			if ( Debug )
 			{
@@ -213,6 +213,8 @@ namespace Fortwars
 		public float PlayerLandOnFloatingObject => 173;
 		public float PlayerMaxSafeFallSpeed => 526.5f;
 		public float PlayerMinBounceSpeed => 173;
+		public float PlayerFatalFallSpeed => 1024f;
+		public float DamageForFallSpeed => 100.0f / (PlayerFatalFallSpeed - PlayerMaxSafeFallSpeed);
 
 		private void CheckFalling()
 		{
@@ -221,47 +223,39 @@ namespace Fortwars
 
 			float fallVelocity = FallVelocity;
 
-			if ( Pawn.LifeState != LifeState.Dead && fallVelocity >= FallPunchThreshold )
+			if ( Pawn.LifeState != LifeState.Dead
+				&& fallVelocity >= FallPunchThreshold
+				&& !Pawn.WaterLevel.IsInWater )
 			{
 				float soundVolume = 0.5f;
 
-				if ( Pawn.WaterLevel.IsInWater )
+				if ( GroundEntity.WaterLevel.IsInWater )
 				{
-					// landed in water
-				}
-				else
-				{
-					if ( GroundEntity.WaterLevel.IsInWater )
-					{
-						FallVelocity -= PlayerLandOnFloatingObject;
-					}
-
-					if ( GroundEntity.Velocity.z < 0.0f )
-					{
-						FallVelocity += GroundEntity.Velocity.z;
-						FallVelocity = MathF.Max( 0.1f, FallVelocity );
-					}
-
-					if ( FallVelocity > PlayerMaxSafeFallSpeed )
-					{
-						TakeFallDamage();
-					}
-					else if ( FallVelocity > PlayerMaxSafeFallSpeed / 2 )
-					{
-						// soundVolume = 0.85;
-					}
-					else if ( FallVelocity < PlayerMinBounceSpeed )
-					{
-						// soundVolume = 0;
-					}
+					FallVelocity -= PlayerLandOnFloatingObject;
 				}
 
-				// PlayerRoughLandingEffects( soundVolume );
+				if ( GroundEntity.Velocity.z < 0.0f )
+				{
+					FallVelocity += GroundEntity.Velocity.z;
+					FallVelocity = MathF.Max( 0.1f, FallVelocity );
+				}
+
+				if ( FallVelocity > PlayerMaxSafeFallSpeed )
+				{
+					TakeFallDamage();
+				}
+				else if ( FallVelocity > PlayerMaxSafeFallSpeed / 2 )
+				{
+					// soundVolume = 0.85;
+				}
+				else if ( FallVelocity < PlayerMinBounceSpeed )
+				{
+					// soundVolume = 0;
+				}
+
+				// PlayRoughLandingEffects( soundVolume );
 			}
 		}
-
-		float PlayerFatalFallSpeed = 1024f;
-		float DamageForFallSpeed => 100.0f / (PlayerFatalFallSpeed - PlayerMaxSafeFallSpeed);
 
 		private void TakeFallDamage()
 		{
