@@ -227,8 +227,6 @@ namespace Fortwars
 				&& fallVelocity >= FallPunchThreshold
 				&& !Pawn.WaterLevel.IsInWater )
 			{
-				float soundVolume = 0.5f;
-
 				if ( GroundEntity.WaterLevel.IsInWater )
 				{
 					FallVelocity -= PlayerLandOnFloatingObject;
@@ -243,18 +241,16 @@ namespace Fortwars
 				if ( FallVelocity > PlayerMaxSafeFallSpeed )
 				{
 					TakeFallDamage();
-				}
-				else if ( FallVelocity > PlayerMaxSafeFallSpeed / 2 )
-				{
-					// soundVolume = 0.85;
-				}
-				else if ( FallVelocity < PlayerMinBounceSpeed )
-				{
-					// soundVolume = 0;
+					PlayRoughLandingEffects( 0.85f );
 				}
 
-				// PlayRoughLandingEffects( soundVolume );
+				DebugOverlay.ScreenText( 10, $"{FallVelocity}", 2f );
 			}
+		}
+
+		private void PlayRoughLandingEffects( float soundVolume )
+		{
+			Sound.FromEntity( "damage.fall", Pawn ).SetVolume( soundVolume );
 		}
 
 		private void TakeFallDamage()
