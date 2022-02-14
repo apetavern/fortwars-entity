@@ -9,6 +9,11 @@
     border-radius: 2px;
     box-shadow: 0 0 5px rgba( white, 0.05 );
 
+    .owner {
+        position: absolute;
+        bottom: -60px;
+    }
+
     .inner {
         position: absolute;
         top: 0;

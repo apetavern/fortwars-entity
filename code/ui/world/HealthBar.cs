@@ -6,7 +6,8 @@ namespace Fortwars
 {
 	public class HealthBar : WorldPanel
 	{
-		private Label label;
+		private Label owner;
+		private Label health;
 		private Panel inner;
 
 		private FortwarsBlock block;
@@ -16,7 +17,8 @@ namespace Fortwars
 			this.block = block;
 
 			StyleSheet.Load( "/ui/world/HealthBar.scss" );
-			label = Add.Label( "0" );
+			health = Add.Label( "0", "health" );
+			owner = Add.Label( "owner", "owner" );
 			inner = Add.Panel( "inner" );
 
 			SceneObject.ZBufferMode = ZBufferMode.None;
@@ -27,8 +29,9 @@ namespace Fortwars
 		{
 			base.Tick();
 
-			label.Text = $"{block.Health.CeilToInt()} / {block.MaxHealth.CeilToInt()}";
+			health.Text = $"{block.Health.CeilToInt()} / {block.MaxHealth.CeilToInt()}";
 			inner.Style.Width = Length.Fraction( block.Health / block.MaxHealth );
+			owner.Text = $"Owned by {block.Client.Name}";
 
 			Scale = 2.0f;
 			WorldScale = 0.5f;

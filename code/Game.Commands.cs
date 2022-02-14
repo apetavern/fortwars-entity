@@ -58,15 +58,14 @@ namespace Fortwars
 			if ( blockName.Contains( "steel" ) )
 			{
 				ent.BlockMaterial = BlockMaterial.Steel;
-				ent.SetModel( $"models/blocks/steel/fw_{blockName.Split('_')[1]}.vmdl" );
-				ent.SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
+				ent.SetModel( $"models/blocks/steel/fw_{blockName.Split( '_' )[1]}.vmdl" );
 			}
 			else
 			{
 				ent.SetModel( $"models/blocks/wood/fw_{blockName}.vmdl" );
-				ent.SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 			}
 
+			ent.SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 			ent.TeamID = (player as FortwarsPlayer).TeamID;
 			ent.Owner = player;
 
