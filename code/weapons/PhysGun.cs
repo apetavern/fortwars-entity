@@ -147,6 +147,12 @@ public partial class PhysGun : Carriable, IUse
 			return;
 		}
 
+		if ( rootEnt.Owner != owner )
+		{
+			CanGrab = false;
+			return;
+		}
+
 		CanGrab = true;
 	}
 
@@ -284,12 +290,9 @@ public partial class PhysGun : Carriable, IUse
 
 		if ( !body.IsValid() ) return;
 
-
 		if ( rootEnt is not FortwarsBlock ) return;
-
-
 		if ( (rootEnt as FortwarsBlock).TeamID != (owner as FortwarsPlayer).TeamID ) return; //Gotta make sure the block is actually our team's, can't fuck with enemy blocks.
-
+		if ( rootEnt.Owner != Owner ) return;
 
 		// Unfreeze
 		if ( body.BodyType == PhysicsBodyType.Static )
