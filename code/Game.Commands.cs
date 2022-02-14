@@ -25,6 +25,19 @@ namespace Fortwars
 			weapon.ReserveAmmo += amount;
 		}
 
+		[AdminCmd( "fw_cleanup" )]
+		public static void Cleanup()
+		{
+			foreach ( var entry in Instance.buildLogEntries )
+			{
+				entry.Block.Delete();
+			}
+
+			Instance.buildLogEntries.Clear();
+
+			Log.Trace( $"Deleted blocks" );
+		}
+
 		[ServerCmd( "fw_spawn" )]
 		public static void Spawn( string blockName )
 		{

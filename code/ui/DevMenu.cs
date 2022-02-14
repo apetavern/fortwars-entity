@@ -36,6 +36,7 @@ namespace Fortwars
 			buttons.Add.ButtonWithIcon( "Skip round", "fast_forward", "button", () => ConsoleSystem.Run( "fw_round_skip" ) );
 			buttons.Add.ButtonWithIcon( "Extend round", "timer", "button", () => ConsoleSystem.Run( "fw_round_extend" ) );
 			buttons.Add.ButtonWithIcon( "Switch teams", "loop", "button", () => ConsoleSystem.Run( "fw_team_swap" ) );
+			buttons.Add.ButtonWithIcon( "Clean up blocks", "delete", "button", () => ConsoleSystem.Run( "fw_cleanup" ) );
 
 			//
 			// Weapons
