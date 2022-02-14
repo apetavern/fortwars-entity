@@ -38,7 +38,7 @@ namespace Fortwars
 			if ( !player.IsValid() || player.LifeState != LifeState.Alive )
 				return;
 
-			if ( blockName.Contains( "metal" ) && BlockMaterial.Steel.GetRemainingCount( owner ) <= 0 )
+			if ( blockName.Contains( "steel" ) && BlockMaterial.Steel.GetRemainingCount( owner ) <= 0 )
 				return;
 
 			if ( BlockMaterial.Wood.GetRemainingCount( owner ) <= 0 )
@@ -55,10 +55,10 @@ namespace Fortwars
 			ent.Rotation = Rotation.From( new Angles( 0, player.EyeRotation.Yaw(), 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
 
 
-			if ( blockName.Contains( "metal" ) )
+			if ( blockName.Contains( "steel" ) )
 			{
 				ent.BlockMaterial = BlockMaterial.Steel;
-				ent.SetModel( $"models/blocks/fw_{blockName}.vmdl" );
+				ent.SetModel( $"models/blocks/steel/fw_{blockName.Split('_')[1]}.vmdl" );
 				ent.SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 			}
 			else

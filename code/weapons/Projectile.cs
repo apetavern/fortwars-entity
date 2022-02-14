@@ -11,14 +11,25 @@ namespace Fortwars
 
 		public FortwarsWeapon Weapon;
 
+		Particles trailParticle;
+
 		public override void Spawn()
 		{
 			base.Spawn();
+			
 		}
 
 		[Event.Tick.Server]
 		public void OnTick()
 		{
+			if ( trailParticle == null )
+			{
+				trailParticle = Particles.Create( "particles/smoke_trail.vpcf" );
+				trailParticle.SetPosition( 0, GetAttachment( "trail" ).Value.Position ); //Can't parent the particle or it gets destroyed with the projectile.
+			}
+
+			trailParticle.SetPosition( 0, GetAttachment( "trail" ).Value.Position ); //Have to keep positioning it...
+
 			Velocity += Speed * Rotation.Forward * Time.Delta;
 			Velocity += PhysicsWorld.Gravity * 0.5f * Time.Delta;
 
@@ -29,6 +40,7 @@ namespace Fortwars
 
 			if ( tr.Hit )
 			{
+				trailParticle.Destroy( false );//Destroy it when it's done.
 				Explode( tr );
 			}
 

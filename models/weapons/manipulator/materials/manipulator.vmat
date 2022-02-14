@@ -4,6 +4,9 @@ Layer0
 {
 	shader "complex.vfx"
 
+	//---- Color ----
+	F_TINT_MASK 1
+
 	//---- PBR ----
 	F_SELF_ILLUM 1
 	F_SPECULAR 1
@@ -15,8 +18,9 @@ Layer0
 
 	//---- Color ----
 	g_flModelTintAmount "1.000"
-	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	g_vColorTint "[1.000000 1.000000 1.000000 1.000000]"
 	TextureColor "models/weapons/manipulator/materials/manipulator_color.psd"
+	TextureTintMask "models/weapons/manipulator/materials/manipulator_illumn.psd"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
