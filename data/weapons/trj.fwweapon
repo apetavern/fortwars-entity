@@ -42,5 +42,6 @@
 		userendertarget = false
 		fireparticles = resource:"particles/flash_medium.vpcf"
 		tracerparticles = resource:"particles/tracer_large.vpcf"
+		buildingdamagemultiplier = 0.25
 	}
 }
