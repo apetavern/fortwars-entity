@@ -419,7 +419,7 @@ public partial class FortwarsWeapon : Carriable
 			//);
 		}
 
-		(ViewModelEntity as ViewModel)?.OnFire();
+		(ViewModelEntity as ViewModel)?.OnFire( IsAiming );
 
 		if ( !IsAiming )
 			ViewModelEntity?.SetAnimBool( "fire", true );

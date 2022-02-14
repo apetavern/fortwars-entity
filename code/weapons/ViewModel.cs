@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using System;
+using System.Diagnostics.SymbolStore;
 
 namespace Fortwars
 {
@@ -40,10 +41,17 @@ namespace Fortwars
 
 		public ViewModel() { }
 
-		public void OnFire()
+		public void OnFire( bool ads )
 		{
 			using ( Prediction.Off() )
-				ShootOffset -= Vector3.Backward * 16f;
+			{
+				float strength = 64f;
+
+				if ( ads )
+					strength = 2.0f;
+
+				ShootOffset += Vector3.Backward * strength;
+			}
 		}
 
 		public override void PostCameraSetup( ref CameraSetup camSetup )
@@ -168,7 +176,7 @@ namespace Fortwars
 
 			var offset = CalcSwingOffset( pitchDelta, yawDelta );
 			offset += CalcBobbingOffset( playerVelocity, bobCycleTime );
-			offset -= ShootOffset;
+			offset += ShootOffset;
 
 			Vector2 maskOffset = new Vector2( offset.y, offset.z ) * 0.1f * (10 * offset.x + 1f);
 			SceneObject.SetValue( "maskOffset", new Vector2( maskOffset.x, maskOffset.y ) );
