@@ -48,6 +48,7 @@
 	mindamage(float) { group = "Damage" } : "Min Damage" : "10" : ""
 	damagedropoffdistance(integer) { group = "Damage" } : "Damage Drop Off Distance" : 256 : ""
 	headshotmultiplier(float) { group = "Damage" } : "Headshot Multiplier" : "1.5" : ""
+	buildingdamagemultiplier(float) { group = "Damage" } : "Building Damage Multiplier" : "1" : ""
 	kickbacksize(float) { group = "View Kick" } : "Kickback Size" : "1" : ""
 	kickbacklength(float) { group = "View Kick" } : "Kickback Length" : "1" : ""
 	kickbackspeed(float) { group = "View Kick" } : "Kickback Speed" : "1" : ""

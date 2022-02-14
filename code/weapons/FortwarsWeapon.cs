@@ -331,7 +331,12 @@ public partial class FortwarsWeapon : Carriable
 			if ( !IsServer ) continue;
 			if ( !tr.Entity.IsValid() ) continue;
 
-			var damageInfo = DamageInfo.FromBullet( tr.EndPos, forward * 100, CalcDamage( tr.Distance, false ) )
+			float damage = CalcDamage( tr.Distance, false );
+
+			if ( tr.Entity is FortwarsBlock )
+				damage *= WeaponAsset.BuildingDamageMultiplier;
+
+			var damageInfo = DamageInfo.FromBullet( tr.EndPos, forward * 100, damage )
 				.UsingTraceResult( tr )
 				.WithAttacker( Owner )
 				.WithWeapon( this );

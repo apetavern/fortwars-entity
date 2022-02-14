@@ -133,6 +133,9 @@ public class WeaponAsset : Asset
 	[Property, Category( "Damage" )]
 	public float HeadshotMultiplier { get; set; } = 1.5f;
 
+	[Property, Category( "Damage" )]
+	public float BuildingDamageMultiplier { get; set; } = 1.0f;
+
 	//
 	// View kick
 	//
