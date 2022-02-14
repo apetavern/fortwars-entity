@@ -1,4 +1,6 @@
 ﻿using Sandbox;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Fortwars
 {
@@ -27,7 +29,7 @@ namespace Fortwars
 		public static void Spawn( string blockName )
 		{
 			var owner = ConsoleSystem.Caller;
-			var player = owner.Pawn;
+			var player = owner.Pawn as FortwarsPlayer;
 
 			if ( Instance.Round is not BuildRound )
 				return;
@@ -41,8 +43,26 @@ namespace Fortwars
 			if ( blockName.Contains( "steel" ) && BlockMaterial.Steel.GetRemainingCount( owner ) <= 0 )
 				return;
 
-			if ( BlockMaterial.Wood.GetRemainingCount( owner ) <= 0 )
+			if ( !blockName.Contains( "steel" ) && BlockMaterial.Wood.GetRemainingCount( owner ) <= 0 )
 				return;
+
+			//
+			// Stop the player spawning too many blocks too quickly
+			//
+			{
+				int delay = 0;
+				var playerLogs = Instance.buildLogEntries.ToList().Where( x => x.Player == player );
+				foreach ( var entry in playerLogs.TakeLast( 3 ) )
+				{
+					delay += (Time.Tick - entry.Tick);
+				}
+
+				if ( delay < Global.TickRate * 9 && playerLogs.Count() > 3 )
+				{
+					MessageFeed.AddMessage( To.Single( player ), "clear", "Can't build", "You're building too fast! Slow down!" );
+					return;
+				}
+			}
 
 			var tr = Trace.Ray( player.EyePosition, player.EyePosition + player.EyeRotation.Forward * 500 )
 				.UseHitboxes()
@@ -53,7 +73,6 @@ namespace Fortwars
 			var ent = new FortwarsBlock();
 			ent.Position = tr.EndPos;
 			ent.Rotation = Rotation.From( new Angles( 0, player.EyeRotation.Yaw(), 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
-
 
 			if ( blockName.Contains( "steel" ) )
 			{
@@ -66,7 +85,7 @@ namespace Fortwars
 			}
 
 			ent.SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
-			ent.TeamID = (player as FortwarsPlayer).TeamID;
+			ent.TeamID = player.TeamID;
 			ent.Owner = player;
 
 			ent.OnTeamIDChanged();
@@ -79,6 +98,8 @@ namespace Fortwars
 				var delta = p - tr.EndPos;
 				ent.PhysicsBody.Position -= delta;
 			}
+
+			Instance.buildLogEntries.Add( new BuildLogEntry( Time.Tick, ent, player ) );
 		}
 	}
 }
