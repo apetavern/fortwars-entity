@@ -2,7 +2,7 @@
 
 BaseMessage {
     padding: 15px 20px;
-    background-color: $background;
+    background-color: rgba( $background, 0.5 );
     width: 600px;
     align-items: center;
     justify-content: space-between;
