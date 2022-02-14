@@ -43,7 +43,12 @@ namespace Fortwars
 			{
 				var blockNode = model.GetData<BlockNode>();
 
-				MaxHealth = BlockMaterial.BaseHealth + blockNode.AdditionalHealth;
+				// This shouldn't ever be the case, but we'll catch it here just in case
+				if ( blockNode == null )
+					MaxHealth = BlockMaterial.BaseHealth;
+				else
+					MaxHealth = BlockMaterial.BaseHealth + blockNode.AdditionalHealth;
+
 				Health = MaxHealth;
 			}
 		}
