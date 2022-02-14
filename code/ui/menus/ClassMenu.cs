@@ -101,7 +101,15 @@ namespace Fortwars
 				{
 					foreach ( var item in items )
 					{
-						loadoutStr += $"+ {item}\n";
+						if ( item.StartsWith( "fw:" ) )
+						{
+							var asset = Asset.FromPath<WeaponAsset>( item.Remove( 0, 3 ) );
+							loadoutStr += $"• {asset.WeaponName}\n";
+						}
+						else
+						{
+							loadoutStr += $"• {Library.GetAttribute( item ).Title}\n";
+						}
 					}
 				}
 
