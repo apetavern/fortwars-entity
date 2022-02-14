@@ -57,7 +57,6 @@ public partial class FortwarsWeapon : Carriable
 
 	public override void Simulate( Client player )
 	{
-		recoil = Vector2.Lerp( recoil, 0, Time.Delta * 25 );
 		spread = spread.LerpTo( 0, Time.Delta * WeaponAsset.SpreadChangeTime );
 
 		if ( spread.AlmostEqual( 0 ) )
@@ -436,7 +435,9 @@ public partial class FortwarsWeapon : Carriable
 	{
 		base.BuildInput( inputBuilder );
 
-		inputBuilder.ViewAngles += recoil;
+		inputBuilder.ViewAngles += recoil * Time.Delta * 100f;
+
+		recoil = Vector2.Lerp( recoil, 0, Time.Delta * 25 );
 
 		if ( IsAiming )
 			inputBuilder.ViewAngles = Angles.Lerp( inputBuilder.OriginalViewAngles, inputBuilder.ViewAngles, WeaponAsset.AimFovMult );
