@@ -6,6 +6,8 @@ namespace Fortwars
 	public partial class MessageFeed : Panel
 	{
 		public static MessageFeed Instance { get; set; }
+		private TimeSince timeSinceLastMessage = 0;
+
 		public MessageFeed()
 		{
 			Instance = this;
@@ -13,10 +15,13 @@ namespace Fortwars
 		}
 
 		[ClientCmd( "fw_message_add", CanBeCalledFromServer = true )]
-		public static void AddMessage( string icon, string title, string message )
+		public static void AddMessage( string icon, string title, string message, bool priority = false )
 		{
-			var control = Instance.Add.Message( icon, title, message );
-			control.SetClass( "kill", true );
+			if ( !priority && Instance.timeSinceLastMessage < 3 )
+				return;
+
+			Instance.Add.Message( icon, title, message );
+			Instance.timeSinceLastMessage = 0;
 		}
 	}
 }
