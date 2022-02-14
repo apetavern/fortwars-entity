@@ -299,7 +299,7 @@
 										}
 									},
 								]
-								m_blendDuration = 0.2
+								m_blendDuration = 0.0
 								m_destState = 
 								{
 									m_id = 1956258695
@@ -527,7 +527,7 @@
 										}
 									},
 								]
-								m_blendDuration = 0.2
+								m_blendDuration = 0.0
 								m_destState = 
 								{
 									m_id = 1001372604
@@ -546,7 +546,7 @@
 						]
 						m_tags = [  ]
 						m_tagBehaviors = [  ]
-						m_name = "Unnamed"
+						m_name = "Aiming"
 						m_childNodeID = 
 						{
 							m_id = 1568776379

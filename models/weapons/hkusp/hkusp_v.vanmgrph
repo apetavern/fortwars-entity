@@ -187,7 +187,7 @@
 			{
 				_class = "CStateMachineAnimNode"
 				m_sName = "Unnamed"
-				m_vecPosition = [ -160.0, -144.0 ]
+				m_vecPosition = [ -176.0, -160.0 ]
 				m_nNodeID = 
 				{
 					m_id = 310127258
@@ -320,7 +320,7 @@
 										}
 									},
 								]
-								m_blendDuration = 0.2
+								m_blendDuration = 0.0
 								m_destState = 
 								{
 									m_id = 1282519920
@@ -548,7 +548,7 @@
 										}
 									},
 								]
-								m_blendDuration = 0.2
+								m_blendDuration = 0.0
 								m_destState = 
 								{
 									m_id = 1001372604
@@ -567,7 +567,7 @@
 						]
 						m_tags = [  ]
 						m_tagBehaviors = [  ]
-						m_name = "Unnamed"
+						m_name = "Aiming"
 						m_childNodeID = 
 						{
 							m_id = 166614608
