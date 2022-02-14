@@ -16,7 +16,7 @@ namespace Fortwars
 		public override void Spawn()
 		{
 			base.Spawn();
-			
+
 		}
 
 		[Event.Tick.Server]
@@ -93,7 +93,7 @@ namespace Fortwars
 			using ( Prediction.Off() )
 			{
 				var particle = Particles.Create( "particles/explosion/barrel_explosion/explosion_barrel.vpcf", Position );
-				PlaySound( "rocket_jump" );
+				PlaySound( "explosion.small" );
 			}
 
 			Delete();
