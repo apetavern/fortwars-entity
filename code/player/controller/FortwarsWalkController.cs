@@ -243,8 +243,6 @@ namespace Fortwars
 					TakeFallDamage();
 					PlayRoughLandingEffects( 0.85f );
 				}
-
-				DebugOverlay.ScreenText( 10, $"{FallVelocity}", 2f );
 			}
 		}
 
