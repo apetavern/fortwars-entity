@@ -30,12 +30,11 @@ ChatBox {
         align-items: flex-start;
         height: 400px;
         overflow: scroll;
-        margin-bottom: 50px;
+        margin-bottom: 55px;
     }
 
     &.open {
         pointer-events: all;
-        background-color: rgba( $background, 0.5 );
 
         textentry {
             opacity: 1;
@@ -55,6 +54,7 @@ ChatEntry {
     transform: scale( 1 );
     width: 100%;
     align-items: center;
+    background-color: rgba( $background, 0.5 );
 
     &:intro {
         opacity: 0;
@@ -87,18 +87,16 @@ ChatEntry {
     }
 
     image {
-        width: 24px;
-        height: 24px;
-        min-height: 24px;
+        height: 32px;
+        aspect-ratio: 1;
         border-radius: 100px;
-        margin-right: 4px;
+        margin-right: 8px;
     }
 
     .name {
         padding-right: 10px;
         font-weight: 600;
         font-size: 14px;
-        color: #c0fb2e;
         flex-shrink: 0;
     }
 
@@ -106,6 +104,19 @@ ChatEntry {
         color: white;
         font-size: 14px;
         flex-grow: 1;
+    }
+
+
+    &.red-team {
+        .name {
+            color: $red-team;
+        }
+    }
+
+    &.blue-team {
+        .name {
+            color: $blue-team;
+        }
     }
 
     &.noname .name {

@@ -95,9 +95,9 @@ public partial class ChatBox : Panel
 	}
 
 	[ClientCmd( "chat_add", CanBeCalledFromServer = true )]
-	public static void AddChatEntry( string name, string message, string avatar = null )
+	public static void AddChatEntry( string name, string message, string avatar = null, string className = null )
 	{
-		Instance?.AddEntry( name, message, avatar );
+		Instance?.AddEntry( name, message, avatar, className );
 
 		// Only log clientside if we're not the listen server host
 		if ( !Global.IsListenServer )
@@ -121,7 +121,12 @@ public partial class ChatBox : Panel
 		if ( message.Contains( '\n' ) || message.Contains( '\r' ) )
 			return;
 
+		string className = "";
+
+		if ( ConsoleSystem.Caller.Pawn is FortwarsPlayer player )
+			className = $"{player.TeamID}-team";
+
 		Log.Info( $"{ConsoleSystem.Caller}: {message}" );
-		AddChatEntry( To.Everyone, ConsoleSystem.Caller.Name, message, $"avatar:{ConsoleSystem.Caller.PlayerId}" );
+		AddChatEntry( To.Everyone, ConsoleSystem.Caller.Name, message, $"avatar:{ConsoleSystem.Caller.PlayerId}", className );
 	}
 }
