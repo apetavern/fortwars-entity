@@ -45,7 +45,7 @@ namespace Fortwars
 		{
 			using ( Prediction.Off() )
 			{
-				float strength = 64f;
+				float strength = 16f;
 
 				if ( ads )
 					strength = 2.0f;
