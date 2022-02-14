@@ -1,0 +1,78 @@
+﻿@import "/UI/_Common.scss";
+
+BaseMessage {
+    padding: 15px 20px;
+    background-color: $background;
+    width: 600px;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 2px;
+    margin: 5px 0;
+    // transition: all 150ms ease;
+    transform-origin: 0% 50%;
+    border-left: 4px solid transparent;
+    flex-shrink: 0;
+
+    &:intro {
+        transform: scale( 1.1 );
+        opacity: 0;
+    }
+
+    &:outro {
+        opacity: 0;
+        height: 0;
+    }
+
+    .inner {
+        position: absolute;
+        bottom: 0;
+        height: 4px;
+        background-color: $background;
+    }
+
+    text, label, icon, iconpanel {
+        color: $background;
+    }
+
+    icon, iconpanel {
+        margin-right: 16px;
+        align-items: center;
+        color: white;
+    }
+
+    .title {
+        text-align: left;
+    }
+
+    .title, .message {
+        font-size: 20px;
+        color: white;
+        align-items: center;
+        padding: 0;
+    }
+
+    .message {
+        text-align: right;
+    }
+}
+
+
+.red-team {
+    BaseMessage {
+        border-left: $red-team;
+    }
+
+    .inner {
+        background-color: $red-team;
+    }
+}
+
+.blue-team {
+    BaseMessage {
+        border-left: $blue-team;
+    }
+
+    .inner {
+        background-color: $blue-team;
+    }
+}

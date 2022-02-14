@@ -27,6 +27,7 @@ namespace Fortwars
 			RootPanel.AddChild<WipText>();
 			RootPanel.AddChild<Hitmarker>();
 			RootPanel.AddChild<DamageIndicator>();
+			RootPanel.AddChild<MessageFeed>();
 
 			RootPanel.AddChild<ClassMenu>();
 			RootPanel.AddChild<Victory>();

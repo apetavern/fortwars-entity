@@ -1,0 +1,12 @@
+﻿@import "/UI/_Common.scss";
+
+MessageFeed {
+    position: absolute;
+    bottom: 200px;
+    left: 50%;
+    flex-direction: column;
+    transform: translate( -50% );
+    z-index: 1000;
+    max-height: 200px;
+    overflow: scroll;
+}
