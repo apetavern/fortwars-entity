@@ -233,24 +233,6 @@ public partial class FortwarsWeapon : Carriable
 		return TimeSincePrimaryAttack > (1 / rate);
 	}
 
-	private void DrawDebug()
-	{
-		var vals = new (string, object)[]
-		{
-			( "Spread", spread ),
-			( "Recoil", recoil ),
-			( "XHair size", GetCrosshairSize() ),
-		};
-
-		Vector2 offset = new Vector2( 100, 250 );
-
-		for ( int i = 0; i < vals.Length; i++ )
-		{
-			(string, object) valTuple = vals[i];
-			DebugOverlay.ScreenText( offset, i, Color.White, $"{valTuple.Item1,16}: {valTuple.Item2,16}" );
-		}
-	}
-
 	public virtual void AttackPrimary()
 	{
 		_ = FireBullets();
