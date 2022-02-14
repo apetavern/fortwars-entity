@@ -56,8 +56,9 @@ namespace Fortwars
 				{
 					delay += (Time.Tick - entry.Tick);
 				}
+				delay = (delay / 3f).CeilToInt();
 
-				if ( delay < Global.TickRate * 9 && playerLogs.Count() > 3 )
+				if ( delay < Global.TickRate * 3 && playerLogs.Count() > 3 )
 				{
 					MessageFeed.AddMessage( To.Single( player ), "clear", "Can't build", "You're building too fast! Slow down!" );
 					return;
