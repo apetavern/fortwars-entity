@@ -311,7 +311,7 @@ public partial class FortwarsWeapon : Carriable
 
 		var forward = Owner.EyeRotation.Forward;
 
-		if ( TimeSincePrimaryAttack < 3 || !WeaponAsset.FirstShotAlwaysAccurate )
+		if ( !IsAiming )
 		{
 			forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * (WeaponAsset.Spread + spread) * 0.25f;
 			forward = forward.Normal;
