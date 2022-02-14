@@ -4,7 +4,7 @@ namespace Fortwars
 {
 	partial class Game
 	{
-		struct BuildLogEntry
+		private struct BuildLogEntry
 		{
 			public BuildLogEntry( int tick, FortwarsBlock block, FortwarsPlayer player )
 			{
@@ -18,6 +18,6 @@ namespace Fortwars
 			public FortwarsPlayer Player { get; set; }
 		}
 
-		List<BuildLogEntry> buildLogEntries = new List<BuildLogEntry>();
+		private List<BuildLogEntry> buildLogEntries = new List<BuildLogEntry>();
 	}
 }
