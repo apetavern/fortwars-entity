@@ -227,6 +227,9 @@ namespace Fortwars
 				&& fallVelocity >= FallPunchThreshold
 				&& !Pawn.WaterLevel.IsInWater )
 			{
+				float punchStrength = fallVelocity.LerpInverse( FallPunchThreshold, FallPunchThreshold * 2 );
+				_ = new Sandbox.ScreenShake.ViewPunch( 1f, punchStrength * 2f );
+
 				if ( GroundEntity.WaterLevel.IsInWater )
 				{
 					FallVelocity -= PlayerLandOnFloatingObject;
