@@ -209,11 +209,11 @@ namespace Fortwars
 			}
 		}
 
-		public float FallPunchThreshold => 303.0f;
-		public float PlayerLandOnFloatingObject => 173;
-		public float PlayerMaxSafeFallSpeed => 526.5f;
+		public float FallPunchThreshold => 350f; // won't make player's screen / make scrape noise unless player falling at least this fast.
+		public float PlayerLandOnFloatingObject => 173; // Can fall another 173 in/sec without getting hurt
 		public float PlayerMinBounceSpeed => 173;
-		public float PlayerFatalFallSpeed => 1024f;
+		public float PlayerMaxSafeFallSpeed => MathF.Sqrt( 2 * Gravity * 20 * 12 ); // approx 20 feet
+		public float PlayerFatalFallSpeed => MathF.Sqrt( 2 * Gravity * 60 * 12 ); // approx 60 feet
 		public float DamageForFallSpeed => 100.0f / (PlayerFatalFallSpeed - PlayerMaxSafeFallSpeed);
 
 		private void CheckFalling()
