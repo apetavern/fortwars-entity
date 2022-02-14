@@ -46,10 +46,6 @@ namespace Fortwars
 			using ( Prediction.Off() )
 			{
 				float strength = 16f;
-
-				if ( ads )
-					strength = 2.0f;
-
 				ShootOffset += Vector3.Backward * strength;
 			}
 		}
@@ -174,9 +170,16 @@ namespace Fortwars
 			verticalDelta *= (1.0f - System.MathF.Abs( viewDown.Cross( Vector3.Down ).y ));
 			pitchDelta -= verticalDelta * 1;
 
+			float aimingMultiplier = 1.0f;
+
+			if ( Weapon != null && Weapon.IsAiming )
+				aimingMultiplier = 0.1f;
+
 			var offset = CalcSwingOffset( pitchDelta, yawDelta );
 			offset += CalcBobbingOffset( playerVelocity, bobCycleTime );
 			offset += ShootOffset;
+
+			offset *= aimingMultiplier;
 
 			Vector2 maskOffset = new Vector2( offset.y, offset.z ) * 0.1f * (10 * offset.x + 1f);
 			SceneObject.SetValue( "maskOffset", new Vector2( maskOffset.x, maskOffset.y ) );
