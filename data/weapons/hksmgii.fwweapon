@@ -36,8 +36,8 @@
 		useprojectile = false
 		projectilemodel = resource:""
 		projectilespeed = 1.0
-		aimposition = [ -10.0, 19.1, 2.0 ]
-		aimrotation = [ -5.0, -1.0, 3.0 ]
+		aimposition = [ -10.0, 19.075, 2.5 ]
+		aimrotation = [ -2.0, -0.9, 3.0 ]
 		aimfovmult = 0.75
 		userendertarget = false
 		fireparticles = resource:"particles/flash_medium.vpcf"
