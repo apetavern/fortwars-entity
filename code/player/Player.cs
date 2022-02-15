@@ -7,6 +7,9 @@ namespace Fortwars
 		public DamageInfo LastDamage { get; private set; }
 		public Clothing.Container Clothing = new();
 
+		[ServerVar( "fw_time_between_spawns", Help = "How long do players need to wait between respawns", Min = 1, Max = 30 )]
+		public static int TimeBetweenSpawns { get; set; } = 10;
+
 		public bool IsSpectator
 		{
 			get => Team == null;
@@ -90,7 +93,7 @@ namespace Fortwars
 						 GetHitboxBone( LastDamage.HitboxIndex ) );
 
 			base.OnKilled();
-			RespawnTimer = 10;
+			RespawnTimer = TimeBetweenSpawns;
 
 			Inventory.DropActive();
 
