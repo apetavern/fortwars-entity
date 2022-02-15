@@ -53,7 +53,6 @@ public partial class PhysGun : Carriable, IUse
 
 	public void UpdateViewmodel()
 	{
-		bool wantsToFreeze = Input.Pressed( InputButton.Attack2 );
 		bool rotating = Input.Down( InputButton.Use );
 
 		ViewModelEntity?.SetAnimBool( "fire", BeamActive );
@@ -69,11 +68,6 @@ public partial class PhysGun : Carriable, IUse
 			ViewModelEntity?.SetAnimFloat( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickFB" ), 0f, 0.1f ) );
 			ViewModelEntity?.SetAnimFloat( "joystickLR", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickLR" ), 0f, 0.1f ) );
 			ViewModelEntity?.SetAnimBool( "snap", false );
-		}
-
-		if ( GrabbedEntity.IsValid() && wantsToFreeze )
-		{
-			ViewModelEntity?.SetAnimBool( "freeze", true );
 		}
 
 		if ( GrabbedEntity.IsValid() )
@@ -177,12 +171,6 @@ public partial class PhysGun : Carriable, IUse
 		}
 
 		bool grabEnabled = grabbing && Input.Down( InputButton.Attack1 );
-		bool wantsToFreeze = Input.Pressed( InputButton.Attack2 );
-
-		if ( GrabbedEntity.IsValid() && wantsToFreeze )
-		{
-			(Owner as AnimEntity)?.SetAnimBool( "b_attack", true );
-		}
 
 		BeamActive = grabEnabled;
 
@@ -197,7 +185,7 @@ public partial class PhysGun : Carriable, IUse
 				{
 					if ( heldBody.IsValid() )
 					{
-						UpdateGrab( EyePosition, EyeRotation, eyeDir, wantsToFreeze );
+						UpdateGrab( EyePosition, EyeRotation, eyeDir );
 					}
 					else
 					{
@@ -207,11 +195,6 @@ public partial class PhysGun : Carriable, IUse
 				else if ( grabbing )
 				{
 					GrabEnd();
-				}
-
-				if ( !grabbing && Input.Pressed( InputButton.Reload ) )
-				{
-					TryUnfreezeAll( owner, EyePosition, EyeRotation, eyeDir );
 				}
 			}
 		}
@@ -228,43 +211,6 @@ public partial class PhysGun : Carriable, IUse
 		if ( All.OfType<PhysGun>().Any( x => x?.HeldBody?.PhysicsGroup == body?.PhysicsGroup ) ) return true;
 
 		return false;
-	}
-
-	private void TryUnfreezeAll( Player owner, Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )
-	{
-		var tr = Trace.Ray( EyePosition, EyePosition + eyeDir * MaxTargetDistance )
-			.UseHitboxes()
-			.Ignore( owner, false )
-			.HitLayer( CollisionLayer.Debris )
-			.Run();
-
-		if ( !tr.Hit || !tr.Entity.IsValid() || tr.Entity.IsWorld ) return;
-
-		var rootEnt = tr.Entity.Root;
-		if ( !rootEnt.IsValid() ) return;
-
-		var physicsGroup = rootEnt.PhysicsGroup;
-		if ( physicsGroup == null ) return;
-
-		bool unfrozen = false;
-
-		for ( int i = 0; i < physicsGroup.BodyCount; ++i )
-		{
-			var body = physicsGroup.GetBody( i );
-			if ( !body.IsValid() ) continue;
-
-			if ( body.BodyType == PhysicsBodyType.Static )
-			{
-				body.BodyType = PhysicsBodyType.Dynamic;
-				unfrozen = true;
-			}
-		}
-
-		if ( unfrozen )
-		{
-			var freezeEffect = Particles.Create( "particles/physgun_freeze.vpcf" );
-			freezeEffect.SetPosition( 0, tr.EndPos );
-		}
 	}
 
 	private void TryStartGrab( Player owner, Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )
@@ -312,25 +258,8 @@ public partial class PhysGun : Carriable, IUse
 		Client?.Pvs.Add( GrabbedEntity );
 	}
 
-	private void UpdateGrab( Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir, bool wantsToFreeze )
+	private void UpdateGrab( Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )
 	{
-		if ( wantsToFreeze )
-		{
-			if ( heldBody.BodyType == PhysicsBodyType.Dynamic )
-			{
-				heldBody.BodyType = PhysicsBodyType.Static;
-			}
-
-			if ( GrabbedEntity.IsValid() )
-			{
-				var freezeEffect = Particles.Create( "particles/physgun_freeze.vpcf" );
-				freezeEffect.SetPosition( 0, heldBody.Transform.PointToWorld( GrabbedPos ) );
-			}
-			ViewModelEntity?.SetAnimBool( "freeze", true );
-			GrabEnd();
-			return;
-		}
-
 		MoveTargetDistance( Input.MouseWheel * TargetDistanceSpeed );
 
 		bool rotating = Input.Down( InputButton.Use );
