@@ -74,9 +74,6 @@ namespace Fortwars
 		[ClientRpc]
 		public void DidDamage( Vector3 pos, float amount, float healthinv )
 		{
-			Sound.FromScreen( "dm.ui_attacker" )
-				.SetPitch( 1 + healthinv * 1 );
-
 			Hitmarker.Instance.OnHit( amount, false, true );
 		}
 
