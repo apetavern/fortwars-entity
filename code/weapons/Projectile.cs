@@ -92,7 +92,7 @@ namespace Fortwars
 
 			using ( Prediction.Off() )
 			{
-				var particle = Particles.Create( "particles/explosion/barrel_explosion/explosion_barrel.vpcf", Position );
+				var particle = Particles.Create( "particles/explosion/fw_explosion_base.vpcf", Position );
 				PlaySound( "explosion.small" );
 			}
 
