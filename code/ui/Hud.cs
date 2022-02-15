@@ -32,6 +32,8 @@ namespace Fortwars
 			RootPanel.AddChild<ClassMenu>();
 			RootPanel.AddChild<Victory>();
 
+			RootPanel.AddChild<Dead>();
+
 			RootPanel.AddChild<DevMenu>();
 
 			RootPanel.AddChild<ChatBox>();

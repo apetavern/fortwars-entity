@@ -90,7 +90,7 @@ namespace Fortwars
 						 GetHitboxBone( LastDamage.HitboxIndex ) );
 
 			base.OnKilled();
-			RespawnTimer = 0;
+			RespawnTimer = 10;
 
 			Inventory.DropActive();
 
@@ -110,13 +110,13 @@ namespace Fortwars
 				child.EnableDrawing = false;
 		}
 
-		[Net] TimeSince RespawnTimer { get; set; }
+		[Net] public TimeUntil RespawnTimer { get; set; }
 
 		public override void Simulate( Client cl )
 		{
 			if ( LifeState == LifeState.Dead )
 			{
-				if ( RespawnTimer > 10 && IsServer )
+				if ( RespawnTimer <= 0 && IsServer )
 				{
 					Respawn();
 				}
