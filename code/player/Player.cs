@@ -90,6 +90,7 @@ namespace Fortwars
 						 GetHitboxBone( LastDamage.HitboxIndex ) );
 
 			base.OnKilled();
+			RespawnTimer = 0;
 
 			Inventory.DropActive();
 
@@ -109,16 +110,29 @@ namespace Fortwars
 				child.EnableDrawing = false;
 		}
 
-		public override void Simulate( Client owner )
+		[Net] TimeSince RespawnTimer { get; set; }
+
+		public override void Simulate( Client cl )
 		{
-			base.Simulate( owner );
+			if ( LifeState == LifeState.Dead )
+			{
+				if ( RespawnTimer > 10 && IsServer )
+				{
+					Respawn();
+				}
+
+				return;
+			}
+
+			var controller = GetActiveController();
+			controller?.Simulate( cl, this, GetActiveAnimator() );
 
 			if ( Input.ActiveChild != null )
 			{
 				ActiveChild = Input.ActiveChild;
 			}
 
-			SimulateActiveChild( owner, ActiveChild );
+			SimulateActiveChild( cl, ActiveChild );
 
 			if ( LifeState != LifeState.Alive )
 				return;

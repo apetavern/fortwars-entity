@@ -45,8 +45,6 @@ namespace Fortwars
 
 		public override void OnPlayerKilled( Player player )
 		{
-			player.Respawn();
-
 			base.OnPlayerKilled( player );
 		}
 
