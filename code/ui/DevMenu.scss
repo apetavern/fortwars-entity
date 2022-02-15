@@ -46,7 +46,10 @@ DevMenu {
     opacity: 0;
     padding: 10px 25px;
     transition: all 150ms ease;
-    overflow: scroll;
+
+    button, label {
+        flex-shrink: 0;
+    }
 
     &.visible {
         transform: translate( 0 );
@@ -55,6 +58,9 @@ DevMenu {
     }
 
     .buttons {
+        overflow: scroll;
+        height: 100%;
+        padding-bottom: 100px;
         flex-direction: column;
     }
 }
