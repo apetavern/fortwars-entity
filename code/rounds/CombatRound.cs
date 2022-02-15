@@ -76,20 +76,6 @@ namespace Fortwars
 			game.ChangeRound( new BuildRound() );
 		}
 
-		public override void OnPlayerKilled( Player player )
-		{
-			_ = StartRespawnTimer( player );
-
-			base.OnPlayerKilled( player );
-		}
-
-		private async Task StartRespawnTimer( Player player )
-		{
-			await Task.Delay( 1000 );
-
-			player.Respawn();
-		}
-
 		public override void OnPlayerSpawn( Player player )
 		{
 			base.OnPlayerSpawn( player );
