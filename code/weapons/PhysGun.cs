@@ -49,13 +49,10 @@ public partial class PhysGun : Carriable, IUse
 		SetInteractsAs( CollisionLayer.Debris );
 	}
 
-	public void UpdateCanGrab( Player owner, Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )
+	public bool CheckCanGrab( Player owner, Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )
 	{
 		if ( GrabbedEntity.IsValid() )
-		{
-			CanGrab = true;
-			return;
-		}
+			return true;
 
 		var tr = Trace.Ray( EyePosition, EyePosition + eyeDir * MaxTargetDistance )
 			.UseHitboxes()
@@ -64,10 +61,7 @@ public partial class PhysGun : Carriable, IUse
 			.Run();
 
 		if ( !tr.Hit || !tr.Entity.IsValid() || tr.Entity.IsWorld || tr.StartedSolid )
-		{
-			CanGrab = false;
-			return;
-		}
+			return false;
 
 		var rootEnt = tr.Entity.Root;
 		var body = tr.Body;
@@ -81,30 +75,18 @@ public partial class PhysGun : Carriable, IUse
 		}
 
 		if ( !body.IsValid() )
-		{
-			CanGrab = false;
-			return;
-		}
+			return false;
 
 		if ( rootEnt is not FortwarsBlock )
-		{
-			CanGrab = false;
-			return;
-		}
+			return false;
 
 		if ( (rootEnt as FortwarsBlock).TeamID != (owner as FortwarsPlayer).TeamID )
-		{
-			CanGrab = false;
-			return;
-		}
+			return false;
 
 		if ( rootEnt.Owner != owner )
-		{
-			CanGrab = false;
-			return;
-		}
+			return false;
 
-		CanGrab = true;
+		return true;
 	}
 
 	public override void Simulate( Client client )
@@ -117,7 +99,7 @@ public partial class PhysGun : Carriable, IUse
 		var eyeDir = owner.EyeRotation.Forward;
 		var EyeRotation = Rotation.From( new Angles( 0.0f, owner.EyeRotation.Angles().yaw, 0.0f ) );
 
-		UpdateCanGrab( owner, EyePosition, EyeRotation, eyeDir );
+		CanGrab = CheckCanGrab( owner, EyePosition, EyeRotation, eyeDir );
 
 		if ( Input.Pressed( InputButton.Attack1 ) )
 		{
