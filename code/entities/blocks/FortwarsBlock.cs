@@ -65,6 +65,19 @@ namespace Fortwars
 				base.TakeDamage( info );
 				UpdateRenderColor();
 			}
+			if ( info.Attacker is FortwarsPlayer attacker )
+			{
+				this.DidDamage( To.Single( attacker ), info.Position, info.Damage, ((float)Health).LerpInverse( 100, 0 ) );
+			}
+		}
+
+		[ClientRpc]
+		public void DidDamage( Vector3 pos, float amount, float healthinv )
+		{
+			Sound.FromScreen( "dm.ui_attacker" )
+				.SetPitch( 1 + healthinv * 1 );
+
+			Hitmarker.Instance.OnHit( amount, false, true );
 		}
 
 		public void Heal( float amount, Vector3 position )
@@ -80,6 +93,7 @@ namespace Fortwars
 
 			UpdateRenderColor();
 		}
+
 
 		private void UpdateRenderColor()
 		{

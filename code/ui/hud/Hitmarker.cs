@@ -15,11 +15,14 @@ namespace Fortwars
 			StyleSheet.Load( "/ui/hud/Hitmarker.scss" );
 		}
 
-		public void OnHit( float amount, bool isKill )
+		public void OnHit( float amount, bool isKill, bool isBlock = false )
 		{
 			currentHitmarkerInstance?.Delete();
 			currentHitmarkerInstance = new HitmarkerInstance( amount, this );
 			currentHitmarkerInstance.SetClass( "kill", isKill );
+
+			Log.Trace( isBlock );
+			currentHitmarkerInstance.SetClass( "block", isBlock );
 		}
 
 		public class HitmarkerInstance : Panel

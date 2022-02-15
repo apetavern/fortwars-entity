@@ -19,6 +19,10 @@ hitmarker {
         background-image: url( /ui/misc/hit.png );
         background-size: 100%;
 
+        &.block {
+            background-image: url( /ui/misc/hit-block.png );
+        }
+
         &.kill {
             background-image-tint: #f00;
         }
