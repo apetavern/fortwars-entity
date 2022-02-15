@@ -28,7 +28,6 @@ button, dropdown {
 }
 
 dropdown {
-    flex-grow: 1;
     margin-right: 4px;
 }
 
@@ -47,7 +46,7 @@ DevMenu {
     padding: 10px 25px;
     transition: all 150ms ease;
 
-    button, label {
+    button, dropdown, label {
         flex-shrink: 0;
     }
 

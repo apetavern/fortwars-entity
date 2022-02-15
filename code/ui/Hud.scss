@@ -23,10 +23,9 @@ icon, iconpanel {
 .popup-panel {
     background-color: rgba( white, 0.5 );
     flex-direction: column;
-    color: #cfdbf2;
     transition: all 0.1s ease-out;
     position: absolute;
-    z-index: 1000;
+    z-index: 10000;
     min-height: 10px;
     min-width: 10px;
     overflow: scroll;
@@ -108,6 +107,10 @@ icon, iconpanel {
         color: black;
         font-weight: 400;
         white-space: nowrap;
+
+        label {
+            color: $background;
+        }
 
         .iconpanel {
             color: black;
