@@ -310,10 +310,12 @@ public partial class FortwarsWeapon : Carriable
 		//
 		foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * WeaponAsset.Range, 1f ) )
 		{
-			tr.Surface.DoBulletImpact( tr );
+			TracerEffects( tr.EndPos );
 
 			if ( !IsServer ) continue;
 			if ( !tr.Entity.IsValid() ) continue;
+
+			tr.Surface.DoBulletImpact( tr );
 
 			float damage = CalcDamage( tr.Distance, false );
 
@@ -326,8 +328,6 @@ public partial class FortwarsWeapon : Carriable
 				.WithWeapon( this );
 
 			tr.Entity.TakeDamage( damageInfo );
-
-			TracerEffects( tr.EndPos );
 		}
 	}
 
