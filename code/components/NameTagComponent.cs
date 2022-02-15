@@ -51,17 +51,27 @@ internal class NameTagComponent : EntityComponent<FortwarsPlayer>
 	{
 		foreach ( var player in Sandbox.Entity.All.OfType<FortwarsPlayer>() )
 		{
-			if ( player.IsLocalPawn && player.IsFirstPersonMode )
+			void Remove()
 			{
 				var c = player.Components.Get<NameTagComponent>();
 				c?.Remove();
+			}
+
+			if ( player.IsLocalPawn && player.IsFirstPersonMode )
+			{
+				Remove();
 				continue;
 			}
 
 			if ( player.Position.Distance( CurrentView.Position ) > 500 )
 			{
-				var c = player.Components.Get<NameTagComponent>();
-				c?.Remove();
+				Remove();
+				continue;
+			}
+
+			if ( player.LifeState != LifeState.Alive )
+			{
+				Remove();
 				continue;
 			}
 
