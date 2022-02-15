@@ -7,11 +7,11 @@ namespace Fortwars
 	{
 		public override Item[] Items => new Item[]
 		{
-			new ("3x2", "A wide panel good for defences", "/ui/icons/3x2.png"),
-			new ("1x2", "A medium panel good for entrances", "/ui/icons/1x2.png"),
-			new ("1x4", "A tall panel good for ledges", "/ui/icons/1x4.png"),
-			new ("1x1x1", "A thicc block good for climbing", "/ui/icons/1x1x1.png"),
-			new ("1x2x1", "A thicc block good for cover", "/ui/icons/1x2x1.png"),
+			new ("3x2", "A wide panel good for defences", "/ui/icons/wood/fw_3x2.png"),
+			new ("1x2", "A medium panel good for entrances", "/ui/icons/wood/fw_1x2.png"),
+			new ("1x4", "A tall panel good for ledges", "/ui/icons/wood/fw_1x4.png"),
+			new ("1x1x1", "A thicc block good for climbing", "/ui/icons/wood/fw_1x1x1.png"),
+			new ("1x2x1", "A thicc block good for cover", "/ui/icons/wood/fw_1x2x1.png"),
 		};
 
 		public BuildWheel() : base()
