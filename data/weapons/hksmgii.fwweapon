@@ -40,7 +40,7 @@
 		aimrotation = [ -2.0, -0.9, 3.0 ]
 		aimfovmult = 0.75
 		userendertarget = false
-		fireparticles = resource:"particles/flash_medium.vpcf"
+		fireparticles = resource:"particles/muzzleflash/fw_muzzleflash.vpcf"
 		tracerparticles = resource:"particles/tracer_large.vpcf"
 		buildingdamagemultiplier = 0.25
 	}
