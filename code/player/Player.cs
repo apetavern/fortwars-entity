@@ -194,7 +194,7 @@ namespace Fortwars
 			base.TakeDamage( info );
 
 			if ( info.Weapon.IsValid() || info.Attacker.IsValid() )
-				TookDamage( To.Single( Client ), info.Weapon.IsValid() ? info.Weapon.Position : info.Attacker.Position );
+				TookDamage( To.Single( Client ), info.Weapon.IsValid() ? info.Weapon.Position : info.Position );
 		}
 
 		[ClientRpc]

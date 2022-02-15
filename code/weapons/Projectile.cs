@@ -85,7 +85,7 @@ namespace Fortwars
 					shouldDoDamage = true;
 
 				if ( shouldDoDamage )
-					ent.TakeDamage( DamageInfoExtension.FromProjectile( Weapon.WeaponAsset.MaxDamage * distanceFactor, tr.Normal * 32, Client.Pawn ) );
+					ent.TakeDamage( DamageInfoExtension.FromProjectile( Weapon.WeaponAsset.MaxDamage * distanceFactor, Position, tr.Normal * 32, Client.Pawn ) );
 
 				ent.ApplyAbsoluteImpulse( dir * force );
 			}
