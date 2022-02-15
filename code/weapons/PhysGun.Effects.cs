@@ -47,6 +47,49 @@ public partial class PhysGun
 		}
 	}
 
+	float DesiredDialPos;
+
+	public void UpdateViewmodel()
+	{
+		bool rotating = Input.Down( InputButton.Use );
+
+		ViewModelEntity?.SetAnimBool( "fire", BeamActive );
+
+		if ( GrabbedEntity.IsValid() && rotating )
+		{
+			ViewModelEntity?.SetAnimFloat( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickFB" ), -(Input.MouseDelta.y * RotateSpeed), Time.Delta ) );
+			ViewModelEntity?.SetAnimFloat( "joystickLR", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickLR" ), (Input.MouseDelta.x * RotateSpeed), Time.Delta ) );
+			ViewModelEntity?.SetAnimBool( "snap", Input.Down( InputButton.Run ) );
+		}
+		else
+		{
+			ViewModelEntity?.SetAnimFloat( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickFB" ), 0f, 0.1f ) );
+			ViewModelEntity?.SetAnimFloat( "joystickLR", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickLR" ), 0f, 0.1f ) );
+			ViewModelEntity?.SetAnimBool( "snap", false );
+		}
+
+		if ( GrabbedEntity.IsValid() )
+		{
+			DesiredDialPos = 0.5f;
+			if ( !rotating )
+			{
+				DesiredDialPos += Rand.Float() * 0.1f;
+			}
+			else
+			{
+				DesiredDialPos += Rand.Float() * 0.15f * (1 + (Input.MouseDelta.Length / 20f));
+			}
+		}
+		else
+		{
+			DesiredDialPos = 0f;
+		}
+
+		ViewModelEntity?.SetAnimBool( "cangrab", CanGrab );
+
+		ViewModelEntity?.SetAnimFloat( "dialpos", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "dialpos" ), DesiredDialPos, 0.5f ) );
+	}
+
 	protected virtual void UpdateEffects()
 	{
 		var owner = Owner;

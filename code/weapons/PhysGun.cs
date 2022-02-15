@@ -49,49 +49,6 @@ public partial class PhysGun : Carriable, IUse
 		SetInteractsAs( CollisionLayer.Debris );
 	}
 
-	float DesiredDialPos;
-
-	public void UpdateViewmodel()
-	{
-		bool rotating = Input.Down( InputButton.Use );
-
-		ViewModelEntity?.SetAnimBool( "fire", BeamActive );
-
-		if ( GrabbedEntity.IsValid() && rotating )
-		{
-			ViewModelEntity?.SetAnimFloat( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickFB" ), -(Input.MouseDelta.y * RotateSpeed), Time.Delta ) );
-			ViewModelEntity?.SetAnimFloat( "joystickLR", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickLR" ), (Input.MouseDelta.x * RotateSpeed), Time.Delta ) );
-			ViewModelEntity?.SetAnimBool( "snap", Input.Down( InputButton.Run ) );
-		}
-		else
-		{
-			ViewModelEntity?.SetAnimFloat( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickFB" ), 0f, 0.1f ) );
-			ViewModelEntity?.SetAnimFloat( "joystickLR", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickLR" ), 0f, 0.1f ) );
-			ViewModelEntity?.SetAnimBool( "snap", false );
-		}
-
-		if ( GrabbedEntity.IsValid() )
-		{
-			DesiredDialPos = 0.5f;
-			if ( !rotating )
-			{
-				DesiredDialPos += Rand.Float() * 0.1f;
-			}
-			else
-			{
-				DesiredDialPos += Rand.Float() * 0.15f * (1 + (Input.MouseDelta.Length / 20f));
-			}
-		}
-		else
-		{
-			DesiredDialPos = 0f;
-		}
-
-		ViewModelEntity?.SetAnimBool( "cangrab", CanGrab );
-
-		ViewModelEntity?.SetAnimFloat( "dialpos", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "dialpos" ), DesiredDialPos, 0.5f ) );
-	}
-
 	public void UpdateCanGrab( Player owner, Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )
 	{
 		if ( GrabbedEntity.IsValid() )
@@ -215,30 +172,16 @@ public partial class PhysGun : Carriable, IUse
 
 	private void TryStartGrab( Player owner, Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )
 	{
+		if ( !CanGrab ) return;
+
 		var tr = Trace.Ray( EyePosition, EyePosition + eyeDir * MaxTargetDistance )
 			.UseHitboxes()
 			.Ignore( owner, false )
 			.HitLayer( CollisionLayer.Debris )
 			.Run();
 
-		if ( !tr.Hit || !tr.Entity.IsValid() || tr.Entity.IsWorld || tr.StartedSolid ) return;
-
 		var rootEnt = tr.Entity.Root;
 		var body = tr.Body;
-
-		if ( !body.IsValid() || tr.Entity.Parent.IsValid() )
-		{
-			if ( rootEnt.IsValid() && rootEnt.PhysicsGroup != null )
-			{
-				body = (rootEnt.PhysicsGroup.BodyCount > 0 ? rootEnt.PhysicsGroup.GetBody( 0 ) : null);
-			}
-		}
-
-		if ( !body.IsValid() ) return;
-
-		if ( rootEnt is not FortwarsBlock ) return;
-		if ( (rootEnt as FortwarsBlock).TeamID != (owner as FortwarsPlayer).TeamID ) return; //Gotta make sure the block is actually our team's, can't fuck with enemy blocks.
-		if ( rootEnt.Owner != Owner ) return;
 
 		// Unfreeze
 		if ( body.BodyType == PhysicsBodyType.Static )
@@ -356,10 +299,6 @@ public partial class PhysGun : Carriable, IUse
 		base.OnDestroy();
 
 		Deactivate();
-	}
-
-	public override void OnCarryDrop( Entity dropper )
-	{
 	}
 
 	private void GrabInit( PhysicsBody body, Vector3 startPos, Vector3 grabPos, Rotation rot )
