@@ -144,13 +144,7 @@ public partial class PhysGun : Carriable, IUse
 		}
 	}
 
-	private static bool IsBodyGrabbed( PhysicsBody body )
-	{
-		// There for sure is a better way to deal with this
-		if ( All.OfType<PhysGun>().Any( x => x?.HeldBody?.PhysicsGroup == body?.PhysicsGroup ) ) return true;
-
-		return false;
-	}
+	private static bool IsBodyGrabbed( PhysicsBody body ) => All.OfType<PhysGun>().Any( x => x?.HeldBody?.PhysicsGroup == body?.PhysicsGroup );
 
 	private void TryStartGrab( Player owner, Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )
 	{
