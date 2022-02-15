@@ -24,7 +24,7 @@ namespace Fortwars
 		{
 			if ( trailParticle == null )
 			{
-				trailParticle = Particles.Create( "particles/rpg/rpg_trail_smoke.vpcf" );
+				trailParticle = Particles.Create( "particles/rpg/fw_rpg_projectile_fire.vpcf" );
 				trailParticle.SetPosition( 0, GetAttachment( "trail" ).Value.Position ); //Can't parent the particle or it gets destroyed with the projectile.
 			}
 
