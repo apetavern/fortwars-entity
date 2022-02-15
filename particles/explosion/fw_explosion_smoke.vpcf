@@ -69,7 +69,7 @@
 			{
 				m_nType = "PF_TYPE_LITERAL"
 				m_nMapType = "PF_MAP_TYPE_MULT"
-				m_flLiteralValue = 500.0
+				m_flLiteralValue = 250.0
 				m_nControlPoint = 1
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
@@ -217,14 +217,14 @@
 						{
 							x = 0.0
 							y = 0.0
-							m_flSlopeIncoming = 24.262403
-							m_flSlopeOutgoing = 24.262403
+							m_flSlopeIncoming = 7.390857
+							m_flSlopeOutgoing = 7.390857
 						},
 						{
-							x = 0.525381
+							x = 1.0
 							y = 0.0
-							m_flSlopeIncoming = -2.616534
-							m_flSlopeOutgoing = -2.616534
+							m_flSlopeIncoming = -7.647682
+							m_flSlopeOutgoing = -7.647682
 						},
 					]
 					m_tangents = 
@@ -243,6 +243,7 @@
 				}
 			}
 			m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
+			m_bDisableOperator = true
 		},
 		{
 			_class = "C_OP_SetFloat"
