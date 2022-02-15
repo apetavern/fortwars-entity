@@ -227,6 +227,9 @@ public partial class FortwarsWeapon : Carriable
 				return false;
 		}
 
+		if ( Owner is FortwarsPlayer { Controller: FortwarsWalkController { IsSprinting: true } } )
+			return false;
+
 		var rate = WeaponAsset.RPM / 60f;
 		if ( rate <= 0 ) return true;
 
