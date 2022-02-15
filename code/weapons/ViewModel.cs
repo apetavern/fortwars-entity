@@ -178,16 +178,16 @@ namespace Fortwars
 			offset += CalcBobbingOffset( playerVelocity, bobCycleTime );
 			offset += ShootOffset;
 
-			offset *= aimingMultiplier;
-
-			Vector2 maskOffset = new Vector2( offset.y, offset.z ) * 0.1f * (10 * offset.x + 1f);
-			SceneObject.SetValue( "maskOffset", new Vector2( maskOffset.x, maskOffset.y ) );
-
 			if ( Owner.GroundEntity == null )
 			{
 				offset += new Vector3( 0, 0, -2.5f );
 				newPitch -= 2.5f;
 			}
+
+			offset *= aimingMultiplier;
+
+			Vector2 maskOffset = new Vector2( offset.y, offset.z ) * 0.1f * (10 * offset.x + 1f);
+			SceneObject.SetValue( "maskOffset", new Vector2( maskOffset.x, maskOffset.y ) );
 
 			TargetPos += offset;
 
