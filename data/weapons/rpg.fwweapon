@@ -8,7 +8,7 @@
 		movementspeedmultiplier = 0.75
 		holdtype = "2"
 		firemode = "1"
-		rpm = 40.0
+		rpm = 120.0
 		firstshotdelay = 0.0
 		shotdelay = 0.0
 		range = 16384
