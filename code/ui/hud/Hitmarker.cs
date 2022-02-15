@@ -20,8 +20,6 @@ namespace Fortwars
 			currentHitmarkerInstance?.Delete();
 			currentHitmarkerInstance = new HitmarkerInstance( amount, this );
 			currentHitmarkerInstance.SetClass( "kill", isKill );
-
-			Log.Trace( isBlock );
 			currentHitmarkerInstance.SetClass( "block", isBlock );
 		}
 
