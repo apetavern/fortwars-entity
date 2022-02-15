@@ -20,7 +20,7 @@ namespace Fortwars
 		public float BodyHeight => 72.0f;
 		public float EyeHeight => 64.0f;
 		public float Gravity => 800.0f;
-		public bool AutoJump => true;
+		public bool AutoJump => false;
 		public float AirControl => 100.0f;
 
 		public DuckSlide DuckSlide { get; private set; }
