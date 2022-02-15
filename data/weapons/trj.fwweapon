@@ -21,7 +21,7 @@
 		aimaccuracymult = 1.0
 		maxammo = 6
 		extraammo = 36
-		reloadtime = 2.0
+		reloadtime = 3.5
 		postreloadtime = 0.5
 		maxdamage = 50.0
 		mindamage = 30.0
