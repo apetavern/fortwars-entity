@@ -22,9 +22,10 @@ namespace Fortwars
 
 		private void AssignLoadout( List<string> items, Inventory inventory )
 		{
-			foreach ( string itemPath in items )
+			for ( int i = 0; i < items.Count; i++ )
 			{
-				inventory.Add( ItemUtils.GetItem( itemPath ) );
+				string itemPath = items[i];
+				inventory.Add( ItemUtils.GetItem( itemPath ), i == 0 );
 			}
 		}
 

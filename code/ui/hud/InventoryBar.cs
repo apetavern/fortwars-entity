@@ -79,12 +79,6 @@ namespace Fortwars
 			if ( input.Pressed( InputButton.Slot1 ) ) SetActiveSlot( input, inventory, 0 );
 			if ( input.Pressed( InputButton.Slot2 ) ) SetActiveSlot( input, inventory, 1 );
 			if ( input.Pressed( InputButton.Slot3 ) ) SetActiveSlot( input, inventory, 2 );
-			if ( input.Pressed( InputButton.Slot4 ) ) SetActiveSlot( input, inventory, 3 );
-			if ( input.Pressed( InputButton.Slot5 ) ) SetActiveSlot( input, inventory, 4 );
-			if ( input.Pressed( InputButton.Slot6 ) ) SetActiveSlot( input, inventory, 5 );
-			if ( input.Pressed( InputButton.Slot7 ) ) SetActiveSlot( input, inventory, 6 );
-			if ( input.Pressed( InputButton.Slot8 ) ) SetActiveSlot( input, inventory, 7 );
-			if ( input.Pressed( InputButton.Slot9 ) ) SetActiveSlot( input, inventory, 8 );
 
 			if ( input.MouseWheel != 0 ) SwitchActiveSlot( input, inventory, -input.MouseWheel );
 		}
