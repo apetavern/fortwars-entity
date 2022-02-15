@@ -35,7 +35,13 @@ public partial class Crosshair : Panel
 			if ( VirtualCursor.InUse )
 				return false;
 
-			return Local.Pawn.ActiveChild is not FortwarsWeapon { IsAiming: true };
+			if ( Local.Pawn.ActiveChild is FortwarsWeapon weapon && (weapon.GetTuckDist() != -1 || weapon.IsAiming) )
+				return false;
+
+			if ( Local.Pawn is FortwarsPlayer { Controller: FortwarsWalkController { IsSprinting: true } } )
+				return false;
+
+			return true;
 		} );
 	}
 
