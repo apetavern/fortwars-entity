@@ -111,6 +111,7 @@ namespace Fortwars
 
 				var delta = p - tr.EndPos;
 				ent.PhysicsBody.Position -= delta;
+				ent.PhysicsBody.BodyType = PhysicsBodyType.Static;
 			}
 
 			Instance.buildLogEntries.Add( new BuildLogEntry( Time.Tick, ent, player ) );
