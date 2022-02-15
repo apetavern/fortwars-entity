@@ -18,3 +18,7 @@ Sound effects obtained from https://www.zapsplat.com
 
 *Weapon Models*
 TastyTony (https://sketchfab.com/TastyTony), CC BY 4.0
+
+*Icons*
+Wood beam icon by Delapouite (https://delapouite.com/) under CC BY 3.0
+I beam icon by Delapouite (https://delapouite.com/) under CC BY 3.0

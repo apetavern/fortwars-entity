@@ -12,12 +12,19 @@ Resources {
 
     Resource {
         width: 250px;
-        align-items: center;
+        align-items: flex-start;
 
-        .name {
-            width: 50%;
-            margin-right: 4px;
-            text-transform: uppercase;
+        .limit {
+            font-size: 14px;
+            margin-left: 4px;
+            margin-top: 2px;
+        }
+
+        .icon {
+            height: 32px;
+            aspect-ratio: 1;
+            background-size: cover;
+            margin-right: 8px;
         }
     }
 }
@@ -26,11 +33,19 @@ Resources {
 .red-team {
     Resources {
         border-left: $red-team;
+
+        Resource .icon {
+            background-image-tint: $red-team;
+        }
     }
 }
 
 .blue-team {
     Resources {
         border-left: $blue-team;
+
+        Resource .icon {
+            background-image-tint: $blue-team;
+        }
     }
 }

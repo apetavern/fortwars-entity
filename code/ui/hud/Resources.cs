@@ -10,9 +10,11 @@ namespace Fortwars
 		{
 			StyleSheet.Load( "/ui/hud/Resources.scss" );
 
-			AddResource( "wood", BlockMaterial.Wood );
-			AddResource( "steel", BlockMaterial.Steel );
-			AddResource( "rubber", BlockMaterial.Rubber );
+			Add.Label( "Resources", "subtitle" );
+
+			AddResource( "/ui/icons/resources/wood.png", BlockMaterial.Wood );
+			AddResource( "/ui/icons/resources/steel.png", BlockMaterial.Steel );
+			AddResource( "/ui/icons/resources/rubber.png", BlockMaterial.Rubber );
 		}
 
 		private void AddResource( string name, BlockMaterial resourceType )
@@ -28,13 +30,12 @@ namespace Fortwars
 
 			private BlockMaterial resourceType;
 
-			public Resource( string name, BlockMaterial resourceType )
+			public Resource( string iconPath, BlockMaterial resourceType )
 			{
 				this.resourceType = resourceType;
 
-				Add.Label( name, "name" );
+				Add.Image( iconPath, "icon" );
 				count = Add.Label( "20", "count" );
-				Add.Label( "/", "separator" );
 				limit = Add.Label( "20", "limit" );
 			}
 
