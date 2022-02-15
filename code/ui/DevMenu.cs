@@ -42,17 +42,14 @@ namespace Fortwars
 			// Weapons
 			//
 			buttons.Add.Label( "Weapons", "subtitle" );
+
 			buttons.Add.ButtonWithIcon( "Give ammo", "gamepad", "button", () => ConsoleSystem.Run( "fw_give_ammo 10000" ) );
 			buttons.Add.ButtonWithIcon( "Give physgun", "add", "button", () => ConsoleSystem.Run( "fw_inventory_give physgun" ) );
 			buttons.Add.ButtonWithIcon( "Give repair tool", "add", "button", () => ConsoleSystem.Run( "fw_inventory_give repairtool" ) );
 			buttons.Add.ButtonWithIcon( "Give medkit", "add", "button", () => ConsoleSystem.Run( "fw_inventory_give medkittool" ) );
 			buttons.Add.ButtonWithIcon( "Give ammokit", "add", "button", () => ConsoleSystem.Run( "fw_inventory_give ammokittool" ) );
 
-			buttons.Add.Label( "Spawn Weapon", "minitext" );
-
-			var row = buttons.Add.Panel();
-			var dropdown = new DropDown( row );
-
+			var dropdown = new DropDown( buttons );
 			AddEventListener( "onopen", () =>
 			{
 				dropdown.Options.Clear();
@@ -67,9 +64,7 @@ namespace Fortwars
 				}
 			} );
 
-			row.Add.ButtonWithIcon( "Spawn", "gamepad", "button", () => ConsoleSystem.Run( $"spawn_weapon data/{dropdown.Value}" ) );
-
-			row.Add.ButtonWithIcon( "Give", "backpack", "button", () => ConsoleSystem.Run( $"give_weapon data/{dropdown.Value}" ) );
+			buttons.Add.ButtonWithIcon( "Give", "backpack", "button", () => ConsoleSystem.Run( $"give_weapon data/{dropdown.Value}" ) );
 
 			BindClass( "visible", () => Input.Down( InputButton.Flashlight ) && Global.CheatsEnabled() );
 		}
