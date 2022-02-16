@@ -8,17 +8,9 @@ namespace Fortwars;
 public partial class FortwarsWeapon : Carriable
 {
 	//
-	// Realtime variables
-	//
-	private float spread = 0;
-	private Vector2 recoil = 0;
-	private TimeSince TimeSinceReload { get; set; }
-	public bool IsAiming => Input.Down( InputButton.Attack2 );
-
-	//
 	// Networked variables
 	//
-	[Net, Local] public WeaponAsset WeaponAsset { get; set; }
+	[Net] public WeaponAsset WeaponAsset { get; set; }
 
 	[Net, Predicted] public TimeSince TimeSincePrimaryAttack { get; set; }
 
@@ -26,6 +18,14 @@ public partial class FortwarsWeapon : Carriable
 	[Net] public int ReserveAmmo { get; set; }
 
 	[Net, Predicted] private bool IsReloading { get; set; }
+
+	//
+	// Realtime variables
+	//
+	private float spread = 0;
+	private Vector2 recoil = 0;
+	private TimeSince TimeSinceReload { get; set; }
+	public bool IsAiming => Input.Down( InputButton.Attack2 );
 
 	/// <summary>
 	/// Load a weapon from a specified path.
@@ -36,13 +36,13 @@ public partial class FortwarsWeapon : Carriable
 
 		var weapon = new FortwarsWeapon()
 		{
-			WeaponAsset = weaponAsset
+			WeaponAsset = weaponAsset,
+			CurrentClip = weaponAsset.MaxAmmo,
+			ReserveAmmo = weaponAsset.ExtraAmmo
 		};
 
 		weapon.SetModel( weaponAsset.WorldModel );
 		weapon.SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
-		weapon.CurrentClip = weaponAsset.MaxAmmo;
-		weapon.ReserveAmmo = weaponAsset.ExtraAmmo;
 
 		return weapon;
 	}
