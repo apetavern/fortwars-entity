@@ -152,7 +152,7 @@ namespace Fortwars
 			WishVelocity = WishVelocity.Normal * inSpeed;
 			WishVelocity *= GetWishSpeed();
 
-			if ( Pawn.ActiveChild is FortwarsWeapon weapon )
+			if ( Pawn.ActiveChild is FortwarsWeapon weapon && weapon != null && weapon.WeaponAsset != null )
 				WishVelocity *= weapon.WeaponAsset.MovementSpeedMultiplier;
 
 			DuckSlide.PreTick();
