@@ -38,6 +38,13 @@ public class WeaponAsset : Asset
 	[Property, Category( "Meta" )]
 	public bool UseRenderTarget { get; set; } = false;
 
+	[Property, Category( "Meta" )]
+	public float ProceduralViewmodelStrength { get; set; } = 1.0f;
+
+	[Property, Category( "Meta" )]
+	public float AimedProceduralViewmodelStrength { get; set; } = 0.1f;
+
+
 	//
 	// Shooting
 	//

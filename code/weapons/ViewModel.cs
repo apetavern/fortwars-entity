@@ -31,6 +31,7 @@ namespace Fortwars
 		private bool activated;
 
 		private Vector3 ShootOffset { get; set; }
+		private Rotation ShootRotation { get; set; }
 		private FortwarsWeapon Weapon { get; set; }
 
 		public ViewModel( FortwarsWeapon weapon )
@@ -46,6 +47,7 @@ namespace Fortwars
 			{
 				float strength = 16f;
 				ShootOffset += Vector3.Backward * strength;
+				ShootRotation *= Rotation.FromPitch( -strength );
 			}
 		}
 
@@ -169,30 +171,41 @@ namespace Fortwars
 			verticalDelta *= (1.0f - System.MathF.Abs( viewDown.Cross( Vector3.Down ).y ));
 			pitchDelta -= verticalDelta * 1;
 
-			float aimingMultiplier = 1.0f;
-
-			if ( Weapon != null && Weapon.IsAiming )
-				aimingMultiplier = 0.1f;
-
 			var offset = CalcSwingOffset( pitchDelta, yawDelta );
 			offset += CalcBobbingOffset( playerVelocity, bobCycleTime );
-			offset += ShootOffset;
-
 			if ( Owner.GroundEntity == null )
 			{
 				offset += new Vector3( 0, 0, -2.5f );
 				newPitch -= 2.5f;
 			}
 
-			offset *= aimingMultiplier;
+			offset *= (Weapon?.IsAiming ?? false) ? 0.1f : 1.0f;
 
-			Vector2 maskOffset = new Vector2( offset.y, offset.z ) * 0.1f * (10 * offset.x + 1f);
-			SceneObject.SetValue( "maskOffset", new Vector2( maskOffset.x, maskOffset.y ) );
+			float offsetMultiplier = 1.0f;
+			float rotationMultiplier = 1.0f;
+
+			if ( Weapon != null )
+			{
+				rotationMultiplier = Weapon.WeaponAsset.ProceduralViewmodelStrength;
+				offsetMultiplier = Weapon.WeaponAsset.ProceduralViewmodelStrength;
+
+				if ( Weapon.IsAiming )
+				{
+					rotationMultiplier = Weapon.WeaponAsset.AimedProceduralViewmodelStrength;
+					offsetMultiplier = Weapon.WeaponAsset.AimedProceduralViewmodelStrength;
+				}
+			}
+			offset += ShootOffset * offsetMultiplier;
+			var rotationOffset = ShootRotation * rotationMultiplier;
 
 			TargetPos += offset;
+			TargetRot *= rotationOffset;
 
 			lastPitch = newPitch;
 			lastYaw = newYaw;
+
+			Vector2 maskOffset = new Vector2( offset.y, offset.z ) * 0.1f * (10 * offset.x + 1f);
+			SceneObject.SetValue( "maskOffset", new Vector2( maskOffset.x, maskOffset.y ) );
 
 			return true;
 		}
@@ -216,6 +229,7 @@ namespace Fortwars
 		private bool DoShootOffset()
 		{
 			ShootOffset = ShootOffset.LerpTo( Vector3.Zero, 20f * Time.Delta );
+			ShootRotation = Rotation.Lerp( ShootRotation, Rotation.Identity, 20f * Time.Delta );
 
 			return true;
 		}

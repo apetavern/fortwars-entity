@@ -18,6 +18,8 @@
 		6 : "Melee Weapons"
 	]
 	userendertarget(boolean) { group = "Meta" } : "Use Render Target" : 0 : ""
+	proceduralviewmodelstrength(float) { group = "Meta" } : "Procedural Viewmodel Strength" : "1" : ""
+	aimedproceduralviewmodelstrength(float) { group = "Meta" } : "Aimed Procedural Viewmodel Strength" : "0.1" : ""
 	firemode(choices) { group = "Shooting" } : "Fire Mode" : 0 : "" =
 	[
 		0 : "Burst"

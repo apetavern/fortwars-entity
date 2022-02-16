@@ -43,5 +43,7 @@
 		fireparticles = resource:"particles/muzzleflash/fw_muzzleflash.vpcf"
 		tracerparticles = resource:"particles/tracer_large.vpcf"
 		buildingdamagemultiplier = 0.25
+		proceduralviewmodelstrength = 1.0
+		aimedproceduralviewmodelstrength = 4.0
 	}
 }
