@@ -31,7 +31,7 @@ namespace Fortwars
 
 			health.Text = $"{block.Health.CeilToInt()} / {block.MaxHealth.CeilToInt()}";
 			inner.Style.Width = Length.Fraction( block.Health / block.MaxHealth );
-			owner.Text = $"Owned by {block.Client.Name}";
+			owner.Text = $"Owned by {block.Client?.Name ?? "(disconnected)"}";
 
 			Scale = 2.0f;
 			WorldScale = 0.5f;
