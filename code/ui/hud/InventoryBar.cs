@@ -44,7 +44,7 @@ namespace Fortwars
 
 			inventoryIcon.TargetEnt = ent;
 
-			if ( ent is FortwarsWeapon weapon )
+			if ( ent is FortwarsWeapon weapon && weapon != null && weapon.WeaponAsset != null )
 			{
 				inventoryIcon.Label.Text = weapon.WeaponAsset.WeaponName;
 				inventoryIcon.AmmoLabel.Text = $"{weapon.CurrentClip} / {weapon.ReserveAmmo}";
