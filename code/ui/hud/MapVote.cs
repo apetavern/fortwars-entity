@@ -20,6 +20,14 @@ namespace Fortwars
 				AddChild( mapPanel );
 			}
 		}
+
+		public override void Tick()
+		{
+			var game = Game.Instance;
+			if ( game == null ) return;
+
+			SetClass( "show", game.Round is VoteRound );
+		}
 	}
 
 	public class MapVotePanel : Panel
