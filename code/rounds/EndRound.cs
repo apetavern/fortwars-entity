@@ -3,7 +3,7 @@
 	public partial class EndRound : BaseRound
 	{
 		public override string RoundName => "Game Over";
-		public override int RoundDuration => 15;
+		public override int RoundDuration => 8;
 
 		protected override void OnStart()
 		{
@@ -12,11 +12,8 @@
 
 		protected override void OnTimeUp()
 		{
-			// Eventually, we will map vote so resetting this will be redundant.
-			Game.Instance.BlueWins = 0;
-			Game.Instance.RedWins = 0;
 			Game.Instance.WinningTeam = Team.Invalid;
-			Game.Instance.ChangeRound( new BuildRound() );
+			Game.Instance.ChangeRound( new VoteRound() );
 		}
 	}
 }

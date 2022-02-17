@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System.Collections.Generic;
 
 namespace Fortwars
 {
@@ -16,6 +17,19 @@ namespace Fortwars
 		[Net] public int RedWins { get; set; } = 0;
 
 		[Net] public Team WinningTeam { get; set; } = Team.Invalid;
+
+		public struct MapVote
+		{
+			public int MapIndex { get; set; }
+			public long PlayerId { get; set; }
+			public MapVote( int mapIndex, long playerId )
+			{
+				MapIndex = mapIndex;
+				PlayerId = playerId;
+			}
+		}
+
+		[Net] public IList<MapVote> MapVotes { get; set; }
 
 		public void ChangeRound( BaseRound round )
 		{
@@ -39,6 +53,31 @@ namespace Fortwars
 			{
 				ChangeRound( new LobbyRound() );
 			}
+		}
+
+		[ServerCmd( "vote_map" )]
+		public static void VoteMap( int index )
+		{
+			var playerId = ConsoleSystem.Caller.PlayerId;
+			var mapVotes = Game.Instance?.MapVotes;
+
+			foreach ( var vote in mapVotes )
+			{
+				if ( vote.PlayerId == playerId ) return;
+			}
+
+			Game.Instance?.MapVotes.Add( new MapVote( index, playerId ) );
+		}
+
+		public static string[] GetMaps()
+		{
+			var packageTask = Package.Fetch( Global.GameIdent, true ).ContinueWith( t =>
+			{
+				var package = t.Result;
+				return package.GameConfiguration.MapList.ToArray();
+			} );
+
+			return packageTask.Result;
 		}
 	}
 }
