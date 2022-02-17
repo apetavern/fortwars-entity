@@ -4,6 +4,8 @@ namespace Fortwars
 {
 	public partial class FortwarsPlayer : Sandbox.Player
 	{
+		[Net] public string Killer { get; set; }
+
 		public DamageInfo LastDamage { get; private set; }
 		public Clothing.Container Clothing = new();
 
@@ -195,6 +197,7 @@ namespace Fortwars
 		public override void TakeDamage( DamageInfo info )
 		{
 			LastDamage = info;
+			Killer = info.Attacker.Client.Name;
 
 			if ( (HitboxIndex)info.HitboxIndex == HitboxIndex.Head )
 				info.Damage *= 2.0f;
