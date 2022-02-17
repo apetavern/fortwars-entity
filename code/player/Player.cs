@@ -197,7 +197,6 @@ namespace Fortwars
 		public override void TakeDamage( DamageInfo info )
 		{
 			LastDamage = info;
-			Killer = info.Attacker.Client.Name;
 
 			if ( (HitboxIndex)info.HitboxIndex == HitboxIndex.Head )
 				info.Damage *= 2.0f;
@@ -206,6 +205,8 @@ namespace Fortwars
 			{
 				if ( attacker.TeamID == this.TeamID )
 					return; // No team damage
+
+				Killer = attacker.Client.Name;
 
 				// Note - sending this only to the attacker!
 				attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, ((float)Health).LerpInverse( 100, 0 ) );
