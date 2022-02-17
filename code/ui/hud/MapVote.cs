@@ -9,6 +9,8 @@ namespace Fortwars
 	{
 		public MapVote()
 		{
+			StyleSheet.Load( "ui/hud/MapVote.scss" );
+
 			string[] maps = Game.GetMaps();
 
 			for ( int i = 0; i < maps.Length; i++ )
@@ -38,8 +40,6 @@ namespace Fortwars
 
 		public MapVotePanel( string mapName, string backgroundImage, int index )
 		{
-			StyleSheet.Load( "ui/hud/MapVotePanel.scss" );
-
 			AddClass( "vote-panel" );
 
 			VoteCount = Add.Label( "0", "vote-count" );
