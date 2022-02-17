@@ -1,0 +1,59 @@
+﻿@import "/ui/_Common.scss";
+
+MapVotePanel {
+    background-color: $gray-800;
+    padding: 10px 20px;
+    aspect-ratio: 1;
+    margin: 10px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 175px;
+    background-size: cover;
+    background-position: center;
+    background-image-tint: #333333;
+    text-stroke: 4px black;
+    box-shadow: 0 0 5px black;
+    border: 4px solid transparent;
+    transition: all 150ms ease;
+
+    &:intro {
+        opacity: 0;
+        transform: scale( 1.1 );
+        transition: all 150ms ease;
+    }
+
+    .vote-count {
+        font-size: 64px;
+    }
+
+    .vote-subtext {
+        margin-bottom: 20px;
+    }
+
+    .map-name {
+        text-align: center;
+    }
+
+    &:not(.disabled) {
+        cursor: pointer;
+
+        &:hover {
+            transform: scale( 1.1 );
+            box-shadow: 0 0 50px rgba( $accent, 0.2 );
+            border: 4px solid $accent;
+            z-index: 1;
+        }
+
+        &.clicked {
+            transform: scale( 1.25 );
+        }
+    }
+
+    &.voted-for {
+        background-image-tint: $accent;
+    }
+}
