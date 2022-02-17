@@ -24,8 +24,8 @@
 		extraammo = 90
 		reloadtime = 3.0
 		postreloadtime = 0.5
-		maxdamage = 25.0
-		mindamage = 15.0
+		maxdamage = 19.0
+		mindamage = 10.0
 		damagedropoffdistance = 512
 		headshotmultiplier = 1.5
 		kickbacksize = 1.5
@@ -43,5 +43,7 @@
 		fireparticles = resource:"particles/muzzleflash/fw_muzzleflash.vpcf"
 		tracerparticles = resource:"particles/tracer_large.vpcf"
 		buildingdamagemultiplier = 0.25
+		proceduralviewmodelstrength = 1.0
+		aimedproceduralviewmodelstrength = 0.1
 	}
 }
