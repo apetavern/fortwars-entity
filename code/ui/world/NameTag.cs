@@ -27,7 +27,7 @@ namespace Fortwars
 
 			healthPanel = Add.Panel( "health-bar" );
 
-			Vector2 size = new Vector2( 750, 200 );
+			Vector2 size = new Vector2( 750, 150 );
 			PanelBounds = new Rect( -(size / 2).x, -(size / 2).y, size.x, size.y );
 		}
 	}

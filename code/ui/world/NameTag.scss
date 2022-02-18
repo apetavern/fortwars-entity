@@ -11,7 +11,7 @@ NameTag {
     }
 
     .inner {
-        height: 80%;
+        height: 85%;
         width: 100%;
         background-color: rgba( $background, 0.5 );
         border-radius: 2px;
@@ -21,7 +21,7 @@ NameTag {
 
         label.title {
             text-align: center;
-            font-size: 40px;
+            font-size: 32px;
         }
 
         .avatar {
@@ -41,7 +41,7 @@ NameTag {
         position: absolute;
         left: 0;
         bottom: 0px;
-        height: 15%;
+        height: 10%;
         background: linear-gradient( to right, #02F049, #02B036 );
     }
 }
