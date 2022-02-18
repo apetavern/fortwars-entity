@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System;
 using System.ComponentModel;
 
 namespace Fortwars;
@@ -44,20 +45,25 @@ public class WeaponAsset : Asset
 	[Property, Category( "Meta" )]
 	public float AimedProceduralViewmodelStrength { get; set; } = 0.1f;
 
+	//
+	// TODO: No flag support in inspector?
+	//
+	public struct WeaponFlags
+	{
+		public bool AutomaticFire { get; set; }
+		public bool UseProjectile { get; set; }
+		public bool ContinuousLoading { get; set; }
+		public bool UseRenderTarget { get; set; }
+		public bool ShotgunAmmo { get; set; }
+	}
+
+	[Property( Title = "Weapon Flags" ), Category( "Meta" )]
+	public WeaponFlags Flags { get; set; }
+
 
 	//
 	// Shooting
 	//
-	public enum FireModes : int
-	{
-		Burst,
-		Single,
-		SemiAuto,
-		BoltAction
-	}
-
-	[Property, Category( "Shooting" )]
-	public FireModes FireMode { get; set; }
 
 	[Property, Category( "Shooting" )]
 	public float RPM { get; set; } = 600;
@@ -83,8 +89,6 @@ public class WeaponAsset : Asset
 	//
 	// Accuracy
 	//
-	[Property, Category( "Accuracy" )]
-	public bool FirstShotAlwaysAccurate { get; set; } = true;
 
 	[Property, Category( "Accuracy" )]
 	public float Spread { get; set; } = 0.1f;
@@ -144,21 +148,6 @@ public class WeaponAsset : Asset
 	public float BuildingDamageMultiplier { get; set; } = 1.0f;
 
 	//
-	// View kick
-	//
-	[Property, Category( "View Kick" )]
-	public float KickbackSize { get; set; } = 1f;
-
-	[Property, Category( "View Kick" )]
-	public float KickbackLength { get; set; } = 1f;
-
-	[Property, Category( "View Kick" )]
-	public float KickbackSpeed { get; set; } = 1f;
-
-	[Property, Category( "View Kick" )]
-	public float KickbackRotation { get; set; } = 0.6f;
-
-	//
 	// Effects
 	//
 	[Property, Category( "Effects" ), FGDType( "sound" )]
@@ -173,8 +162,6 @@ public class WeaponAsset : Asset
 	//
 	// Projectile
 	//
-	[Property, Category( "Projectile" )]
-	public bool UseProjectile { get; set; } = false;
 
 	[Property, Category( "Projectile" ), ResourceType( "vmdl" )]
 	public string ProjectileModel { get; set; }

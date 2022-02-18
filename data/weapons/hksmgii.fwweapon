@@ -7,7 +7,6 @@
 		viewmodel = resource:"models/weapons/hksmgii/hksmgii_v.vmdl"
 		movementspeedmultiplier = 0.95
 		holdtype = "2"
-		firemode = "2"
 		rpm = 800.0
 		firstshotdelay = 0.0
 		shotdelay = 0.0
@@ -15,7 +14,6 @@
 		shotcount = 1
 		recoilx = -0.1
 		recoily = -0.25
-		firstshotalwaysaccurate = true
 		spread = 0.1
 		spreadshotincrease = 0.05
 		spreadchangetime = 4.0
@@ -28,12 +26,7 @@
 		mindamage = 10.0
 		damagedropoffdistance = 512
 		headshotmultiplier = 1.5
-		kickbacksize = 1.5
-		kickbacklength = 1.0
-		kickbackspeed = 1.5
-		kickbackrotation = 0.9
 		firesound = "rust_smg.shoot"
-		useprojectile = false
 		projectilemodel = resource:""
 		projectilespeed = 1.0
 		aimposition = [ -10.0, 19.075, 2.5 ]
@@ -45,5 +38,10 @@
 		buildingdamagemultiplier = 0.25
 		proceduralviewmodelstrength = 1.0
 		aimedproceduralviewmodelstrength = 0.1
+		flags = 
+		{
+			automaticfire = true
+			shotgunammo = false
+		}
 	}
 }

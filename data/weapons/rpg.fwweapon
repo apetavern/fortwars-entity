@@ -7,7 +7,6 @@
 		viewmodel = resource:"models/weapons/rpg/rpg_v.vmdl"
 		movementspeedmultiplier = 0.75
 		holdtype = "2"
-		firemode = "1"
 		rpm = 120.0
 		firstshotdelay = 0.0
 		shotdelay = 0.0
@@ -15,7 +14,6 @@
 		shotcount = 1
 		recoilx = 0.0
 		recoily = -2.0
-		firstshotalwaysaccurate = true
 		spread = 0.1
 		spreadshotincrease = 0.05
 		spreadchangetime = 0.01
@@ -28,12 +26,7 @@
 		mindamage = 15.0
 		damagedropoffdistance = 256
 		headshotmultiplier = 1.5
-		kickbacksize = 1.0
-		kickbacklength = 1.0
-		kickbackspeed = 1.0
-		kickbackrotation = 0.6
 		firesound = "rust_pumpshotgun.shootdouble"
-		useprojectile = true
 		projectilemodel = resource:"models/weapons/rpg/rpgrocket.vmdl"
 		projectilespeed = 1000.0
 		userendertarget = false
@@ -43,5 +36,13 @@
 		fireparticles = resource:"particles/flash_medium.vpcf"
 		tracerparticles = resource:"particles/tracer_large.vpcf"
 		buildingdamagemultiplier = 2.0
+		proceduralviewmodelstrength = 1.0
+		aimedproceduralviewmodelstrength = 0.1
+		flags = 
+		{
+			automaticfire = false
+			continuousloading = true
+			useprojectile = true
+		}
 	}
 }

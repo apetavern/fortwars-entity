@@ -6,7 +6,6 @@
 		worldmodel = resource:"models/weapons/aiax50/aiax50_w.vmdl"
 		viewmodel = resource:"models/weapons/aiax50/aiax50_v.vmdl"
 		movementspeedmultiplier = 0.75
-		firemode = "3"
 		rpm = 60.0
 		firstshotdelay = 0.0
 		shotdelay = 0.0
@@ -14,7 +13,6 @@
 		shotcount = 1
 		recoilx = 0.4
 		recoily = -3.0
-		firstshotalwaysaccurate = true
 		spread = 0.0
 		spreadshotincrease = 1.0
 		spreadchangetime = 4.0
@@ -27,13 +25,8 @@
 		mindamage = 50.0
 		damagedropoffdistance = 100000
 		headshotmultiplier = 2.0
-		kickbacksize = 3.0
-		kickbacklength = 1.0
-		kickbackspeed = 1.5
-		kickbackrotation = 0.8
 		firesound = "rust_pumpshotgun.shootdouble"
 		holdtype = "2"
-		useprojectile = false
 		projectilemodel = resource:""
 		projectilespeed = 1.0
 		aimposition = [ -20.0, 29.7, 8.3 ]
@@ -43,5 +36,11 @@
 		fireparticles = resource:"particles/flash_medium.vpcf"
 		tracerparticles = resource:"particles/tracer_large.vpcf"
 		buildingdamagemultiplier = 0.5
+		proceduralviewmodelstrength = 1.0
+		aimedproceduralviewmodelstrength = 0.1
+		flags = 
+		{
+			userendertarget = true
+		}
 	}
 }

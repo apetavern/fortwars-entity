@@ -1,4 +1,16 @@
 //
+// Fortwars.WeaponAsset+WeaponFlags
+//
+@struct = Fortwars_WeaponAsset_WeaponFlags
+[
+	automaticfire(boolean) : "Automatic Fire" : 0 : ""
+	useprojectile(boolean) : "Use Projectile" : 0 : ""
+	continuousloading(boolean) : "Continuous Loading" : 0 : ""
+	userendertarget(boolean) : "Use Render Target" : 0 : ""
+	shotgunammo(boolean) : "Shotgun Ammo" : 0 : ""
+]
+
+//
 // Fortwars.WeaponAsset
 //
 @BaseClass = fwweapon : ""
@@ -20,13 +32,7 @@
 	userendertarget(boolean) { group = "Meta" } : "Use Render Target" : 0 : ""
 	proceduralviewmodelstrength(float) { group = "Meta" } : "Procedural Viewmodel Strength" : "1" : ""
 	aimedproceduralviewmodelstrength(float) { group = "Meta" } : "Aimed Procedural Viewmodel Strength" : "0.1" : ""
-	firemode(choices) { group = "Shooting" } : "Fire Mode" : 0 : "" =
-	[
-		0 : "Burst"
-		1 : "Single"
-		2 : "Semi Auto"
-		3 : "Bolt Action"
-	]
+	flags(struct:Fortwars_WeaponAsset_WeaponFlags) { group = "Meta" } : "Weapon Flags" :  : ""
 	rpm(float) { group = "Shooting" } : "RPM" : 600 : ""
 	firstshotdelay(float) { group = "Shooting" } : "First Shot Delay" : 0 : ""
 	shotdelay(float) { group = "Shooting" } : "Shot Delay" : 0 : ""
@@ -34,7 +40,6 @@
 	shotcount(integer) { group = "Shooting" } : "Shot Count" : 1 : ""
 	recoilx(float) { group = "Shooting" } : "Recoil X" : "0.2" : ""
 	recoily(float) { group = "Shooting" } : "Recoil Y" : "1" : ""
-	firstshotalwaysaccurate(boolean) { group = "Accuracy" } : "First Shot Always Accurate" : 1 : ""
 	spread(float) { group = "Accuracy" } : "Spread" : "0.1" : ""
 	spreadshotincrease(float) { group = "Accuracy" } : "Spread Shot Increase" : "0.05" : ""
 	spreadchangetime(float) { group = "Accuracy" } : "Spread Change Time" : "0.01" : ""
@@ -51,14 +56,9 @@
 	damagedropoffdistance(integer) { group = "Damage" } : "Damage Drop Off Distance" : 256 : ""
 	headshotmultiplier(float) { group = "Damage" } : "Headshot Multiplier" : "1.5" : ""
 	buildingdamagemultiplier(float) { group = "Damage" } : "Building Damage Multiplier" : "1" : ""
-	kickbacksize(float) { group = "View Kick" } : "Kickback Size" : "1" : ""
-	kickbacklength(float) { group = "View Kick" } : "Kickback Length" : "1" : ""
-	kickbackspeed(float) { group = "View Kick" } : "Kickback Speed" : "1" : ""
-	kickbackrotation(float) { group = "View Kick" } : "Kickback Rotation" : "0.6" : ""
 	firesound(sound) { group = "Effects" } : "Fire Sound" : "rust_pistol.shoot" : ""
 	fireparticles(resource:vpcf) { group = "Effects" } : "Fire Particles" : "particles/flash_medium.vpcf" : ""
 	tracerparticles(resource:vpcf) { group = "Effects" } : "Tracer Particles" : "particles/tracer_large.vpcf" : ""
-	useprojectile(boolean) { group = "Projectile" } : "Use Projectile" : 0 : ""
 	projectilemodel(resource:vmdl) { group = "Projectile" } : "Projectile Model" :  : ""
 	projectilespeed(float) { group = "Projectile" } : "Projectile Speed" : 1 : ""
 ]

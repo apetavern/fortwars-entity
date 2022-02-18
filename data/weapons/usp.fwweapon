@@ -6,7 +6,6 @@
 		worldmodel = resource:"models/weapons/hkusp/hkusp_w.vmdl"
 		viewmodel = resource:"models/weapons/hkusp/hkusp_v.vmdl"
 		movementspeedmultiplier = 0.95
-		firemode = "1"
 		rpm = 600.0
 		firstshotdelay = 0.0
 		shotdelay = 0.0
@@ -14,7 +13,6 @@
 		shotcount = 1
 		recoilx = 0.05
 		recoily = -0.1
-		firstshotalwaysaccurate = true
 		spread = 0.0
 		spreadshotincrease = 0.25
 		spreadchangetime = 2.0
@@ -27,13 +25,8 @@
 		mindamage = 20.0
 		damagedropoffdistance = 512
 		headshotmultiplier = 1.5
-		kickbacksize = 1.0
-		kickbacklength = 1.0
-		kickbackspeed = 1.0
-		kickbackrotation = 0.6
 		firesound = "rust_pistol.shoot"
 		holdtype = "1"
-		useprojectile = false
 		projectilemodel = resource:""
 		projectilespeed = 1.0
 		aimposition = [ -20.0, 25.25, 4.0 ]
@@ -43,5 +36,11 @@
 		fireparticles = resource:"particles/muzzleflash/fw_muzzleflash.vpcf"
 		tracerparticles = resource:"particles/tracer_large.vpcf"
 		buildingdamagemultiplier = 0.25
+		proceduralviewmodelstrength = 1.0
+		aimedproceduralviewmodelstrength = 0.1
+		flags = 
+		{
+			automaticfire = false
+		}
 	}
 }

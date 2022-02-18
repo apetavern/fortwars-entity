@@ -22,8 +22,9 @@ public partial class FortwarsWeapon : Carriable
 	//
 	// Realtime variables
 	//
-	private float spread = 0;
-	private Vector2 recoil = 0;
+	public float spread { get; set; }
+	public Vector2 recoil { get; set; }
+
 	private TimeSince TimeSinceReload { get; set; }
 	public bool IsAiming => Input.Down( InputButton.Attack2 );
 
@@ -66,9 +67,9 @@ public partial class FortwarsWeapon : Carriable
 
 		if ( IsReloading )
 		{
-			if ( WeaponAsset.UseProjectile )
+			if ( WeaponAsset.Flags.ContinuousLoading )
 			{
-				OnProjectileReload();
+				OnContinuousReload();
 			}
 			else if ( TimeSinceReload > WeaponAsset.ReloadTime )
 			{
@@ -175,7 +176,7 @@ public partial class FortwarsWeapon : Carriable
 		anim.SetParam( "holdtype_handedness", 0 );
 	}
 
-	private void OnProjectileReload()
+	private void OnContinuousReload()
 	{
 		var amount = Math.Min( ReserveAmmo, WeaponAsset.MaxAmmo - CurrentClip );
 
@@ -216,7 +217,7 @@ public partial class FortwarsWeapon : Carriable
 		if ( !Owner.IsValid() )
 			return false;
 
-		if ( WeaponAsset.FireMode == WeaponAsset.FireModes.SemiAuto )
+		if ( WeaponAsset.Flags.AutomaticFire )
 		{
 			if ( !Input.Down( InputButton.Attack1 ) )
 				return false;
@@ -261,9 +262,6 @@ public partial class FortwarsWeapon : Carriable
 		ViewModelEntity?.SetAnimBool( "endreload", true );
 		IsReloading = false;
 
-		recoil += new Vector2( WeaponAsset.RecoilY, WeaponAsset.RecoilX );
-		spread += WeaponAsset.SpreadShotIncrease;
-
 		ShootEffects();
 		PlaySound( WeaponAsset.FireSound );
 
@@ -287,9 +285,6 @@ public partial class FortwarsWeapon : Carriable
 	/// </summary>
 	public virtual void ShootBullet()
 	{
-		if ( !TakeAmmo() )
-			return;
-
 		ShootEffects();
 		PlaySound( WeaponAsset.FireSound );
 
@@ -300,9 +295,6 @@ public partial class FortwarsWeapon : Carriable
 			forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * (WeaponAsset.Spread + spread) * 0.25f;
 			forward = forward.Normal;
 		}
-
-		recoil += new Vector2( WeaponAsset.RecoilY, WeaponAsset.RecoilX );
-		spread += WeaponAsset.SpreadShotIncrease;
 
 		//
 		// ShootBullet is coded in a way where we can have bullets pass through shit
@@ -337,6 +329,12 @@ public partial class FortwarsWeapon : Carriable
 		//
 		Rand.SetSeed( Time.Tick );
 
+		if ( WeaponAsset.Flags.ShotgunAmmo )
+		{
+			if ( !TakeAmmo() )
+				return;
+		}
+
 		for ( int i = 0; i < WeaponAsset.ShotCount; ++i )
 		{
 			if ( i == 0 && WeaponAsset.FirstShotDelay > 0 )
@@ -348,12 +346,18 @@ public partial class FortwarsWeapon : Carriable
 				await Task.DelayRealtimeSeconds( WeaponAsset.ShotDelay );
 			}
 
-			if ( WeaponAsset.UseProjectile )
+			if ( WeaponAsset.Flags.UseProjectile )
 			{
 				ShootProjectile();
 			}
 			else
 			{
+				if ( !WeaponAsset.Flags.ShotgunAmmo )
+				{
+					if ( !TakeAmmo() )
+						return;
+				}
+
 				ShootBullet();
 			}
 		}
@@ -395,17 +399,13 @@ public partial class FortwarsWeapon : Carriable
 	{
 		Host.AssertClient();
 
-		Particles.Create( WeaponAsset.FireParticles, EffectEntity, "muzzle" );
-
 		if ( IsLocalPawn )
 		{
-			//new Sandbox.ScreenShake.Perlin(
-			//	WeaponAsset.KickbackLength * (IsAiming ? 0.5f : 1.0f),
-			//	WeaponAsset.KickbackSpeed * (IsAiming ? 0.5f : 1.0f),
-			//	WeaponAsset.KickbackSize * (IsAiming ? 0.5f : 1.0f),
-			//	WeaponAsset.KickbackRotation * (IsAiming ? 0.5f : 1.0f)
-			//);
+			recoil += new Vector2( WeaponAsset.RecoilY, WeaponAsset.RecoilX );
+			spread += WeaponAsset.SpreadShotIncrease;
 		}
+
+		Particles.Create( WeaponAsset.FireParticles, EffectEntity, "muzzle" );
 
 		(ViewModelEntity as ViewModel)?.OnFire( IsAiming );
 
@@ -436,8 +436,5 @@ public partial class FortwarsWeapon : Carriable
 		return baseDamage;
 	}
 
-	public float GetCrosshairSize()
-	{
-		return (384 * (spread + WeaponAsset.Spread)).Clamp( 16, 512 );
-	}
+	public float GetCrosshairSize() => (384 * (spread + WeaponAsset.Spread)).Clamp( 16, 512 );
 }

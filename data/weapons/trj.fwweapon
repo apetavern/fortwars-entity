@@ -6,15 +6,13 @@
 		worldmodel = resource:"models/weapons/trj/trj_w.vmdl"
 		viewmodel = resource:"models/weapons/trj/trj_v.vmdl"
 		movementspeedmultiplier = 0.95
-		firemode = "1"
 		rpm = 300.0
 		firstshotdelay = 0.0
 		shotdelay = 0.0
 		range = 16384
-		shotcount = 1
+		shotcount = 2
 		recoilx = 0.3
 		recoily = -2.0
-		firstshotalwaysaccurate = true
 		spread = 0.01
 		spreadshotincrease = 0.1
 		spreadchangetime = 1.0
@@ -27,13 +25,8 @@
 		mindamage = 30.0
 		damagedropoffdistance = 1024
 		headshotmultiplier = 2.5
-		kickbacksize = 2.0
-		kickbacklength = 1.0
-		kickbackspeed = 1.5
-		kickbackrotation = 4.0
 		firesound = "rust_pumpshotgun.shoot"
 		holdtype = "1"
-		useprojectile = false
 		projectilemodel = resource:""
 		projectilespeed = 1.0
 		aimposition = [ -20.0, 27.4, 4.25 ]
@@ -45,5 +38,9 @@
 		buildingdamagemultiplier = 0.25
 		proceduralviewmodelstrength = 1.0
 		aimedproceduralviewmodelstrength = 4.0
+		flags = 
+		{
+			shotgunammo = true
+		}
 	}
 }
