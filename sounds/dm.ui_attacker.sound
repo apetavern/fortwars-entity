@@ -2,14 +2,14 @@
 {
 	data = 
 	{
-		volume = 1.0
+		volume = 0.4
 		sounds = 
 		[
-			"sounds/diagnostics/bell.vsnd",
+			"sounds/ui.hitmarker.mp3",
 		]
-		VolumeRandom = 0.0
+		VolumeRandom = 0.1
 		Pitch = 1.0
-		PitchRandom = 0.0
+		PitchRandom = 0.05
 		DistanceMax = 1000.0
 		UI = true
 		selectionmode = "3"
