@@ -5,7 +5,7 @@
 		weaponname = "UTS 15"
 		worldmodel = resource:"models/weapons/uts15/uts15_w.vmdl"
 		viewmodel = resource:"models/weapons/uts15/uts15_v.vmdl"
-		movementspeedmultiplier = 0.75
+		movementspeedmultiplier = 0.85
 		rpm = 50.0
 		firstshotdelay = 0.0
 		shotdelay = 0.0
@@ -21,8 +21,8 @@
 		extraammo = 30
 		reloadtime = 0.5
 		postreloadtime = 0.5
-		maxdamage = 25.0
-		mindamage = 20.0
+		maxdamage = 10.0
+		mindamage = 6.0
 		damagedropoffdistance = 512
 		headshotmultiplier = 1.5
 		firesound = "rust_pumpshotgun.shoot"
