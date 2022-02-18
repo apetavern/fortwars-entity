@@ -182,7 +182,7 @@
 								{
 									TypeName = "shake"
 									Int = 0
-									Float = 0.2
+									Float = 0.55
 									Vector = [ 0.0, 0.0, 0.0 ]
 									StringData = ""
 								}
@@ -251,7 +251,7 @@
 						source_filename = "models/weapons/uts15/uts15_v.fbx"
 						start_frame = 69
 						end_frame = 79
-						framerate = -1.0
+						framerate = 15.0
 						take = 0
 						reverse = false
 					},
@@ -268,7 +268,7 @@
 								{
 									TypeName = "shake"
 									Int = 0
-									Float = 0.2
+									Float = 0.5
 									Vector = [ 0.0, 0.0, 0.0 ]
 									StringData = ""
 								}
@@ -319,8 +319,8 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						source_filename = "models/weapons/uts15/uts15_v.fbx"
-						start_frame = 8
-						end_frame = 10
+						start_frame = 94
+						end_frame = 109
 						framerate = 15.0
 						take = 0
 						reverse = false
