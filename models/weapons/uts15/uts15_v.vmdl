@@ -182,7 +182,7 @@
 								{
 									TypeName = "shake"
 									Int = 0
-									Float = 0.55
+									Float = 1.0
 									Vector = [ 0.0, 0.0, 0.0 ]
 									StringData = ""
 								}
@@ -268,7 +268,7 @@
 								{
 									TypeName = "shake"
 									Int = 0
-									Float = 0.5
+									Float = 0.8
 									Vector = [ 0.0, 0.0, 0.0 ]
 									StringData = ""
 								}
@@ -276,7 +276,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_CL_PLAYSOUND"
-								event_frame = 6
+								event_frame = 7
 								event_keys = 
 								{
 									name = "rust_pumpshotgun.insert"
