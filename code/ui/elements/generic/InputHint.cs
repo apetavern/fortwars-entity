@@ -50,7 +50,7 @@ namespace Fortwars
 
 			ActionLabel.SetText( Text );
 
-			Texture glyphTexture = Input.GetGlyph( Button, InputGlyphSize.Small, GlyphStyle.Light.WithSolidABXY().WithNeutralColorABXY() );
+			Texture glyphTexture = Input.GetGlyph( Button, InputGlyphSize.Small, GlyphStyle.Knockout.WithSolidABXY().WithNeutralColorABXY() );
 			if ( glyphTexture != null )
 			{
 				Glyph.Texture = glyphTexture;
