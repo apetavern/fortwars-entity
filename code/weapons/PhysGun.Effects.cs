@@ -49,6 +49,8 @@ public partial class PhysGun
 
 	float DesiredDialPos;
 
+	bool DidFreeze;
+
 	public void UpdateViewmodel()
 	{
 		bool rotating = Input.Down( InputButton.Use );
@@ -79,9 +81,16 @@ public partial class PhysGun
 			{
 				DesiredDialPos += Rand.Float() * 0.15f * (1 + (Input.MouseDelta.Length / 20f));
 			}
+
+			DidFreeze = false;
 		}
 		else
 		{
+			if ( !Input.Down( InputButton.Attack1 ) && !DidFreeze )
+			{
+				ViewModelEntity?.SetAnimBool( "freeze", true );
+				DidFreeze = true;
+			}
 			DesiredDialPos = 0f;
 		}
 
