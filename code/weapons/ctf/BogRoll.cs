@@ -97,6 +97,28 @@ namespace Fortwars
 			}
 		}
 
+		[Event.Tick.Client]
+		public void ClientTick()
+		{
+			if ( RespawntimerStarted )
+			{
+				switch ( Team )
+				{
+					case Team.Invalid:
+						break;
+					case Team.Red:
+						DebugOverlay.Text( CollisionWorldSpaceCenter + Vector3.Up * 20f, "" + MathF.Ceiling( 15f - TimeSinceDropped ), Color.Red, 0, 500 );
+						break;
+					case Team.Blue:
+						DebugOverlay.Text( CollisionWorldSpaceCenter + Vector3.Up * 20f, "" + MathF.Ceiling( 15f - TimeSinceDropped ), Color.Blue, 0, 500 );
+						break;
+					default:
+						break;
+				}
+
+			}
+		}
+
 		public override void EndTouch( Entity other )
 		{
 			CantPickup = false;
