@@ -556,7 +556,7 @@
 						{
 							m_id = 315192404
 						}
-						m_position = [ -32.0, 256.0 ]
+						m_position = [ -192.0, 320.0 ]
 						m_bIsStartState = false
 						m_bIsEndtState = false
 						m_bIsPassthrough = false
@@ -613,7 +613,7 @@
 						{
 							m_id = 1412057085
 						}
-						m_position = [ 112.0, 256.0 ]
+						m_position = [ -48.0, 320.0 ]
 						m_bIsStartState = false
 						m_bIsEndtState = false
 						m_bIsPassthrough = false
@@ -635,10 +635,10 @@
 										m_bIsFinished = true
 									},
 								]
-								m_blendDuration = 0.2
+								m_blendDuration = 0.05
 								m_destState = 
 								{
-									m_id = 1920226664
+									m_id = 41620952
 								}
 								m_bReset = true
 								m_resetCycleOption = "Beginning"
@@ -663,7 +663,7 @@
 						{
 							m_id = 1094328426
 						}
-						m_position = [ 240.0, 256.0 ]
+						m_position = [ 80.0, 320.0 ]
 						m_bIsStartState = false
 						m_bIsEndtState = false
 						m_bIsPassthrough = false
@@ -713,7 +713,7 @@
 						{
 							m_id = 41620952
 						}
-						m_position = [ -48.0, 96.0 ]
+						m_position = [ 80.0, 144.0 ]
 						m_bIsStartState = false
 						m_bIsEndtState = false
 						m_bIsPassthrough = false
