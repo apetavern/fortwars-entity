@@ -7,7 +7,7 @@ namespace Fortwars
 	public partial class VoteRound : BaseRound
 	{
 		public override string RoundName => "Voting";
-		public override int RoundDuration => 12;
+		public override int RoundDuration => 20;
 
 		protected override void OnStart()
 		{
