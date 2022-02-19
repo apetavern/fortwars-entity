@@ -70,9 +70,9 @@ namespace Fortwars
 					HitEffects();
 				}
 
-				if ( tr.Entity is FortwarsBlock block && block.TeamID == player.TeamID )
+				if ( tr.Entity is FortwarsBlock block && block.TeamID == player.TeamID && block.IsValid )
 				{
-					block.Heal( 50, tr.EndPos );
+					block?.Heal( 50, tr.EndPos );
 					continue;
 				}
 
