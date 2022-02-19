@@ -263,7 +263,7 @@ public partial class FortwarsWeapon : Carriable
 		IsReloading = false;
 
 		ShootEffects();
-		PlaySound( WeaponAsset.FireSound );
+		PlaySound( WeaponAsset.FireSound ).SetVolume(0.5f);
 
 		if ( !IsServer )
 			return;
@@ -286,7 +286,7 @@ public partial class FortwarsWeapon : Carriable
 	public virtual void ShootBullet()
 	{
 		ShootEffects();
-		PlaySound( WeaponAsset.FireSound );
+		PlaySound( WeaponAsset.FireSound ).SetVolume( 0.25f );
 
 		var forward = Owner.EyeRotation.Forward;
 
