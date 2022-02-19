@@ -8,6 +8,8 @@ MapVote {
     height: 100%;
     justify-content: center;
     align-items: center;
+    background-color: rgba( $background, 0.9 );
+    backdrop-filter: blur( 20px );
 
     &.show {
         opacity: 1;

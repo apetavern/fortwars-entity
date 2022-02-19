@@ -4,7 +4,7 @@ ChatBox {
     position: absolute;
     bottom: 250px;
     left: $safe-area-x;
-    z-index: 100;
+    z-index: 99999999;
     flex-direction: column;
     width: 500px;
     font-size: 13px;
