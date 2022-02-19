@@ -12,6 +12,20 @@ namespace Fortwars
 		protected override void OnStart()
 		{
 			Log.Info( "Started Vote Round" );
+
+			Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( player =>
+			{
+				if ( player.LifeState != LifeState.Alive )
+					player.RespawnTimer = 0;
+			} );
+		}
+
+		public override void OnTick()
+		{
+			base.OnTick();
+
+			// Keep players alive during this round
+			Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( player => player.Health = 100 );
 		}
 
 		protected override void OnTimeUp()
@@ -20,6 +34,7 @@ namespace Fortwars
 			if ( game == null ) return;
 
 			Dictionary<int, int> voteCount = new();
+
 			foreach ( var vote in game.MapVotes )
 			{
 				if ( !voteCount.ContainsKey( vote.MapIndex ) )
@@ -32,6 +47,7 @@ namespace Fortwars
 				from entry in voteCount
 				orderby entry.Value descending
 				select entry;
+
 			if ( sortedMapVotePairs.Count() == 0 )
 			{
 				Global.ChangeLevel( Game.GetMaps()[0] );
