@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 namespace Fortwars
 {
+	// TODO: we shouldn't need a separate wheel for this; implement scrollability in RadialWheel
 	public partial class BuildWheelMetal : RadialWheel
 	{
 		public override Item[] Items => new Item[]
@@ -27,7 +28,8 @@ namespace Fortwars
 			{
 				return;
 			}
-			ConsoleSystem.Run( $"fw_spawn steel_{GetCurrentItem()?.Name}" );
+
+			Game.Spawn( $"steel_{GetCurrentItem()?.Name}" ); // ???
 			_ = ApplyShrinkEffect();
 		}
 

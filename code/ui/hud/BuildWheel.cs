@@ -29,7 +29,8 @@ namespace Fortwars
 			{
 				return;
 			}
-			ConsoleSystem.Run( $"fw_spawn {GetCurrentItem()?.Name}" );
+
+			Game.Spawn( GetCurrentItem()?.Name );
 			_ = ApplyShrinkEffect();
 		}
 
@@ -113,7 +114,7 @@ namespace Fortwars
 						ConsoleSystem.Run( $"fw_spawn 1x1x1" );
 					}
 				}
-				
+
 			}
 
 			Log.Trace( output );

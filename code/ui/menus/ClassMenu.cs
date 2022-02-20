@@ -74,7 +74,7 @@ namespace Fortwars
 		private void SetClass( string classId )
 		{
 			Delete();
-			ConsoleSystem.Run( $"fw_change_class {classId}" );
+			ChangeClass( classId );
 		}
 
 		class ClassInfo : Panel
