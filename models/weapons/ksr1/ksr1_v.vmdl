@@ -54,6 +54,24 @@
 						weight = 1.0
 						ignore_rotation = false
 					},
+					{
+						_class = "Attachment"
+						name = "scope_start"
+						parent_bone = ""
+						relative_origin = [ 29.597612, -22.69838, -4.506833 ]
+						relative_angles = [ 0.0, 3.433624, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "scope_end"
+						parent_bone = ""
+						relative_origin = [ 130.87851, -17.254026, -3.570212 ]
+						relative_angles = [ 0.0, 3.433624, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
 				]
 			},
 			{
@@ -127,6 +145,27 @@
 						start_frame = 14
 						end_frame = 14
 						framerate = 15.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "fire"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/ksr1/ksr1_v.fbx"
+						start_frame = 19
+						end_frame = 29
+						framerate = 120.0
 						take = 0
 						reverse = false
 					},

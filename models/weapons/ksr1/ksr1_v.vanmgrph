@@ -160,7 +160,7 @@
 						{
 							m_id = 1655781445
 						}
-						m_position = [ -208.0, -144.0 ]
+						m_position = [ 16.0, -240.0 ]
 						m_bIsStartState = true
 						m_bIsEndtState = false
 						m_bIsPassthrough = false
@@ -273,7 +273,7 @@
 										m_bIsFinished = true
 									},
 								]
-								m_blendDuration = 0.2
+								m_blendDuration = 0.0
 								m_destState = 
 								{
 									m_id = 1331867203
@@ -295,13 +295,13 @@
 						m_name = "fire"
 						m_childNodeID = 
 						{
-							m_id = 1527665568
+							m_id = 1327461086
 						}
 						m_stateID = 
 						{
 							m_id = 985482549
 						}
-						m_position = [ -208.0, -32.0 ]
+						m_position = [ -144.0, -80.0 ]
 						m_bIsStartState = false
 						m_bIsEndtState = false
 						m_bIsPassthrough = false
@@ -333,6 +333,28 @@
 				{
 					m_id = 633220884
 				}
+			}
+		},
+		{
+			key = 
+			{
+				m_id = 1327461086
+			}
+			value = 
+			{
+				_class = "CSequenceAnimNode"
+				m_sName = "Unnamed"
+				m_vecPosition = [ -240.0, 0.0 ]
+				m_nNodeID = 
+				{
+					m_id = 1327461086
+				}
+				m_networkMode = "ClientSimulate"
+				m_sNote = ""
+				m_tagSpans = [  ]
+				m_sequenceName = "fire"
+				m_playbackSpeed = 1.0
+				m_bLoop = false
 			}
 		},
 		{
