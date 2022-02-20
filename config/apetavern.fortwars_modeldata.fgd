@@ -1,0 +1,9 @@
+//
+// Fortwars.BlockNode
+//
+@ModelGameData = fw_block_node : "Defines data for each block type"
+[
+	name(string) : "Name" :  : ""
+	additionalhealth(integer) : "Additional Health" : 0 : ""
+]
+

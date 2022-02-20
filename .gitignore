@@ -28,7 +28,6 @@ _bakeresourcecache/
 *.vtex_c
 *.zip
 *.vpcf_c
-*.fgd
 *.vpost_c
 
 # Allowlist
