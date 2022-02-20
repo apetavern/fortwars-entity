@@ -27,7 +27,8 @@ namespace Fortwars
 
 		public void SpawnBlock( string output )
 		{
-			Game.Spawn( choices[output] );
+			if(choices.ContainsKey( output ) )
+				Game.Spawn( choices[output] );
 
 			Log.Trace( output );
 
