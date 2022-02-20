@@ -4,7 +4,7 @@
 	{
 		weaponname = "KSR1"
 		worldmodel = resource:"models/weapons/ksr1/ksr1_w.vmdl"
-		viewmodel = resource:"models/weapons/hksmgii/hksmgii_v.vmdl"
+		viewmodel = resource:"models/weapons/ksr1/ksr1_v.vmdl"
 		movementspeedmultiplier = 0.95
 		holdtype = "2"
 		rpm = 800.0
@@ -18,12 +18,12 @@
 		spreadshotincrease = 0.05
 		spreadchangetime = 4.0
 		aimaccuracymult = 1.0
-		maxammo = 45
+		maxammo = 30
 		extraammo = 90
 		reloadtime = 3.0
 		postreloadtime = 0.5
-		maxdamage = 19.0
-		mindamage = 10.0
+		maxdamage = 25.0
+		mindamage = 15.0
 		damagedropoffdistance = 512
 		headshotmultiplier = 1.5
 		firesound = "rust_smg.shoot"
