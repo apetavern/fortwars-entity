@@ -17,7 +17,7 @@ namespace Fortwars
 
 		public override List<string> CombatLoadout => new()
 		{
-			"fw:data/weapons/hksmgii.fwweapon",
+			"fw:data/weapons/ksr1.fwweapon",
 			"fw:data/weapons/trj.fwweapon",
 			"fw:data/weapons/rpg.fwweapon"
 		};
