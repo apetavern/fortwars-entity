@@ -1,0 +1,47 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		weaponname = "KSR1"
+		worldmodel = resource:"models/weapons/ksr1/ksr1_w.vmdl"
+		viewmodel = resource:"models/weapons/hksmgii/hksmgii_v.vmdl"
+		movementspeedmultiplier = 0.95
+		holdtype = "2"
+		rpm = 800.0
+		firstshotdelay = 0.0
+		shotdelay = 0.0
+		range = 16384
+		shotcount = 1
+		recoilx = -0.1
+		recoily = -0.25
+		spread = 0.1
+		spreadshotincrease = 0.05
+		spreadchangetime = 4.0
+		aimaccuracymult = 1.0
+		maxammo = 45
+		extraammo = 90
+		reloadtime = 3.0
+		postreloadtime = 0.5
+		maxdamage = 19.0
+		mindamage = 10.0
+		damagedropoffdistance = 512
+		headshotmultiplier = 1.5
+		firesound = "rust_smg.shoot"
+		projectilemodel = resource:""
+		projectilespeed = 1.0
+		aimposition = [ -10.0, 19.075, 2.5 ]
+		aimrotation = [ -2.0, -0.9, 3.0 ]
+		aimfovmult = 0.75
+		userendertarget = false
+		fireparticles = resource:"particles/muzzleflash/fw_muzzleflash.vpcf"
+		tracerparticles = resource:"particles/tracer_large.vpcf"
+		buildingdamagemultiplier = 0.25
+		proceduralviewmodelstrength = 1.0
+		aimedproceduralviewmodelstrength = 0.1
+		flags = 
+		{
+			automaticfire = true
+			shotgunammo = false
+		}
+	}
+}
