@@ -29,7 +29,6 @@ namespace Fortwars
 		{
 			Game.Spawn( choices[output] );
 
-
 			Log.Trace( output );
 
 			SpeechRecognition.Listen( ( output ) => SpawnBlock( output ), choices.Keys.ToArray() );//Not sure why but this is needed...
