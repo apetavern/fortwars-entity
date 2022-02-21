@@ -25,8 +25,8 @@ namespace Fortwars
 			// todo: start in Lobby round
 			ChangeRound( new BuildRound() );
 
-			//if ( IsClient )
-			//	Components.Add( new SpeechRecognitionComponent() );
+			if ( IsClient )
+				Components.Add( new SpeechRecognitionComponent() );
 		}
 
 		public async Task StartSecondTimer()
