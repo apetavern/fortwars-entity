@@ -24,16 +24,24 @@ namespace Fortwars
 		[Event.Tick.Client]
 		void Tick()
 		{
-			if (Game.Instance.Round is BuildRound )
+			if ( Game.Instance.Round is BuildRound )
 			{
 				if ( Input.Pressed( InputButton.Attack2 ) )
 				{
 					SpeechRecognition.Listen( ( output ) => SpawnBlock( output ), choices.Keys.ToArray() ); //Listen for speech
 				}
 
-				if(Input.Released( InputButton.Attack2 ) )
+				if ( Input.Released( InputButton.Attack2 ) )
 				{
-					wantstostop = true;
+					if ( !wantstostop )
+					{
+						wantstostop = true;
+					}
+					else
+					{
+						SpeechRecognition.Stop(); //Only fires second mouse2 release while it was still listening, reduces amount of accidental activations
+						wantstostop = false;
+					}
 				}
 			}
 		}
