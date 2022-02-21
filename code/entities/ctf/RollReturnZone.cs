@@ -23,10 +23,13 @@ namespace Fortwars
 
 			SetModel( "models/items/bogroll/roll_returnfield.vmdl" );
 
-			visuals = new ModelEntity();//Why the fuck do I need this?
+			visuals = new ModelEntity();//Why the fuck do I need this? Literally doesn't show up without this extra model ent??
 			visuals.SetModel( "models/items/bogroll/roll_returnfield.vmdl" );
 			visuals.Position = Position;
 			visuals.SetParent( this );
+			visuals.EnableShadowCasting = false;
+
+			EnableShadowCasting = false;
 
 			SetupPhysicsFromModel( PhysicsMotionType.Static );
 			CollisionGroup = CollisionGroup.Trigger;
