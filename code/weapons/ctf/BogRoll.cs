@@ -100,6 +100,8 @@ namespace Fortwars
 
 			if ( RespawntimerStarted && TimeSinceDropped > 15f )
 			{
+				PlaySound( "enemyflagreturned" );//Play sad flag return sounds
+
 				Delete();
 			}
 		}
