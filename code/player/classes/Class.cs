@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Fortwars
 {
@@ -20,12 +21,13 @@ namespace Fortwars
 			AssignLoadout( CombatLoadout, inventory );
 		}
 
-		private void AssignLoadout( List<string> items, Inventory inventory )
+		private async Task AssignLoadout( List<string> items, Inventory inventory )
 		{
 			for ( int i = 0; i < items.Count; i++ )
 			{
 				string itemPath = items[i];
 				inventory.Add( ItemUtils.GetItem( itemPath ), i == 0 );
+				await Task.Delay( 100 ); //Gotta wait between each weapon added so OnChildAdded gets fired in the correct order...
 			}
 		}
 
