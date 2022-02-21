@@ -93,6 +93,11 @@ public partial class FortwarsWeapon : Carriable
 		{
 			TimeSincePrimaryAttack = 0;
 			AttackPrimary();
+
+			if ( ReserveAmmo > 0 && CurrentClip == 0 )
+			{
+				Reload();
+			}
 		}
 	}
 
