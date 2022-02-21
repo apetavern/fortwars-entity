@@ -112,10 +112,12 @@ namespace Fortwars
 					case Team.Invalid:
 						break;
 					case Team.Red:
-						RedPlayers.Add( player );
+						if ( !RedPlayers.Contains( player ) )
+							RedPlayers.Add( player );
 						break;
 					case Team.Blue:
-						BluePlayers.Add( player );
+						if ( !BluePlayers.Contains( player ) )
+							BluePlayers.Add( player );
 						break;
 					default:
 						break;
