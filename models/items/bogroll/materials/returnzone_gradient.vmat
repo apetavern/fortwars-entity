@@ -15,6 +15,10 @@ Layer0
 	F_ADDITIVE_BLEND 1
 	F_TRANSLUCENT 1
 
+	//---- Z-Buffering ----
+	F_DISABLE_Z_BUFFERING 1
+	F_DISABLE_Z_PREPASS 1
+
 	//---- Ambient Occlusion ----
 	g_flAmbientOcclusionDirectDiffuse "0.000"
 	g_flAmbientOcclusionDirectSpecular "0.000"
@@ -50,7 +54,7 @@ Layer0
 	g_flSelfIllumScale "16.000"
 	g_vSelfIllumScrollSpeed "[0.000 0.000]"
 	g_vSelfIllumTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureSelfIllumMask "materials/default/default_selfillum.tga"
+	TextureSelfIllumMask "models/items/bogroll/materials/returnzone_gradient.psd"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
