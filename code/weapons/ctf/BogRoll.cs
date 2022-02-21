@@ -28,9 +28,11 @@ namespace Fortwars
 		public TimeSince TimeSincePrimaryAttack { get; set; }
 
 		[Net] bool RespawntimerStarted { get; set; }
-		[Net] TimeSince TimeSinceDropped { get; set; }
+		[Net] public TimeSince TimeSinceDropped { get; set; }
 
 		[Net] bool CantPickup { get; set; }
+
+		[Net] RollReturnZone ReturnZone { get; set; }
 
 		public override void OnCarryStart( Entity carrier )
 		{
@@ -51,10 +53,6 @@ namespace Fortwars
 
 		public override bool CanCarry( Entity carrier )
 		{
-			if ( RespawntimerStarted && (carrier as FortwarsPlayer).TeamID == Team )
-			{
-				TimeSinceDropped += Time.Delta;
-			}
 			return !CantPickup && (carrier as FortwarsPlayer).TeamID != Team;
 		}
 
@@ -68,7 +66,11 @@ namespace Fortwars
 			if ( IsServer )
 			{
 				Game.Instance.ReturnFlag( Team );
+
+				if ( ReturnZone != null )
+					ReturnZone.Delete();
 			}
+			
 			base.OnDestroy();
 		}
 
@@ -83,12 +85,17 @@ namespace Fortwars
 			else if ( Parent != null && Parent.ActiveChild == this )
 			{
 				RespawntimerStarted = false;
+
+				if(ReturnZone != null )
+					ReturnZone.Delete();
 			}
 
 			if ( Parent == null && !RespawntimerStarted )
 			{
 				TimeSinceDropped = 0;
 				RespawntimerStarted = true;
+				ReturnZone = new RollReturnZone();
+				ReturnZone.AttachToRoll(this);
 			}
 
 			if ( RespawntimerStarted && TimeSinceDropped > 15f )
