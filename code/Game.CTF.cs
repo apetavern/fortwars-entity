@@ -85,11 +85,11 @@ namespace Fortwars
 			{
 				if ( ply.TeamID == player.TeamID )
 				{
-					PlayLocalSound( "enemyflagtaken" );//positive sound, same team who took flag
+					PlayLocalSound( To.Single( ply.Client ), "enemyflagtaken" );//positive sound, same team who took flag
 				}
 				else
 				{
-					PlayLocalSound( "enemytookflag" );//negative sound, enemy team took flag
+					PlayLocalSound( To.Single( ply.Client ), "enemytookflag" );//negative sound, enemy team took flag
 				}
 			}
 		}
@@ -131,11 +131,11 @@ namespace Fortwars
 			{
 				if ( ply.TeamID == player.TeamID )
 				{
-					PlayLocalSound( "enemyflagcaptured" );//positive sound, same team who scored
+					PlayLocalSound( To.Single( ply.Client ), "enemyflagcaptured" );//positive sound, same team who scored
 				}
 				else
 				{
-					PlayLocalSound( "enemycapturedourflag" );//negative sound, enemy team scored
+					PlayLocalSound( To.Single( ply.Client ), "enemycapturedourflag" );//negative sound, enemy team scored
 				}
 			}
 
