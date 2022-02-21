@@ -21,7 +21,7 @@ namespace Fortwars
 			AssignLoadout( CombatLoadout, inventory );
 		}
 
-		private async Task AssignLoadout( List<string> items, Inventory inventory )
+		private async void AssignLoadout( List<string> items, Inventory inventory )
 		{
 			for ( int i = 0; i < items.Count; i++ )
 			{
