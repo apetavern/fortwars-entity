@@ -80,7 +80,18 @@ namespace Fortwars
 
 			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
 
-			PlaySound( "enemyflagtaken" );
+
+			foreach ( FortwarsPlayer ply in All.OfType<FortwarsPlayer>() )
+			{
+				if ( ply.TeamID == player.TeamID )
+				{
+					PlayLocalSound( "enemyflagtaken" );//positive sound, same team who took flag
+				}
+				else
+				{
+					PlayLocalSound( "enemytookflag" );//negative sound, enemy team took flag
+				}
+			}
 		}
 
 		public void PlayerPickupEnemyFlagFloor( FortwarsPlayer player )
@@ -104,22 +115,11 @@ namespace Fortwars
 
 			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
 
-			foreach ( FortwarsPlayer ply in All.OfType<FortwarsPlayer>() )
-			{
-				if ( ply.TeamID == player.TeamID )
-				{
-					PlayLocalSound( "enemyflagtaken" );//positive sound, same team who took flag
-				}
-				else
-				{
-					PlayLocalSound( "enemytookflag" );//negative sound, enemy team took flag
-				}
-			}
-			
+			player.PlaySound( "ctf_flag_pickup" );
 		}
 
 		[ClientRpc]
-		public void PlayLocalSound(string sound )
+		public void PlayLocalSound( string sound )
 		{
 			PlaySound( sound );
 		}
