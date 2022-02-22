@@ -25,7 +25,7 @@
 		mindamage = 6.0
 		damagedropoffdistance = 512
 		headshotmultiplier = 1.5
-		firesound = "rust_pumpshotgun.shoot"
+		firesound = "uts15_fire"
 		holdtype = "3"
 		projectilemodel = resource:""
 		projectilespeed = 1.0
