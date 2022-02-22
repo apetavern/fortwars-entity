@@ -16,7 +16,7 @@ Layer0
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "particles/muzzleflash/grubs_muzzleflash_gradient.png"
+	TextureColor "particles/muzzleflash/fw_muzzleflash_gradient.png"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
