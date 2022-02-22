@@ -26,7 +26,7 @@
 		mindamage = 10.0
 		damagedropoffdistance = 512
 		headshotmultiplier = 1.5
-		firesound = "rust_smg.shoot"
+		firesound = "hksmgii_fire"
 		projectilemodel = resource:""
 		projectilespeed = 1.0
 		aimposition = [ -10.0, 19.075, 2.5 ]
