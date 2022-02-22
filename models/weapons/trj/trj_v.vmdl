@@ -128,7 +128,7 @@
 						source_filename = "models/weapons/trj/trj_v.fbx"
 						start_frame = 34
 						end_frame = 59
-						framerate = -1.0
+						framerate = 65.0
 						take = 0
 						reverse = false
 					},
@@ -149,7 +149,7 @@
 						source_filename = "models/weapons/trj/trj_v.fbx"
 						start_frame = 59
 						end_frame = 84
-						framerate = -1.0
+						framerate = 65.0
 						take = 0
 						reverse = false
 					},
@@ -170,7 +170,7 @@
 						source_filename = "models/weapons/trj/trj_v.fbx"
 						start_frame = 84
 						end_frame = 109
-						framerate = -1.0
+						framerate = 65.0
 						take = 0
 						reverse = false
 					},
@@ -245,7 +245,7 @@
 								event_frame = 122
 								event_keys = 
 								{
-									name = "ui.button.deny"
+									name = "chamberspin"
 									stop_on_seq_change = false
 									use_layer_sequence = false
 									tags = ""
@@ -257,7 +257,7 @@
 								event_frame = 124
 								event_keys = 
 								{
-									name = "ui.button.deny"
+									name = "chamberspin"
 									stop_on_seq_change = false
 									use_layer_sequence = false
 									tags = ""
@@ -269,7 +269,7 @@
 								event_frame = 126
 								event_keys = 
 								{
-									name = "ui.button.deny"
+									name = "chamberspin"
 									stop_on_seq_change = false
 									use_layer_sequence = false
 									tags = ""
@@ -281,7 +281,7 @@
 								event_frame = 128
 								event_keys = 
 								{
-									name = "ui.button.deny"
+									name = "chamberspin"
 									stop_on_seq_change = false
 									use_layer_sequence = false
 									tags = ""
@@ -293,7 +293,7 @@
 								event_frame = 130
 								event_keys = 
 								{
-									name = "ui.button.deny"
+									name = "chamberspin"
 									stop_on_seq_change = false
 									use_layer_sequence = false
 									tags = ""
@@ -305,7 +305,7 @@
 								event_frame = 132
 								event_keys = 
 								{
-									name = "ui.button.deny"
+									name = "chamberspin"
 									stop_on_seq_change = false
 									use_layer_sequence = false
 									tags = ""
@@ -352,7 +352,7 @@
 						source_filename = "models/weapons/trj/trj_v.fbx"
 						start_frame = 109
 						end_frame = 249
-						framerate = -1.0
+						framerate = 35.0
 						take = 0
 						reverse = false
 					},
