@@ -210,7 +210,7 @@
 								event_frame = 26
 								event_keys = 
 								{
-									name = "rust_pumpshotgun.insert"
+									name = "mag_in"
 									stop_on_seq_change = false
 									use_layer_sequence = false
 									tags = ""
@@ -222,7 +222,7 @@
 								event_frame = 5
 								event_keys = 
 								{
-									name = "rust_flashlight.attack"
+									name = "mag_out"
 									stop_on_seq_change = false
 									use_layer_sequence = false
 									tags = ""
@@ -234,19 +234,7 @@
 								event_frame = 41
 								event_keys = 
 								{
-									name = "rust_smg.boltback"
-									stop_on_seq_change = false
-									use_layer_sequence = false
-									tags = ""
-								}
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_CL_PLAYSOUND"
-								event_frame = 47
-								event_keys = 
-								{
-									name = "rust_smg.boltshut"
+									name = "pistol_cocking"
 									stop_on_seq_change = false
 									use_layer_sequence = false
 									tags = ""
