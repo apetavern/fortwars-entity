@@ -15,6 +15,7 @@ Minor edits by Alex Guthrie, https://creativecommons.org/licenses/by-sa/3.0/lega
 
 *Sounds*
 Sound effects obtained from https://www.zapsplat.com
+Some free gun sound effects from https://www.fesliyanstudios.com
 
 *Weapon Models*
 TastyTony (https://sketchfab.com/TastyTony), CC BY 4.0
