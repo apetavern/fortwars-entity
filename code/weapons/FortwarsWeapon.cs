@@ -291,7 +291,7 @@ public partial class FortwarsWeapon : Carriable
 	public virtual void ShootBullet()
 	{
 		ShootEffects();
-		PlaySound( WeaponAsset.FireSound ).SetVolume( 0.25f );
+		PlaySound( WeaponAsset.FireSound );
 
 		var forward = Owner.EyeRotation.Forward;
 
