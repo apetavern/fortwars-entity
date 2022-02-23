@@ -52,7 +52,7 @@ namespace Fortwars
 				bool hasPhysgun = false;
 				foreach ( var player in Sandbox.Player.All )
 				{
-					if ( player.ActiveChild is PhysGun physgun )
+					if ( (player as FortwarsPlayer).ActiveChild is PhysGun physgun )
 					{
 						if ( physgun.GrabbedEntity == entity )
 							hasPhysgun = true;

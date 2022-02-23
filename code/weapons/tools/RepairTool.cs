@@ -51,10 +51,10 @@ namespace Fortwars
 		public virtual void AttackPrimary()
 		{
 			var player = Owner as FortwarsPlayer;
-			player.SetAnimBool( "b_attack", true );
+			player.SetAnimParameter( "b_attack", true );
 			foreach ( var tr in TraceHit( Owner.EyePosition, Owner.EyePosition + Owner.EyeRotation.Forward * 128f ) )
 			{
-				ViewModelEntity?.SetAnimBool( "hit", tr.Hit );
+				ViewModelEntity?.SetAnimParameter( "hit", tr.Hit );
 
 				if ( !tr.Hit )
 				{
@@ -72,14 +72,14 @@ namespace Fortwars
 
 				if ( tr.Entity is FortwarsBlock block && block.TeamID == player.TeamID && block.IsValid )
 				{
-					block?.Heal( 50, tr.EndPos );
+					block?.Heal( 50, tr.EndPosition );
 					continue;
 				}
 
-				tr.Entity.TakeDamage( DamageInfo.FromBullet( tr.EndPos, -tr.Normal * 10f, 10 ) );
+				tr.Entity.TakeDamage( DamageInfo.FromBullet( tr.EndPosition, -tr.Normal * 10f, 10 ) );
 			}
 
-			ViewModelEntity?.SetAnimBool( "fire", true );
+			ViewModelEntity?.SetAnimParameter( "fire", true );
 		}
 
 		[ClientRpc]
@@ -96,7 +96,7 @@ namespace Fortwars
 
 		public virtual IEnumerable<TraceResult> TraceHit( Vector3 start, Vector3 end, float radius = 2.0f )
 		{
-			bool InWater = Physics.TestPointContents( start, CollisionLayer.Water );
+			bool InWater = Map.Physics.IsPointWater( start );
 
 			var tr = Trace.Ray( start, end )
 					.UseHitboxes()
@@ -112,11 +112,11 @@ namespace Fortwars
 
 		public override void SimulateAnimator( PawnAnimator anim )
 		{
-			anim.SetParam( "holdtype", 4 );
-			anim.SetParam( "aimat_weight", 1.0f );
-			anim.SetParam( "holdtype_handedness", 1 );
-			anim.SetParam( "holdtype_pose_hand", 0.07f );
-			anim.SetParam( "holdtype_attack", 1 );
+			anim.SetAnimParameter( "holdtype", 4 );
+			anim.SetAnimParameter( "aimat_weight", 1.0f );
+			anim.SetAnimParameter( "holdtype_handedness", 1 );
+			anim.SetAnimParameter( "holdtype_pose_hand", 0.07f );
+			anim.SetAnimParameter( "holdtype_attack", 1 );
 		}
 	}
 }

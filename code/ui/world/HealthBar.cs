@@ -21,7 +21,7 @@ namespace Fortwars
 			owner = Add.Label( "owner", "owner" );
 			inner = Add.Panel( "inner" );
 
-			SceneObject.ZBufferMode = ZBufferMode.None;
+			// SceneObject.ZBufferMode = ZBufferMode.None;
 			PanelBounds = new Rect( -500, -75, 1000, 150 );
 		}
 

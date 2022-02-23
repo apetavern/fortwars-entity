@@ -72,7 +72,7 @@ namespace Fortwars
 
 		public void Apply()
 		{
-			if ( Local.Pawn.ActiveChild is not Carriable carriable )
+			if ( (Local.Pawn as FortwarsPlayer).ActiveChild is not Carriable carriable )
 				return;
 
 			var config = CrosshairConfig.Default;

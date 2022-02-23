@@ -26,11 +26,11 @@ namespace Fortwars
 
 			var player = Local.Pawn;
 			if ( player == null ) return;
-			if ( player.Inventory == null ) return;
+			if ( (player as FortwarsPlayer).Inventory == null ) return;
 
 			for ( int i = 0; i < slots.Count; i++ )
 			{
-				UpdateIcon( player.Inventory.GetSlot( i ), slots[i], i );
+				UpdateIcon( (player as FortwarsPlayer).Inventory.GetSlot( i ), slots[i], i );
 			}
 		}
 
@@ -57,7 +57,10 @@ namespace Fortwars
 				inventoryIcon.AmmoLabel.SetClass( "visible", false );
 			}
 
-			inventoryIcon.SetClass( "active", ent.IsActiveChild() );
+			var player = Local.Pawn;
+			if ( player == null ) return;
+
+			inventoryIcon.SetClass( "active", (player as FortwarsPlayer).ActiveChild == ent );
 		}
 
 		[Event( "buildinput" )]
@@ -90,7 +93,7 @@ namespace Fortwars
 				return;
 
 			var ent = inventory.GetSlot( i );
-			if ( player.ActiveChild == ent )
+			if ( (player as FortwarsPlayer).ActiveChild == ent )
 				return;
 
 			if ( ent == null )

@@ -28,7 +28,7 @@ namespace Fortwars
 		public bool IsSwimming { get; set; } = false;
 		private bool IsGrounded => GroundEntity != null;
 		public bool IsSprinting => Input.Down( InputButton.Run ) && IsGrounded && ForwardSpeed > 100f;
-		public float ForwardSpeed => Velocity.Dot( EyeRot.Forward );
+		public float ForwardSpeed => Velocity.Dot( EyeRotation.Forward );
 
 		public FortwarsWalkController()
 		{
@@ -86,7 +86,7 @@ namespace Fortwars
 		{
 			base.FrameSimulate();
 
-			EyeRot = Input.Rotation;
+			EyeRotation = Input.Rotation;
 		}
 
 		public float FallVelocity { get; private set; } = 0;
@@ -95,17 +95,17 @@ namespace Fortwars
 		{
 			FallVelocity = -Pawn.Velocity.z;
 
-			EyePosLocal = Vector3.Up * (EyeHeight * Pawn.Scale);
+			EyeLocalPosition = Vector3.Up * (EyeHeight * Pawn.Scale);
 			UpdateBBox();
 
-			EyePosLocal += TraceOffset;
-			EyeRot = Input.Rotation;
+			EyeLocalPosition += TraceOffset;
+			EyeRotation = Input.Rotation;
 
 			if ( Unstuck.TestAndFix() )
 				return;
 
 			CheckLadder();
-			IsSwimming = Pawn.WaterLevel.Fraction > 0.6f;
+			IsSwimming = Pawn.WaterLevel > 0.6f;
 
 			//
 			// Start Gravity
@@ -152,7 +152,7 @@ namespace Fortwars
 			WishVelocity = WishVelocity.Normal * inSpeed;
 			WishVelocity *= GetWishSpeed();
 
-			if ( Pawn.ActiveChild is FortwarsWeapon weapon && weapon != null && weapon.WeaponAsset != null )
+			if ( (Pawn as FortwarsPlayer).ActiveChild is FortwarsWeapon weapon && weapon != null && weapon.WeaponAsset != null )
 				WishVelocity *= weapon.WeaponAsset.MovementSpeedMultiplier;
 
 			DuckSlide.PreTick();
@@ -225,12 +225,12 @@ namespace Fortwars
 
 			if ( Pawn.LifeState != LifeState.Dead
 				&& fallVelocity >= FallPunchThreshold
-				&& !Pawn.WaterLevel.IsInWater )
+				&& !(Pawn.WaterLevel >= 1f) )
 			{
 				float punchStrength = fallVelocity.LerpInverse( FallPunchThreshold, FallPunchThreshold * 2 );
 				_ = new Sandbox.ScreenShake.ViewPunch( 1f, punchStrength * 2f );
 
-				if ( GroundEntity.WaterLevel.IsInWater )
+				if ( (GroundEntity.WaterLevel >= 1f) )
 				{
 					FallVelocity -= PlayerLandOnFloatingObject;
 				}
@@ -301,7 +301,7 @@ namespace Fortwars
 
 				if ( pm.Fraction == 1 )
 				{
-					Position = pm.EndPos;
+					Position = pm.EndPosition;
 					StayOnGround();
 					return;
 				}
@@ -581,7 +581,7 @@ namespace Fortwars
 
 			if ( bMoveToEndPos && !pm.StartedSolid && pm.Fraction > 0.0f && pm.Fraction < 1.0f )
 			{
-				Position = pm.EndPos;
+				Position = pm.EndPosition;
 			}
 
 		}
@@ -644,7 +644,7 @@ namespace Fortwars
 						.WithoutTags( "nocollide" )
 						.Run();
 
-			tr.EndPos -= TraceOffset;
+			tr.EndPosition -= TraceOffset;
 			return tr;
 		}
 
@@ -668,7 +668,7 @@ namespace Fortwars
 
 			// See how far up we can go without getting stuck
 			var trace = TraceBBox( Position, start );
-			start = trace.EndPos;
+			start = trace.EndPosition;
 
 			// Now trace down from a known safe position
 			trace = TraceBBox( start, end );
@@ -678,7 +678,7 @@ namespace Fortwars
 			if ( trace.StartedSolid ) return;
 			if ( Vector3.GetAngle( Vector3.Up, trace.Normal ) > GroundAngle ) return;
 
-			Position = trace.EndPos;
+			Position = trace.EndPosition;
 		}
 	}
 }

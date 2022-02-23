@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using Sandbox.Component;
 using System.Linq;
 
 namespace Fortwars
@@ -15,16 +16,18 @@ namespace Fortwars
 				if ( player.IsLocalPawn )
 					return;
 
+				var glow = player.Components.GetOrCreate<Glow>();
+
 				if ( player.TeamID != localPlayer.TeamID )
 				{
-					player.GlowActive = true;
-					player.GlowState = GlowStates.On;
-					player.GlowColor = Color.Red;
+					glow.Active = true;
+					glow.RangeMin = 0;
+					glow.RangeMax = 1000;
+					glow.Color = Color.Red;
 				}
 				else
 				{
-					player.GlowActive = false;
-					player.GlowState = GlowStates.Off;
+					glow.Active = false;
 				}
 			} );
 		}

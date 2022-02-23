@@ -11,7 +11,7 @@ namespace Fortwars
 		{
 			base.Update();
 
-			if ( Local.Pawn.ActiveChild is FortwarsWeapon { IsAiming: true } weapon )
+			if ( (Local.Pawn as FortwarsPlayer).ActiveChild is FortwarsWeapon { IsAiming: true } weapon )
 				FieldOfView = FieldOfView.LerpTo( weapon.WeaponAsset.AimFovMult * FovDesired, 10 * Time.Delta );
 			else
 				FieldOfView = FieldOfView.LerpTo( FovDesired, 10 * Time.Delta );

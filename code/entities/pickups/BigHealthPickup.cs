@@ -26,12 +26,12 @@ namespace Fortwars
 		{
 			if ( Landed )
 			{
-				SetAnimBool( "deployed", true );
+				SetAnimParameter( "deployed", true );
 				Scale = 0.4f;
 				return;
 			}
 			Velocity += ThrowSpeed * Rotation.Forward * Time.Delta;
-			Velocity += PhysicsWorld.Gravity * 0.5f * Time.Delta;
+			Velocity += Map.Physics.Gravity * 0.5f * Time.Delta;
 
 			Rotation = Rotation.LookAt( -Velocity.Normal.WithZ( 0 ), Vector3.Up );
 
@@ -42,7 +42,7 @@ namespace Fortwars
 
 			if ( tr.Hit )
 			{
-				SetAnimBool( "deployed", true );
+				SetAnimParameter( "deployed", true );
 				Landed = true;
 			}
 
