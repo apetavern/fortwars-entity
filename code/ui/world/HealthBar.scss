@@ -1,4 +1,5 @@
 ﻿HealthBar {
+    position: absolute;
     font-size: 48px;
     font-color: white;
     align-items: center;
@@ -8,10 +9,13 @@
     font-weight: 600;
     border-radius: 2px;
     box-shadow: 0 0 5px rgba( white, 0.05 );
+    transform: translate(-50% -50%);
+    width: 200px;
+    height: 25px;
 
     .owner {
         position: absolute;
-        bottom: -60px;
+        bottom: -30px;
     }
 
     .inner {

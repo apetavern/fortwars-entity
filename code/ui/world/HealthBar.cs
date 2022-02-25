@@ -4,7 +4,7 @@ using Sandbox.UI.Construct;
 
 namespace Fortwars
 {
-	public class HealthBar : WorldPanel
+	public class HealthBar : Panel
 	{
 		private Label owner;
 		private Label health;
@@ -12,17 +12,15 @@ namespace Fortwars
 
 		private FortwarsBlock block;
 
-		internal HealthBar( FortwarsBlock block )
+		public HealthBar( FortwarsBlock block )
 		{
+			this.Parent = Local.Hud;
 			this.block = block;
 
 			StyleSheet.Load( "/ui/world/HealthBar.scss" );
 			health = Add.Label( "0", "health" );
 			owner = Add.Label( "owner", "owner" );
 			inner = Add.Panel( "inner" );
-
-			// SceneObject.ZBufferMode = ZBufferMode.None;
-			PanelBounds = new Rect( -500, -75, 1000, 150 );
 		}
 
 		public override void Tick()
@@ -32,9 +30,6 @@ namespace Fortwars
 			health.Text = $"{block.Health.CeilToInt()} / {block.MaxHealth.CeilToInt()}";
 			inner.Style.Width = Length.Fraction( block.Health / block.MaxHealth );
 			owner.Text = $"Owned by {block.Client?.Name ?? "(disconnected)"}";
-
-			Scale = 2.0f;
-			WorldScale = 0.5f;
 		}
 	}
 }

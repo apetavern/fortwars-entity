@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using Sandbox.UI;
 using System.Linq;
 
 namespace Fortwars
@@ -33,7 +34,9 @@ namespace Fortwars
 			transform.Position = transform.Position + (localCenter * transform.Rotation);
 			transform.Rotation = Rotation.LookAt( -CurrentView.Rotation.Forward );
 
-			healthBar.Transform = transform;
+			var screenPos = transform.Position.ToScreen();
+			healthBar.Style.Left = Length.Fraction( screenPos.x );
+			healthBar.Style.Top = Length.Fraction( screenPos.y );
 		}
 
 		[Event.Frame]
