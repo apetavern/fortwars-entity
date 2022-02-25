@@ -263,6 +263,7 @@ public partial class PhysGun : Carriable, IUse
 		heldBody = body;
 		holdDistance = Vector3.DistanceBetween( startPos, grabPos );
 		holdDistance = holdDistance.Clamp( MinTargetDistance, MaxTargetDistance );
+		heldPos = heldBody.Transform.PointToLocal( grabPos );
 		heldRot = rot.Inverse * heldBody.Rotation;
 
 		holdBody.Position = grabPos;
