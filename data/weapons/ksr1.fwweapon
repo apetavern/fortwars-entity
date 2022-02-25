@@ -29,9 +29,9 @@
 		firesound = "ksr1_fire"
 		projectilemodel = resource:""
 		projectilespeed = 1.0
-		aimposition = [ -20.0, 24.4, 4.75 ]
+		aimposition = [ -30.0, 23.925, 4.75 ]
 		aimrotation = [ 0.75, -2.75, 0.0 ]
-		aimfovmult = 0.75
+		aimfovmult = 0.5
 		userendertarget = false
 		fireparticles = resource:"particles/muzzleflash/fw_muzzleflash.vpcf"
 		tracerparticles = resource:"particles/tracer_large.vpcf"
