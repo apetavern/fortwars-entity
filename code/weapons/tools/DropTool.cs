@@ -165,7 +165,6 @@ namespace Fortwars
 			{
 				EnableDrawing = false;
 				anim.SetAnimParameter( "holdtype", 0 );
-				anim.SetAnimParameter( "aimat_weight", 1.0f );
 				anim.SetAnimParameter( "holdtype_handedness", 0 );
 				anim.SetAnimParameter( "holdtype_pose_hand", 0f );
 				anim.SetAnimParameter( "holdtype_attack", 1 );
@@ -174,7 +173,6 @@ namespace Fortwars
 			{
 				EnableDrawing = true;
 				anim.SetAnimParameter( "holdtype", 4 );
-				anim.SetAnimParameter( "aimat_weight", 1.0f );
 				anim.SetAnimParameter( "holdtype_handedness", 0 );
 				anim.SetAnimParameter( "holdtype_pose_hand", 0f );
 				anim.SetAnimParameter( "holdtype_attack", 1 );
