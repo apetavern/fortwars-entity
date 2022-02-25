@@ -13,25 +13,30 @@ namespace Fortwars
 
 			private Rotation CameraRot => Rotation.From( 0, 210, 0 );
 			private Vector3 CameraPos => new Vector3( 70, 40, 48 );
-
-			AnimEntity citizen;
+			SceneModel citizen;
 
 			public ClassPreviewPanel()
 			{
-				Build();
-			}
+				Style.FlexWrap = Wrap.Wrap;
+				Style.JustifyContent = Justify.Center;
+				Style.AlignItems = Align.Center;
+				Style.AlignContent = Align.Center;
+				Style.Padding = 0;
 
-			public override void OnHotloaded()
-			{
-				base.OnHotloaded();
+				var world = new SceneWorld();
+				citizen = new SceneModel( world, "models/citizen/citizen.vmdl", Transform.Zero );
 
-				Build();
-			}
+				List<SceneLight> sceneLights = new();
+				sceneLights.Add( new SceneLight( world, Vector3.Up * 150.0f, 200.0f, Color.White * 5.0f ) );
+				sceneLights.Add( new SceneLight( world, Vector3.Up * 75.0f + Vector3.Forward * 100.0f, 200, Color.White * 15.0f ) );
+				sceneLights.Add( new SceneLight( world, Vector3.Up * 75.0f + Vector3.Backward * 100.0f, 200, Color.White * 15f ) );
+				sceneLights.Add( new SceneLight( world, Vector3.Up * 75.0f + Vector3.Right * 100.0f, 200, Color.White * 15.0f ) );
+				sceneLights.Add( new SceneLight( world, Vector3.Up * 100.0f + Vector3.Up, 200, Color.White * 15.0f ) );
 
-			public override void Tick()
-			{
-				base.Tick();
-				Animate();
+				renderScene = Add.ScenePanel( world, CameraPos, CameraRot, 75 );
+				renderScene.Style.Width = Length.Percent( 100 );
+				renderScene.Style.Height = Length.Percent( 100 );
+				renderScene.AmbientColor = new Color( .25f, .15f, .15f ) * 2.0f;
 			}
 
 			Vector3 lookPos, headPos, aimPos;
@@ -61,27 +66,16 @@ namespace Fortwars
 				citizen.SetAnimParameter( "aim_body_weight", 1.0f );
 			}
 
-			public void Build()
+			public override void Tick()
 			{
-				renderScene?.Delete( true );
+				base.Tick();
 
-				Log.Trace( "Building render scene" );
+				renderScene.CameraPosition = CameraPos;
+				renderScene.CameraRotation = CameraRot;
 
-				List<SceneLight> sceneLights = new();
+				Animate();
 
-				SceneWorld sceneWorld = new SceneWorld();
-				citizen = new AnimEntity( "models/citizen/citizen.vmdl" );
-
-				sceneLights.Add( new SceneLight( sceneWorld, Vector3.Up * 150.0f, 200.0f, Color.White * 5.0f ) );
-				sceneLights.Add( new SceneLight( sceneWorld, Vector3.Up * 75.0f + Vector3.Forward * 100.0f, 200, Color.White * 15.0f ) );
-				sceneLights.Add( new SceneLight( sceneWorld, Vector3.Up * 75.0f + Vector3.Backward * 100.0f, 200, Color.White * 15f ) );
-				sceneLights.Add( new SceneLight( sceneWorld, Vector3.Up * 75.0f + Vector3.Right * 100.0f, 200, Color.White * 15.0f ) );
-				sceneLights.Add( new SceneLight( sceneWorld, Vector3.Up * 100.0f + Vector3.Up, 200, Color.White * 15.0f ) );
-
-				renderScene = Add.ScenePanel( sceneWorld, CameraPos, CameraRot, 75 );
-				renderScene.Style.Width = Length.Percent( 100 );
-				renderScene.Style.Height = Length.Percent( 100 );
-				renderScene.AmbientColor = new Color( .25f, .15f, .15f ) * 2.0f;
+				citizen.Update( RealTime.Delta );
 			}
 		}
 	}
