@@ -55,6 +55,17 @@ namespace Fortwars
 			cl.Pawn = player;
 		}
 
+		public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )
+		{
+			base.ClientDisconnect( cl, reason );
+
+			Entity.All.OfType<FortwarsBlock>().ToList().ForEach( x =>
+			{
+				if ( x.Owner == cl )
+					x.Delete();
+			} );
+		}
+
 		public override void OnKilled( Entity pawn )
 		{
 			Round?.OnPlayerKilled( pawn as Player );
