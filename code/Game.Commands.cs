@@ -37,36 +37,6 @@ namespace Fortwars
 			Log.Trace( $"Deleted blocks" );
 		}
 
-		[ServerCmd( "fw_secret" )]
-		public static void Secret()
-		{
-			var caller = ConsoleSystem.Caller;
-			var steamIds = new[]
-			{
-				76561198045068860, // Trundler
-				76561198128972602, // xezno
-				76561197980414711, // ShadowBrain
-				76561197993568598, // Matt9440
-				76561198169265681, // JakeSayingWoosh
-				76561198092519585, // gumby
-				76561198030362336, // Willow
-				76561198004949954, // Leaf
-			};
-
-			if ( steamIds.Contains( caller.PlayerId ) )
-			{
-				var inventory = caller.Pawn.Inventory;
-				inventory.DeleteContents();
-				inventory.Add( FortwarsWeapon.FromPath( "data/weapons/boner_gun.fwweapon" ) );
-				inventory.Add( FortwarsWeapon.FromPath( "data/weapons/trj.fwweapon" ) );
-				inventory.Add( FortwarsWeapon.FromPath( "data/weapons/rpg.fwweapon" ) );
-			}
-			else
-			{
-				caller.Pawn.TakeDamage( DamageInfo.Generic( 100000 ) );
-			}
-		}
-
 		[ServerCmd( "fw_spawn" )]
 		public static void Spawn( string blockName )
 		{
