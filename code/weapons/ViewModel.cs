@@ -205,7 +205,7 @@ namespace Fortwars
 			lastYaw = newYaw;
 
 			Vector2 maskOffset = new Vector2( offset.y, offset.z ) * 0.1f * (10 * offset.x + 1f);
-			SceneObject.SetValue( "maskOffset", new Vector2( maskOffset.x, maskOffset.y ) );
+			SceneObject.Attributes.Set( "maskOffset", new Vector2( maskOffset.x, maskOffset.y ) );
 
 			return true;
 		}

@@ -63,7 +63,7 @@ public partial class FortwarsWeapon : Carriable
 		if ( spread.AlmostEqual( 0 ) )
 			spread = 0;
 
-		ViewModelEntity?.SetAnimBool( "aiming", IsAiming );
+		ViewModelEntity?.SetAnimParameter( "aiming", IsAiming );
 
 		if ( IsReloading )
 		{
@@ -169,16 +169,15 @@ public partial class FortwarsWeapon : Carriable
 		TimeSinceReload = 0;
 		IsReloading = true;
 
-		(Owner as AnimEntity).SetAnimBool( "b_reload", true );
+		(Owner as AnimEntity).SetAnimParameter( "b_reload", true );
 
 		StartReloadEffects();
 	}
 
 	public override void SimulateAnimator( PawnAnimator anim )
 	{
-		anim.SetParam( "holdtype", (int)WeaponAsset.HoldType );
-		anim.SetParam( "aimat_weight", 1.0f );
-		anim.SetParam( "holdtype_handedness", 0 );
+		anim.SetAnimParameter( "holdtype", (int)WeaponAsset.HoldType );
+		anim.SetAnimParameter( "holdtype_handedness", 0 );
 	}
 
 	private void OnContinuousReload()
@@ -187,7 +186,7 @@ public partial class FortwarsWeapon : Carriable
 
 		if ( amount <= 0 )
 		{
-			ViewModelEntity?.SetAnimBool( "endreload", true );
+			ViewModelEntity?.SetAnimParameter( "endreload", true );
 		}
 
 		if ( TimeSinceReload < WeaponAsset.ReloadTime )
@@ -264,11 +263,11 @@ public partial class FortwarsWeapon : Carriable
 		if ( !TakeAmmo() )
 			return;
 
-		ViewModelEntity?.SetAnimBool( "endreload", true );
+		ViewModelEntity?.SetAnimParameter( "endreload", true );
 		IsReloading = false;
 
 		ShootEffects();
-		PlaySound( WeaponAsset.FireSound ).SetVolume(0.5f);
+		PlaySound( WeaponAsset.FireSound ).SetVolume( 0.5f );
 
 		if ( !IsServer )
 			return;
@@ -307,7 +306,7 @@ public partial class FortwarsWeapon : Carriable
 		//
 		foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * WeaponAsset.Range, 1f ) )
 		{
-			TracerEffects( tr.EndPos );
+			TracerEffects( tr.EndPosition );
 			tr.Surface.DoBulletImpact( tr );
 
 			if ( !IsServer ) continue;
@@ -318,7 +317,7 @@ public partial class FortwarsWeapon : Carriable
 			if ( tr.Entity is FortwarsBlock )
 				damage *= WeaponAsset.BuildingDamageMultiplier;
 
-			var damageInfo = DamageInfo.FromBullet( tr.EndPos, forward * 100, damage )
+			var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100, damage )
 				.UsingTraceResult( tr )
 				.WithAttacker( Owner )
 				.WithWeapon( this );
@@ -371,14 +370,14 @@ public partial class FortwarsWeapon : Carriable
 	[ClientRpc]
 	public virtual void StartReloadEffects()
 	{
-		ViewModelEntity?.SetAnimBool( "reload", true );
+		ViewModelEntity?.SetAnimParameter( "reload", true );
 	}
 
 	public virtual IEnumerable<TraceResult> TraceBullet( Vector3 start, Vector3 end, float radius = 2.0f )
 	{
 		using var _ = LagCompensation();
 
-		bool InWater = Physics.TestPointContents( start, CollisionLayer.Water );
+		bool InWater = Map.Physics.IsPointWater( start );
 
 		var tr = Trace.Ray( start, end )
 				.UseHitboxes()
@@ -415,7 +414,7 @@ public partial class FortwarsWeapon : Carriable
 		(ViewModelEntity as ViewModel)?.OnFire( IsAiming );
 
 		if ( !IsAiming )
-			ViewModelEntity?.SetAnimBool( "fire", true );
+			ViewModelEntity?.SetAnimParameter( "fire", true );
 
 		CrosshairPanel?.CreateEvent( "fire" );
 	}

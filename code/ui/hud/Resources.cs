@@ -10,11 +10,9 @@ namespace Fortwars
 		{
 			StyleSheet.Load( "/ui/hud/Resources.scss" );
 
-			Add.Label( "Resources", "subtitle" );
-
 			AddResource( "/ui/icons/resources/wood.png", BlockMaterial.Wood );
 			AddResource( "/ui/icons/resources/steel.png", BlockMaterial.Steel );
-			AddResource( "/ui/icons/resources/rubber.png", BlockMaterial.Rubber );
+			// AddResource( "/ui/icons/resources/rubber.png", BlockMaterial.Rubber );
 		}
 
 		private void AddResource( string name, BlockMaterial resourceType )
@@ -34,9 +32,12 @@ namespace Fortwars
 			{
 				this.resourceType = resourceType;
 
-				Add.Image( iconPath, "icon" );
-				count = Add.Label( "20", "count" );
-				limit = Add.Label( "20", "limit" );
+				var top = Add.Panel( "top" );
+				var bottom = Add.Panel( "bottom" );
+
+				top.Add.Image( iconPath, "icon" );
+				count = bottom.Add.Label( "20", "count" );
+				limit = bottom.Add.Label( "20", "limit" );
 			}
 
 			public override void Tick()

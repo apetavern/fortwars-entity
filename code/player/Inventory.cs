@@ -37,7 +37,7 @@ namespace Fortwars
 		{
 			var player = ConsoleSystem.Caller.Pawn;
 			var item = Library.Create<Entity>( itemName );
-			player.Inventory.Add( item );
+			(player as FortwarsPlayer).Inventory.Add( item );
 			Log.Info( $"Gave {player.Client.Name} 1x {itemName}" );
 		}
 	}
