@@ -7,25 +7,26 @@ namespace Fortwars
 	{
 		Texture colorTexture;
 		Texture depthTexture;
-		RenderAttributes renderAttributes;
 
-		private Vector2 textureSize;
+		private Rect viewport;
 		private float fieldOfView = 25f;
 		const float baseFov = 50f;
 
+		private RenderAttributes renderAttributes;
+
 		public ScopeRenderTarget()
 		{
-			textureSize = Screen.Size / 2f;
-			renderAttributes.Set( "textureSize", textureSize );
+			renderAttributes = new();
+			viewport = new Rect( Vector2.Zero, Screen.Size / 2f );
 
 			colorTexture = Texture.CreateRenderTarget()
-						 .WithSize( (int)textureSize.x, (int)textureSize.y )
+						 .WithSize( (int)viewport.width, (int)viewport.height )
 						 .WithScreenFormat()
 						 .WithScreenMultiSample()
 						 .Create();
 
 			depthTexture = Texture.CreateRenderTarget()
-						 .WithSize( (int)textureSize.x, (int)textureSize.y )
+						 .WithSize( (int)viewport.width, (int)viewport.height )
 						 .WithDepthFormat()
 						 .WithScreenMultiSample()
 						 .Create();
@@ -45,33 +46,27 @@ namespace Fortwars
 			if ( player == null )
 				return;
 
-			var sceneWorld = Map.Scene;
-
-			if ( sceneWorld == null )
-				return;
-
 			if ( (player as FortwarsPlayer).ActiveChild is not FortwarsWeapon weapon )
 				return;
 
 			var sceneObject = weapon.ViewModelEntity.SceneObject;
+			sceneObject.Flags.ViewModelLayer = true;
 
 			if ( sceneObject == null )
 				return;
 
-			if ( weapon.IsAiming )
-				fieldOfView = fieldOfView.LerpTo( weapon.WeaponAsset.AimFovMult * baseFov, 10 * Time.Delta );
-			else
-				fieldOfView = fieldOfView.LerpTo( baseFov, 10 * Time.Delta );
+			if ( !weapon.IsAiming )
+				return;
 
 			Render.Draw.DrawScene( colorTexture,
 					depthTexture,
-					sceneWorld,
+					Map.Scene,
 					renderAttributes,
-					Box.Rect,
+					viewport,
 					CurrentView.Position,
-					CurrentView.Rotation.Angles().ToRotation(),
-					fov: fieldOfView,
-					zNear: 1,
+					CurrentView.Rotation,
+					fieldOfView,
+					zNear: 32,
 					zFar: 25000 );
 
 			Render.Attributes.Set( "ScopeRT", colorTexture );
