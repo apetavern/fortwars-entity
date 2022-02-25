@@ -214,7 +214,7 @@
 						source_filename = "models/weapons/uts15/uts15_v.fbx"
 						start_frame = 59
 						end_frame = 69
-						framerate = -1.0
+						framerate = 20.0
 						take = 0
 						reverse = false
 					},
