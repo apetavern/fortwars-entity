@@ -177,7 +177,6 @@ public partial class FortwarsWeapon : Carriable
 	public override void SimulateAnimator( PawnAnimator anim )
 	{
 		anim.SetAnimParameter( "holdtype", (int)WeaponAsset.HoldType );
-		anim.SetAnimParameter( "aimat_weight", 1.0f );
 		anim.SetAnimParameter( "holdtype_handedness", 0 );
 	}
 
