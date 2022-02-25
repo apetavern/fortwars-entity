@@ -1,4 +1,6 @@
-﻿HealthBar {
+﻿@import "/UI/_Common.scss";
+
+HealthBar {
     position: absolute;
     font-size: 48px;
     font-color: white;
@@ -12,6 +14,7 @@
     transform: translate(-50% -50%);
     width: 200px;
     height: 25px;
+    z-index: $z-index-world;
 
     .owner {
         position: absolute;
