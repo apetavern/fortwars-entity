@@ -10,7 +10,7 @@ ShopMenu {
     bottom: 0;
     background-color: rgba( $background, 0.9 );
     padding: 50px 80px;
-    z-index: 100;
+    z-index: $z-index-shop;
     backdrop-filter: blur( 20px );
     flex-direction: column;
     pointer-events: all;

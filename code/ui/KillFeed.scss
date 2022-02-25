@@ -1,8 +1,10 @@
-﻿killfeed {
+﻿@import "/ui/_Common.scss";
+
+killfeed {
     position: absolute;
     top: 100px;
     right: 100px;
-    z-index: 100;
+    z-index: $z-index-killfeed;
     flex-direction: column-reverse;
     width: 500px;
     font-family: ChakraPetch;

@@ -39,7 +39,7 @@ DevMenu {
     width: 500px;
     background-color: rgba( #333, 0.75 );
     backdrop-filter: blur( 10px );
-    z-index: 1000;
+    z-index: $z-index-devmenu;
     flex-direction: column;
     transform: translate( -50px );
     opacity: 0;
