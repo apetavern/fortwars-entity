@@ -23,7 +23,7 @@ namespace Fortwars
 							.UseHitboxes()
 							.Run();
 
-			panel.PositionAtWorld( tr.EndPos );
+			panel.PositionAtWorld( tr.EndPosition );
 		}
 
 		public static void PositionAtWorld( this Panel panel, Vector3 pos )

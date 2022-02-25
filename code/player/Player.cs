@@ -56,7 +56,7 @@ namespace Fortwars
 				EnableDrawing = false;
 
 				Controller = null;
-				Camera = new SpectateRagdollCamera();
+				CameraMode = new SpectateRagdollCamera();
 
 				base.Respawn();
 
@@ -65,7 +65,7 @@ namespace Fortwars
 
 			Controller = new FortwarsWalkController();
 			Animator = new StandardPlayerAnimator();
-			Camera = new FirstPersonCamera();
+			CameraMode = new FirstPersonCamera();
 
 			EnableAllCollisions = true;
 			EnableDrawing = true;
@@ -105,7 +105,7 @@ namespace Fortwars
 			Inventory.DeleteContents();
 
 			Controller = null;
-			Camera = new SpectateRagdollCamera();
+			CameraMode = new SpectateRagdollCamera();
 
 			EnableAllCollisions = false;
 			EnableDrawing = false;
@@ -128,6 +128,11 @@ namespace Fortwars
 
 				return;
 			}
+
+
+			// HACK: remove this when https://github.com/Facepunch/sbox-issues/issues/1641 gets fixed
+			if ( CameraMode is SpectateRagdollCamera )
+				CameraMode = new FirstPersonCamera();
 
 			var controller = GetActiveController();
 			controller?.Simulate( cl, this, GetActiveAnimator() );

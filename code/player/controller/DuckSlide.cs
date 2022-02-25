@@ -53,12 +53,12 @@ namespace Fortwars
 			if ( IsActive )
 			{
 				if ( IsActiveSlide )
-					Controller.EyePosLocal = Controller.EyePosLocal.LerpTo( new Vector3( 0, 0, 32 ), 50f * Time.Delta );
+					Controller.EyeLocalPosition = Controller.EyeLocalPosition.LerpTo( new Vector3( 0, 0, 32 ), 50f * Time.Delta );
 				else
-					Controller.EyePosLocal = Controller.EyePosLocal.LerpTo( new Vector3( 0, 0, 32 ), 25f * Time.Delta );
+					Controller.EyeLocalPosition = Controller.EyeLocalPosition.LerpTo( new Vector3( 0, 0, 32 ), 25f * Time.Delta );
 			}
 			else
-				Controller.EyePosLocal = Controller.EyePosLocal.LerpTo( new Vector3( 0, 0, 64 ), 25f * Time.Delta );
+				Controller.EyeLocalPosition = Controller.EyeLocalPosition.LerpTo( new Vector3( 0, 0, 64 ), 25f * Time.Delta );
 		}
 
 		protected virtual void TrySlide()

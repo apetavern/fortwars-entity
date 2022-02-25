@@ -36,19 +36,23 @@ namespace Fortwars
 
 		public override void OnCarryStart( Entity carrier )
 		{
-			carrier.Inventory.SetActive( this );
-
-			if ( Team == Team.Blue && Game.Instance.BlueFlagCarrier != carrier as FortwarsPlayer )
+			if ( carrier is FortwarsPlayer player )
 			{
-				Game.Instance.PlayerPickupEnemyFlagFloor( carrier as FortwarsPlayer );
+				player.Inventory.SetActive( this );
+
+				if ( Team == Team.Blue && Game.Instance.BlueFlagCarrier != player )
+				{
+					Game.Instance.PlayerPickupEnemyFlagFloor( player );
+				}
+
+				if ( Team == Team.Red && Game.Instance.BlueFlagCarrier != player )
+				{
+					Game.Instance.PlayerPickupEnemyFlagFloor( player );
+				}
+
+				base.OnCarryStart( carrier );
 			}
 
-			if ( Team == Team.Red && Game.Instance.BlueFlagCarrier != carrier as FortwarsPlayer )
-			{
-				Game.Instance.PlayerPickupEnemyFlagFloor( carrier as FortwarsPlayer );
-			}
-
-			base.OnCarryStart( carrier );
 		}
 
 		public override bool CanCarry( Entity carrier )
@@ -70,7 +74,7 @@ namespace Fortwars
 				if ( ReturnZone != null )
 					ReturnZone.Delete();
 			}
-			
+
 			base.OnDestroy();
 		}
 
@@ -78,15 +82,15 @@ namespace Fortwars
 		[Event.Tick.Server]
 		public void Tick()
 		{
-			if ( Parent != null && Parent.ActiveChild != this )
+			if ( Parent != null && (Parent as FortwarsPlayer).ActiveChild != this )
 			{
 				ThrowRoll();
 			}
-			else if ( Parent != null && Parent.ActiveChild == this )
+			else if ( Parent != null && (Parent as FortwarsPlayer).ActiveChild == this )
 			{
 				RespawntimerStarted = false;
 
-				if(ReturnZone != null )
+				if ( ReturnZone != null )
 					ReturnZone.Delete();
 			}
 
@@ -95,7 +99,7 @@ namespace Fortwars
 				TimeSinceDropped = 0;
 				RespawntimerStarted = true;
 				ReturnZone = new RollReturnZone();
-				ReturnZone.AttachToRoll(this);
+				ReturnZone.AttachToRoll( this );
 			}
 
 			if ( RespawntimerStarted && TimeSinceDropped > 15f )
@@ -224,17 +228,17 @@ namespace Fortwars
 		public virtual void AttackSecondary()
 		{
 			HoldingSecondary = true;
-			ViewModelEntity?.SetAnimBool( "pull", HoldingSecondary );
-			ViewModelEntity?.SetAnimFloat( "pullamount", Math.Clamp( TimeSinceHoldingSecondary / 4f, 0, 1f ) );
+			ViewModelEntity?.SetAnimParameter( "pull", HoldingSecondary );
+			ViewModelEntity?.SetAnimParameter( "pullamount", Math.Clamp( TimeSinceHoldingSecondary / 4f, 0, 1f ) );
 		}
 
 		public virtual void AttackPrimary()
 		{
 			var player = Owner as FortwarsPlayer;
-			player.SetAnimBool( "b_attack", true );
+			player.SetAnimParameter( "b_attack", true );
 			foreach ( var tr in TraceHit( Owner.EyePosition, Owner.EyePosition + Owner.EyeRotation.Forward * 128f ) )
 			{
-				ViewModelEntity?.SetAnimBool( "hit", tr.Hit );
+				ViewModelEntity?.SetAnimParameter( "hit", tr.Hit );
 
 				if ( !tr.Hit )
 				{
@@ -244,15 +248,15 @@ namespace Fortwars
 
 				HitEffects();
 
-				tr.Entity.TakeDamage( DamageInfo.FromBullet( tr.EndPos, -tr.Normal * 10f, 10 ) );
+				tr.Entity.TakeDamage( DamageInfo.FromBullet( tr.EndPosition, -tr.Normal * 10f, 10 ) );
 			}
 
-			ViewModelEntity?.SetAnimBool( "fire", true );
+			ViewModelEntity?.SetAnimParameter( "fire", true );
 
 			if ( HoldingSecondary )
 			{
 				_ = DoThrowDelayed();
-				ViewModelEntity?.SetAnimBool( "throw", true );
+				ViewModelEntity?.SetAnimParameter( "throw", true );
 			}
 		}
 
@@ -270,7 +274,7 @@ namespace Fortwars
 
 		public virtual IEnumerable<TraceResult> TraceHit( Vector3 start, Vector3 end, float radius = 2.0f )
 		{
-			bool InWater = Physics.TestPointContents( start, CollisionLayer.Water );
+			bool InWater = Map.Physics.IsPointWater( start );
 
 			var tr = Trace.Ray( start, end )
 					.UseHitboxes()
@@ -286,11 +290,11 @@ namespace Fortwars
 
 		public override void SimulateAnimator( PawnAnimator anim )
 		{
-			anim.SetParam( "holdtype", 4 );
-			anim.SetParam( "aimat_weight", 1.0f );
-			anim.SetParam( "holdtype_handedness", 1 );
-			anim.SetParam( "holdtype_pose_hand", 0.07f );
-			anim.SetParam( "holdtype_attack", 1 );
+			anim.SetAnimParameter( "holdtype", 4 );
+			anim.SetAnimParameter( "aimat_weight", 1.0f );
+			anim.SetAnimParameter( "holdtype_handedness", 1 );
+			anim.SetAnimParameter( "holdtype_pose_hand", 0.07f );
+			anim.SetAnimParameter( "holdtype_attack", 1 );
 		}
 	}
 }

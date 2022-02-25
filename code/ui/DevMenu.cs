@@ -91,14 +91,14 @@ namespace Fortwars
 				return;
 
 			var weapon = FortwarsWeapon.FromPath( path );
-			weapon.Position = tr.EndPos + tr.Normal * 16;
+			weapon.Position = tr.EndPosition + tr.Normal * 16;
 		}
 
 		[AdminCmd( "give_weapon" )]
 		public static void GiveWeapon( string path )
 		{
 			var caller = ConsoleSystem.Caller;
-			var player = caller.Pawn;
+			var player = caller.Pawn as FortwarsPlayer;
 
 			player.Inventory.Add( FortwarsWeapon.FromPath( path ), true );
 		}

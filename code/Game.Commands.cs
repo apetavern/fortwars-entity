@@ -18,7 +18,7 @@ namespace Fortwars
 			var owner = ConsoleSystem.Caller;
 			var player = owner.Pawn;
 
-			if ( player.ActiveChild is not FortwarsWeapon weapon )
+			if ( (player as FortwarsPlayer).ActiveChild is not FortwarsWeapon weapon )
 				return;
 
 			weapon.ReserveAmmo += amount;
@@ -84,7 +84,7 @@ namespace Fortwars
 				.Run();
 
 			var ent = new FortwarsBlock();
-			ent.Position = tr.EndPos;
+			ent.Position = tr.EndPosition;
 			ent.Rotation = Rotation.From( new Angles( 0, player.EyeRotation.Yaw(), 0 ) ) * Rotation.FromAxis( Vector3.Up, 180 );
 
 			if ( blockName.Contains( "steel" ) )
@@ -106,9 +106,9 @@ namespace Fortwars
 			// Drop to floor
 			if ( ent.PhysicsBody != null && ent.PhysicsGroup.BodyCount == 1 )
 			{
-				var p = ent.PhysicsBody.FindClosestPoint( tr.EndPos );
+				var p = ent.PhysicsBody.FindClosestPoint( tr.EndPosition );
 
-				var delta = p - tr.EndPos;
+				var delta = p - tr.EndPosition;
 				ent.PhysicsBody.Position -= delta;
 			}
 

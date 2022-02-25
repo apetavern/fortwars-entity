@@ -62,6 +62,20 @@
 				m_bPredicted = false
 				m_bDefaultValue = false
 			},
+			{
+				_class = "CBoolAnimParameter"
+				m_name = "aiming"
+				m_id = 
+				{
+					m_id = 1978694289
+				}
+				m_previewButton = "ANIMPARAM_BUTTON_NONE"
+				m_bNetwork = false
+				m_bUseMostRecentValue = false
+				m_bAutoReset = false
+				m_bPredicted = false
+				m_bDefaultValue = false
+			},
 		]
 	}
 	m_pTagManager = 

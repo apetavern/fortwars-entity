@@ -7,6 +7,7 @@ namespace Fortwars
 	{
 		Texture colorTexture;
 		Texture depthTexture;
+		RenderAttributes renderAttributes;
 
 		private Vector2 textureSize;
 		private float fieldOfView = 25f;
@@ -15,6 +16,7 @@ namespace Fortwars
 		public ScopeRenderTarget()
 		{
 			textureSize = Screen.Size / 2f;
+			renderAttributes.Set( "textureSize", textureSize );
 
 			colorTexture = Texture.CreateRenderTarget()
 						 .WithSize( (int)textureSize.x, (int)textureSize.y )
@@ -43,10 +45,12 @@ namespace Fortwars
 			if ( player == null )
 				return;
 
-			if ( SceneWorld.Current == null )
+			var sceneWorld = Map.Scene;
+
+			if ( sceneWorld == null )
 				return;
 
-			if ( player.ActiveChild is not FortwarsWeapon weapon )
+			if ( (player as FortwarsPlayer).ActiveChild is not FortwarsWeapon weapon )
 				return;
 
 			var sceneObject = weapon.ViewModelEntity.SceneObject;
@@ -59,18 +63,19 @@ namespace Fortwars
 			else
 				fieldOfView = fieldOfView.LerpTo( baseFov, 10 * Time.Delta );
 
-			Render.DrawScene( colorTexture,
+			Render.Draw.DrawScene( colorTexture,
 					depthTexture,
-					textureSize,
-					SceneWorld.Current,
+					sceneWorld,
+					renderAttributes,
+					Box.Rect,
 					CurrentView.Position,
-					CurrentView.Rotation.Angles(),
-					fieldOfView,
+					CurrentView.Rotation.Angles().ToRotation(),
+					fov: fieldOfView,
 					zNear: 1,
 					zFar: 25000 );
 
-			Render.Set( "ScopeRT", colorTexture );
-			sceneObject.SetValue( "ScopeRT", colorTexture );
+			Render.Attributes.Set( "ScopeRT", colorTexture );
+			sceneObject.Attributes.Set( "ScopeRT", colorTexture );
 		}
 	}
 }

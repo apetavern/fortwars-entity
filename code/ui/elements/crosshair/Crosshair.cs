@@ -35,7 +35,7 @@ public partial class Crosshair : Panel
 			if ( VirtualCursor.InUse )
 				return false;
 
-			if ( Local.Pawn.ActiveChild is FortwarsWeapon weapon && (weapon.GetTuckDist() != -1 || weapon.IsAiming) )
+			if ( (Local.Pawn as FortwarsPlayer).ActiveChild is FortwarsWeapon weapon && (weapon.GetTuckDist() != -1 || weapon.IsAiming) )
 				return false;
 
 			if ( Local.Pawn is FortwarsPlayer { Controller: FortwarsWalkController { IsSprinting: true } } )
@@ -103,7 +103,7 @@ public partial class Crosshair : Panel
 	{
 		base.Tick();
 
-		if ( Local.Pawn.ActiveChild is not FortwarsWeapon weapon )
+		if ( (Local.Pawn as FortwarsPlayer).ActiveChild is not FortwarsWeapon weapon )
 			return;
 
 		float size = Config.Gap + (Config.Size * 2) + weapon.GetCrosshairSize();

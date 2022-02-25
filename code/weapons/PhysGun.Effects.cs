@@ -1,4 +1,5 @@
-﻿using Sandbox;
+﻿using Fortwars;
+using Sandbox;
 using Sandbox.Component;
 using System.Linq;
 
@@ -55,19 +56,19 @@ public partial class PhysGun
 	{
 		bool rotating = Input.Down( InputButton.Use );
 
-		ViewModelEntity?.SetAnimBool( "fire", BeamActive );
+		ViewModelEntity?.SetAnimParameter( "fire", BeamActive );
 
 		if ( GrabbedEntity.IsValid() && rotating )
 		{
-			ViewModelEntity?.SetAnimFloat( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickFB" ), -(Input.MouseDelta.y * RotateSpeed), Time.Delta ) );
-			ViewModelEntity?.SetAnimFloat( "joystickLR", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickLR" ), (Input.MouseDelta.x * RotateSpeed), Time.Delta ) );
-			ViewModelEntity?.SetAnimBool( "snap", Input.Down( InputButton.Run ) );
+			ViewModelEntity?.SetAnimParameter( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimParameterFloat( "joystickFB" ), -(Input.MouseDelta.y * RotateSpeed), Time.Delta ) );
+			ViewModelEntity?.SetAnimParameter( "joystickLR", MathX.LerpTo( ViewModelEntity.GetAnimParameterFloat( "joystickLR" ), (Input.MouseDelta.x * RotateSpeed), Time.Delta ) );
+			ViewModelEntity?.SetAnimParameter( "snap", Input.Down( InputButton.Run ) );
 		}
 		else
 		{
-			ViewModelEntity?.SetAnimFloat( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickFB" ), 0f, 0.1f ) );
-			ViewModelEntity?.SetAnimFloat( "joystickLR", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "joystickLR" ), 0f, 0.1f ) );
-			ViewModelEntity?.SetAnimBool( "snap", false );
+			ViewModelEntity?.SetAnimParameter( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimParameterFloat( "joystickFB" ), 0f, 0.1f ) );
+			ViewModelEntity?.SetAnimParameter( "joystickLR", MathX.LerpTo( ViewModelEntity.GetAnimParameterFloat( "joystickLR" ), 0f, 0.1f ) );
+			ViewModelEntity?.SetAnimParameter( "snap", false );
 		}
 
 		if ( GrabbedEntity.IsValid() )
@@ -88,22 +89,22 @@ public partial class PhysGun
 		{
 			if ( !Input.Down( InputButton.Attack1 ) && !DidFreeze )
 			{
-				ViewModelEntity?.SetAnimBool( "freeze", true );
+				ViewModelEntity?.SetAnimParameter( "freeze", true );
 				DidFreeze = true;
 			}
 			DesiredDialPos = 0f;
 		}
 
-		ViewModelEntity?.SetAnimBool( "cangrab", CanGrab );
+		ViewModelEntity?.SetAnimParameter( "cangrab", CanGrab );
 
-		ViewModelEntity?.SetAnimFloat( "dialpos", MathX.LerpTo( ViewModelEntity.GetAnimFloat( "dialpos" ), DesiredDialPos, 0.5f ) );
+		ViewModelEntity?.SetAnimParameter( "dialpos", MathX.LerpTo( ViewModelEntity.GetAnimParameterFloat( "dialpos" ), DesiredDialPos, 0.5f ) );
 	}
 
 	protected virtual void UpdateEffects()
 	{
 		var owner = Owner;
 
-		if ( owner == null || !BeamActive || !IsActiveChild() )
+		if ( owner == null || !BeamActive || !((owner as FortwarsPlayer).ActiveChild == this) )
 		{
 			KillEffects();
 			return;
@@ -120,7 +121,7 @@ public partial class PhysGun
 
 		if ( Beam == null )
 		{
-			Beam = Particles.Create( "particles/physgun_beam.vpcf", tr.EndPos );
+			Beam = Particles.Create( "particles/physgun_beam.vpcf", tr.EndPosition );
 		}
 
 		Beam.SetEntityAttachment( 0, EffectEntity, "muzzle", true );
@@ -172,7 +173,7 @@ public partial class PhysGun
 		}
 		else
 		{
-			lastBeamPos = tr.EndPos;// Vector3.Lerp( lastBeamPos, tr.EndPos, Time.Delta * 10 );
+			lastBeamPos = tr.EndPosition; // Vector3.Lerp( lastBeamPos, tr.EndPos, Time.Delta * 10 );
 			Beam.SetPosition( 1, lastBeamPos );
 
 			if ( EndNoHit == null )

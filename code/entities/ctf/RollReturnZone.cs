@@ -41,7 +41,7 @@ namespace Fortwars
 			Transmit = TransmitType.Never;
 		}
 
-		public void AttachToRoll(BogRoll roll )
+		public void AttachToRoll( BogRoll roll )
 		{
 			Team = roll.Team;
 			switch ( Team )
@@ -66,16 +66,16 @@ namespace Fortwars
 		{
 			if ( AttachedRoll != null )
 			{
-				Position = Trace.Ray( AttachedRoll.Position, AttachedRoll.Position - Vector3.Up * 10f ).Ignore( AttachedRoll ).Run().EndPos;
+				Position = Trace.Ray( AttachedRoll.Position, AttachedRoll.Position - Vector3.Up * 10f ).Ignore( AttachedRoll ).Run().EndPosition;
 
-				if (Team == Team.Red )
+				if ( Team == Team.Red )
 				{
-					if(RedPlayers.Count > 0 && BluePlayers.Count == 0 )
+					if ( RedPlayers.Count > 0 && BluePlayers.Count == 0 )
 					{
 						AttachedRoll.TimeSinceDropped += Time.Delta; //Return faster if team matches.
 					}
 
-					if ( BluePlayers.Count > 0 && RedPlayers.Count == 0)
+					if ( BluePlayers.Count > 0 && RedPlayers.Count == 0 )
 					{
 						AttachedRoll.TimeSinceDropped -= Time.Delta * 2f; // Timer goes back up to max if enemy team is in the return zone.
 						AttachedRoll.TimeSinceDropped = Math.Clamp( AttachedRoll.TimeSinceDropped, 0f, 15f );
@@ -125,7 +125,7 @@ namespace Fortwars
 					default:
 						break;
 				}
-				
+
 			}
 		}
 
@@ -146,7 +146,7 @@ namespace Fortwars
 					case Team.Invalid:
 						break;
 					case Team.Red:
-						if(RedPlayers.Contains( player ))
+						if ( RedPlayers.Contains( player ) )
 							RedPlayers.Remove( player );
 						break;
 					case Team.Blue:

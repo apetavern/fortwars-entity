@@ -50,7 +50,7 @@ namespace Fortwars
 				}
 
 				bool hasPhysgun = false;
-				foreach ( var player in Sandbox.Player.All )
+				foreach ( var player in Sandbox.Entity.All.OfType<FortwarsPlayer>() )
 				{
 					if ( player.ActiveChild is PhysGun physgun )
 					{

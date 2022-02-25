@@ -31,7 +31,7 @@ namespace Fortwars
 			trailParticle.SetPosition( 0, GetAttachment( "trail" ).Value.Position ); //Have to keep positioning it...
 
 			Velocity += Speed * Rotation.Forward * Time.Delta;
-			Velocity += PhysicsWorld.Gravity * 0.5f * Time.Delta;
+			Velocity += Map.Physics.Gravity * 0.5f * Time.Delta;
 
 			Rotation = Rotation.LookAt( Velocity.Normal, Vector3.Up );
 
@@ -52,7 +52,7 @@ namespace Fortwars
 			if ( !IsServer )
 				return;
 
-			var sourcePos = tr.EndPos;
+			var sourcePos = tr.EndPosition;
 			var radius = 256f;
 			var overlaps = Entity.All.Where( e => Vector3.DistanceBetween( sourcePos, e.Position ) <= radius ).ToList();
 
@@ -61,8 +61,8 @@ namespace Fortwars
 				if ( overlap is not ModelEntity ent || !ent.IsValid() ) continue;
 				if ( ent.LifeState != LifeState.Alive || !ent.PhysicsBody.IsValid() || ent.IsWorld ) continue;
 
-				var dir = (overlap.Position - tr.EndPos).Normal;
-				var dist = Vector3.DistanceBetween( tr.EndPos, overlap.Position );
+				var dir = (overlap.Position - tr.EndPosition).Normal;
+				var dist = Vector3.DistanceBetween( tr.EndPosition, overlap.Position );
 
 				if ( dist > radius ) continue;
 
