@@ -10,6 +10,7 @@ InventoryBar {
     position: absolute;
     bottom: $safe-area-y;
     right: $safe-area-x;
+    z-index: $z-index-inventorybar;
 
     InventoryIcon {
         margin: 2px 0;

@@ -6,6 +6,20 @@ $safe-area-y: 32px;
 
 $background: #333;
 
+$z-index-compass: 100;
+$z-index-inventorybar: 101;
+$z-index-resources: 102;
+$z-index-dead: 500;
+$z-index-classmenu: 501;
+$z-index-shop: 502;
+$z-index-messagefeed: 503;
+$z-index-killfeed: 504;
+$z-index-victory: 1000;
+$z-index-mapvote: 1001;
+$z-index-scoreboard: 1002;
+$z-index-chat: 2000;
+$z-index-devmenu: 3000;
+
 label.title, text.title {
     font-size: 48px;
     padding: 25px 0;

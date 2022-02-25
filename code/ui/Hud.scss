@@ -25,7 +25,7 @@ icon, iconpanel {
     flex-direction: column;
     transition: all 0.1s ease-out;
     position: absolute;
-    z-index: 10000;
+    z-index: $z-index-dropdown;
     min-height: 10px;
     min-width: 10px;
     overflow: scroll;
