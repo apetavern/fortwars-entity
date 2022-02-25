@@ -19,6 +19,8 @@ namespace Fortwars
 			if ( !IsServer )
 				return;
 
+			if ( !(other as FortwarsPlayer).IsValid() ) return;
+
 			if ( (other as FortwarsPlayer).ActiveChild is not FortwarsWeapon weapon )
 				return;
 
