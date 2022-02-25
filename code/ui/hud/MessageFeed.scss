@@ -6,7 +6,7 @@ MessageFeed {
     left: 50%;
     flex-direction: column;
     transform: translate( -50% );
-    z-index: 1000;
+    z-index: $z-index-messagefeed;
     max-height: 200px;
     overflow: scroll;
 }

@@ -1,6 +1,8 @@
-﻿.scoreboard {
+﻿@import "/ui/_Common.scss";
+
+.scoreboard {
     position: absolute;
-    z-index: 100;
+    z-index: $z-index-scoreboard;
     flex-direction: column;
     font-family: Roboto;
     font-size: 23px;

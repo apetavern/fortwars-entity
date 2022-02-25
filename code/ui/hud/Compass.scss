@@ -10,6 +10,7 @@ compass {
     background-image: radial-gradient( rgba( black, 0.5 ), rgba( black, 0 ) 50% );
     background-position: 0 -100%;
     background-size: 100% 200%;
+    z-index: $z-index-compass;
 
     .compass-point {
         position: absolute;

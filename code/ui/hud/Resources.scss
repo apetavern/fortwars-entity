@@ -9,6 +9,7 @@ Resources {
     border-left: 4px solid transparent;
     border-radius: 2px;
     padding: 10px 20px;
+    z-index: $z-index-resources;
 
     Resource {
         align-items: center;
