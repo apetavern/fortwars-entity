@@ -129,6 +129,11 @@ namespace Fortwars
 				return;
 			}
 
+
+			// HACK: remove this when https://github.com/Facepunch/sbox-issues/issues/1641 gets fixed
+			if ( CameraMode is SpectateRagdollCamera )
+				CameraMode = new FirstPersonCamera();
+
 			var controller = GetActiveController();
 			controller?.Simulate( cl, this, GetActiveAnimator() );
 
