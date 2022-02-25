@@ -42,6 +42,8 @@ namespace Fortwars
 					classInfo.Update( classType );
 				} );
 			}
+
+			Add.Button( "Cancel", "cancel", () => Delete() );
 		}
 
 		[Event.Tick.Client]
@@ -49,18 +51,23 @@ namespace Fortwars
 		{
 			if ( Input.Pressed( InputButton.View ) )
 			{
-				ShowMenu();
+				Toggle();
 			}
 		}
 
-		public static void ShowMenu()
+		public static void Toggle()
 		{
 			// Do we already have the class menu shown?
-			if ( Local.Hud.Children.ToList().OfType<ClassMenu>().Count() > 0 )
-				return;
-
-			// No class menu, let's add one
-			Local.Hud.AddChild<ClassMenu>();
+			var existingClassMenu = Local.Hud.Children.OfType<ClassMenu>().FirstOrDefault();
+			if ( existingClassMenu != null )
+			{
+				existingClassMenu.Delete();
+			}
+			else
+			{
+				// No class menu, let's add one
+				Local.Hud.AddChild<ClassMenu>();
+			}
 		}
 
 		[ServerCmd( "fw_change_class" )]

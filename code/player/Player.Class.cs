@@ -2,7 +2,7 @@
 {
 	partial class FortwarsPlayer
 	{
-		public Class Class { get; set; }
+		public Class Class { get; set; } = new AssaultClass();
 
 		public void AssignClass( Class newClass )
 		{

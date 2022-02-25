@@ -17,6 +17,12 @@ ClassMenu {
     }
 }
 
+.cancel {
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+}
+
 ClassInfo {
     position: absolute;
     top: 50%;
@@ -24,6 +30,28 @@ ClassInfo {
     width: 400px;
     flex-direction: column;
     transform: translate( 0 -50% );
+}
+
+button {
+    background-color: rgba( white, 0.2 );
+    margin: 0px 10px;
+    padding: 10px 20px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    border: 2px solid transparent;
+    transition: all 150ms ease;
+    flex-direction: column-reverse;
+
+    iconpanel {
+        color: white;
+        margin-right: 8px;
+    }
+
+    &:hover {
+        cursor: pointer;
+        border: white;
+    }
 }
 
 .classes {
@@ -39,14 +67,6 @@ ClassInfo {
     right: 0;
 
     button.class {
-        background-color: rgba( white, 0.2 );
-        margin: 0px 10px;
-        padding: 10px 20px;
-        align-items: center;
-        justify-content: center;
-        border-radius: 2px;
-        border: 2px solid transparent;
-        transition: all 150ms ease;
         flex-direction: column-reverse;
 
         .class-count {
@@ -55,16 +75,6 @@ ClassInfo {
             left: 0;
             right: 0;
             text-align: center;
-        }
-
-        iconpanel {
-            color: white;
-            margin-right: 8px;
-        }
-
-        &:hover {
-            cursor: pointer;
-            border: white;
         }
     }
 }
