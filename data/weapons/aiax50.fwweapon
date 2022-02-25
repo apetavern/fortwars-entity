@@ -29,9 +29,9 @@
 		holdtype = "2"
 		projectilemodel = resource:""
 		projectilespeed = 1.0
-		aimposition = [ -20.0, 29.7, 8.3 ]
-		aimrotation = [ 1.65, -4.0, 0.0 ]
-		aimfovmult = 0.25
+		aimposition = [ -1000.0, 0.0, 0.0 ]
+		aimrotation = [ 0.0, 0.0, 0.0 ]
+		aimfovmult = 0.1
 		userendertarget = true
 		fireparticles = resource:"particles/flash_medium.vpcf"
 		tracerparticles = resource:"particles/tracer_large.vpcf"

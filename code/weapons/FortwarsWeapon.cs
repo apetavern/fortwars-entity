@@ -101,15 +101,19 @@ public partial class FortwarsWeapon : Carriable
 		}
 	}
 
-	ScopeRenderTarget SniperScopePanel;
+	FallbackScope scopePanel;
+	// ScopeRenderTarget SniperScopePanel;
 	public override void CreateHudElements()
 	{
 		base.CreateHudElements();
 
 		if ( WeaponAsset.UseRenderTarget )
 		{
-			SniperScopePanel = new ScopeRenderTarget();
-			SniperScopePanel.Parent = Local.Hud;
+			// SniperScopePanel = new ScopeRenderTarget();
+			// SniperScopePanel.Parent = Local.Hud;
+
+			scopePanel = new FallbackScope();
+			scopePanel.Parent = Local.Hud;
 		}
 	}
 
@@ -117,7 +121,8 @@ public partial class FortwarsWeapon : Carriable
 	{
 		base.DestroyHudElements();
 
-		SniperScopePanel?.Delete();
+		// SniperScopePanel?.Delete();
+		scopePanel?.Delete();
 	}
 
 	public override void CreateViewModel()
