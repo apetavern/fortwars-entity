@@ -218,6 +218,7 @@ namespace Fortwars
 			Vector3 throwdir = player.EyeRotation.Forward + (Vector3.Up / 3f);
 
 			player.Inventory.Drop( this );
+			player.Inventory.SetActiveSlot( 0, true );
 
 			Velocity = throwdir * 300f * (1f + Math.Clamp( TimeSinceHoldingSecondary / 2f, 0, 2f ));
 		}
