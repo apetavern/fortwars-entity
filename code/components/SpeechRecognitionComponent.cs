@@ -48,7 +48,7 @@ namespace Fortwars
 
 		public void SpawnBlock( string output )
 		{
-			if(choices.ContainsKey( output ) )
+			if ( choices.ContainsKey( output ) )
 				Game.Spawn( choices[output] );
 
 			if ( wantstostop )
