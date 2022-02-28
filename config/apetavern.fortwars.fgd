@@ -67,6 +67,24 @@ metadata
 ]
 
 //
+// Fortwars.ConfigEntity
+//
+@PointClass base(BaseProperties_apetavern_fortwars) iconsprite( "materials/editor/fw_config.vmat" ) 
+metadata
+{
+	entity_tool_name = "Map Config"
+	entity_tool_group = "FortWars"
+}
+= fw_config : "Overrides game settings for this map"
+[
+	buildtime(integer) : "Build Time" : 150 : "Build round time in seconds"
+	combattime(integer) : "Combat Time" : 300 : "Combat round time in seconds"
+	maxrounds(integer) : "Max Rounds" : 3 : "Maximum number of rounds per game"
+	woodblocksperplayer(integer) : "Wood Blocks Per Player" : 30 : "Wood blocks per player"
+	steelblocksperplayer(integer) : "Steel Blocks Per Player" : 15 : "Steel blocks per player"
+]
+
+//
 // Fortwars.FuncFlagzone
 //
 @SolidClass base(BaseProperties_apetavern_fortwars) tags( Dynamic, Dynamic ) = func_flagzone : "Players capture the flag in this area."
