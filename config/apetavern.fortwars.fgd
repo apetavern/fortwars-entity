@@ -79,6 +79,7 @@ metadata
 [
 	buildtime(integer) : "Build Time" : 150 : "Build round time in seconds"
 	combattime(integer) : "Combat Time" : 300 : "Combat round time in seconds"
+	respawntimer(integer) : "Respawn Timer" : 10 : "Time between respawns in seconds"
 	woodblocksperplayer(integer) : "Wood Blocks Per Player" : 30 : "Wood blocks per player"
 	steelblocksperplayer(integer) : "Steel Blocks Per Player" : 15 : "Steel blocks per player"
 ]

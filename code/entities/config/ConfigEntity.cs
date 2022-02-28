@@ -21,14 +21,19 @@ namespace Fortwars
 		[Property] public int CombatTime { get; set; } = 300;
 
 		/// <summary>
+		/// Time between respawns in seconds
+		/// </summary>
+		[Property] public int RespawnTimer { get; set; } = 10;
+
+		/// <summary>
 		/// Wood blocks per player
 		/// </summary>
-		[Property] public int WoodBlocksPerPlayer { get; set; } = 30;
+		[Property] public int WoodBlocksPerPlayer { get; set; } = 30; // TODO
 
 		/// <summary>
 		/// Steel blocks per player
 		/// </summary>
-		[Property] public int SteelBlocksPerPlayer { get; set; } = 15;
+		[Property] public int SteelBlocksPerPlayer { get; set; } = 15; // TODO
 
 		public override void Spawn()
 		{
@@ -38,6 +43,8 @@ namespace Fortwars
 
 			BuildRound.RoundLength = BuildTime;
 			CombatRound.RoundLength = CombatTime;
+
+			FortwarsPlayer.TimeBetweenSpawns = RespawnTimer;
 
 			Transmit = TransmitType.Never;
 		}
