@@ -23,13 +23,13 @@
 					properties = null
 				},
 				{
-					min = [ 8192, 0 ]
-					max = [ 16384, 2048 ]
+					min = [ 8192, 2048 ]
+					max = [ 16256, 4096 ]
 					properties = null
 				},
 				{
-					min = [ 16384, 0 ]
-					max = [ 32768, 2048 ]
+					min = [ 16256, 2048 ]
+					max = [ 32768, 4096 ]
 					properties = null
 				},
 				{
@@ -48,18 +48,18 @@
 					properties = null
 				},
 				{
-					min = [ 8192, 2048 ]
-					max = [ 16384, 4096 ]
+					min = [ 8192, 4096 ]
+					max = [ 16256, 8192 ]
 					properties = null
 				},
 				{
-					min = [ 16384, 2048 ]
-					max = [ 32768, 4096 ]
-					properties = null
-				},
-				{
-					min = [ 16384, 4096 ]
+					min = [ 16256, 4096 ]
 					max = [ 32768, 8192 ]
+					properties = null
+				},
+				{
+					min = [ 16256, 8192 ]
+					max = [ 32768, 16384 ]
 					properties = null
 				},
 				{
@@ -68,8 +68,8 @@
 					properties = null
 				},
 				{
-					min = [ 8192, 4096 ]
-					max = [ 16384, 8192 ]
+					min = [ 8192, 8192 ]
+					max = [ 16256, 16384 ]
 					properties = null
 				},
 				{
@@ -103,43 +103,33 @@
 					properties = null
 				},
 				{
-					min = [ 4096, 8192 ]
-					max = [ 6144, 16384 ]
-					properties = null
-				},
-				{
-					min = [ 6144, 8192 ]
-					max = [ 8192, 16384 ]
-					properties = null
-				},
-				{
 					min = [ 4096, 16384 ]
-					max = [ 6144, 32768 ]
-					properties = null
-				},
-				{
-					min = [ 6144, 16384 ]
 					max = [ 8192, 32768 ]
 					properties = null
 				},
 				{
-					min = [ 8192, 8192 ]
-					max = [ 16384, 16384 ]
-					properties = null
-				},
-				{
-					min = [ 16384, 8192 ]
-					max = [ 32768, 16384 ]
+					min = [ 8192, 0 ]
+					max = [ 16256, 2048 ]
 					properties = null
 				},
 				{
 					min = [ 8192, 16384 ]
-					max = [ 16384, 32768 ]
+					max = [ 16256, 32768 ]
 					properties = null
 				},
 				{
-					min = [ 16384, 16384 ]
+					min = [ 16256, 16384 ]
 					max = [ 32768, 32768 ]
+					properties = null
+				},
+				{
+					min = [ 4096, 8192 ]
+					max = [ 8192, 16384 ]
+					properties = null
+				},
+				{
+					min = [ 16256, 0 ]
+					max = [ 32768, 2048 ]
 					properties = null
 				},
 			]
