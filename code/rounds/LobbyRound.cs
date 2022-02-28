@@ -22,6 +22,10 @@ namespace Fortwars
 		{
 			Log.Info( "Finished Lobby Round" );
 		}
+		protected override void OnTimeUp()
+		{
+			Game.Instance.ChangeRound( new BuildRound() );
+		}
 
 		public override void OnPlayerKilled( Player player )
 		{
@@ -29,6 +33,7 @@ namespace Fortwars
 
 			base.OnPlayerKilled( player );
 		}
+
 		public override void OnPlayerSpawn( Player player )
 		{
 			base.OnPlayerSpawn( player );

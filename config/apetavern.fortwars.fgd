@@ -79,7 +79,6 @@ metadata
 [
 	buildtime(integer) : "Build Time" : 150 : "Build round time in seconds"
 	combattime(integer) : "Combat Time" : 300 : "Combat round time in seconds"
-	maxrounds(integer) : "Max Rounds" : 3 : "Maximum number of rounds per game"
 	woodblocksperplayer(integer) : "Wood Blocks Per Player" : 30 : "Wood blocks per player"
 	steelblocksperplayer(integer) : "Steel Blocks Per Player" : 15 : "Steel blocks per player"
 ]

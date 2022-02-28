@@ -22,8 +22,7 @@ namespace Fortwars
 			if ( IsServer )
 				hud = new FortwarsHUD();
 
-			// todo: start in Lobby round
-			ChangeRound( new BuildRound() );
+			ChangeRound( new LobbyRound() );
 		}
 
 		public async Task StartSecondTimer()

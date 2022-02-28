@@ -21,11 +21,6 @@ namespace Fortwars
 		[Property] public int CombatTime { get; set; } = 300;
 
 		/// <summary>
-		/// Maximum number of rounds per game
-		/// </summary>
-		[Property] public int MaxRounds { get; set; } = 3;
-
-		/// <summary>
 		/// Wood blocks per player
 		/// </summary>
 		[Property] public int WoodBlocksPerPlayer { get; set; } = 30;
@@ -34,5 +29,17 @@ namespace Fortwars
 		/// Steel blocks per player
 		/// </summary>
 		[Property] public int SteelBlocksPerPlayer { get; set; } = 15;
+
+		public override void Spawn()
+		{
+			base.Spawn();
+
+			Log.Trace( $"Spawned config {this}" );
+
+			BuildRound.RoundLength = BuildTime;
+			CombatRound.RoundLength = CombatTime;
+
+			Transmit = TransmitType.Never;
+		}
 	}
 }
