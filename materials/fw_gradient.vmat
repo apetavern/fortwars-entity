@@ -7,6 +7,9 @@ Layer0
 	//---- PBR ----
 	F_SELF_ILLUM 1
 
+	//---- Rendering ----
+	F_RENDER_BACKFACES 1
+
 	//---- Translucent ----
 	F_TRANSLUCENT 1
 
@@ -55,6 +58,6 @@ Layer0
 	g_vTexCoordScrollSpeed "[0.000 0.000]"
 
 	//---- Translucent ----
-	g_flOpacityScale "1.000"
+	g_flOpacityScale "0.198"
 	TextureTranslucency "materials/fw_gradient.png"
 }
