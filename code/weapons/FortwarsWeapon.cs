@@ -48,14 +48,6 @@ public partial class FortwarsWeapon : Carriable
 		return weapon;
 	}
 
-	public override void Spawn()
-	{
-		base.Spawn();
-
-		CollisionGroup = CollisionGroup.Weapon;
-		SetInteractsAs( CollisionLayer.Debris );
-	}
-
 	public override void Simulate( Client player )
 	{
 		spread = spread.LerpTo( 0, Time.Delta * WeaponAsset.SpreadChangeTime );
@@ -68,23 +60,15 @@ public partial class FortwarsWeapon : Carriable
 		if ( IsReloading )
 		{
 			if ( WeaponAsset.Flags.ContinuousLoading )
-			{
 				OnContinuousReload();
-			}
 			else if ( TimeSinceReload > WeaponAsset.ReloadTime )
-			{
 				OnReloadFinish();
-			}
 			else
-			{
 				return;
-			}
 		}
 
 		if ( CanReload() )
-		{
 			Reload();
-		}
 
 		if ( !Owner.IsValid() )
 			return;
@@ -92,9 +76,7 @@ public partial class FortwarsWeapon : Carriable
 		if ( CanPrimaryAttack() )
 		{
 			if ( ReserveAmmo > 0 && CurrentClip == 0 )
-			{
 				Reload();
-			}
 
 			TimeSincePrimaryAttack = 0;
 			AttackPrimary();
@@ -347,13 +329,9 @@ public partial class FortwarsWeapon : Carriable
 		for ( int i = 0; i < WeaponAsset.ShotCount; ++i )
 		{
 			if ( i == 0 && WeaponAsset.FirstShotDelay > 0 )
-			{
 				await Task.DelayRealtimeSeconds( WeaponAsset.FirstShotDelay );
-			}
 			else if ( i != 0 && WeaponAsset.ShotDelay > 0 )
-			{
 				await Task.DelayRealtimeSeconds( WeaponAsset.ShotDelay );
-			}
 
 			if ( WeaponAsset.Flags.UseProjectile )
 			{
@@ -428,9 +406,19 @@ public partial class FortwarsWeapon : Carriable
 	{
 		base.BuildInput( inputBuilder );
 
-		inputBuilder.ViewAngles += recoil * Time.Delta * 100f;
+		const float recoveryRate = 1.0f;
 
-		recoil = Vector2.Lerp( recoil, 0, Time.Delta * 25 );
+		DebugOverlay.ScreenText( 0, recoil.ToString() );
+
+		var oldAngles = inputBuilder.ViewAngles;
+
+		inputBuilder.ViewAngles.pitch -= recoil.x * Time.Delta * 10f;
+		inputBuilder.ViewAngles.yaw -= recoil.y * Time.Delta * 10f;
+
+		recoil -= new Vector2(
+			(oldAngles.pitch - inputBuilder.ViewAngles.pitch) * recoveryRate * 1f,
+			(oldAngles.yaw - inputBuilder.ViewAngles.yaw) * recoveryRate * 1f
+		);
 
 		if ( IsAiming )
 			inputBuilder.ViewAngles = Angles.Lerp( inputBuilder.OriginalViewAngles, inputBuilder.ViewAngles, WeaponAsset.AimFovMult );
@@ -439,6 +427,7 @@ public partial class FortwarsWeapon : Carriable
 	private float CalcDamage( float distance, bool isHeadshot )
 	{
 		float baseDamage = WeaponAsset.MaxDamage.LerpTo( WeaponAsset.MinDamage, distance / WeaponAsset.DamageDropOffDistance );
+
 		if ( isHeadshot )
 			return WeaponAsset.HeadshotMultiplier * baseDamage;
 

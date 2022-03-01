@@ -4,16 +4,16 @@
 	{
 		// shit tier singleton hack since we can't init these in Game ctor
 		// CreatePlayer is called before Game ctor
-		private RedTeam _redTeam;
-		private BlueTeam _blueTeam;
+		private RedTeam redTeam;
+		private BlueTeam blueTeam;
 
 		public RedTeam RedTeam
 		{
 			get
 			{
-				if ( _redTeam == null )
-					_redTeam = new RedTeam();
-				return _redTeam;
+				if ( redTeam == null )
+					redTeam = new RedTeam();
+				return redTeam;
 			}
 		}
 
@@ -21,9 +21,9 @@
 		{
 			get
 			{
-				if ( _blueTeam == null )
-					_blueTeam = new BlueTeam();
-				return _blueTeam;
+				if ( blueTeam == null )
+					blueTeam = new BlueTeam();
+				return blueTeam;
 			}
 		}
 	}

@@ -8,6 +8,7 @@ namespace Fortwars
 
 		private static void SetupPostProcessing()
 		{
+			return;
 			Host.AssertClient();
 
 			PostProcess.Add<StandardPostProcess>( new() );
@@ -17,6 +18,7 @@ namespace Fortwars
 		[Event.Frame]
 		private static void UpdatePostProcessing()
 		{
+			return;
 			Host.AssertClient();
 
 			if ( postProcess == null )

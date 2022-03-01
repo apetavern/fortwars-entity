@@ -43,9 +43,6 @@ public partial class PhysGun : Carriable, IUse
 		base.Spawn();
 
 		SetModel( "models/weapons/manipulator/manipulator_w.vmdl" );
-
-		CollisionGroup = CollisionGroup.Weapon;
-		SetInteractsAs( CollisionLayer.Debris );
 	}
 
 	public bool CheckCanGrab( Player owner, Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )

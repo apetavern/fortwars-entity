@@ -9,18 +9,12 @@ namespace Fortwars
 	{
 		public virtual float PrimaryRate => 2.0f;
 
-		public override string ViewModelPath => "models/items/medkit/medkit_v.vmdl";
-
-		[Net] public bool IsAmmo { get; set; }
-
 		public float DropTimeDelay = 15f;
+		public override string ViewModelPath => "models/items/medkit/medkit_v.vmdl";
 
 		public override void Spawn()
 		{
 			base.Spawn();
-
-			CollisionGroup = CollisionGroup.Weapon; // so players touch it as a trigger but not as a solid
-			SetInteractsAs( CollisionLayer.Debris ); // so player movement doesn't walk into it
 
 			SetModel( "models/items/medkit/medkit_w.vmdl" );
 			Scale = 0.25f;
@@ -69,13 +63,6 @@ namespace Fortwars
 
 			if ( IsClient )
 			{
-
-				if ( IsAmmo )
-				{
-					ViewModelEntity?.SetMaterialGroup( "ammo" );
-					SetMaterialGroup( "ammo" );
-				}
-
 				if ( TimeSincePrimaryAttack > 0.6f )
 				{
 					ViewModelEntity?.SetAnimParameter( "noammo", true );
@@ -88,6 +75,10 @@ namespace Fortwars
 			}
 		}
 
+		public virtual void SpawnPickup()
+		{
+		}
+
 		public void DoDrop()
 		{
 			if ( IsServer )
@@ -95,24 +86,7 @@ namespace Fortwars
 				Entity.All.OfType<Pickup>().Where( e => e.Client == this.Client ).ToList().ForEach( e => e.Delete() );
 			}
 
-			if ( !IsAmmo )
-			{
-				var projectile = new BigHealthPickup();
-				projectile.Rotation = Owner.EyeRotation.Angles().WithPitch( 0 ).ToRotation();
-				projectile.Position = Owner.EyePosition - Vector3.Up * 15f;
-				projectile.Velocity = projectile.Rotation.Forward * 250f;
-
-				projectile.Owner = Owner;
-			}
-			else
-			{
-				var projectile = new BigAmmoPickup();
-				projectile.Rotation = Owner.EyeRotation.Angles().WithPitch( 0 ).ToRotation();
-				projectile.Position = Owner.EyePosition - Vector3.Up * 15f;
-				projectile.Velocity = projectile.Rotation.Forward * 250f;
-
-				projectile.Owner = Owner;
-			}
+			SpawnPickup();
 
 			Dropped = false;
 		}
@@ -156,7 +130,6 @@ namespace Fortwars
 		public override void ActiveStart( Entity ent )
 		{
 			base.ActiveStart( ent );
-
 		}
 
 		public override void SimulateAnimator( PawnAnimator anim )

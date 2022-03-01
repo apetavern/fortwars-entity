@@ -3,6 +3,14 @@ using Sandbox;
 
 public partial class Carriable : BaseCarriable
 {
+	public override void Spawn()
+	{
+		base.Spawn();
+
+		CollisionGroup = CollisionGroup.Weapon; // so players touch it as a trigger but not as a solid
+		SetInteractsAs( CollisionLayer.Debris ); // so player movement doesn't walk into it
+	}
+
 	public override void CreateViewModel()
 	{
 		Host.AssertClient();

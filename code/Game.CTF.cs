@@ -174,14 +174,14 @@ namespace Fortwars
 			{
 				ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {BlueTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
 				BlueFlagCarrier = null;
-				//ShowFlag( Team.Blue );
+				ShowFlag( Team.Blue );
 				return;
 			}
 			if ( player == RedFlagCarrier )
 			{
 				ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {RedTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
 				RedFlagCarrier = null;
-				//ShowFlag( Team.Red );
+				ShowFlag( Team.Red );
 				return;
 			}
 		}

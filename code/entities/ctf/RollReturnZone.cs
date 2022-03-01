@@ -10,8 +10,8 @@ namespace Fortwars
 	{
 		[Net] public Team Team { get; set; }
 
-		[Net] public List<FortwarsPlayer> RedPlayers { get; set; }
-		[Net] public List<FortwarsPlayer> BluePlayers { get; set; }
+		[Net] public IList<FortwarsPlayer> RedPlayers { get; set; }
+		[Net] public IList<FortwarsPlayer> BluePlayers { get; set; }
 
 		public BogRoll AttachedRoll;
 

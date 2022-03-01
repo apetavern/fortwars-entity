@@ -69,15 +69,15 @@ namespace Fortwars
 			TryDuck();
 			return;
 
-			IsActive = true;
+			//IsActive = true;
 
-			float distance = 64;
-			var direction = Controller.Pawn.EyeRotation.Forward;
+			//float distance = 64;
+			//var direction = Controller.Pawn.EyeRotation.Forward;
 
-			float force = 8.0f;
-			Controller.Velocity += direction * distance * force;
+			//float force = 8.0f;
+			//Controller.Velocity += direction * distance * force;
 
-			IsActiveSlide = true;
+			//IsActiveSlide = true;
 		}
 
 		protected virtual void TryDuck()

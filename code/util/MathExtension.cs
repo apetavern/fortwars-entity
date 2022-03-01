@@ -42,6 +42,7 @@ namespace Fortwars
 		/// <para>Finds the point (x, y) from the <paramref name="angle"/> given</para>
 		/// </summary>
 		/// <param name="angle">Degrees</param>
+		/// <param name="length">How far away you want to be from the origin</param>
 		public static Vector2 InverseAtan2( float angle, float length = 1f )
 		{
 			Vector2 res = new();

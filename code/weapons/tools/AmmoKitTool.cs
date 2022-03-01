@@ -9,9 +9,32 @@ namespace Fortwars
 		{
 			base.Spawn();
 
-			IsAmmo = true;
 			ViewModelEntity?.SetMaterialGroup( "ammo" );
 			SetMaterialGroup( "ammo" );
+		}
+
+		public override void SpawnPickup()
+		{
+			base.SpawnPickup();
+
+			var projectile = new BigAmmoPickup();
+			projectile.Rotation = Owner.EyeRotation.Angles().WithPitch( 0 ).ToRotation();
+			projectile.Position = Owner.EyePosition - Vector3.Up * 15f;
+			projectile.Velocity = projectile.Rotation.Forward * 250f;
+
+			projectile.Owner = Owner;
+		}
+
+		public override void Simulate( Client player )
+		{
+			base.Simulate( player );
+
+			// Why the fuck is this even in simulate to begin with
+			if ( IsClient )
+			{
+				ViewModelEntity?.SetMaterialGroup( "ammo" );
+				SetMaterialGroup( "ammo" );
+			}
 		}
 	}
 }

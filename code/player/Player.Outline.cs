@@ -22,7 +22,7 @@ namespace Fortwars
 				{
 					glow.Active = true;
 					glow.RangeMin = 0;
-					glow.RangeMax = 1000;
+					glow.RangeMax = int.MaxValue;
 					glow.Color = Color.Red;
 				}
 				else
