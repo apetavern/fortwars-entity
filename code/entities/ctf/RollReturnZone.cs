@@ -15,19 +15,11 @@ namespace Fortwars
 
 		public BogRoll AttachedRoll;
 
-		ModelEntity visuals;
-
 		public override void Spawn()
 		{
 			base.Spawn();
 
 			SetModel( "models/items/bogroll/roll_returnfield.vmdl" );
-
-			visuals = new ModelEntity();//Why the fuck do I need this? Literally doesn't show up without this extra model ent??
-			visuals.SetModel( "models/items/bogroll/roll_returnfield.vmdl" );
-			visuals.Position = Position;
-			visuals.SetParent( this );
-			visuals.EnableShadowCasting = false;
 
 			EnableShadowCasting = false;
 
@@ -38,12 +30,13 @@ namespace Fortwars
 
 			EnableDrawing = true;
 
-			Transmit = TransmitType.Never;
+			Transmit = TransmitType.Always;
 		}
 
 		public void AttachToRoll( BogRoll roll )
 		{
 			Team = roll.Team;
+
 			switch ( Team )
 			{
 				case Team.Invalid:
@@ -57,7 +50,8 @@ namespace Fortwars
 				default:
 					break;
 			}
-			visuals.RenderColor = RenderColor;
+
+			RenderColor = RenderColor;
 			AttachedRoll = roll;
 		}
 
@@ -72,7 +66,7 @@ namespace Fortwars
 				{
 					if ( RedPlayers.Count > 0 && BluePlayers.Count == 0 )
 					{
-						AttachedRoll.TimeSinceDropped += Time.Delta; //Return faster if team matches.
+						AttachedRoll.TimeSinceDropped += Time.Delta; // Return faster if team matches.
 					}
 
 					if ( BluePlayers.Count > 0 && RedPlayers.Count == 0 )
@@ -125,7 +119,6 @@ namespace Fortwars
 					default:
 						break;
 				}
-
 			}
 		}
 
@@ -156,7 +149,6 @@ namespace Fortwars
 					default:
 						break;
 				}
-
 			}
 		}
 	}
