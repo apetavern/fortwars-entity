@@ -6,12 +6,16 @@ namespace Fortwars
 	public partial class BogRoll : MeleeWeapon
 	{
 		[Net] public Team Team { get; set; }
+
+		[Net] private bool CanPickup { get; set; } = true;
+		[Net] private RollReturnZone ReturnZone { get; set; }
+
+		[Net] private bool IsDropped { get; set; }
 		[Net] public TimeSince TimeSinceDropped { get; set; }
-		[Net] bool CanPickup { get; set; } = true;
-		[Net] RollReturnZone ReturnZone { get; set; }
 
 		public override float PrimaryRate => 2.0f;
 		public override string ViewModelPath => "models/items/bogroll/bogroll_v.vmdl";
+		private float DropTimer => 15f; // How long can the flag stay dropped for
 
 		public override void Spawn()
 		{
@@ -61,8 +65,23 @@ namespace Fortwars
 		{
 			ThrowRoll();
 
+			TimeSinceDropped = 0;
+			IsDropped = true;
+			ReturnZone = new RollReturnZone();
+			ReturnZone?.AttachToRoll( this );
+
 			dropped = true;
 			base.ActiveEnd( ent, dropped );
+		}
+
+		public override void ActiveStart( Entity ent )
+		{
+			base.ActiveStart( ent );
+
+			IsDropped = false;
+
+			if ( ReturnZone != null )
+				ReturnZone.Delete();
 		}
 
 		protected override void OnDestroy()
@@ -108,6 +127,49 @@ namespace Fortwars
 			anim.SetAnimParameter( "holdtype_handedness", 1 );
 			anim.SetAnimParameter( "holdtype_pose_hand", 0.07f );
 			anim.SetAnimParameter( "holdtype_attack", 1 );
+		}
+
+
+		[Event.Tick.Server]
+		public void OnServerTick()
+		{
+			if ( IsDropped && TimeSinceDropped > DropTimer )
+			{
+				PlaySound( "enemyflagreturned" );//Play sad flag return sounds
+
+				Delete();
+			}
+		}
+
+		[Event.Tick.Client]
+		public void OnClientTick()
+		{
+			if ( IsDropped )
+			{
+				switch ( Team )
+				{
+					case Team.Invalid:
+						break;
+					case Team.Red:
+						DebugOverlay.Text(
+							CollisionWorldSpaceCenter + Vector3.Up * 20f,
+							"" + (DropTimer - TimeSinceDropped).CeilToInt(),
+							Color.Red,
+							0,
+							500 );
+						break;
+					case Team.Blue:
+						DebugOverlay.Text(
+							CollisionWorldSpaceCenter + Vector3.Up * 20f,
+							"" + (DropTimer - TimeSinceDropped).CeilToInt(),
+							Color.Blue,
+							0,
+							500 );
+						break;
+					default:
+						break;
+				}
+			}
 		}
 	}
 }

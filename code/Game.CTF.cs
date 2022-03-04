@@ -227,6 +227,16 @@ namespace Fortwars
 			ResetFlags();
 		}
 
+		private BogRoll? FindRedFlag()
+		{
+			return Entity.All.OfType<BogRoll>().FirstOrDefault( e => e.Team == Team.Red );
+		}
+
+		private BogRoll? FindBlueFlag()
+		{
+			return Entity.All.OfType<BogRoll>().FirstOrDefault( e => e.Team == Team.Blue );
+		}
+
 		private void ShowFlag( Team team )
 		{
 			(Entity.All.First( e => e is InfoFlagSpawn flagSpawn && flagSpawn.Team == team ) as InfoFlagSpawn)?.ShowFlag();
