@@ -16,8 +16,8 @@ namespace Fortwars
 
 		private Vector3 TargetPos = 0;
 		private Vector3 FinalPos = 0;
-		private float TargetFov = 0;
-		private float FinalFov = 0;
+		private float TargetFov = 60f;
+		private float FinalFov = 60f;
 		private Rotation TargetRot = Rotation.Identity;
 		private Rotation FinalRot = Rotation.Identity;
 
@@ -77,6 +77,8 @@ namespace Fortwars
 
 			FinalFov = FinalFov.LerpTo( TargetFov, LerpSpeed * Time.Delta );
 			camSetup.ViewModel.FieldOfView = FinalFov;
+
+			DebugOverlay.ScreenText( 2, camSetup.ViewModel.FieldOfView.ToString() );
 
 			TargetPos = 0;
 			TargetFov = ViewmodelFov;
