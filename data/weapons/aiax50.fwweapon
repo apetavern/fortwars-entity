@@ -14,11 +14,9 @@
 		spread = 0.0
 		spreadshotincrease = 1.0
 		spreadchangetime = 4.0
-		aimaccuracymult = 1.0
 		maxammo = 5
 		extraammo = 30
 		reloadtime = 2.0
-		postreloadtime = 0.5
 		maxdamage = 50.0
 		mindamage = 50.0
 		damagedropoffdistance = 100000
@@ -30,7 +28,6 @@
 		aimposition = [ -1000.0, 0.0, 0.0 ]
 		aimrotation = [ 0.0, 0.0, 0.0 ]
 		aimfovmult = 0.1
-		userendertarget = true
 		fireparticles = resource:"particles/flash_medium.vpcf"
 		tracerparticles = resource:"particles/tracer_large.vpcf"
 		buildingdamagemultiplier = 0.5
@@ -40,5 +37,6 @@
 		{
 			userendertarget = true
 		}
+		inventoryslot = "0"
 	}
 }

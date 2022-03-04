@@ -15,11 +15,9 @@
 		spread = 0.1
 		spreadshotincrease = 0.05
 		spreadchangetime = 0.01
-		aimaccuracymult = 1.0
 		maxammo = 4
 		extraammo = 12
 		reloadtime = 0.75
-		postreloadtime = 0.0
 		maxdamage = 50.0
 		mindamage = 15.0
 		damagedropoffdistance = 256
@@ -27,7 +25,6 @@
 		firesound = "rust_pumpshotgun.shootdouble"
 		projectilemodel = resource:"models/weapons/rpg/rpgrocket.vmdl"
 		projectilespeed = 1000.0
-		userendertarget = false
 		aimposition = [ -15.0, 7.0, -2.5 ]
 		aimrotation = [ 0.0, 0.0, 0.0 ]
 		aimfovmult = 0.5
@@ -42,5 +39,6 @@
 			continuousloading = true
 			useprojectile = true
 		}
+		inventoryslot = "0"
 	}
 }

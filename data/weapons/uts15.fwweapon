@@ -14,11 +14,9 @@
 		spread = 0.2
 		spreadshotincrease = 0.1
 		spreadchangetime = 2.0
-		aimaccuracymult = 0.0
 		maxammo = 15
 		extraammo = 30
 		reloadtime = 0.5
-		postreloadtime = 0.5
 		maxdamage = 16.0
 		mindamage = 6.0
 		damagedropoffdistance = 512
@@ -30,7 +28,6 @@
 		aimposition = [ -20.0, 23.95, 3.5 ]
 		aimrotation = [ -1.75, -4.35, -0.5 ]
 		aimfovmult = 0.5
-		userendertarget = false
 		fireparticles = resource:"particles/muzzleflash/fw_muzzleflash.vpcf"
 		tracerparticles = resource:"particles/tracer_large.vpcf"
 		buildingdamagemultiplier = 0.25
@@ -41,5 +38,6 @@
 			shotgunammo = true
 			continuousloading = true
 		}
+		inventoryslot = "0"
 	}
 }
