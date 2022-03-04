@@ -80,7 +80,7 @@ namespace Fortwars
 
 			IsDropped = false;
 
-			if ( ReturnZone != null )
+			if ( ReturnZone != null && IsServer )
 				ReturnZone.Delete();
 		}
 
