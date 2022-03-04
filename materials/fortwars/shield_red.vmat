@@ -4,6 +4,9 @@ Layer0
 {
 	shader "shield.vfx"
 
+	//---- Ambient Occlusion ----
+	TextureAmbientOcclusion "materials/default/default_ao.tga"
+
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 1.000000]"
@@ -11,6 +14,16 @@ Layer0
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Lighting ----
+	g_flDirectionalLightmapMinZ "0.050"
+	g_flDirectionalLightmapStrength "1.000"
+
+	//---- Metalness ----
+	g_flMetalness "0.000"
 
 	//---- Shield ----
 	g_flFresnelExponent "6.094"
@@ -25,5 +38,6 @@ Layer0
 	g_vTexCoordScrollSpeed "[0.000 0.000]"
 
 	//---- Translucent ----
+	g_flOpacityScale "1.000"
 	TextureTranslucency "materials/default/default_trans.tga"
 }
