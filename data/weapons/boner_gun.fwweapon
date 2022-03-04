@@ -8,8 +8,6 @@
 		movementspeedmultiplier = 0.95
 		holdtype = "2"
 		rpm = 1200.0
-		firstshotdelay = 0.0
-		shotdelay = 0.0
 		range = 16384
 		shotcount = 4
 		recoilx = 0.0

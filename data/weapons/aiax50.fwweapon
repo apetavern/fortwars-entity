@@ -7,12 +7,10 @@
 		viewmodel = resource:"models/weapons/aiax50/aiax50_v.vmdl"
 		movementspeedmultiplier = 0.75
 		rpm = 60.0
-		firstshotdelay = 0.0
-		shotdelay = 0.0
 		range = 16384
 		shotcount = 1
 		recoilx = 0.4
-		recoily = -6.0
+		recoily = 6.0
 		spread = 0.0
 		spreadshotincrease = 1.0
 		spreadchangetime = 4.0

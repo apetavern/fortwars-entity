@@ -230,7 +230,7 @@ public partial class FortwarsWeapon : Carriable
 
 	public virtual void AttackPrimary()
 	{
-		_ = FireBullets();
+		FireBullets();
 	}
 
 	public virtual bool TakeAmmo()
@@ -293,10 +293,11 @@ public partial class FortwarsWeapon : Carriable
 		//
 		foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * WeaponAsset.Range, 1f ) )
 		{
-			TracerEffects( tr.EndPosition );
 			tr.Surface.DoBulletImpact( tr );
 
 			if ( !IsServer ) continue;
+			TracerEffects( tr.EndPosition );
+
 			if ( !tr.Entity.IsValid() ) continue;
 
 			float damage = CalcDamage( tr.Distance, false );
@@ -313,7 +314,7 @@ public partial class FortwarsWeapon : Carriable
 		}
 	}
 
-	private async Task FireBullets()
+	private void FireBullets()
 	{
 		//
 		// Seed rand using the tick, so bullet cones match on client and server
@@ -328,11 +329,6 @@ public partial class FortwarsWeapon : Carriable
 
 		for ( int i = 0; i < WeaponAsset.ShotCount; ++i )
 		{
-			if ( i == 0 && WeaponAsset.FirstShotDelay > 0 )
-				await Task.DelayRealtimeSeconds( WeaponAsset.FirstShotDelay );
-			else if ( i != 0 && WeaponAsset.ShotDelay > 0 )
-				await Task.DelayRealtimeSeconds( WeaponAsset.ShotDelay );
-
 			if ( WeaponAsset.Flags.UseProjectile )
 			{
 				ShootProjectile();

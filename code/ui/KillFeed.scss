@@ -14,7 +14,7 @@ killfeed {
 }
 
 KillFeedEntry {
-    //background-color: rgba( black, 0.8 );
+    background-color: rgba( black, 0.8 );
     margin-bottom: 5px;
     color: white;
     transition: all 0.2s ease-out;
@@ -25,7 +25,6 @@ KillFeedEntry {
     height: 45px;
     position: relative;
     align-items: center;
-    mix-blend-mode: lighten;
 
     &:intro {
         transform: scale( 2 );
@@ -52,7 +51,6 @@ KillFeedEntry {
 
     .left, .right {
         padding: 0 12px;
-        color: #fc0;
 
         &.me {
             font-weight: bold;
@@ -60,7 +58,7 @@ KillFeedEntry {
     }
 
     .method {
-        opacity: 0.3;
+        align-items: center;
     }
 
     .message {
@@ -76,5 +74,22 @@ KillFeedEntry {
 
     &.noavatar image {
         display: none;
+    }
+
+    &.me {
+        background-color: white;
+    }
+}
+
+
+.red-team {
+    .left, .right, .method {
+        color: $red-team;
+    }
+}
+
+.blue-team {
+    .left, .right, .method {
+        color: $blue-team;
     }
 }

@@ -15,6 +15,9 @@ namespace Fortwars
 				FieldOfView = FieldOfView.LerpTo( weapon.WeaponAsset.AimFovMult * FovDesired, 10 * Time.Delta );
 			else
 				FieldOfView = FieldOfView.LerpTo( FovDesired, 10 * Time.Delta );
+
+			ZNear = 1;
+			ZFar = 20000;
 		}
 	}
 }

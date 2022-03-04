@@ -8,12 +8,10 @@
 		movementspeedmultiplier = 0.95
 		holdtype = "2"
 		rpm = 600.0
-		firstshotdelay = 0.0
-		shotdelay = 0.0
 		range = 16384
 		shotcount = 1
-		recoilx = -0.1
-		recoily = -0.15
+		recoilx = 1.0
+		recoily = 5.0
 		spread = 0.1
 		spreadshotincrease = 0.05
 		spreadchangetime = 4.0

@@ -69,12 +69,6 @@ public class WeaponAsset : Asset
 	public float RPM { get; set; } = 600;
 
 	[Property, Category( "Shooting" )]
-	public float FirstShotDelay { get; set; }
-
-	[Property, Category( "Shooting" )]
-	public float ShotDelay { get; set; }
-
-	[Property, Category( "Shooting" )]
 	public int Range { get; set; } = 16384;
 
 	[Property, Category( "Shooting" )]

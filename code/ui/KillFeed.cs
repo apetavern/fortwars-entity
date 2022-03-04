@@ -10,12 +10,12 @@ namespace Fortwars
 	{
 		public Label Left { get; internal set; }
 		public Label Right { get; internal set; }
-		public Panel Icon { get; internal set; }
+		public Label Method { get; internal set; }
 
 		public KillFeedEntry()
 		{
 			Left = Add.Label( "", "left" );
-			Icon = Add.Panel( "icon" );
+			Method = Add.Label( "", "method" );
 			Right = Add.Label( "", "right" );
 
 			_ = RunAsync();
@@ -51,12 +51,11 @@ namespace Fortwars
 			var e = Current.AddChild<KillFeedEntry>();
 
 			e.AddClass( method );
+			e.SetClass( "me", lsteamid == (Local.Client?.PlayerId) || rsteamid == (Local.Client?.PlayerId) );
 
 			e.Left.Text = left;
-			e.Left.SetClass( "me", lsteamid == (Local.Client?.PlayerId) );
-
+			e.Method.Text = $"[{method}]";
 			e.Right.Text = right;
-			e.Right.SetClass( "me", rsteamid == (Local.Client?.PlayerId) );
 		}
 	}
 

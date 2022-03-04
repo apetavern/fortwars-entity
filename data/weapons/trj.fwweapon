@@ -7,12 +7,10 @@
 		viewmodel = resource:"models/weapons/trj/trj_v.vmdl"
 		movementspeedmultiplier = 0.95
 		rpm = 300.0
-		firstshotdelay = 0.0
-		shotdelay = 0.0
 		range = 16384
 		shotcount = 1
 		recoilx = 0.3
-		recoily = -2.0
+		recoily = 2.0
 		spread = 0.01
 		spreadshotincrease = 0.1
 		spreadchangetime = 1.0

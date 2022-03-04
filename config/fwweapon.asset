@@ -34,8 +34,6 @@
 	aimedproceduralviewmodelstrength(float) { group = "Meta" } : "Aimed Procedural Viewmodel Strength" : "0.1" : ""
 	flags(struct:Fortwars_WeaponAsset_WeaponFlags) { group = "Meta" } : "Weapon Flags" :  : ""
 	rpm(float) { group = "Shooting" } : "RPM" : 600 : ""
-	firstshotdelay(float) { group = "Shooting" } : "First Shot Delay" : 0 : ""
-	shotdelay(float) { group = "Shooting" } : "Shot Delay" : 0 : ""
 	range(integer) { group = "Shooting" } : "Range" : 16384 : ""
 	shotcount(integer) { group = "Shooting" } : "Shot Count" : 1 : ""
 	recoilx(float) { group = "Shooting" } : "Recoil X" : "0.2" : ""

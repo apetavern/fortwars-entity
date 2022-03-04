@@ -7,12 +7,10 @@
 		viewmodel = resource:"models/weapons/hkusp/hkusp_v.vmdl"
 		movementspeedmultiplier = 0.95
 		rpm = 600.0
-		firstshotdelay = 0.0
-		shotdelay = 0.0
 		range = 16384
 		shotcount = 1
-		recoilx = 0.05
-		recoily = -0.1
+		recoilx = 0.0
+		recoily = 2.0
 		spread = 0.0
 		spreadshotincrease = 0.25
 		spreadchangetime = 2.0

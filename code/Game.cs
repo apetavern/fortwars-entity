@@ -79,7 +79,10 @@ namespace Fortwars
 			{
 				if ( pawn.LastAttacker is Player attackPlayer )
 				{
-					KillFeed.AddEntry( attackPlayer.Client.PlayerId, attackPlayer.Client.Name, pawn.Client.PlayerId, pawn.Client.Name, pawn.LastAttackerWeapon?.ClassInfo?.Name );
+					if ( pawn.LastAttackerWeapon is FortwarsWeapon weapon )
+						KillFeed.AddEntry( attackPlayer.Client.PlayerId, attackPlayer.Client.Name, pawn.Client.PlayerId, pawn.Client.Name, weapon.WeaponAsset.WeaponName );
+					else
+						KillFeed.AddEntry( attackPlayer.Client.PlayerId, attackPlayer.Client.Name, pawn.Client.PlayerId, pawn.Client.Name, pawn.LastAttackerWeapon?.ClassInfo?.Name );
 				}
 				else
 				{
