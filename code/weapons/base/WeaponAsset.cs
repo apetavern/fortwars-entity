@@ -22,6 +22,18 @@ public class WeaponAsset : Asset
 	[Property, Category( "Meta" ), Range( 0.1f, 1.0f )]
 	public float MovementSpeedMultiplier { get; set; } = 1.0f;
 
+	public enum InventorySlots
+	{
+		Primary,
+		Secondary,
+		Equipment,
+
+		Flag
+	}
+
+	[Property, Category( "Meta" )]
+	public InventorySlots InventorySlot { get; set; } = InventorySlots.Primary;
+
 	public enum HoldTypes
 	{
 		None,
@@ -35,9 +47,6 @@ public class WeaponAsset : Asset
 
 	[Property, Category( "Meta" )]
 	public HoldTypes HoldType { get; set; } = HoldTypes.Pistol;
-
-	[Property, Category( "Meta" )]
-	public bool UseRenderTarget { get; set; } = false;
 
 	[Property, Category( "Meta" )]
 	public float ProceduralViewmodelStrength { get; set; } = 1.0f;
@@ -97,9 +106,6 @@ public class WeaponAsset : Asset
 	// ADS
 	//
 	[Property, Category( "ADS" )]
-	public float AimAccuracyMult { get; set; } = 1.0f;
-
-	[Property, Category( "ADS" )]
 	public Vector3 AimPosition { get; set; }
 
 	[Property, Category( "ADS" )]
@@ -119,9 +125,6 @@ public class WeaponAsset : Asset
 
 	[Property, Category( "Ammo" )]
 	public float ReloadTime { get; set; } = 3.0f;
-
-	[Property, Category( "Ammo" )]
-	public float PostReloadTime { get; set; } = 0.5f;
 
 	//
 	// Damage

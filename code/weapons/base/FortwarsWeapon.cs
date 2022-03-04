@@ -88,7 +88,7 @@ public partial class FortwarsWeapon : Carriable
 	{
 		base.CreateHudElements();
 
-		if ( WeaponAsset.UseRenderTarget )
+		if ( WeaponAsset.Flags.UseRenderTarget )
 		{
 			// SniperScopePanel = new ScopeRenderTarget();
 			// SniperScopePanel.Parent = Local.Hud;
