@@ -81,6 +81,8 @@ namespace Fortwars
 
 			Game.Instance.Round.SetupInventory( this );
 
+			InSpawnRoom = true;
+
 			base.Respawn();
 		}
 
