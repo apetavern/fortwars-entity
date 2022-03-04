@@ -237,8 +237,6 @@ namespace Fortwars
 		[ClientRpc]
 		public void TookDamage( Vector3 pos )
 		{
-			DebugOverlay.Sphere( pos, 2f, Color.Red, false, 5f );
-			Log.Trace( pos );
 			DamageIndicator.Current?.OnHit( pos );
 		}
 	}

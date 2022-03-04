@@ -78,8 +78,6 @@ namespace Fortwars
 			FinalFov = FinalFov.LerpTo( TargetFov, LerpSpeed * Time.Delta );
 			camSetup.ViewModel.FieldOfView = FinalFov;
 
-			DebugOverlay.ScreenText( 2, camSetup.ViewModel.FieldOfView.ToString() );
-
 			TargetPos = 0;
 			TargetFov = ViewmodelFov;
 			TargetRot = Rotation.Identity;

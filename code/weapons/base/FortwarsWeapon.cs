@@ -403,8 +403,6 @@ public partial class FortwarsWeapon : Carriable
 
 		const float recoveryRate = 1.0f;
 
-		DebugOverlay.ScreenText( 0, recoil.ToString() );
-
 		var oldAngles = inputBuilder.ViewAngles;
 
 		inputBuilder.ViewAngles.pitch -= recoil.x * Time.Delta * 10f;

@@ -328,13 +328,7 @@ public partial class PhysGun : Carriable, IUse
 			return;
 
 		TraceResult walltr = Trace.Ray( heldBody.Transform.PointToWorld( heldPos ), startPos + dir * holdDistance ).Ignore( heldBody.GetEntity() ).Run();
-
 		StopPushing = walltr.Hit;
-
-		if ( walltr.Hit )
-		{
-			DebugOverlay.Line( heldBody.Transform.PointToWorld( heldPos ), startPos + dir * holdDistance, Color.Red );
-		}
 
 		if ( !StopPushing )
 		{
