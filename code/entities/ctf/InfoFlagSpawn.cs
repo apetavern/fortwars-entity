@@ -32,6 +32,7 @@ namespace Fortwars
 		{
 			Host.AssertServer();
 
+			Log.Trace( $"Showing {flag}" );
 			flag.EnableDrawing = true;
 		}
 
@@ -39,6 +40,7 @@ namespace Fortwars
 		{
 			Host.AssertServer();
 
+			Log.Trace( $"Hiding {flag}" );
 			flag.EnableDrawing = false;
 		}
 	}

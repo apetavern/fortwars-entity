@@ -126,16 +126,15 @@ namespace Fortwars
 
 		public void PlayerScoreFlag( FortwarsPlayer player )
 		{
-			// play a sick sound
 			foreach ( FortwarsPlayer ply in All.OfType<FortwarsPlayer>() )
 			{
 				if ( ply.TeamID == player.TeamID )
 				{
-					PlayLocalSound( To.Single( ply.Client ), "enemyflagcaptured" );//positive sound, same team who scored
+					PlayLocalSound( To.Single( ply.Client ), "enemyflagcaptured" );// positive sound, same team who scored
 				}
 				else
 				{
-					PlayLocalSound( To.Single( ply.Client ), "enemycapturedourflag" );//negative sound, enemy team scored
+					PlayLocalSound( To.Single( ply.Client ), "enemycapturedourflag" );// negative sound, enemy team scored
 				}
 			}
 
@@ -188,19 +187,18 @@ namespace Fortwars
 
 		public void ReturnFlag( Team Team )
 		{
-			if ( Team == Team.Blue )
+			switch ( Team )
 			{
-				ChatBox.AddInformation( To.Everyone, $"{BlueTeam.Name} flag returned", null, true );
-				BlueFlagCarrier = null;
-				ShowFlag( Team.Blue );
-				return;
-			}
-			if ( Team == Team.Red )
-			{
-				ChatBox.AddInformation( To.Everyone, $"{RedTeam.Name} flag returned", null, true );
-				RedFlagCarrier = null;
-				ShowFlag( Team.Red );
-				return;
+				case Team.Blue:
+					ChatBox.AddInformation( To.Everyone, $"{BlueTeam.Name} flag returned", null, true );
+					BlueFlagCarrier = null;
+					ShowFlag( Team.Blue );
+					return;
+				case Team.Red:
+					ChatBox.AddInformation( To.Everyone, $"{RedTeam.Name} flag returned", null, true );
+					RedFlagCarrier = null;
+					ShowFlag( Team.Red );
+					return;
 			}
 		}
 
@@ -227,24 +225,16 @@ namespace Fortwars
 			ResetFlags();
 		}
 
-		private BogRoll? FindRedFlag()
-		{
-			return Entity.All.OfType<BogRoll>().FirstOrDefault( e => e.Team == Team.Red );
-		}
-
-		private BogRoll? FindBlueFlag()
-		{
-			return Entity.All.OfType<BogRoll>().FirstOrDefault( e => e.Team == Team.Blue );
-		}
-
 		private void ShowFlag( Team team )
 		{
-			(Entity.All.First( e => e is InfoFlagSpawn flagSpawn && flagSpawn.Team == team ) as InfoFlagSpawn)?.ShowFlag();
+			var flagSpawns = Entity.All.OfType<InfoFlagSpawn>().ToList();
+			flagSpawns.First( e => e.Team == team ).ShowFlag();
 		}
 
 		private void HideFlag( Team team )
 		{
-			(Entity.All.First( e => e is InfoFlagSpawn flagSpawn && flagSpawn.Team == team ) as InfoFlagSpawn)?.HideFlag();
+			var flagSpawns = Entity.All.OfType<InfoFlagSpawn>().ToList();
+			flagSpawns.First( e => e.Team == team ).HideFlag();
 		}
 	}
 }
