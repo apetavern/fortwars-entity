@@ -16,8 +16,8 @@ namespace Fortwars
 				MessageFeed.AddMessage(
 					To.Single( Client ),
 					"clear",
-					"Can't change class",
-					"You can only change class in a spawn room." );
+					"no",
+					"Go to spawn to change class." );
 
 				return;
 			}
