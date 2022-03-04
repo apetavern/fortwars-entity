@@ -113,6 +113,11 @@ public partial class PhysGun : Carriable, IUse
 		{
 			using ( Prediction.Off() )
 			{
+				if ( Input.Pressed( InputButton.Reload ) && CanGrab )
+				{
+					TryDelete( owner, EyePosition, EyeRotation, eyeDir );
+				}
+
 				if ( !holdBody.IsValid() )
 					return;
 
@@ -138,6 +143,19 @@ public partial class PhysGun : Carriable, IUse
 		{
 			Input.MouseWheel = 0;
 		}
+	}
+
+	private void TryDelete( Player owner, Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )
+	{
+		var tr = Trace.Ray( EyePosition, EyePosition + eyeDir * MaxTargetDistance )
+			.UseHitboxes()
+			.Ignore( owner, false )
+			.HitLayer( CollisionLayer.Debris )
+			.Run();
+
+		var rootEnt = tr.Entity.Root;
+		if ( rootEnt is FortwarsBlock )
+			rootEnt.Delete();
 	}
 
 	private static bool IsBodyGrabbed( PhysicsBody body ) => All.OfType<PhysGun>().Any( x => x?.HeldBody?.PhysicsGroup == body?.PhysicsGroup );

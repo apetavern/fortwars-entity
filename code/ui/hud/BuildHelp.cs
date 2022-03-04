@@ -10,6 +10,7 @@ namespace Fortwars
 			Add.InputHint( Sandbox.InputButton.Use, "Rotate" );
 			Add.InputHint( Sandbox.InputButton.Run, "Snap Rotation" );
 			Add.InputHint( Sandbox.InputButton.Menu, "Build Menu" );
+			Add.InputHint( Sandbox.InputButton.Reload, "Delete Block" );
 
 			BindClass( "visible", () => Game.Instance.Round is BuildRound );
 		}
