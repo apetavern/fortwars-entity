@@ -12,9 +12,9 @@
 		shotcount = 1
 		recoilx = 0.0
 		recoily = 20.0
-		spread = 0.1
-		spreadshotincrease = 0.05
-		spreadchangetime = 0.01
+		spread = 0.0
+		spreadshotincrease = 0.0
+		spreadchangetime = 0.0
 		maxammo = 4
 		extraammo = 12
 		reloadtime = 0.75
