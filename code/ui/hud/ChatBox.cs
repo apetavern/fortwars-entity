@@ -117,6 +117,11 @@ public partial class ChatBox : Panel
 	{
 		Assert.NotNull( ConsoleSystem.Caller );
 
+		if ( message.StartsWith( "!rtv" ) )
+		{
+			Game.RockTheVote();
+		}
+
 		// todo - reject more stuff
 		if ( message.Contains( '\n' ) || message.Contains( '\r' ) )
 			return;

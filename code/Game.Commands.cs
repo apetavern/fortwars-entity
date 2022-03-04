@@ -1,10 +1,27 @@
 ﻿using Sandbox;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Fortwars
 {
 	partial class Game
 	{
+		public static List<Client> Votes = new();
+
+		[ServerCmd( "fw_rtv" )]
+		public static void RockTheVote()
+		{
+			if ( Votes.Contains( ConsoleSystem.Caller ) )
+				return;
+
+			Votes.Add( ConsoleSystem.Caller );
+
+			ChatBox.AddInformation( To.Everyone, $"{Votes.Count}/3 voted to skip" );
+
+			if ( Votes.Count >= 3 )
+				Game.Instance.ChangeRound( new VoteRound() );
+		}
+
 		[AdminCmd( "recreatehud" )]
 		public static void RecreateHud()
 		{
