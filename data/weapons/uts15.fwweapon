@@ -8,12 +8,12 @@
 		movementspeedmultiplier = 0.8
 		rpm = 60.0
 		range = 16384
-		shotcount = 6
+		shotcount = 11
 		recoilx = 0.1
 		recoily = 1.0
 		spread = 0.01
-		spreadshotincrease = 0.05
-		spreadchangetime = 2.0
+		spreadshotincrease = 0.1
+		spreadchangetime = 4.0
 		maxammo = 15
 		extraammo = 30
 		reloadtime = 0.5
