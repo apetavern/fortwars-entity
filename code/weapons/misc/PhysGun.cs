@@ -198,10 +198,23 @@ public partial class PhysGun : Carriable, IUse
 		bool rotating = Input.Down( InputButton.Use );
 		bool snapping = false;
 
-		if ( rotating )
+		if ( Input.UsingController )
 		{
-			DoRotate( EyeRotation, Input.MouseDelta * RotateSpeed );
-			snapping = Input.Down( InputButton.Run );
+			rotating = Input.Down( InputButton.Attack2 ); //Attack2 feels good to use
+
+			if ( rotating )
+			{
+				DoRotate( EyeRotation, (Input.GetAnalog(InputAnalog.Look) * RotateSpeed * 100f) + (new Vector2(Input.MouseDelta.x,Input.MouseDelta.y) * RotateSpeed) ); //Using analog look as well as the mouse so the Steam controller is supported with its mouse emulation
+				snapping = Input.Down( InputButton.SlotPrev ); //This is bound to the left bumper, so essentially holding the left 2 top buttons makes you able to snap rotate
+			}
+		}
+		else
+		{
+			if ( rotating )
+			{
+				DoRotate( EyeRotation, Input.MouseDelta * RotateSpeed );
+				snapping = Input.Down( InputButton.Run );
+			}
 		}
 
 		GrabMove( EyePosition, eyeDir, EyeRotation, snapping );
@@ -387,9 +400,19 @@ public partial class PhysGun : Carriable, IUse
 		if ( !owner.Down( InputButton.Attack1 ) )
 			return;
 
-		if ( owner.Down( InputButton.Use ) )
+		if ( Input.UsingController )
 		{
-			owner.ViewAngles = owner.OriginalViewAngles;
+			if ( owner.Down( InputButton.Attack2 ) )
+			{
+				owner.ViewAngles = owner.OriginalViewAngles;
+			}
+		}
+		else
+		{
+			if ( owner.Down( InputButton.Use ) )
+			{
+				owner.ViewAngles = owner.OriginalViewAngles;
+			}
 		}
 	}
 
