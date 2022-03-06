@@ -11,6 +11,7 @@ namespace Fortwars
 		// @ref
 		public Image Glyph { get; set; }
 		public InputButton Button { get; set; }
+		public InputButton gamepadButton { get; set; }
 		public string Text { get; set; }
 		public Label ActionLabel { get; set; }
 
@@ -50,7 +51,17 @@ namespace Fortwars
 
 			ActionLabel.SetText( Text );
 
-			Texture glyphTexture = Input.GetGlyph( Button, InputGlyphSize.Small, GlyphStyle.Knockout.WithSolidABXY().WithNeutralColorABXY() );
+			Texture glyphTexture = null;
+
+			if ( !Input.UsingController )
+			{
+				glyphTexture = Input.GetGlyph( Button, InputGlyphSize.Small, GlyphStyle.Knockout.WithSolidABXY().WithNeutralColorABXY() );
+			}
+			else
+			{
+				glyphTexture = Input.GetGlyph( gamepadButton, InputGlyphSize.Small, GlyphStyle.Knockout.WithSolidABXY().WithNeutralColorABXY() );
+			}
+
 			if ( glyphTexture != null )
 			{
 				Glyph.Texture = glyphTexture;
@@ -63,14 +74,16 @@ namespace Fortwars
 			}
 		}
 	}
-
+	 
 	public static class InputHintExtensions
 	{
-		public static InputHint InputHint( this PanelCreator self, InputButton button, string action = null, string classname = null )
+		public static InputHint InputHint( this PanelCreator self, InputButton button, InputButton gamepadButton, string action = null, string classname = null )
 		{
 			var control = self.panel.AddChild<InputHint>();
 
 			control.Button = button;
+
+			control.gamepadButton = gamepadButton;
 
 			if ( action != null )
 				control.Text = action;
