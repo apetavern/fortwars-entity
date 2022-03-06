@@ -130,7 +130,7 @@ namespace Fortwars
 			AmmoLabel = Add.Label( "0 / 0", "ammo" );
 
 			var inputButton = (InputButton)Enum.Parse( typeof( InputButton ), $"Slot{i}" );
-			Add.InputHint( inputButton, "", "slot-number" );
+			Add.InputHint( inputButton, inputButton, "", "slot-number" );
 		}
 
 		public void Clear()
