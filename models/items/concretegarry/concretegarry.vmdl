@@ -55,7 +55,7 @@
 				[
 					{
 						_class = "ModelModifier_Translate"
-						translation = [ 0.0, 0.0, 10.0 ]
+						translation = [ 0.0, 0.0, 0.0 ]
 					},
 				]
 			},
@@ -73,7 +73,7 @@
 						collision_interact_with = ""
 						collision_interact_exclude = ""
 						recenter_on_parent_bone = false
-						offset_origin = [ 0.0, 0.0, 10.0 ]
+						offset_origin = [ 0.0, 0.0, 0.0 ]
 						offset_angles = [ 0.0, 0.0, 0.0 ]
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
