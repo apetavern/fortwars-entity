@@ -204,7 +204,7 @@ public partial class PhysGun : Carriable, IUse
 
 			if ( rotating )
 			{
-				DoRotate( EyeRotation, (Input.GetAnalog(InputAnalog.Look) * RotateSpeed * 100f) + (new Vector2(Input.MouseDelta.x,Input.MouseDelta.y) * RotateSpeed) ); //Using analog look as well as the mouse so the Steam controller is supported with its mouse emulation
+				DoRotate( EyeRotation, (Input.GetAnalog(InputAnalog.Look) * RotateSpeed * 25f) + (new Vector2(Input.MouseDelta.x,Input.MouseDelta.y) * RotateSpeed) ); //Using analog look as well as the mouse so the Steam controller is supported with its mouse emulation
 				snapping = Input.Down( InputButton.SlotPrev ); //This is bound to the left bumper, so essentially holding the left 2 top buttons makes you able to snap rotate
 			}
 		}
