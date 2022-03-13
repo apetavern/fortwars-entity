@@ -123,8 +123,8 @@ namespace Fortwars
 
 		public override void SimulateAnimator( PawnAnimator anim )
 		{
-			anim.SetAnimParameter( "holdtype", 4 );
-			anim.SetAnimParameter( "holdtype_handedness", 1 );
+			anim.SetAnimParameter( "holdtype", (int)HoldTypes.HoldItem );
+			anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.RightHand );
 			anim.SetAnimParameter( "holdtype_pose_hand", 0.07f );
 			anim.SetAnimParameter( "holdtype_attack", 1 );
 		}

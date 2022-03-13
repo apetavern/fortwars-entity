@@ -5,7 +5,7 @@ using System.ComponentModel;
 namespace Fortwars;
 
 [Library( "fwweapon" ), AutoGenerate]
-public class WeaponAsset : Asset
+public partial class WeaponAsset : Asset
 {
 	//
 	// Meta
@@ -33,17 +33,6 @@ public class WeaponAsset : Asset
 
 	[Property, Category( "Meta" )]
 	public InventorySlots InventorySlot { get; set; } = InventorySlots.Primary;
-
-	public enum HoldTypes
-	{
-		None,
-		Pistol,
-		Rifle,
-		Shotgun,
-		HoldItem,
-		MeleePunch,
-		MeleeWeapons
-	}
 
 	[Property, Category( "Meta" )]
 	public HoldTypes HoldType { get; set; } = HoldTypes.Pistol;

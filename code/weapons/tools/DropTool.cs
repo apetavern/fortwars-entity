@@ -137,16 +137,16 @@ namespace Fortwars
 			if ( TimeSinceLastDrop < DropTimeDelay )
 			{
 				EnableDrawing = false;
-				anim.SetAnimParameter( "holdtype", 0 );
-				anim.SetAnimParameter( "holdtype_handedness", 0 );
+				anim.SetAnimParameter( "holdtype", (int)HoldTypes.None );
+				anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.TwoHands );
 				anim.SetAnimParameter( "holdtype_pose_hand", 0f );
 				anim.SetAnimParameter( "holdtype_attack", 1 );
 			}
 			else
 			{
 				EnableDrawing = true;
-				anim.SetAnimParameter( "holdtype", 4 );
-				anim.SetAnimParameter( "holdtype_handedness", 0 );
+				anim.SetAnimParameter( "holdtype", (int)HoldTypes.HoldItem );
+				anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.TwoHands );
 				anim.SetAnimParameter( "holdtype_pose_hand", 0f );
 				anim.SetAnimParameter( "holdtype_attack", 1 );
 			}
