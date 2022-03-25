@@ -50,7 +50,7 @@ namespace Fortwars
 
 			if ( sortedMapVotePairs.Count() == 0 )
 			{
-				Global.ChangeLevel( Rand.FromArray( Game.GetMaps() ) );
+				Global.ChangeLevel( Rand.FromList( Game.GetMaps() ) );
 				return;
 			}
 

@@ -69,12 +69,12 @@ namespace Fortwars
 			Game.Instance?.MapVotes.Add( new MapVote( index, playerId ) );
 		}
 
-		public static string[] GetMaps()
+		public static List<string> GetMaps()
 		{
 			var packageTask = Package.Fetch( Global.GameIdent, true ).ContinueWith( t =>
 			{
 				Package package = t.Result;
-				return package.GetMeta<List<string>>("MapList").ToArray();
+				return package.GetMeta<List<string>>("MapList");
 			} );
 
 			return packageTask.Result;
