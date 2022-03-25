@@ -73,8 +73,8 @@ namespace Fortwars
 		{
 			var packageTask = Package.Fetch( Global.GameIdent, true ).ContinueWith( t =>
 			{
-				var package = t.Result;
-				return package.GameConfiguration.MapList.ToArray();
+				Package package = t.Result;
+				return package.GetMeta<List<string>>("MapList").ToArray();
 			} );
 
 			return packageTask.Result;
