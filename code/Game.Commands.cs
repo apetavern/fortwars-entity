@@ -29,6 +29,12 @@ namespace Fortwars
 			hud = new();
 		}
 
+		[AdminCmd("fw_force_voteround")]
+		public static void ForceVoteround()
+		{
+			Game.Instance.ChangeRound( new VoteRound() );
+		}
+
 		[AdminCmd( "fw_give_ammo" )]
 		public static void GiveAmmo( int amount )
 		{
