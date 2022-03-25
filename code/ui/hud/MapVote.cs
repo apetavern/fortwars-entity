@@ -13,10 +13,18 @@ namespace Fortwars
 
 			string[] maps = Game.GetMaps();
 
-			for ( int i = 0; i < maps.Length; i++ )
+			/*for ( int i = 0; i < maps.Length; i++ )
 			{
 				string mapName = maps[i];
 				var mapPanel = MapVotePanel.FromPackage( mapName, i );
+				AddChild( mapPanel );
+			}*/
+
+			for ( int i = 0; i < 4; i++ )
+			{
+				int selectedMap = Rand.Int( maps.Length-1 );
+				string mapName = maps[selectedMap];
+				var mapPanel = MapVotePanel.FromPackage( mapName, selectedMap );
 				AddChild( mapPanel );
 			}
 		}
