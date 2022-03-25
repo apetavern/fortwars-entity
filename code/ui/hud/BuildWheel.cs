@@ -18,7 +18,9 @@ namespace Fortwars
 		{
 			VirtualCursor.OnClick += OnClick;
 
-			BindClass( "active", () => Input.Down( InputButton.Menu ) && !Input.Down( InputButton.Use ) && Game.Instance.Round is BuildRound );
+			BindClass( "active", () => ((Input.UsingController && Input.Down( InputButton.Slot4 ) && !Input.Down( InputButton.Attack2 )) // Gamepad compatible bind
+									|| (!Input.UsingController && Input.Down( InputButton.Menu ) && !Input.Down( InputButton.Use )))
+									&& Game.Instance.Round is BuildRound );
 		}
 
 		private void OnClick()

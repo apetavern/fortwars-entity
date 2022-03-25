@@ -6,11 +6,11 @@ namespace Fortwars
 	{
 		public BuildHelp()
 		{
-			Add.InputHint( Sandbox.InputButton.Attack1, "Move" );
-			Add.InputHint( Sandbox.InputButton.Use, "Rotate" );
-			Add.InputHint( Sandbox.InputButton.Run, "Snap Rotation" );
-			Add.InputHint( Sandbox.InputButton.Menu, "Build Menu" );
-			Add.InputHint( Sandbox.InputButton.Reload, "Delete Block" );
+			Add.InputHint( Sandbox.InputButton.Attack1, Sandbox.InputButton.Attack1, "Move" );
+			Add.InputHint( Sandbox.InputButton.Use, Sandbox.InputButton.Attack2, "Rotate" );
+			Add.InputHint( Sandbox.InputButton.Run, Sandbox.InputButton.SlotPrev, "Snap Rotation" );
+			Add.InputHint( Sandbox.InputButton.Menu, Sandbox.InputButton.Slot4, "Build Menu" );
+			Add.InputHint( Sandbox.InputButton.Reload, Sandbox.InputButton.Reload, "Delete Block" );
 
 			BindClass( "visible", () => Game.Instance.Round is BuildRound );
 		}
