@@ -21,21 +21,21 @@ namespace Fortwars
 				maps.Remove( Global.MapName );
 			}
 
-			/*for ( int i = 0; i < maps.Length; i++ )
+			for ( int i = 0; i < maps.Count; i++ )
 			{
 				string mapName = maps[i];
-				var mapPanel = MapVotePanel.FromPackage( mapName, i );
+				var mapPanel = MapVotePanel.FromPackage( mapName, fullMaplist.IndexOf( mapName ) );
 				AddChild( mapPanel );
-			}*/
+			}
 
-			for ( int i = 0; i < 4; i++ )
+			/*for ( int i = 0; i < 4; i++ )
 			{
 				int selectedMap = Rand.Int( maps.Count - 1 );
 				string mapName = maps[selectedMap];
 				var mapPanel = MapVotePanel.FromPackage( mapName, fullMaplist.IndexOf( mapName ) );
 				maps.RemoveAt( selectedMap );
 				AddChild( mapPanel );
-			}
+			}*/
 		}
 
 		public override void Tick()
