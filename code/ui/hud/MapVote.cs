@@ -14,11 +14,13 @@ namespace Fortwars
 
 			List<string> maps = Game.GetMaps();
 
-			if (maps.Contains( Global.MapName ) )
+			List<string> fullMaplist = Game.GetMaps();
+
+			if ( maps.Contains( Global.MapName ) )
 			{
 				maps.Remove( Global.MapName );
 			}
-			
+
 			/*for ( int i = 0; i < maps.Length; i++ )
 			{
 				string mapName = maps[i];
@@ -28,15 +30,15 @@ namespace Fortwars
 
 			for ( int i = 0; i < 4; i++ )
 			{
-				int selectedMap = Rand.Int( maps.Count-1 );
+				int selectedMap = Rand.Int( maps.Count - 1 );
 				string mapName = maps[selectedMap];
-				var mapPanel = MapVotePanel.FromPackage( mapName, selectedMap );
+				var mapPanel = MapVotePanel.FromPackage( mapName, fullMaplist.IndexOf( mapName ) );
 				maps.RemoveAt( selectedMap );
 				AddChild( mapPanel );
 			}
 		}
 
-		public override void Tick() 
+		public override void Tick()
 		{
 			var game = Game.Instance;
 			if ( game == null ) return;
