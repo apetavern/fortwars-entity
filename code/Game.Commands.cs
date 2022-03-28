@@ -1,4 +1,7 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author support@apetavern.com
+
+using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -29,7 +32,7 @@ namespace Fortwars
 			hud = new();
 		}
 
-		[AdminCmd("fw_force_voteround")]
+		[AdminCmd( "fw_force_voteround" )]
 		public static void ForceVoteround()
 		{
 			Game.Instance.ChangeRound( new VoteRound() );
@@ -41,7 +44,7 @@ namespace Fortwars
 			var owner = ConsoleSystem.Caller;
 			var player = owner.Pawn;
 
-			if ( (player as FortwarsPlayer).ActiveChild is not FortwarsWeapon weapon )
+			if ( ( player as FortwarsPlayer ).ActiveChild is not FortwarsWeapon weapon )
 				return;
 
 			weapon.ReserveAmmo += amount;
@@ -89,9 +92,9 @@ namespace Fortwars
 				var playerLogs = Instance.buildLogEntries.ToList().Where( x => x.Player == player );
 				foreach ( var entry in playerLogs.TakeLast( 3 ) )
 				{
-					delay += (Time.Tick - entry.Tick);
+					delay += ( Time.Tick - entry.Tick );
 				}
-				delay = (delay / 3f).CeilToInt();
+				delay = ( delay / 3f ).CeilToInt();
 
 				if ( delay < Global.TickRate * 3 && playerLogs.Count() > 3 )
 				{

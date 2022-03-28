@@ -1,4 +1,7 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author support@apetavern.com
+
+using Sandbox;
 using System.Linq;
 
 namespace Fortwars
@@ -32,7 +35,7 @@ namespace Fortwars
 			base.SetupInventory( player );
 
 			player.Inventory.Add( new PhysGun(), true );
-			(player as FortwarsPlayer).Class?.AssignBuildLoadout( player.Inventory as Inventory );
+			( player as FortwarsPlayer ).Class?.AssignBuildLoadout( player.Inventory as Inventory );
 		}
 
 		protected override void OnFinish()

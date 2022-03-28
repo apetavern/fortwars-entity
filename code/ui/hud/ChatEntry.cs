@@ -1,4 +1,7 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author support@apetavern.com
+
+using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
@@ -6,31 +9,31 @@ namespace Fortwars;
 
 public partial class ChatEntry : Panel
 {
-	public Label NameLabel { get; internal set; }
-	public Label Message { get; internal set; }
-	public Image Avatar { get; internal set; }
+    public Label NameLabel { get; internal set; }
+    public Label Message { get; internal set; }
+    public Image Avatar { get; internal set; }
 
-	private RealTimeSince TimeSinceBorn = 0;
+    private RealTimeSince TimeSinceBorn = 0;
 
-	public ChatEntry()
-	{
-		Avatar = Add.Image();
-		NameLabel = Add.Label( "Name", "name" );
-		Message = Add.Label( "Message", "message" );
-	}
+    public ChatEntry()
+    {
+        Avatar = Add.Image();
+        NameLabel = Add.Label( "Name", "name" );
+        Message = Add.Label( "Message", "message" );
+    }
 
-	public override void Tick()
-	{
-		base.Tick();
+    public override void Tick()
+    {
+        base.Tick();
 
-		if ( TimeSinceBorn > 3 && !ChatBox.Instance.HasClass( "open" ) )
-		{
-			Hide();
-		}
-	}
+        if ( TimeSinceBorn > 3 && !ChatBox.Instance.HasClass( "open" ) )
+        {
+            Hide();
+        }
+    }
 
-	public void Hide()
-	{
-		AddClass( "hide" );
-	}
+    public void Hide()
+    {
+        AddClass( "hide" );
+    }
 }

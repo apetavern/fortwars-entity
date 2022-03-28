@@ -1,3 +1,6 @@
+// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author support@apetavern.com
+
 using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
@@ -5,93 +8,93 @@ using System;
 
 namespace Fortwars
 {
-	[UseTemplate]
-	public partial class InputHint : Panel
-	{
-		// @ref
-		public Image Glyph { get; set; }
-		public InputButton Button { get; set; }
-		public InputButton gamepadButton { get; set; }
-		public string Text { get; set; }
-		public Label ActionLabel { get; set; }
+    [UseTemplate]
+    public partial class InputHint : Panel
+    {
+        // @ref
+        public Image Glyph { get; set; }
+        public InputButton Button { get; set; }
+        public InputButton gamepadButton { get; set; }
+        public string Text { get; set; }
+        public Label ActionLabel { get; set; }
 
-		public InputHint()
-		{
-			StyleSheet.Load( "/ui/elements/generic/InputHint.scss" );
+        public InputHint()
+        {
+            StyleSheet.Load( "/ui/elements/generic/InputHint.scss" );
 
-			BindClass( "noaction", () => string.IsNullOrEmpty( Text ) );
-		}
+            BindClass( "noaction", () => string.IsNullOrEmpty( Text ) );
+        }
 
-		public override void SetProperty( string name, string value )
-		{
-			base.SetProperty( name, value );
+        public override void SetProperty( string name, string value )
+        {
+            base.SetProperty( name, value );
 
-			if ( name == "btn" )
-			{
-				SetButton( Enum.Parse<InputButton>( value, true ) );
-			}
-		}
+            if ( name == "btn" )
+            {
+                SetButton( Enum.Parse<InputButton>( value, true ) );
+            }
+        }
 
-		public void SetButton( InputButton button )
-		{
-			Button = button;
-		}
+        public void SetButton( InputButton button )
+        {
+            Button = button;
+        }
 
-		public override void SetContent( string value )
-		{
-			base.SetContent( value );
+        public override void SetContent( string value )
+        {
+            base.SetContent( value );
 
-			ActionLabel.SetText( value );
-			Text = value;
-		}
+            ActionLabel.SetText( value );
+            Text = value;
+        }
 
-		public override void Tick()
-		{
-			base.Tick();
+        public override void Tick()
+        {
+            base.Tick();
 
-			ActionLabel.SetText( Text );
+            ActionLabel.SetText( Text );
 
-			Texture glyphTexture = null;
+            Texture glyphTexture = null;
 
-			if ( !Input.UsingController )
-			{
-				glyphTexture = Input.GetGlyph( Button, InputGlyphSize.Small, GlyphStyle.Knockout.WithSolidABXY().WithNeutralColorABXY() );
-			}
-			else
-			{
-				glyphTexture = Input.GetGlyph( gamepadButton, InputGlyphSize.Small, GlyphStyle.Knockout.WithSolidABXY().WithNeutralColorABXY() );
-			}
+            if ( !Input.UsingController )
+            {
+                glyphTexture = Input.GetGlyph( Button, InputGlyphSize.Small, GlyphStyle.Knockout.WithSolidABXY().WithNeutralColorABXY() );
+            }
+            else
+            {
+                glyphTexture = Input.GetGlyph( gamepadButton, InputGlyphSize.Small, GlyphStyle.Knockout.WithSolidABXY().WithNeutralColorABXY() );
+            }
 
-			if ( glyphTexture != null )
-			{
-				Glyph.Texture = glyphTexture;
-				Glyph.Style.Width = glyphTexture.Width;
-				Glyph.Style.Height = glyphTexture.Height;
-			}
-			else
-			{
-				Glyph.Texture = Texture.Load( FileSystem.Mounted, "/tools/images/common/generic_hud_warning.jpg" );
-			}
-		}
-	}
-	 
-	public static class InputHintExtensions
-	{
-		public static InputHint InputHint( this PanelCreator self, InputButton button, InputButton gamepadButton, string action = null, string classname = null )
-		{
-			var control = self.panel.AddChild<InputHint>();
+            if ( glyphTexture != null )
+            {
+                Glyph.Texture = glyphTexture;
+                Glyph.Style.Width = glyphTexture.Width;
+                Glyph.Style.Height = glyphTexture.Height;
+            }
+            else
+            {
+                Glyph.Texture = Texture.Load( FileSystem.Mounted, "/tools/images/common/generic_hud_warning.jpg" );
+            }
+        }
+    }
 
-			control.Button = button;
+    public static class InputHintExtensions
+    {
+        public static InputHint InputHint( this PanelCreator self, InputButton button, InputButton gamepadButton, string action = null, string classname = null )
+        {
+            var control = self.panel.AddChild<InputHint>();
 
-			control.gamepadButton = gamepadButton;
+            control.Button = button;
 
-			if ( action != null )
-				control.Text = action;
+            control.gamepadButton = gamepadButton;
 
-			if ( classname != null )
-				control.AddClass( classname );
+            if ( action != null )
+                control.Text = action;
 
-			return control;
-		}
-	}
+            if ( classname != null )
+                control.AddClass( classname );
+
+            return control;
+        }
+    }
 }

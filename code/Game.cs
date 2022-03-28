@@ -1,3 +1,6 @@
+// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author support@apetavern.com
+
 using Sandbox;
 using System;
 using System.Linq;
@@ -124,9 +127,9 @@ namespace Fortwars
 
 		public override void MoveToSpawnpoint( Entity pawn )
 		{
-			Log.Info( $"Finding spawnpoint for {pawn.Name} on TeamID: {(int)(pawn as FortwarsPlayer).TeamID}" );
+			Log.Info( $"Finding spawnpoint for {pawn.Name} on TeamID: {(int)( pawn as FortwarsPlayer ).TeamID}" );
 
-			var spawnpoints = Entity.All.OfType<InfoPlayerTeamspawn>().Where( x => x.Team == (pawn as FortwarsPlayer).TeamID );
+			var spawnpoints = Entity.All.OfType<InfoPlayerTeamspawn>().Where( x => x.Team == ( pawn as FortwarsPlayer ).TeamID );
 			var randomSpawn = spawnpoints.OrderBy( x => Guid.NewGuid() ).FirstOrDefault();
 
 			if ( randomSpawn == null )
