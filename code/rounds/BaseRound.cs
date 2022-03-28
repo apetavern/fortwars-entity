@@ -67,7 +67,7 @@ namespace Fortwars
 					skipRound = false;
 				}
 
-				if ( Client.All.Count < Game.Instance.MinPlayers )
+				if ( Client.All.Count < Game.Instance.MinPlayers && Game.Instance.Round is not LobbyRound )
 					Game.Instance.ChangeRound( new LobbyRound() );
 
 			}
