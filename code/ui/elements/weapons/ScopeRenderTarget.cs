@@ -4,8 +4,8 @@
 using Sandbox;
 using Sandbox.UI;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class ScopeRenderTarget : Panel
     {
         Texture colorTexture;
@@ -76,4 +76,3 @@ namespace Fortwars
             sceneObject.Attributes.Set( "ScopeRT", colorTexture );
         }
     }
-}

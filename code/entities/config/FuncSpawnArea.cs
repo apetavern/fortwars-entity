@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     /// <summary>
     /// Players capture the flag in this area.
     /// </summary>
@@ -40,4 +40,3 @@ namespace Fortwars
                 other.TakeDamage( DamageInfo.Generic( 10000f ) );
         }
     }
-}

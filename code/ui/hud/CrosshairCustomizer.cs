@@ -8,8 +8,8 @@ using System;
 using System.Linq;
 using static Fortwars.Crosshair;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class CrosshairCustomizer : Panel
     {
         SliderEntry size;
@@ -95,4 +95,3 @@ namespace Fortwars
             carriable.CreateHudElements();
         }
     }
-}

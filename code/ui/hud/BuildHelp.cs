@@ -3,8 +3,8 @@
 
 using Sandbox.UI;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class BuildHelp : Panel
     {
         public BuildHelp()
@@ -18,4 +18,3 @@ namespace Fortwars
             BindClass( "visible", () => Game.Instance.Round is BuildRound );
         }
     }
-}

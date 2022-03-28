@@ -6,8 +6,8 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class Vitals : Panel
     {
         public Vitals()
@@ -29,4 +29,3 @@ namespace Fortwars
             }
         }
     }
-}

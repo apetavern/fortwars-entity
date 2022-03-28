@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     [Library( "medkittool", Title = "Medkit" )]
     public partial class MedkitTool : DropTool
     {
@@ -20,4 +20,3 @@ namespace Fortwars
             projectile.Owner = Owner;
         }
     }
-}

@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     partial class FortwarsPlayer
     {
         [Net] public Team TeamID { get; set; }
@@ -52,4 +52,3 @@ namespace Fortwars
             player.Respawn();
         }
     }
-}

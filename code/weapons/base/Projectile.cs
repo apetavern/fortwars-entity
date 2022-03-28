@@ -5,8 +5,8 @@ using Sandbox;
 using System;
 using System.Linq;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class Projectile : ModelEntity
     {
         public float Speed { get; set; }
@@ -102,4 +102,3 @@ namespace Fortwars
             Delete();
         }
     }
-}

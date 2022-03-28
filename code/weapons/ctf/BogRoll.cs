@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     [Library( "bogroll", Title = "Bogroll Weapon" )]
     public partial class BogRoll : MeleeWeapon
     {
@@ -175,4 +175,3 @@ namespace Fortwars
             }
         }
     }
-}

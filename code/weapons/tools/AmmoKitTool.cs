@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     [Library( "ammokittool", Title = "Ammokit" )]
     public partial class AmmoKitTool : DropTool
     {
@@ -40,4 +40,3 @@ namespace Fortwars
             }
         }
     }
-}

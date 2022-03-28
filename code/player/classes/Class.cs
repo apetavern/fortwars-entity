@@ -4,8 +4,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public abstract class Class
     {
         public virtual string Name { get; set; }
@@ -39,4 +39,3 @@ namespace Fortwars
             inventory.DeleteContents();
         }
     }
-}

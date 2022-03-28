@@ -4,8 +4,8 @@
 using Sandbox;
 using System.Threading.Tasks;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class BuildWheel : RadialWheel
     {
         public override Item[] Items => new Item[]
@@ -50,4 +50,3 @@ namespace Fortwars
             Wrapper.RemoveClass( "shrink" );
         }
     }
-}

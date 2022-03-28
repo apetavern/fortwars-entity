@@ -5,8 +5,8 @@ using Sandbox;
 using Sandbox.UI;
 using System.Linq;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     /// <summary>
     /// For things that need a health bar overlay
     /// </summary>
@@ -77,4 +77,3 @@ namespace Fortwars
             }
         }
     }
-}

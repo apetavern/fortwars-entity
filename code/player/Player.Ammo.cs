@@ -5,8 +5,8 @@ using Sandbox;
 using System;
 using System.Collections.Generic;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     partial class FortwarsPlayer
     {
         [Net]
@@ -68,4 +68,3 @@ namespace Fortwars
         Buckshot,
         Crossbow
     }
-}

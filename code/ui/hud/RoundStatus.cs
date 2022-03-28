@@ -7,8 +7,8 @@ using Sandbox.UI.Construct;
 using System;
 using System.Collections.Generic;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class RoundStatus : Panel
     {
         public Panel Wins;
@@ -81,4 +81,3 @@ namespace Fortwars
             }
         }
     }
-}

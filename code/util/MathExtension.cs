@@ -4,8 +4,8 @@
 using Sandbox;
 using System;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public static class MathExtension
     {
         /// <summary>
@@ -60,4 +60,3 @@ namespace Fortwars
 
         public static byte ColorComponentToByte( this float v ) => (byte)MathF.Floor( ( v >= 1.0f ) ? 255f : v * 256.0f );
     }
-}

@@ -4,8 +4,8 @@
 using Sandbox;
 using System.Collections.Generic;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class MeleeWeapon : Carriable
     {
         public virtual float PrimaryRate => 2.0f;
@@ -66,4 +66,3 @@ namespace Fortwars
             return TimeSincePrimaryAttack > ( 1 / rate );
         }
     }
-}

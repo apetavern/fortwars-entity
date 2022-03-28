@@ -6,8 +6,8 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System.Threading.Tasks;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class KillFeedEntry : Panel
     {
         public Label Left { get; internal set; }
@@ -61,4 +61,3 @@ namespace Fortwars
         }
     }
 
-}

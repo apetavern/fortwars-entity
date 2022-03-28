@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     partial class FortwarsPlayer
     {
         public Class Class { get; set; } = new AssaultClass();
@@ -48,4 +48,3 @@ namespace Fortwars
                 InSpawnRoom = false;
         }
     }
-}

@@ -5,8 +5,8 @@ using Sandbox;
 using Sandbox.UI;
 using System.Threading.Tasks;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class Hitmarker : Panel
     {
         public static Hitmarker Instance { get; private set; }
@@ -44,4 +44,3 @@ namespace Fortwars
             }
         }
     }
-}

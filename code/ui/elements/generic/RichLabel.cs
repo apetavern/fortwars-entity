@@ -5,8 +5,8 @@ using Sandbox;
 using Sandbox.UI;
 using System.Collections.Generic;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     [Library( "richlabel", Alias = new[] { "richtext" } )]
     public class RichLabel : Panel
     {
@@ -59,4 +59,3 @@ namespace Fortwars
             }
         }
     }
-}

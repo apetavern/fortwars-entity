@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public static class DamageInfoExtension
     {
         public static DamageInfo FromFall( float damage, Entity attacker )
@@ -29,4 +29,3 @@ namespace Fortwars
             };
         }
     }
-}

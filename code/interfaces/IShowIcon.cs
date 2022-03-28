@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author support@apetavern.com
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     /// <summary>
     /// Put this on things where you want to have a UI icon
     /// </summary>
@@ -33,4 +33,3 @@ namespace Fortwars
         /// </summary>
         bool DrawIcon();
     }
-}

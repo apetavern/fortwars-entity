@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     [Library( "repairtool", Title = "Repair Tool" )]
     public partial class RepairTool : MeleeWeapon
     {
@@ -61,4 +61,3 @@ namespace Fortwars
             anim.SetAnimParameter( "holdtype_attack", 1 );
         }
     }
-}

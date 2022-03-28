@@ -4,8 +4,8 @@
 using Sandbox;
 using System.Collections.Generic;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     [Library( "fwclass_engineer" )]
     public class EngineerClass : Class
     {
@@ -28,4 +28,3 @@ namespace Fortwars
             "repairtool"
         };
     }
-}

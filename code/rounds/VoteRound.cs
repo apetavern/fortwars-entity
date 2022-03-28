@@ -5,8 +5,8 @@ using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class VoteRound : BaseRound
     {
         public override string RoundName => "Voting";
@@ -61,4 +61,3 @@ namespace Fortwars
             Global.ChangeLevel( Game.GetMaps()[votedMap.Key] );
         }
     }
-}

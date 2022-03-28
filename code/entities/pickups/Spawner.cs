@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class Spawner : Entity
     {
         protected TimeUntil timeUntilSpawn = 0;
@@ -42,4 +42,3 @@ namespace Fortwars
             }
         }
     }
-}

@@ -6,8 +6,8 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System.Collections.Generic;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     partial class ClassMenu
     {
         public class ClassPreviewPanel : Panel
@@ -82,4 +82,3 @@ namespace Fortwars
             }
         }
     }
-}

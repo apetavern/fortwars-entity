@@ -5,8 +5,8 @@ using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class DevMenu : Panel
     {
         public DevMenu()
@@ -107,4 +107,3 @@ namespace Fortwars
             player.Inventory.Add( FortwarsWeapon.FromPath( path ), true );
         }
     }
-}

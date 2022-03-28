@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class FortwarsPlayer : Sandbox.Player
     {
         [Net] public string Killer { get; set; }
@@ -243,4 +243,3 @@ namespace Fortwars
             DamageIndicator.Current?.OnHit( pos );
         }
     }
-}

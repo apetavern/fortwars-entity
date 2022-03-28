@@ -4,8 +4,8 @@
 using Sandbox;
 using System;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class FortwarsBlock : Prop
     {
         [Net] public BlockMaterial BlockMaterial { get; set; } = BlockMaterial.Wood;
@@ -104,4 +104,3 @@ namespace Fortwars
         //TODO: Override OnKilled for custom gibs, in the Prop class it creates gibs and decides if it should explode or not.
         //Gibs are defined in Prop.DoGibs() which is private on Prop so we need to copy it over to do custom gibs.
     }
-}

@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     [Library( "func_wall_toggle" )]
     [Hammer.Solid]
     [Hammer.RenderFields]
@@ -37,4 +37,3 @@ namespace Fortwars
             EnableDrawing = false;
         }
     }
-}

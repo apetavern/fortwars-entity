@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     /// <summary>
     /// This is where players spawn.
     /// </summary>
@@ -23,4 +23,3 @@ namespace Fortwars
             Transmit = TransmitType.Never;
         }
     }
-}

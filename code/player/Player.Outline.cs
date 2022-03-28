@@ -5,8 +5,8 @@ using Sandbox;
 using Sandbox.Component;
 using System.Linq;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class FortwarsPlayer
     {
         [Event.Tick.Client]
@@ -35,4 +35,3 @@ namespace Fortwars
             } );
         }
     }
-}

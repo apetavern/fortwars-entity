@@ -4,8 +4,8 @@
 using Sandbox;
 using System.Linq;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     partial class Game
     {
         [Net] public int RedTeamScore { get; set; }
@@ -17,8 +17,8 @@ namespace Fortwars
         [Net] public BogRoll BlueFlagRoll { get; set; }
 
         /**
-		 * Called when a Player walks into a Team's flagzone.
-		 */
+	 * Called when a Player walks into a Team's flagzone.
+	 */
         public void OnPlayerTouchFlagzone( FortwarsPlayer player, Team team )
         {
             // don't let spectators interact with the flagzone at all
@@ -240,4 +240,3 @@ namespace Fortwars
             flagSpawns.First( e => e.Team == team ).HideFlag();
         }
     }
-}

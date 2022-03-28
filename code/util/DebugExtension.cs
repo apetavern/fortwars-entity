@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public static class Profiler
     {
         private static Stopwatch sw = Stopwatch.StartNew();
@@ -125,4 +125,3 @@ namespace Fortwars
             }
         }
     }
-}

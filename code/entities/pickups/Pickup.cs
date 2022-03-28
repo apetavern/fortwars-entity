@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class Pickup : AnimEntity
     {
         public Spawner Spawner { get; set; }
@@ -31,4 +31,3 @@ namespace Fortwars
             base.OnDestroy();
         }
     }
-}

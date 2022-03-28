@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     /// <summary>
     /// Overrides game settings for this map
     /// </summary>
@@ -52,4 +52,3 @@ namespace Fortwars
             Transmit = TransmitType.Never;
         }
     }
-}

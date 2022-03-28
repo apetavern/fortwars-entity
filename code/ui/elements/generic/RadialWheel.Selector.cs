@@ -5,8 +5,8 @@ using Sandbox;
 using Sandbox.UI;
 using System;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class RadialWheel
     {
         public class PieSelector : Panel
@@ -136,4 +136,3 @@ namespace Fortwars
             }
         }
     }
-}

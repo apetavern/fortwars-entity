@@ -4,8 +4,8 @@
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class WipText : Panel
     {
         public WipText()
@@ -16,4 +16,3 @@ namespace Fortwars
             Add.Image( "ui/misc/logo.png", "logo" );
         }
     }
-}

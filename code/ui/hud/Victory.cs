@@ -4,8 +4,8 @@
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class Victory : Panel
     {
         public Label VictoryLabel { get; set; }
@@ -30,4 +30,3 @@ namespace Fortwars
             VictoryLabel.SetClass( "blue", winningTeam == Team.Blue );
         }
     }
-}

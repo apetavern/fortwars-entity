@@ -5,8 +5,8 @@ using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class BaseMessage : Panel
     {
         Panel progress;
@@ -48,4 +48,3 @@ namespace Fortwars
             return control;
         }
     }
-}

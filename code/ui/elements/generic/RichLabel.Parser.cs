@@ -3,8 +3,8 @@
 
 using System.Collections.Generic;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class RichLabelParser
     {
         public struct Token
@@ -76,4 +76,3 @@ namespace Fortwars
             return tokenList;
         }
     }
-}

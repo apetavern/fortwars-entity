@@ -4,8 +4,8 @@
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     /// <summary>
     /// A nametag panel in the world
     /// </summary>
@@ -34,4 +34,3 @@ namespace Fortwars
             PanelBounds = new Rect( -( size / 2 ).x, -( size / 2 ).y, size.x, size.y );
         }
     }
-}

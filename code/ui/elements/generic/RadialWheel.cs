@@ -7,8 +7,8 @@ using Sandbox.UI.Construct;
 using System;
 using System.Collections.Generic;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     [UseTemplate]
     public partial class RadialWheel : Panel
     {
@@ -176,4 +176,3 @@ namespace Fortwars
 
         protected virtual void OnChange() { }
     }
-}

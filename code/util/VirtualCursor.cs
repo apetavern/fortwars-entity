@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public static class VirtualCursor
     {
         public static Vector2 Position { get; set; }
@@ -58,4 +58,3 @@ namespace Fortwars
             InUse = false;
         }
     }
-}

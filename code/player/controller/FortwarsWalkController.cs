@@ -4,8 +4,8 @@
 using Sandbox;
 using System;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     [Library]
     public partial class FortwarsWalkController : BasePlayerController
     {
@@ -684,4 +684,3 @@ namespace Fortwars
             Position = trace.EndPosition;
         }
     }
-}

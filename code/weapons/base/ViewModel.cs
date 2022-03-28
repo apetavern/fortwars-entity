@@ -4,8 +4,8 @@
 using Sandbox;
 using System;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class ViewModel : BaseViewModel
     {
         [ClientVar( "fw_viewmodel_fov", Help = "Viewmodel field of view", Min = 50f, Max = 90f )]
@@ -293,4 +293,3 @@ namespace Fortwars
             return offset;
         }
     }
-}

@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     [Hammer.EntityTool( "Shop", "FortWars" )]
     [Hammer.EditorModel( "models/items/shopterminal/shopterminal.vmdl" )]
     [Library( "info_shop" )]
@@ -25,4 +25,3 @@ namespace Fortwars
             throw new System.NotImplementedException();
         }
     }
-}

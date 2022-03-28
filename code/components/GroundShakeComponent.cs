@@ -4,8 +4,8 @@
 using Sandbox;
 using System.Linq;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     /// <summary>
     /// Shake the ground when these objects hit something
     /// </summary>
@@ -68,4 +68,3 @@ namespace Fortwars
             }
         }
     }
-}

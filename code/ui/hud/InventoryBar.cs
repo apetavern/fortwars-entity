@@ -7,8 +7,8 @@ using Sandbox.UI.Construct;
 using System;
 using System.Collections.Generic;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class InventoryBar : Panel
     {
         readonly List<InventoryIcon> slots = new();
@@ -143,4 +143,3 @@ namespace Fortwars
             SetClass( "active", false );
         }
     }
-}

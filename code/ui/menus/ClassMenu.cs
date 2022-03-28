@@ -7,8 +7,8 @@ using Sandbox.UI.Construct;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class ClassMenu : Menu
     {
         ClassInfo classInfo;
@@ -133,4 +133,3 @@ namespace Fortwars
             }
         }
     }
-}

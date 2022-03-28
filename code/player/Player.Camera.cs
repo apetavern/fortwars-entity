@@ -4,8 +4,8 @@
 using Sandbox;
 using System;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     partial class FortwarsPlayer
     {
         private Vector3 lastCameraPos = Vector3.Zero;
@@ -79,4 +79,3 @@ namespace Fortwars
             lastCameraPos = setup.Position;
         }
     }
-}

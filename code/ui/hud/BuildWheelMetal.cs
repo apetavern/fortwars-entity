@@ -4,8 +4,8 @@
 using Sandbox;
 using System.Threading.Tasks;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     // TODO: we shouldn't need a separate wheel for this; implement scrollability in RadialWheel
     public partial class BuildWheelMetal : RadialWheel
     {
@@ -52,4 +52,3 @@ namespace Fortwars
             Wrapper.RemoveClass( "shrink" );
         }
     }
-}

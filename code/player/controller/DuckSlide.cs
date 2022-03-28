@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     [Library]
     public partial class DuckSlide : BaseNetworkable
     {
@@ -125,4 +125,3 @@ namespace Fortwars
             return 1.0f;
         }
     }
-}

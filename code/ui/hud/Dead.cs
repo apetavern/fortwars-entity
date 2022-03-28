@@ -5,8 +5,8 @@ using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class Dead : Panel
     {
         Label timer;
@@ -36,4 +36,3 @@ namespace Fortwars
             timer.Text = $"Respawn in {player.RespawnTimer.Relative.CeilToInt()}";
         }
     }
-}

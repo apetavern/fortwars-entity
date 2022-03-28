@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author support@apetavern.com
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     /// <summary>
     /// Defines data for each block type
     /// </summary>
@@ -12,4 +12,3 @@ namespace Fortwars
         public string Name { get; set; }
         public int AdditionalHealth { get; set; }
     }
-}

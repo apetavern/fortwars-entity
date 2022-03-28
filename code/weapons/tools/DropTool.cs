@@ -5,8 +5,8 @@ using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     [Library( "droptool", Title = "Drop tool" )]
     public partial class DropTool : Carriable
     {
@@ -155,4 +155,3 @@ namespace Fortwars
             }
         }
     }
-}

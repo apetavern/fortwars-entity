@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author support@apetavern.com
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     partial class Game
     {
         // shit tier singleton hack since we can't init these in Game ctor
@@ -30,4 +30,3 @@ namespace Fortwars
             }
         }
     }
-}

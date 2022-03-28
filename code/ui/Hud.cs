@@ -4,8 +4,8 @@
 using Sandbox;
 using Sandbox.UI;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     [Library]
     public partial class FortwarsHUD : HudEntity<RootPanel>
     {
@@ -47,4 +47,3 @@ namespace Fortwars
             RootPanel.BindClass( "blue-team", () => ( Local.Pawn as FortwarsPlayer ).TeamID == Team.Blue );
         }
     }
-}

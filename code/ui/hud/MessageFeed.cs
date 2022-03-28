@@ -4,8 +4,8 @@
 using Sandbox;
 using Sandbox.UI;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class MessageFeed : Panel
     {
         public static MessageFeed Instance { get; set; }
@@ -27,4 +27,3 @@ namespace Fortwars
             Instance.timeSinceLastMessage = 0;
         }
     }
-}

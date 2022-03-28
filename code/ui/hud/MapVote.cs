@@ -7,8 +7,8 @@ using Sandbox.UI.Construct;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class MapVote : Panel
     {
         public MapVote()
@@ -32,13 +32,13 @@ namespace Fortwars
             }
 
             /*for ( int i = 0; i < 4; i++ )
-			{
-				int selectedMap = Rand.Int( maps.Count - 1 );
-				string mapName = maps[selectedMap];
-				var mapPanel = MapVotePanel.FromPackage( mapName, fullMaplist.IndexOf( mapName ) );
-				maps.RemoveAt( selectedMap );
-				AddChild( mapPanel );
-			}*/
+		{
+			int selectedMap = Rand.Int( maps.Count - 1 );
+			string mapName = maps[selectedMap];
+			var mapPanel = MapVotePanel.FromPackage( mapName, fullMaplist.IndexOf( mapName ) );
+			maps.RemoveAt( selectedMap );
+			AddChild( mapPanel );
+		}*/
         }
 
         public override void Tick()
@@ -111,4 +111,3 @@ namespace Fortwars
             RemoveClass( "clicked" );
         }
     }
-}

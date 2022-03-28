@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class FlagDisplay : ModelEntity, IShowIcon
     {
         [Net, Change( "OnTeamChange" )] public Team Team { get; set; }
@@ -83,4 +83,3 @@ namespace Fortwars
             }
         }
     }
-}

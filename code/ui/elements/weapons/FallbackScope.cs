@@ -4,8 +4,8 @@
 using Sandbox;
 using Sandbox.UI;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     [UseTemplate]
     public class FallbackScope : Panel
     {
@@ -20,4 +20,3 @@ namespace Fortwars
             } );
         }
     }
-}

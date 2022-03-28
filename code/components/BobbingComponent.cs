@@ -4,8 +4,8 @@
 using Sandbox;
 using System;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     /// <summary>
     /// Bob the entity's scene object up and down, and rotate it, over time
     /// </summary>
@@ -45,4 +45,3 @@ namespace Fortwars
             sceneObject.Position = Entity.Position + ( centerOffset + bobbingOffset + PositionOffset ) * Entity.Scale;
         }
     }
-}

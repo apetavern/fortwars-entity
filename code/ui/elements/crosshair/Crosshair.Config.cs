@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author support@apetavern.com
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     partial class Crosshair
     {
         public struct CrosshairConfig
@@ -46,4 +46,3 @@ namespace Fortwars
             };
         }
     }
-}

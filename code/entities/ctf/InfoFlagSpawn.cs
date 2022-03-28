@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     /// <summary>
     /// This is where the flag spawns.
     /// </summary>
@@ -47,4 +47,3 @@ namespace Fortwars
             flag.EnableDrawing = false;
         }
     }
-}

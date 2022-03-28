@@ -4,8 +4,8 @@
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class ShopMenu : Panel
     {
         public ShopMenu()
@@ -47,23 +47,23 @@ namespace Fortwars
 
                 var items = new ShopItem[]
                 {
-				//
-				//
-				new ShopItem( "MP5", "Gun", 1000 ),
+			//
+			//
+			new ShopItem( "MP5", "Gun", 1000 ),
                 new ShopItem( "HK SMG2", "Gun", 2500 ),
                 new ShopItem( "Rocket Launcher", "Gun", 5000 ),
 
-				//
-				//
-				new ShopItem( "Grenade", "Gun", 100 ),
+			//
+			//
+			new ShopItem( "Grenade", "Gun", 100 ),
 
-				//
-				//
-				new ShopItem( "Ammo Refill", "Gun", 100 ),
+			//
+			//
+			new ShopItem( "Ammo Refill", "Gun", 100 ),
 
-				//
-				//
-				new ShopItem( "10 Wood", "Gun", 100 ),
+			//
+			//
+			new ShopItem( "10 Wood", "Gun", 100 ),
                 new ShopItem( "10 Metal", "Gun", 250 ),
                 new ShopItem( "10 Rubber", "Gun", 500 ),
                 };
@@ -140,4 +140,3 @@ namespace Fortwars
             }
         }
     }
-}

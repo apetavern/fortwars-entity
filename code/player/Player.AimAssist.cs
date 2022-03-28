@@ -5,8 +5,8 @@ using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class FortwarsPlayer
     {
         public override void BuildInput( InputBuilder input )
@@ -112,4 +112,3 @@ namespace Fortwars
             }
         }
     }
-}

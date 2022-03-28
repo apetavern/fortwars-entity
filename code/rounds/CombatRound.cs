@@ -4,8 +4,8 @@
 using Sandbox;
 using System.Linq;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class CombatRound : BaseRound
     {
         public static int RoundLength = 300;
@@ -85,4 +85,3 @@ namespace Fortwars
             base.OnPlayerSpawn( player );
         }
     }
-}

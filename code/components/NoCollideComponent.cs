@@ -4,8 +4,8 @@
 using Sandbox;
 using System.Linq;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     /// <summary>
     /// Don't collide with players when we're grabbing these
     /// </summary>
@@ -72,4 +72,3 @@ namespace Fortwars
             }
         }
     }
-}

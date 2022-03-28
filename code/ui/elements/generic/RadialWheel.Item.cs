@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author support@apetavern.com
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class RadialWheel
     {
         public struct Item
@@ -19,4 +19,3 @@ namespace Fortwars
             }
         }
     }
-}

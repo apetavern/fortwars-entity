@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class HealthPickup : Pickup
     {
         public override void Spawn()
@@ -34,4 +34,3 @@ namespace Fortwars
             this.Delete();
         }
     }
-}

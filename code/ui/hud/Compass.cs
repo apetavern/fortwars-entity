@@ -8,8 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public static class PlayerExtensions
     {
         public static float CalcRelativeYaw( this Player player, float angle )
@@ -188,4 +188,3 @@ namespace Fortwars
             return "?";
         }
     }
-}

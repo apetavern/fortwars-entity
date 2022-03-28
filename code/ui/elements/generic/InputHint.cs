@@ -6,8 +6,8 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     [UseTemplate]
     public partial class InputHint : Panel
     {
@@ -97,4 +97,3 @@ namespace Fortwars
             return control;
         }
     }
-}

@@ -5,8 +5,8 @@ using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class HealthBar : Panel
     {
         private Label owner;
@@ -35,4 +35,3 @@ namespace Fortwars
             owner.Text = $"Owned by {block.Client?.Name ?? "(disconnected)"}";
         }
     }
-}

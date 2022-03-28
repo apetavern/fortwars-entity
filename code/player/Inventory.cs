@@ -5,8 +5,8 @@ using Sandbox;
 using System;
 using System.Linq;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class Inventory : BaseInventory
     {
         public Inventory( Player player ) : base( player )
@@ -44,4 +44,3 @@ namespace Fortwars
             Log.Info( $"Gave {player.Client.Name} 1x {itemName}" );
         }
     }
-}

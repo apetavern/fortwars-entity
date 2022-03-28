@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public static class ItemUtils
     {
         public static Carriable GetItem( string itemName )
@@ -19,4 +19,3 @@ namespace Fortwars
             }
         }
     }
-}

@@ -4,8 +4,8 @@
 using Sandbox;
 using Sandbox.UI;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public static class PanelExtension
     {
         public static void PositionAtCrosshair( this Panel panel )
@@ -41,4 +41,3 @@ namespace Fortwars
             panel.Style.Dirty();
         }
     }
-}

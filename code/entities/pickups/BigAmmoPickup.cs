@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public partial class BigAmmoPickup : Pickup
     {
         [Net] int uses { get; set; } = 5;
@@ -75,4 +75,3 @@ namespace Fortwars
             }
         }
     }
-}

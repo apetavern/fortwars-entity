@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     partial class FortwarsPlayer
     {
         private static StandardPostProcess postProcess;
@@ -41,4 +41,3 @@ namespace Fortwars
             postProcess.ChromaticAberration.Offset = Vector3.Up * 0.0005f;
         }
     }
-}

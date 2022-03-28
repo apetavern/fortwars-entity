@@ -6,8 +6,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace Fortwars
-{
+namespace Fortwars;
 
     public partial class RollReturnZone : ModelEntity
     {
@@ -155,4 +154,3 @@ namespace Fortwars
             }
         }
     }
-}

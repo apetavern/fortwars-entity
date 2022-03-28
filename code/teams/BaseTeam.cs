@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author support@apetavern.com
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public enum Team
     {
         Invalid = -1,
@@ -20,4 +20,3 @@ namespace Fortwars
 
         public virtual void OnPlayerSpawn( FortwarsPlayer player ) { }
     }
-}

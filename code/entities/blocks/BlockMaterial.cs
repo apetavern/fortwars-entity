@@ -5,8 +5,8 @@ using Sandbox;
 using System;
 using System.Linq;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public struct BlockMaterial : IEquatable<BlockMaterial>
     {
         public enum Type
@@ -66,4 +66,3 @@ namespace Fortwars
             return obj is BlockMaterial && Equals( (BlockMaterial)obj );
         }
     }
-}

@@ -5,8 +5,8 @@ using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     /// <summary>
     /// A horizontal slider with a text entry on the right
     /// </summary>
@@ -161,4 +161,3 @@ namespace Fortwars
             }
         }
     }
-}

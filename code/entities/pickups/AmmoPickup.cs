@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class AmmoPickup : Pickup
     {
         public override void Spawn()
@@ -32,4 +32,3 @@ namespace Fortwars
             this.Delete();
         }
     }
-}

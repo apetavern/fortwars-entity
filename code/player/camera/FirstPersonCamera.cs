@@ -3,8 +3,8 @@
 
 using Sandbox;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class FirstPersonCamera : Sandbox.FirstPersonCamera
     {
         [ClientVar( "fw_fov_desired", Help = "Desired player field of view", Max = 110f, Min = 80f )]
@@ -23,4 +23,3 @@ namespace Fortwars
             ZFar = 20000;
         }
     }
-}

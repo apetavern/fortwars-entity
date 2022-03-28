@@ -5,8 +5,8 @@ using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace Fortwars
-{
+namespace Fortwars;
+
     public class Resources : Panel
     {
         public Resources()
@@ -52,4 +52,3 @@ namespace Fortwars
             }
         }
     }
-}
