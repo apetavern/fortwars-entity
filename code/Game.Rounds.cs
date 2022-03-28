@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
-// without permission of its author support@apetavern.com
+// without permission of its author (insert_email_here)
 
 using Sandbox;
 using System.Collections.Generic;
@@ -47,14 +47,14 @@ partial class Game
 	public static void VoteMap( int index )
 	{
 		var playerId = ConsoleSystem.Caller.PlayerId;
-		var mapVotes = Game.Instance?.MapVotes;
+		var mapVotes = Instance?.MapVotes;
 
 		foreach ( var vote in mapVotes )
 		{
 			if ( vote.PlayerId == playerId ) return;
 		}
 
-		Game.Instance?.MapVotes.Add( new MapVote( index, playerId ) );
+		Instance?.MapVotes.Add( new MapVote( index, playerId ) );
 	}
 
 	public static List<string> GetMaps()

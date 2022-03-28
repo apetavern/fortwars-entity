@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
-// without permission of its author support@apetavern.com
+// without permission of its author (insert_email_here)
 
 using Sandbox;
 using Sandbox.UI;
@@ -9,105 +9,105 @@ using System.Threading.Tasks;
 
 namespace Fortwars;
 
-    public class MapVote : Panel
-    {
-        public MapVote()
-        {
-            StyleSheet.Load( "ui/hud/MapVote.scss" );
+public class MapVote : Panel
+{
+	public MapVote()
+	{
+		StyleSheet.Load( "ui/hud/MapVote.scss" );
 
-            List<string> maps = Game.GetMaps();
+		List<string> maps = Game.GetMaps();
 
-            List<string> fullMaplist = Game.GetMaps();
+		List<string> fullMaplist = Game.GetMaps();
 
-            if ( maps.Contains( Global.MapName ) )
-            {
-                maps.Remove( Global.MapName );
-            }
-
-            for ( int i = 0; i < maps.Count; i++ )
-            {
-                string mapName = maps[i];
-                var mapPanel = MapVotePanel.FromPackage( mapName, fullMaplist.IndexOf( mapName ) );
-                AddChild( mapPanel );
-            }
-
-            /*for ( int i = 0; i < 4; i++ )
+		if ( maps.Contains( Global.MapName ) )
 		{
-			int selectedMap = Rand.Int( maps.Count - 1 );
-			string mapName = maps[selectedMap];
+			maps.Remove( Global.MapName );
+		}
+
+		for ( int i = 0; i < maps.Count; i++ )
+		{
+			string mapName = maps[i];
 			var mapPanel = MapVotePanel.FromPackage( mapName, fullMaplist.IndexOf( mapName ) );
-			maps.RemoveAt( selectedMap );
 			AddChild( mapPanel );
-		}*/
-        }
+		}
 
-        public override void Tick()
-        {
-            var game = Game.Instance;
-            if ( game == null ) return;
+		/*for ( int i = 0; i < 4; i++ )
+	{
+		int selectedMap = Rand.Int( maps.Count - 1 );
+		string mapName = maps[selectedMap];
+		var mapPanel = MapVotePanel.FromPackage( mapName, fullMaplist.IndexOf( mapName ) );
+		maps.RemoveAt( selectedMap );
+		AddChild( mapPanel );
+	}*/
+	}
 
-            SetClass( "show", game.Round is VoteRound );
-        }
-    }
+	public override void Tick()
+	{
+		var game = Game.Instance;
+		if ( game == null ) return;
 
-    public class MapVotePanel : Panel
-    {
-        private Label VoteCount { get; set; }
-        private int Index { get; set; }
+		SetClass( "show", game.Round is VoteRound );
+	}
+}
 
-        public static MapVotePanel FromPackage( string packageName, int index )
-        {
-            var packageTask = Package.Fetch( packageName, true ).ContinueWith( t =>
-            {
-                var package = t.Result;
-                return new MapVotePanel( package.Title, package.Thumb, index );
-            } );
+public class MapVotePanel : Panel
+{
+	private Label VoteCount { get; set; }
+	private int Index { get; set; }
 
-            return packageTask.Result;
-        }
+	public static MapVotePanel FromPackage( string packageName, int index )
+	{
+		var packageTask = Package.Fetch( packageName, true ).ContinueWith( t =>
+		{
+			var package = t.Result;
+			return new MapVotePanel( package.Title, package.Thumb, index );
+		} );
 
-        public MapVotePanel( string mapName, string backgroundImage, int index )
-        {
-            AddClass( "vote-panel" );
+		return packageTask.Result;
+	}
 
-            VoteCount = Add.Label( "0", "vote-count" );
-            Add.Label( "VOTES", "vote-subtext" );
-            Add.Label( mapName, "map-name" );
+	public MapVotePanel( string mapName, string backgroundImage, int index )
+	{
+		AddClass( "vote-panel" );
 
-            Style.BackgroundImage = Texture.Load( backgroundImage );
+		VoteCount = Add.Label( "0", "vote-count" );
+		Add.Label( "VOTES", "vote-subtext" );
+		Add.Label( mapName, "map-name" );
 
-            AddEventListener( "onclick", () =>
-            {
-                if ( HasClass( "disabled" ) )
-                    return;
-                Game.VoteMap( index );
-                Sound.FromScreen( "vote_confirm" );
-                _ = SetClickClass();
-            } );
+		Style.BackgroundImage = Texture.Load( backgroundImage );
 
-            Index = index;
-        }
+		AddEventListener( "onclick", () =>
+		{
+			if ( HasClass( "disabled" ) )
+				return;
+			Game.VoteMap( index );
+			Sound.FromScreen( "vote_confirm" );
+			_ = SetClickClass();
+		} );
 
-        public override void Tick()
-        {
-            base.Tick();
-            int votes = 0;
+		Index = index;
+	}
 
-            foreach ( var mapVote in Game.Instance?.MapVotes )
-            {
-                SetClass( "disabled", mapVote.PlayerId == Local.Client.PlayerId );
-                SetClass( "voted-for", mapVote.PlayerId == Local.Client.PlayerId && mapVote.MapIndex == this.Index );
+	public override void Tick()
+	{
+		base.Tick();
+		int votes = 0;
 
-                if ( mapVote.MapIndex == this.Index )
-                    votes++;
-            }
+		foreach ( var mapVote in Game.Instance?.MapVotes )
+		{
+			SetClass( "disabled", mapVote.PlayerId == Local.Client.PlayerId );
+			SetClass( "voted-for", mapVote.PlayerId == Local.Client.PlayerId && mapVote.MapIndex == Index );
 
-            VoteCount.Text = votes.ToString();
-        }
-        private async Task SetClickClass()
-        {
-            AddClass( "clicked" );
-            await Task.Delay( 50 );
-            RemoveClass( "clicked" );
-        }
-    }
+			if ( mapVote.MapIndex == Index )
+				votes++;
+		}
+
+		VoteCount.Text = votes.ToString();
+	}
+	private async Task SetClickClass()
+	{
+		AddClass( "clicked" );
+		await Task.Delay( 50 );
+		RemoveClass( "clicked" );
+	}
+}

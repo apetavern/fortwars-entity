@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
-// without permission of its author support@apetavern.com
+// without permission of its author (insert_email_here)
 
 using Sandbox;
 using System.Linq;
@@ -19,7 +19,7 @@ public class BuildRound : BaseRound
 
 		if ( Host.IsServer )
 		{
-			Player.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) =>
+			Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) =>
 			{
 				SetupInventory( player );
 				player.Reset();

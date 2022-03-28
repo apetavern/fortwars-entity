@@ -1,242 +1,242 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
-// without permission of its author support@apetavern.com
+// without permission of its author (insert_email_here)
 
 using Sandbox;
 using System.Linq;
 
 namespace Fortwars;
 
-    partial class Game
-    {
-        [Net] public int RedTeamScore { get; set; }
-        [Net] public int BlueTeamScore { get; set; }
-        [Net] public FortwarsPlayer RedFlagCarrier { get; set; }
-        [Net] public FortwarsPlayer BlueFlagCarrier { get; set; }
+partial class Game
+{
+	[Net] public int RedTeamScore { get; set; }
+	[Net] public int BlueTeamScore { get; set; }
+	[Net] public FortwarsPlayer RedFlagCarrier { get; set; }
+	[Net] public FortwarsPlayer BlueFlagCarrier { get; set; }
 
-        [Net] public BogRoll RedFlagRoll { get; set; }
-        [Net] public BogRoll BlueFlagRoll { get; set; }
+	[Net] public BogRoll RedFlagRoll { get; set; }
+	[Net] public BogRoll BlueFlagRoll { get; set; }
 
-        /**
-	 * Called when a Player walks into a Team's flagzone.
-	 */
-        public void OnPlayerTouchFlagzone( FortwarsPlayer player, Team team )
-        {
-            // don't let spectators interact with the flagzone at all
-            if ( player.IsSpectator )
-                return;
+	/**
+ * Called when a Player walks into a Team's flagzone.
+ */
+	public void OnPlayerTouchFlagzone( FortwarsPlayer player, Team team )
+	{
+		// don't let spectators interact with the flagzone at all
+		if ( player.IsSpectator )
+			return;
 
-            // If the player is in their own flag zone
-            if ( player.TeamID == team )
-            {
-                // If the player isn't carrying a flag, nothing to do
-                if ( player != RedFlagCarrier && player != BlueFlagCarrier )
-                    return;
+		// If the player is in their own flag zone
+		if ( player.TeamID == team )
+		{
+			// If the player isn't carrying a flag, nothing to do
+			if ( player != RedFlagCarrier && player != BlueFlagCarrier )
+				return;
 
-                // Check if the player's team flag is out (you can only capture if your flag is in base)
-                if ( ( player.Team is BlueTeam && BlueFlagCarrier != null ) || ( player.Team is RedTeam && RedFlagCarrier != null ) )
-                    return;
+			// Check if the player's team flag is out (you can only capture if your flag is in base)
+			if ( ( player.Team is BlueTeam && BlueFlagCarrier != null ) || ( player.Team is RedTeam && RedFlagCarrier != null ) )
+				return;
 
-                PlayerScoreFlag( player );
-                player.ActiveChild.Delete();//Has to be the flag from the checks before this.
-                return;
-            }
+			PlayerScoreFlag( player );
+			player.ActiveChild.Delete();//Has to be the flag from the checks before this.
+			return;
+		}
 
-            // The player must be in the enemy flag zone
+		// The player must be in the enemy flag zone
 
-            // Check if the enemy flag is actually here
-            if ( ( player.Team is BlueTeam && RedFlagCarrier != null ) || ( player.Team is RedTeam && BlueFlagCarrier != null ) )
-                return;
+		// Check if the enemy flag is actually here
+		if ( ( player.Team is BlueTeam && RedFlagCarrier != null ) || ( player.Team is RedTeam && BlueFlagCarrier != null ) )
+			return;
 
-            // Check if the flag exists in the world
-            if ( ( player.Team is BlueTeam && RedFlagRoll != null ) || ( player.Team is RedTeam && BlueFlagRoll != null ) )
-                return;
+		// Check if the flag exists in the world
+		if ( ( player.Team is BlueTeam && RedFlagRoll != null ) || ( player.Team is RedTeam && BlueFlagRoll != null ) )
+			return;
 
-            PlayerPickupEnemyFlag( player );
-        }
+		PlayerPickupEnemyFlag( player );
+	}
 
-        public void PlayerPickupEnemyFlag( FortwarsPlayer player )
-        {
-            BaseTeam enemyTeam = player.TeamID switch
-            {
-                Team.Blue => RedTeam,
-                Team.Red => BlueTeam,
-                _ => RedTeam, // shit but shutiup
-            };
+	public void PlayerPickupEnemyFlag( FortwarsPlayer player )
+	{
+		BaseTeam enemyTeam = player.TeamID switch
+		{
+			Team.Blue => RedTeam,
+			Team.Red => BlueTeam,
+			_ => RedTeam, // shit but shutiup
+		};
 
-            if ( enemyTeam is RedTeam )
-            {
-                RedFlagCarrier = player;
-                RedFlagRoll = new BogRoll();
-                RedFlagRoll.Team = Team.Red;
-                player.Inventory.Add( RedFlagRoll, true );
-            }
+		if ( enemyTeam is RedTeam )
+		{
+			RedFlagCarrier = player;
+			RedFlagRoll = new BogRoll();
+			RedFlagRoll.Team = Team.Red;
+			player.Inventory.Add( RedFlagRoll, true );
+		}
 
-            if ( enemyTeam is BlueTeam )
-            {
-                BlueFlagCarrier = player;
-                BlueFlagRoll = new BogRoll();
-                BlueFlagRoll.Team = Team.Blue;
-                player.Inventory.Add( BlueFlagRoll, true );
-            }
+		if ( enemyTeam is BlueTeam )
+		{
+			BlueFlagCarrier = player;
+			BlueFlagRoll = new BogRoll();
+			BlueFlagRoll.Team = Team.Blue;
+			player.Inventory.Add( BlueFlagRoll, true );
+		}
 
-            HideFlag( enemyTeam.ID );
+		HideFlag( enemyTeam.ID );
 
-            ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
+		ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
 
 
-            foreach ( FortwarsPlayer ply in All.OfType<FortwarsPlayer>() )
-            {
-                if ( ply.TeamID == player.TeamID )
-                {
-                    PlayLocalSound( To.Single( ply.Client ), "enemyflagtaken" );//positive sound, same team who took flag
-                }
-                else
-                {
-                    PlayLocalSound( To.Single( ply.Client ), "enemytookflag" );//negative sound, enemy team took flag
-                }
-            }
-        }
+		foreach ( FortwarsPlayer ply in All.OfType<FortwarsPlayer>() )
+		{
+			if ( ply.TeamID == player.TeamID )
+			{
+				PlayLocalSound( To.Single( ply.Client ), "enemyflagtaken" );//positive sound, same team who took flag
+			}
+			else
+			{
+				PlayLocalSound( To.Single( ply.Client ), "enemytookflag" );//negative sound, enemy team took flag
+			}
+		}
+	}
 
-        public void PlayerPickupEnemyFlagFloor( FortwarsPlayer player )
-        {
-            BaseTeam enemyTeam = player.TeamID switch
-            {
-                Team.Blue => RedTeam,
-                Team.Red => BlueTeam,
-                _ => RedTeam, // shit but shutiup
-            };
+	public void PlayerPickupEnemyFlagFloor( FortwarsPlayer player )
+	{
+		BaseTeam enemyTeam = player.TeamID switch
+		{
+			Team.Blue => RedTeam,
+			Team.Red => BlueTeam,
+			_ => RedTeam, // shit but shutiup
+		};
 
-            if ( enemyTeam is RedTeam )
-            {
-                RedFlagCarrier = player;
-            }
+		if ( enemyTeam is RedTeam )
+		{
+			RedFlagCarrier = player;
+		}
 
-            if ( enemyTeam is BlueTeam )
-            {
-                BlueFlagCarrier = player;
-            }
+		if ( enemyTeam is BlueTeam )
+		{
+			BlueFlagCarrier = player;
+		}
 
-            ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
+		ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
 
-            player.PlaySound( "ctf_flag_pickup" );
-        }
+		player.PlaySound( "ctf_flag_pickup" );
+	}
 
-        [ClientRpc]
-        public void PlayLocalSound( string sound )
-        {
-            PlaySound( sound );
-        }
+	[ClientRpc]
+	public void PlayLocalSound( string sound )
+	{
+		PlaySound( sound );
+	}
 
-        public void PlayerScoreFlag( FortwarsPlayer player )
-        {
-            foreach ( FortwarsPlayer ply in All.OfType<FortwarsPlayer>() )
-            {
-                if ( ply.TeamID == player.TeamID )
-                {
-                    PlayLocalSound( To.Single( ply.Client ), "enemyflagcaptured" );// positive sound, same team who scored
-                }
-                else
-                {
-                    PlayLocalSound( To.Single( ply.Client ), "enemycapturedourflag" );// negative sound, enemy team scored
-                }
-            }
+	public void PlayerScoreFlag( FortwarsPlayer player )
+	{
+		foreach ( FortwarsPlayer ply in All.OfType<FortwarsPlayer>() )
+		{
+			if ( ply.TeamID == player.TeamID )
+			{
+				PlayLocalSound( To.Single( ply.Client ), "enemyflagcaptured" );// positive sound, same team who scored
+			}
+			else
+			{
+				PlayLocalSound( To.Single( ply.Client ), "enemycapturedourflag" );// negative sound, enemy team scored
+			}
+		}
 
-            if ( player == BlueFlagCarrier )
-            {
-                // Make the player drop the flag
-                BlueFlagCarrier = null;
+		if ( player == BlueFlagCarrier )
+		{
+			// Make the player drop the flag
+			BlueFlagCarrier = null;
 
-                // Up the team score
-                RedTeamScore++;
+			// Up the team score
+			RedTeamScore++;
 
-                ShowFlag( Team.Blue );
+			ShowFlag( Team.Blue );
 
-                // Announce
-                ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {RedTeam.Name}", $"avatar:{player.Client.PlayerId}", true );
-            }
+			// Announce
+			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {RedTeam.Name}", $"avatar:{player.Client.PlayerId}", true );
+		}
 
-            if ( player == RedFlagCarrier )
-            {
-                // Make the player drop the flag
-                RedFlagCarrier = null;
+		if ( player == RedFlagCarrier )
+		{
+			// Make the player drop the flag
+			RedFlagCarrier = null;
 
-                // Up the team score
-                BlueTeamScore++;
+			// Up the team score
+			BlueTeamScore++;
 
-                ShowFlag( Team.Red );
+			ShowFlag( Team.Red );
 
-                // Announce
-                ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {BlueTeam.Name}", $"avatar:{player.Client.PlayerId}", true );
-            }
-        }
+			// Announce
+			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {BlueTeam.Name}", $"avatar:{player.Client.PlayerId}", true );
+		}
+	}
 
-        public void PlayerDropFlag( FortwarsPlayer player )
-        {
-            if ( player == BlueFlagCarrier )
-            {
-                ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {BlueTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
-                BlueFlagCarrier = null;
-                ShowFlag( Team.Blue );
-                return;
-            }
-            if ( player == RedFlagCarrier )
-            {
-                ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {RedTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
-                RedFlagCarrier = null;
-                ShowFlag( Team.Red );
-                return;
-            }
-        }
+	public void PlayerDropFlag( FortwarsPlayer player )
+	{
+		if ( player == BlueFlagCarrier )
+		{
+			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {BlueTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
+			BlueFlagCarrier = null;
+			ShowFlag( Team.Blue );
+			return;
+		}
+		if ( player == RedFlagCarrier )
+		{
+			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {RedTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
+			RedFlagCarrier = null;
+			ShowFlag( Team.Red );
+			return;
+		}
+	}
 
-        public void ReturnFlag( Team Team )
-        {
-            switch ( Team )
-            {
-                case Team.Blue:
-                    ChatBox.AddInformation( To.Everyone, $"{BlueTeam.Name} flag returned", null, true );
-                    BlueFlagCarrier = null;
-                    ShowFlag( Team.Blue );
-                    return;
-                case Team.Red:
-                    ChatBox.AddInformation( To.Everyone, $"{RedTeam.Name} flag returned", null, true );
-                    RedFlagCarrier = null;
-                    ShowFlag( Team.Red );
-                    return;
-            }
-        }
+	public void ReturnFlag( Team Team )
+	{
+		switch ( Team )
+		{
+			case Team.Blue:
+				ChatBox.AddInformation( To.Everyone, $"{BlueTeam.Name} flag returned", null, true );
+				BlueFlagCarrier = null;
+				ShowFlag( Team.Blue );
+				return;
+			case Team.Red:
+				ChatBox.AddInformation( To.Everyone, $"{RedTeam.Name} flag returned", null, true );
+				RedFlagCarrier = null;
+				ShowFlag( Team.Red );
+				return;
+		}
+	}
 
-        public void ResetFlags()
-        {
-            RedFlagCarrier = null;
-            BlueFlagCarrier = null;
+	public void ResetFlags()
+	{
+		RedFlagCarrier = null;
+		BlueFlagCarrier = null;
 
-            ShowFlag( Team.Red );
-            ShowFlag( Team.Blue );
-        }
+		ShowFlag( Team.Red );
+		ShowFlag( Team.Blue );
+	}
 
-        public void CleanupCTF()
-        {
-            // Reset Score
-            RedTeamScore = 0;
-            BlueTeamScore = 0;
+	public void CleanupCTF()
+	{
+		// Reset Score
+		RedTeamScore = 0;
+		BlueTeamScore = 0;
 
-            // Return Flags
-            ReturnFlag( Team.Red );
-            ReturnFlag( Team.Blue );
+		// Return Flags
+		ReturnFlag( Team.Red );
+		ReturnFlag( Team.Blue );
 
-            // Reset Flags
-            ResetFlags();
-        }
+		// Reset Flags
+		ResetFlags();
+	}
 
-        private void ShowFlag( Team team )
-        {
-            var flagSpawns = Entity.All.OfType<InfoFlagSpawn>().ToList();
-            flagSpawns.First( e => e.Team == team ).ShowFlag();
-        }
+	private void ShowFlag( Team team )
+	{
+		var flagSpawns = All.OfType<InfoFlagSpawn>().ToList();
+		flagSpawns.First( e => e.Team == team ).ShowFlag();
+	}
 
-        private void HideFlag( Team team )
-        {
-            var flagSpawns = Entity.All.OfType<InfoFlagSpawn>().ToList();
-            flagSpawns.First( e => e.Team == team ).HideFlag();
-        }
-    }
+	private void HideFlag( Team team )
+	{
+		var flagSpawns = All.OfType<InfoFlagSpawn>().ToList();
+		flagSpawns.First( e => e.Team == team ).HideFlag();
+	}
+}

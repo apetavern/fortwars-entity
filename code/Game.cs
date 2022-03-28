@@ -1,5 +1,5 @@
 // Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
-// without permission of its author support@apetavern.com
+// without permission of its author (insert_email_here)
 
 using Sandbox;
 using System;
@@ -58,7 +58,7 @@ partial class Game : Sandbox.Game
 	{
 		base.ClientDisconnect( cl, reason );
 
-		Entity.All.OfType<FortwarsBlock>().ToList().ForEach( x =>
+		All.OfType<FortwarsBlock>().ToList().ForEach( x =>
 		{
 			if ( x.Owner == cl )
 				x.Delete();
@@ -129,7 +129,7 @@ partial class Game : Sandbox.Game
 	{
 		Log.Info( $"Finding spawnpoint for {pawn.Name} on TeamID: {(int)( pawn as FortwarsPlayer ).TeamID}" );
 
-		var spawnpoints = Entity.All.OfType<InfoPlayerTeamspawn>().Where( x => x.Team == ( pawn as FortwarsPlayer ).TeamID );
+		var spawnpoints = All.OfType<InfoPlayerTeamspawn>().Where( x => x.Team == ( pawn as FortwarsPlayer ).TeamID );
 		var randomSpawn = spawnpoints.OrderBy( x => Guid.NewGuid() ).FirstOrDefault();
 
 		if ( randomSpawn == null )

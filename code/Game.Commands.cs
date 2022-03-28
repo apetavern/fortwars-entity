@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
-// without permission of its author support@apetavern.com
+// without permission of its author (insert_email_here)
 
 using Sandbox;
 using System.Collections.Generic;
@@ -22,7 +22,7 @@ partial class Game
 		ChatBox.AddInformation( To.Everyone, $"{Votes.Count}/3 voted to skip" );
 
 		if ( Votes.Count >= 3 )
-			Game.Instance.ChangeRound( new VoteRound() );
+			Instance.ChangeRound( new VoteRound() );
 	}
 
 	[AdminCmd( "recreatehud" )]
@@ -35,7 +35,7 @@ partial class Game
 	[AdminCmd( "fw_force_voteround" )]
 	public static void ForceVoteround()
 	{
-		Game.Instance.ChangeRound( new VoteRound() );
+		Instance.ChangeRound( new VoteRound() );
 	}
 
 	[AdminCmd( "fw_give_ammo" )]
@@ -92,7 +92,7 @@ partial class Game
 			var playerLogs = Instance.buildLogEntries.ToList().Where( x => x.Player == player );
 			foreach ( var entry in playerLogs.TakeLast( 3 ) )
 			{
-				delay += ( Time.Tick - entry.Tick );
+				delay +=  Time.Tick - entry.Tick ;
 			}
 			delay = ( delay / 3f ).CeilToInt();
 

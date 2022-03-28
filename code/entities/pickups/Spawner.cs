@@ -1,44 +1,44 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
-// without permission of its author support@apetavern.com
+// without permission of its author (insert_email_here)
 
 using Sandbox;
 
 namespace Fortwars;
 
-    public class Spawner : Entity
-    {
-        protected TimeUntil timeUntilSpawn = 0;
+public class Spawner : Entity
+{
+	protected TimeUntil timeUntilSpawn = 0;
 
-        public void ResetSpawnTimer()
-        {
-            timeUntilSpawn = 10;
-        }
-    }
+	public void ResetSpawnTimer()
+	{
+		timeUntilSpawn = 10;
+	}
+}
 
-    public class Spawner<T> : Spawner where T : Pickup, new()
-    {
-        private T pickup;
+public class Spawner<T> : Spawner where T : Pickup, new()
+{
+	private T pickup;
 
-        public override void Spawn()
-        {
-            base.Spawn();
+	public override void Spawn()
+	{
+		base.Spawn();
 
-            SpawnPickup();
-        }
+		SpawnPickup();
+	}
 
-        private void SpawnPickup()
-        {
-            pickup = new();
-            pickup.Position = Position;
-            pickup.Spawner = this;
-        }
+	private void SpawnPickup()
+	{
+		pickup = new();
+		pickup.Position = Position;
+		pickup.Spawner = this;
+	}
 
-        [Event.Tick.Server]
-        public void OnServerTick()
-        {
-            if ( timeUntilSpawn < 0 && !pickup.IsValid() )
-            {
-                SpawnPickup();
-            }
-        }
-    }
+	[Event.Tick.Server]
+	public void OnServerTick()
+	{
+		if ( timeUntilSpawn < 0 && !pickup.IsValid() )
+		{
+			SpawnPickup();
+		}
+	}
+}

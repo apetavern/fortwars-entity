@@ -1,25 +1,25 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
-// without permission of its author support@apetavern.com
+// without permission of its author (insert_email_here)
 
 using Sandbox;
 
 namespace Fortwars;
 
-    public class FirstPersonCamera : Sandbox.FirstPersonCamera
-    {
-        [ClientVar( "fw_fov_desired", Help = "Desired player field of view", Max = 110f, Min = 80f )]
-        public static float FovDesired { get; set; } = 90f;
+public class FirstPersonCamera : Sandbox.FirstPersonCamera
+{
+	[ClientVar( "fw_fov_desired", Help = "Desired player field of view", Max = 110f, Min = 80f )]
+	public static float FovDesired { get; set; } = 90f;
 
-        public override void Update()
-        {
-            base.Update();
+	public override void Update()
+	{
+		base.Update();
 
-            if ( ( Local.Pawn as FortwarsPlayer ).ActiveChild is FortwarsWeapon { IsAiming: true } weapon )
-                FieldOfView = FieldOfView.LerpTo( weapon.WeaponAsset.AimFovMult * FovDesired, 10 * Time.Delta );
-            else
-                FieldOfView = FieldOfView.LerpTo( FovDesired, 10 * Time.Delta );
+		if ( ( Local.Pawn as FortwarsPlayer ).ActiveChild is FortwarsWeapon { IsAiming: true } weapon )
+			FieldOfView = FieldOfView.LerpTo( weapon.WeaponAsset.AimFovMult * FovDesired, 10 * Time.Delta );
+		else
+			FieldOfView = FieldOfView.LerpTo( FovDesired, 10 * Time.Delta );
 
-            ZNear = 1;
-            ZFar = 20000;
-        }
-    }
+		ZNear = 1;
+		ZFar = 20000;
+	}
+}
