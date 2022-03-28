@@ -1,4 +1,7 @@
-﻿using Fortwars;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+using Fortwars;
 using Sandbox;
 using Sandbox.Component;
 using System.Linq;
@@ -60,8 +63,8 @@ public partial class PhysGun
 
 		if ( GrabbedEntity.IsValid() && rotating )
 		{
-			ViewModelEntity?.SetAnimParameter( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimParameterFloat( "joystickFB" ), -(Input.MouseDelta.y * RotateSpeed), Time.Delta ) );
-			ViewModelEntity?.SetAnimParameter( "joystickLR", MathX.LerpTo( ViewModelEntity.GetAnimParameterFloat( "joystickLR" ), (Input.MouseDelta.x * RotateSpeed), Time.Delta ) );
+			ViewModelEntity?.SetAnimParameter( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimParameterFloat( "joystickFB" ), -( Input.MouseDelta.y * RotateSpeed ), Time.Delta ) );
+			ViewModelEntity?.SetAnimParameter( "joystickLR", MathX.LerpTo( ViewModelEntity.GetAnimParameterFloat( "joystickLR" ),  Input.MouseDelta.x * RotateSpeed , Time.Delta ) );
 			ViewModelEntity?.SetAnimParameter( "snap", Input.Down( InputButton.Run ) );
 		}
 		else
@@ -80,7 +83,7 @@ public partial class PhysGun
 			}
 			else
 			{
-				DesiredDialPos += Rand.Float() * 0.15f * (1 + (Input.MouseDelta.Length / 20f));
+				DesiredDialPos += Rand.Float() * 0.15f * ( 1 + ( Input.MouseDelta.Length / 20f ) );
 			}
 
 			DidFreeze = false;
@@ -104,7 +107,7 @@ public partial class PhysGun
 	{
 		var owner = Owner;
 
-		if ( owner == null || !BeamActive || !((owner as FortwarsPlayer).ActiveChild == this) )
+		if ( owner == null || !BeamActive || !( ( owner as FortwarsPlayer ).ActiveChild == this ) )
 		{
 			KillEffects();
 			return;

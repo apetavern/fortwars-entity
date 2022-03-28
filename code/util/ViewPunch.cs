@@ -1,32 +1,34 @@
-﻿namespace Sandbox.ScreenShake
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+namespace Sandbox.ScreenShake;
+
+public class ViewPunch : CameraModifier
 {
-	public class ViewPunch : CameraModifier
+	float RotationAmount;
+	float Length;
+
+	Vector2 direction;
+
+	TimeSince lifeTime = 0;
+
+	public ViewPunch( float length = 1.0f, float rotation = 0.6f )
 	{
-		float RotationAmount;
-		float Length;
+		RotationAmount = rotation;
+		Length = length;
 
-		Vector2 direction;
+		direction = Vector2.Random.Normal;
+	}
 
-		TimeSince lifeTime = 0;
+	public override bool Update( ref CameraSetup cam )
+	{
+		var delta = ( (float)lifeTime ).LerpInverse( 0, Length, true );
+		delta = Easing.EaseOut( delta );
+		var invdelta = 1 - delta;
 
-		public ViewPunch( float length = 1.0f, float rotation = 0.6f )
-		{
-			RotationAmount = rotation;
-			Length = length;
+		cam.Rotation *= Rotation.FromAxis( Vector3.Up, direction.x * invdelta * RotationAmount );
+		cam.Rotation *= Rotation.FromAxis( Vector3.Right, direction.y * invdelta * RotationAmount );
 
-			direction = Vector2.Random.Normal;
-		}
-
-		public override bool Update( ref CameraSetup cam )
-		{
-			var delta = ((float)lifeTime).LerpInverse( 0, Length, true );
-			delta = Easing.EaseOut( delta );
-			var invdelta = 1 - delta;
-
-			cam.Rotation *= Rotation.FromAxis( Vector3.Up, direction.x * invdelta * RotationAmount );
-			cam.Rotation *= Rotation.FromAxis( Vector3.Right, direction.y * invdelta * RotationAmount );
-
-			return lifeTime < Length;
-		}
+		return lifeTime < Length;
 	}
 }

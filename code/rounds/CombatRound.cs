@@ -1,85 +1,87 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+using Sandbox;
 using System.Linq;
 
-namespace Fortwars
+namespace Fortwars;
+
+public class CombatRound : BaseRound
 {
-	public class CombatRound : BaseRound
+	public static int RoundLength = 300;
+
+	public override string RoundName => "Combat";
+	public override int RoundDuration => RoundLength;
+
+	protected override void OnStart()
 	{
-		public static int RoundLength = 300;
+		Log.Info( "Started Combat Round" );
 
-		public override string RoundName => "Combat";
-		public override int RoundDuration => RoundLength;
-
-		protected override void OnStart()
+		if ( Host.IsServer )
 		{
-			Log.Info( "Started Combat Round" );
-
-			if ( Host.IsServer )
+			Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) =>
 			{
-				Player.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) =>
-				{
-					SetupInventory( player );
-					player.Reset();
-				} );
-			}
-
-			foreach ( var wall in Entity.All.OfType<FuncWallToggle>() )
-				wall.Hide();
+				SetupInventory( player );
+				player.Reset();
+			} );
 		}
 
-		public override void SetupInventory( Player player )
+		foreach ( var wall in Entity.All.OfType<FuncWallToggle>() )
+			wall.Hide();
+	}
+
+	public override void SetupInventory( Player player )
+	{
+		base.SetupInventory( player );
+		( player as FortwarsPlayer ).Class?.AssignCombatLoadout( player.Inventory as Inventory );
+	}
+
+	protected override void OnFinish()
+	{
+		Log.Info( "Finished Combat Round" );
+	}
+
+	protected override void OnTimeUp()
+	{
+		var game = Game.Instance;
+		if ( game == null ) return;
+
+		// Assign a score point to winning team. Do nothing on draw.
+		if ( game.RedTeamScore > game.BlueTeamScore )
 		{
-			base.SetupInventory( player );
-			(player as FortwarsPlayer).Class?.AssignCombatLoadout( player.Inventory as Inventory );
+			game.RedWins++;
+		}
+		else if ( game.RedTeamScore < game.BlueTeamScore )
+		{
+			game.BlueWins++;
 		}
 
-		protected override void OnFinish()
+		// Set winning team.
+		if ( game.BlueWins == game.RoundsToWin )
 		{
-			Log.Info( "Finished Combat Round" );
+			game.WinningTeam = Team.Blue;
+		}
+		else if ( game.RedWins == game.RoundsToWin )
+		{
+			game.WinningTeam = Team.Red;
 		}
 
-		protected override void OnTimeUp()
+		// Cleanup game.
+		game.CleanupCTF();
+
+		// If a team one, set round to EndRound.
+		if ( game.WinningTeam != Team.Invalid )
 		{
-			var game = Game.Instance;
-			if ( game == null ) return;
-
-			// Assign a score point to winning team. Do nothing on draw.
-			if ( game.RedTeamScore > game.BlueTeamScore )
-			{
-				game.RedWins++;
-			}
-			else if ( game.RedTeamScore < game.BlueTeamScore )
-			{
-				game.BlueWins++;
-			}
-
-			// Set winning team.
-			if ( game.BlueWins == game.RoundsToWin )
-			{
-				game.WinningTeam = Team.Blue;
-			}
-			else if ( game.RedWins == game.RoundsToWin )
-			{
-				game.WinningTeam = Team.Red;
-			}
-
-			// Cleanup game.
-			game.CleanupCTF();
-
-			// If a team one, set round to EndRound.
-			if ( game.WinningTeam != Team.Invalid )
-			{
-				game.ChangeRound( new EndRound() );
-				return;
-			}
-
-			// Otherwise, go back into BuildRound for another round.
-			game.ChangeRound( new BuildRound() );
+			game.ChangeRound( new EndRound() );
+			return;
 		}
 
-		public override void OnPlayerSpawn( Player player )
-		{
-			base.OnPlayerSpawn( player );
-		}
+		// Otherwise, go back into BuildRound for another round.
+		game.ChangeRound( new BuildRound() );
+	}
+
+	public override void OnPlayerSpawn( Player player )
+	{
+		base.OnPlayerSpawn( player );
 	}
 }

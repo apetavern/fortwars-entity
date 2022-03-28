@@ -1,76 +1,78 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+using Sandbox;
 using Sandbox.UI;
 
-namespace Fortwars
+namespace Fortwars;
+
+public class ScopeRenderTarget : Panel
 {
-	public class ScopeRenderTarget : Panel
+	Texture colorTexture;
+	Texture depthTexture;
+
+	private Rect viewport;
+	private float fieldOfView = 25f;
+	const float baseFov = 50f;
+
+	private RenderAttributes renderAttributes;
+
+	public ScopeRenderTarget()
 	{
-		Texture colorTexture;
-		Texture depthTexture;
+		renderAttributes = new();
+		viewport = new Rect( Vector2.Zero, Screen.Size / 2f );
 
-		private Rect viewport;
-		private float fieldOfView = 25f;
-		const float baseFov = 50f;
+		colorTexture = Texture.CreateRenderTarget()
+					 .WithSize( (int)viewport.width, (int)viewport.height )
+					 .WithScreenFormat()
+					 .WithScreenMultiSample()
+					 .Create();
 
-		private RenderAttributes renderAttributes;
+		depthTexture = Texture.CreateRenderTarget()
+					 .WithSize( (int)viewport.width, (int)viewport.height )
+					 .WithDepthFormat()
+					 .WithScreenMultiSample()
+					 .Create();
+	}
 
-		public ScopeRenderTarget()
-		{
-			renderAttributes = new();
-			viewport = new Rect( Vector2.Zero, Screen.Size / 2f );
+	public override void OnDeleted()
+	{
+		colorTexture.Dispose();
+		depthTexture.Dispose();
 
-			colorTexture = Texture.CreateRenderTarget()
-						 .WithSize( (int)viewport.width, (int)viewport.height )
-						 .WithScreenFormat()
-						 .WithScreenMultiSample()
-						 .Create();
+		base.OnDeleted();
+	}
 
-			depthTexture = Texture.CreateRenderTarget()
-						 .WithSize( (int)viewport.width, (int)viewport.height )
-						 .WithDepthFormat()
-						 .WithScreenMultiSample()
-						 .Create();
-		}
+	public override void DrawBackground( ref RenderState state )
+	{
+		var player = Local.Pawn;
+		if ( player == null )
+			return;
 
-		public override void OnDeleted()
-		{
-			colorTexture.Dispose();
-			depthTexture.Dispose();
+		if ( ( player as FortwarsPlayer ).ActiveChild is not FortwarsWeapon weapon )
+			return;
 
-			base.OnDeleted();
-		}
+		var sceneObject = weapon.ViewModelEntity.SceneObject;
+		sceneObject.Flags.ViewModelLayer = true;
 
-		public override void DrawBackground( ref RenderState state )
-		{
-			var player = Local.Pawn;
-			if ( player == null )
-				return;
+		if ( sceneObject == null )
+			return;
 
-			if ( (player as FortwarsPlayer).ActiveChild is not FortwarsWeapon weapon )
-				return;
+		if ( !weapon.IsAiming )
+			return;
 
-			var sceneObject = weapon.ViewModelEntity.SceneObject;
-			sceneObject.Flags.ViewModelLayer = true;
+		Render.Draw.DrawScene( colorTexture,
+				depthTexture,
+				Map.Scene,
+				renderAttributes,
+				viewport,
+				CurrentView.Position,
+				CurrentView.Rotation,
+				fieldOfView,
+				zNear: 32,
+				zFar: 25000 );
 
-			if ( sceneObject == null )
-				return;
-
-			if ( !weapon.IsAiming )
-				return;
-
-			Render.Draw.DrawScene( colorTexture,
-					depthTexture,
-					Map.Scene,
-					renderAttributes,
-					viewport,
-					CurrentView.Position,
-					CurrentView.Rotation,
-					fieldOfView,
-					zNear: 32,
-					zFar: 25000 );
-
-			Render.Attributes.Set( "ScopeRT", colorTexture );
-			sceneObject.Attributes.Set( "ScopeRT", colorTexture );
-		}
+		Render.Attributes.Set( "ScopeRT", colorTexture );
+		sceneObject.Attributes.Set( "ScopeRT", colorTexture );
 	}
 }

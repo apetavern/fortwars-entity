@@ -1,48 +1,50 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
 
-namespace Fortwars
+using Sandbox;
+
+namespace Fortwars;
+
+partial class FortwarsPlayer
 {
-	partial class FortwarsPlayer
+	public Class Class { get; set; } = new AssaultClass();
+
+	public bool CanChangeClass => InSpawnRoom || LifeState != LifeState.Alive;
+	[Net, Predicted] public bool InSpawnRoom { get; set; }
+
+	public void AssignClass( Class newClass )
 	{
-		public Class Class { get; set; } = new AssaultClass();
-
-		public bool CanChangeClass => InSpawnRoom || LifeState != LifeState.Alive;
-		[Net, Predicted] public bool InSpawnRoom { get; set; }
-
-		public void AssignClass( Class newClass )
+		if ( !CanChangeClass )
 		{
-			if ( !CanChangeClass )
-			{
-				MessageFeed.AddMessage(
-					To.Single( Client ),
-					"clear",
-					"no",
-					"Go to spawn to change class." );
+			MessageFeed.AddMessage(
+				To.Single( Client ),
+				"clear",
+				"no",
+				"Go to spawn to change class." );
 
-				return;
-			}
-
-			Class?.Cleanup( Inventory as Inventory );
-			Class = newClass;
-
-			this.Reset();
-			Game.Instance.Round.SetupInventory( this );
+			return;
 		}
 
-		public override void StartTouch( Entity other )
-		{
-			base.StartTouch( other );
+		Class?.Cleanup( Inventory as Inventory );
+		Class = newClass;
 
-			if ( other is FuncSpawnArea )
-				InSpawnRoom = true;
-		}
+		Reset();
+		Game.Instance.Round.SetupInventory( this );
+	}
 
-		public override void EndTouch( Entity other )
-		{
-			base.EndTouch( other );
+	public override void StartTouch( Entity other )
+	{
+		base.StartTouch( other );
 
-			if ( other is FuncSpawnArea )
-				InSpawnRoom = false;
-		}
+		if ( other is FuncSpawnArea )
+			InSpawnRoom = true;
+	}
+
+	public override void EndTouch( Entity other )
+	{
+		base.EndTouch( other );
+
+		if ( other is FuncSpawnArea )
+			InSpawnRoom = false;
 	}
 }

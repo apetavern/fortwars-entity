@@ -1,4 +1,7 @@
-﻿using Fortwars;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+using Fortwars;
 using Sandbox;
 using System;
 using System.Linq;
@@ -66,7 +69,7 @@ public partial class PhysGun : Carriable, IUse
 		{
 			if ( rootEnt.IsValid() && rootEnt.PhysicsGroup != null )
 			{
-				body = (rootEnt.PhysicsGroup.BodyCount > 0 ? rootEnt.PhysicsGroup.GetBody( 0 ) : null);
+				body =  rootEnt.PhysicsGroup.BodyCount > 0 ? rootEnt.PhysicsGroup.GetBody( 0 ) : null ;
 			}
 		}
 
@@ -76,7 +79,7 @@ public partial class PhysGun : Carriable, IUse
 		if ( rootEnt is not FortwarsBlock )
 			return false;
 
-		if ( (rootEnt as FortwarsBlock).TeamID != (owner as FortwarsPlayer).TeamID )
+		if ( ( rootEnt as FortwarsBlock ).TeamID != ( owner as FortwarsPlayer ).TeamID )
 			return false;
 
 		if ( rootEnt.Owner != owner )
@@ -99,7 +102,7 @@ public partial class PhysGun : Carriable, IUse
 
 		if ( Input.Pressed( InputButton.Attack1 ) )
 		{
-			(Owner as AnimEntity)?.SetAnimParameter( "b_attack", true );
+			( Owner as AnimEntity )?.SetAnimParameter( "b_attack", true );
 
 			if ( !grabbing )
 				grabbing = true;
@@ -204,7 +207,7 @@ public partial class PhysGun : Carriable, IUse
 
 			if ( rotating )
 			{
-				DoRotate( EyeRotation, (Input.GetAnalog(InputAnalog.Look) * RotateSpeed * 25f) + (new Vector2(Input.MouseDelta.x,Input.MouseDelta.y) * RotateSpeed) ); //Using analog look as well as the mouse so the Steam controller is supported with its mouse emulation
+				DoRotate( EyeRotation, ( Input.GetAnalog( InputAnalog.Look ) * RotateSpeed * 25f ) + ( new Vector2( Input.MouseDelta.x, Input.MouseDelta.y ) * RotateSpeed ) ); //Using analog look as well as the mouse so the Steam controller is supported with its mouse emulation
 				snapping = Input.Down( InputButton.SlotPrev ); //This is bound to the left bumper, so essentially holding the left 2 top buttons makes you able to snap rotate
 			}
 		}

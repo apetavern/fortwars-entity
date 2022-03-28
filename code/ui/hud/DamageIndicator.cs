@@ -1,4 +1,7 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+using Sandbox;
 using Sandbox.UI;
 using System;
 using System.Threading.Tasks;
@@ -35,7 +38,7 @@ public partial class DamageIndicator : Panel
 		{
 			base.Tick();
 
-			var wpos = CurrentView.Rotation.Inverse * (Position.WithZ( 0 ) - CurrentView.Position.WithZ( 0 )).Normal;
+			var wpos = CurrentView.Rotation.Inverse * ( Position.WithZ( 0 ) - CurrentView.Position.WithZ( 0 ) ).Normal;
 			wpos = wpos.WithZ( 0 ).Normal;
 
 			var angle = MathF.Atan2( wpos.y, -1.0f * wpos.x );
