@@ -3,40 +3,44 @@ using System.Linq;
 
 namespace Fortwars
 {
-	public class LobbyRound : BaseRound
-	{
-		public override string RoundName => "Lobby";
-		public override int RoundDuration => 60;
+    public class LobbyRound : BaseRound
+    {
+        public override string RoundName => "Lobby";
+        public override int RoundDuration => 60;
 
-		protected override void OnStart()
-		{
-			Log.Info( "Started Lobby Round" );
+        protected override void OnStart()
+        {
+            Log.Info("Started Lobby Round");
 
-			if ( Host.IsServer )
-			{
-				Player.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) => (player as FortwarsPlayer)?.Respawn() );
-			}
-		}
+            if (Host.IsServer)
+            {
+                Player.All.OfType<FortwarsPlayer>().ToList().ForEach((player) => (player as FortwarsPlayer)?.Respawn());
+            }
+        }
 
-		protected override void OnFinish()
-		{
-			Log.Info( "Finished Lobby Round" );
-		}
-		protected override void OnTimeUp()
-		{
-			Game.Instance.ChangeRound( new BuildRound() );
-		}
+        protected override void OnFinish()
+        {
+            Log.Info("Finished Lobby Round");
+        }
 
-		public override void OnPlayerKilled( Player player )
-		{
-			player.Respawn();
+        protected override void OnTimeUp()
+        {
+            if (Client.All.Count >= Game.Instance.MinPlayers)
+                Game.Instance.ChangeRound(new BuildRound());
+            else
+                Game.Instance.ChangeRound(new LobbyRound());
+        }
 
-			base.OnPlayerKilled( player );
-		}
+        public override void OnPlayerKilled(Player player)
+        {
+            player.Respawn();
 
-		public override void OnPlayerSpawn( Player player )
-		{
-			base.OnPlayerSpawn( player );
-		}
-	}
+            base.OnPlayerKilled(player);
+        }
+
+        public override void OnPlayerSpawn(Player player)
+        {
+            base.OnPlayerSpawn(player);
+        }
+    }
 }
