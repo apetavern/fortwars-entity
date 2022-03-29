@@ -16,10 +16,10 @@
 		spreadshotincrease = 0.0
 		spreadchangetime = 0.0
 		maxammo = 4
-		extraammo = 12
+		extraammo = 4
 		reloadtime = 0.75
-		maxdamage = 50.0
-		mindamage = 15.0
+		maxdamage = 100.0
+		mindamage = 25.0
 		damagedropoffdistance = 256
 		headshotmultiplier = 1.5
 		firesound = "rust_pumpshotgun.shootdouble"
