@@ -24,8 +24,8 @@ public partial class FortwarsWeapon : Carriable
 	//
 	// Cvars
 	//
-	[ServerVar( "fw_weapon_debug" )]
-	public bool Debug { get; set; } = false;
+	[ConVar.Replicated( "fw_weapon_debug" )]
+	public static bool Debug { get; set; } = false;
 
 	//
 	// Realtime variables
@@ -305,13 +305,9 @@ public partial class FortwarsWeapon : Carriable
 			if ( Debug )
 			{
 				var color = IsServer ? Color.Blue : Color.Red;
-				DebugOverlay.Box(
-					tr.EndPosition,
-					new Vector3( -2, -2, -2 ),
-					new Vector3( 2, 2, 2 ),
-					color,
-					5f,
-					false );
+				var size = IsServer ? new Vector3( 2f ) : new Vector3( 2.5f );
+
+				DebugOverlay.Box( tr.EndPosition, -size, size, color, 5f, false );
 			}
 
 			tr.Surface.DoBulletImpact( tr );
