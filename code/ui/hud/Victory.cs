@@ -1,30 +1,32 @@
-﻿using Sandbox.UI;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace Fortwars
+namespace Fortwars;
+
+public partial class Victory : Panel
 {
-	public partial class Victory : Panel
+	public Label VictoryLabel { get; set; }
+
+	public Victory()
 	{
-		public Label VictoryLabel { get; set; }
+		StyleSheet.Load( "/ui/hud/Victory.scss" );
+		VictoryLabel = Add.Label( "Some Team Won!", "win-label" );
+	}
 
-		public Victory()
-		{
-			StyleSheet.Load( "/ui/hud/Victory.scss" );
-			VictoryLabel = Add.Label( "Some Team Won!", "win-label" );
-		}
+	public override void Tick()
+	{
+		var game = Game.Instance;
+		if ( game == null ) return;
 
-		public override void Tick()
-		{
-			var game = Game.Instance;
-			if ( game == null ) return;
+		var winningTeam = game.WinningTeam;
 
-			var winningTeam = game.WinningTeam;
+		VictoryLabel.Text = $"{winningTeam} Wins!";
 
-			VictoryLabel.Text = $"{winningTeam} Wins!";
-
-			SetClass( "show", winningTeam != Team.Invalid );
-			VictoryLabel.SetClass( "red", winningTeam == Team.Red );
-			VictoryLabel.SetClass( "blue", winningTeam == Team.Blue );
-		}
+		SetClass( "show", winningTeam != Team.Invalid );
+		VictoryLabel.SetClass( "red", winningTeam == Team.Red );
+		VictoryLabel.SetClass( "blue", winningTeam == Team.Blue );
 	}
 }

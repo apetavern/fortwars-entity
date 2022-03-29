@@ -1,75 +1,77 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
 
-namespace Fortwars
+using Sandbox;
+
+namespace Fortwars;
+
+public partial class BigAmmoPickup : Pickup
 {
-	public partial class BigAmmoPickup : Pickup
+	[Net] int uses { get; set; } = 5;
+
+	float ThrowSpeed = 100f;
+
+	[Net] bool Landed { get; set; }
+
+	public override void Spawn()
 	{
-		[Net] int uses { get; set; } = 5;
+		base.Spawn();
 
-		float ThrowSpeed = 100f;
+		SetModel( "models/items/medkit/medkit_w.vmdl" );
+		SetBodyGroup( 0, 1 );
+		SetMaterialGroup( "ammo" );
+		Scale = 0.4f;
 
-		[Net] bool Landed { get; set; }
+		Components.Get<BobbingComponent>().NoPitch = true;
+	}
 
-		public override void Spawn()
+	[Event.Tick.Server]
+	public void OnTick()
+	{
+		if ( Landed )
 		{
-			base.Spawn();
-
-			SetModel( "models/items/medkit/medkit_w.vmdl" );
-			SetBodyGroup( 0, 1 );
-			SetMaterialGroup( "ammo" );
+			SetAnimParameter( "deployed", true );
 			Scale = 0.4f;
+			return;
+		}
+		Velocity += ThrowSpeed * Rotation.Forward * Time.Delta;
+		Velocity += Map.Physics.Gravity * 0.5f * Time.Delta;
 
-			Components.Get<BobbingComponent>().NoPitch = true;
+		Rotation = Rotation.LookAt( -Velocity.Normal.WithZ( 0 ), Vector3.Up );
+
+		var target = Position + Velocity * Time.Delta;
+		var tr = Trace.Ray( Position, target ).Ignore( Owner ).Run();
+
+		if ( tr.Hit )
+		{
+			SetAnimParameter( "deployed", true );
+			Landed = true;
 		}
 
-		[Event.Tick.Server]
-		public void OnTick()
+		Position = target;
+	}
+
+	public override void StartTouch( Entity other )
+	{
+		if ( !Landed )
 		{
-			if ( Landed )
-			{
-				SetAnimParameter( "deployed", true );
-				Scale = 0.4f;
-				return;
-			}
-			Velocity += ThrowSpeed * Rotation.Forward * Time.Delta;
-			Velocity += Map.Physics.Gravity * 0.5f * Time.Delta;
-
-			Rotation = Rotation.LookAt( -Velocity.Normal.WithZ( 0 ), Vector3.Up );
-
-			var target = Position + Velocity * Time.Delta;
-			var tr = Trace.Ray( Position, target ).Ignore( Owner ).Run();
-
-			if ( tr.Hit )
-			{
-				SetAnimParameter( "deployed", true );
-				Landed = true;
-			}
-
-			Position = target;
+			return;
 		}
+		base.StartTouch( other );
 
-		public override void StartTouch( Entity other )
+		if ( !IsServer )
+			return;
+
+		if ( ( other as FortwarsPlayer ).ActiveChild is not FortwarsWeapon weapon )
+			return;
+
+		weapon.ReserveAmmo += weapon.WeaponAsset.MaxAmmo * 2;
+
+		uses--;
+
+		if ( uses <= 0 )
 		{
-			if ( !Landed )
-			{
-				return;
-			}
-			base.StartTouch( other );
-
-			if ( !IsServer )
-				return;
-
-			if ( (other as FortwarsPlayer).ActiveChild is not FortwarsWeapon weapon )
-				return;
-
-			weapon.ReserveAmmo += weapon.WeaponAsset.MaxAmmo * 2;
-
-			uses--;
-
-			if ( uses <= 0 )
-			{
-				this.Delete();
-			}
+			Delete();
 		}
 	}
 }

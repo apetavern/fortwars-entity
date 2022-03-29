@@ -1,4 +1,7 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+using Sandbox;
 
 namespace Fortwars;
 partial class FortwarsPlayer
@@ -68,9 +71,9 @@ partial class FortwarsPlayer
 		{
 			if ( ent.PhysicsGroup != null )
 			{
-				ent.PhysicsGroup.AddVelocity( (Position - (forcePos + Vector3.Down * 100.0f)).Normal * (force.Length * 0.2f) );
-				var angularDir = (Rotation.FromYaw( 90 ) * force.WithZ( 0 ).Normal).Normal;
-				ent.PhysicsGroup.AddAngularVelocity( angularDir * (force.Length * 0.02f) );
+				ent.PhysicsGroup.AddVelocity( ( Position - ( forcePos + Vector3.Down * 100.0f ) ).Normal * ( force.Length * 0.2f ) );
+				var angularDir = ( Rotation.FromYaw( 90 ) * force.WithZ( 0 ).Normal ).Normal;
+				ent.PhysicsGroup.AddAngularVelocity( angularDir * ( force.Length * 0.02f ) );
 			}
 		}
 

@@ -1,41 +1,43 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
 
-namespace Fortwars
+using Sandbox;
+
+namespace Fortwars;
+
+partial class FortwarsPlayer
 {
-	partial class FortwarsPlayer
+	private static StandardPostProcess postProcess;
+
+	private static void SetupPostProcessing()
 	{
-		private static StandardPostProcess postProcess;
+		return;
+		Host.AssertClient();
 
-		private static void SetupPostProcessing()
+		PostProcess.Add<StandardPostProcess>( new() );
+		postProcess = PostProcess.Get<StandardPostProcess>();
+	}
+
+	[Event.Frame]
+	private static void UpdatePostProcessing()
+	{
+		return;
+		Host.AssertClient();
+
+		if ( postProcess == null )
 		{
-			return;
-			Host.AssertClient();
-
-			PostProcess.Add<StandardPostProcess>( new() );
-			postProcess = PostProcess.Get<StandardPostProcess>();
+			SetupPostProcessing();
 		}
 
-		[Event.Frame]
-		private static void UpdatePostProcessing()
-		{
-			return;
-			Host.AssertClient();
+		postProcess.FilmGrain.Enabled = true;
+		postProcess.FilmGrain.Intensity = 0.15f;
+		postProcess.FilmGrain.Response = 1f;
 
-			if ( postProcess == null )
-			{
-				SetupPostProcessing();
-			}
+		postProcess.LensDistortion.Enabled = true;
+		postProcess.LensDistortion.K1 = 0f;
+		postProcess.LensDistortion.K2 = -0.005f;
 
-			postProcess.FilmGrain.Enabled = true;
-			postProcess.FilmGrain.Intensity = 0.15f;
-			postProcess.FilmGrain.Response = 1f;
-
-			postProcess.LensDistortion.Enabled = true;
-			postProcess.LensDistortion.K1 = 0f;
-			postProcess.LensDistortion.K2 = -0.005f;
-
-			postProcess.ChromaticAberration.Enabled = true;
-			postProcess.ChromaticAberration.Offset = Vector3.Up * 0.0005f;
-		}
+		postProcess.ChromaticAberration.Enabled = true;
+		postProcess.ChromaticAberration.Offset = Vector3.Up * 0.0005f;
 	}
 }

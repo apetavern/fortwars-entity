@@ -1,4 +1,7 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+using Sandbox;
 using Sandbox.UI;
 
 namespace Fortwars;
@@ -35,7 +38,7 @@ public partial class Crosshair : Panel
 			if ( VirtualCursor.InUse )
 				return false;
 
-			if ( (Local.Pawn as FortwarsPlayer).ActiveChild is FortwarsWeapon weapon && (weapon.GetTuckDist() != -1 || weapon.IsAiming) )
+			if ( ( Local.Pawn as FortwarsPlayer ).ActiveChild is FortwarsWeapon weapon && ( weapon.GetTuckDist() != -1 || weapon.IsAiming ) )
 				return false;
 
 			if ( Local.Pawn is FortwarsPlayer { Controller: FortwarsWalkController { IsSprinting: true } } )
@@ -50,11 +53,11 @@ public partial class Crosshair : Panel
 	/// </summary>
 	private void Build()
 	{
-		var generatedStyle = ("crosshair.fortwarsweapon {" +
+		var generatedStyle =  "crosshair.fortwarsweapon {" +
 
 			".el0, .el1, .el2, .el3 {" +
 			$"background-color: {Config.Color.Hex};" +
-			$"border: {(Config.Outline ? $"2px solid {Config.OutlineColor.Hex}" : "none")};" +
+			$"border: {( Config.Outline ? $"2px solid {Config.OutlineColor.Hex}" : "none" )};" +
 			$"opacity: {Config.Opacity};" +
 			"}" +
 
@@ -91,7 +94,7 @@ public partial class Crosshair : Panel
 			$"top: {Config.Size}px;" +
 			"}" +
 
-		"}");
+		"}" ;
 
 		Tick();
 
@@ -103,10 +106,10 @@ public partial class Crosshair : Panel
 	{
 		base.Tick();
 
-		if ( (Local.Pawn as FortwarsPlayer).ActiveChild is not FortwarsWeapon weapon )
+		if ( ( Local.Pawn as FortwarsPlayer ).ActiveChild is not FortwarsWeapon weapon )
 			return;
 
-		float size = Config.Gap + (Config.Size * 2) + weapon.GetCrosshairSize();
+		float size = Config.Gap + ( Config.Size * 2 ) + weapon.GetCrosshairSize();
 		Style.Width = size;
 		Style.Height = size;
 

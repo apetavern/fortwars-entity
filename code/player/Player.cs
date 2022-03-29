@@ -1,243 +1,245 @@
+// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
 using Sandbox;
 
-namespace Fortwars
+namespace Fortwars;
+
+public partial class FortwarsPlayer : Sandbox.Player
 {
-	public partial class FortwarsPlayer : Sandbox.Player
+	[Net] public string Killer { get; set; }
+
+	public DamageInfo LastDamage { get; private set; }
+	public Clothing.Container Clothing = new();
+
+	[ServerVar( "fw_time_between_spawns", Help = "How long do players need to wait between respawns", Min = 1, Max = 30 )]
+	public static int TimeBetweenSpawns { get; set; } = 10;
+
+	public bool IsSpectator
 	{
-		[Net] public string Killer { get; set; }
+		get => Team == null;
+	}
 
-		public DamageInfo LastDamage { get; private set; }
-		public Clothing.Container Clothing = new();
+	public FortwarsPlayer()
+	{
+		Inventory = new Inventory( this );
+	}
 
-		[ServerVar( "fw_time_between_spawns", Help = "How long do players need to wait between respawns", Min = 1, Max = 30 )]
-		public static int TimeBetweenSpawns { get; set; } = 10;
+	public FortwarsPlayer( Client cl ) : this()
+	{
+		// Load clothing from client data
+		Clothing.LoadFromClient( cl );
+	}
 
-		public bool IsSpectator
+	public override void Respawn()
+	{
+		// assign random team
+		if ( Team == null )
 		{
-			get => Team == null;
+			int team = Client.All.Count % 2;
+			if ( team == 0 )
+				Team = Game.Instance.BlueTeam;
+			else
+				Team = Game.Instance.RedTeam;
+
+			// ChatBox.AddInformation( To.Everyone, $"{Name} has joined {Team.Name}", $"avatar:{Client.PlayerId}" );
 		}
 
-		public FortwarsPlayer()
+		SetModel( "models/citizen/citizen.vmdl" );
+
+		// Allow Team class to dress the player
+		if ( Team != null )
 		{
-			Inventory = new Inventory( this );
+			Team.OnPlayerSpawn( this );
 		}
 
-		public FortwarsPlayer( Client cl ) : this()
+		if ( IsSpectator )
 		{
-			// Load clothing from client data
-			Clothing.LoadFromClient( cl );
-		}
-
-		public override void Respawn()
-		{
-			// assign random team
-			if ( Team == null )
-			{
-				int team = Client.All.Count % 2;
-				if ( team == 0 )
-					Team = Game.Instance.BlueTeam;
-				else
-					Team = Game.Instance.RedTeam;
-
-				// ChatBox.AddInformation( To.Everyone, $"{Name} has joined {Team.Name}", $"avatar:{Client.PlayerId}" );
-			}
-
-			SetModel( "models/citizen/citizen.vmdl" );
-
-			// Allow Team class to dress the player
-			if ( Team != null )
-			{
-				Team.OnPlayerSpawn( this );
-			}
-
-			if ( IsSpectator )
-			{
-				EnableAllCollisions = false;
-				EnableDrawing = false;
-
-				Controller = null;
-				CameraMode = new SpectateRagdollCamera();
-
-				base.Respawn();
-
-				return;
-			}
-
-			Controller = new FortwarsWalkController();
-			Animator = new StandardPlayerAnimator();
-			CameraMode = new FirstPersonCamera();
-
-			EnableAllCollisions = true;
-			EnableDrawing = true;
-
-			// Draw clothes etc
-			foreach ( var child in Children )
-				child.EnableDrawing = true;
-
-			EnableHideInFirstPerson = true;
-			EnableShadowInFirstPerson = true;
-
-			Clothing.DressEntity( this );
-
-			Game.Instance.Round.SetupInventory( this );
-
-			InSpawnRoom = true;
-
-			base.Respawn();
-		}
-
-		public override void OnKilled()
-		{
-			BecomeRagdollOnClient( Position,
-						 Rotation,
-						 Velocity,
-						 LastDamage.Flags,
-						 LastDamage.Position,
-						 LastDamage.Force,
-						 GetHitboxBone( LastDamage.HitboxIndex ) );
-
-			base.OnKilled();
-			RespawnTimer = TimeBetweenSpawns;
-
-			Inventory.DropActive();
-
-			//
-			// Delete any items we didn't drop
-			//
-			Inventory.DeleteContents();
+			EnableAllCollisions = false;
+			EnableDrawing = false;
 
 			Controller = null;
 			CameraMode = new SpectateRagdollCamera();
 
-			EnableAllCollisions = false;
-			EnableDrawing = false;
+			base.Respawn();
 
-			// Don't draw clothes etc
-			foreach ( var child in Children )
-				child.EnableDrawing = false;
+			return;
 		}
 
-		[Net] public TimeUntil RespawnTimer { get; set; }
+		Controller = new FortwarsWalkController();
+		Animator = new StandardPlayerAnimator();
+		CameraMode = new FirstPersonCamera();
 
-		public override void Simulate( Client cl )
+		EnableAllCollisions = true;
+		EnableDrawing = true;
+
+		// Draw clothes etc
+		foreach ( var child in Children )
+			child.EnableDrawing = true;
+
+		EnableHideInFirstPerson = true;
+		EnableShadowInFirstPerson = true;
+
+		Clothing.DressEntity( this );
+
+		Game.Instance.Round.SetupInventory( this );
+
+		InSpawnRoom = true;
+
+		base.Respawn();
+	}
+
+	public override void OnKilled()
+	{
+		BecomeRagdollOnClient( Position,
+					 Rotation,
+					 Velocity,
+					 LastDamage.Flags,
+					 LastDamage.Position,
+					 LastDamage.Force,
+					 GetHitboxBone( LastDamage.HitboxIndex ) );
+
+		base.OnKilled();
+		RespawnTimer = TimeBetweenSpawns;
+
+		Inventory.DropActive();
+
+		//
+		// Delete any items we didn't drop
+		//
+		Inventory.DeleteContents();
+
+		Controller = null;
+		CameraMode = new SpectateRagdollCamera();
+
+		EnableAllCollisions = false;
+		EnableDrawing = false;
+
+		// Don't draw clothes etc
+		foreach ( var child in Children )
+			child.EnableDrawing = false;
+	}
+
+	[Net] public TimeUntil RespawnTimer { get; set; }
+
+	public override void Simulate( Client cl )
+	{
+		if ( LifeState == LifeState.Dead )
 		{
-			if ( LifeState == LifeState.Dead )
+			if ( RespawnTimer <= 0 && IsServer )
 			{
-				if ( RespawnTimer <= 0 && IsServer )
-				{
-					Respawn();
-				}
-
-				return;
+				Respawn();
 			}
 
-
-			// HACK: remove this when https://github.com/Facepunch/sbox-issues/issues/1641 gets fixed
-			if ( CameraMode is SpectateRagdollCamera )
-				CameraMode = new FirstPersonCamera();
-
-			var controller = GetActiveController();
-			controller?.Simulate( cl, this, GetActiveAnimator() );
-
-			if ( Input.ActiveChild != null )
-			{
-				ActiveChild = Input.ActiveChild;
-			}
-
-			SimulateActiveChild( cl, ActiveChild );
-
-			if ( LifeState != LifeState.Alive )
-				return;
-
-			TickPlayerUse();
+			return;
 		}
 
-		protected override void TickPlayerUse()
+
+		// HACK: remove this when https://github.com/Facepunch/sbox-issues/issues/1641 gets fixed
+		if ( CameraMode is SpectateRagdollCamera )
+			CameraMode = new FirstPersonCamera();
+
+		var controller = GetActiveController();
+		controller?.Simulate( cl, this, GetActiveAnimator() );
+
+		if ( Input.ActiveChild != null )
 		{
-			// This is serverside only
-			if ( !Host.IsServer ) return;
+			ActiveChild = Input.ActiveChild;
+		}
 
-			// Turn prediction off
-			using ( Prediction.Off() )
+		SimulateActiveChild( cl, ActiveChild );
+
+		if ( LifeState != LifeState.Alive )
+			return;
+
+		TickPlayerUse();
+	}
+
+	protected override void TickPlayerUse()
+	{
+		// This is serverside only
+		if ( !Host.IsServer ) return;
+
+		// Turn prediction off
+		using ( Prediction.Off() )
+		{
+			if ( Input.Pressed( InputButton.Use ) )
 			{
-				if ( Input.Pressed( InputButton.Use ) )
-				{
-					Using = FindUsable();
+				Using = FindUsable();
 
-					if ( Using == null )
-					{
-						if ( ActiveChild is not PhysGun )
-							UseFail();
-						return;
-					}
-				}
-
-				if ( !Input.Down( InputButton.Use ) )
+				if ( Using == null )
 				{
-					StopUsing();
+					if ( ActiveChild is not PhysGun )
+						UseFail();
 					return;
 				}
+			}
 
-				if ( !Using.IsValid() )
-					return;
-
-				// If we move too far away or something we should probably ClearUse()?
-
-				//
-				// If use returns true then we can keep using it
-				//
-				if ( Using is IUse use && use.OnUse( this ) )
-					return;
-
+			if ( !Input.Down( InputButton.Use ) )
+			{
 				StopUsing();
-			}
-		}
-
-		public void Reset()
-		{
-			Host.AssertServer();
-
-			Health = 100;
-			Game.Instance.MoveToSpawnpoint( this );
-		}
-
-		public override void TakeDamage( DamageInfo info )
-		{
-			LastDamage = info;
-
-			if ( (HitboxIndex)info.HitboxIndex == HitboxIndex.Head )
-				info.Damage *= 2.0f;
-
-			if ( info.Attacker is FortwarsPlayer attacker && attacker != this )
-			{
-				if ( attacker.TeamID == this.TeamID )
-					return; // No team damage
-
-				Killer = attacker.Client.Name;
-
-				// Note - sending this only to the attacker!
-				attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, ((float)Health).LerpInverse( 100, 0 ) );
+				return;
 			}
 
-			base.TakeDamage( info );
+			if ( !Using.IsValid() )
+				return;
 
-			if ( info.Weapon.IsValid() || info.Attacker.IsValid() )
-				TookDamage( To.Single( Client ), info.Weapon.IsValid() ? info.Weapon.Position : info.Position );
+			// If we move too far away or something we should probably ClearUse()?
+
+			//
+			// If use returns true then we can keep using it
+			//
+			if ( Using is IUse use && use.OnUse( this ) )
+				return;
+
+			StopUsing();
 		}
+	}
 
-		[ClientRpc]
-		public void DidDamage( Vector3 pos, float amount, float healthinv )
+	public void Reset()
+	{
+		Host.AssertServer();
+
+		Health = 100;
+		Game.Instance.MoveToSpawnpoint( this );
+	}
+
+	public override void TakeDamage( DamageInfo info )
+	{
+		LastDamage = info;
+
+		if ( (HitboxIndex)info.HitboxIndex == HitboxIndex.Head )
+			info.Damage *= 2.0f;
+
+		if ( info.Attacker is FortwarsPlayer attacker && attacker != this )
 		{
-			Sound.FromScreen( "dm.ui_attacker" )
-				.SetPitch( 1 + healthinv * 1 );
+			if ( attacker.TeamID == TeamID )
+				return; // No team damage
 
-			Hitmarker.Instance.OnHit( amount, false );
+			Killer = attacker.Client.Name;
+
+			// Note - sending this only to the attacker!
+			attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, ( (float)Health ).LerpInverse( 100, 0 ) );
 		}
 
-		[ClientRpc]
-		public void TookDamage( Vector3 pos )
-		{
-			DamageIndicator.Current?.OnHit( pos );
-		}
+		base.TakeDamage( info );
+
+		if ( info.Weapon.IsValid() || info.Attacker.IsValid() )
+			TookDamage( To.Single( Client ), info.Weapon.IsValid() ? info.Weapon.Position : info.Position );
+	}
+
+	[ClientRpc]
+	public void DidDamage( Vector3 pos, float amount, float healthinv )
+	{
+		Sound.FromScreen( "dm.ui_attacker" )
+			.SetPitch( 1 + healthinv * 1 );
+
+		Hitmarker.Instance.OnHit( amount, false );
+	}
+
+	[ClientRpc]
+	public void TookDamage( Vector3 pos )
+	{
+		DamageIndicator.Current?.OnHit( pos );
 	}
 }

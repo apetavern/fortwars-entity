@@ -1,58 +1,60 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+using Sandbox;
 using System.Linq;
 
-namespace Fortwars
+namespace Fortwars;
+
+public class BuildRound : BaseRound
 {
-	public class BuildRound : BaseRound
+	public static int RoundLength = 150;
+
+	public override string RoundName => "Build";
+	public override int RoundDuration => RoundLength;
+
+	protected override void OnStart()
 	{
-		public static int RoundLength = 150;
+		Log.Info( "Started Build Round" );
 
-		public override string RoundName => "Build";
-		public override int RoundDuration => RoundLength;
-
-		protected override void OnStart()
+		if ( Host.IsServer )
 		{
-			Log.Info( "Started Build Round" );
-
-			if ( Host.IsServer )
+			Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) =>
 			{
-				Player.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) =>
-				{
-					SetupInventory( player );
-					player.Reset();
-				} );
-			}
-
-			foreach ( var wall in Entity.All.OfType<FuncWallToggle>() )
-				wall.Show();
+				SetupInventory( player );
+				player.Reset();
+			} );
 		}
 
-		public override void SetupInventory( Player player )
-		{
-			base.SetupInventory( player );
+		foreach ( var wall in Entity.All.OfType<FuncWallToggle>() )
+			wall.Show();
+	}
 
-			player.Inventory.Add( new PhysGun(), true );
-			(player as FortwarsPlayer).Class?.AssignBuildLoadout( player.Inventory as Inventory );
-		}
+	public override void SetupInventory( Player player )
+	{
+		base.SetupInventory( player );
 
-		protected override void OnFinish()
-		{
-			Log.Info( "Finished Build Round" );
-		}
+		player.Inventory.Add( new PhysGun(), true );
+		( player as FortwarsPlayer ).Class?.AssignBuildLoadout( player.Inventory as Inventory );
+	}
 
-		protected override void OnTimeUp()
-		{
-			Game.Instance.ChangeRound( new CombatRound() );
-		}
+	protected override void OnFinish()
+	{
+		Log.Info( "Finished Build Round" );
+	}
 
-		public override void OnPlayerKilled( Player player )
-		{
-			base.OnPlayerKilled( player );
-		}
+	protected override void OnTimeUp()
+	{
+		Game.Instance.ChangeRound( new CombatRound() );
+	}
 
-		public override void OnPlayerSpawn( Player player )
-		{
-			base.OnPlayerSpawn( player );
-		}
+	public override void OnPlayerKilled( Player player )
+	{
+		base.OnPlayerKilled( player );
+	}
+
+	public override void OnPlayerSpawn( Player player )
+	{
+		base.OnPlayerSpawn( player );
 	}
 }

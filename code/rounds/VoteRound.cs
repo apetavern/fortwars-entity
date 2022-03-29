@@ -1,61 +1,63 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Fortwars
+namespace Fortwars;
+
+public partial class VoteRound : BaseRound
 {
-	public partial class VoteRound : BaseRound
+	public override string RoundName => "Voting";
+	public override int RoundDuration => 20;
+
+	protected override void OnStart()
 	{
-		public override string RoundName => "Voting";
-		public override int RoundDuration => 20;
+		Log.Info( "Started Vote Round" );
 
-		protected override void OnStart()
+		Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( player =>
 		{
-			Log.Info( "Started Vote Round" );
+			if ( player.LifeState != LifeState.Alive )
+				player.RespawnTimer = 0;
+		} );
+	}
 
-			Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( player =>
-			{
-				if ( player.LifeState != LifeState.Alive )
-					player.RespawnTimer = 0;
-			} );
+	public override void OnTick()
+	{
+		base.OnTick();
+
+		// Keep players alive during this round
+		Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( player => player.Health = 100 );
+	}
+
+	protected override void OnTimeUp()
+	{
+		var game = Game.Instance;
+		if ( game == null ) return;
+
+		Dictionary<int, int> voteCount = new();
+
+		foreach ( var vote in game.MapVotes )
+		{
+			if ( !voteCount.ContainsKey( vote.MapIndex ) )
+				voteCount.Add( vote.MapIndex, 0 );
+
+			voteCount[vote.MapIndex]++;
 		}
 
-		public override void OnTick()
-		{
-			base.OnTick();
+		var sortedMapVotePairs =
+			from entry in voteCount
+			orderby entry.Value descending
+			select entry;
 
-			// Keep players alive during this round
-			Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( player => player.Health = 100 );
+		if ( sortedMapVotePairs.Count() == 0 )
+		{
+			Global.ChangeLevel( Rand.FromList( Game.GetMaps() ) );
+			return;
 		}
 
-		protected override void OnTimeUp()
-		{
-			var game = Game.Instance;
-			if ( game == null ) return;
-
-			Dictionary<int, int> voteCount = new();
-
-			foreach ( var vote in game.MapVotes )
-			{
-				if ( !voteCount.ContainsKey( vote.MapIndex ) )
-					voteCount.Add( vote.MapIndex, 0 );
-
-				voteCount[vote.MapIndex]++;
-			}
-
-			var sortedMapVotePairs =
-				from entry in voteCount
-				orderby entry.Value descending
-				select entry;
-
-			if ( sortedMapVotePairs.Count() == 0 )
-			{
-				Global.ChangeLevel( Rand.FromArray( Game.GetMaps() ) );
-				return;
-			}
-
-			var votedMap = sortedMapVotePairs.First();
-			Global.ChangeLevel( Game.GetMaps()[votedMap.Key] );
-		}
+		var votedMap = sortedMapVotePairs.First();
+		Global.ChangeLevel( Game.GetMaps()[votedMap.Key] );
 	}
 }

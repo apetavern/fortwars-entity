@@ -1,4 +1,7 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+using Sandbox;
 using System;
 using System.Collections.Generic;
 
@@ -155,7 +158,7 @@ public partial class FortwarsWeapon : Carriable
 		TimeSinceReload = 0;
 		IsReloading = true;
 
-		(Owner as AnimEntity).SetAnimParameter( "b_reload", true );
+		( Owner as AnimEntity ).SetAnimParameter( "b_reload", true );
 
 		StartReloadEffects();
 	}
@@ -224,7 +227,7 @@ public partial class FortwarsWeapon : Carriable
 		var rate = WeaponAsset.RPM / 60f;
 		if ( rate <= 0 ) return true;
 
-		return TimeSincePrimaryAttack > (1 / rate);
+		return TimeSincePrimaryAttack > ( 1 / rate );
 	}
 
 	public virtual void AttackPrimary()
@@ -282,7 +285,7 @@ public partial class FortwarsWeapon : Carriable
 
 		if ( !IsAiming )
 		{
-			forward += (Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random) * (WeaponAsset.Spread + spread) * 0.25f;
+			forward += ( Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random ) * ( WeaponAsset.Spread + spread ) * 0.25f;
 			forward = forward.Normal;
 		}
 
@@ -389,7 +392,7 @@ public partial class FortwarsWeapon : Carriable
 
 		Particles.Create( WeaponAsset.FireParticles, EffectEntity, "muzzle" );
 
-		(ViewModelEntity as ViewModel)?.OnFire( IsAiming );
+		( ViewModelEntity as ViewModel )?.OnFire( IsAiming );
 
 		if ( !IsAiming )
 			ViewModelEntity?.SetAnimParameter( "fire", true );
@@ -409,8 +412,8 @@ public partial class FortwarsWeapon : Carriable
 		inputBuilder.ViewAngles.yaw -= recoil.y * Time.Delta * 10f;
 
 		recoil -= new Vector2(
-			(oldAngles.pitch - inputBuilder.ViewAngles.pitch) * recoveryRate * 1f,
-			(oldAngles.yaw - inputBuilder.ViewAngles.yaw) * recoveryRate * 1f
+			( oldAngles.pitch - inputBuilder.ViewAngles.pitch ) * recoveryRate * 1f,
+			( oldAngles.yaw - inputBuilder.ViewAngles.yaw ) * recoveryRate * 1f
 		);
 
 		if ( IsAiming )
@@ -427,5 +430,5 @@ public partial class FortwarsWeapon : Carriable
 		return baseDamage;
 	}
 
-	public float GetCrosshairSize() => (384 * (spread + WeaponAsset.Spread)).Clamp( 16, 512 );
+	public float GetCrosshairSize() => ( 384 * ( spread + WeaponAsset.Spread ) ).Clamp( 16, 512 );
 }

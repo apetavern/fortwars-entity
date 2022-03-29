@@ -1,35 +1,37 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+using Sandbox;
 using Sandbox.Component;
 using System.Linq;
 
-namespace Fortwars
+namespace Fortwars;
+
+public partial class FortwarsPlayer
 {
-	public partial class FortwarsPlayer
+	[Event.Tick.Client]
+	public static void OnClientTick()
 	{
-		[Event.Tick.Client]
-		public static void OnClientTick()
+		var localPlayer = Local.Pawn as FortwarsPlayer;
+
+		All.OfType<FortwarsPlayer>().ToList().ForEach( player =>
 		{
-			var localPlayer = Local.Pawn as FortwarsPlayer;
+			if ( player.IsLocalPawn )
+				return;
 
-			Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( player =>
+			var glow = player.Components.GetOrCreate<Glow>();
+
+			if ( player.TeamID != localPlayer.TeamID )
 			{
-				if ( player.IsLocalPawn )
-					return;
-
-				var glow = player.Components.GetOrCreate<Glow>();
-
-				if ( player.TeamID != localPlayer.TeamID )
-				{
-					glow.Active = true;
-					glow.RangeMin = 0;
-					glow.RangeMax = int.MaxValue;
-					glow.Color = Color.Red;
-				}
-				else
-				{
-					glow.Active = false;
-				}
-			} );
-		}
+				glow.Active = true;
+				glow.RangeMin = 0;
+				glow.RangeMax = int.MaxValue;
+				glow.Color = Color.Red;
+			}
+			else
+			{
+				glow.Active = false;
+			}
+		} );
 	}
 }

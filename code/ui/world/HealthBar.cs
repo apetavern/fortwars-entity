@@ -1,35 +1,37 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace Fortwars
+namespace Fortwars;
+
+public class HealthBar : Panel
 {
-	public class HealthBar : Panel
+	private Label owner;
+	private Label health;
+	private Panel inner;
+
+	private FortwarsBlock block;
+
+	public HealthBar( FortwarsBlock block )
 	{
-		private Label owner;
-		private Label health;
-		private Panel inner;
+		Parent = Local.Hud;
+		this.block = block;
 
-		private FortwarsBlock block;
+		StyleSheet.Load( "/ui/world/HealthBar.scss" );
+		health = Add.Label( "0", "health" );
+		owner = Add.Label( "owner", "owner" );
+		inner = Add.Panel( "inner" );
+	}
 
-		public HealthBar( FortwarsBlock block )
-		{
-			this.Parent = Local.Hud;
-			this.block = block;
+	public override void Tick()
+	{
+		base.Tick();
 
-			StyleSheet.Load( "/ui/world/HealthBar.scss" );
-			health = Add.Label( "0", "health" );
-			owner = Add.Label( "owner", "owner" );
-			inner = Add.Panel( "inner" );
-		}
-
-		public override void Tick()
-		{
-			base.Tick();
-
-			health.Text = $"{block.Health.CeilToInt()} / {block.MaxHealth.CeilToInt()}";
-			inner.Style.Width = Length.Fraction( block.Health / block.MaxHealth );
-			owner.Text = $"Owned by {block.Client?.Name ?? "(disconnected)"}";
-		}
+		health.Text = $"{block.Health.CeilToInt()} / {block.MaxHealth.CeilToInt()}";
+		inner.Style.Width = Length.Fraction( block.Health / block.MaxHealth );
+		owner.Text = $"Owned by {block.Client?.Name ?? "(disconnected)"}";
 	}
 }

@@ -1,30 +1,32 @@
-﻿namespace Fortwars
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+namespace Fortwars;
+
+partial class Game
 {
-	partial class Game
+	// shit tier singleton hack since we can't init these in Game ctor
+	// CreatePlayer is called before Game ctor
+	private RedTeam redTeam;
+	private BlueTeam blueTeam;
+
+	public RedTeam RedTeam
 	{
-		// shit tier singleton hack since we can't init these in Game ctor
-		// CreatePlayer is called before Game ctor
-		private RedTeam redTeam;
-		private BlueTeam blueTeam;
-
-		public RedTeam RedTeam
+		get
 		{
-			get
-			{
-				if ( redTeam == null )
-					redTeam = new RedTeam();
-				return redTeam;
-			}
+			if ( redTeam == null )
+				redTeam = new RedTeam();
+			return redTeam;
 		}
+	}
 
-		public BlueTeam BlueTeam
+	public BlueTeam BlueTeam
+	{
+		get
 		{
-			get
-			{
-				if ( blueTeam == null )
-					blueTeam = new BlueTeam();
-				return blueTeam;
-			}
+			if ( blueTeam == null )
+				blueTeam = new BlueTeam();
+			return blueTeam;
 		}
 	}
 }

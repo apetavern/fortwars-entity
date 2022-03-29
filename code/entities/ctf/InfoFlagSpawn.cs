@@ -1,47 +1,49 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
 
-namespace Fortwars
+using Sandbox;
+
+namespace Fortwars;
+
+/// <summary>
+/// This is where the flag spawns.
+/// </summary>
+[Library( "info_flag_spawn" )]
+[Hammer.EntityTool( "Flag Spawn", "FortWars" )]
+[Hammer.EditorModel( "models/rust_props/small_junk/toilet_paper.vmdl" )]
+public partial class InfoFlagSpawn : Entity
 {
-	/// <summary>
-	/// This is where the flag spawns.
-	/// </summary>
-	[Library( "info_flag_spawn" )]
-	[Hammer.EntityTool( "Flag Spawn", "FortWars" )]
-	[Hammer.EditorModel( "models/rust_props/small_junk/toilet_paper.vmdl" )]
-	public partial class InfoFlagSpawn : Entity
+	[Property]
+	public Team Team { get; set; }
+
+	private FlagDisplay flag;
+
+	public override void Spawn()
 	{
-		[Property]
-		public Team Team { get; set; }
+		base.Spawn();
 
-		private FlagDisplay flag;
+		flag = new FlagDisplay();
+		flag.Position = Position;
+		flag.Team = Team;
 
-		public override void Spawn()
-		{
-			base.Spawn();
+		// make sure our clients know where to render flags
+		// todo: probably better as a ClientRpc
+		Transmit = TransmitType.Never;
+	}
 
-			flag = new FlagDisplay();
-			flag.Position = Position;
-			flag.Team = Team;
+	public void ShowFlag()
+	{
+		Host.AssertServer();
 
-			// make sure our clients know where to render flags
-			// todo: probably better as a ClientRpc
-			Transmit = TransmitType.Never;
-		}
+		Log.Trace( $"Showing {flag}" );
+		flag.EnableDrawing = true;
+	}
 
-		public void ShowFlag()
-		{
-			Host.AssertServer();
+	public void HideFlag()
+	{
+		Host.AssertServer();
 
-			Log.Trace( $"Showing {flag}" );
-			flag.EnableDrawing = true;
-		}
-
-		public void HideFlag()
-		{
-			Host.AssertServer();
-
-			Log.Trace( $"Hiding {flag}" );
-			flag.EnableDrawing = false;
-		}
+		Log.Trace( $"Hiding {flag}" );
+		flag.EnableDrawing = false;
 	}
 }

@@ -1,4 +1,7 @@
-﻿using Sandbox;
+﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
+// without permission of its author (insert_email_here)
+
+using Sandbox;
 using Sandbox.UI;
 using System.Linq;
 
@@ -33,7 +36,7 @@ internal class NameTagComponent : EntityComponent<FortwarsPlayer>
 		tx.Position += Vector3.Up * 10.0f;
 		tx.Rotation = Rotation.LookAt( -CurrentView.Rotation.Forward );
 
-		NameTag.SetClass( "visible", (Entity as FortwarsPlayer)?.TeamID == (Local.Pawn as FortwarsPlayer)?.TeamID );
+		NameTag.SetClass( "visible",  Entity ?.TeamID == ( Local.Pawn as FortwarsPlayer )?.TeamID );
 
 		NameTag.Transform = tx;
 

@@ -13,5 +13,24 @@
   ],
   "HasCode": true,
   "CodePath": "code",
-  "RootNamespace": "Fortwars"
+  "RootNamespace": "Fortwars",
+  "Metadata": {
+    "MapList": [
+      "apetavern.fw_easter",
+      "apetavern.fw_grassforts",
+      "apetavern.fw_pillars",
+      "apetavern.fw_hydroelectric",
+      "apetavern.fw_aquarius",
+      "apetavern.fw_crete",
+      "apetavern.fw_levels",
+      "apetavern.fw_dev",
+      "apetavern.fw_divided",
+      "apetavern.fw_basin",
+      "sharpmars.fw_aztec",
+      "gvar.fw_harbor"
+    ],
+    "MapSelect": 2,
+    "MaxPlayers": 24,
+    "MinPlayers": 0
+  }
 }
