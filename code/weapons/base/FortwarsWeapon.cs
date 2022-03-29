@@ -255,11 +255,13 @@ public partial class FortwarsWeapon : Carriable
 		ViewModelEntity?.SetAnimParameter( "endreload", true );
 		IsReloading = false;
 
-		ShootEffects();
+		ShootEffectsLocal( Vector3.Zero );
 		PlaySound( WeaponAsset.FireSound ).SetVolume( 0.5f );
 
 		if ( !IsServer )
 			return;
+
+		ShootEffectsRemote( Vector3.Zero );
 
 		var projectile = new Projectile();
 		projectile.Rotation = Owner.EyeRotation;
@@ -278,7 +280,6 @@ public partial class FortwarsWeapon : Carriable
 	/// </summary>
 	public virtual void ShootBullet()
 	{
-		ShootEffects();
 		PlaySound( WeaponAsset.FireSound );
 
 		var forward = Owner.EyeRotation.Forward;
@@ -306,10 +307,15 @@ public partial class FortwarsWeapon : Carriable
 
 			tr.Surface.DoBulletImpact( tr );
 
-			if ( !IsServer ) continue;
-			TracerEffects( tr.EndPosition );
+			ShootEffectsLocal( tr.EndPosition );
 
-			if ( !tr.Entity.IsValid() ) continue;
+			if ( !IsServer )
+				continue;
+
+			ShootEffectsRemote( tr.EndPosition );
+
+			if ( !tr.Entity.IsValid() )
+				continue;
 
 			float damage = CalcDamage( tr.Distance, false );
 
@@ -382,8 +388,7 @@ public partial class FortwarsWeapon : Carriable
 		yield return tr;
 	}
 
-	[ClientRpc]
-	protected void TracerEffects( Vector3 end )
+	private void CreateTracerEffects( Vector3 end )
 	{
 		var tracer = Particles.Create( WeaponAsset.TracerParticles );
 		tracer.SetPosition( 1, EffectEntity.GetAttachment( "muzzle" )?.Position ?? default );
@@ -391,23 +396,27 @@ public partial class FortwarsWeapon : Carriable
 	}
 
 	[ClientRpc]
-	protected virtual void ShootEffects()
+	private void ShootEffectsLocal( Vector3 traceEnd )
 	{
-		Host.AssertClient();
+		if ( !IsLocalPawn )
+			return;
 
-		if ( IsLocalPawn )
-		{
-			recoil += new Vector2( WeaponAsset.RecoilY, WeaponAsset.RecoilX );
-		}
-
+		recoil += new Vector2( WeaponAsset.RecoilY, WeaponAsset.RecoilX );
 		Particles.Create( WeaponAsset.FireParticles, EffectEntity, "muzzle" );
 
 		( ViewModelEntity as ViewModel )?.OnFire( IsAiming );
-
-		if ( !IsAiming )
-			ViewModelEntity?.SetAnimParameter( "fire", true );
-
 		CrosshairPanel?.CreateEvent( "fire" );
+
+		CreateTracerEffects( traceEnd );
+	}
+
+	[ClientRpc]
+	private void ShootEffectsRemote( Vector3 traceEnd )
+	{
+		if ( IsLocalPawn )
+			return;
+
+		CreateTracerEffects( traceEnd );
 	}
 
 	public override void BuildInput( InputBuilder inputBuilder )

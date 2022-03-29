@@ -51,6 +51,9 @@ public class ViewModel : BaseViewModel
 			float strength = 16f;
 			ShootOffset += Vector3.Backward * strength;
 			ShootRotation *= Rotation.FromPitch( -strength );
+
+			if ( !ads )
+				SetAnimParameter( "fire", true );
 		}
 	}
 
@@ -171,7 +174,7 @@ public class ViewModel : BaseViewModel
 		var playerVelocity = Local.Pawn.Velocity;
 		var verticalDelta = playerVelocity.z * Time.Delta;
 		var viewDown = Rotation.FromPitch( newPitch ).Up * -1.0f;
-		verticalDelta *=  1.0f - MathF.Abs( viewDown.Cross( Vector3.Down ).y ) ;
+		verticalDelta *= 1.0f - MathF.Abs( viewDown.Cross( Vector3.Down ).y );
 		pitchDelta -= verticalDelta * 1;
 
 		var offset = CalcSwingOffset( pitchDelta, yawDelta );
@@ -250,7 +253,7 @@ public class ViewModel : BaseViewModel
 		Vector3 swingVelocity = new Vector3( 0, yawDelta, pitchDelta );
 
 		swingOffset -= swingOffset * ReturnSpeed * Time.Delta;
-		swingOffset +=  swingVelocity * SwingInfluence ;
+		swingOffset += swingVelocity * SwingInfluence;
 
 		if ( swingOffset.Length > MaxOffsetLength )
 		{
