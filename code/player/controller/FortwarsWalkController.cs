@@ -9,8 +9,8 @@ namespace Fortwars;
 [Library]
 public partial class FortwarsWalkController : BasePlayerController
 {
-	public float SprintSpeed => 400f;
-	public float DefaultSpeed => 300f;
+	public float SprintSpeed => 320f;
+	public float DefaultSpeed => 250f;
 	public float Acceleration => 8.0f;
 	public float AirAcceleration => 8.0f;
 	public float GroundFriction => 8.0f;
@@ -24,7 +24,7 @@ public partial class FortwarsWalkController : BasePlayerController
 	public float EyeHeight => 64.0f;
 	public float Gravity => 800.0f;
 	public bool AutoJump => false;
-	public float AirControl => 100.0f;
+	public float AirControl => 32f;
 
 	public DuckSlide DuckSlide { get; private set; }
 	public Unstuck Unstuck { get; private set; }
@@ -233,7 +233,7 @@ public partial class FortwarsWalkController : BasePlayerController
 			float punchStrength = fallVelocity.LerpInverse( FallPunchThreshold, FallPunchThreshold * 2 );
 			_ = new Sandbox.ScreenShake.ViewPunch( 1f, punchStrength * 2f );
 
-			if (  GroundEntity.WaterLevel >= 1f  )
+			if ( GroundEntity.WaterLevel >= 1f )
 			{
 				FallVelocity -= PlayerLandOnFloatingObject;
 			}
@@ -523,7 +523,7 @@ public partial class FortwarsWalkController : BasePlayerController
 		var velocity = WishVelocity;
 		float normalDot = velocity.Dot( LadderNormal );
 		var cross = LadderNormal * normalDot;
-		Velocity =  velocity - cross  + ( -normalDot * LadderNormal.Cross( Vector3.Up.Cross( LadderNormal ).Normal ) );
+		Velocity = velocity - cross + ( -normalDot * LadderNormal.Cross( Vector3.Up.Cross( LadderNormal ).Normal ) );
 
 		Move();
 	}
