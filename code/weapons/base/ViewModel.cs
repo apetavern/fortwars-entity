@@ -87,7 +87,7 @@ public class ViewModel : BaseViewModel
 		TargetPos = 0;
 		TargetFov = ViewmodelFov;
 		TargetRot = Rotation.Identity;
-		LerpSpeed = 10f;
+		LerpSpeed = 20f;
 
 		float bobCycleTime = BobCycleTime;
 
