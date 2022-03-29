@@ -39,11 +39,11 @@ public partial class KillFeed : Panel
 	{
 		Current = this;
 
-		StyleSheet.Load( "/ui/KillFeed.scss" );
+		StyleSheet.Load( "/ui/hud/KillFeed.scss" );
 	}
 
 	[ClientRpc]
-	public static void AddEntry( long lsteamid, string left, long rsteamid, string right, string method )
+	public static void AddEntry( long lsteamid, string left, long rsteamid, string right, string method, string leftClass = "", string rightClass = "" )
 	{
 		if ( Current == null )
 			return;
@@ -56,8 +56,12 @@ public partial class KillFeed : Panel
 		e.SetClass( "me", lsteamid == ( Local.Client?.PlayerId ) || rsteamid == ( Local.Client?.PlayerId ) );
 
 		e.Left.Text = left;
+		e.Left.AddClass( leftClass );
+
 		e.Method.Text = $"[{method}]";
+
 		e.Right.Text = right;
+		e.Right.AddClass( rightClass );
 	}
 }
 

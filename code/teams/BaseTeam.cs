@@ -1,6 +1,8 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
+using System;
+
 namespace Fortwars;
 
 public enum Team
@@ -19,4 +21,6 @@ public abstract class BaseTeam
 	public virtual Color Color => Color.Gray;
 
 	public virtual void OnPlayerSpawn( FortwarsPlayer player ) { }
+
+	public string GetCssClass() => $"{ID.ToString().ToLower()}-team";
 }

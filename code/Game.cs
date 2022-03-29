@@ -80,27 +80,56 @@ partial class Game : Sandbox.Game
 
 		if ( pawn.LastAttacker != null )
 		{
-			if ( pawn.LastAttacker is Player attackPlayer )
+			if ( pawn.LastAttacker is FortwarsPlayer attackPlayer )
 			{
+				var method = pawn.LastAttackerWeapon?.ClassInfo?.Name;
 				if ( pawn.LastAttackerWeapon is FortwarsWeapon weapon )
-					KillFeed.AddEntry( attackPlayer.Client.PlayerId, attackPlayer.Client.Name, pawn.Client.PlayerId, pawn.Client.Name, weapon.WeaponAsset.WeaponName );
-				else
-					KillFeed.AddEntry( attackPlayer.Client.PlayerId, attackPlayer.Client.Name, pawn.Client.PlayerId, pawn.Client.Name, pawn.LastAttackerWeapon?.ClassInfo?.Name );
+					method = weapon.WeaponAsset.WeaponName;
+
+				KillFeed.AddEntry(
+					attackPlayer.Client.PlayerId,
+					attackPlayer.Client.Name,
+					pawn.Client.PlayerId,
+					pawn.Client.Name,
+					method,
+					attackPlayer.Team.GetCssClass(),
+					player.Team.GetCssClass() );
 			}
 			else
 			{
-				KillFeed.AddEntry( pawn.LastAttacker.NetworkIdent, pawn.LastAttacker.ToString(), pawn.Client.PlayerId, pawn.Client.Name, "killed" );
+				KillFeed.AddEntry(
+					pawn.LastAttacker.NetworkIdent,
+					pawn.LastAttacker.ToString(),
+					pawn.Client.PlayerId,
+					pawn.Client.Name,
+					"killed",
+					"",
+					player.Team.GetCssClass() );
 			}
 		}
 		else
 		{
 			if ( player.LastDamage.Flags.HasFlag( DamageFlags.Fall ) )
 			{
-				KillFeed.AddEntry( 0, "Fall Damage", pawn.Client.PlayerId, pawn.Client.Name, "killed" );
+				KillFeed.AddEntry(
+					0,
+					"Fall Damage",
+					pawn.Client.PlayerId,
+					pawn.Client.Name,
+					"killed",
+					"",
+					player.Team.GetCssClass() );
 			}
 			else
 			{
-				KillFeed.AddEntry( 0, "", pawn.Client.PlayerId, pawn.Client.Name, "died" );
+				KillFeed.AddEntry(
+					0,
+					"Suicide",
+					pawn.Client.PlayerId,
+					pawn.Client.Name,
+					"killed",
+					"",
+					player.Team.GetCssClass() );
 			}
 		}
 

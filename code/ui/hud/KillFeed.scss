@@ -52,6 +52,14 @@ KillFeedEntry {
     .left, .right {
         padding: 0 12px;
 
+        &.blue-team {
+            color: $blue-team;
+        }
+
+        &.red-team {
+            color: $red-team;
+        }
+
         &.me {
             font-weight: bold;
         }
@@ -77,19 +85,20 @@ KillFeedEntry {
     }
 
     &.me {
-        background-color: white;
+        border-right: 4px solid white;
+        border-radius: 2px;
     }
 }
 
 
 .red-team {
-    .left, .right, .method {
-        color: $red-team;
+    .me {
+        border-right: $red-team;
     }
 }
 
 .blue-team {
-    .left, .right, .method {
-        color: $blue-team;
+    .me {
+        border-right: $blue-team;
     }
 }
