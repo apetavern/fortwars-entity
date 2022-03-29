@@ -10,8 +10,8 @@
 		rpm = 550.0
 		range = 16384
 		shotcount = 1
-		recoilx = 1.0
-		recoily = 2.5
+		recoilx = 0.5
+		recoily = 1.0
 		spread = 0.1
 		spreadshotincrease = 0.05
 		spreadchangetime = 4.0
