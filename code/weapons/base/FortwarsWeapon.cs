@@ -295,6 +295,15 @@ public partial class FortwarsWeapon : Carriable
 		//
 		foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * WeaponAsset.Range, 1f ) )
 		{
+			if ( IsServer )
+			{
+				DebugOverlay.Box( tr.EndPosition, new Vector3( -2, -2, -2 ), new Vector3( 2, 2, 2 ), Color.Blue, 5f, false );
+			}
+			else
+			{
+				DebugOverlay.Box( tr.EndPosition, new Vector3( -2, -2, -2 ), new Vector3( 2, 2, 2 ), Color.Red, 5f, false );
+			}
+
 			tr.Surface.DoBulletImpact( tr );
 
 			if ( !IsServer ) continue;
@@ -346,6 +355,8 @@ public partial class FortwarsWeapon : Carriable
 				ShootBullet();
 			}
 		}
+
+		spread += WeaponAsset.SpreadShotIncrease;
 	}
 
 	[ClientRpc]
@@ -387,7 +398,6 @@ public partial class FortwarsWeapon : Carriable
 		if ( IsLocalPawn )
 		{
 			recoil += new Vector2( WeaponAsset.RecoilY, WeaponAsset.RecoilX );
-			spread += WeaponAsset.SpreadShotIncrease;
 		}
 
 		Particles.Create( WeaponAsset.FireParticles, EffectEntity, "muzzle" );
