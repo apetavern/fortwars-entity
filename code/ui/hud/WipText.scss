@@ -19,7 +19,7 @@ WipText {
 
     .logo {
         position: absolute;
-        bottom: 50px;
+        top: -50px;
         left: 10px;
         width: 250px;
         background-size: contain;
@@ -30,7 +30,7 @@ WipText {
 
     .website {
         position: absolute;
-        bottom: 90px;
+        top: 125px;
         left: $safe-area-x;
         width: 250px;
     }

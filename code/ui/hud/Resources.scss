@@ -2,19 +2,19 @@
 
 Resources {
     position: absolute;
-    top: $safe-area-y;
+    bottom: 100px;
     left: $safe-area-x;
     flex-direction: row;
     background: linear-gradient( to right, $background, rgba( $background, 0 ) );
     border-left: 4px solid transparent;
     border-radius: 2px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     z-index: $z-index-resources;
 
     Resource {
         align-items: center;
         justify-content: space-between;
-        height: 75px;
+        height: 64px;
         margin: 0 10px;
         flex-direction: column;
 
@@ -38,19 +38,11 @@ Resources {
 .red-team {
     Resources {
         border-left: $red-team;
-
-        Resource .icon {
-            background-image-tint: $red-team;
-        }
     }
 }
 
 .blue-team {
     Resources {
         border-left: $blue-team;
-
-        Resource .icon {
-            background-image-tint: $blue-team;
-        }
     }
 }

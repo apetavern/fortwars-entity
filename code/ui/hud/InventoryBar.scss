@@ -1,7 +1,7 @@
 ﻿@import "/ui/_Common.scss";
 
 InventoryBar {
-    width: 300px;
+    width: 350px;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
@@ -47,6 +47,10 @@ InventoryBar {
         &.active {
             opacity: 1;
         }
+
+        inputhint {
+            margin-left: 5px;
+        }
     }
 }
 
@@ -55,10 +59,6 @@ InventoryBar {
         &.active {
             border-right: $red-team;
         }
-
-        inputhint image {
-            background-image-tint: $red-team;
-        }
     }
 }
 
@@ -66,10 +66,6 @@ InventoryBar {
     InventoryIcon {
         &.active {
             border-right: $blue-team;
-        }
-
-        inputhint image {
-            background-image-tint: $blue-team;
         }
     }
 }
