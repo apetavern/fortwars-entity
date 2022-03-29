@@ -22,6 +22,12 @@ public partial class FortwarsWeapon : Carriable
 	[Net, Predicted] private bool IsReloading { get; set; }
 
 	//
+	// Cvars
+	//
+	[ServerVar( "fw_weapon_debug" )]
+	public bool Debug { get; set; } = false;
+
+	//
 	// Realtime variables
 	//
 	public float spread { get; set; }
@@ -296,13 +302,16 @@ public partial class FortwarsWeapon : Carriable
 		//
 		foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * WeaponAsset.Range, 1f ) )
 		{
-			if ( IsServer )
+			if ( Debug )
 			{
-				DebugOverlay.Box( tr.EndPosition, new Vector3( -2, -2, -2 ), new Vector3( 2, 2, 2 ), Color.Blue, 5f, false );
-			}
-			else
-			{
-				DebugOverlay.Box( tr.EndPosition, new Vector3( -2, -2, -2 ), new Vector3( 2, 2, 2 ), Color.Red, 5f, false );
+				var color = IsServer ? Color.Blue : Color.Red;
+				DebugOverlay.Box(
+					tr.EndPosition,
+					new Vector3( -2, -2, -2 ),
+					new Vector3( 2, 2, 2 ),
+					color,
+					5f,
+					false );
 			}
 
 			tr.Surface.DoBulletImpact( tr );
