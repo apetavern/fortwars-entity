@@ -3,6 +3,7 @@
 
 using Sandbox;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Fortwars;
 
@@ -30,6 +31,13 @@ public class NoCollideComponent : EntityComponent<FortwarsBlock>
 
 	protected override void OnDeactivate()
 	{
+		_ = RemoveNoCollide();
+	}
+
+	private async Task RemoveNoCollide()
+	{
+		await Task.Delay( 500 );
+
 		if ( Host.IsServer )
 		{
 			entity.SetInteractsWith( CollisionLayer.Player );
