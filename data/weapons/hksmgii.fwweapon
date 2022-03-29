@@ -11,7 +11,7 @@
 		range = 16384
 		shotcount = 1
 		recoilx = 0.1
-		recoily = 3.0
+		recoily = 2.0
 		spread = 0.05
 		spreadshotincrease = 0.01
 		spreadchangetime = 4.0
