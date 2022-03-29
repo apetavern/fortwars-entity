@@ -24,12 +24,6 @@ public partial class RadialWheel
 			GenerateTexture();
 		}
 
-		public override void OnHotloaded()
-		{
-			base.OnHotloaded();
-			GenerateTexture();
-		}
-
 		/// <summary>
 		/// Generate our cool selection texture based on number of items in parent wheel
 		/// </summary>
