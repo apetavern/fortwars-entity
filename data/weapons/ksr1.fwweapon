@@ -2,7 +2,7 @@
 {
 	data = 
 	{
-		weaponname = "KSR1"
+		weaponname = "Assault Rifle"
 		worldmodel = resource:"models/weapons/ksr1/ksr1_w.vmdl"
 		viewmodel = resource:"models/weapons/ksr1/ksr1_v.vmdl"
 		movementspeedmultiplier = 0.95

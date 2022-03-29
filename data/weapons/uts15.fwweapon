@@ -2,7 +2,7 @@
 {
 	data = 
 	{
-		weaponname = "UTS 15"
+		weaponname = "Shotgun"
 		worldmodel = resource:"models/weapons/uts15/uts15_w.vmdl"
 		viewmodel = resource:"models/weapons/uts15/uts15_v.vmdl"
 		movementspeedmultiplier = 0.8

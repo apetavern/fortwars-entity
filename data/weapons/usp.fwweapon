@@ -2,7 +2,7 @@
 {
 	data = 
 	{
-		weaponname = "HK USP"
+		weaponname = "Pistol"
 		worldmodel = resource:"models/weapons/hkusp/hkusp_w.vmdl"
 		viewmodel = resource:"models/weapons/hkusp/hkusp_v.vmdl"
 		movementspeedmultiplier = 0.95

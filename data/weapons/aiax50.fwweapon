@@ -2,7 +2,7 @@
 {
 	data = 
 	{
-		weaponname = "AX50"
+		weaponname = "Sniper Rifle"
 		worldmodel = resource:"models/weapons/aiax50/aiax50_w.vmdl"
 		viewmodel = resource:"models/weapons/aiax50/aiax50_v.vmdl"
 		movementspeedmultiplier = 0.75

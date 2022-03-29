@@ -2,7 +2,7 @@
 {
 	data = 
 	{
-		weaponname = "HK SMGII"
+		weaponname = "SMG"
 		worldmodel = resource:"models/weapons/hksmgii/hksmgii_w.vmdl"
 		viewmodel = resource:"models/weapons/hksmgii/hksmgii_v.vmdl"
 		movementspeedmultiplier = 0.95

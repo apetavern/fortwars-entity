@@ -2,7 +2,7 @@
 {
 	data = 
 	{
-		weaponname = "Raging Judge"
+		weaponname = "Revolver"
 		worldmodel = resource:"models/weapons/trj/trj_w.vmdl"
 		viewmodel = resource:"models/weapons/trj/trj_v.vmdl"
 		movementspeedmultiplier = 0.95
