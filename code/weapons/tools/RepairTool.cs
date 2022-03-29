@@ -37,6 +37,7 @@ public partial class RepairTool : MeleeWeapon
 	{
 		var player = Owner as FortwarsPlayer;
 		player.SetAnimParameter( "b_attack", true );
+
 		foreach ( var tr in TraceHit( Owner.EyePosition, Owner.EyePosition + Owner.EyeRotation.Forward * 128f ) )
 		{
 			ViewModelEntity?.SetAnimParameter( "hit", tr.Hit );
@@ -46,6 +47,9 @@ public partial class RepairTool : MeleeWeapon
 				block?.Heal( 50, tr.EndPosition );
 				continue;
 			}
+
+			if ( tr.Entity == null || !tr.Entity.IsValid )
+				continue;
 
 			tr.Entity.TakeDamage( DamageInfo.FromBullet( tr.EndPosition, -tr.Normal * 10f, 10 ) );
 		}
