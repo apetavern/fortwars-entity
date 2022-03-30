@@ -26,7 +26,7 @@ public partial class FortwarsHUD : HudEntity<RootPanel>
 		RootPanel.AddChild<BuildHelp>();
 		RootPanel.AddChild<BuildWheel>();
 		RootPanel.AddChild<BuildWheelMetal>();
-		RootPanel.AddChild<Compass>();
+		// RootPanel.AddChild<Compass>();
 		RootPanel.AddChild<WipText>();
 		RootPanel.AddChild<Hitmarker>();
 		RootPanel.AddChild<DamageIndicator>();
