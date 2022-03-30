@@ -18,7 +18,7 @@
 		extraammo = 36
 		reloadtime = 2.0
 		maxdamage = 25.0
-		mindamage = 20.0
+		mindamage = 10.0
 		damagedropoffdistance = 512
 		headshotmultiplier = 1.5
 		firesound = "hkusp_fire"

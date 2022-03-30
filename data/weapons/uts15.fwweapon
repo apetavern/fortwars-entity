@@ -18,8 +18,8 @@
 		extraammo = 16
 		reloadtime = 0.5
 		maxdamage = 20.0
-		mindamage = 10.0
-		damagedropoffdistance = 512
+		mindamage = 3.0
+		damagedropoffdistance = 768
 		headshotmultiplier = 1.5
 		firesound = "uts15_fire"
 		holdtype = "3"

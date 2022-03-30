@@ -19,8 +19,8 @@
 		extraammo = 90
 		reloadtime = 3.0
 		maxdamage = 25.0
-		mindamage = 15.0
-		damagedropoffdistance = 512
+		mindamage = 20.0
+		damagedropoffdistance = 1024
 		headshotmultiplier = 1.5
 		firesound = "ksr1_fire"
 		projectilemodel = resource:""

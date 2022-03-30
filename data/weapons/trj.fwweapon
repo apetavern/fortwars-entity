@@ -18,7 +18,7 @@
 		extraammo = 36
 		reloadtime = 4.0
 		maxdamage = 50.0
-		mindamage = 30.0
+		mindamage = 25.0
 		damagedropoffdistance = 1024
 		headshotmultiplier = 2.5
 		firesound = "trj_fire"
