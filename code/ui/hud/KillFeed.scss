@@ -14,7 +14,7 @@ killfeed {
 }
 
 KillFeedEntry {
-    background-color: rgba( black, 0.8 );
+    background-color: rgba( $background, 0.8 );
     margin-bottom: 5px;
     color: white;
     transition: all 0.2s ease-out;
