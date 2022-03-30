@@ -27,7 +27,8 @@
       "apetavern.fw_divided",
       "apetavern.fw_basin",
       "sharpmars.fw_aztec",
-      "gvar.fw_harbor"
+      "gvar.fw_harbor",
+      "gvar.metro"
     ],
     "MapSelect": 2,
     "MaxPlayers": 24,
