@@ -7,11 +7,10 @@ namespace Fortwars;
 
 public partial class BigHealthPickup : Pickup
 {
-	[Net] int uses { get; set; } = 5;
+	[Net] public int RemainingUses { get; set; } = 5;
+	[Net] public bool HasLanded { get; set; }
 
 	float ThrowSpeed = 100f;
-
-	[Net] bool Landed { get; set; }
 
 	public override void Spawn()
 	{
@@ -19,6 +18,7 @@ public partial class BigHealthPickup : Pickup
 
 		SetModel( "models/items/medkit/medkit_w.vmdl" );
 		SetBodyGroup( 0, 1 );
+		SetMaterialGroup( "ammo" );
 		Scale = 0.4f;
 
 		Components.Get<BobbingComponent>().NoPitch = true;
@@ -27,7 +27,7 @@ public partial class BigHealthPickup : Pickup
 	[Event.Tick.Server]
 	public void OnTick()
 	{
-		if ( Landed )
+		if ( HasLanded )
 		{
 			SetAnimParameter( "deployed", true );
 			Scale = 0.4f;
@@ -44,7 +44,7 @@ public partial class BigHealthPickup : Pickup
 		if ( tr.Hit )
 		{
 			SetAnimParameter( "deployed", true );
-			Landed = true;
+			HasLanded = true;
 		}
 
 		Position = target;
@@ -52,10 +52,9 @@ public partial class BigHealthPickup : Pickup
 
 	public override void StartTouch( Entity other )
 	{
-		if ( !Landed )
-		{
+		if ( !HasLanded )
 			return;
-		}
+
 		base.StartTouch( other );
 
 		if ( !IsServer )
@@ -70,9 +69,9 @@ public partial class BigHealthPickup : Pickup
 		player.Health += 50f;
 		player.Health = player.Health.Clamp( 0, 100 );
 
-		uses--;
+		RemainingUses--;
 
-		if ( uses <= 0 )
+		if ( RemainingUses <= 0 )
 		{
 			Delete();
 		}

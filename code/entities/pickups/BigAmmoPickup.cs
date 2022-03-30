@@ -7,11 +7,10 @@ namespace Fortwars;
 
 public partial class BigAmmoPickup : Pickup
 {
-	[Net] int uses { get; set; } = 5;
+	[Net] public int RemainingUses { get; set; } = 5;
+	[Net] public bool HasLanded { get; set; }
 
 	float ThrowSpeed = 100f;
-
-	[Net] bool Landed { get; set; }
 
 	public override void Spawn()
 	{
@@ -28,7 +27,7 @@ public partial class BigAmmoPickup : Pickup
 	[Event.Tick.Server]
 	public void OnTick()
 	{
-		if ( Landed )
+		if ( HasLanded )
 		{
 			SetAnimParameter( "deployed", true );
 			Scale = 0.4f;
@@ -45,7 +44,7 @@ public partial class BigAmmoPickup : Pickup
 		if ( tr.Hit )
 		{
 			SetAnimParameter( "deployed", true );
-			Landed = true;
+			HasLanded = true;
 		}
 
 		Position = target;
@@ -53,23 +52,28 @@ public partial class BigAmmoPickup : Pickup
 
 	public override void StartTouch( Entity other )
 	{
-		if ( !Landed )
-		{
+		if ( !HasLanded )
 			return;
-		}
+
 		base.StartTouch( other );
 
 		if ( !IsServer )
 			return;
 
-		if ( ( other as FortwarsPlayer ).ActiveChild is not FortwarsWeapon weapon )
+		if ( other is not FortwarsPlayer player )
+			return;
+
+		if ( player.ActiveChild == null || !player.ActiveChild.IsValid )
+			return;
+
+		if ( player.ActiveChild is not FortwarsWeapon weapon )
 			return;
 
 		weapon.ReserveAmmo += weapon.WeaponAsset.MaxAmmo * 2;
 
-		uses--;
+		RemainingUses--;
 
-		if ( uses <= 0 )
+		if ( RemainingUses <= 0 )
 		{
 			Delete();
 		}
