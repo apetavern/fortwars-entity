@@ -3,6 +3,7 @@
 
 using Sandbox;
 using Sandbox.UI;
+using System;
 
 namespace Fortwars;
 
@@ -53,7 +54,7 @@ public partial class Crosshair : Panel
 	/// </summary>
 	private void Build()
 	{
-		var generatedStyle =  "crosshair.fortwarsweapon {" +
+		var generatedStyle = "crosshair.fortwarsweapon {" +
 
 			".el0, .el1, .el2, .el3 {" +
 			$"background-color: {Config.Color.Hex};" +
@@ -94,7 +95,7 @@ public partial class Crosshair : Panel
 			$"top: {Config.Size}px;" +
 			"}" +
 
-		"}" ;
+		"}";
 
 		Tick();
 
@@ -110,6 +111,8 @@ public partial class Crosshair : Panel
 			return;
 
 		float size = Config.Gap + ( Config.Size * 2 ) + weapon.GetCrosshairSize();
+		size = MathF.Max( size, Config.Size * 4 );
+
 		Style.Width = size;
 		Style.Height = size;
 
