@@ -35,7 +35,7 @@ partial class Crosshair
 		{
 			Style = CrosshairStyle.Dynamic,
 			Size = 16,
-			Gap = 16,
+			Gap = 0,
 
 			Thickness = 2,
 			Opacity = 0.5f,

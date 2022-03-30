@@ -24,8 +24,11 @@ public partial class FortwarsWeapon : Carriable
 	//
 	// Cvars
 	//
-	[ConVar.Replicated( "fw_weapon_debug" )]
-	public static bool Debug { get; set; } = false;
+	[ConVar.Replicated( "fw_weapon_debug_shots" )]
+	public static bool DebugShots { get; set; } = false;
+
+	[ConVar.Replicated( "fw_weapon_debug_spread" )]
+	public static bool DebugSpread { get; set; } = false;
 
 	//
 	// Realtime variables
@@ -56,12 +59,36 @@ public partial class FortwarsWeapon : Carriable
 		return weapon;
 	}
 
+	private void ShowSpreadPattern()
+	{
+		if ( IsServer )
+			return;
+
+		for ( int i = 0; i < 32; i++ )
+		{
+			var forward = Owner.EyeRotation.Forward;
+
+			if ( !IsAiming )
+			{
+				forward += ( Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random ) * ( WeaponAsset.Spread + spread ) * 0.25f;
+				forward = forward.Normal;
+			}
+
+			foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * WeaponAsset.Range, 1f ) )
+			{
+				DebugOverlay.Line( tr.EndPosition, tr.EndPosition + tr.Normal * 4f, 5f, false );
+			}
+		}
+	}
+
 	public override void Simulate( Client player )
 	{
 		spread = spread.LerpTo( 0, Time.Delta * WeaponAsset.SpreadChangeTime );
-
 		if ( spread.AlmostEqual( 0 ) )
 			spread = 0;
+
+		if ( DebugSpread )
+			ShowSpreadPattern();
 
 		ViewModelEntity?.SetAnimParameter( "aiming", IsAiming );
 
@@ -302,7 +329,7 @@ public partial class FortwarsWeapon : Carriable
 		//
 		foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * WeaponAsset.Range, 1f ) )
 		{
-			if ( Debug )
+			if ( DebugShots )
 			{
 				var color = IsServer ? Color.Blue : Color.Red;
 				var size = IsServer ? new Vector3( 2f ) : new Vector3( 2.5f );
@@ -332,7 +359,7 @@ public partial class FortwarsWeapon : Carriable
 				.WithAttacker( Owner )
 				.WithWeapon( this );
 
-			if ( Debug )
+			if ( DebugShots )
 			{
 				DebugOverlay.Text( tr.EndPosition, $"D: {damageInfo.Damage}\nF: {damageInfo.Force.Length}", Color.White, 5f, float.MaxValue );
 			}
@@ -459,5 +486,5 @@ public partial class FortwarsWeapon : Carriable
 		return baseDamage;
 	}
 
-	public float GetCrosshairSize() => ( 384 * ( spread + WeaponAsset.Spread ) ).Clamp( 16, 512 );
+	public float GetCrosshairSize() => 512 * ( spread + WeaponAsset.Spread );
 }
