@@ -327,14 +327,14 @@ public partial class FortwarsWeapon : Carriable
 			if ( tr.Entity is FortwarsBlock )
 				damage *= WeaponAsset.BuildingDamageMultiplier;
 
-			var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 100, damage )
+			var damageInfo = DamageInfo.FromBullet( tr.EndPosition, forward * 32, damage )
 				.UsingTraceResult( tr )
 				.WithAttacker( Owner )
 				.WithWeapon( this );
 
 			if ( Debug )
 			{
-				DebugOverlay.Text( tr.EndPosition, $"{damageInfo.Damage}", Color.White, 5f, float.MaxValue );
+				DebugOverlay.Text( tr.EndPosition, $"D: {damageInfo.Damage}\nF: {damageInfo.Force.Length}", Color.White, 5f, float.MaxValue );
 			}
 
 			tr.Entity.TakeDamage( damageInfo );
