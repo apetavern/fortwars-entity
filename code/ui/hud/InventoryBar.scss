@@ -21,11 +21,11 @@ InventoryBar {
         border-radius: 2px;
         flex-wrap: wrap;
         padding: 10px 20px;
-        opacity: 0.25;
         flex-grow: 1;
-        background: linear-gradient( to left, $background, rgba( $background, 0 ) );
+        background: linear-gradient( to left, rgba( $background, 0.5 ), rgba( $background, 0 ) );
         border-right: 4px transparent;
         transition: all 150ms ease;
+        opacity: 1;
 
         .item-name {
             flex-grow: 1;
@@ -45,7 +45,7 @@ InventoryBar {
         }
 
         &.active {
-            opacity: 1;
+            background: linear-gradient( to left, $background, rgba( $background, 0 ) );
         }
 
         inputhint {
