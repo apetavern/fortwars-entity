@@ -332,6 +332,11 @@ public partial class FortwarsWeapon : Carriable
 				.WithAttacker( Owner )
 				.WithWeapon( this );
 
+			if ( Debug )
+			{
+				DebugOverlay.Text( tr.EndPosition, $"{damageInfo.Damage}", Color.White, 5f, float.MaxValue );
+			}
+
 			tr.Entity.TakeDamage( damageInfo );
 		}
 	}
