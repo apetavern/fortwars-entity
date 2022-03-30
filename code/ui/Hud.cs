@@ -43,6 +43,9 @@ public partial class FortwarsHUD : HudEntity<RootPanel>
 		RootPanel.AddChild<ChatBox>();
 		RootPanel.AddChild<VoiceList>();
 
+		// AF
+		RootPanel.AddChild<Assistant>();
+
 		RootPanel.BindClass( "red-team", () => ( Local.Pawn as FortwarsPlayer ).TeamID == Team.Red );
 		RootPanel.BindClass( "blue-team", () => ( Local.Pawn as FortwarsPlayer ).TeamID == Team.Blue );
 	}
