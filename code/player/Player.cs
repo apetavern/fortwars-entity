@@ -221,6 +221,10 @@ public partial class FortwarsPlayer : Sandbox.Player
 			// Note - sending this only to the attacker!
 			attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, ( (float)Health ).LerpInverse( 100, 0 ) );
 		}
+		else
+		{
+			Killer = null;
+		}
 
 		base.TakeDamage( info );
 
