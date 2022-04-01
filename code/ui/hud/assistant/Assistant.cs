@@ -8,8 +8,7 @@ namespace Fortwars;
 
 public partial class Assistant : Panel
 {
-	[ConVar.Replicated( "fw_assistant_enabled" )]
-	public static bool AssistantEnabled { get; set; } = false;
+	public static bool AssistantEnabled { get; set; } = true;
 
 	private Bubble currentBubble;
 
