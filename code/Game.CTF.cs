@@ -82,7 +82,6 @@ partial class Game
 		HideFlag( enemyTeam.ID );
 
 		ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
-		Assistant.Speak( To.Everyone, $"{enemyTeam.ID} flag taken", $"flag_taken.{enemyTeam.ID}" );
 
 
 		foreach ( FortwarsPlayer ply in All.OfType<FortwarsPlayer>() )
@@ -118,7 +117,6 @@ partial class Game
 		}
 
 		ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
-		Assistant.Speak( To.Everyone, $"{enemyTeam.ID} flag taken", $"flag_taken.{enemyTeam.ID}" );
 
 		player.PlaySound( "ctf_flag_pickup" );
 	}
@@ -155,7 +153,6 @@ partial class Game
 
 			// Announce
 			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {RedTeam.Name}", $"avatar:{player.Client.PlayerId}", true );
-			Assistant.Speak( To.Everyone, $"Red team scored!", $"team_scored.red" );
 		}
 
 		if ( player == RedFlagCarrier )
@@ -170,7 +167,6 @@ partial class Game
 
 			// Announce
 			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {BlueTeam.Name}", $"avatar:{player.Client.PlayerId}", true );
-			Assistant.Speak( To.Everyone, $"Blue team scored!", $"team_scored.blue" );
 		}
 	}
 
@@ -179,7 +175,6 @@ partial class Game
 		if ( player == BlueFlagCarrier )
 		{
 			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {BlueTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
-			Assistant.Speak( To.Everyone, $"Blue flag dropped", $"flag_dropped.blue" );
 			BlueFlagCarrier = null;
 			ShowFlag( Team.Blue );
 			return;
@@ -187,7 +182,6 @@ partial class Game
 		if ( player == RedFlagCarrier )
 		{
 			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {RedTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
-			Assistant.Speak( To.Everyone, $"Red flag dropped", $"flag_dropped.red" );
 			RedFlagCarrier = null;
 			ShowFlag( Team.Red );
 			return;
@@ -200,13 +194,11 @@ partial class Game
 		{
 			case Team.Blue:
 				ChatBox.AddInformation( To.Everyone, $"{BlueTeam.Name} flag returned", null, true );
-				Assistant.Speak( To.Everyone, $"Blue flag returned", $"flag_returned.blue" );
 				BlueFlagCarrier = null;
 				ShowFlag( Team.Blue );
 				return;
 			case Team.Red:
 				ChatBox.AddInformation( To.Everyone, $"{RedTeam.Name} flag returned", null, true );
-				Assistant.Speak( To.Everyone, $"Red flag returned", $"flag_returned.red" );
 				RedFlagCarrier = null;
 				ShowFlag( Team.Red );
 				return;
