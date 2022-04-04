@@ -8,7 +8,7 @@ namespace Fortwars;
 
 public partial class Assistant : Panel
 {
-	public static bool AssistantEnabled { get; set; } = true;
+	public static bool AssistantEnabled { get; set; } = false;
 
 	private Bubble currentBubble;
 
