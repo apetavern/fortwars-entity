@@ -34,7 +34,6 @@ public partial class FortwarsWeapon : Carriable
 	// Realtime variables
 	//
 	public float spread { get; set; }
-	public Vector2 recoil { get; set; }
 
 	private TimeSince TimeSinceReload { get; set; }
 	public bool IsAiming => Input.Down( InputButton.Attack2 );
@@ -438,7 +437,6 @@ public partial class FortwarsWeapon : Carriable
 		if ( !IsLocalPawn )
 			return;
 
-		recoil += new Vector2( WeaponAsset.RecoilY, WeaponAsset.RecoilX );
 		Particles.Create( WeaponAsset.FireParticles, EffectEntity, "muzzle" );
 
 		( ViewModelEntity as ViewModel )?.OnFire( IsAiming );
@@ -459,18 +457,6 @@ public partial class FortwarsWeapon : Carriable
 	public override void BuildInput( InputBuilder inputBuilder )
 	{
 		base.BuildInput( inputBuilder );
-
-		const float recoveryRate = 1.0f;
-
-		var oldAngles = inputBuilder.ViewAngles;
-
-		inputBuilder.ViewAngles.pitch -= recoil.x * Time.Delta * 10f;
-		inputBuilder.ViewAngles.yaw -= recoil.y * Time.Delta * 10f;
-
-		recoil -= new Vector2(
-			( oldAngles.pitch - inputBuilder.ViewAngles.pitch ) * recoveryRate * 1f,
-			( oldAngles.yaw - inputBuilder.ViewAngles.yaw ) * recoveryRate * 1f
-		);
 
 		if ( IsAiming )
 			inputBuilder.ViewAngles = Angles.Lerp( inputBuilder.OriginalViewAngles, inputBuilder.ViewAngles, WeaponAsset.AimFovMult );
