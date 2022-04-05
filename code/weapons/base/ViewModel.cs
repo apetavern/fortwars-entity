@@ -87,7 +87,7 @@ public class ViewModel : BaseViewModel
 		TargetPos = 0;
 		TargetFov = ViewmodelFov;
 		TargetRot = Rotation.Identity;
-		LerpSpeed = 20f;
+		LerpSpeed = 10f;
 
 		float bobCycleTime = BobCycleTime;
 
@@ -119,8 +119,8 @@ public class ViewModel : BaseViewModel
 		{
 			TargetPos = Weapon.WeaponAsset.AimPosition;
 			TargetRot = Weapon.WeaponAsset.AimRotation.ToRotation();
-			TargetFov = Weapon.WeaponAsset.AimFovMult * ViewmodelFov;
-
+			// TargetFov = Weapon.WeaponAsset.AimFovMult * ViewmodelFov;
+			LerpSpeed = 20f;
 			return true;
 		}
 
@@ -131,8 +131,9 @@ public class ViewModel : BaseViewModel
 	{
 		if ( Local.Pawn is Player { Controller: FortwarsWalkController { IsSprinting: true } } player )
 		{
-			TargetRot = Rotation.From( 15, 5, 0 );
-			TargetPos = Vector3.Backward * 6f;
+			TargetRot = Rotation.From( 15, 45, 0 );
+			TargetPos = Vector3.Backward * 32f + Vector3.Right * 16f;
+			LerpSpeed = 5f;
 			return true;
 		}
 
@@ -263,35 +264,25 @@ public class ViewModel : BaseViewModel
 		return swingOffset;
 	}
 
+	private float currentBob = 0;
 	protected Vector3 CalcBobbingOffset( Vector3 velocity, float bobCycleTime )
 	{
-		var halfPI = MathF.PI * 0.5f;
-		var twoPI = MathF.PI * 2.0f;
+
+		//
+		// Bob up and down based on our walk movement
+		//
+		var speed = velocity.Length.LerpInverse( 0, 400 );
+		var speed2 = MathF.Exp( speed );
+		var left = Vector3.Left;
+		var up = Vector3.Up;
 
 		if ( Owner.GroundEntity != null )
 		{
-			bobAnim += Time.Delta * bobCycleTime;
-		}
-		else
-		{
-			// In air - return to center
-			if ( bobAnim > halfPI + 0.1f )
-				bobAnim -= Time.Delta * bobCycleTime * 0.05f;
-			else if ( bobAnim < halfPI + 0.1f )
-				bobAnim += Time.Delta * bobCycleTime * 0.05f;
-			else
-				bobAnim = halfPI;
+			currentBob += Time.Delta * 25.0f * speed;
 		}
 
-		if ( bobAnim > twoPI )
-		{
-			bobAnim -= twoPI;
-		}
-
-		var speed = new Vector2( velocity.x, velocity.y ).Length;
-		speed = speed > 10.0 ? speed : 0.0f;
-		var offset = BobDirection * ( speed * 0.005f ) * MathF.Cos( bobAnim );
-		offset = offset.WithZ( -MathF.Abs( offset.z ) );
+		var offset = up * MathF.Sin( currentBob ) * speed;
+		offset += left * MathF.Sin( currentBob * 0.5f ) * speed2;
 
 		return offset;
 	}
