@@ -261,34 +261,5 @@ public class ViewModel : BaseViewModel
 	}
 
 	private float currentBob = 0;
-	protected Vector3 CalcBobbingOffset( Vector3 velocity )
-	{
-		// Bob up and down based on our walk movement
-		var speed = velocity.Length.LerpInverse( 0, 400 );
-		var speed2 = velocity.Length.LerpInverse( 200, 400 );
-		var left = Vector3.Left;
-		var up = Vector3.Up;
-
-		if ( Owner.GroundEntity != null )
-		{
-			currentBob += Time.Delta * 25.0f * speed;
-		}
-
-		// Reset if we're not really moving
-		if ( speed < 0.1f )
-		{
-			currentBob = currentBob.LerpTo( 0, 5 * Time.Delta );
-		}
-
-		// Limit to 1 cycle
-		// https://www.desmos.com/calculator/8ued619kst
-		currentBob = currentBob.UnsignedMod( MathF.PI * 4f );
-
-		float sprintMul = 2.0f * speed2;
-		float speedMul = speed + sprintMul;
-		var offset = up * MathF.Sin( currentBob ) * speedMul;
-		offset += left * MathF.Sin( currentBob * 0.5f ) * speedMul;
-
-		return offset;
-	}
+	protected Vector3 CalcBobbingOffset( Vector3 velocity ) => Bobbing.CalcBobbingOffset( ref currentBob, velocity, Owner );
 }
