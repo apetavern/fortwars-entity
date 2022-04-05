@@ -14,7 +14,6 @@ public class ViewModel : BaseViewModel
 	protected float SwingInfluence => 0.05f;
 	protected float ReturnSpeed => 5.0f;
 	protected float MaxOffsetLength => 20.0f;
-	protected float BobCycleTime => 7.0f;
 	protected Vector3 BobDirection => new( 0.0f, 0.5f, 1.0f );
 
 	private Vector3 TargetPos = 0;
@@ -89,7 +88,6 @@ public class ViewModel : BaseViewModel
 		TargetRot = Rotation.Identity;
 		LerpSpeed = 10f;
 
-		float bobCycleTime = BobCycleTime;
 
 		if ( Weapon.IsValid() && DoTucking() )
 			return;
@@ -98,19 +96,17 @@ public class ViewModel : BaseViewModel
 
 		if ( DoADS() )
 		{
-			DoBobbing( bobCycleTime );
+			DoBobbing();
 			return;
 		}
 
 		DoDucking();
-
-		if ( DoSprinting() )
-			bobCycleTime *= 2;
+		DoSprinting();
 
 		if ( DoSliding() )
 			return;
 
-		DoBobbing( bobCycleTime );
+		DoBobbing();
 	}
 
 	private bool DoADS()
@@ -164,7 +160,7 @@ public class ViewModel : BaseViewModel
 		return false;
 	}
 
-	private bool DoBobbing( float bobCycleTime )
+	private bool DoBobbing()
 	{
 		var newPitch = Rotation.Pitch();
 		var newYaw = Rotation.Yaw();
@@ -179,7 +175,7 @@ public class ViewModel : BaseViewModel
 		pitchDelta -= verticalDelta * 1;
 
 		var offset = CalcSwingOffset( pitchDelta, yawDelta );
-		offset += CalcBobbingOffset( playerVelocity, bobCycleTime );
+		offset += CalcBobbingOffset( playerVelocity );
 		if ( Owner.GroundEntity == null )
 		{
 			offset += new Vector3( 0, 0, -2.5f );
@@ -265,13 +261,11 @@ public class ViewModel : BaseViewModel
 	}
 
 	private float currentBob = 0;
-	protected Vector3 CalcBobbingOffset( Vector3 velocity, float bobCycleTime )
+	protected Vector3 CalcBobbingOffset( Vector3 velocity )
 	{
-		//
 		// Bob up and down based on our walk movement
-		//
 		var speed = velocity.Length.LerpInverse( 0, 400 );
-		var speed2 = MathF.Exp( speed );
+		var speed2 = velocity.Length.LerpInverse( 200, 400 );
 		var left = Vector3.Left;
 		var up = Vector3.Up;
 
@@ -280,13 +274,20 @@ public class ViewModel : BaseViewModel
 			currentBob += Time.Delta * 25.0f * speed;
 		}
 
+		// Reset if we're not really moving
 		if ( speed < 0.1f )
 		{
 			currentBob = currentBob.LerpTo( 0, 5 * Time.Delta );
 		}
 
-		var offset = up * MathF.Sin( currentBob ) * speed;
-		offset += left * MathF.Sin( currentBob * 0.5f ) * speed2;
+		// Limit to 1 cycle
+		// https://www.desmos.com/calculator/8ued619kst
+		currentBob = currentBob.UnsignedMod( MathF.PI * 4f );
+
+		float sprintMul = 2.0f * speed2;
+		float speedMul = speed + sprintMul;
+		var offset = up * MathF.Sin( currentBob ) * speedMul;
+		offset += left * MathF.Sin( currentBob * 0.5f ) * speedMul;
 
 		return offset;
 	}
