@@ -267,7 +267,6 @@ public class ViewModel : BaseViewModel
 	private float currentBob = 0;
 	protected Vector3 CalcBobbingOffset( Vector3 velocity, float bobCycleTime )
 	{
-
 		//
 		// Bob up and down based on our walk movement
 		//
@@ -279,6 +278,11 @@ public class ViewModel : BaseViewModel
 		if ( Owner.GroundEntity != null )
 		{
 			currentBob += Time.Delta * 25.0f * speed;
+		}
+
+		if ( speed < 0.1f )
+		{
+			currentBob = currentBob.LerpTo( 0, 5 * Time.Delta );
 		}
 
 		var offset = up * MathF.Sin( currentBob ) * speed;
