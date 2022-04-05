@@ -56,6 +56,9 @@ partial class FortwarsPlayer
 		{
 			var healthT = player.Health.LerpInverse( 75f, 0.0f );
 
+			if ( healthT.AlmostEqual( 0 ) )
+				return;
+
 			postProcess.Vignette.Color = Color.Lerp( postProcess.Vignette.Color, Color.Red, healthT );
 			postProcess.Vignette.Intensity = healthT * 10f;
 		}
