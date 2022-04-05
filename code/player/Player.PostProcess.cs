@@ -11,7 +11,6 @@ partial class FortwarsPlayer
 
 	private static void SetupPostProcessing()
 	{
-		return;
 		Host.AssertClient();
 
 		PostProcess.Add<StandardPostProcess>( new() );
@@ -21,7 +20,6 @@ partial class FortwarsPlayer
 	[Event.Frame]
 	private static void UpdatePostProcessing()
 	{
-		return;
 		Host.AssertClient();
 
 		if ( postProcess == null )
@@ -39,5 +37,27 @@ partial class FortwarsPlayer
 
 		postProcess.ChromaticAberration.Enabled = true;
 		postProcess.ChromaticAberration.Offset = Vector3.Up * 0.0005f;
+
+		postProcess.Vignette.Enabled = true;
+
+		float vignette;
+		if ( Local.Pawn is FortwarsPlayer { ActiveChild: FortwarsWeapon { IsAiming: true } } )
+			vignette = 1.0f;
+		else
+			vignette = 0.0f;
+
+		postProcess.Vignette.Intensity = postProcess.Vignette.Intensity.LerpTo( vignette, 10 * Time.Delta );
+
+		postProcess.Vignette.Roundness = 1.5f;
+		postProcess.Vignette.Smoothness = 100f;
+		postProcess.Vignette.Color = Color.Black;
+
+		if ( Local.Pawn is FortwarsPlayer player )
+		{
+			var healthT = player.Health.LerpInverse( 75f, 0.0f );
+
+			postProcess.Vignette.Color = Color.Lerp( postProcess.Vignette.Color, Color.Red, healthT );
+			postProcess.Vignette.Intensity = healthT * 10f;
+		}
 	}
 }
