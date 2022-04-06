@@ -21,6 +21,9 @@ public class Scoreboard : Panel
 	public Panel BlueSection { get; set; }
 	public Panel RedSection { get; set; }
 
+	public string RedTeamHeader => $"Red ({Game.Instance.RedTeam.GetPlayerCount()})";
+	public string BlueTeamHeader => $"Blue ({Game.Instance.BlueTeam.GetPlayerCount()})";
+
 	public override void Tick()
 	{
 		base.Tick();
