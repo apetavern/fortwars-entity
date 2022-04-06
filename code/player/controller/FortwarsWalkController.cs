@@ -33,6 +33,10 @@ public partial class FortwarsWalkController : BasePlayerController
 	public bool IsSprinting => Input.Down( InputButton.Run ) && IsGrounded && ForwardSpeed > 100f;
 	public float ForwardSpeed => Velocity.Dot( EyeRotation.Forward );
 
+	private TimeSince timeSinceLastJump;
+	public float JumpDecayTime => 1.0f; // Seconds
+
+
 	public FortwarsWalkController()
 	{
 		DuckSlide = new DuckSlide( this );
@@ -155,8 +159,20 @@ public partial class FortwarsWalkController : BasePlayerController
 		WishVelocity = WishVelocity.Normal * inSpeed;
 		WishVelocity *= GetWishSpeed();
 
+		//
+		// Wish velocity: weapon movement speed multiplier
+		//
 		if ( ( Pawn as FortwarsPlayer ).ActiveChild is FortwarsWeapon weapon && weapon != null && weapon.WeaponAsset != null )
 			WishVelocity *= weapon.WeaponAsset.MovementSpeedMultiplier;
+
+		//
+		// Wish velocity: jump decay penalty
+		//
+		float jumpDecayMul = 1.0f;
+		if ( timeSinceLastJump < JumpDecayTime && !IsSwimming )
+			jumpDecayMul = timeSinceLastJump / JumpDecayTime;
+
+		WishVelocity *= jumpDecayMul;
 
 		DuckSlide.PreTick();
 
@@ -421,11 +437,16 @@ public partial class FortwarsWalkController : BasePlayerController
 		if ( GroundEntity == null )
 			return;
 
+		float jumpDecayMul = 1.0f;
+		if ( timeSinceLastJump < JumpDecayTime && !IsSwimming )
+			jumpDecayMul = timeSinceLastJump / JumpDecayTime;
+
+		jumpDecayMul.Clamp( 0.0f, 1.0f );
 
 		ClearGroundEntity();
 
 		float flGroundFactor = 1.0f;
-		float flMul = 268.3281572999747f * 1.2f;
+		float flMul = 268.3281572999747f * 1.2f * jumpDecayMul;
 
 		float startz = Velocity.z;
 
@@ -438,6 +459,7 @@ public partial class FortwarsWalkController : BasePlayerController
 
 		AddEvent( "jump" );
 
+		timeSinceLastJump = 0;
 	}
 
 	public virtual void AirMove()
