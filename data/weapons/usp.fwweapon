@@ -38,5 +38,6 @@
 			automaticfire = false
 		}
 		inventoryslot = "0"
+		sprintanimationtype = "1"
 	}
 }

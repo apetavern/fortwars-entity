@@ -10,7 +10,7 @@
 		range = 16384
 		shotcount = 1
 		recoilx = 0.3
-		recoily = 2.0
+		recoily = 8.0
 		spread = 0.01
 		spreadshotincrease = 0.025
 		spreadchangetime = 4.0
@@ -38,5 +38,6 @@
 			shotgunammo = true
 		}
 		inventoryslot = "0"
+		sprintanimationtype = "1"
 	}
 }
