@@ -95,6 +95,7 @@
 			{
 				_class = "CAnimGraphNetworkSettings"
 				m_bNetworkingEnabled = true
+				m_defaultNetworkMode = "ServerAuthoritative"
 			},
 		]
 	}
@@ -352,7 +353,7 @@
 										m_bIsFinished = true
 									},
 								]
-								m_blendDuration = 0.2
+								m_blendDuration = 0.0
 								m_destState = 
 								{
 									m_id = 1001372604
@@ -586,7 +587,7 @@
 										m_comparisonOp = 0
 										m_paramID = 
 										{
-											m_id = 1087503129
+											m_id = 1122991723
 										}
 										m_comparisonValue = 
 										{
