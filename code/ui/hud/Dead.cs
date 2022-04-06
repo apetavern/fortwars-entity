@@ -16,6 +16,7 @@ public class Dead : Panel
 	{
 		StyleSheet.Load( "/ui/hud/Dead.scss" );
 		Add.Label( "You are dead.", "title" );
+		Add.Label( "Not big surprise.", "tiny" );
 		killer = Add.Label( "Killed by", "subtitle" );
 		timer = Add.Label( "Respawn in 0:00", "timer" );
 

@@ -2,10 +2,9 @@
 
 Dead {
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 0;
     right: 0;
-    bottom: 0;
     background-color: rgba( $background, 0.9 );
     padding: 50px 80px;
     z-index: $z-index-dead;
@@ -14,12 +13,25 @@ Dead {
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transform: scale( 1.5 );
+    transform: scale( 1.5 ) translateY( -50% );
     transition: all 150ms ease;
 
     &.visible {
         opacity: 1;
-        transform: scale( 1.0 );
+        transform: scale( 1.0 ) translateY( -50% );
         backdrop-filter: blur( 20px );
+    }
+
+    .title {
+        padding: 0;
+    }
+
+    .tiny {
+        padding: 0;
+        padding-bottom: 25px;
+    }
+
+    .subtitle {
+        padding: 0;
     }
 }
