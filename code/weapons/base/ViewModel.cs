@@ -88,7 +88,6 @@ public class ViewModel : BaseViewModel
 		TargetRot = Rotation.Identity;
 		LerpSpeed = 10f;
 
-
 		if ( Weapon.IsValid() && DoTucking() )
 			return;
 
@@ -127,8 +126,20 @@ public class ViewModel : BaseViewModel
 	{
 		if ( Local.Pawn is Player { Controller: FortwarsWalkController { IsSprinting: true } } player )
 		{
-			TargetRot = Rotation.From( 15, 45, 0 );
-			TargetPos = Vector3.Backward * 32f + Vector3.Right * 16f;
+			TargetRot = Weapon.WeaponAsset.SprintAnimationType switch
+			{
+				WeaponAsset.SprintAnimationTypes.Default => Rotation.From( 15, 45, 0 ),
+				WeaponAsset.SprintAnimationTypes.Pistol => Rotation.From( -45, 0, 0 ),
+				_ => throw new NotImplementedException(),
+			};
+
+			TargetPos = Weapon.WeaponAsset.SprintAnimationType switch
+			{
+				WeaponAsset.SprintAnimationTypes.Default => Vector3.Backward * 32f + Vector3.Right * 16f,
+				WeaponAsset.SprintAnimationTypes.Pistol => Vector3.Down * 32f + Vector3.Backward * 32f,
+				_ => throw new NotImplementedException(),
+			};
+
 			LerpSpeed = 5f;
 			return true;
 		}

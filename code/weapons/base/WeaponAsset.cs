@@ -61,6 +61,15 @@ public partial class WeaponAsset : Asset
 	[Property( Title = "Weapon Flags" ), Category( "Meta" )]
 	public WeaponFlags Flags { get; set; }
 
+	public enum SprintAnimationTypes
+	{
+		Default,
+		Pistol
+	}
+
+	[Property( Title = "Sprinting Animation" ), Category( "Meta" )]
+	public SprintAnimationTypes SprintAnimationType { get; set; } = SprintAnimationTypes.Default;
+
 
 	//
 	// Shooting
