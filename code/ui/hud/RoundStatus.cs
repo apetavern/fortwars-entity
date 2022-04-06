@@ -26,9 +26,6 @@ public class RoundStatus : Panel
 	{
 		StyleSheet.Load( "/ui/hud/RoundStatus.scss" );
 
-		// scores.Add.Label( "Red", "red team" );
-		// scores.Add.Label( "Blue", "blue team" );
-
 		var RoundInfo = Add.Panel( "round-info" );
 		Phase = RoundInfo.Add.Label( "Unknown", "phase" );
 		Time = RoundInfo.Add.Label( "00:00", "time" );

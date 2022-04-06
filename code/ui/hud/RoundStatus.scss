@@ -10,7 +10,9 @@ roundstatus {
     left: 50%;
     transform: translate( -50% );
     transform-origin: 0% 0%;
+    border-radius: 2px;
     background: linear-gradient( to bottom, $background, rgba( $background, 0 ) );
+    border-bottom: 2px solid;
 
     panel.round-info {
         display: flex;
@@ -19,10 +21,8 @@ roundstatus {
         justify-content: space-around;
         flex-grow: 1;
         width: 100%;
-        margin-top: 5px;
         padding: 10px 0;
         border-radius: 2px;
-        box-shadow: 0 0 5px rgba( black, 0.2 );
 
         label {
             width: 50%;
@@ -102,5 +102,18 @@ roundstatus {
                 background-color: $red-team;
             }
         }
+    }
+}
+
+
+.red-team {
+    roundstatus {
+        border-bottom: $red-team;
+    }
+}
+
+.blue-team {
+    roundstatus {
+        border-bottom: $blue-team;
     }
 }
