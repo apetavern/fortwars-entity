@@ -6,7 +6,7 @@
 		worldmodel = resource:"models/weapons/aiax50/aiax50_w.vmdl"
 		viewmodel = resource:"models/weapons/aiax50/aiax50_v.vmdl"
 		movementspeedmultiplier = 0.75
-		rpm = 60.0
+		rpm = 40.0
 		range = 16384
 		shotcount = 1
 		recoilx = 0.4
@@ -16,7 +16,7 @@
 		spreadchangetime = 1.0
 		maxammo = 4
 		extraammo = 8
-		reloadtime = 2.0
+		reloadtime = 3.0
 		maxdamage = 50.0
 		mindamage = 50.0
 		damagedropoffdistance = 100000
@@ -37,6 +37,7 @@
 		{
 			userendertarget = true
 			useprojectile = false
+			shotgunammo = true
 		}
 		inventoryslot = "0"
 		sprintanimationtype = "0"
