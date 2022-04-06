@@ -34,6 +34,7 @@ public partial class FortwarsWeapon : Carriable
 	// Realtime variables
 	//
 	public float spread { get; set; }
+	public Vector2 Recoil { get; set; }
 
 	private TimeSince TimeSinceReload { get; set; }
 	public bool IsAiming => Input.Down( InputButton.Attack2 );
@@ -441,6 +442,9 @@ public partial class FortwarsWeapon : Carriable
 
 		( ViewModelEntity as ViewModel )?.OnFire( IsAiming );
 		CrosshairPanel?.CreateEvent( "fire" );
+
+		const float RecoilScaleFactor = 10f;
+		Recoil += new Vector2( WeaponAsset.RecoilX, WeaponAsset.RecoilY ) * RecoilScaleFactor;
 
 		CreateTracerEffects( traceEnd );
 	}
