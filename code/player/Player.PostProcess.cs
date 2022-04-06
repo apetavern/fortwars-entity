@@ -54,13 +54,23 @@ partial class FortwarsPlayer
 
 		if ( Local.Pawn is FortwarsPlayer player )
 		{
-			var healthT = player.Health.LerpInverse( 75f, 0.0f );
+			var healthT = player.Health.LerpInverse( 50f, 0f );
 
-			if ( healthT.AlmostEqual( 0 ) )
-				return;
+			if ( healthT > 0 )
+			{
+				postProcess.Vignette.Color = Color.Lerp( postProcess.Vignette.Color, Color.Red, healthT );
+				postProcess.Vignette.Intensity = healthT * 10f;
+			}
 
-			postProcess.Vignette.Color = Color.Lerp( postProcess.Vignette.Color, Color.Red, healthT );
-			postProcess.Vignette.Intensity = healthT * 10f;
+			postProcess.Blur.Enabled = healthT > 0;
+			postProcess.Blur.Strength = healthT * 0.25f;
+
+			postProcess.MotionBlur.Enabled = false;
+			postProcess.MotionBlur.Samples = 8;
+			postProcess.MotionBlur.Scale = healthT * 0.5f;
+
+			postProcess.Saturate.Enabled = healthT > 0;
+			postProcess.Saturate.Amount = 1.0f - healthT;
 		}
 	}
 }
