@@ -5,6 +5,7 @@
     top: 50%;
     left: 50%;
     opacity: 0;
+    transition: opacity 25ms ease;
 
     &.visible {
         opacity: 1;
@@ -14,20 +15,20 @@
         position: absolute;
     }
 
-    .el0 {
-        &:not(.fortwarsweapon ) {
-            background-color: white;
-        }
-
+    .el4 {
         border-radius: 1000px;
-        width: 6px;
-        height: 6px;
+        width: 3px;
+        height: 3px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate( -50% -50% );
     }
 
     &.fortwarsweapon {
         .el0, .el1, .el2, .el3 {
             /*background-color: white;*/
-            border-radius: 0;
+            border-radius: 2px;
         }
 
         .el0, .el1 {

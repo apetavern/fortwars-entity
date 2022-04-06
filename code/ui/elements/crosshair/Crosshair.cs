@@ -56,7 +56,7 @@ public partial class Crosshair : Panel
 	{
 		var generatedStyle = "crosshair.fortwarsweapon {" +
 
-			".el0, .el1, .el2, .el3 {" +
+			".el0, .el1, .el2, .el3, .el4 {" +
 			$"background-color: {Config.Color.Hex};" +
 			$"border: {( Config.Outline ? $"2px solid {Config.OutlineColor.Hex}" : "none" )};" +
 			$"opacity: {Config.Opacity};" +
