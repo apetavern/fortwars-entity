@@ -2,12 +2,12 @@
 {
 	data = 
 	{
-		volume = 0.4
+		volume = 2.0
 		sounds = 
 		[
 			"sounds/ui.hitmarker.mp3",
 		]
-		VolumeRandom = 0.1
+		VolumeRandom = 0.0
 		Pitch = 1.0
 		PitchRandom = 0.05
 		DistanceMax = 1000.0
