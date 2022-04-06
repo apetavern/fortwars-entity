@@ -45,8 +45,6 @@ partial class FortwarsPlayer
 		fovOffset = fovOffset.LerpTo( speed * 40f * MathF.Abs( forwardspeed ), Time.Delta * 2.0f );
 		setup.FieldOfView += fovOffset;
 
-		DebugOverlay.ScreenText( fovOffset.ToString() );
-
 		var posOffset = Bobbing.CalcBobbingOffset( ref currentBob, Velocity, this );
 		posOffset *= setup.Rotation;
 
