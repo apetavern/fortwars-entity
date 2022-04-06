@@ -13,12 +13,9 @@ public partial class FortwarsWeapon : Carriable
 	// Networked variables
 	//
 	[Net] public WeaponAsset WeaponAsset { get; set; }
-
-	[Net, Predicted] public TimeSince TimeSincePrimaryAttack { get; set; }
-
 	[Net] public int CurrentClip { get; set; }
 	[Net] public int ReserveAmmo { get; set; }
-
+	[Net, Predicted] public TimeSince TimeSincePrimaryAttack { get; set; }
 	[Net, Predicted] private bool IsReloading { get; set; }
 
 	//
@@ -33,11 +30,11 @@ public partial class FortwarsWeapon : Carriable
 	//
 	// Realtime variables
 	//
-	public float spread { get; set; }
+	public float Spread { get; set; }
 	public Vector2 Recoil { get; set; }
-
-	private TimeSince TimeSinceReload { get; set; }
 	public bool IsAiming => Input.Down( InputButton.Attack2 );
+	private TimeSince TimeSinceReload { get; set; }
+	private FallbackScope scopePanel;
 
 	/// <summary>
 	/// Load a weapon from a specified path.
@@ -70,7 +67,7 @@ public partial class FortwarsWeapon : Carriable
 
 			if ( !IsAiming )
 			{
-				forward += ( Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random ) * ( WeaponAsset.Spread + spread ) * 0.25f;
+				forward += ( Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random ) * ( WeaponAsset.Spread + Spread ) * 0.25f;
 				forward = forward.Normal;
 			}
 
@@ -83,9 +80,9 @@ public partial class FortwarsWeapon : Carriable
 
 	public override void Simulate( Client player )
 	{
-		spread = spread.LerpTo( 0, Time.Delta * WeaponAsset.SpreadChangeTime );
-		if ( spread.AlmostEqual( 0 ) )
-			spread = 0;
+		Spread = Spread.LerpTo( 0, Time.Delta * WeaponAsset.SpreadChangeTime );
+		if ( Spread.AlmostEqual( 0 ) )
+			Spread = 0;
 
 		if ( DebugSpread )
 			ShowSpreadPattern();
@@ -118,17 +115,12 @@ public partial class FortwarsWeapon : Carriable
 		}
 	}
 
-	FallbackScope scopePanel;
-	// ScopeRenderTarget SniperScopePanel;
 	public override void CreateHudElements()
 	{
 		base.CreateHudElements();
 
 		if ( WeaponAsset.Flags.UseRenderTarget )
 		{
-			// SniperScopePanel = new ScopeRenderTarget();
-			// SniperScopePanel.Parent = Local.Hud;
-
 			scopePanel = new FallbackScope();
 			scopePanel.Parent = Local.Hud;
 		}
@@ -138,7 +130,6 @@ public partial class FortwarsWeapon : Carriable
 	{
 		base.DestroyHudElements();
 
-		// SniperScopePanel?.Delete();
 		scopePanel?.Delete();
 	}
 
@@ -174,8 +165,11 @@ public partial class FortwarsWeapon : Carriable
 
 	public virtual bool CanReload()
 	{
-		if ( !Owner.IsValid() || !Input.Down( InputButton.Reload ) ) return false;
-		if ( ReserveAmmo <= 0 ) return false;
+		if ( !Owner.IsValid() || !Input.Down( InputButton.Reload ) )
+			return false;
+
+		if ( ReserveAmmo <= 0 )
+			return false;
 
 		return true;
 	}
@@ -207,9 +201,7 @@ public partial class FortwarsWeapon : Carriable
 		var amount = Math.Min( ReserveAmmo, WeaponAsset.MaxAmmo - CurrentClip );
 
 		if ( amount <= 0 )
-		{
 			ViewModelEntity?.SetAnimParameter( "endreload", true );
-		}
 
 		if ( TimeSinceReload < WeaponAsset.ReloadTime )
 			return;
@@ -258,7 +250,8 @@ public partial class FortwarsWeapon : Carriable
 			return false;
 
 		var rate = WeaponAsset.RPM / 60f;
-		if ( rate <= 0 ) return true;
+		if ( rate <= 0 )
+			return true;
 
 		return TimeSincePrimaryAttack > ( 1 / rate );
 	}
@@ -319,7 +312,7 @@ public partial class FortwarsWeapon : Carriable
 
 		if ( !IsAiming )
 		{
-			forward += ( Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random ) * ( WeaponAsset.Spread + spread ) * 0.25f;
+			forward += ( Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random ) * ( WeaponAsset.Spread + Spread ) * 0.25f;
 			forward = forward.Normal;
 		}
 
@@ -399,7 +392,7 @@ public partial class FortwarsWeapon : Carriable
 			}
 		}
 
-		spread += WeaponAsset.SpreadShotIncrease;
+		Spread += WeaponAsset.SpreadShotIncrease;
 	}
 
 	[ClientRpc]
@@ -476,5 +469,5 @@ public partial class FortwarsWeapon : Carriable
 		return baseDamage;
 	}
 
-	public float GetCrosshairSize() => 512 * ( spread + WeaponAsset.Spread );
+	public float GetCrosshairSize() => 512 * ( Spread + WeaponAsset.Spread );
 }
