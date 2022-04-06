@@ -129,6 +129,9 @@ partial class Game
 
 	public void PlayerScoreFlag( FortwarsPlayer player )
 	{
+		// Up the player's score
+		player.Client.AddInt( "captures" );
+
 		foreach ( FortwarsPlayer ply in All.OfType<FortwarsPlayer>() )
 		{
 			if ( ply.TeamID == player.TeamID )
