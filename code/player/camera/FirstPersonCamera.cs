@@ -54,7 +54,6 @@ public class FirstPersonCamera : Sandbox.FirstPersonCamera
 		var oldPitch = input.ViewAngles.pitch;
 		var oldYaw = input.ViewAngles.yaw;
 
-		DebugOverlay.ScreenText( 5, weapon.Recoil.LengthSquared.ToString() );
 		totalRecoil -= weapon.Recoil * Time.Delta;
 
 		//
