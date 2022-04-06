@@ -126,21 +126,29 @@ public class ViewModel : BaseViewModel
 	{
 		if ( Local.Pawn is Player { Controller: FortwarsWalkController { IsSprinting: true } } player )
 		{
+			LerpSpeed = 5f;
+
+			if ( Weapon == null || Weapon.WeaponAsset == null )
+			{
+				TargetRot = Rotation.Identity;
+				TargetPos = 0;
+				return true;
+			}
+
 			TargetRot = Weapon.WeaponAsset.SprintAnimationType switch
 			{
 				WeaponAsset.SprintAnimationTypes.Default => Rotation.From( 15, 45, 0 ),
 				WeaponAsset.SprintAnimationTypes.Pistol => Rotation.From( -45, 0, 0 ),
-				_ => throw new NotImplementedException(),
+				_ => Rotation.Identity,
 			};
 
 			TargetPos = Weapon.WeaponAsset.SprintAnimationType switch
 			{
 				WeaponAsset.SprintAnimationTypes.Default => Vector3.Backward * 32f + Vector3.Right * 16f,
 				WeaponAsset.SprintAnimationTypes.Pistol => Vector3.Down * 32f + Vector3.Backward * 32f,
-				_ => throw new NotImplementedException(),
+				_ => 0,
 			};
 
-			LerpSpeed = 5f;
 			return true;
 		}
 
