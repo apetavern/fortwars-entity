@@ -469,5 +469,12 @@ public partial class FortwarsWeapon : Carriable
 		return baseDamage;
 	}
 
+	public override void ActiveEnd( Entity ent, bool dropped )
+	{
+		base.ActiveEnd( ent, dropped );
+
+		Recoil = 0;
+	}
+
 	public float GetCrosshairSize() => 512 * ( Spread + WeaponAsset.Spread );
 }
