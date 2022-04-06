@@ -13,7 +13,7 @@
 		recoily = 1.0
 		spread = 0.1
 		spreadshotincrease = 0.025
-		spreadchangetime = 4.0
+		spreadchangetime = 3.0
 		maxammo = 8
 		extraammo = 16
 		reloadtime = 0.5
@@ -39,5 +39,6 @@
 			continuousloading = true
 		}
 		inventoryslot = "0"
+		sprintanimationtype = "0"
 	}
 }

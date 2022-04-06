@@ -11,9 +11,9 @@
 		shotcount = 1
 		recoilx = 0.4
 		recoily = 6.0
-		spread = 0.0
-		spreadshotincrease = 1.0
-		spreadchangetime = 4.0
+		spread = 0.3
+		spreadshotincrease = 0.0
+		spreadchangetime = 1.0
 		maxammo = 4
 		extraammo = 8
 		reloadtime = 2.0
@@ -23,8 +23,8 @@
 		headshotmultiplier = 2.0
 		firesound = "aiax50_fire"
 		holdtype = "2"
-		projectilemodel = resource:""
-		projectilespeed = 1.0
+		projectilemodel = resource:"models/weapons/rpg/rpgrocket.vmdl"
+		projectilespeed = 10000.0
 		aimposition = [ -1000.0, 0.0, 0.0 ]
 		aimrotation = [ 0.0, 0.0, 0.0 ]
 		aimfovmult = 0.1
@@ -36,7 +36,9 @@
 		flags = 
 		{
 			userendertarget = true
+			useprojectile = false
 		}
 		inventoryslot = "0"
+		sprintanimationtype = "0"
 	}
 }

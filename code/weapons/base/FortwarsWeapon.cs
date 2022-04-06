@@ -30,8 +30,9 @@ public partial class FortwarsWeapon : Carriable
 	//
 	// Realtime variables
 	//
-	public float Spread { get; set; }
+	public float Bloom { get; set; }
 	public Vector2 Recoil { get; set; }
+	public float Inaccuracy { get; set; }
 	public bool IsAiming => Input.Down( InputButton.Attack2 );
 	private TimeSince TimeSinceReload { get; set; }
 	private FallbackScope scopePanel;
@@ -67,22 +68,36 @@ public partial class FortwarsWeapon : Carriable
 
 			if ( !IsAiming )
 			{
-				forward += ( Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random ) * ( WeaponAsset.Spread + Spread ) * 0.25f;
+				forward += ( Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random ) * Inaccuracy * 0.25f;
 				forward = forward.Normal;
 			}
 
 			foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * WeaponAsset.Range, 1f ) )
 			{
-				DebugOverlay.Line( tr.EndPosition, tr.EndPosition + tr.Normal * 4f, 5f, false );
+				DebugOverlay.Line( tr.EndPosition, tr.EndPosition + tr.Normal * 4f, 1f, false );
 			}
 		}
 	}
 
+	public void ApplyInaccuracy()
+	{
+		float spread = Bloom + WeaponAsset.Spread;
+
+		if ( Owner.GroundEntity == null )
+			spread *= 3f;
+		else
+			spread *= 1.0f + Owner.Velocity.Length.LerpInverse( 0, 400 );
+
+		Inaccuracy = Inaccuracy.LerpTo( spread, 25f * Time.Delta );
+	}
+
 	public override void Simulate( Client player )
 	{
-		Spread = Spread.LerpTo( 0, Time.Delta * WeaponAsset.SpreadChangeTime );
-		if ( Spread.AlmostEqual( 0 ) )
-			Spread = 0;
+		Bloom = Bloom.LerpTo( 0, Time.Delta * WeaponAsset.SpreadChangeTime );
+		if ( Bloom.AlmostEqual( 0 ) )
+			Bloom = 0;
+
+		ApplyInaccuracy();
 
 		if ( DebugSpread )
 			ShowSpreadPattern();
@@ -312,7 +327,7 @@ public partial class FortwarsWeapon : Carriable
 
 		if ( !IsAiming )
 		{
-			forward += ( Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random ) * ( WeaponAsset.Spread + Spread ) * 0.25f;
+			forward += ( Vector3.Random + Vector3.Random + Vector3.Random + Vector3.Random ) * Inaccuracy * 0.25f;
 			forward = forward.Normal;
 		}
 
@@ -392,7 +407,7 @@ public partial class FortwarsWeapon : Carriable
 			}
 		}
 
-		Spread += WeaponAsset.SpreadShotIncrease;
+		Bloom += WeaponAsset.SpreadShotIncrease;
 	}
 
 	[ClientRpc]
@@ -476,5 +491,5 @@ public partial class FortwarsWeapon : Carriable
 		Recoil = 0;
 	}
 
-	public float GetCrosshairSize() => 512 * ( Spread + WeaponAsset.Spread );
+	public float GetCrosshairSize() => 768 * Inaccuracy;
 }
