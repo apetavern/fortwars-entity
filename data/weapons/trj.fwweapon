@@ -32,7 +32,7 @@
 		tracerparticles = resource:"particles/tracer_large.vpcf"
 		buildingdamagemultiplier = 0.25
 		proceduralviewmodelstrength = 1.0
-		aimedproceduralviewmodelstrength = 4.0
+		aimedproceduralviewmodelstrength = 2.0
 		flags = 
 		{
 			shotgunammo = true
