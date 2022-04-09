@@ -11,8 +11,9 @@ public static class Bobbing
 	public static Vector3 CalcBobbingOffset( ref float currentBob, Vector3 velocity, Entity entity )
 	{
 		// Bob up and down based on our walk movement
-		var speed = velocity.Length.LerpInverse( 0, 400 );
-		var speed2 = velocity.Length.LerpInverse( 200, 400 );
+		var forwardVel = velocity.Cross( Vector3.Up );
+		var speed = forwardVel.Length.LerpInverse( 0, 400 );
+		var speed2 = forwardVel.Length.LerpInverse( 200, 400 );
 		var left = Vector3.Left;
 		var up = Vector3.Up;
 
@@ -31,7 +32,7 @@ public static class Bobbing
 		// https://www.desmos.com/calculator/8ued619kst
 		currentBob = currentBob.UnsignedMod( MathF.PI * 4f );
 
-		float sprintMul = 2.0f * speed2;
+		float sprintMul = 8.0f * speed2;
 		float speedMul = speed + sprintMul;
 		var offset = up * MathF.Sin( currentBob ) * speedMul;
 		offset += left * MathF.Sin( currentBob * 0.5f ) * speedMul;
