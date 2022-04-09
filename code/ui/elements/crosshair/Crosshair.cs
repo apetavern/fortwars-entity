@@ -122,5 +122,7 @@ public partial class Crosshair : Panel
 		transform.AddScale( ScaleFromScreen );
 		transform.AddTranslate( Length.Percent( -50 ), Length.Percent( -50 ) );
 		Style.Transform = transform;
+
+		this.PositionAtCrosshair();
 	}
 }
