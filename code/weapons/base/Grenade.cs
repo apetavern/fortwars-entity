@@ -65,7 +65,6 @@ partial class Grenade : Carriable
 
 		Count--;
 
-		// woosh sound
 		_ = new Sandbox.ScreenShake.Perlin( 1.0f, 0.5f, 4.0f, 0.6f );
 
 		Rand.SetSeed( Time.Tick );
@@ -80,7 +79,8 @@ partial class Grenade : Carriable
 					Owner = Owner
 				};
 
-				grenade.PhysicsBody.Velocity = Owner.EyeRotation.Forward * 600.0f + Owner.EyeRotation.Up * 200.0f + Owner.Velocity;
+				grenade.PhysicsBody.Velocity = Owner.EyeRotation.Forward * 600.0f + Owner.EyeRotation.Up * 200.0f
+					+ ( Owner.EyeRotation.Forward * Owner.Velocity.Length );
 
 				grenade.CollisionGroup = CollisionGroup.Debris;
 				grenade.SetInteractsExclude( CollisionLayer.Player );
