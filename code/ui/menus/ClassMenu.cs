@@ -28,7 +28,8 @@ public partial class ClassMenu : Menu
 				"fwclass_assault",
 				"fwclass_medic",
 				"fwclass_support",
-				"fwclass_engineer"
+				"fwclass_engineer",
+				"fwclass_demo"
 		};
 
 		classInfo = AddChild<ClassInfo>();
