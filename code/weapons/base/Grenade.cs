@@ -66,7 +66,7 @@ partial class Grenade : Carriable
 		Count--;
 
 		// woosh sound
-		// screen shake
+		_ = new Sandbox.ScreenShake.Perlin( 1.0f, 0.5f, 4.0f, 0.6f );
 
 		Rand.SetSeed( Time.Tick );
 
