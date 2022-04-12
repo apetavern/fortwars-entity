@@ -19,7 +19,8 @@ partial class Grenade : Carriable
 	public float ReloadTime => 1.0f;
 	public int Count { get; private set; } = 3000;
 
-	private TimeSince TimeSinceThrow { get; set; } = 0;
+	[Net, Predicted] private bool PlayerThrown { get; set; }
+	[Net, Predicted] private TimeSince TimeSinceThrow { get; set; } = 0;
 
 	public override void Spawn()
 	{
@@ -32,19 +33,31 @@ partial class Grenade : Carriable
 	{
 		base.Simulate( cl );
 
+		DebugOverlay.ScreenText( 21, $"TimeSinceThrow:       {TimeSinceThrow}" );
+
 		if ( CanThrow() )
+		{
+			PlayerThrown = true;
+			TimeSinceThrow = 0;
+
+			if ( IsClient )
+				ViewModelEntity?.SetAnimParameter( "fire", true );
+		}
+
+		if ( PlayerThrown && TimeSinceThrow >= 0.3f )
+		{
+			PlayerThrown = false;
 			Throw();
+		}
 	}
 
 	public bool CanThrow()
 	{
-		return TimeSinceThrow > 1 && Input.Released( InputButton.Attack1 );
+		return TimeSinceThrow > 2 && Input.Released( InputButton.Attack1 );
 	}
 
 	public void Throw()
 	{
-		TimeSinceThrow = 0;
-
 		if ( Owner is not FortwarsPlayer player ) return;
 
 		if ( Count <= 0 )
@@ -76,8 +89,6 @@ partial class Grenade : Carriable
 				_ = grenade.ExplodeAfterSeconds( 3.0f );
 			}
 		}
-
-		player.SetAnimParameter( "fire", true );
 	}
 
 	public override void SimulateAnimator( PawnAnimator anim )
