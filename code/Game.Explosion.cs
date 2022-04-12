@@ -2,8 +2,10 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
+using Sandbox.Internal;
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Fortwars;
 
@@ -45,10 +47,15 @@ partial class Game
 			else if ( player.TeamID != ( owner as FortwarsPlayer ).TeamID || owner == player )
 				shouldDoDamage = true;
 
-			if ( shouldDoDamage )
-				ent.TakeDamage( DamageInfoExtension.FromProjectile( maxDamage * distanceFactor, position, Vector3.Up * 32, owner ) );
+			var tr = Trace.Ray( position, ent.Position ).Run();
+			if ( tr.Hit && tr.Entity != ent )
+				continue;
 
-			ent.ApplyAbsoluteImpulse( dir * force );
+			if ( shouldDoDamage )
+			{
+				ent.TakeDamage( DamageInfoExtension.FromProjectile( maxDamage * distanceFactor, position, Vector3.Up * 32, owner ) );
+				ent.ApplyAbsoluteImpulse( dir * force );
+			}
 		}
 
 		using ( Prediction.Off() )
