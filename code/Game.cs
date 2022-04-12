@@ -23,7 +23,10 @@ partial class Game : Sandbox.Game
 	public Game()
 	{
 		if ( IsServer )
+		{
 			hud = new FortwarsHUD();
+			Global.TickRate = 30;
+		}
 
 		ChangeRound( new LobbyRound() );
 	}
