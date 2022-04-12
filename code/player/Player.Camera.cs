@@ -42,12 +42,15 @@ partial class FortwarsPlayer
 		var speed = Velocity.Length.LerpInverse( 200, 400 );
 		var forwardspeed = Velocity.Normal.Dot( setup.Rotation.Forward );
 
-		fovOffset = fovOffset.LerpTo( speed * 40f * MathF.Abs( forwardspeed ), Time.Delta * 2.0f );
+		var fovTarget = speed * 40f * MathF.Abs( forwardspeed );
+		if ( Controller is FortwarsWalkController { DuckSlide.IsActiveSlide: true } )
+			fovTarget = 40f;
+
+		fovOffset = fovOffset.LerpTo( fovTarget, Time.Delta * 2.0f );
 		setup.FieldOfView += fovOffset;
 
 		var posOffset = Bobbing.CalcBobbingOffset( ref currentBob, Velocity, this );
 		posOffset *= setup.Rotation;
-
 		setup.Position += posOffset;
 
 		lastCameraPos = setup.Position;

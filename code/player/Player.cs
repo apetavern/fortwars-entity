@@ -67,7 +67,7 @@ public partial class FortwarsPlayer : Sandbox.Player
 		}
 
 		Controller = new FortwarsWalkController();
-		Animator = new StandardPlayerAnimator();
+		Animator = new FortwarsPlayerAnimator();
 		CameraMode = new FirstPersonCamera();
 
 		EnableAllCollisions = true;
@@ -133,11 +133,6 @@ public partial class FortwarsPlayer : Sandbox.Player
 
 			return;
 		}
-
-
-		// HACK: remove this when https://github.com/Facepunch/sbox-issues/issues/1641 gets fixed
-		if ( CameraMode is SpectateRagdollCamera )
-			CameraMode = new FirstPersonCamera();
 
 		var controller = GetActiveController();
 		controller?.Simulate( cl, this, GetActiveAnimator() );

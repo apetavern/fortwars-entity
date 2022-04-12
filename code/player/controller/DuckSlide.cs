@@ -15,6 +15,9 @@ public partial class DuckSlide : BaseNetworkable
 
 	private float MinimumSlideSpeed => 200f;
 
+	TimeSince timeSinceSlide = 0;
+	TimeSince timeSinceDuck = 0;
+
 	public DuckSlide( FortwarsWalkController controller )
 	{
 		Controller = controller;
@@ -44,8 +47,15 @@ public partial class DuckSlide : BaseNetworkable
 		if ( IsActive )
 			Controller.SetTag( "ducked" );
 
-		if ( IsActiveSlide && Controller.Velocity.Length <= MinimumSlideSpeed )
-			TryUnDuck();
+		if ( IsActiveSlide )
+		{
+			_ = new Sandbox.ScreenShake.Perlin( 1, 1, 0.25f, 0.6f );
+
+			if ( Controller.Velocity.Length <= MinimumSlideSpeed )
+				TryUnDuck();
+
+			Controller.SetTag( "slide" );
+		}
 
 		if ( !Controller.GroundEntity.IsValid() )
 			IsActiveSlide = false;
@@ -55,32 +65,33 @@ public partial class DuckSlide : BaseNetworkable
 	{
 		if ( IsActive )
 		{
+			float lerpRate = 25f;
+
 			if ( IsActiveSlide )
-				Controller.EyeLocalPosition = Controller.EyeLocalPosition.LerpTo( new Vector3( 0, 0, 32 ), 50f * Time.Delta );
-			else
-				Controller.EyeLocalPosition = Controller.EyeLocalPosition.LerpTo( new Vector3( 0, 0, 32 ), 25f * Time.Delta );
+				lerpRate = 5f;
+
+			Controller.EyeLocalPosition = Controller.EyeLocalPosition.LerpTo( new Vector3( 0, 0, 32 ), lerpRate * Time.Delta );
 		}
 		else
-			Controller.EyeLocalPosition = Controller.EyeLocalPosition.LerpTo( new Vector3( 0, 0, 64 ), 25f * Time.Delta );
+		{
+			float lerpRate = 25f;
+
+			if ( timeSinceSlide < 1f )
+				lerpRate = 5f;
+
+			Controller.EyeLocalPosition = Controller.EyeLocalPosition.LerpTo( new Vector3( 0, 0, 64 ), lerpRate * Time.Delta );
+		}
 	}
 
 	protected virtual void TrySlide()
 	{
-		//
-		// TEMP/TODO: Sliding is disabled for the public playtest
-		//
-		TryDuck();
-		return;
+		IsActive = true;
 
-		//IsActive = true;
+		float force = 300f;
+		var direction = Controller.Pawn.EyeRotation.Forward;
+		Controller.Velocity += direction * force;
 
-		//float distance = 64;
-		//var direction = Controller.Pawn.EyeRotation.Forward;
-
-		//float force = 8.0f;
-		//Controller.Velocity += direction * distance * force;
-
-		//IsActiveSlide = true;
+		IsActiveSlide = true;
 	}
 
 	protected virtual void TryDuck()
@@ -94,6 +105,11 @@ public partial class DuckSlide : BaseNetworkable
 		if ( pm.StartedSolid ) return;
 
 		if ( IsActiveSlide && Controller.Velocity.Length > MinimumSlideSpeed ) return;
+
+		if ( IsActiveSlide )
+			timeSinceSlide = 0;
+		else
+			timeSinceDuck = 0;
 
 		IsActive = false;
 		IsActiveSlide = false;
@@ -115,13 +131,14 @@ public partial class DuckSlide : BaseNetworkable
 
 	public virtual float GetWishSpeed()
 	{
+		if ( IsActiveSlide ) return 0f;
 		if ( IsActive ) return 200f;
 		return -1f;
 	}
 
 	public virtual float GetFrictionMultiplier()
 	{
-		if ( IsActiveSlide ) return 0.25f;
+		if ( IsActiveSlide ) return 0.125f;
 		return 1.0f;
 	}
 }

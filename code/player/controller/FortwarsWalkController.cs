@@ -30,7 +30,7 @@ public partial class FortwarsWalkController : BasePlayerController
 	public Unstuck Unstuck { get; private set; }
 	public bool IsSwimming { get; set; } = false;
 	private bool IsGrounded => GroundEntity != null;
-	public bool IsSprinting => Input.Down( InputButton.Run ) && IsGrounded && ForwardSpeed > 100f;
+	public bool IsSprinting => Input.Down( InputButton.Run ) && IsGrounded && ForwardSpeed > 100f && !DuckSlide.IsActive;
 	public float ForwardSpeed => Velocity.Dot( EyeRotation.Forward );
 
 	private TimeSince timeSinceLastJump;
@@ -102,7 +102,7 @@ public partial class FortwarsWalkController : BasePlayerController
 	{
 		FallVelocity = -Pawn.Velocity.z;
 
-		EyeLocalPosition = Vector3.Up * ( EyeHeight * Pawn.Scale );
+		// EyeLocalPosition = Vector3.Up * ( EyeHeight * Pawn.Scale );
 		UpdateBBox();
 
 		EyeLocalPosition += TraceOffset;
@@ -435,6 +435,9 @@ public partial class FortwarsWalkController : BasePlayerController
 		}
 
 		if ( GroundEntity == null )
+			return;
+
+		if ( DuckSlide.IsActiveSlide )
 			return;
 
 		float jumpDecayMul = 1.0f;

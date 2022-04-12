@@ -157,10 +157,11 @@ public class ViewModel : BaseViewModel
 
 	private bool DoSliding()
 	{
-		if ( Local.Pawn is Player { Controller: FortwarsWalkController { DuckSlide: { IsActive: true, IsActiveSlide: true } } } player )
+		if ( Local.Pawn is Player { Controller: FortwarsWalkController { DuckSlide.IsActiveSlide: true } } player )
 		{
-			TargetRot = Rotation.From( 0, 0, -35 );
-			TargetPos = Vector3.Down * 16f + Vector3.Left * 16f;
+			TargetRot = Rotation.From( 0f, 0, -10f );
+			TargetPos = 0; // Vector3.Down * 8f;
+			LerpSpeed = 10;
 			return true;
 		}
 
@@ -171,7 +172,7 @@ public class ViewModel : BaseViewModel
 	{
 		if ( Local.Pawn is Player { Controller: FortwarsWalkController { DuckSlide: { IsActive: true, IsActiveSlide: false } } } player )
 		{
-			TargetRot = Rotation.From( 5, 0, -15 );
+			TargetRot = Rotation.From( -2f, 0, 0 );
 			TargetPos = Vector3.Zero;
 			return true;
 		}

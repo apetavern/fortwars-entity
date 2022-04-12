@@ -17,10 +17,10 @@ public static class Bobbing
 		var left = Vector3.Left;
 		var up = Vector3.Up;
 
-		if ( entity.GroundEntity != null )
-		{
+		bool applyBob = entity.GroundEntity != null;
+
+		if ( applyBob )
 			currentBob += Time.Delta * 25.0f * speed;
-		}
 
 		// Reset if we're not really moving
 		if ( speed < 0.1f )
@@ -34,6 +34,10 @@ public static class Bobbing
 
 		float sprintMul = 8.0f * speed2;
 		float speedMul = speed + sprintMul;
+
+		if ( entity is FortwarsPlayer { Controller: FortwarsWalkController { DuckSlide.IsActiveSlide: true } } )
+			speedMul *= 0.25f;
+
 		var offset = up * MathF.Sin( currentBob ) * speedMul;
 		offset += left * MathF.Sin( currentBob * 0.5f ) * speedMul;
 
