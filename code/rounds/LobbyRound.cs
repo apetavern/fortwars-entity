@@ -17,7 +17,11 @@ public class LobbyRound : BaseRound
 
 		if ( Host.IsServer )
 		{
-			Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) =>  player ?.Respawn() );
+			Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) =>
+			{
+				player?.Respawn();
+				player?.Inventory.Add( new Grenade() );
+			} );
 		}
 	}
 

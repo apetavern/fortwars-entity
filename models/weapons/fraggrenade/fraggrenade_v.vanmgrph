@@ -16,7 +16,7 @@
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
 				m_bNetwork = false
 				m_bUseMostRecentValue = false
-				m_bAutoReset = false
+				m_bAutoReset = true
 				m_bPredicted = false
 				m_bDefaultValue = false
 			},
@@ -53,6 +53,7 @@
 			{
 				_class = "CAnimGraphNetworkSettings"
 				m_bNetworkingEnabled = true
+				m_defaultNetworkMode = "ServerAuthoritative"
 			},
 		]
 	}
@@ -69,6 +70,7 @@
 	[
 		"models/weapons/fraggrenade/fraggrenade_v.vmdl",
 	]
+	m_boneMergeModels = [  ]
 	m_nodes = 
 	[
 		{
@@ -198,7 +200,49 @@
 					},
 					{
 						_class = "CAnimState"
-						m_transitions = [  ]
+						m_transitions = 
+						[
+							{
+								_class = "CAnimStateTransition"
+								m_conditions = 
+								[
+									{
+										_class = "CFinishedCondition"
+										m_comparisonOp = 0
+										m_option = "FinishedConditionOption_OnFinished"
+										m_bIsFinished = true
+									},
+									{
+										_class = "CParameterAnimCondition"
+										m_comparisonOp = 0
+										m_paramID = 
+										{
+											m_id = 1121783981
+										}
+										m_comparisonValue = 
+										{
+											m_nType = 1
+											m_data = false
+										}
+									},
+								]
+								m_blendDuration = 0.2
+								m_destState = 
+								{
+									m_id = 2142633552
+								}
+								m_bReset = true
+								m_resetCycleOption = "Beginning"
+								m_flFixedCycleValue = 0.0
+								m_blendCurve = 
+								{
+									m_vControlPoint1 = [ 0.5, 0.0 ]
+									m_vControlPoint2 = [ 0.5, 1.0 ]
+								}
+								m_bForceFootPlant = false
+								m_bDisabled = false
+							},
+						]
 						m_tags = [  ]
 						m_tagBehaviors = [  ]
 						m_name = "throw"
@@ -210,7 +254,7 @@
 						{
 							m_id = 1211909062
 						}
-						m_position = [ 32.0, -224.0 ]
+						m_position = [ -112.0, -416.0 ]
 						m_bIsStartState = false
 						m_bIsEndtState = false
 						m_bIsPassthrough = false
