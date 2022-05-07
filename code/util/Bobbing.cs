@@ -32,7 +32,7 @@ public static class Bobbing
 		// https://www.desmos.com/calculator/8ued619kst
 		currentBob = currentBob.UnsignedMod( MathF.PI * 4f );
 
-		float sprintMul = 8.0f * speed2;
+		float sprintMul = 2.0f * speed2;
 		float speedMul = speed + sprintMul;
 
 		if ( entity is FortwarsPlayer { Controller: FortwarsWalkController { DuckSlide.IsActiveSlide: true } } )
