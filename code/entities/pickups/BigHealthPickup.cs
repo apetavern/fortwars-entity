@@ -18,7 +18,7 @@ public partial class BigHealthPickup : Pickup
 
 		SetModel( "models/items/medkit/medkit_w.vmdl" );
 		SetBodyGroup( 0, 1 );
-		SetMaterialGroup( "ammo" );
+		SetMaterialGroup( "health" );
 		Scale = 0.4f;
 
 		Components.Get<BobbingComponent>().NoPitch = true;
