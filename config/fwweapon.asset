@@ -55,6 +55,7 @@
 	aimposition(vector) { group = "ADS" } : "Aim Position" :  : ""
 	aimrotation(angle) { group = "ADS" } : "Aim Rotation" :  : ""
 	aimfovmult(float) { group = "ADS" } : "Aim Fov Mult" : "0.5" : ""
+	aimviewmodelfov(float) { group = "ADS" } : "Aim Viewmodel Fov" : "50" : ""
 	maxammo(integer) { group = "Ammo" } : "Max Ammo" : 30 : ""
 	extraammo(integer) { group = "Ammo" } : "Extra Ammo" : 90 : ""
 	reloadtime(float) { group = "Ammo" } : "Reload Time" : "3" : ""
