@@ -49,8 +49,8 @@ public partial class ClassMenu : Menu
 		Add.Button( "Cancel", "cancel", () => Delete() );
 	}
 
-	[Event.Tick.Client]
-	public static void OnClientTick()
+	[Event.Frame]
+	public static void OnFrame()
 	{
 		if ( Input.Pressed( InputButton.View ) )
 		{
