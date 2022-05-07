@@ -8,6 +8,7 @@
 
     .element {
         position: absolute;
+        transition: opacity 150ms ease;
     }
 
     .el4 {
@@ -25,7 +26,12 @@
             opacity: 0;
             /*background-color: white;*/
             border-radius: 2px;
-            transition: opacity 150ms ease;
+        }
+
+        &.ads {
+            .el4 {
+                opacity: 0;
+            }
         }
 
         .el0, .el1 {

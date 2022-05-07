@@ -34,6 +34,14 @@ public partial class Crosshair : Panel
 		Instance = this;
 		Build();
 
+		BindClass( "ads", () =>
+		{
+			if ( ( Local.Pawn as FortwarsPlayer ).ActiveChild is FortwarsWeapon weapon && ( weapon.GetTuckDist() != -1 || weapon.IsAiming ) )
+				return true;
+
+			return false;
+		} );
+
 		BindClass( "visible", () =>
 		{
 			if ( VirtualCursor.InUse )
