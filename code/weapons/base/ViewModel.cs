@@ -221,6 +221,11 @@ public class ViewModel : BaseViewModel
 		offset += ShootOffset * offsetMultiplier;
 		var rotationOffset = ShootRotation * rotationMultiplier;
 
+		float t = playerVelocity.Length.LerpInverse( 0, 350 );
+		float factor = ( Weapon?.IsAiming ?? false ) ? 0.1f : 1.0f;
+
+		offset += new Vector3( t, 0, t / 2f ) * -4f * factor;
+
 		TargetPos += offset;
 		TargetRot *= rotationOffset;
 
