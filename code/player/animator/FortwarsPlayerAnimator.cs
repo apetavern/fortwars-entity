@@ -13,9 +13,6 @@ public class FortwarsPlayerAnimator : PawnAnimator
 
 	public override void Simulate()
 	{
-		DebugOverlay.ScreenText( 10, duck.ToString() );
-		DebugOverlay.ScreenText( 11, slide.ToString() );
-
 		var player = Pawn as Player;
 		var idealRotation = Rotation.LookAt( Input.Rotation.Forward.WithZ( 0 ), Vector3.Up );
 
