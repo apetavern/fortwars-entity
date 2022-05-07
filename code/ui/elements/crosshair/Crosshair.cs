@@ -59,7 +59,6 @@ public partial class Crosshair : Panel
 			".el0, .el1, .el2, .el3, .el4 {" +
 			$"background-color: {Config.Color.Hex};" +
 			$"border: {( Config.Outline ? $"2px solid {Config.OutlineColor.Hex}" : "none" )};" +
-			$"opacity: {Config.Opacity};" +
 			"}" +
 
 			//
@@ -94,6 +93,12 @@ public partial class Crosshair : Panel
 			".el3 {" +
 			$"top: {Config.Size}px;" +
 			"}" +
+
+			$"&.visible {{" +
+			$".el0, .el1, .el2, .el3 {{" +
+			$"	opacity: {Config.Opacity};" +
+			$"}}" +
+			$"}}" +
 
 		"}";
 

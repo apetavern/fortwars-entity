@@ -4,12 +4,7 @@
     aspect-ratio: 1;
     top: 50%;
     left: 50%;
-    opacity: 0;
     transition: opacity 25ms ease;
-
-    &.visible {
-        opacity: 1;
-    }
 
     .element {
         position: absolute;
@@ -27,8 +22,10 @@
 
     &.fortwarsweapon {
         .el0, .el1, .el2, .el3 {
+            opacity: 0;
             /*background-color: white;*/
             border-radius: 2px;
+            transition: opacity 150ms ease;
         }
 
         .el0, .el1 {
