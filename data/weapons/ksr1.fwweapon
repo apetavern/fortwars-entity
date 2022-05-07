@@ -25,7 +25,7 @@
 		firesound = "ksr1_fire"
 		projectilemodel = resource:""
 		projectilespeed = 1.0
-		aimposition = [ -10.0, 24.9, 5.0 ]
+		aimposition = [ -40.0, 23.45, 4.75 ]
 		aimrotation = [ 0.75, -2.75, 0.0 ]
 		aimfovmult = 0.5
 		fireparticles = resource:"particles/muzzleflash/fw_muzzleflash.vpcf"
@@ -39,7 +39,5 @@
 			shotgunammo = false
 		}
 		inventoryslot = "0"
-		sprintanimationtype = "0"
-		aimviewmodelfov = 20.0
 	}
 }

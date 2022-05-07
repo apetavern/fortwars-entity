@@ -115,9 +115,6 @@ public partial class WeaponAsset : Asset
 	[Property, Category( "ADS" )]
 	public float AimFovMult { get; set; } = 0.5f;
 
-	[Property, Category( "ADS" )]
-	public float AimViewmodelFov { get; set; } = 50f;
-
 	//
 	// Ammo
 	//
