@@ -114,7 +114,7 @@ public partial class ClassMenu : Menu
 				{
 					if ( item.StartsWith( "fw:" ) )
 					{
-						var asset = Asset.FromPath<WeaponAsset>( item.Remove( 0, 3 ) );
+						var asset = Resource.FromPath<WeaponAsset>( item.Remove( 0, 3 ) );
 						loadoutStr += $"• {asset.WeaponName}\n";
 					}
 					else

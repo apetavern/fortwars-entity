@@ -60,7 +60,7 @@ public class DevMenu : Panel
 
 			foreach ( var file in FileSystem.Mounted.FindFile( "data/", "*.fwweapon", true ) )
 			{
-				var asset = Asset.FromPath<WeaponAsset>( "data/" + file );
+				var asset = Resource.FromPath<WeaponAsset>( "data/" + file );
 				if ( asset == null )
 					continue;
 

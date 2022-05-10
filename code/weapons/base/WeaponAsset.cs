@@ -8,7 +8,7 @@ using System.ComponentModel;
 namespace Fortwars;
 
 [Library( "fwweapon" ), AutoGenerate]
-public partial class WeaponAsset : Asset
+public partial class WeaponAsset : GameResource
 {
 	//
 	// Meta
