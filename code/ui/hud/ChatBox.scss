@@ -7,14 +7,15 @@ ChatBox {
     z-index: $z-index-chat;
     flex-direction: column;
     width: 500px;
-    font-size: 13px;
+    font-size: 16px;
     border-radius: 2px;
     pointer-events: none;
+    padding: 5px;
 
     textentry {
         opacity: 0;
         color: white;
-        padding: 15px 25px;
+        padding: 10px 15px;
         backdrop-filter: brightness( 0.5 );
         flex-shrink: 0;
         flex-grow: 0;
@@ -23,18 +24,23 @@ ChatBox {
         bottom: 0;
         border-radius: 0 0px 2px 2px;
         border-radius: 2px;
+
+        text {
+            font-size: 13px;
+        }
     }
 
     .canvas {
         flex-direction: column;
         align-items: flex-start;
-        height: 400px;
+        height: 200px;
         overflow: scroll;
         margin-bottom: 55px;
     }
 
     &.open {
         pointer-events: all;
+        background-color: black;
 
         textentry {
             opacity: 1;
@@ -49,13 +55,13 @@ ChatEntry {
     opacity: 1;
     flex-shrink: 0;
     flex-grow: 0;
-    padding: 10px 20px;
+    padding: 5px 10px;
     max-width: 100%;
     transform: scale( 1 );
     width: 100%;
     align-items: center;
-    background-color: rgba( $background, 0.5 );
     border-radius: 2px;
+    text-shadow: 2px 2px 0px rgba( black, 0.5 );
 
     &:intro {
         opacity: 0;
@@ -77,6 +83,8 @@ ChatEntry {
     }
 
     &.information {
+        text-shadow: none;
+
         .message {
             color: $background;
         }
@@ -88,6 +96,7 @@ ChatEntry {
     }
 
     image {
+        display: none;
         height: 32px;
         aspect-ratio: 1;
         border-radius: 100px;
@@ -97,13 +106,13 @@ ChatEntry {
     .name {
         padding-right: 10px;
         font-weight: 600;
-        font-size: 14px;
+        font-size: 16px;
         flex-shrink: 0;
     }
 
     .message {
         color: white;
-        font-size: 14px;
+        font-size: 16px;
         flex-grow: 1;
     }
 
