@@ -4,6 +4,12 @@ rootpanel {
     &.devcamera {
         display: none;
     }
+
+    justify-content: center;
+}
+
+.hud {
+    max-width: 1920px;
 }
 
 label, text {

@@ -16,33 +16,35 @@ public partial class FortwarsHUD : HudEntity<RootPanel>
 		RootPanel.StyleSheet.Load( "/ui/Hud.scss" );
 		RootPanel.StyleSheet.Load( "/ui/hud/BuildHelp.scss" );
 
-		RootPanel.AddChild<KillFeed>();
-		RootPanel.AddChild<Scoreboard>();
+		var hud = RootPanel.Add.Panel( "hud" );
 
-		RootPanel.AddChild<Vitals>();
-		RootPanel.AddChild<Resources>();
-		RootPanel.AddChild<InventoryBar>();
-		RootPanel.AddChild<RoundStatus>();
-		RootPanel.AddChild<BuildHelp>();
-		RootPanel.AddChild<BuildWheel>();
-		RootPanel.AddChild<BuildWheelMetal>();
-		RootPanel.AddChild<Compass>();
-		RootPanel.AddChild<Hitmarker>();
-		RootPanel.AddChild<DamageIndicator>();
-		RootPanel.AddChild<MessageFeed>();
-		RootPanel.AddChild<MapVote>();
+		hud.AddChild<KillFeed>();
+		hud.AddChild<Scoreboard>();
 
-		RootPanel.AddChild<ClassMenu>();
-		RootPanel.AddChild<Victory>();
+		hud.AddChild<Vitals>();
+		hud.AddChild<Resources>();
+		hud.AddChild<InventoryBar>();
+		hud.AddChild<RoundStatus>();
+		hud.AddChild<BuildHelp>();
+		hud.AddChild<BuildWheel>();
+		hud.AddChild<BuildWheelMetal>();
+		hud.AddChild<Compass>();
+		hud.AddChild<Hitmarker>();
+		hud.AddChild<DamageIndicator>();
+		hud.AddChild<MessageFeed>();
+		hud.AddChild<MapVote>();
 
-		RootPanel.AddChild<Dead>();
+		hud.AddChild<Victory>();
+
+		hud.AddChild<Dead>();
+
+		hud.AddChild<ChatBox>();
+		hud.AddChild<VoiceList>();
 
 		RootPanel.AddChild<DevMenu>();
+		RootPanel.AddChild<ClassMenu>();
 
-		RootPanel.AddChild<ChatBox>();
-		RootPanel.AddChild<VoiceList>();
-
-		RootPanel.BindClass( "red-team", () => ( Local.Pawn as FortwarsPlayer ).TeamID == Team.Red );
-		RootPanel.BindClass( "blue-team", () => ( Local.Pawn as FortwarsPlayer ).TeamID == Team.Blue );
+		hud.BindClass( "red-team", () => ( Local.Pawn as FortwarsPlayer ).TeamID == Team.Red );
+		hud.BindClass( "blue-team", () => ( Local.Pawn as FortwarsPlayer ).TeamID == Team.Blue );
 	}
 }
