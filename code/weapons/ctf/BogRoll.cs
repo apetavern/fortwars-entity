@@ -91,8 +91,6 @@ public partial class BogRoll : MeleeWeapon
 	{
 		if ( IsServer )
 		{
-			Game.Instance.ReturnFlag( Team );
-
 			if ( ReturnZone != null )
 				ReturnZone.Delete();
 		}
@@ -139,8 +137,8 @@ public partial class BogRoll : MeleeWeapon
 		if ( IsDropped && TimeSinceDropped > DropTimer )
 		{
 			PlaySound( "enemyflagreturned" );//Play sad flag return sounds
-
 			Delete();
+			Game.Instance.ReturnFlag( Team );
 		}
 	}
 

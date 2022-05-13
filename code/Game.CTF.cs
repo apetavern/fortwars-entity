@@ -16,9 +16,6 @@ partial class Game
 	[Net] public BogRoll RedFlagRoll { get; set; }
 	[Net] public BogRoll BlueFlagRoll { get; set; }
 
-	/**
- * Called when a Player walks into a Team's flagzone.
- */
 	public void OnPlayerTouchFlagzone( FortwarsPlayer player, Team team )
 	{
 		// don't let spectators interact with the flagzone at all
@@ -69,6 +66,8 @@ partial class Game
 			RedFlagRoll = new BogRoll();
 			RedFlagRoll.Team = Team.Red;
 			player.Inventory.Add( RedFlagRoll, true );
+			PlayAnnouncerSound( "announcer.your_flag_taken", Team.Red );
+			PlayAnnouncerSound( "announcer.enemy_flag_taken", Team.Blue );
 		}
 
 		if ( enemyTeam is BlueTeam )
@@ -77,6 +76,8 @@ partial class Game
 			BlueFlagRoll = new BogRoll();
 			BlueFlagRoll.Team = Team.Blue;
 			player.Inventory.Add( BlueFlagRoll, true );
+			PlayAnnouncerSound( "announcer.your_flag_taken", Team.Blue );
+			PlayAnnouncerSound( "announcer.enemy_flag_taken", Team.Red );
 		}
 
 		HideFlag( enemyTeam.ID );
@@ -108,11 +109,15 @@ partial class Game
 
 		if ( enemyTeam is RedTeam )
 		{
+			PlayAnnouncerSound( "announcer.your_flag_taken", Team.Red );
+			PlayAnnouncerSound( "announcer.enemy_flag_taken", Team.Blue );
 			RedFlagCarrier = player;
 		}
 
 		if ( enemyTeam is BlueTeam )
 		{
+			PlayAnnouncerSound( "announcer.your_flag_taken", Team.Blue );
+			PlayAnnouncerSound( "announcer.enemy_flag_taken", Team.Red );
 			BlueFlagCarrier = player;
 		}
 
@@ -155,6 +160,8 @@ partial class Game
 			ShowFlag( Team.Blue );
 
 			// Announce
+			PlayAnnouncerSound( "announcer.enemy_flag_captured", Team.Red );
+			PlayAnnouncerSound( "announcer.your_flag_captured", Team.Blue );
 			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {RedTeam.Name}", $"avatar:{player.Client.PlayerId}", true );
 		}
 
@@ -169,6 +176,8 @@ partial class Game
 			ShowFlag( Team.Red );
 
 			// Announce
+			PlayAnnouncerSound( "announcer.your_flag_captured", Team.Red );
+			PlayAnnouncerSound( "announcer.enemy_flag_captured", Team.Blue );
 			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {BlueTeam.Name}", $"avatar:{player.Client.PlayerId}", true );
 		}
 	}
@@ -177,6 +186,9 @@ partial class Game
 	{
 		if ( player == BlueFlagCarrier )
 		{
+			PlayAnnouncerSound( "announcer.enemy_flag_dropped", Team.Red );
+			PlayAnnouncerSound( "announcer.your_flag_dropped", Team.Blue );
+
 			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {BlueTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
 			BlueFlagCarrier = null;
 			ShowFlag( Team.Blue );
@@ -184,6 +196,9 @@ partial class Game
 		}
 		if ( player == RedFlagCarrier )
 		{
+			PlayAnnouncerSound( "announcer.enemy_flag_dropped", Team.Blue );
+			PlayAnnouncerSound( "announcer.your_flag_dropped", Team.Red );
+
 			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {RedTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
 			RedFlagCarrier = null;
 			ShowFlag( Team.Red );
@@ -196,11 +211,17 @@ partial class Game
 		switch ( Team )
 		{
 			case Team.Blue:
+				PlayAnnouncerSound( "announcer.enemy_flag_returned", Team.Red );
+				PlayAnnouncerSound( "announcer.your_flag_returned", Team.Blue );
+
 				ChatBox.AddInformation( To.Everyone, $"{BlueTeam.Name} flag returned", null, true );
 				BlueFlagCarrier = null;
 				ShowFlag( Team.Blue );
 				return;
 			case Team.Red:
+				PlayAnnouncerSound( "announcer.enemy_flag_returned", Team.Blue );
+				PlayAnnouncerSound( "announcer.your_flag_returned", Team.Red );
+
 				ChatBox.AddInformation( To.Everyone, $"{RedTeam.Name} flag returned", null, true );
 				RedFlagCarrier = null;
 				ShowFlag( Team.Red );
