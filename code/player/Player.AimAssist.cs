@@ -23,11 +23,11 @@ public partial class FortwarsPlayer
 			// We could probably put in a feature request at some point
 			// or even move this to VirtualCursor itself somewhere just to make
 			// things a bit more modular?
-			if ( input.Pressed( InputButton.Attack1 ) )
+			if ( input.Pressed( InputButton.PrimaryAttack ) )
 			{
 				VirtualCursor.OnClick?.Invoke();
 			}
-			input.ClearButton( InputButton.Attack1 );
+			input.ClearButton( InputButton.PrimaryAttack );
 
 			input.StopProcessing = true;
 			input.ViewAngles = input.OriginalViewAngles;
@@ -53,19 +53,19 @@ public partial class FortwarsPlayer
 		public Player Player { get; set; }
 	}
 
-	[ServerVar( "fw_aimassist_distance_min", Min = 64, Max = 512 )]
+	[ConVar.Server( "fw_aimassist_distance_min", Min = 64, Max = 512 )]
 	public static float AimAssistDistanceMin { get; set; } = 64f;
 
-	[ServerVar( "fw_aimassist_distance_max", Min = 512, Max = 2048 )]
+	[ConVar.Server( "fw_aimassist_distance_max", Min = 512, Max = 2048 )]
 	public static float AimAssistDistanceMax { get; set; } = 512f;
 
-	[ServerVar( "fw_aimassist_angle_min", Min = 0, Max = 15 )]
+	[ConVar.Server( "fw_aimassist_angle_min", Min = 0, Max = 15 )]
 	public static float AimAssistAngleMin { get; set; } = 0f;
 
-	[ServerVar( "fw_aimassist_angle_max", Min = 30, Max = 60 )]
+	[ConVar.Server( "fw_aimassist_angle_max", Min = 30, Max = 60 )]
 	public static float AimAssistAngleMax { get; set; } = 30f;
 
-	[ServerVar( "fw_aimassist_strength", Min = 1, Max = 10 )]
+	[ConVar.Server( "fw_aimassist_strength", Min = 1, Max = 10 )]
 	public static float AimAssistStrength { get; set; } = 2.5f;
 
 	public static void AimAssistInput( InputBuilder input, Player owner )

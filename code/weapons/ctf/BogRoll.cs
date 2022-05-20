@@ -153,16 +153,16 @@ public partial class BogRoll : MeleeWeapon
 					break;
 				case Team.Red:
 					DebugOverlay.Text(
-						CollisionWorldSpaceCenter + Vector3.Up * 20f,
 						"" + ( DropTimer - TimeSinceDropped ).CeilToInt(),
+						CollisionWorldSpaceCenter + Vector3.Up * 20f,
 						Color.Red,
 						0,
 						500 );
 					break;
 				case Team.Blue:
 					DebugOverlay.Text(
-						CollisionWorldSpaceCenter + Vector3.Up * 20f,
 						"" + ( DropTimer - TimeSinceDropped ).CeilToInt(),
+						CollisionWorldSpaceCenter + Vector3.Up * 20f,
 						Color.Blue,
 						0,
 						500 );

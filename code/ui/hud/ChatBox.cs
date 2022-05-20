@@ -97,7 +97,7 @@ public partial class ChatBox : Panel
 		Canvas.TryScrollToBottom();
 	}
 
-	[ClientCmd( "chat_add", CanBeCalledFromServer = true )]
+	[ConCmd.Client( "chat_add", CanBeCalledFromServer = true )]
 	public static void AddChatEntry( string name, string message, string avatar = null, string className = null )
 	{
 		Instance?.AddEntry( name, message, avatar, className );
@@ -109,13 +109,13 @@ public partial class ChatBox : Panel
 		}
 	}
 
-	[ClientCmd( "chat_addinfo", CanBeCalledFromServer = true )]
+	[ConCmd.Client( "chat_addinfo", CanBeCalledFromServer = true )]
 	public static void AddInformation( string message, string avatar = null, bool important = false )
 	{
 		Instance?.AddEntry( null, message, avatar, important ? "information" : null );
 	}
 
-	[ServerCmd( "say" )]
+	[ConCmd.Server( "say" )]
 	public static void Say( string message )
 	{
 		Assert.NotNull( ConsoleSystem.Caller );

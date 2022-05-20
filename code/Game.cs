@@ -85,7 +85,7 @@ partial class Game : Sandbox.Game
 		{
 			if ( pawn.LastAttacker is FortwarsPlayer attackPlayer )
 			{
-				var method = pawn.LastAttackerWeapon?.ClassInfo?.Name;
+				var method = pawn.LastAttackerWeapon?.ClassName;
 				if ( pawn.LastAttackerWeapon is FortwarsWeapon weapon )
 					method = weapon.WeaponAsset.WeaponName;
 

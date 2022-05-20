@@ -10,9 +10,9 @@ public partial class FortwarsPlayer : Sandbox.Player
 	[Net] public string Killer { get; set; }
 
 	public DamageInfo LastDamage { get; private set; }
-	public Clothing.Container Clothing = new();
+	public ClothingContainer Clothing = new();
 
-	[ServerVar( "fw_time_between_spawns", Help = "How long do players need to wait between respawns", Min = 1, Max = 30 )]
+	[ConVar.Server( "fw_time_between_spawns", Help = "How long do players need to wait between respawns", Min = 1, Max = 30 )]
 	public static int TimeBetweenSpawns { get; set; } = 10;
 
 	public bool IsSpectator

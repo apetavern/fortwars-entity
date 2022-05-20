@@ -36,7 +36,7 @@ public partial class ClassMenu : Menu
 
 		foreach ( var classId in classArray )
 		{
-			var classType = Library.Create<Class>( classId );
+			var classType = TypeLibrary.Create<Class>( classId );
 			var classButton = classes.Add.Button( classType.Name, "class", () => SetClass( classId ) );
 			classButton.Add.Image( "ui/icons/placeholder.png", "class-icon" );
 			classButton.Add.Label( "0 / 0", "class-count" );
@@ -74,11 +74,11 @@ public partial class ClassMenu : Menu
 		}
 	}
 
-	[ServerCmd( "fw_change_class" )]
+	[ConCmd.Server( "fw_change_class" )]
 	public static void ChangeClass( string classId )
 	{
 		var pawn = ConsoleSystem.Caller.Pawn as FortwarsPlayer;
-		var classType = Library.Create<Class>( classId );
+		var classType = TypeLibrary.Create<Class>( classId );
 		pawn.AssignClass( classType );
 	}
 
@@ -114,12 +114,14 @@ public partial class ClassMenu : Menu
 				{
 					if ( item.StartsWith( "fw:" ) )
 					{
-						var asset = Resource.FromPath<WeaponAsset>( item.Remove( 0, 3 ) );
+						string assetName = item.Remove( 0, 3 );
+						Log.Trace( $"Weapon name: {assetName}" );
+						var asset = ResourceLibrary.Get<WeaponAsset>( item.Remove( 0, 3 ) );
 						loadoutStr += $"• {asset.WeaponName}\n";
 					}
 					else
 					{
-						loadoutStr += $"• {Library.GetAttribute( item ).Title}\n";
+						loadoutStr += $"• {TypeLibrary.GetDescription( item.GetType() )?.Title }\n";
 					}
 				}
 			}

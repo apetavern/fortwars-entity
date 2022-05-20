@@ -2,6 +2,7 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
+using System.ComponentModel;
 
 namespace Fortwars;
 
@@ -9,8 +10,8 @@ namespace Fortwars;
 /// Overrides game settings for this map
 /// </summary>
 [Library( "fw_config" )]
-[Hammer.EntityTool( "Map Config", "FortWars" )]
-[Hammer.EditorSprite( "materials/editor/fw_config.vmat" )]
+[Title( "Map Config" ), Category( "FortWars" )]
+[SandboxEditor.EditorSprite( "materials/editor/fw_config.vmat" )]
 public partial class ConfigEntity : Entity
 {
 	/// <summary>

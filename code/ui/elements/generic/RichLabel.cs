@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Fortwars;
 
-[Library( "richlabel", Alias = new[] { "richtext" } )]
+[Library( "richlabel" )]
 public class RichLabel : Panel
 {
 	private List<Label> labels = new();

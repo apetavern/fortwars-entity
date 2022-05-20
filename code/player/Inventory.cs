@@ -35,11 +35,11 @@ public partial class Inventory : BaseInventory
 		return List.Any( x => x.GetType() == t );
 	}
 
-	[AdminCmd( "fw_inventory_give" )]
+	[ConCmd.Admin( "fw_inventory_give" )]
 	public static void GiveCommand( string itemName )
 	{
 		var player = ConsoleSystem.Caller.Pawn;
-		var item = Library.Create<Entity>( itemName );
+		var item = TypeLibrary.Create<Entity>( itemName );
 		( player as FortwarsPlayer ).Inventory.Add( item );
 		Log.Info( $"Gave {player.Client.Name} 1x {itemName}" );
 	}

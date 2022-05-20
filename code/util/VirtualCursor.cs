@@ -14,7 +14,7 @@ public static class VirtualCursor
 	/// </summary>
 	public static bool InUse { get; set; }
 
-	[ClientVar( "fw_virtualcursor_debug" )]
+	[ConVar.Client( "fw_virtualcursor_debug" )]
 	public static bool Debug { get; set; } = false;
 
 	public delegate void ClickEvent();
@@ -51,7 +51,7 @@ public static class VirtualCursor
 			return;
 
 		if ( Debug )
-			DebugOverlay.ScreenText( ( Screen.Size * 0.5f ) + Position, Position.ToString(), Time.Delta );
+			DebugOverlay.ScreenText( Position.ToString(), ( Screen.Size * 0.5f ) + Position, Time.Delta );
 
 		Update();
 

@@ -6,6 +6,8 @@ using Sandbox;
 
 public partial class Carriable : BaseCarriable
 {
+	public Sandbox.UI.Panel CrosshairPanel { get; set; }
+
 	public override void Spawn()
 	{
 		base.Spawn();
@@ -36,7 +38,7 @@ public partial class Carriable : BaseCarriable
 
 		CrosshairPanel = new Crosshair();
 		CrosshairPanel.Parent = Local.Hud;
-		CrosshairPanel.AddClass( ClassInfo.Name );
+		CrosshairPanel.AddClass( ClassName );
 	}
 
 	public override void DestroyHudElements()

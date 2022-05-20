@@ -2,6 +2,7 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
+using System.ComponentModel;
 
 namespace Fortwars;
 
@@ -9,8 +10,8 @@ namespace Fortwars;
 /// This is where players spawn.
 /// </summary>
 [Library( "info_player_teamspawn" )]
-[Hammer.EntityTool( "Team Spawn", "FortWars" )]
-[Hammer.EditorModel( "models/citizen/citizen.vmdl" )]
+[Title( "Team Spawn" ), Category( "FortWars" )]
+[EditorModel( "models/citizen/citizen.vmdl" )]
 public partial class InfoPlayerTeamspawn : Entity
 {
 	[Property]

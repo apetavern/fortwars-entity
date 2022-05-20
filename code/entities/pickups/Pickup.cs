@@ -5,7 +5,7 @@ using Sandbox;
 
 namespace Fortwars;
 
-public class Pickup : AnimEntity
+public class Pickup : AnimatedEntity
 {
 	public Spawner Spawner { get; set; }
 

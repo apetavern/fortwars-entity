@@ -49,7 +49,8 @@ public partial class DuckSlide : BaseNetworkable
 
 		if ( IsActiveSlide )
 		{
-			_ = new Sandbox.ScreenShake.Perlin( 1, 1, 0.25f, 0.6f );
+			// TODO
+			// _ = new Sandbox.ScreenShake.Perlin( 1, 1, 0.25f, 0.6f );
 
 			if ( Controller.Velocity.Length <= MinimumSlideSpeed )
 				TryUnDuck();

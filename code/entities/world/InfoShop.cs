@@ -2,11 +2,12 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
+using System.ComponentModel;
 
 namespace Fortwars;
 
-[Hammer.EntityTool( "Shop", "FortWars" )]
-[Hammer.EditorModel( "models/items/shopterminal/shopterminal.vmdl" )]
+[Title( "Shop" ), Category( "FortWars" )]
+[EditorModel( "models/items/shopterminal/shopterminal.vmdl" )]
 [Library( "info_shop" )]
 public class InfoShop : ModelEntity, IUse
 {

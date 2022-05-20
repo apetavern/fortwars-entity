@@ -11,7 +11,8 @@ partial class FortwarsPlayer
 
 	private static void SetupPostProcessing()
 	{
-		Host.AssertClient();
+		if ( !Host.IsClient )
+			return;
 
 		PostProcess.Add<StandardPostProcess>( new() );
 		postProcess = PostProcess.Get<StandardPostProcess>();
@@ -20,7 +21,8 @@ partial class FortwarsPlayer
 	[Event.Frame]
 	private static void UpdatePostProcessing()
 	{
-		Host.AssertClient();
+		if ( !Host.IsClient )
+			return;
 
 		if ( postProcess == null )
 		{

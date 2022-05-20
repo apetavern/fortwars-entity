@@ -60,7 +60,7 @@ public class DevMenu : Panel
 
 			foreach ( var file in FileSystem.Mounted.FindFile( "data/", "*.fwweapon", true ) )
 			{
-				var asset = Resource.FromPath<WeaponAsset>( "data/" + file );
+				var asset = ResourceLibrary.Get<WeaponAsset>( "data/" + file );
 				if ( asset == null )
 					continue;
 
@@ -83,7 +83,7 @@ public class DevMenu : Panel
 		}
 	}
 
-	[AdminCmd( "spawn_weapon" )]
+	[ConCmd.Admin( "spawn_weapon" )]
 	public static void SpawnWeapon( string path )
 	{
 		var caller = ConsoleSystem.Caller;
@@ -98,7 +98,7 @@ public class DevMenu : Panel
 		weapon.Position = tr.EndPosition + tr.Normal * 16;
 	}
 
-	[AdminCmd( "give_weapon" )]
+	[ConCmd.Admin( "give_weapon" )]
 	public static void GiveWeapon( string path )
 	{
 		var caller = ConsoleSystem.Caller;

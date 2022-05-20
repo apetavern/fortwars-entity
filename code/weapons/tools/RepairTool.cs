@@ -8,60 +8,60 @@ namespace Fortwars;
 [Library( "repairtool", Title = "Repair Tool" )]
 public partial class RepairTool : MeleeWeapon
 {
-	public override float PrimaryRate => 2.0f;
-	public override string ViewModelPath => "models/weapons/amhammer/amhammer_v.vmdl";
+    public override float PrimaryRate => 2.0f;
+    public override string ViewModelPath => "models/weapons/amSandboxEditor/amSandboxEditor_v.vmdl";
 
-	public override void Spawn()
-	{
-		base.Spawn();
+    public override void Spawn()
+    {
+        base.Spawn();
 
-		SetModel( "models/weapons/amhammer/amhammer_w.vmdl" );
-	}
+        SetModel( "models/weapons/amSandboxEditor/amSandboxEditor_w.vmdl" );
+    }
 
-	public override void Simulate( Client player )
-	{
-		if ( !Owner.IsValid() )
-			return;
+    public override void Simulate( Client player )
+    {
+        if ( !Owner.IsValid() )
+            return;
 
-		if ( CanPrimaryAttack() )
-		{
-			using ( LagCompensation() )
-			{
-				TimeSincePrimaryAttack = 0;
-				AttackPrimary();
-			}
-		}
-	}
+        if ( CanPrimaryAttack() )
+        {
+            using ( LagCompensation() )
+            {
+                TimeSincePrimaryAttack = 0;
+                AttackPrimary();
+            }
+        }
+    }
 
-	public override void AttackPrimary()
-	{
-		var player = Owner as FortwarsPlayer;
-		player.SetAnimParameter( "b_attack", true );
+    public override void AttackPrimary()
+    {
+        var player = Owner as FortwarsPlayer;
+        player.SetAnimParameter( "b_attack", true );
 
-		foreach ( var tr in TraceHit( Owner.EyePosition, Owner.EyePosition + Owner.EyeRotation.Forward * 128f ) )
-		{
-			ViewModelEntity?.SetAnimParameter( "hit", tr.Hit );
+        foreach ( var tr in TraceHit( Owner.EyePosition, Owner.EyePosition + Owner.EyeRotation.Forward * 128f ) )
+        {
+            ViewModelEntity?.SetAnimParameter( "hit", tr.Hit );
 
-			if ( tr.Entity is FortwarsBlock block && block.TeamID == player.TeamID && block.IsValid )
-			{
-				block?.Heal( 50, tr.EndPosition );
-				continue;
-			}
+            if ( tr.Entity is FortwarsBlock block && block.TeamID == player.TeamID && block.IsValid )
+            {
+                block?.Heal( 50, tr.EndPosition );
+                continue;
+            }
 
-			if ( tr.Entity == null || !tr.Entity.IsValid )
-				continue;
+            if ( tr.Entity == null || !tr.Entity.IsValid )
+                continue;
 
-			tr.Entity.TakeDamage( DamageInfo.FromBullet( tr.EndPosition, -tr.Normal * 10f, 10 ) );
-		}
+            tr.Entity.TakeDamage( DamageInfo.FromBullet( tr.EndPosition, -tr.Normal * 10f, 10 ) );
+        }
 
-		ViewModelEntity?.SetAnimParameter( "fire", true );
-	}
+        ViewModelEntity?.SetAnimParameter( "fire", true );
+    }
 
-	public override void SimulateAnimator( PawnAnimator anim )
-	{
-		anim.SetAnimParameter( "holdtype", (int)HoldTypes.HoldItem );
-		anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.RightHand );
-		anim.SetAnimParameter( "holdtype_pose_hand", 0.07f );
-		anim.SetAnimParameter( "holdtype_attack", 1 );
-	}
+    public override void SimulateAnimator( PawnAnimator anim )
+    {
+        anim.SetAnimParameter( "holdtype", (int)HoldTypes.HoldItem );
+        anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.RightHand );
+        anim.SetAnimParameter( "holdtype_pose_hand", 0.07f );
+        anim.SetAnimParameter( "holdtype_attack", 1 );
+    }
 }

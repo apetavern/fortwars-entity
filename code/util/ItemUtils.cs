@@ -15,7 +15,7 @@ public static class ItemUtils
 		}
 		else
 		{
-			return Library.Create<Carriable>( itemName );
+			return TypeLibrary.Create<Carriable>( itemName );
 		}
 	}
 }

@@ -77,20 +77,13 @@ public partial class RadialWheel
 						//
 						// Sample multiple points to make it less jagged
 						//
-						for ( int xOff = -1; xOff <= 1; xOff++ )
+						if ( InCircle( x, y, circleRadius ) && // Outer ring
+							!InCircle( x, y, circleRadius * 0.6f ) && // Inner ring
+							InSegment( x, y ) ) // Pie segment
 						{
-							for ( int yOff = -1; yOff <= 1; yOff++ )
-							{
-								if ( InCircle( x + xOff, y + yOff, circleRadius ) && // Outer ring
-									!InCircle( x + xOff, y + yOff, circleRadius * 0.6f ) && // Inner ring
-									InSegment( x + xOff, y + yOff ) ) // Pie segment
-								{
-									pixelOpacity++;
-								}
-							}
+							pixelOpacity++;
 						}
 
-						pixelOpacity = pixelOpacity / 9.0f;
 						SetPixel( x, y, Color.White * pixelOpacity );
 					}
 				}

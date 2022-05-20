@@ -33,7 +33,7 @@ public partial class FortwarsWeapon : Carriable
 	public float Bloom { get; set; }
 	public Vector2 Recoil { get; set; }
 	public float Inaccuracy { get; set; }
-	public bool IsAiming => Input.Down( InputButton.Attack2 );
+	public bool IsAiming => Input.Down( InputButton.SecondaryAttack );
 	private TimeSince TimeSinceReload { get; set; }
 	private FallbackScope scopePanel;
 
@@ -42,7 +42,7 @@ public partial class FortwarsWeapon : Carriable
 	/// </summary>
 	public static FortwarsWeapon FromPath( string assetPath )
 	{
-		var weaponAsset = Asset.FromPath<WeaponAsset>( assetPath );
+		var weaponAsset = ResourceLibrary.Get<WeaponAsset>( assetPath );
 
 		var weapon = new FortwarsWeapon()
 		{
@@ -200,7 +200,7 @@ public partial class FortwarsWeapon : Carriable
 		TimeSinceReload = 0;
 		IsReloading = true;
 
-		( Owner as AnimEntity ).SetAnimParameter( "b_reload", true );
+		( Owner as AnimatedEntity ).SetAnimParameter( "b_reload", true );
 
 		StartReloadEffects();
 	}
@@ -252,12 +252,12 @@ public partial class FortwarsWeapon : Carriable
 
 		if ( WeaponAsset.Flags.AutomaticFire )
 		{
-			if ( !Input.Down( InputButton.Attack1 ) )
+			if ( !Input.Down( InputButton.PrimaryAttack ) )
 				return false;
 		}
 		else
 		{
-			if ( !Input.Pressed( InputButton.Attack1 ) )
+			if ( !Input.Pressed( InputButton.PrimaryAttack ) )
 				return false;
 		}
 
@@ -369,7 +369,7 @@ public partial class FortwarsWeapon : Carriable
 
 			if ( DebugShots )
 			{
-				DebugOverlay.Text( tr.EndPosition, $"D: {damageInfo.Damage}\nF: {damageInfo.Force.Length}", Color.White, 5f, float.MaxValue );
+				DebugOverlay.Text( $"D: {damageInfo.Damage}\nF: {damageInfo.Force.Length}", tr.EndPosition, Color.White, 5f, float.MaxValue );
 			}
 
 			tr.Entity.TakeDamage( damageInfo );
@@ -449,7 +449,6 @@ public partial class FortwarsWeapon : Carriable
 		Particles.Create( WeaponAsset.FireParticles, EffectEntity, "muzzle" );
 
 		( ViewModelEntity as ViewModel )?.OnFire( IsAiming );
-		CrosshairPanel?.CreateEvent( "fire" );
 
 		const float RecoilScaleFactor = 10f;
 		Recoil += new Vector2( WeaponAsset.RecoilX, WeaponAsset.RecoilY ) * RecoilScaleFactor;

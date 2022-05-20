@@ -22,7 +22,7 @@ public partial class BuildWheelMetal : RadialWheel
 	{
 		VirtualCursor.OnClick += OnClick;
 
-		BindClass( "active", () => ( ( Input.UsingController && Input.Down( InputButton.Slot4 ) && Input.Down( InputButton.Attack2 ) ) // Gamepad compatible bind
+		BindClass( "active", () => ( ( Input.UsingController && Input.Down( InputButton.Slot4 ) && Input.Down( InputButton.SecondaryAttack ) ) // Gamepad compatible bind
 								|| ( !Input.UsingController && Input.Down( InputButton.Menu ) && Input.Down( InputButton.Use ) ) )
 								&& Game.Instance.Round is BuildRound );
 

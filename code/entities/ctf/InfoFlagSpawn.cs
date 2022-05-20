@@ -2,6 +2,7 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
+using System.ComponentModel;
 
 namespace Fortwars;
 
@@ -9,8 +10,8 @@ namespace Fortwars;
 /// This is where the flag spawns.
 /// </summary>
 [Library( "info_flag_spawn" )]
-[Hammer.EntityTool( "Flag Spawn", "FortWars" )]
-[Hammer.EditorModel( "models/rust_props/small_junk/toilet_paper.vmdl" )]
+[Title( "Flag Spawn" ), Category( "FortWars" )]
+[EditorModel( "models/rust_props/small_junk/toilet_paper.vmdl" )]
 public partial class InfoFlagSpawn : Entity
 {
 	[Property]

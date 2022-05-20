@@ -94,7 +94,7 @@ public static class Profiler
 		{
 			timeSince = 0;
 
-			DebugOverlay.ScreenText( 20, Root.GetString(), 5.0f );
+			DebugOverlay.ScreenText( Root.GetString(), 20, 5.0f );
 		}
 
 		Root.Clear();

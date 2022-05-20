@@ -55,7 +55,7 @@ public class InventoryBar : Panel
 		}
 		else
 		{
-			inventoryIcon.Label.Text = ent.ClassInfo.Title;
+			inventoryIcon.Label.Text = DisplayInfo.For( ent ).Name;
 			inventoryIcon.AmmoLabel.Text = $"";
 			inventoryIcon.AmmoLabel.SetClass( "visible", false );
 		}

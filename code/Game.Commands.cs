@@ -11,7 +11,7 @@ partial class Game
 {
 	public static List<Client> Votes = new();
 
-	[ServerCmd( "fw_rtv" )]
+	[ConCmd.Server( "fw_rtv" )]
 	public static void RockTheVote()
 	{
 		if ( Votes.Contains( ConsoleSystem.Caller ) )
@@ -25,20 +25,20 @@ partial class Game
 			Instance.ChangeRound( new VoteRound() );
 	}
 
-	[AdminCmd( "recreatehud" )]
+	[ConCmd.Admin( "recreatehud" )]
 	public static void RecreateHud()
 	{
 		hud?.Delete();
 		hud = new();
 	}
 
-	[AdminCmd( "fw_force_voteround" )]
+	[ConCmd.Admin( "fw_force_voteround" )]
 	public static void ForceVoteround()
 	{
 		Instance.ChangeRound( new VoteRound() );
 	}
 
-	[AdminCmd( "fw_give_ammo" )]
+	[ConCmd.Admin( "fw_give_ammo" )]
 	public static void GiveAmmo( int amount )
 	{
 		var owner = ConsoleSystem.Caller;
@@ -50,7 +50,7 @@ partial class Game
 		weapon.ReserveAmmo += amount;
 	}
 
-	[AdminCmd( "fw_cleanup" )]
+	[ConCmd.Admin( "fw_cleanup" )]
 	public static void Cleanup()
 	{
 		foreach ( var entry in Instance.buildLogEntries )
@@ -63,7 +63,7 @@ partial class Game
 		Log.Trace( $"Deleted blocks" );
 	}
 
-	[ServerCmd( "fw_spawn" )]
+	[ConCmd.Server( "fw_spawn" )]
 	public static void Spawn( string blockName )
 	{
 		var owner = ConsoleSystem.Caller;
@@ -92,7 +92,7 @@ partial class Game
 			var playerLogs = Instance.buildLogEntries.ToList().Where( x => x.Player == player );
 			foreach ( var entry in playerLogs.TakeLast( 3 ) )
 			{
-				delay +=  Time.Tick - entry.Tick ;
+				delay += Time.Tick - entry.Tick;
 			}
 			delay = ( delay / 3f ).CeilToInt();
 

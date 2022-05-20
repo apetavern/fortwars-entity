@@ -75,13 +75,13 @@ public abstract partial class BaseRound : BaseNetworkable
 
 	bool skipRound = false;
 
-	[AdminCmd( "fw_round_skip" )]
+	[ConCmd.Admin( "fw_round_skip" )]
 	public static void SkipRound()
 	{
 		Game.Instance.Round.skipRound = true;
 	}
 
-	[AdminCmd( "fw_round_extend" )]
+	[ConCmd.Admin( "fw_round_extend" )]
 	public static void ExtendRound()
 	{
 		Game.Instance.Round.RoundEndTime += 600;

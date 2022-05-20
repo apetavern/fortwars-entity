@@ -42,7 +42,9 @@ public class GroundShakeComponent : EntityComponent<FortwarsBlock>
 			shakeStrength *= strengthScale;
 			shakeStrength = shakeStrength.Clamp( 0, strengthMax );
 
-			_ = new Sandbox.ScreenShake.Perlin( 0.5f, 1f, shakeStrength );
+			// TODO
+			// _ = new Sandbox.ScreenShake.Perlin( 0.5f, 1f, shakeStrength );
+
 			timeSinceLastShake = 0;
 			wasShakingLastFrame = true;
 		}

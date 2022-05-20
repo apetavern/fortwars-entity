@@ -7,8 +7,8 @@ using System.ComponentModel.DataAnnotations;
 namespace Fortwars;
 
 [Library( "fw_grenade", Title = "Grenade" )]
-[Hammer.EditorModel( "models/fw_grenade.vmdl" )]
-[Display( Name = "Grenade" )]
+[EditorModel( "models/fw_grenade.vmdl" )]
+[Title( "Grenade" )]
 partial class Grenade : Carriable
 {
 	public static readonly Model WorldModel = Model.Load( "models/weapons/fraggrenade/fraggrenade_w.vmdl" );
@@ -33,7 +33,7 @@ partial class Grenade : Carriable
 	{
 		base.Simulate( cl );
 
-		DebugOverlay.ScreenText( 21, $"TimeSinceThrow:       {TimeSinceThrow}" );
+		DebugOverlay.ScreenText( $"TimeSinceThrow:       {TimeSinceThrow}", 21 );
 
 		if ( CanThrow() )
 		{
@@ -53,7 +53,7 @@ partial class Grenade : Carriable
 
 	public bool CanThrow()
 	{
-		return TimeSinceThrow > 2 && Input.Released( InputButton.Attack1 );
+		return TimeSinceThrow > 2 && Input.Released( InputButton.PrimaryAttack );
 	}
 
 	public void Throw()
@@ -65,7 +65,8 @@ partial class Grenade : Carriable
 
 		Count--;
 
-		_ = new Sandbox.ScreenShake.Perlin( 1.0f, 0.5f, 4.0f, 0.6f );
+		// TODO
+		// _ = new Sandbox.ScreenShake.Perlin( 1.0f, 0.5f, 4.0f, 0.6f );
 
 		Rand.SetSeed( Time.Tick );
 

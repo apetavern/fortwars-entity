@@ -69,7 +69,7 @@ public partial class PhysGun : Carriable, IUse
 		{
 			if ( rootEnt.IsValid() && rootEnt.PhysicsGroup != null )
 			{
-				body =  rootEnt.PhysicsGroup.BodyCount > 0 ? rootEnt.PhysicsGroup.GetBody( 0 ) : null ;
+				body = rootEnt.PhysicsGroup.BodyCount > 0 ? rootEnt.PhysicsGroup.GetBody( 0 ) : null;
 			}
 		}
 
@@ -100,15 +100,15 @@ public partial class PhysGun : Carriable, IUse
 
 		CanGrab = CheckCanGrab( owner, EyePosition, EyeRotation, eyeDir );
 
-		if ( Input.Pressed( InputButton.Attack1 ) )
+		if ( Input.Pressed( InputButton.PrimaryAttack ) )
 		{
-			( Owner as AnimEntity )?.SetAnimParameter( "b_attack", true );
+			( Owner as AnimatedEntity )?.SetAnimParameter( "b_attack", true );
 
 			if ( !grabbing )
 				grabbing = true;
 		}
 
-		bool grabEnabled = grabbing && Input.Down( InputButton.Attack1 );
+		bool grabEnabled = grabbing && Input.Down( InputButton.PrimaryAttack );
 
 		BeamActive = grabEnabled;
 
@@ -203,7 +203,7 @@ public partial class PhysGun : Carriable, IUse
 
 		if ( Input.UsingController )
 		{
-			rotating = Input.Down( InputButton.Attack2 ); //Attack2 feels good to use
+			rotating = Input.Down( InputButton.SecondaryAttack ); //Attack2 feels good to use
 
 			if ( rotating )
 			{
@@ -400,12 +400,12 @@ public partial class PhysGun : Carriable, IUse
 		if ( !GrabbedEntity.IsValid() )
 			return;
 
-		if ( !owner.Down( InputButton.Attack1 ) )
+		if ( !owner.Down( InputButton.PrimaryAttack ) )
 			return;
 
 		if ( Input.UsingController )
 		{
-			if ( owner.Down( InputButton.Attack2 ) )
+			if ( owner.Down( InputButton.SecondaryAttack ) )
 			{
 				owner.ViewAngles = owner.OriginalViewAngles;
 			}

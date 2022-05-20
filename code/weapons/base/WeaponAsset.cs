@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace Fortwars;
 
-[Library( "fwweapon" ), AutoGenerate]
+[GameResource( "Weapon Definition", "fwweapon", "Describes a FortWars weapon", Icon = "💀", IconBgColor = "#fe71dc", IconFgColor = "black" )]
 public partial class WeaponAsset : GameResource
 {
 	//
