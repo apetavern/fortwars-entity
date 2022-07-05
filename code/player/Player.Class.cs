@@ -19,7 +19,6 @@ partial class FortwarsPlayer
 			MessageFeed.AddMessage(
 				To.Single( Client ),
 				"clear",
-				"no",
 				"Go to spawn to change class." );
 
 			return;

@@ -13,16 +13,13 @@ public class BaseMessage : Panel
 
 	TimeUntil remainingLifetime;
 
-	public BaseMessage( string icon, string title, string message )
+	public BaseMessage( string icon, string message )
 	{
 		StyleSheet.Load( "/ui/elements/generic/BaseMessage.scss" );
 
 		progress = Add.Panel( "inner" );
 
-		var left = Add.Panel();
-		left.Add.Icon( icon, "icon" );
-		left.Add.Label( title, "title" );
-
+		Add.Icon( icon, "icon" );
 		Add.Label( message, "message" );
 
 		remainingLifetime = 5;
@@ -40,9 +37,9 @@ public class BaseMessage : Panel
 
 public static class BaseMessageExtensions
 {
-	public static BaseMessage Message( this PanelCreator self, string icon, string title, string message )
+	public static BaseMessage Message( this PanelCreator self, string icon, string message )
 	{
-		var control = new BaseMessage( icon, title, message );
+		var control = new BaseMessage( icon, message );
 		control.Parent = self.panel;
 
 		return control;

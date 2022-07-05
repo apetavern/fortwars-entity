@@ -98,7 +98,7 @@ partial class Game
 
 			if ( delay < Global.TickRate * 3 && playerLogs.Count() > 3 )
 			{
-				MessageFeed.AddMessage( To.Single( player ), "clear", "Can't build", "You're building too fast! Slow down!" );
+				MessageFeed.AddMessage( To.Single( player ), "clear", "You're building too fast! Slow down!" );
 				return;
 			}
 		}
