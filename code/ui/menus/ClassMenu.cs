@@ -28,8 +28,7 @@ public partial class ClassMenu : Menu
 				"fwclass_assault",
 				"fwclass_medic",
 				"fwclass_support",
-				"fwclass_engineer",
-				"fwclass_demo"
+				"fwclass_engineer"
 		};
 
 		classInfo = AddChild<ClassInfo>();
@@ -121,7 +120,7 @@ public partial class ClassMenu : Menu
 					}
 					else
 					{
-						loadoutStr += $"• {TypeLibrary.GetDescription( item.GetType() )?.Title }\n";
+						loadoutStr += $"• {TypeLibrary.GetDescription( item.GetType() )?.Title}\n";
 					}
 				}
 			}
