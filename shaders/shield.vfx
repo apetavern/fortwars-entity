@@ -69,11 +69,7 @@ VS
 
 PS
 {
-  	// #include "common/pixel.hlsl"
-    // #include "common.fxc"
-
-	// why
-	#include "vr_shared_standard_ps_code.fxc"
+  	#include "common/pixel.hlsl"
 	  
     RenderState( BlendEnable, true );
     RenderState( SrcBlend, SRC_ALPHA );
@@ -154,11 +150,12 @@ PS
 	//
 	// Main
 	//
-	PS_OUTPUT MainPs( PixelInput i )
+	PixelOutput MainPs( PixelInput i )
 	{
-		FinalCombinerInput_t material = PS_SharedStandardProcessing( i );
+		Material m = GatherMaterial( i );
+		ShadingModelStandard sm;
+		PixelOutput o= FinalizePixelMaterial( i, m, sm );
 
-		PS_OUTPUT o = PS_FinalCombiner( material );
         float3 vPositionWs = i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz;
         float2 vPositionUv = (i.vPositionSs.xy - g_vViewportOffset) / g_vRenderTargetSize;
 
