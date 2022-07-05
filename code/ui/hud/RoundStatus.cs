@@ -30,15 +30,32 @@ public class RoundStatus : Panel
 		Phase = RoundInfo.Add.Label( "Unknown", "phase" );
 		Time = RoundInfo.Add.Label( "00:00", "time" );
 
-		var scores = Add.Panel( "scores" );
-		BlueScore = scores.Add.Label( "0", "score blue" );
-		RedScore = scores.Add.Label( "0", "score red" );
+		//
+		// Scores
+		//
+		{
+			var scores = Add.Panel( "scores" );
+
+			//
+			// Blue
+			//
+			BlueScore = scores.Add.Label( "0", "score blue" );
+			BlueScore.Add.Icon( "warning", "warning-icon" )
+				.BindClass( "visible", () => Game.Instance.BlueFlagRoll.IsValid() );
+
+			//
+			// Red
+			//
+			RedScore = scores.Add.Label( "0", "score red" );
+			RedScore.Add.Icon( "warning", "warning-icon" )
+				.BindClass( "visible", () => Game.Instance.RedFlagRoll.IsValid() );
+		}
 
 		var game = Game.Instance;
 		if ( game == null ) return;
 
 		Wins = Add.Panel( "wins" );
-		Log.Info( game.BestOf );
+
 		for ( int i = 0; i < game.BestOf; i++ )
 		{
 			WinsPointPanels.Add( Wins.Add.Panel( "point" ) );
