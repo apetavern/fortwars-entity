@@ -211,11 +211,22 @@ public partial class FortwarsWeapon : Carriable
 		anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.TwoHands );
 		anim.SetAnimParameter( "useleftik", GetAttachment( "lhand_ik" ).HasValue );
 
-		if( GetAttachment( "lhand_ik" ).HasValue )
+		if ( GetAttachment( "lhand_ik" ).HasValue )
 		{
 			Transform attachment = GetAttachment( "lhand_ik" ).Value;
-			anim.SetAnimParameter( "left_hand_ik.position", attachment.Position );
+			anim.SetAnimParameter( "left_hand_ik.position", attachment.Position + anim.Velocity * Time.Delta * 2f );
 			anim.AnimPawn.SetAnimParameter( "left_hand_ik.rotation", attachment.Rotation );
+		}
+
+		if ( WeaponAsset.HoldType == HoldTypes.Rifle )
+		{
+			anim.SetAnimParameter( "gunup", MathX.Lerp( anim.AnimPawn.GetAnimParameterFloat( "gunup" ), IsAiming ? 1f : 0f, Time.Delta * 10f ) );//Only looks good on rifle hold pose at the moment.
+			anim.SetAnimParameter( "gundown", 0f );
+		}
+		else
+		{
+			anim.SetAnimParameter( "gunup", 0f );
+			anim.SetAnimParameter( "gundown", 0f );
 		}
 	}
 

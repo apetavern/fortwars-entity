@@ -11,13 +11,13 @@
 				[
 					{
 						_class = "AnimFile"
-						name = "updown"
+						name = "gundown"
 						children = 
 						[
 							{
 								_class = "AnimSubtract"
-								anim_name = "updown_copy"
-								frame = 4
+								anim_name = "gunbind"
+								frame = 0
 							},
 						]
 						activity_name = ""
@@ -31,7 +31,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/playermodel/updownleftright.fbx"
+						source_filename = "models/playermodel/gunupdown.fbx"
 						start_frame = -1
 						end_frame = 9
 						framerate = -1.0
@@ -40,13 +40,13 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "leftright"
+						name = "gunup"
 						children = 
 						[
 							{
 								_class = "AnimSubtract"
-								anim_name = "updown_copy"
-								frame = 4
+								anim_name = "gunbind"
+								frame = 0
 							},
 						]
 						activity_name = ""
@@ -60,7 +60,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/playermodel/updownleftright.fbx"
+						source_filename = "models/playermodel/gunupdown.fbx"
 						start_frame = 15
 						end_frame = 24
 						framerate = -1.0
@@ -69,7 +69,7 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "updown_copy"
+						name = "gunbind"
 						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
@@ -81,7 +81,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/playermodel/updownleftright.fbx"
+						source_filename = "models/playermodel/gunupdown.fbx"
 						start_frame = -1
 						end_frame = 9
 						framerate = -1.0

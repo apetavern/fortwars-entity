@@ -68,9 +68,12 @@ public partial class PhysGun
 			if ( GetAttachment( "lhand_ik" ).HasValue )
 			{
 				Transform attachment = GetAttachment( "lhand_ik" ).Value;
-				( Parent as AnimatedEntity ).SetAnimParameter( "left_hand_ik.position", attachment.Position );
+				( Parent as AnimatedEntity ).SetAnimParameter( "left_hand_ik.position", attachment.Position + Parent.Velocity * Time.Delta );
 				( Parent as AnimatedEntity ).SetAnimParameter( "left_hand_ik.rotation", attachment.Rotation );
 			}
+
+			( Parent as AnimatedEntity ).SetAnimParameter( "gunup", 0f );
+			( Parent as AnimatedEntity ).SetAnimParameter( "gundown", 1f );
 		}
 
 		if ( GrabbedEntity.IsValid() && rotating )
