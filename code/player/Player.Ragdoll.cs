@@ -13,10 +13,10 @@ partial class FortwarsPlayer
 		ent.Position = position;
 		ent.Rotation = rotation;
 		ent.Scale = Scale;
-		ent.MoveType = MoveType.Physics;
+		ent.PhysicsEnabled = true;
 		ent.UsePhysicsCollision = true;
 		ent.EnableAllCollisions = true;
-		ent.CollisionGroup = CollisionGroup.Debris;
+		ent.Tags.Add( "debris" );
 		ent.SetModel( GetModelName() );
 		ent.CopyBonesFrom( this );
 		ent.CopyBodyGroups( this );
