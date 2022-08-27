@@ -119,6 +119,8 @@ public partial class BogRoll : MeleeWeapon
 		player.Inventory.Drop( this );
 		player.Inventory.SetActiveSlot( 0, true );
 
+		Tags.Add( "trigger" );
+
 		Velocity = throwDir * 600f;
 	}
 

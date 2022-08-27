@@ -16,7 +16,8 @@ public class Pickup : AnimatedEntity
 		float bboxSize = 4;
 		SetupPhysicsFromAABB( PhysicsMotionType.Static, new Vector3( -bboxSize ), new Vector3( bboxSize ) );
 
-		CollisionGroup = CollisionGroup.Trigger;
+		Tags.Add( "trigger" );
+
 		EnableSolidCollisions = false;
 		EnableTouch = true;
 
