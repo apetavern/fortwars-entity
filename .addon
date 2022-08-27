@@ -21,12 +21,8 @@
       "apetavern.fw_pillars",
       "apetavern.fw_hydroelectric",
       "apetavern.fw_aquarius",
-      "apetavern.fw_crete",
-      "apetavern.fw_levels",
       "apetavern.fw_dev",
-      "apetavern.fw_divided",
       "apetavern.fw_basin",
-      "sharpmars.fw_aztec",
       "gvar.fw_harbor",
       "gvar.metro"
     ],
@@ -45,7 +41,8 @@
         "water": "Trigger",
         "redteam": "Trigger",
         "blueteam": "Trigger",
-        "player": "Collide"
+        "player": "Collide",
+        "debris": "Ignore"
       },
       "Pairs": [
         {
@@ -110,6 +107,41 @@
         {
           "a": "redteam",
           "b": "player"
+        },
+        {
+          "a": "solid",
+          "b": "debris",
+          "r": "Collide"
+        },
+        {
+          "a": "player",
+          "b": "debris",
+          "r": "Ignore"
+        },
+        {
+          "a": "blueteam",
+          "b": "debris",
+          "r": "Ignore"
+        },
+        {
+          "a": "redteam",
+          "b": "debris",
+          "r": "Ignore"
+        },
+        {
+          "a": "water",
+          "b": "debris",
+          "r": "Trigger"
+        },
+        {
+          "a": "ladder",
+          "b": "debris",
+          "r": "Ignore"
+        },
+        {
+          "a": "trigger",
+          "b": "debris",
+          "r": "Ignore"
         }
       ]
     }
