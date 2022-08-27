@@ -26,7 +26,7 @@ public partial class RollReturnZone : ModelEntity
 		EnableShadowCasting = false;
 
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
-		CollisionGroup = CollisionGroup.Trigger;
+		Tags.Add( "trigger" );
 		EnableSolidCollisions = false;
 		EnableTouch = true;
 
