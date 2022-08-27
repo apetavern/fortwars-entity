@@ -2,14 +2,14 @@
 {
 	data = 
 	{
-		Title = "labcoat"
+		Title = null
 		Subtitle = null
-		Category = "Tops"
-		Model = resource:"models/citizen_clothes/jacket/labcoat.vmdl"
+		Category = "None"
+		Model = resource:"models/cosmetics/doctor/headmirror.vmdl"
 		SkinMaterial = null
 		EyesMaterial = null
 		MaterialGroup = null
-		SlotsUnder = "Chest"
+		SlotsUnder = 0
 		SlotsOver = 0
 		HideBody = 0
 	}
