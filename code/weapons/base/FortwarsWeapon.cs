@@ -209,6 +209,14 @@ public partial class FortwarsWeapon : Carriable
 	{
 		anim.SetAnimParameter( "holdtype", (int)WeaponAsset.HoldType );
 		anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.TwoHands );
+		anim.SetAnimParameter( "useleftik", GetAttachment( "lhand_ik" ).HasValue );
+
+		if( GetAttachment( "lhand_ik" ).HasValue )
+		{
+			Transform attachment = GetAttachment( "lhand_ik" ).Value;
+			anim.SetAnimParameter( "left_hand_ik.position", attachment.Position );
+			anim.AnimPawn.SetAnimParameter( "left_hand_ik.rotation", attachment.Rotation );
+		}
 	}
 
 	private void OnContinuousReload()

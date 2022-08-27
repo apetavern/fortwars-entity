@@ -61,7 +61,19 @@ public partial class PhysGun
 
         ViewModelEntity?.SetAnimParameter( "fire", BeamActive );
 
-        if ( GrabbedEntity.IsValid() && rotating )
+		if ( Parent is not null )
+		{
+			(Parent as AnimatedEntity).SetAnimParameter( "useleftik", GetAttachment( "lhand_ik" ).HasValue );
+
+			if ( GetAttachment( "lhand_ik" ).HasValue )
+			{
+				Transform attachment = GetAttachment( "lhand_ik" ).Value;
+				( Parent as AnimatedEntity ).SetAnimParameter( "left_hand_ik.position", attachment.Position );
+				( Parent as AnimatedEntity ).SetAnimParameter( "left_hand_ik.rotation", attachment.Rotation );
+			}
+		}
+
+		if ( GrabbedEntity.IsValid() && rotating )
         {
             ViewModelEntity?.SetAnimParameter( "joystickFB", MathX.LerpTo( ViewModelEntity.GetAnimParameterFloat( "joystickFB" ), -( Input.MouseDelta.y * RotateSpeed ), Time.Delta ) );
             ViewModelEntity?.SetAnimParameter( "joystickLR", MathX.LerpTo( ViewModelEntity.GetAnimParameterFloat( "joystickLR" ), Input.MouseDelta.x * RotateSpeed, Time.Delta ) );
