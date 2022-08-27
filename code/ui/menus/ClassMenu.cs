@@ -38,7 +38,7 @@ public partial class ClassMenu : Menu
 		{
 			var classType = TypeLibrary.Create<Class>( classId );
 			var classButton = classes.Add.Button( classType.Name, "class", () => SetClass( classId ) );
-			classButton.Add.Image( "ui/icons/placeholder.png", "class-icon" );
+			classButton.Add.Image( "ui/icons/"+ classType.Name.ToLower() + ".png", "class-icon" );
 			classButton.Add.Label( "0 / 0", "class-count" );
 
 			classButton.AddEventListener( "onmouseover", () =>
