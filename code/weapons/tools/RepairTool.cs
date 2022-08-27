@@ -9,13 +9,13 @@ namespace Fortwars;
 public partial class RepairTool : MeleeWeapon
 {
     public override float PrimaryRate => 2.0f;
-    public override string ViewModelPath => "models/weapons/amSandboxEditor/amSandboxEditor_v.vmdl";
+    public override string ViewModelPath => "models/weapons/amhammer/amhammer_v.vmdl";
 
     public override void Spawn()
     {
         base.Spawn();
 
-        SetModel( "models/weapons/amSandboxEditor/amSandboxEditor_w.vmdl" );
+        SetModel( "models/weapons/amhammer/amhammer_w.vmdl" );
     }
 
     public override void Simulate( Client player )
