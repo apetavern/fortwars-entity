@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "sniper_scope.vfx"
+	shader "sbox_glass.vfx"
 
 	//---- Color ----
 	g_flModelTintAmount "1.000"
@@ -11,22 +11,28 @@ Layer0
 	//---- Fade ----
 	g_flFadeExponent "1.000"
 
-	//---- Mask ----
-	g_flMaskLiveOffsetMul "1.500"
-	g_flMaskScale "1.750"
-	g_vMaskOffset "[0.000 0.000]"
+	//---- Glass ----
+	g_flColorExponent "5.000"
+	g_flColorReflectance "0.100"
+	g_flExponent "4.000"
+	g_flInnerRefraction "0.360"
+	g_flOuterRefraction "2.000"
+	g_flReflectance "0.000"
+	g_vInnerColor "[0.360784 0.560784 0.741176 1.000000]"
+	g_vOuterColor "[0.850980 0.858824 0.968628 1.000000]"
+
+	//---- Lighting ----
+	g_flDirectionalLightmapMinZ "0.050"
+	g_flDirectionalLightmapStrength "1.000"
 
 	//---- Material ----
+	TextureAmbientOcclusion "materials/default/default_ao.tga"
+	TextureBlendMask "materials/default/default_blend.tga"
 	TextureColor "materials/default/default_color.tga"
+	TextureMetalness "materials/default/default_metal.tga"
+	TextureNormal "materials/default/default_normal.tga"
+	TextureRoughness "materials/default/default_rough.tga"
 	TextureTranslucency "materials/default/default_trans.tga"
-
-	//---- Misc ----
-	g_flScreenLiveOffsetMul "0.100"
-
-	//---- Reticle ----
-	g_flReticleLiveOffsetMul "0.500"
-	g_flReticleScale "1.500"
-	g_vReticleOffset "[0.500 0.500]"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
@@ -35,12 +41,7 @@ Layer0
 	g_vTexCoordScale "[1.000 1.000]"
 	g_vTexCoordScrollSpeed "[0.000 0.000]"
 
-	//---- Textures ----
-	MaskTexture "textures/sniper_mask.png"
-	ReticleTexture "textures/sniper_reticle.png"
-
-	DynamicParams
-	{
-		g_vMaskOffset "maskOffset"
-	}
+	//---- Translucent ----
+	g_flOpacityScale "1.000"
+	g_flOpaqueness "0.000"
 }
