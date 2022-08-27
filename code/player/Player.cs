@@ -47,7 +47,7 @@ public partial class FortwarsPlayer : Sandbox.Player
 			// ChatBox.AddInformation( To.Everyone, $"{Name} has joined {Team.Name}", $"avatar:{Client.PlayerId}" );
 		}
 
-		SetModel( "models/citizen/citizen.vmdl" );
+		SetModel( "models/playermodel/playermodel.vmdl" );
 
 		// Allow Team class to dress the player
 		if ( Team != null )
