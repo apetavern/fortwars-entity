@@ -116,14 +116,11 @@ public partial class DropTool : Carriable
 
     public virtual IEnumerable<TraceResult> TraceHit( Vector3 start, Vector3 end, float radius = 2.0f )
     {
-        bool InWater = Map.Physics.IsPointWater( start );
-
         var tr = Trace.Ray( start, end )
                 .UseHitboxes()
-                .HitLayer( CollisionLayer.Water, !InWater )
-                .HitLayer( CollisionLayer.Debris )
-                .Ignore( Owner )
-                .Ignore( this )
+                .WorldOnly()
+				.Ignore(Owner)
+				.Ignore(this)
                 .Size( radius )
                 .Run();
 

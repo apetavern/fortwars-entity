@@ -666,7 +666,7 @@ public partial class FortwarsWalkController : BasePlayerController
 
 		var tr = Trace.Ray( start + TraceOffset, end + TraceOffset )
 					.Size( mins, maxs )
-					.WithAnyTags( "solid", "player", "npc" )
+					.WithAnyTags( "solid", "player" )
 					.Ignore( Pawn )
 					.WithoutTags( "nocollide" )
 					.Run();

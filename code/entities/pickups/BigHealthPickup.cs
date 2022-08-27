@@ -39,7 +39,7 @@ public partial class BigHealthPickup : Pickup
 		Rotation = Rotation.LookAt( -Velocity.Normal.WithZ( 0 ), Vector3.Up );
 
 		var target = Position + Velocity * Time.Delta;
-		var tr = Trace.Ray( Position, target ).Ignore( Owner ).Run();
+		var tr = Trace.Ray( Position, target ).WorldOnly().WithoutTags( "trigger" ).Run();
 
 		if ( tr.Hit )
 		{

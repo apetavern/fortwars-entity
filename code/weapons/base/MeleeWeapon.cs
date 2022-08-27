@@ -32,8 +32,7 @@ public partial class MeleeWeapon : Carriable
 
         var tr = Trace.Ray( start, end )
                 .UseHitboxes()
-                .HitLayer( CollisionLayer.Water, !InWater )
-                .HitLayer( CollisionLayer.Debris )
+                .WithAnyTags("player", "solid")
                 .Ignore( Owner )
                 .Ignore( this )
                 .Size( radius )
