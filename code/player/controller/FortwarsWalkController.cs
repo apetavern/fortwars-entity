@@ -666,10 +666,7 @@ public partial class FortwarsWalkController : BasePlayerController
 
 		var tr = Trace.Ray( start + TraceOffset, end + TraceOffset )
 					.Size( mins, maxs )
-					.HitLayer( CollisionLayer.All, false )
-					.HitLayer( CollisionLayer.Solid, true )
-					.HitLayer( CollisionLayer.GRATE, true )
-					.HitLayer( CollisionLayer.PLAYER_CLIP, true )
+					.WithAnyTags( "solid", "player", "npc" )
 					.Ignore( Pawn )
 					.WithoutTags( "nocollide" )
 					.Run();
