@@ -116,13 +116,12 @@ public partial class ClassMenu : Menu
 					if ( item.StartsWith( "fw:" ) )
 					{
 						string assetName = item.Remove( 0, 3 );
-						Log.Trace( $"Weapon name: {assetName}" );
 						var asset = ResourceLibrary.Get<WeaponAsset>( item.Remove( 0, 3 ) );
 						loadoutStr += $"• {asset.WeaponName}\n";
 					}
 					else
 					{
-						loadoutStr += $"• {TypeLibrary.GetDescription( item.GetType() )?.Title}\n";
+						loadoutStr += $"• {TypeLibrary.GetDescription( item )?.Title}\n";
 					}
 				}
 			}
