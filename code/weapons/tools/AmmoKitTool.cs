@@ -18,14 +18,7 @@ public partial class AmmoKitTool : DropTool
 
 	public override void SpawnPickup()
 	{
-		base.SpawnPickup();
-
-		var projectile = new BigAmmoPickup();
-		projectile.Rotation = Owner.EyeRotation.Angles().WithPitch( 0 ).ToRotation();
-		projectile.Position = Owner.EyePosition - Vector3.Up * 15f;
-		projectile.Velocity = projectile.Rotation.Forward * 250f;
-
-		projectile.Owner = Owner;
+		ThrowProjectile( new BigAmmoPickup() );
 	}
 
 	public override void Simulate( Client player )
