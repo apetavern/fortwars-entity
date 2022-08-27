@@ -12,7 +12,7 @@ public partial class DropTool : Carriable
 {
     public virtual float PrimaryRate => 2.0f;
 
-    public float DropTimeDelay = 15f;
+    public float DropTimeDelay => 1f;
     public override string ViewModelPath => "models/items/medkit/medkit_v.vmdl";
 
     public override void Spawn()
@@ -81,6 +81,20 @@ public partial class DropTool : Carriable
     public virtual void SpawnPickup()
     {
     }
+
+	protected void ThrowProjectile<T>( T projectile ) where T : Entity
+	{
+		// This offset is here to make it look like the projectile is being
+		// thrown from the player's hands, rather than directly out of
+		// their face.
+		var offset = Vector3.Down * 32f;
+		
+		projectile.Rotation = Owner.EyeRotation;
+		projectile.Position = Owner.EyePosition + offset;
+		projectile.Velocity = projectile.Rotation.Forward * 250f;
+
+		projectile.Owner = Owner;
+	}
 
     public void DoDrop()
     {
