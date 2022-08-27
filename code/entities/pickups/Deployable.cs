@@ -2,13 +2,20 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
+using System.Collections.Generic;
 
 namespace Fortwars;
 
 public partial class Deployable : Pickup
 {
 	[Net] public bool HasLanded { get; set; }
+
+	private float ResupplyRadius => 96f;
 	private float ThrowSpeed => 100f;
+	private float TimeBetweenResupplies => 15f;
+	private Particles radiusParticles;
+
+	private Dictionary<long, TimeSince> playerResupplyPairs = new();
 
 	public override void Spawn()
 	{
@@ -22,11 +29,52 @@ public partial class Deployable : Pickup
 	{
 		if ( HasLanded )
 		{
-			SetAnimParameter( "deployed", true );
-			Rotation = Rotation.Angles().WithPitch( 0 ).ToRotation();
+			SetLandedAppearance();
+			SetRadiusParticleAppearance();
+
+			ResupplyNearby();
 		}
-		
-		Move();
+		else
+		{
+			Move();
+		}
+	}
+
+	private void SetLandedAppearance()
+	{
+		SetAnimParameter( "deployed", true );
+		Rotation = Rotation.Angles().WithPitch( 0 ).ToRotation();
+	}
+
+	private void SetRadiusParticleAppearance()
+	{
+		if ( IsServer )
+			radiusParticles ??= Particles.Create( "particles/deployable/deployable.vpcf", this );
+
+		radiusParticles?.SetPosition( 0, Position );
+	}
+
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+		radiusParticles?.Destroy( true );
+	}
+
+	private void ResupplyNearby()
+	{
+
+		foreach ( var entity in Entity.FindInSphere( Position, ResupplyRadius ) )
+		{
+			if ( entity is not FortwarsPlayer player )
+				continue;
+
+			if ( !playerResupplyPairs.ContainsKey( player.Client.PlayerId ) 
+				|| playerResupplyPairs[player.Client.PlayerId] > TimeBetweenResupplies )
+			{
+				Resupply( player );
+				playerResupplyPairs[player.Client.PlayerId] = 0;
+			}
+		}
 	}
 
 	private void Move()
@@ -55,6 +103,5 @@ public partial class Deployable : Pickup
 
 	public virtual void Resupply( FortwarsPlayer player )
 	{
-
 	}
 }
