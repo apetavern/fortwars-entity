@@ -14,30 +14,30 @@ namespace Fortwars;
 [SandboxEditor.VisGroup( SandboxEditor.VisGroup.Dynamic )]
 public partial class FuncSpawnArea : BrushEntity
 {
-    [Property]
-    public Team Team { get; set; }
+	[Property]
+	public Team Team { get; set; }
 
-    public override void Spawn()
-    {
-        base.Spawn();
+	public override void Spawn()
+	{
+		base.Spawn();
 
-        SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
+		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
 		Tags.Add( "trigger" );
 		Tags.Add( Team == Team.Red ? "redteam" : "blueteam" );//Should make it so opposite teams can't enter eachother's spawn.
-        EnableSolidCollisions = false;
-        EnableTouch = true;
+		EnableSolidCollisions = false;
+		EnableTouch = true;
 
-        Transmit = TransmitType.Never;
-    }
+		Transmit = TransmitType.Never;
+	}
 
-    public override void StartTouch( Entity other )
-    {
-        base.StartTouch( other );
+	public override void StartTouch( Entity other )
+	{
+		base.StartTouch( other );
 
-        if ( other.IsWorld )
-            return;
+		if ( other.IsWorld )
+			return;
 
-        if ( other is FortwarsPlayer player && player.TeamID != Team )
-            other.TakeDamage( DamageInfo.Generic( 10000f ) );
-    }
+		if ( other is FortwarsPlayer player && player.TeamID != Team )
+			other.TakeDamage( DamageInfo.Generic( 10000f ) );
+	}
 }

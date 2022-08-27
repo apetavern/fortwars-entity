@@ -4,7 +4,6 @@
 using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-using System;
 
 namespace Fortwars;
 
@@ -14,16 +13,18 @@ public class Vitals : Panel
 	{
 		StyleSheet.Load( "/ui/hud/Vitals.scss" );
 
-		_ = new VitalsPanel( this, "add_box", () => Local.Pawn.Health.CeilToInt() );
+		_ = new VitalsPanel( this, "add_box" );
 	}
 
 	class VitalsPanel : Panel
 	{
-		public VitalsPanel( Panel parent, string icon, Func<object> textBinding )
+		public string PlayerHealth => Local.Pawn.Health.CeilToInt().ToString();
+
+		public VitalsPanel( Panel parent, string icon )
 		{
 			var iconPanel = Add.Icon( icon );
 			var label = Add.Label( "100" );
-			label.Bind( "text", textBinding );
+			label.Bind( "text", this, nameof( PlayerHealth ) );
 
 			Parent = parent;
 		}
