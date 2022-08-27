@@ -2,6 +2,7 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
+using System.ComponentModel;
 
 namespace Fortwars;
 
@@ -11,6 +12,7 @@ public partial class FortwarsPlayer : Sandbox.Player
 
 	public DamageInfo LastDamage { get; private set; }
 	public ClothingContainer Clothing = new();
+	public ClothingContainer CleanClothing = new();
 
 	[ConVar.Server( "fw_time_between_spawns", Help = "How long do players need to wait between respawns", Min = 1, Max = 30 )]
 	public static int TimeBetweenSpawns { get; set; } = 10;
@@ -28,7 +30,7 @@ public partial class FortwarsPlayer : Sandbox.Player
 	public FortwarsPlayer( Client cl ) : this()
 	{
 		// Load clothing from client data
-		Clothing.LoadFromClient( cl );
+		CleanClothing.LoadFromClient( cl );
 	}
 
 	public override void Respawn()
@@ -80,13 +82,36 @@ public partial class FortwarsPlayer : Sandbox.Player
 		EnableHideInFirstPerson = true;
 		EnableShadowInFirstPerson = true;
 
-		Clothing.DressEntity( this );
+		DressPlayerClothing();
 
 		Game.Instance.Round.SetupInventory( this );
 
 		InSpawnRoom = true;
 
 		base.Respawn();
+	}
+
+	public void DressPlayerClothing()
+	{
+
+		Clothing.ClearEntities();
+
+		Clothing = new ClothingContainer();
+
+		foreach ( var item in CleanClothing.Clothing )
+		{
+			Clothing.Clothing.Add( item );
+		}
+
+
+		foreach ( var item in Class.Cosmetics )
+		{
+			Clothing cloth = ResourceLibrary.Get<Clothing>( item );
+			Clothing.Clothing.RemoveAll( x => !x.CanBeWornWith( cloth ) );
+			Clothing.Clothing.Add( cloth );
+		}
+
+		Clothing.DressEntity( this );
 	}
 
 	public override void OnKilled()
@@ -194,6 +219,8 @@ public partial class FortwarsPlayer : Sandbox.Player
 	public void Reset()
 	{
 		Host.AssertServer();
+
+		DressPlayerClothing();
 
 		Health = 100;
 		Game.Instance.MoveToSpawnpoint( this );
