@@ -12,6 +12,7 @@ namespace Fortwars;
 public partial class ClassMenu : Menu
 {
 	ClassInfo classInfo;
+	ClassPreviewPanel previewpanel;
 	public ClassMenu()
 	{
 		StyleSheet.Load( "ui/menus/ClassMenu.scss" );
@@ -20,7 +21,7 @@ public partial class ClassMenu : Menu
 		Add.Label( "Select a class", "title" );
 
 		var main = Add.Panel( "main" );
-		main.AddChild<ClassPreviewPanel>();
+		previewpanel = main.AddChild<ClassPreviewPanel>();
 
 		var classes = Add.Panel( "classes" );
 		var classArray = new string[]
@@ -43,6 +44,7 @@ public partial class ClassMenu : Menu
 			classButton.AddEventListener( "onmouseover", () =>
 			{
 				classInfo.Update( classType );
+				previewpanel.ShowClass( classType );
 			} );
 		}
 

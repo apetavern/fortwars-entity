@@ -27,4 +27,9 @@ public class SupportClass : Class
 		"fw:data/weapons/usp.fwweapon",
 		"ammokittool"
 	};
+
+	public override List<string> Cosmetics => new()
+	{
+		"models/citizen_clothes/hat/tactical_helmet/tactical_helmet.clothing"
+	};
 }

@@ -13,6 +13,7 @@ public abstract class Class
 	public virtual string IconPath { get; set; }
 	public virtual List<string> CombatLoadout { get; set; }
 	public virtual List<string> BuildLoadout { get; set; }
+	public virtual List<string> Cosmetics { get; set; }
 
 	public virtual void AssignBuildLoadout( Inventory inventory )
 	{

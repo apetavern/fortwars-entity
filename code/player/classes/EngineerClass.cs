@@ -27,4 +27,9 @@ public class EngineerClass : Class
 		"fw:data/weapons/trj.fwweapon",
 		"repairtool"
 	};
+
+	public override List<string> Cosmetics => new()
+	{
+		"models/citizen_clothes/hat/hardhat.yellow.clothing"
+	};
 }

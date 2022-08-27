@@ -27,4 +27,9 @@ public class MedicClass : Class
 		"fw:data/weapons/usp.fwweapon",
 		"medkittool"
 	};
+
+	public override List<string> Cosmetics => new()
+	{
+		"data/labcoat.clothing"
+	};
 }

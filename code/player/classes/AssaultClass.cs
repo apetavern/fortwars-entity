@@ -24,4 +24,9 @@ public partial class AssaultClass : Class
 		"fw:data/weapons/trj.fwweapon",
 		"fw:data/weapons/rpg.fwweapon"
 	};
+	
+	public override List<string> Cosmetics => new()
+	{
+		"models/citizen_clothes/hat/tactical_helmet/tactical_helmet_army.clothing"
+	};
 }

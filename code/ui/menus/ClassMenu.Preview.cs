@@ -5,6 +5,7 @@ using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Fortwars;
 
@@ -17,6 +18,12 @@ partial class ClassMenu
 		private Rotation CameraRot => Rotation.From( 0, 210, 0 );
 		private Vector3 CameraPos => new Vector3( 70, 40, 48 );
 		SceneModel citizen;
+
+		bool dressed;
+
+		public ClothingContainer Container = new();
+
+		List<SceneModel> clothes = new List<SceneModel>();
 
 		public ClassPreviewPanel()
 		{
@@ -69,6 +76,36 @@ partial class ClassMenu
 			citizen.SetAnimParameter( "aim_body_weight", 1.0f );
 		}
 
+		public void ShowClass( Class classType )
+		{
+			foreach ( var model in clothes )
+			{
+				model?.Delete();
+			}
+
+			Container.Deserialize( ConsoleSystem.GetValue( "avatar" ) );
+
+			citizen.SetMaterialGroup( "Skin01" );
+
+			foreach ( var item in classType.Cosmetics )
+			{
+				Clothing cloth = ResourceLibrary.Get<Clothing>( item );
+				Container.Clothing.RemoveAll( x => !x.CanBeWornWith( cloth ) );
+				Container.Clothing.Add( cloth );
+			}
+
+			clothes = Container.DressSceneObject( citizen );
+		}
+
+		void DressModel()
+		{
+			Container.Deserialize( ConsoleSystem.GetValue( "avatar" ) );
+
+			citizen.SetMaterialGroup( "Skin01" );
+
+			clothes = Container.DressSceneObject( citizen );
+		}
+
 		public override void Tick()
 		{
 			base.Tick();
@@ -79,6 +116,16 @@ partial class ClassMenu
 			Animate();
 
 			citizen.Update( RealTime.Delta );
+
+			foreach ( var item in clothes )
+			{
+				item.Update( RealTime.Delta );
+			}
+
+			if ( clothes.Count == 0 )
+			{
+				DressModel();
+			}
 		}
 	}
 }
