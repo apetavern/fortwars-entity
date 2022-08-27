@@ -48,10 +48,7 @@
 						_class = "PhysicsHullFromRender"
 						parent_bone = "hold_R"
 						surface_prop = "default"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
+						collision_tags = "solid"
 						faceMergeAngle = 20.0
 						maxHullVertices = 32
 					},
@@ -65,8 +62,17 @@
 						_class = "Attachment"
 						name = "muzzle"
 						parent_bone = ""
-						relative_origin = [ 41.320206, 0.0, 11.237925 ]
-						relative_angles = [ 0.0, 0.0, 0.0 ]
+						relative_origin = [ 21.908606, 0.0, 3.910344 ]
+						relative_angles = [ -0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "lhand_ik"
+						parent_bone = ""
+						relative_origin = [ 9.387768, 2.727445, -2.308173 ]
+						relative_angles = [ 2.664523, -19.882185, 78.762825 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -80,7 +86,7 @@
 						_class = "RenderMeshFile"
 						filename = "models/weapons/rpg/rpg_w.fbx"
 						import_translation = [ 0.0, 0.0, -3.0 ]
-						import_rotation = [ -10.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 0.5
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
@@ -101,5 +107,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }

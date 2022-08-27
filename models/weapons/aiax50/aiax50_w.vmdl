@@ -56,10 +56,7 @@
 						_class = "PhysicsHullFromRender"
 						parent_bone = "hold_R"
 						surface_prop = "default"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
+						collision_tags = "solid"
 						faceMergeAngle = 8.97
 						maxHullVertices = 36
 					},
@@ -73,7 +70,7 @@
 						_class = "RenderMeshFile"
 						filename = "models/weapons/aiax50/aiax50.fbx"
 						import_translation = [ -3.0, 0.0, -2.0 ]
-						import_rotation = [ -12.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 0.6
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
@@ -100,8 +97,17 @@
 						_class = "Attachment"
 						name = "muzzle"
 						parent_bone = "hold_R"
-						relative_origin = [ 63.739517, 0.0, 18.569981 ]
-						relative_angles = [ -14.477669, 0.0, 0.0 ]
+						relative_origin = [ 63.739517, 0.0, 4.681812 ]
+						relative_angles = [ -0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "lhand_ik"
+						parent_bone = "hold_R"
+						relative_origin = [ 8.90881, 2.889528, -5.662219 ]
+						relative_angles = [ 5.520648, -75.719322, 12.442117 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -111,5 +117,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }

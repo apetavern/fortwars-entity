@@ -31,7 +31,7 @@
 						_class = "RenderMeshFile"
 						filename = "models/weapons/hksmgii/hksmgii_w.fbx"
 						import_translation = [ -2.0, 0.0, -1.0 ]
-						import_rotation = [ -12.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
@@ -66,10 +66,7 @@
 						_class = "PhysicsHullFromRender"
 						parent_bone = "hold_R"
 						surface_prop = "default"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
+						collision_tags = "solid"
 						faceMergeAngle = 20.0
 						maxHullVertices = 32
 					},
@@ -83,8 +80,17 @@
 						_class = "Attachment"
 						name = "muzzle"
 						parent_bone = "hold_R"
-						relative_origin = [ 16.164387, 0.0, 8.117855 ]
-						relative_angles = [ -19.986639, 0.0, 0.0 ]
+						relative_origin = [ 17.486788, 0.0, 4.135312 ]
+						relative_angles = [ 3.744057, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "lhand_ik"
+						parent_bone = "hold_R"
+						relative_origin = [ 11.866067, 0.0, -1.987397 ]
+						relative_angles = [ 2.563818, 6.560005, 94.346855 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -94,5 +100,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }

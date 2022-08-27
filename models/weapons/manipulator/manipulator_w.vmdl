@@ -70,10 +70,7 @@
 						_class = "PhysicsHullFromRender"
 						parent_bone = "hold_R"
 						surface_prop = "default"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
+						collision_tags = "solid"
 						faceMergeAngle = 20.0
 						maxHullVertices = 32
 					},
@@ -92,11 +89,21 @@
 						weight = 1.0
 						ignore_rotation = false
 					},
+					{
+						_class = "Attachment"
+						name = "lhand_ik"
+						parent_bone = "hold_R"
+						relative_origin = [ -4.183717, 7.569175, 7.191741 ]
+						relative_angles = [ -21.589947, -7.721111, 92.408165 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
 				]
 			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }

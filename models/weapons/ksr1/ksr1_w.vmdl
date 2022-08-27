@@ -35,8 +35,17 @@
 						_class = "Attachment"
 						name = "muzzle"
 						parent_bone = ""
-						relative_origin = [ 88.655388, 0.0, 10.307884 ]
-						relative_angles = [ 0.0, 0.0, 0.0 ]
+						relative_origin = [ 44.166515, 0.0, 2.743141 ]
+						relative_angles = [ -0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "lhand_ik"
+						parent_bone = ""
+						relative_origin = [ 11.88204, 2.832714, -2.713354 ]
+						relative_angles = [ -3.263246, -47.916283, 83.989891 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -50,7 +59,7 @@
 						_class = "RenderMeshFile"
 						filename = "models/weapons/ksr1/ksr1_w.fbx"
 						import_translation = [ 0.0, 0.0, -4.0 ]
-						import_rotation = [ -9.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 0.5
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
@@ -85,5 +94,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }
