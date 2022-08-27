@@ -36,6 +36,82 @@
     "PerMapRanking": false,
     "LeaderboardType": 0,
     "RankType": 0,
-    "GameNetworkType": 0
+    "GameNetworkType": 0,
+    "Collision": {
+      "Defaults": {
+        "solid": "Collide",
+        "trigger": "Trigger",
+        "ladder": "Ignore",
+        "water": "Trigger",
+        "redteam": "Trigger",
+        "blueteam": "Trigger",
+        "player": "Collide"
+      },
+      "Pairs": [
+        {
+          "a": "solid",
+          "b": "solid",
+          "r": "Collide"
+        },
+        {
+          "a": "trigger",
+          "b": "playerclip",
+          "r": "Ignore"
+        },
+        {
+          "a": "trigger",
+          "b": "solid",
+          "r": "Trigger"
+        },
+        {
+          "a": "solid",
+          "b": "trigger",
+          "r": "Collide"
+        },
+        {
+          "a": "playerclip",
+          "b": "solid",
+          "r": "Collide"
+        },
+        {
+          "a": "redteam",
+          "b": "blueteam",
+          "r": "Collide"
+        },
+        {
+          "a": "redteam",
+          "b": "redteam",
+          "r": "Trigger"
+        },
+        {
+          "a": "blueteam",
+          "b": "blueteam",
+          "r": "Trigger"
+        },
+        {
+          "a": "trigger",
+          "b": "blueteam",
+          "r": "Trigger"
+        },
+        {
+          "a": "trigger",
+          "b": "redteam",
+          "r": "Trigger"
+        },
+        {
+          "a": "player",
+          "b": "player",
+          "r": "Collide"
+        },
+        {
+          "a": "blueteam",
+          "b": "player"
+        },
+        {
+          "a": "redteam",
+          "b": "player"
+        }
+      ]
+    }
   }
 }
