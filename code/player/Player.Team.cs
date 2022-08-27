@@ -27,10 +27,11 @@ partial class FortwarsPlayer
                 if ( IsServer )
                 {
                     TeamID = _team.ID;
-
-                    // You have to do this for now.
-                    // Client.SetValue( "team", TeamID );
-                }
+					Tags.Remove( _team.ID == Fortwars.Team.Red ? "blueteam" : "redteam" );//Remove opposite team tag (for team swaps)
+					Tags.Add( _team.ID == Fortwars.Team.Red ? "redteam" : "blueteam" );//Add team tag
+					// You have to do this for now.
+					// Client.SetValue( "team", TeamID );
+				}
             }
         }
     }

@@ -21,8 +21,9 @@ public partial class FuncSpawnArea : BrushEntity
     {
         base.Spawn();
 
-        SetupPhysicsFromModel( PhysicsMotionType.Static );
-        CollisionGroup = CollisionGroup.Trigger;
+        SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
+		Tags.Add( "trigger" );
+		Tags.Add( Team == Team.Red ? "redteam" : "blueteam" );//Should make it so opposite teams can't enter eachother's spawn.
         EnableSolidCollisions = false;
         EnableTouch = true;
 

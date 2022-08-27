@@ -22,7 +22,8 @@ public partial class FuncFlagzone : BrushEntity
         base.Spawn();
 
         SetupPhysicsFromModel( PhysicsMotionType.Static );
-        CollisionGroup = CollisionGroup.Trigger;
+		Tags.Add( "trigger" );
+		Tags.Add( Team == Team.Red ? "blueteam" : "redteam" );//Opposite teams because the collision matrix has them set up as trigger for their own team
         EnableSolidCollisions = false;
         EnableTouch = true;
 
