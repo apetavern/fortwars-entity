@@ -116,6 +116,11 @@ public partial class DuckSlide : BaseNetworkable
 		IsActiveSlide = false;
 	}
 
+	public void CancelSlide()
+	{
+		TryUnDuck();
+	}
+
 	// Uck, saving off the bbox kind of sucks
 	// and we should probably be changing the bbox size in PreTick
 	Vector3 originalMins;

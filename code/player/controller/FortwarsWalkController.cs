@@ -440,7 +440,7 @@ public partial class FortwarsWalkController : BasePlayerController
 			return;
 
 		if ( DuckSlide.IsActiveSlide )
-			return;
+			DuckSlide.CancelSlide();
 
 		float jumpDecayMul = 1.0f;
 		if ( timeSinceLastJump < JumpDecayTime && !IsSwimming )
