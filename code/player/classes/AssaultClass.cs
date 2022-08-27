@@ -27,6 +27,11 @@ public partial class AssaultClass : Class
 	
 	public override List<string> Cosmetics => new()
 	{
-		"models/citizen_clothes/hat/tactical_helmet/tactical_helmet_army.clothing"
+		"models/citizen_clothes/hat/tactical_helmet/tactical_helmet_army.clothing",
+		"models/citizen_clothes/vest/tactical_vest/models/tactical_vest_army.clothing"
 	};
+
+	public override string PreviewWeapon => "models/weapons/rpg/rpg_w.vmdl";
+
+	public override HoldTypes PreviewHoldType => HoldTypes.Rifle;
 }

@@ -30,6 +30,15 @@ public class EngineerClass : Class
 
 	public override List<string> Cosmetics => new()
 	{
-		"models/citizen_clothes/hat/hardhat.yellow.clothing"
+		"models/citizen_clothes/hat/hardhat.yellow.clothing",
+		"models/citizen_clothes/shirt/tanktop/tanktop.clothing"
 	};
+
+	public override string PreviewWeapon => "models/weapons/amhammer/amhammer_w.vmdl";
+
+	public override HoldTypes PreviewHoldType => HoldTypes.HoldItem;
+
+	public override HoldHandedness PreviewHoldHandedness => HoldHandedness.RightHand;
+
+	public override float PreviewHandpose => 0.07f;
 }

@@ -16,14 +16,14 @@ partial class ClassMenu
 		private ScenePanel renderScene;
 
 		private Rotation CameraRot => Rotation.From( 0, 210, 0 );
-		private Vector3 CameraPos => new Vector3( 70, 40, 48 );
+		private Vector3 CameraPos => new Vector3( 120, 70, 48 );
 		SceneModel citizen;
-
-		bool dressed;
 
 		public ClothingContainer Container = new();
 
 		List<SceneModel> clothes = new List<SceneModel>();
+
+		SceneModel weaponModel;
 
 		public ClassPreviewPanel()
 		{
@@ -35,6 +35,7 @@ partial class ClassMenu
 
 			var world = new SceneWorld();
 			citizen = new SceneModel( world, "models/citizen/citizen.vmdl", Transform.Zero );
+			citizen.Position += Vector3.Up * 5f;
 
 			List<SceneLight> sceneLights = new();
 			sceneLights.Add( new SceneLight( world, Vector3.Up * 150.0f, 200.0f, Color.White * 5.0f ) );
@@ -43,9 +44,9 @@ partial class ClassMenu
 			sceneLights.Add( new SceneLight( world, Vector3.Up * 75.0f + Vector3.Right * 100.0f, 200, Color.White * 15.0f ) );
 			sceneLights.Add( new SceneLight( world, Vector3.Up * 100.0f + Vector3.Up, 200, Color.White * 15.0f ) );
 
-			renderScene = Add.ScenePanel( world, CameraPos, CameraRot, 75 );
+			renderScene = Add.ScenePanel( world, CameraPos, CameraRot, 50 );
 			renderScene.Style.Width = Length.Percent( 100 );
-			renderScene.Style.Height = Length.Percent( 100 );
+			renderScene.Style.Height = Length.Percent( 150 );
 			renderScene.AmbientColor = new Color( .25f, .15f, .15f ) * 2.0f;
 		}
 
@@ -74,13 +75,25 @@ partial class ClassMenu
 			citizen.SetAnimParameter( "aim_head", headPos );
 			citizen.SetAnimParameter( "aim_body", aimPos );
 			citizen.SetAnimParameter( "aim_body_weight", 1.0f );
+			citizen.SetAnimParameter( "holdtype", (int)weaponHoldtype );
+			citizen.SetAnimParameter( "holdtype_handedness", (int)weaponHoldHandedness );
+			citizen.SetAnimParameter( "holdtype_pose_hand", handpose );
 		}
+
+		HoldTypes weaponHoldtype;
+		HoldHandedness weaponHoldHandedness;
+		float handpose;
 
 		public void ShowClass( Class classType )
 		{
 			foreach ( var model in clothes )
 			{
 				model?.Delete();
+			}
+
+			if ( weaponModel != null )
+			{
+				weaponModel.Delete();
 			}
 
 			Container.Deserialize( ConsoleSystem.GetValue( "avatar" ) );
@@ -95,6 +108,23 @@ partial class ClassMenu
 			}
 
 			clothes = Container.DressSceneObject( citizen );
+
+			Transform bone = citizen.GetBoneWorldTransform( "hold_R" );
+
+			if ( classType.PreviewWeapon.Contains( "medkit" ) )
+			{
+				bone = citizen.GetBoneWorldTransform( "hold_L" );
+			}
+
+			weaponModel = new SceneModel( citizen.World, classType.PreviewWeapon, bone );
+
+			weaponHoldtype = classType.PreviewHoldType;
+
+			weaponHoldHandedness = classType.PreviewHoldHandedness;
+
+			handpose = classType.PreviewHandpose;
+
+			citizen.AddChild( "weapon", weaponModel );
 		}
 
 		void DressModel()
@@ -116,6 +146,8 @@ partial class ClassMenu
 			Animate();
 
 			citizen.Update( RealTime.Delta );
+
+			weaponModel?.Update( RealTime.Delta );
 
 			foreach ( var item in clothes )
 			{

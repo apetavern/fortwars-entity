@@ -14,6 +14,10 @@ public abstract class Class
 	public virtual List<string> CombatLoadout { get; set; }
 	public virtual List<string> BuildLoadout { get; set; }
 	public virtual List<string> Cosmetics { get; set; }
+	public virtual string PreviewWeapon { get; set; }
+	public virtual HoldTypes PreviewHoldType { get; set; }
+	public virtual HoldHandedness PreviewHoldHandedness { get; set; } = HoldHandedness.TwoHands;
+	public virtual float PreviewHandpose { get; set; } = 0f;
 
 	public virtual void AssignBuildLoadout( Inventory inventory )
 	{

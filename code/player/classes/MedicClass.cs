@@ -30,6 +30,11 @@ public class MedicClass : Class
 
 	public override List<string> Cosmetics => new()
 	{
-		"data/labcoat.clothing"
+		"data/labcoat.clothing",
+		"models/cosmetics/doctor/headmirror.clothing"
 	};
+
+	public override string PreviewWeapon => "models/items/medkit/medkit_w/medkit_preview.vmdl";
+
+	public override HoldTypes PreviewHoldType => HoldTypes.HoldItem;
 }
