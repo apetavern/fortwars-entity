@@ -92,7 +92,9 @@ partial class Grenade : Carriable
 
 	public override void SimulateAnimator( PawnAnimator anim )
 	{
-		anim.SetAnimParameter( "holdtype", (int)HoldTypes.MeleePunch );
+		anim.SetAnimParameter( "holdtype", (int)HoldTypes.HoldItem );
+		anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.RightHand );
+		anim.SetAnimParameter( "holdtype_pose_hand", 0.11f );
 		anim.SetAnimParameter( "aim_body_weight", 1.0f );
 	}
 }
