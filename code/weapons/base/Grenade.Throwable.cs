@@ -16,6 +16,7 @@ partial class Grenade
 
 			SetModel( "models/weapons/fraggrenade/fraggrenade_w.vmdl" );
 			SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
+			SetBodyGroup( 0, 1 );
 		}
 
 		public async Task ExplodeAfterSeconds( float seconds )

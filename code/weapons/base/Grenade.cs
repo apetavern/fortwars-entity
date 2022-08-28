@@ -33,7 +33,7 @@ partial class Grenade : Carriable
 	{
 		base.Simulate( cl );
 
-		DebugOverlay.ScreenText( $"TimeSinceThrow:       {TimeSinceThrow}", 21 );
+		//DebugOverlay.ScreenText( $"TimeSinceThrow:       {TimeSinceThrow}", 21 );
 
 		if ( CanThrow() )
 		{
@@ -83,9 +83,7 @@ partial class Grenade : Carriable
 				grenade.PhysicsBody.Velocity = Owner.EyeRotation.Forward * 600.0f + Owner.EyeRotation.Up * 200.0f
 					+ ( Owner.EyeRotation.Forward * Owner.Velocity.Length );
 
-				grenade.CollisionGroup = CollisionGroup.Debris;
-				grenade.SetInteractsExclude( CollisionLayer.Player );
-				grenade.SetInteractsAs( CollisionLayer.Debris );
+				grenade.Tags.Add( "debris" );
 
 				_ = grenade.ExplodeAfterSeconds( 3.0f );
 			}
