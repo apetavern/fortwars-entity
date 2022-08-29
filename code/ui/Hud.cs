@@ -35,7 +35,7 @@ public partial class FortwarsHUD : HudEntity<RootPanel>
 		hud.AddChild<MapVote>();
 
 		hud.AddChild<ChatBox>();
-		hud.AddChild<VoiceList>();
+		hud.AddChild<VoiceFeed>();
 
 		hud.AddChild<Victory>();
 
