@@ -13,7 +13,7 @@ public partial class DuckSlide : BaseNetworkable
 	public bool IsActive { get; private set; }
 	public bool IsActiveSlide { get; private set; }
 
-	private float MinimumSlideSpeed => 200f;
+	private float MinimumSlideSpeed => 150;
 
 	TimeSince timeSinceSlide = 0;
 	TimeSince timeSinceDuck = 0;
