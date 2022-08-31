@@ -4,11 +4,11 @@
     aspect-ratio: 1;
     top: 50%;
     left: 50%;
-    transition: opacity 25ms ease;
+    transition: opacity 100ms ease;
 
     .element {
         position: absolute;
-        transition: opacity 150ms ease;
+        transition: opacity 100ms ease;
     }
 
     .el4 {

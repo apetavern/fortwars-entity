@@ -91,7 +91,7 @@ public partial class DropTool : Carriable
 		
 		projectile.Rotation = Owner.EyeRotation;
 		projectile.Position = Owner.EyePosition + offset;
-		projectile.Velocity = projectile.Rotation.Forward * 250f;
+		projectile.Velocity = projectile.Rotation.Forward * 250f + Owner.Velocity;
 
 		projectile.Owner = Owner;
 	}
