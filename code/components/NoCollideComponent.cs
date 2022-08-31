@@ -20,7 +20,6 @@ public class NoCollideComponent : EntityComponent<FortwarsBlock>
 
 		if ( Host.IsServer )
 		{
-			entity.SetInteractsExclude( CollisionLayer.Player );
 			entity.Tags.Add( "nocollide" );
 		}
 		else
@@ -40,7 +39,6 @@ public class NoCollideComponent : EntityComponent<FortwarsBlock>
 
 		if ( Host.IsServer )
 		{
-			entity.SetInteractsWith( CollisionLayer.Player );
 			entity.Tags.Remove( "nocollide" );
 		}
 		else

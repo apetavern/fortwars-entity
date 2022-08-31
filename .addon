@@ -42,7 +42,8 @@
         "redteam": "Trigger",
         "blueteam": "Trigger",
         "player": "Collide",
-        "debris": "Ignore"
+        "debris": "Ignore",
+        "nocollide": "Ignore"
       },
       "Pairs": [
         {
@@ -141,6 +142,11 @@
         {
           "a": "trigger",
           "b": "debris",
+          "r": "Ignore"
+        },
+        {
+          "a": "player",
+          "b": "nocollide",
           "r": "Ignore"
         }
       ]
