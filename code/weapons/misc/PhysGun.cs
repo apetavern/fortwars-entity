@@ -56,7 +56,6 @@ public partial class PhysGun : Carriable, IUse
 		var tr = Trace.Ray( EyePosition, EyePosition + eyeDir * MaxTargetDistance )
 			.UseHitboxes()
 			.Ignore( owner, false )
-			.HitLayer( CollisionLayer.Debris )
 			.Run();
 
 		if ( !tr.Hit || !tr.Entity.IsValid() || tr.Entity.IsWorld || tr.StartedSolid )
@@ -153,7 +152,6 @@ public partial class PhysGun : Carriable, IUse
 		var tr = Trace.Ray( EyePosition, EyePosition + eyeDir * MaxTargetDistance )
 			.UseHitboxes()
 			.Ignore( owner, false )
-			.HitLayer( CollisionLayer.Debris )
 			.Run();
 
 		var rootEnt = tr.Entity.Root;
@@ -170,7 +168,6 @@ public partial class PhysGun : Carriable, IUse
 		var tr = Trace.Ray( EyePosition, EyePosition + eyeDir * MaxTargetDistance )
 			.UseHitboxes()
 			.Ignore( owner, false )
-			.HitLayer( CollisionLayer.Debris )
 			.Run();
 
 		var rootEnt = tr.Entity.Root;

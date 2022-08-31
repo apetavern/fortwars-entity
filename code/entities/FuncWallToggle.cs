@@ -15,8 +15,7 @@ public partial class FuncWallToggle : BrushEntity
     {
         base.Spawn();
 
-        SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
-        CollisionGroup = CollisionGroup.Default;
+        SetupPhysicsFromModel( PhysicsMotionType.Keyframed ); 
         EnableAllCollisions = true;
         EnableTouch = true;
     }
@@ -24,7 +23,6 @@ public partial class FuncWallToggle : BrushEntity
     public void Show()
     {
         // TODO: Why does changing EnableAllCollisions do fuck all
-        CollisionGroup = CollisionGroup.Default;
         EnableAllCollisions = true;
         EnableDrawing = true;
     }
@@ -32,7 +30,6 @@ public partial class FuncWallToggle : BrushEntity
     public void Hide()
     {
         // TODO: Ditto
-        CollisionGroup = CollisionGroup.Never;
         EnableAllCollisions = false;
         EnableDrawing = false;
     }
