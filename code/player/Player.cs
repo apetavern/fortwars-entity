@@ -292,8 +292,6 @@ public partial class FortwarsPlayer : Sandbox.Player
 
 		timeSinceLastFootstep = 0;
 
-		DebugOverlay.Box( pos, -1, 1, Color.Red, 5 );
-
 		var tr = Trace.Ray( pos, pos + Vector3.Down * 20 )
 			.Radius( 1 )
 			.Ignore( this )
