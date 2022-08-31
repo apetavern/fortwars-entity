@@ -51,7 +51,7 @@ public partial class RepairTool : MeleeWeapon
             if ( tr.Entity == null || !tr.Entity.IsValid )
                 continue;
 
-            tr.Entity.TakeDamage( DamageInfo.FromBullet( tr.EndPosition, -tr.Normal * 10f, 10 ) );
+            tr.Entity.TakeDamage( DamageInfo.FromBullet( tr.EndPosition, -tr.Normal * 10f, 10 ).WithAttacker( player ) );
         }
 
         ViewModelEntity?.SetAnimParameter( "fire", true );
