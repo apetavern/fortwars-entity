@@ -28,8 +28,6 @@ public partial class MeleeWeapon : Carriable
 
     public virtual IEnumerable<TraceResult> TraceHit( Vector3 start, Vector3 end, float radius = 2.0f )
     {
-        bool InWater = Map.Physics.IsPointWater( start );
-
         var tr = Trace.Ray( start, end )
                 .UseHitboxes()
                 .WithAnyTags("player", "solid")

@@ -439,11 +439,8 @@ public partial class FortwarsWeapon : Carriable
 	{
 		using var _ = LagCompensation();
 
-		bool InWater = Map.Physics.IsPointWater( start );
-
 		var tr = Trace.Ray( start, end )
 				.UseHitboxes()
-				.HitLayer( CollisionLayer.Water, !InWater )
 				.Ignore( Owner )
 				.Ignore( this )
 				.Size( radius )

@@ -12,8 +12,9 @@ public partial class Carriable : BaseCarriable
 	{
 		base.Spawn();
 
-		CollisionGroup = CollisionGroup.Weapon; // so players touch it as a trigger but not as a solid
-		SetInteractsAs( CollisionLayer.Debris ); // so player movement doesn't walk into it
+		//CollisionGroup = CollisionGroup.Weapon; // so players touch it as a trigger but not as a solid
+		Tags.Add( "trigger" );
+		//SetInteractsAs( CollisionLayer.Debris ); // so player movement doesn't walk into it
 	}
 
 	public override void CreateViewModel()

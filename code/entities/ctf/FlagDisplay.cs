@@ -52,8 +52,6 @@ public partial class FlagDisplay : ModelEntity, IShowIcon
 	{
 		base.Spawn();
 
-		MoveType = MoveType.None;
-		CollisionGroup = CollisionGroup.Interactive;
 		PhysicsEnabled = false;
 		UsePhysicsCollision = false;
 		EnableHideInFirstPerson = true;

@@ -33,10 +33,6 @@ partial class FortwarsPlayer
 			//ent.EnableDrawing = false; wtf
 		}
 
-		ent.SetInteractsAs( CollisionLayer.Debris );
-		ent.SetInteractsWith( CollisionLayer.WORLD_GEOMETRY );
-		ent.SetInteractsExclude( CollisionLayer.Player | CollisionLayer.Debris );
-
 		foreach ( var child in Children )
 		{
 			if ( !child.Tags.Has( "clothes" ) ) continue;

@@ -58,8 +58,8 @@ partial class ClassMenu
 			var mousePosition = Mouse.Position;
 
 			// subtract what we think is about the player's eye position
-			mousePosition.x -= Box.Rect.width * 0.475f;
-			mousePosition.y -= Box.Rect.height * 0.3f;
+			mousePosition.x -= Box.Rect.Width * 0.475f;
+			mousePosition.y -= Box.Rect.Height * 0.3f;
 			mousePosition /= ScaleToScreen;
 
 			// convert it to an imaginary world position
