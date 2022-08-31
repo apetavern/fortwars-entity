@@ -33,7 +33,7 @@ public partial class FortwarsWeapon : Carriable
 	public float Bloom { get; set; }
 	public Vector2 Recoil { get; set; }
 	public float Inaccuracy { get; set; }
-	public bool IsAiming => Input.Down( InputButton.SecondaryAttack );
+	public bool IsAiming { get; set; }
 	private TimeSince TimeSinceReload { get; set; }
 	private FallbackScope scopePanel;
 
@@ -116,6 +116,11 @@ public partial class FortwarsWeapon : Carriable
 
 		if ( CanReload() )
 			Reload();
+
+		if ( CanAimDownSights() )
+			AimDownSights();
+		else
+			IsAiming = false;
 
 		if ( !Owner.IsValid() )
 			return;
@@ -288,6 +293,19 @@ public partial class FortwarsWeapon : Carriable
 			return true;
 
 		return TimeSincePrimaryAttack > ( 1 / rate );
+	}
+
+	public virtual bool CanAimDownSights()
+	{
+		if ( Owner is FortwarsPlayer { Controller: FortwarsWalkController { IsSprinting: true } } || GetTuckDist() != -1 )
+			return false;
+
+		return true;
+	}
+
+	public virtual void AimDownSights()
+	{
+		IsAiming = Input.Down( InputButton.SecondaryAttack );
 	}
 
 	public virtual void AttackPrimary()
