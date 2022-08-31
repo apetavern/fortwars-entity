@@ -268,4 +268,39 @@ public partial class FortwarsPlayer : Sandbox.Player
 	{
 		DamageIndicator.Current?.OnHit( pos );
 	}
+
+	TimeSince timeSinceLastFootstep = 0;
+	
+	public override void OnAnimEventFootstep( Vector3 pos, int foot, float volume )
+	{
+		if ( LifeState != LifeState.Alive )
+			return;
+
+		if ( !IsClient )
+			return;
+
+		if ( timeSinceLastFootstep < 0.2f )
+			return;
+
+		// Don't play if sliding
+		if ( Controller is FortwarsWalkController { DuckSlide: { IsActiveSlide: true } } )
+			return;
+
+		// These are super quiet unless we bump them up. This might be due to some volume
+		// bug in-engine, I don't know, I don't care.
+		volume *= 5f;
+
+		timeSinceLastFootstep = 0;
+
+		DebugOverlay.Box( pos, -1, 1, Color.Red, 5 );
+
+		var tr = Trace.Ray( pos, pos + Vector3.Down * 20 )
+			.Radius( 1 )
+			.Ignore( this )
+			.Run();
+
+		if ( !tr.Hit ) return;
+
+		tr.Surface.DoFootstep( this, tr, foot, volume );
+	}
 }
