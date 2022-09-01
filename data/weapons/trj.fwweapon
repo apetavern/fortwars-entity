@@ -2,42 +2,42 @@
 {
 	data = 
 	{
-		weaponname = "Revolver"
-		worldmodel = resource:"models/weapons/trj/trj_w.vmdl"
-		viewmodel = resource:"models/weapons/trj/trj_v.vmdl"
-		movementspeedmultiplier = 0.95
-		rpm = 300.0
-		range = 16384
-		shotcount = 1
-		recoilx = 0.3
-		recoily = 8.0
-		spread = 0.05
-		spreadshotincrease = 0.025
-		spreadchangetime = 4.0
-		maxammo = 6
-		extraammo = 36
-		reloadtime = 4.0
-		maxdamage = 50.0
-		mindamage = 25.0
-		damagedropoffdistance = 1024
-		headshotmultiplier = 2.5
-		firesound = "trj_fire"
-		holdtype = "1"
-		projectilemodel = resource:""
-		projectilespeed = 1.0
-		aimposition = [ -20.0, 27.4, 4.25 ]
-		aimrotation = [ -0.125, -1.5, 1.0 ]
-		aimfovmult = 0.75
-		fireparticles = resource:"particles/muzzleflash/fw_muzzleflash.vpcf"
-		tracerparticles = resource:"particles/tracer_large.vpcf"
-		buildingdamagemultiplier = 0.25
-		proceduralviewmodelstrength = 1.0
-		aimedproceduralviewmodelstrength = 2.0
-		flags = 
+		WeaponName = "Revolver"
+		WorldModel = resource:"models/weapons/trj/trj_w.vmdl"
+		ViewModel = resource:"models/weapons/trj/trj_v.vmdl"
+		MovementSpeedMultiplier = 0.95
+		InventorySlot = "Secondary"
+		HoldType = "Pistol"
+		ProceduralViewmodelStrength = 1
+		AimedProceduralViewmodelStrength = 2
+		Flags = 
 		{
-			shotgunammo = true
+			ShotgunAmmo = true
 		}
-		inventoryslot = "0"
-		sprintanimationtype = "1"
+		SprintAnimationType = "Pistol"
+		RPM = 300
+		Range = 16384
+		ShotCount = 1
+		RecoilX = 0.3
+		RecoilY = 8
+		Spread = 0.05
+		SpreadShotIncrease = 0.025
+		SpreadChangeTime = 4
+		AimPosition = "-20,27.4,4.25"
+		AimRotation = "-0.125,-1.5,1"
+		AimFovMult = 0.75
+		MaxAmmo = 6
+		ExtraAmmo = 36
+		ReloadTime = 4
+		MaxDamage = 50
+		MinDamage = 25
+		DamageDropOffDistance = 1024
+		HeadshotMultiplier = 2.5
+		BuildingDamageMultiplier = 0.25
+		FireSound = "trj_fire"
+		FireParticles = resource:"particles/muzzleflash/fw_muzzleflash.vpcf"
+		TracerParticles = resource:"particles/tracer_large.vpcf"
+		ProjectileModel = ""
+		ProjectileSpeed = 1
 	}
 }
