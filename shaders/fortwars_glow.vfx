@@ -73,6 +73,7 @@ GS
 	float g_flOutlineSize < UiType( Slider ); Range( 0.025f, 10.0f ); Default( 1.0f ); UiGroup( "Outline Settings,10/20" ); >;
 	bool g_bResolutionDependentOutline < UiType( CheckBox ); Default( 0 ); UiGroup( "Outline Settings,10/20" ); >;
 	bool g_bScaleByDistance < UiType( CheckBox ); Default( 0 ); UiGroup( "Outline Settings,10/20" ); >;
+	float g_flOffset < UiType( Slider ); Range( 0.0f, 10.0f ); Default( 0.0f ); UiGroup( "Outline Settings,10/20" ); >;
 
 
 	void PositionOffset (inout PixelInput input, float2 vOffsetDir, float flOutlineSize)
@@ -127,7 +128,7 @@ GS
 				// Todo: I will make this use a stencil mask instead of
 				// positioning it backwards when moving glow logic to C# - Sam
 				
-				v[i].vPositionPs.z += D_ENABLE_USER_CLIP_PLANE ? 0.1f : 1.0f;
+				v[i].vPositionPs.z += D_ENABLE_USER_CLIP_PLANE ? 0.1f : g_flOffset;
 			}
 
 			triStream.Append(v[2]);

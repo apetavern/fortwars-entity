@@ -21,6 +21,7 @@ Layer0
 	//---- Outline Settings ----
 	g_bResolutionDependentOutline "0"
 	g_bScaleByDistance "0"
+	g_flOffset "1.000"
 	g_flOutlineSize "0.500"
 
 	//---- Texture Coordinates ----
