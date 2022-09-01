@@ -7423,7 +7423,7 @@
 					{
 						m_id = 1874579477
 					}
-					m_lookatChainName = "AimChain"
+					m_lookatChainName = "AimChain_Halved"
 					m_attachmentName = "forward_reference_modelspace"
 					m_flYawLimit = 180.0
 					m_flPitchLimit = 80.0
@@ -8658,7 +8658,7 @@
 				{
 					_class = "CBlend2DAnimNode"
 					m_sName = "2D - Walk & Run"
-					m_vecPosition = [ -4224.0, -640.0 ]
+					m_vecPosition = [ -4208.0, -640.0 ]
 					m_nNodeID = 
 					{
 						m_id = 213225180
@@ -34925,7 +34925,7 @@
 								{
 									_class = "CSingleFrameAnimNode"
 									m_sName = "Unnamed"
-									m_vecPosition = [ -632.0, -408.0 ]
+									m_vecPosition = [ -640.0, -416.0 ]
 									m_nNodeID = 
 									{
 										m_id = 1749786464
@@ -36932,6 +36932,61 @@
 								}
 							},
 						]
+					}
+				}
+			},
+			{
+				key = 
+				{
+					m_id = 1670677948
+				}
+				value = 
+				{
+					_class = "CLookAtAnimNode"
+					m_sName = "Weapon Aim"
+					m_vecPosition = [ 976.0, 3296.0 ]
+					m_nNodeID = 
+					{
+						m_id = 1670677948
+					}
+					m_networkMode = "ClientPredicted"
+					m_sNote = ""
+					m_inputConnection = 
+					{
+						m_nodeID = 
+						{
+							m_id = 269857516
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_target = "VectorParameter"
+					m_param = 
+					{
+						m_id = 1442178442
+					}
+					m_weightParam = 
+					{
+						m_id = 1874579477
+					}
+					m_lookatChainName = "RightHandAim"
+					m_attachmentName = "hold_R"
+					m_flYawLimit = 180.0
+					m_flPitchLimit = 180.0
+					m_bResetBase = true
+					m_bLockWhenWaning = false
+					m_bUseHysteresis = false
+					m_flHysteresisInnerAngle = 1.0
+					m_flHysteresisOuterAngle = 20.0
+					m_damping = 
+					{
+						_class = "CAnimInputDamping"
+						m_speedFunction = "NoDamping"
+						m_fSpeedScale = 20.0
+						m_fMinSpeed = 10.0
+						m_fMaxTension = 720.0
 					}
 				}
 			},
@@ -41790,7 +41845,7 @@
 					{
 						m_nodeID = 
 						{
-							m_id = 4294967295
+							m_id = 269857516
 						}
 						m_outputID = 
 						{
@@ -43365,6 +43420,61 @@
 					m_commentText = "The \"skid\" float fades the locomotion Blend 2Ds over to a different set which is meant to look like the character is \"skidding\", or \"drifting\" to a stop. (When crouched, it looks like \"powersliding.\")\n\nThe controller should be managing the logic driving the value of the \"skid\" float. Generally, any time you are slowing down from a high speed while there\'s no player input going on, you should blend skid to 1.0. Then on top of that, you should modulate from 1.0 to 0.0 once the speed gets slow enough."
 					m_size = [ 480.0, 384.0 ]
 					m_color = [ 125, 75, 125, 255 ]
+				}
+			},
+			{
+				key = 
+				{
+					m_id = 2103425245
+				}
+				value = 
+				{
+					_class = "CLookAtAnimNode"
+					m_sName = "Aim Head"
+					m_vecPosition = [ 976.0, 3344.0 ]
+					m_nNodeID = 
+					{
+						m_id = 2103425245
+					}
+					m_networkMode = "ClientPredicted"
+					m_sNote = ""
+					m_inputConnection = 
+					{
+						m_nodeID = 
+						{
+							m_id = 1670677948
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_target = "VectorParameter"
+					m_param = 
+					{
+						m_id = 1205941383
+					}
+					m_weightParam = 
+					{
+						m_id = 1414089017
+					}
+					m_lookatChainName = "LookChain"
+					m_attachmentName = "forward_reference"
+					m_flYawLimit = 140.0
+					m_flPitchLimit = 140.0
+					m_bResetBase = true
+					m_bLockWhenWaning = false
+					m_bUseHysteresis = false
+					m_flHysteresisInnerAngle = 1.0
+					m_flHysteresisOuterAngle = 20.0
+					m_damping = 
+					{
+						_class = "CAnimInputDamping"
+						m_speedFunction = "Spring"
+						m_fSpeedScale = 20.0
+						m_fMinSpeed = 2.0
+						m_fMaxTension = 960.0
+					}
 				}
 			},
 			{
