@@ -6,7 +6,7 @@
 		WorldModel = resource:"models/weapons/rpg/rpg_w.vmdl"
 		ViewModel = resource:"models/weapons/rpg/rpg_v.vmdl"
 		MovementSpeedMultiplier = 0.75
-		InventorySlot = "Primary"
+		InventorySlot = "Equipment"
 		HoldType = "Rifle"
 		ProceduralViewmodelStrength = 1
 		AimedProceduralViewmodelStrength = 0.1

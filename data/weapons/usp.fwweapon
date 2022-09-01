@@ -2,42 +2,41 @@
 {
 	data = 
 	{
-		weaponname = "Pistol"
-		worldmodel = resource:"models/weapons/hkusp/hkusp_w.vmdl"
-		viewmodel = resource:"models/weapons/hkusp/hkusp_v.vmdl"
-		movementspeedmultiplier = 0.95
-		rpm = 600.0
-		range = 16384
-		shotcount = 1
-		recoilx = 0.0
-		recoily = 2.0
-		spread = 0.05
-		spreadshotincrease = 0.05
-		spreadchangetime = 5.0
-		maxammo = 18
-		extraammo = 36
-		reloadtime = 2.0
-		maxdamage = 25.0
-		mindamage = 10.0
-		damagedropoffdistance = 512
-		headshotmultiplier = 1.5
-		firesound = "hkusp_fire"
-		holdtype = "1"
-		projectilemodel = resource:""
-		projectilespeed = 1.0
-		aimposition = [ -20.0, 25.25, 4.0 ]
-		aimrotation = [ -1.75, -1.175, 0.0 ]
-		aimfovmult = 0.5
-		fireparticles = resource:"particles/muzzleflash/fw_muzzleflash.vpcf"
-		tracerparticles = resource:"particles/tracer_large.vpcf"
-		buildingdamagemultiplier = 0.25
-		proceduralviewmodelstrength = 1.0
-		aimedproceduralviewmodelstrength = 0.5
-		flags = 
+		WeaponName = "Pistol"
+		WorldModel = resource:"models/weapons/hkusp/hkusp_w.vmdl"
+		ViewModel = resource:"models/weapons/hkusp/hkusp_v.vmdl"
+		MovementSpeedMultiplier = 0.95
+		InventorySlot = "Secondary"
+		HoldType = "Pistol"
+		ProceduralViewmodelStrength = 1
+		AimedProceduralViewmodelStrength = 0.5
+		Flags = 
 		{
-			automaticfire = false
 		}
-		inventoryslot = "0"
-		sprintanimationtype = "1"
+		SprintAnimationType = "Pistol"
+		RPM = 600
+		Range = 16384
+		ShotCount = 1
+		RecoilX = 0
+		RecoilY = 2
+		Spread = 0.05
+		SpreadShotIncrease = 0.05
+		SpreadChangeTime = 5
+		AimPosition = "-20,25.25,4"
+		AimRotation = "-1.75,-1.175,0"
+		AimFovMult = 0.5
+		MaxAmmo = 18
+		ExtraAmmo = 36
+		ReloadTime = 2
+		MaxDamage = 25
+		MinDamage = 10
+		DamageDropOffDistance = 512
+		HeadshotMultiplier = 1.5
+		BuildingDamageMultiplier = 0.25
+		FireSound = "hkusp_fire"
+		FireParticles = resource:"particles/muzzleflash/fw_muzzleflash.vpcf"
+		TracerParticles = resource:"particles/tracer_large.vpcf"
+		ProjectileModel = ""
+		ProjectileSpeed = 1
 	}
 }
