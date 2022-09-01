@@ -496,6 +496,15 @@
 						_class = "ModelModifier_Translate"
 						translation = [ 15.0, 5.0, -150.0 ]
 					},
+					{
+						_class = "ModelModifier_ScaleAndMirror"
+						scale = 0.5
+						mirror_x = false
+						mirror_y = false
+						mirror_z = false
+						flip_bone_forward = false
+						swap_left_and_right_bones = false
+					},
 				]
 			},
 			{
@@ -661,5 +670,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = "models/weapons/manipulator/manipulator_v.vanmgrph"
+		base_model_name = ""
 	}
 }
