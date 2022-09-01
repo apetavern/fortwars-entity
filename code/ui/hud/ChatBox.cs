@@ -33,6 +33,16 @@ public partial class ChatBox : Panel
 		Chat.OnOpenChat += Open;
 	}
 
+	public override void Tick()
+	{
+		base.Tick();
+
+		if ( Sandbox.Input.Pressed( InputButton.Chat ) )
+		{
+			Open();
+		}
+	}
+
 	void Open()
 	{
 		AddClass( "open" );
