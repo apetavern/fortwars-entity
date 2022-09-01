@@ -22,6 +22,9 @@ public partial class WeaponAsset : GameResource
 	[Property, Category( "Meta" ), ResourceType( "vmdl" )]
 	public string ViewModel { get; set; }
 
+	[Property, Category( "Meta" ), ResourceType( "png" )]
+	public string IconPath { get; set; }
+
 	[Property, Category( "Meta" ), Range( 0.1f, 1.0f )]
 	public float MovementSpeedMultiplier { get; set; } = 1.0f;
 

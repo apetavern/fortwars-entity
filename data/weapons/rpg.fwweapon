@@ -5,6 +5,7 @@
 		WeaponName = "RPG"
 		WorldModel = resource:"models/weapons/rpg/rpg_w.vmdl"
 		ViewModel = resource:"models/weapons/rpg/rpg_v.vmdl"
+		IconPath = null
 		MovementSpeedMultiplier = 0.75
 		InventorySlot = "Equipment"
 		HoldType = "Rifle"

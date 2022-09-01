@@ -5,6 +5,7 @@
 		WeaponName = "Pistol"
 		WorldModel = resource:"models/weapons/hkusp/hkusp_w.vmdl"
 		ViewModel = resource:"models/weapons/hkusp/hkusp_v.vmdl"
+		IconPath = resource:"ui/icons/weapons/pistol.png"
 		MovementSpeedMultiplier = 0.95
 		InventorySlot = "Secondary"
 		HoldType = "Pistol"

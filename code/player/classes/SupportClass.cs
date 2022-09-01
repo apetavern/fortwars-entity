@@ -10,11 +10,7 @@ namespace Fortwars;
 public class SupportClass : Class
 {
 	public override string Name => "Support";
-	public override string Description =>
-		"Specialization is for suckers! With support, " +
-		"you can help your team in as many creative ways " +
-		"as you can think of.";
-	public override string IconPath => "/textures/icons/support.png";
+	public override string IconPath => "/ui/icons/support.png";
 	public override string ShortDescription => "Resupply your comrades with ammo";
 
 	public override List<string> BuildLoadout => new()
@@ -24,8 +20,6 @@ public class SupportClass : Class
 
 	public override List<string> CombatLoadout => new()
 	{
-		"fw:data/weapons/hksmgii.fwweapon",
-		"fw:data/weapons/usp.fwweapon",
 		"ammokittool"
 	};
 

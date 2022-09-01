@@ -10,11 +10,7 @@ namespace Fortwars;
 public class MedicClass : Class
 {
 	public override string Name => "Medic";
-	public override string Description =>
-		"Nobody knows how to keep the team alive " +
-		"like a medic! This class will help ensure your " +
-		"buddies stay in tip-top shape.";
-	public override string IconPath => "/textures/icons/medic.png";
+	public override string IconPath => "/ui/icons/medic.png";
 	public override string ShortDescription => "Heal your buddies and stop them dying";
 
 	public override List<string> BuildLoadout => new()
@@ -24,8 +20,6 @@ public class MedicClass : Class
 
 	public override List<string> CombatLoadout => new()
 	{
-		"fw:data/weapons/uts15.fwweapon",
-		"fw:data/weapons/usp.fwweapon",
 		"medkittool"
 	};
 

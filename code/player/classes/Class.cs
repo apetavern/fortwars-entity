@@ -9,7 +9,6 @@ namespace Fortwars;
 public abstract class Class
 {
 	public virtual string Name { get; set; }
-	public virtual string Description { get; set; }
 	public virtual string ShortDescription { get; set; }
 	public virtual string IconPath { get; set; }
 	public virtual List<string> CombatLoadout { get; set; }
@@ -19,6 +18,7 @@ public abstract class Class
 	public virtual HoldTypes PreviewHoldType { get; set; }
 	public virtual HoldHandedness PreviewHoldHandedness { get; set; } = HoldHandedness.TwoHands;
 	public virtual float PreviewHandpose { get; set; } = 0f;
+	public virtual bool Selectable => true;
 
 	public virtual void AssignBuildLoadout( Inventory inventory )
 	{

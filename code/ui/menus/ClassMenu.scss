@@ -31,33 +31,62 @@ ClassPreviewPanel {
         height: 100%;
     }
 
-    border: rgba( black, 0.2 );
-    border-left: 2px;
-    border-right: 2px;
     margin: 0 32px;
 }
 
-.cancel {
+.close {
     position: absolute;
-    right: 50px;
+    right: 80px;
     bottom: 50px;
 }
 
-ClassInfo {
+.weapon-select {
     width: 33%;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+
+    .weapons {
+        flex-direction: column;
+        margin: 10px 0;
+        width: 100%;
+
+        button {
+            height: 75px;
+            width: 100%;
+
+            .weapon-icon {
+                height: 100px;
+                width: 100px;
+                position: absolute;
+                left: 0;
+            }
+
+            label {
+                position: absolute;
+                left: 100px;
+            }
+        }
+    }
 }
 
 button {
     background-color: rgba( black, 0.2 );
-    margin: 5px 10px;
+    margin: 5px 0;
     padding: 10px 20px;
     align-items: center;
-    justify-content: center;
     border-radius: 2px;
     border: 2px solid rgba( black, 0.25 );
     transition: all 150ms ease;
+
+    &.selected {
+        background-color: rgba( white, 0.1 );
+        border: 2px solid rgba( white, 0.25 );
+    }
+
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
 
     iconpanel {
         color: white;
@@ -72,7 +101,6 @@ button {
 
 .classes {
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     width: 33%;
 
@@ -103,4 +131,16 @@ button {
             position: absolute;
         }
     }
+}
+
+ClassInfo {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    flex-direction: column;
+    width: 30%;
+    transform: translate( -50% );
+    background-color: black;
+    padding: 20px;
+    border-radius: 2px;
 }

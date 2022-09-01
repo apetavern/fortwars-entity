@@ -5,6 +5,7 @@
 		WeaponName = "Revolver"
 		WorldModel = resource:"models/weapons/trj/trj_w.vmdl"
 		ViewModel = resource:"models/weapons/trj/trj_v.vmdl"
+		IconPath = resource:"ui/icons/weapons/revolver.png"
 		MovementSpeedMultiplier = 0.95
 		InventorySlot = "Secondary"
 		HoldType = "Pistol"

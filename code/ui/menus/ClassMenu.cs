@@ -4,6 +4,7 @@
 using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,48 +12,104 @@ namespace Fortwars;
 
 public partial class ClassMenu : Menu
 {
-	private ClassInfo classInfo;
+	private Panel weaponSelect;
 	private ClassPreviewPanel previewpanel;
 	private Panel classes;
-	
+
+	private Panel primaries;
+	private Panel secondaries;
+
+	// TODO: fetch these from player
+	private string selectedClass = "fwclass_assault";
+	private string selectedPrimary = "fw:data/weapons/ksr1.fwweapon";
+	private string selectedSecondary = "fw:data/weapons/trj.fwweapon";
+
 	public ClassMenu()
 	{
 		AddClass( "menu" );
 		StyleSheet.Load( "ui/menus/ClassMenu.scss" );
 
-		Add.Label( "Select a class", "title" );
+		Add.Label( "Loadout", "title" );
 
 		var main = Add.Panel( "main" );
 		classes = main.Add.Panel( "classes" );
 		previewpanel = main.AddChild<ClassPreviewPanel>();
-		classInfo = main.AddChild<ClassInfo>();
+		weaponSelect = main.AddChild<Panel>( "weapon-select" );
+
+		classes.Add.Label( "Classes", "subtitle" );
 
 		var classArray = new string[]
 		{
 			"fwclass_assault",
 			"fwclass_medic",
 			"fwclass_support",
-			"fwclass_engineer"
+			"fwclass_engineer",
+			"fwclass_mystery"
 		};
 
 		foreach ( var classId in classArray )
 		{
 			var classType = TypeLibrary.Create<Class>( classId );
-			var classButton = classes.Add.Button( "", "class", () => SetClass( classId ) );
+			var classButton = classes.Add.Button( "", "class", () =>
+			{
+				selectedClass = classId;
+				previewpanel.ShowClass( classType );
+			} );
+
+			classButton.SetClass( "disabled", !classType.Selectable );
+			
 			var classInner = classButton.Add.Panel( "inner" );
 			classInner.Add.Label( classType.Name, "name" );
 			classInner.Add.Label( classType.ShortDescription, "description" );
-			
-			classButton.Add.Image( "ui/icons/"+ classType.Name.ToLower() + ".png", "class-icon" );
 
-			classButton.AddEventListener( "onmouseover", () =>
-			{
-				classInfo.Update( classType );
-				previewpanel.ShowClass( classType );
-			} );
+			classButton.Add.Image( classType.IconPath, "class-icon" );
+
+			classButton.BindClass( "selected", () => selectedClass == classId );
 		}
 
-		Add.Button( "Cancel", "cancel", () => Delete() );
+		weaponSelect.Add.Label( "Weapons", "subtitle" );
+		primaries = weaponSelect.Add.Panel( "weapons primaries" );
+		secondaries = weaponSelect.Add.Panel( "weapons secondaries" );
+
+		foreach ( var file in FileSystem.Mounted.FindFile( "data/", "*.fwweapon", true ) )
+		{
+			var asset = ResourceLibrary.Get<WeaponAsset>( "data/" + file );
+			if ( asset == null )
+				continue;
+
+			Log.Trace( $"{asset.WeaponName}, {asset.InventorySlot}" );
+
+			Button CreateButton( Panel parent, Action onClick, Func<bool> binding )
+			{
+				var btn = parent.Add.Button( "", onClick );
+
+				btn.Add.Image( asset.IconPath, "weapon-icon" );
+				btn.Add.Label( asset.WeaponName );
+				btn.BindClass( "selected", binding );
+
+				return btn;
+			}
+
+			if ( asset.InventorySlot == WeaponAsset.InventorySlots.Primary )
+			{
+				CreateButton(
+					primaries,
+					() => selectedPrimary = "fw:" + file,
+					() => selectedPrimary == "fw:" + file
+				);
+			}
+			else if ( asset.InventorySlot == WeaponAsset.InventorySlots.Secondary )
+			{
+				CreateButton(
+					secondaries,
+					() => selectedSecondary = "fw:" + file,
+					() => selectedSecondary == "fw:" + file
+				);
+			}
+
+		}
+
+		Add.Button( "Close", "close", () => Delete() );
 	}
 
 	[Event.Frame]
@@ -85,58 +142,5 @@ public partial class ClassMenu : Menu
 		var pawn = ConsoleSystem.Caller.Pawn as FortwarsPlayer;
 		var classType = TypeLibrary.Create<Class>( classId );
 		pawn.AssignClass( classType );
-	}
-
-	private void SetClass( string classId )
-	{
-		Delete();
-		ChangeClass( classId );
-	}
-
-	class ClassInfo : Panel
-	{
-		Label name;
-		Label description;
-		Label loadout;
-
-		public ClassInfo()
-		{
-			name = Add.Label( "Class Name", "subtitle" );
-			description = Add.Label( "Class Description" );
-			loadout = Add.Label( "Class Loadout" );
-		}
-
-		public void Update( Class classType )
-		{
-			name.Text = classType.Name;
-			description.Text = classType.Description;
-
-			string loadoutStr = "";
-
-			void AddItems( List<string> items )
-			{
-				foreach ( var item in items )
-				{
-					if ( item.StartsWith( "fw:" ) )
-					{
-						string assetName = item.Remove( 0, 3 );
-						var asset = ResourceLibrary.Get<WeaponAsset>( item.Remove( 0, 3 ) );
-						loadoutStr += $"• {asset.WeaponName}\n";
-					}
-					else
-					{
-						loadoutStr += $"• {TypeLibrary.GetDescription( item )?.Title}\n";
-					}
-				}
-			}
-
-			loadoutStr += "\nCombat phase:\n";
-			AddItems( classType.CombatLoadout );
-
-			loadoutStr += "\nBuild phase:\n";
-			AddItems( classType.BuildLoadout );
-
-			loadout.Text = loadoutStr;
-		}
 	}
 }

@@ -10,20 +10,13 @@ namespace Fortwars;
 public partial class AssaultClass : Class
 {
 	public override string Name => "Assault";
-	public override string Description =>
-		"With high damage and a strong resolve, " +
-		"the Assault class will help your team " +
-		"clear enemies with relative ease.";
-
 	public override string ShortDescription => "Go around clearing groups of enemies";
-	public override string IconPath => "/textures/icons/assault.png";
+	public override string IconPath => "/ui/icons/assault.png";
 
 	public override List<string> BuildLoadout => new();
 
 	public override List<string> CombatLoadout => new()
 	{
-		"fw:data/weapons/ksr1.fwweapon",
-		"fw:data/weapons/trj.fwweapon",
 		"fw:data/weapons/rpg.fwweapon"
 	};
 	
