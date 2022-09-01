@@ -320,7 +320,7 @@ public partial class PhysGun : Carriable, IUse
 		if ( !heldBody.IsValid() )
 			return;
 
-		TraceResult walltr = Trace.Sweep( heldBody, heldBody.Transform, heldBody.Transform.WithPosition( startPos - heldPos * heldBody.Rotation + dir * holdDistance ) ).Ignore( heldBody.GetEntity() ).Run();
+		TraceResult walltr = Trace.Sweep( heldBody, heldBody.Transform, heldBody.Transform.WithPosition( startPos - heldPos * heldBody.Rotation + dir * holdDistance ) ).Ignore( heldBody.GetEntity() ).WithoutTags("player").Run();
 		//Trace.Ray( heldBody.Transform.PointToWorld( heldPos ), startPos + dir * holdDistance ).Ignore( heldBody.GetEntity() ).Run(); //The old ray-based collision check
 
 		StopPushing = walltr.Hit;
