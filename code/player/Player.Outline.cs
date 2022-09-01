@@ -19,18 +19,24 @@ public partial class FortwarsPlayer
 			if ( player.IsLocalPawn )
 				return;
 
-			var glow = player.Components.GetOrCreate<Glow>();
+			// This is an awful way of doing this
+			var playerAndChildren = player.Children.ToList().Append( player );
+			
+			foreach ( var child in playerAndChildren )
+			{
+				var glow = child.Components.GetOrCreate<Glow>();
 
-			if ( player.TeamID != localPlayer.TeamID )
-			{
-				glow.Active = true;
-				glow.RangeMin = 0;
-				glow.RangeMax = int.MaxValue;
-				glow.Color = Color.Red;
-			}
-			else
-			{
-				glow.Active = false;
+				if ( player.TeamID != localPlayer.TeamID )
+				{
+					glow.Active = true;
+					glow.RangeMin = 0;
+					glow.RangeMax = int.MaxValue;
+					glow.Color = new Color( 1, 0.05f, 0.05f );
+				}
+				else
+				{
+					glow.Active = false;
+				}
 			}
 		} );
 	}
