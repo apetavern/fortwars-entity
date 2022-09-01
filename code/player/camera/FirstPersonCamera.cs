@@ -31,7 +31,7 @@ public class FirstPersonCamera : Sandbox.FirstPersonCamera
 			FieldOfView = FieldOfView.LerpTo( desiredFov, 10 * Time.Delta );
 		}
 
-		ZNear = 1;
+		ZNear = 10;
 		ZFar = 20000;
 	}
 
