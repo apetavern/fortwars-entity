@@ -34,7 +34,7 @@ partial class ClassMenu
 			Style.Padding = 0;
 
 			var world = new SceneWorld();
-			citizen = new SceneModel( world, "models/citizen/citizen.vmdl", Transform.Zero );
+			citizen = new SceneModel( world, "models/playermodel/playermodel.vmdl", Transform.Zero );
 			citizen.Position += Vector3.Up * 5f;
 
 			List<SceneLight> sceneLights = new();
@@ -78,6 +78,15 @@ partial class ClassMenu
 			citizen.SetAnimParameter( "holdtype", (int)weaponHoldtype );
 			citizen.SetAnimParameter( "holdtype_handedness", (int)weaponHoldHandedness );
 			citizen.SetAnimParameter( "holdtype_pose_hand", handpose );
+
+			/*citizen.SetAnimParameter( "useleftik", weaponModel.GetAttachment( "lhand_ik" ).HasValue ); //Uncomment this shit when https://github.com/Facepunch/sbox-issues/issues/2256 that issue has be resolved
+
+			if ( weaponModel.GetAttachment( "lhand_ik" ).HasValue )
+			{
+				Transform attachment = weaponModel.GetAttachment( "lhand_ik" ).Value;
+				citizen.SetAnimParameter( "left_hand_ik.position", attachment.Position );
+				citizen.SetAnimParameter( "left_hand_ik.rotation", attachment.Rotation );
+			}*/
 		}
 
 		HoldTypes weaponHoldtype;
