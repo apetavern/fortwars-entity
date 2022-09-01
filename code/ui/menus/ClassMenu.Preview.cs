@@ -16,7 +16,7 @@ partial class ClassMenu
 		private ScenePanel renderScene;
 
 		private Rotation CameraRot => Rotation.From( 0, 210, 0 );
-		private Vector3 CameraPos => new Vector3( 120, 70, 48 );
+		private Vector3 CameraPos => new Vector3( 50, 30, 52 );
 		SceneModel citizen;
 
 		public ClothingContainer Container = new();
@@ -45,8 +45,6 @@ partial class ClassMenu
 			sceneLights.Add( new SceneLight( world, Vector3.Up * 100.0f + Vector3.Up, 200, Color.White * 15.0f ) );
 
 			renderScene = Add.ScenePanel( world, CameraPos, CameraRot, 50 );
-			renderScene.Style.Width = Length.Percent( 100 );
-			renderScene.Style.Height = Length.Percent( 150 );
 			renderScene.AmbientColor = new Color( .25f, .15f, .15f ) * 2.0f;
 		}
 
@@ -58,8 +56,8 @@ partial class ClassMenu
 			var mousePosition = Mouse.Position;
 
 			// subtract what we think is about the player's eye position
-			mousePosition.x -= Box.Rect.Width * 0.475f;
-			mousePosition.y -= Box.Rect.Height * 0.3f;
+			mousePosition.x -= Box.Rect.Width * 1.15f;
+			mousePosition.y -= Box.Rect.Height * 0.35f;
 			mousePosition /= ScaleToScreen;
 
 			// convert it to an imaginary world position

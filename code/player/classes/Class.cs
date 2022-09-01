@@ -10,6 +10,7 @@ public abstract class Class
 {
 	public virtual string Name { get; set; }
 	public virtual string Description { get; set; }
+	public virtual string ShortDescription { get; set; }
 	public virtual string IconPath { get; set; }
 	public virtual List<string> CombatLoadout { get; set; }
 	public virtual List<string> BuildLoadout { get; set; }

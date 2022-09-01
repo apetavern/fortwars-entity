@@ -11,35 +11,39 @@ namespace Fortwars;
 
 public partial class ClassMenu : Menu
 {
-	ClassInfo classInfo;
-	ClassPreviewPanel previewpanel;
+	private ClassInfo classInfo;
+	private ClassPreviewPanel previewpanel;
+	private Panel classes;
+	
 	public ClassMenu()
 	{
-		StyleSheet.Load( "ui/menus/ClassMenu.scss" );
 		AddClass( "menu" );
+		StyleSheet.Load( "ui/menus/ClassMenu.scss" );
 
 		Add.Label( "Select a class", "title" );
 
 		var main = Add.Panel( "main" );
+		classes = main.Add.Panel( "classes" );
 		previewpanel = main.AddChild<ClassPreviewPanel>();
+		classInfo = main.AddChild<ClassInfo>();
 
-		var classes = Add.Panel( "classes" );
 		var classArray = new string[]
 		{
-				"fwclass_assault",
-				"fwclass_medic",
-				"fwclass_support",
-				"fwclass_engineer"
+			"fwclass_assault",
+			"fwclass_medic",
+			"fwclass_support",
+			"fwclass_engineer"
 		};
-
-		classInfo = AddChild<ClassInfo>();
 
 		foreach ( var classId in classArray )
 		{
 			var classType = TypeLibrary.Create<Class>( classId );
-			var classButton = classes.Add.Button( classType.Name, "class", () => SetClass( classId ) );
+			var classButton = classes.Add.Button( "", "class", () => SetClass( classId ) );
+			var classInner = classButton.Add.Panel( "inner" );
+			classInner.Add.Label( classType.Name, "name" );
+			classInner.Add.Label( classType.ShortDescription, "description" );
+			
 			classButton.Add.Image( "ui/icons/"+ classType.Name.ToLower() + ".png", "class-icon" );
-			classButton.Add.Label( "0 / 0", "class-count" );
 
 			classButton.AddEventListener( "onmouseover", () =>
 			{

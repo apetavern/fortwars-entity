@@ -15,6 +15,7 @@ public class SupportClass : Class
 		"you can help your team in as many creative ways " +
 		"as you can think of.";
 	public override string IconPath => "/textures/icons/support.png";
+	public override string ShortDescription => "Resupply your comrades with ammo";
 
 	public override List<string> BuildLoadout => new()
 	{

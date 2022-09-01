@@ -15,6 +15,7 @@ public class EngineerClass : Class
 		"and repair to victory with your enhanced tools " +
 		"and gigantic brain!";
 	public override string IconPath => "/textures/icons/engineer.png";
+	public override string ShortDescription => "Fortify and repair broken structures";
 
 	public override List<string> BuildLoadout => new()
 	{
