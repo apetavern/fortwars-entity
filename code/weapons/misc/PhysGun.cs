@@ -331,7 +331,7 @@ public partial class PhysGun : Carriable, IUse
 		}
 		else
 		{
-			holdPos = walltr.EndPosition + Vector3.Up * 0.5f;//Snap to the trace sweep position.
+			holdPos = walltr.EndPosition + walltr.Normal;//Snap to the trace sweep position.
 		}
 
 		if ( GrabbedEntity is Player player )
