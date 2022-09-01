@@ -11,14 +11,12 @@ public partial class PhysGun : Carriable, IUse
 {
 	public override string ViewModelPath => "models/weapons/manipulator/manipulator_v.vmdl";
 
-	protected PhysicsBody holdBody;
-	protected PhysicsBody velBody;
-	protected FixedJoint holdJoint;
-	protected FixedJoint velJoint;
-
 	protected PhysicsBody heldBody;
 	protected Vector3 heldPos;
 	protected Rotation heldRot;
+
+	protected Vector3 holdPos { get; private set; }
+	protected Rotation holdRot { get; private set; }
 
 	protected float holdDistance;
 	protected bool grabbing;
@@ -119,9 +117,6 @@ public partial class PhysGun : Carriable, IUse
 				{
 					TryDelete( owner, EyePosition, EyeRotation, eyeDir );
 				}
-
-				if ( !holdBody.IsValid() )
-					return;
 
 				if ( grabEnabled )
 				{
@@ -224,23 +219,6 @@ public partial class PhysGun : Carriable, IUse
 	{
 		if ( !IsServer )
 			return;
-
-		if ( !holdBody.IsValid() )
-		{
-			holdBody = new PhysicsBody( Map.Physics )
-			{
-				BodyType = PhysicsBodyType.Keyframed
-			};
-		}
-
-		if ( !velBody.IsValid() )
-		{
-			velBody = new PhysicsBody( Map.Physics )
-			{
-				BodyType = PhysicsBodyType.Static,
-				AutoSleep = false
-			};
-		}
 	}
 
 	private void Deactivate()
@@ -248,12 +226,6 @@ public partial class PhysGun : Carriable, IUse
 		if ( IsServer )
 		{
 			GrabEnd();
-
-			holdBody?.Remove();
-			holdBody = null;
-
-			velBody?.Remove();
-			velBody = null;
 		}
 
 		KillEffects();
@@ -294,32 +266,18 @@ public partial class PhysGun : Carriable, IUse
 		heldPos = heldBody.Transform.PointToLocal( grabPos );
 		heldRot = rot.Inverse * heldBody.Rotation;
 
-		holdBody.Position = grabPos;
-		holdBody.Rotation = heldBody.Rotation;
+		heldRot = rot.Inverse * heldBody.Rotation;
+		heldPos = heldBody.Transform.PointToLocal( grabPos );
 
-		velBody.Position = grabPos;
-		velBody.Rotation = heldBody.Rotation;
+		holdPos = heldBody.Position;
+		holdRot = heldBody.Rotation;
 
 		heldBody.Sleeping = false;
 		heldBody.AutoSleep = false;
-
-		holdJoint = PhysicsJoint.CreateFixed( new PhysicsPoint( holdBody ), new PhysicsPoint( heldBody, heldPos ) );
-		holdJoint.SpringLinear = new PhysicsSpring( LinearFrequency, LinearDampingRatio );
-		holdJoint.SpringAngular = new PhysicsSpring( AngularFrequency, AngularDampingRatio );
-
-		velJoint = PhysicsJoint.CreateFixed( new PhysicsPoint( holdBody ), new PhysicsPoint( velBody ) );
-		velJoint.SpringLinear = new PhysicsSpring( LinearFrequency, LinearDampingRatio );
-		velJoint.SpringAngular = new PhysicsSpring( AngularFrequency, AngularDampingRatio );
 	}
 
 	private void GrabEnd()
 	{
-		holdJoint?.Remove();
-		holdJoint = null;
-
-		velJoint?.Remove();
-		velJoint = null;
-
 		if ( heldBody.IsValid() )
 		{
 			heldBody.AutoSleep = true;
@@ -333,6 +291,28 @@ public partial class PhysGun : Carriable, IUse
 		grabbing = false;
 	}
 
+	[Event.Physics.PreStep]
+	public void OnPrePhysicsStep()
+	{
+		if ( !IsServer )
+			return;
+
+		if ( !heldBody.IsValid() )
+			return;
+
+		if ( GrabbedEntity is Player )
+			return;
+
+
+		var velocity = heldBody.Velocity;
+		Vector3.SmoothDamp( heldBody.Position, holdPos, ref velocity, 0.075f, Time.Delta );
+		heldBody.Velocity = velocity;
+	
+		var angularVelocity = heldBody.AngularVelocity;
+		Rotation.SmoothDamp( heldBody.Rotation, holdRot, ref angularVelocity, 0.075f, Time.Delta );
+		heldBody.AngularVelocity = angularVelocity;
+	}
+
 	bool StopPushing;
 
 	private void GrabMove( Vector3 startPos, Vector3 dir, Rotation rot, bool snapAngles )
@@ -340,35 +320,37 @@ public partial class PhysGun : Carriable, IUse
 		if ( !heldBody.IsValid() )
 			return;
 
-		TraceResult walltr = Trace.Ray( heldBody.Transform.PointToWorld( heldPos ), startPos + dir * holdDistance ).Ignore( heldBody.GetEntity() ).Run();
+		TraceResult walltr = Trace.Sweep( heldBody, heldBody.Transform, heldBody.Transform.WithPosition( startPos - heldPos * heldBody.Rotation + dir * holdDistance ) ).Ignore( heldBody.GetEntity() ).Run();
+		//Trace.Ray( heldBody.Transform.PointToWorld( heldPos ), startPos + dir * holdDistance ).Ignore( heldBody.GetEntity() ).Run(); //The old ray-based collision check
+
 		StopPushing = walltr.Hit;
 
 		if ( !StopPushing )
 		{
-			holdBody.Position = startPos + dir * holdDistance;
+			holdPos = startPos - heldPos * heldBody.Rotation + dir * holdDistance;
+		}
+		else
+		{
+			holdPos = walltr.EndPosition + Vector3.Up * 0.5f;//Snap to the trace sweep position.
 		}
 
 		if ( GrabbedEntity is Player player )
 		{
-			player.Velocity = velBody.Velocity;
-			player.Position = holdBody.Position - heldPos;
-
-			var controller = player.GetActiveController();
-			if ( controller != null )
-			{
-				controller.Velocity = velBody.Velocity;
-			}
+			var velocity = player.Velocity;
+			Vector3.SmoothDamp( player.Position, holdPos, ref velocity, 0.075f, Time.Delta );
+			player.Velocity = velocity;
+			player.GroundEntity = null;
 
 			return;
 		}
 
-		holdBody.Rotation = rot * heldRot;
+		holdRot = rot * heldRot;
 
 		if ( snapAngles )
 		{
-			var angles = holdBody.Rotation.Angles();
+			var angles = holdRot.Angles();
 
-			holdBody.Rotation = Rotation.From(
+			holdRot = Rotation.From(
 				MathF.Round( angles.pitch / RotateSnapAt ) * RotateSnapAt,
 				MathF.Round( angles.yaw / RotateSnapAt ) * RotateSnapAt,
 				MathF.Round( angles.roll / RotateSnapAt ) * RotateSnapAt
