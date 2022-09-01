@@ -14,6 +14,8 @@ public partial class AssaultClass : Class
 		"With high damage and a strong resolve, " +
 		"the Assault class will help your team " +
 		"clear enemies with relative ease.";
+
+	public override string ShortDescription => "Go around clearing groups of enemies";
 	public override string IconPath => "/textures/icons/assault.png";
 
 	public override List<string> BuildLoadout => new();

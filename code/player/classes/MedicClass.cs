@@ -15,6 +15,7 @@ public class MedicClass : Class
 		"like a medic! This class will help ensure your " +
 		"buddies stay in tip-top shape.";
 	public override string IconPath => "/textures/icons/medic.png";
+	public override string ShortDescription => "Heal your buddies and stop them dying";
 
 	public override List<string> BuildLoadout => new()
 	{
