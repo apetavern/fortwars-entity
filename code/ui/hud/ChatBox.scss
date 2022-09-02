@@ -19,9 +19,10 @@ ChatBox {
         backdrop-filter: brightness( 0.5 );
         flex-shrink: 0;
         flex-grow: 0;
-        width: 100%;
         position: absolute;
         bottom: 0;
+        left: 0;
+        right: 0;
         border-radius: 0 0px 2px 2px;
         border-radius: 2px;
 
@@ -40,7 +41,8 @@ ChatBox {
 
     &.open {
         pointer-events: all;
-        background-color: black;
+        background-color: rgba( black, 0.5 );
+        backdrop-filter: blur( 50px );
 
         textentry {
             opacity: 1;

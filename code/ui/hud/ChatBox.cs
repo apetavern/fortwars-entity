@@ -29,8 +29,6 @@ public partial class ChatBox : Panel
 		Input.AddEventListener( "onblur", () => Close() );
 		Input.AcceptsFocus = true;
 		Input.AllowEmojiReplace = true;
-
-		Chat.OnOpenChat += Open;
 	}
 
 	public override void Tick()
