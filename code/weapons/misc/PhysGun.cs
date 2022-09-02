@@ -274,6 +274,8 @@ public partial class PhysGun : Carriable, IUse
 
 		heldBody.Sleeping = false;
 		heldBody.AutoSleep = false;
+
+		( heldBody.GetEntity() as ModelEntity ).PhysicsEnabled = true;
 	}
 
 	private void GrabEnd()
@@ -282,6 +284,7 @@ public partial class PhysGun : Carriable, IUse
 		{
 			heldBody.AutoSleep = true;
 			heldBody.BodyType = PhysicsBodyType.Static;
+			( heldBody.GetEntity() as ModelEntity ).PhysicsEnabled = false;
 		}
 
 		Client?.Pvs.Remove( GrabbedEntity );
