@@ -76,7 +76,7 @@ public partial class ClassMenu : Menu
 		primaries = weaponSelect.Add.Panel( "weapons primaries" );
 		secondaries = weaponSelect.Add.Panel( "weapons secondaries" );
 
-		foreach ( var file in FileSystem.Mounted.FindFile( "data/", "*.fwweapon", true ) )
+		foreach ( var file in FileSystem.Mounted.FindFile( "data/", "*.fwweapon_c", true ) )
 		{
 			var fullPath = "data/" + file;
 			var asset = ResourceLibrary.Get<WeaponAsset>( fullPath );
