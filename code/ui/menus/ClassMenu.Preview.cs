@@ -5,7 +5,6 @@ using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace Fortwars;
 
@@ -13,19 +12,16 @@ partial class ClassMenu
 {
 	public class ClassPreviewPanel : Panel
 	{
-		private ScenePanel renderScene;
-
 		private Rotation CameraRot => Rotation.From( 0, 210, 0 );
 		private Vector3 CameraPos => new Vector3( 50, 30, 52 );
-		SceneModel citizen;
 
 		public ClothingContainer Container = new();
+		private List<SceneModel> clothes = new List<SceneModel>();
+		private SceneModel citizen;
+		private SceneModel weaponModel;
+		private ScenePanel renderScene;
 
-		List<SceneModel> clothes = new List<SceneModel>();
-
-		SceneModel weaponModel;
-
-		public ClassPreviewPanel()
+		public ClassPreviewPanel( string className )
 		{
 			Style.FlexWrap = Wrap.Wrap;
 			Style.JustifyContent = Justify.Center;
@@ -46,6 +42,9 @@ partial class ClassMenu
 
 			renderScene = Add.ScenePanel( world, CameraPos, CameraRot, 50 );
 			renderScene.AmbientColor = new Color( .25f, .15f, .15f ) * 2.0f;
+
+			Log.Trace( className );
+			ShowClass( className );
 		}
 
 		Vector3 lookPos, headPos, aimPos;
@@ -94,19 +93,14 @@ partial class ClassMenu
 		public void ShowClass( Class classType )
 		{
 			foreach ( var model in clothes )
-			{
 				model?.Delete();
-			}
 
 			if ( weaponModel != null )
-			{
 				weaponModel.Delete();
-			}
 
 			Container.Deserialize( ConsoleSystem.GetValue( "avatar" ) );
-
 			citizen.SetMaterialGroup( "Skin01" );
-
+			
 			foreach ( var item in classType.Cosmetics )
 			{
 				Clothing cloth = ResourceLibrary.Get<Clothing>( item );
@@ -117,21 +111,21 @@ partial class ClassMenu
 			clothes = Container.DressSceneObject( citizen );
 
 			Transform bone = citizen.GetBoneWorldTransform( "hold_R" );
-
 			if ( classType.PreviewWeapon.Contains( "medkit" ) )
-			{
 				bone = citizen.GetBoneWorldTransform( "hold_L" );
-			}
 
 			weaponModel = new SceneModel( citizen.World, classType.PreviewWeapon, bone );
-
 			weaponHoldtype = classType.PreviewHoldType;
-
 			weaponHoldHandedness = classType.PreviewHoldHandedness;
-
 			handpose = classType.PreviewHandpose;
 
 			citizen.AddChild( "weapon", weaponModel );
+		}
+
+		public void ShowClass( string className )
+		{
+			var classType = TypeLibrary.Create<Class>( className );
+			ShowClass( classType );
 		}
 
 		void DressModel()

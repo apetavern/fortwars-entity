@@ -45,13 +45,13 @@ public abstract partial class BaseRound : BaseNetworkable
 		OnFinish();
 	}
 
-	public virtual void OnPlayerSpawn( Player player ) { }
+	public virtual void OnPlayerSpawn( FortwarsPlayer player ) { }
 
-	public virtual void OnPlayerKilled( Player player ) { }
+	public virtual void OnPlayerKilled( FortwarsPlayer player ) { }
 
 	public virtual void OnTick() { }
 
-	public virtual void SetupInventory( Player player )
+	public virtual void SetupInventory( FortwarsPlayer player )
 	{
 		player.Inventory.DeleteContents();
 	}
@@ -87,10 +87,7 @@ public abstract partial class BaseRound : BaseNetworkable
 		Game.Instance.Round.RoundEndTime += 600;
 	}
 
-
 	protected virtual void OnStart() { }
-
 	protected virtual void OnFinish() { }
-
 	protected virtual void OnTimeUp() { }
 }

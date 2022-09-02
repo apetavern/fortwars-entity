@@ -30,10 +30,10 @@ public class CombatRound : BaseRound
 			wall.Hide();
 	}
 
-	public override void SetupInventory( Player player )
+	public override void SetupInventory( FortwarsPlayer player )
 	{
 		base.SetupInventory( player );
-		( player as FortwarsPlayer ).Class?.AssignCombatLoadout( player.Inventory as Inventory );
+		_ = player.GiveLoadout( new() { player.SelectedPrimary, player.SelectedSecondary, player.Class?.Gadget }, player.Inventory as Inventory );
 	}
 
 	protected override void OnFinish()
@@ -80,7 +80,7 @@ public class CombatRound : BaseRound
 		game.ChangeRound( new BuildRound() );
 	}
 
-	public override void OnPlayerSpawn( Player player )
+	public override void OnPlayerSpawn( FortwarsPlayer player )
 	{
 		base.OnPlayerSpawn( player );
 	}

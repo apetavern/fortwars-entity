@@ -18,4 +18,9 @@ public static class ItemUtils
 			return TypeLibrary.Create<Carriable>( itemName );
 		}
 	}
+
+	public static WeaponAsset GetWeaponAsset( string weaponName )
+	{
+		return ResourceLibrary.Get<WeaponAsset>( $"data/{weaponName}.fwweapon" );
+	}
 }

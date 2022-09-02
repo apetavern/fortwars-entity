@@ -12,16 +12,7 @@ public class SupportClass : Class
 	public override string Name => "Support";
 	public override string IconPath => "/ui/icons/support.png";
 	public override string ShortDescription => "Resupply your comrades with ammo";
-
-	public override List<string> BuildLoadout => new()
-	{
-		"ammokittool"
-	};
-
-	public override List<string> CombatLoadout => new()
-	{
-		"ammokittool"
-	};
+	public override string Gadget => "ammokittool";
 
 	public override List<string> Cosmetics => new()
 	{

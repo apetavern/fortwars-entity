@@ -11,6 +11,7 @@ public abstract class Class
 	public virtual string Name { get; set; }
 	public virtual string ShortDescription { get; set; }
 	public virtual string IconPath { get; set; }
+	public virtual string Gadget { get; set; }
 	public virtual List<string> CombatLoadout { get; set; }
 	public virtual List<string> BuildLoadout { get; set; }
 	public virtual List<string> Cosmetics { get; set; }

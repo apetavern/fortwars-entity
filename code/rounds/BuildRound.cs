@@ -30,12 +30,12 @@ public class BuildRound : BaseRound
 			wall.Show();
 	}
 
-	public override void SetupInventory( Player player )
+	public override void SetupInventory( FortwarsPlayer player )
 	{
 		base.SetupInventory( player );
 
 		player.Inventory.Add( new PhysGun(), true );
-		( player as FortwarsPlayer ).Class?.AssignBuildLoadout( player.Inventory as Inventory );
+		_ = player.GiveLoadout( new() { player.Class?.Gadget }, player.Inventory as Inventory );
 	}
 
 	protected override void OnFinish()
@@ -48,12 +48,12 @@ public class BuildRound : BaseRound
 		Game.Instance.ChangeRound( new CombatRound() );
 	}
 
-	public override void OnPlayerKilled( Player player )
+	public override void OnPlayerKilled( FortwarsPlayer player )
 	{
 		base.OnPlayerKilled( player );
 	}
 
-	public override void OnPlayerSpawn( Player player )
+	public override void OnPlayerSpawn( FortwarsPlayer player )
 	{
 		base.OnPlayerSpawn( player );
 	}

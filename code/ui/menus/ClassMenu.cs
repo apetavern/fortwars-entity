@@ -5,7 +5,6 @@ using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Fortwars;
@@ -19,13 +18,19 @@ public partial class ClassMenu : Menu
 	private Panel primaries;
 	private Panel secondaries;
 
-	// TODO: fetch these from player
 	private string selectedClass = "fwclass_assault";
 	private string selectedPrimary = "fw:data/weapons/ksr1.fwweapon";
 	private string selectedSecondary = "fw:data/weapons/trj.fwweapon";
 
 	public ClassMenu()
 	{
+		if ( Local.Pawn is FortwarsPlayer player )
+		{
+			selectedClass = player.SelectedClass;
+			selectedPrimary = player.SelectedPrimary;
+			selectedSecondary = player.SelectedSecondary;
+		}
+
 		AddClass( "menu" );
 		StyleSheet.Load( "ui/menus/ClassMenu.scss" );
 
@@ -33,7 +38,7 @@ public partial class ClassMenu : Menu
 
 		var main = Add.Panel( "main" );
 		classes = main.Add.Panel( "classes" );
-		previewpanel = main.AddChild<ClassPreviewPanel>();
+		previewpanel = new ClassPreviewPanel( selectedClass ) { Parent = main };
 		weaponSelect = main.AddChild<Panel>( "weapon-select" );
 
 		classes.Add.Label( "Classes", "subtitle" );
@@ -47,24 +52,24 @@ public partial class ClassMenu : Menu
 			"fwclass_mystery"
 		};
 
-		foreach ( var classId in classArray )
+		foreach ( var className in classArray )
 		{
-			var classType = TypeLibrary.Create<Class>( classId );
+			var classType = TypeLibrary.Create<Class>( className );
 			var classButton = classes.Add.Button( "", "class", () =>
 			{
-				selectedClass = classId;
+				selectedClass = className;
 				previewpanel.ShowClass( classType );
 			} );
 
 			classButton.SetClass( "disabled", !classType.Selectable );
-			
+
 			var classInner = classButton.Add.Panel( "inner" );
 			classInner.Add.Label( classType.Name, "name" );
 			classInner.Add.Label( classType.ShortDescription, "description" );
 
 			classButton.Add.Image( classType.IconPath, "class-icon" );
 
-			classButton.BindClass( "selected", () => selectedClass == classId );
+			classButton.BindClass( "selected", () => selectedClass == className );
 		}
 
 		weaponSelect.Add.Label( "Weapons", "subtitle" );
@@ -73,7 +78,8 @@ public partial class ClassMenu : Menu
 
 		foreach ( var file in FileSystem.Mounted.FindFile( "data/", "*.fwweapon", true ) )
 		{
-			var asset = ResourceLibrary.Get<WeaponAsset>( "data/" + file );
+			var fullPath = "data/" + file;
+			var asset = ResourceLibrary.Get<WeaponAsset>( fullPath );
 			if ( asset == null )
 				continue;
 
@@ -94,22 +100,29 @@ public partial class ClassMenu : Menu
 			{
 				CreateButton(
 					primaries,
-					() => selectedPrimary = "fw:" + file,
-					() => selectedPrimary == "fw:" + file
+					() => selectedPrimary = "fw:" + fullPath,
+					() => selectedPrimary == "fw:" + fullPath
 				);
 			}
 			else if ( asset.InventorySlot == WeaponAsset.InventorySlots.Secondary )
 			{
 				CreateButton(
 					secondaries,
-					() => selectedSecondary = "fw:" + file,
-					() => selectedSecondary == "fw:" + file
+					() => selectedSecondary = "fw:" + fullPath,
+					() => selectedSecondary == "fw:" + fullPath
 				);
 			}
 
 		}
 
 		Add.Button( "Close", "close", () => Delete() );
+	}
+
+	public override void OnDeleted()
+	{
+		base.OnDeleted();
+
+		ChangeLoadout( selectedClass, selectedPrimary, selectedSecondary );
 	}
 
 	[Event.Frame]
@@ -136,11 +149,10 @@ public partial class ClassMenu : Menu
 		}
 	}
 
-	[ConCmd.Server( "fw_change_class" )]
-	public static void ChangeClass( string classId )
+	[ConCmd.Server( "fw_change_loadout" )]
+	public static void ChangeLoadout( string selectedClass, string selectedPrimary, string selectedSecondary )
 	{
 		var pawn = ConsoleSystem.Caller.Pawn as FortwarsPlayer;
-		var classType = TypeLibrary.Create<Class>( classId );
-		pawn.AssignClass( classType );
+		pawn.AssignLoadout( selectedClass, selectedPrimary, selectedSecondary );
 	}
 }

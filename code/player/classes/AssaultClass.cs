@@ -12,13 +12,7 @@ public partial class AssaultClass : Class
 	public override string Name => "Assault";
 	public override string ShortDescription => "Go around clearing groups of enemies";
 	public override string IconPath => "/ui/icons/assault.png";
-
-	public override List<string> BuildLoadout => new();
-
-	public override List<string> CombatLoadout => new()
-	{
-		"fw:data/weapons/rpg.fwweapon"
-	};
+	public override string Gadget => "fw:data/weapons/rpg.fwweapon";
 	
 	public override List<string> Cosmetics => new()
 	{

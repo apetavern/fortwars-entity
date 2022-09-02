@@ -12,16 +12,7 @@ public class EngineerClass : Class
 	public override string Name => "Engineer";
 	public override string IconPath => "/ui/icons/engineer.png";
 	public override string ShortDescription => "Fortify and repair broken structures";
-
-	public override List<string> BuildLoadout => new()
-	{
-		"repairtool"
-	};
-
-	public override List<string> CombatLoadout => new()
-	{
-		"repairtool"
-	};
+	public override string Gadget => "repairtool";
 
 	public override List<string> Cosmetics => new()
 	{

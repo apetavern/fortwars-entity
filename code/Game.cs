@@ -70,7 +70,7 @@ partial class Game : Sandbox.Game
 
 	public override void OnKilled( Entity pawn )
 	{
-		Round?.OnPlayerKilled( pawn as Player );
+		Round?.OnPlayerKilled( pawn as FortwarsPlayer );
 
 		var player = pawn as FortwarsPlayer;
 

@@ -38,14 +38,14 @@ public class LobbyRound : BaseRound
 			Game.Instance.ChangeRound( new LobbyRound() );
 	}
 
-	public override void OnPlayerKilled( Player player )
+	public override void OnPlayerKilled( FortwarsPlayer player )
 	{
 		player.Respawn();
 
 		base.OnPlayerKilled( player );
 	}
 
-	public override void OnPlayerSpawn( Player player )
+	public override void OnPlayerSpawn( FortwarsPlayer player )
 	{
 		base.OnPlayerSpawn( player );
 	}

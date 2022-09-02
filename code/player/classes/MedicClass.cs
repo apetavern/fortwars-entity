@@ -12,16 +12,7 @@ public class MedicClass : Class
 	public override string Name => "Medic";
 	public override string IconPath => "/ui/icons/medic.png";
 	public override string ShortDescription => "Heal your buddies and stop them dying";
-
-	public override List<string> BuildLoadout => new()
-	{
-		"medkittool"
-	};
-
-	public override List<string> CombatLoadout => new()
-	{
-		"medkittool"
-	};
+	public override string Gadget => "medkittool";
 
 	public override List<string> Cosmetics => new()
 	{
