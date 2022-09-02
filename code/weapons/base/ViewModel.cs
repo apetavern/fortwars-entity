@@ -115,7 +115,7 @@ public class ViewModel : BaseViewModel
 			TargetPos = Weapon.WeaponAsset.AimPosition;
 			TargetRot = Weapon.WeaponAsset.AimRotation.ToRotation();
 			// TargetFov = Weapon.WeaponAsset.AimFovMult * ViewmodelFov;
-			LerpSpeed = 20f;
+			LerpSpeed = 40f;
 			return true;
 		}
 

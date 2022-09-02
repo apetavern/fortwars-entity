@@ -39,14 +39,14 @@ partial class FortwarsPlayer
 
 	private void AddCameraEffects( ref CameraSetup setup )
 	{
-		var speed = Velocity.Length.LerpInverse( 200, 400 );
-		var forwardspeed = Velocity.Normal.Dot( setup.Rotation.Forward );
+		var fovTarget = 0f;
+		
+		if ( Controller is FortwarsWalkController { IsSprinting: true } )
+			fovTarget = 10f;
+		if ( Controller is FortwarsWalkController { DuckSlide: DuckSlide { IsActiveSlide: true } } )
+			fovTarget = 15f;
 
-		var fovTarget = speed * 40f * MathF.Abs( forwardspeed );
-		if ( Controller is FortwarsWalkController { DuckSlide.IsActiveSlide: true } )
-			fovTarget = 40f;
-
-		fovOffset = fovOffset.LerpTo( fovTarget, Time.Delta * 2.0f );
+		fovOffset = fovOffset.LerpTo( fovTarget, Time.Delta * 20.0f );
 		setup.FieldOfView += fovOffset;
 
 		var posOffset = Bobbing.CalcBobbingOffset( ref currentBob, Velocity, this );

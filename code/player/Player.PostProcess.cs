@@ -68,8 +68,6 @@ partial class FortwarsPlayer
 			postProcess.Blur.Strength = healthT * 0.25f;
 
 			postProcess.MotionBlur.Enabled = false;
-			postProcess.MotionBlur.Samples = 8;
-			postProcess.MotionBlur.Scale = healthT * 0.5f;
 
 			postProcess.Saturate.Enabled = healthT > 0;
 			postProcess.Saturate.Amount = 1.0f - healthT;

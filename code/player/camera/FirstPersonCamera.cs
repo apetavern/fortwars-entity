@@ -24,11 +24,11 @@ public class FirstPersonCamera : Sandbox.FirstPersonCamera
 		if ( Local.Pawn is FortwarsPlayer player
 			&& player.ActiveChild is FortwarsWeapon { IsAiming: true } weapon )
 		{
-			FieldOfView = FieldOfView.LerpTo( weapon.WeaponAsset.AimFovMult * desiredFov, 10 * Time.Delta );
+			FieldOfView = FieldOfView.LerpTo( weapon.WeaponAsset.AimFovMult * desiredFov, 25 * Time.Delta );
 		}
 		else
 		{
-			FieldOfView = FieldOfView.LerpTo( desiredFov, 10 * Time.Delta );
+			FieldOfView = FieldOfView.LerpTo( desiredFov, 25 * Time.Delta );
 		}
 
 		ZNear = 10;
