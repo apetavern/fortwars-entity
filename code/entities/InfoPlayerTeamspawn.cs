@@ -2,6 +2,7 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
+using SandboxEditor;
 using System.ComponentModel;
 
 namespace Fortwars;
@@ -12,6 +13,7 @@ namespace Fortwars;
 [Library( "info_player_teamspawn" )]
 [Title( "Team Spawn" ), Category( "FortWars" )]
 [EditorModel( "models/citizen/citizen.vmdl" )]
+[HammerEntity]
 public partial class InfoPlayerTeamspawn : Entity
 {
 	[Property]

@@ -2,13 +2,15 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
+using SandboxEditor;
 
 namespace Fortwars;
 
 [Library( "func_wall_toggle" )]
-[SandboxEditor.Solid]
-[SandboxEditor.RenderFields]
-[SandboxEditor.VisGroup( SandboxEditor.VisGroup.Dynamic )]
+[Solid]
+[RenderFields]
+[VisGroup( VisGroup.Dynamic )]
+[HammerEntity]
 public partial class FuncWallToggle : BrushEntity
 {
     public override void Spawn()

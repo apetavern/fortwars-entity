@@ -2,6 +2,7 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
+using SandboxEditor;
 using System.ComponentModel;
 
 namespace Fortwars;
@@ -12,6 +13,7 @@ namespace Fortwars;
 [Library( "info_flag_spawn" )]
 [Title( "Flag Spawn" ), Category( "FortWars" )]
 [EditorModel( "models/rust_props/small_junk/toilet_paper.vmdl" )]
+[HammerEntity]
 public partial class InfoFlagSpawn : Entity
 {
 	[Property]

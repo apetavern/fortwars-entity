@@ -2,6 +2,7 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
+using SandboxEditor;
 using System.ComponentModel;
 
 namespace Fortwars;
@@ -11,7 +12,8 @@ namespace Fortwars;
 /// </summary>
 [Library( "fw_config" )]
 [Title( "Map Config" ), Category( "FortWars" )]
-[SandboxEditor.EditorSprite( "materials/editor/fw_config.vmat" )]
+[EditorSprite( "materials/editor/fw_config.vmat" )]
+[HammerEntity]
 public partial class ConfigEntity : Entity
 {
 	/// <summary>
