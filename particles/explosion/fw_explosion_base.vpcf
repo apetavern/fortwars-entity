@@ -583,6 +583,7 @@
 			m_bGammaCorrectVertexColors = false
 			m_bSaturateColorPreAlphaBlend = false
 			m_bAdditiveAlpha = true
+			m_flShadowDensity = -1.0
 		},
 		{
 			_class = "C_OP_RenderSprites"
@@ -1198,19 +1199,15 @@
 	[
 		{
 			m_ChildRef = resource:"particles/explosion/fw_explosion_shockwave.vpcf"
-			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/explosion/fw_explosion_fire.vpcf"
-			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/explosion/fw_explosion_smoke.vpcf"
-			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/explosion/fw_explosion_sparks.vpcf"
-			m_bDisableChild = true
 		},
 	]
 }
