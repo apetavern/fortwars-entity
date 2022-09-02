@@ -2,6 +2,7 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
+using SandboxEditor;
 
 namespace Fortwars;
 
@@ -9,9 +10,10 @@ namespace Fortwars;
 /// Players capture the flag in this area.
 /// </summary>
 [Library( "func_spawn_area" )]
-[SandboxEditor.Solid]
-[SandboxEditor.RenderFields]
-[SandboxEditor.VisGroup( SandboxEditor.VisGroup.Dynamic )]
+[Solid]
+[RenderFields]
+[VisGroup( VisGroup.Dynamic )]
+[HammerEntity]
 public partial class FuncSpawnArea : BrushEntity
 {
 	[Property]

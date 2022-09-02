@@ -2,6 +2,7 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
+using SandboxEditor;
 using System.ComponentModel;
 
 namespace Fortwars;
@@ -9,4 +10,5 @@ namespace Fortwars;
 [Library( "info_ammo_spawn" )]
 [Title( "Ammo Spawn" ), Category( "FortWars" )]
 [EditorModel( "models/rust_props/small_junk/carton_box.vmdl" )]
+[HammerEntity]
 public class InfoAmmoSpawn : Spawner<AmmoPickup> { }
