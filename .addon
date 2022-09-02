@@ -26,7 +26,8 @@
       "apetavern.fw_dev",
       "apetavern.fw_basin",
       "gvar.fw_harbor",
-      "gvar.metro"
+      "gvar.metro",
+      "apetavern.fw_abyss"
     ],
     "MapSelect": 2,
     "MaxPlayers": 24,
@@ -157,6 +158,7 @@
       "RootNamespace": "Fortwars",
       "DefineConstants": "SANDBOX;ADDON;DEBUG",
       "NoWarn": "1701;1702;1591;"
-    }
+    },
+    "GameCategory": "Shooter"
   }
 }
