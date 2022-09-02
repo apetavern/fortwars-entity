@@ -13,7 +13,9 @@ public partial class DuckSlide : BaseNetworkable
 	public bool IsActive { get; private set; }
 	public bool IsActiveSlide { get; private set; }
 
-	private float MinimumSlideSpeed => 150;
+	private float MinimumSlideSpeed => 150f;
+	private float SlideExitSpeed => 320f;
+	private float SlideForce => 400f;
 
 	TimeSince timeSinceSlide = 0;
 	TimeSince timeSinceDuck = 0;
@@ -52,7 +54,9 @@ public partial class DuckSlide : BaseNetworkable
 			// TODO
 			// _ = new Sandbox.ScreenShake.Perlin( 1, 1, 0.25f, 0.6f );
 
-			if ( Controller.Velocity.Length <= MinimumSlideSpeed )
+			DebugOverlay.ScreenText( $"{Controller.Velocity.Length}" );
+
+			if ( Controller.Velocity.Length <= SlideExitSpeed )
 				TryUnDuck();
 
 			Controller.SetTag( "slide" );
@@ -88,9 +92,8 @@ public partial class DuckSlide : BaseNetworkable
 	{
 		IsActive = true;
 
-		float force = 300f;
 		var direction = Controller.Pawn.EyeRotation.Forward;
-		Controller.Velocity += direction * force;
+		Controller.Velocity += direction * SlideForce;
 
 		IsActiveSlide = true;
 	}
@@ -105,7 +108,7 @@ public partial class DuckSlide : BaseNetworkable
 		var pm = Controller.TraceBBox( Controller.Position, Controller.Position, originalMins, originalMaxs );
 		if ( pm.StartedSolid ) return;
 
-		if ( IsActiveSlide && Controller.Velocity.Length > MinimumSlideSpeed ) return;
+		if ( IsActiveSlide && Controller.Velocity.Length > SlideExitSpeed ) return;
 
 		if ( IsActiveSlide )
 			timeSinceSlide = 0;
