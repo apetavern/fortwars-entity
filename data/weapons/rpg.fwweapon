@@ -25,7 +25,7 @@
 		Spread = 0
 		SpreadShotIncrease = 0
 		SpreadChangeTime = 0
-		AimPosition = "-15,7,-2.5"
+		AimPosition = "-50,7,-2.5"
 		AimRotation = "0,0,0"
 		AimFovMult = 0.5
 		MaxAmmo = 2
