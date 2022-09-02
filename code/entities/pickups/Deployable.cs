@@ -13,20 +13,32 @@ public partial class Deployable : Pickup
 	private float ResupplyRadius => 96f;
 	private float ThrowSpeed => 100f;
 	private float TimeBetweenResupplies => 15f;
-	private Particles radiusParticles;
+	private float MaxLifetime => 60f; // Seconds
 
+	private Particles radiusParticles;
 	private Dictionary<long, TimeSince> playerResupplyPairs = new();
+	private TimeSince timeSinceSpawn;
 
 	public override void Spawn()
 	{
 		base.Spawn();
 
 		Predictable = true;
+		timeSinceSpawn = 0;
 	}
 
 	[Event.Tick]
 	public void OnTick()
 	{
+		if ( IsServer )
+		{
+			if ( timeSinceSpawn > MaxLifetime )
+			{
+				Delete();
+				return;
+			}
+		}
+
 		if ( HasLanded )
 		{
 			SetLandedAppearance();
@@ -62,13 +74,12 @@ public partial class Deployable : Pickup
 
 	private void ResupplyNearby()
 	{
-
 		foreach ( var entity in Entity.FindInSphere( Position, ResupplyRadius ) )
 		{
 			if ( entity is not FortwarsPlayer player )
 				continue;
 
-			if ( !playerResupplyPairs.ContainsKey( player.Client.PlayerId ) 
+			if ( !playerResupplyPairs.ContainsKey( player.Client.PlayerId )
 				|| playerResupplyPairs[player.Client.PlayerId] > TimeBetweenResupplies )
 			{
 				Resupply( player );
@@ -81,7 +92,7 @@ public partial class Deployable : Pickup
 	{
 		if ( !IsAuthority )
 			return;
-		
+
 		var moveHelper = new MoveHelper( Position, Velocity );
 		moveHelper.Trace = moveHelper.Trace.WorldOnly().Radius( 4f );
 
