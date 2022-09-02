@@ -24,7 +24,8 @@ public class NoCollideComponent : EntityComponent<FortwarsBlock>
 		}
 		else
 		{
-			entity.RenderColor = entity.RenderColor.WithAlpha( 0.5f );
+			// TODO: Glow renders over transparent objects :(
+			// entity.RenderColor = entity.RenderColor.WithAlpha( 0.5f );
 		}
 	}
 
@@ -43,7 +44,8 @@ public class NoCollideComponent : EntityComponent<FortwarsBlock>
 		}
 		else
 		{
-			entity.RenderColor = entity.RenderColor.WithAlpha( 1.0f );
+			// TODO: Glow renders over transparent objects :(
+			// entity.RenderColor = entity.RenderColor.WithAlpha( 1.0f );
 		}
 	}
 
