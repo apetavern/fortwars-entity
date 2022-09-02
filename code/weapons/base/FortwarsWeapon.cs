@@ -235,12 +235,18 @@ public partial class FortwarsWeapon : Carriable
 		}
 	}
 
+	private void StopReload()
+	{
+		ViewModelEntity?.SetAnimParameter( "endreload", true );
+		IsReloading = false;
+	}
+
 	private void OnContinuousReload()
 	{
 		var amount = Math.Min( ReserveAmmo, WeaponAsset.MaxAmmo - CurrentClip );
 
 		if ( amount <= 0 )
-			ViewModelEntity?.SetAnimParameter( "endreload", true );
+			StopReload();
 
 		if ( TimeSinceReload < WeaponAsset.ReloadTime )
 			return;
@@ -253,7 +259,7 @@ public partial class FortwarsWeapon : Carriable
 		}
 		else
 		{
-			IsReloading = false;
+			StopReload();
 		}
 	}
 
@@ -310,6 +316,7 @@ public partial class FortwarsWeapon : Carriable
 
 	public virtual void AttackPrimary()
 	{
+		StopReload();		
 		FireBullets();
 	}
 
