@@ -160,7 +160,7 @@ public class ViewModel : BaseViewModel
 		if ( Local.Pawn is Player { Controller: FortwarsWalkController { DuckSlide.IsActiveSlide: true } } player )
 		{
 			TargetRot = Rotation.From( 0f, 0, -10f );
-			TargetPos = 0; // Vector3.Down * 8f;
+			TargetPos = Vector3.Backward * 16f;
 			LerpSpeed = 10;
 			return true;
 		}
