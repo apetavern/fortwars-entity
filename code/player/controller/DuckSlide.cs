@@ -54,8 +54,6 @@ public partial class DuckSlide : BaseNetworkable
 			// TODO
 			// _ = new Sandbox.ScreenShake.Perlin( 1, 1, 0.25f, 0.6f );
 
-			DebugOverlay.ScreenText( $"{Controller.Velocity.Length}" );
-
 			if ( Controller.Velocity.Length <= SlideExitSpeed )
 				TryUnDuck();
 
