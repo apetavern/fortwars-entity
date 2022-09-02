@@ -44,7 +44,6 @@ partial class FortwarsPlayer
 
 		bool wasLoadoutChanged = false;
 
-		// TODO: Should probably check here to validate desired loadout
 		if ( SelectedClass != newClassName )
 		{
 			wasLoadoutChanged = true;
@@ -53,12 +52,23 @@ partial class FortwarsPlayer
 
 		if ( SelectedPrimary != newPrimaryName )
 		{
+			WeaponAsset weapon;
+			if ( ( weapon = ItemUtils.GetWeaponAsset( newPrimaryName ) ) == null 
+				|| weapon.InventorySlot != WeaponAsset.InventorySlots.Primary )
+				return;
+			
 			wasLoadoutChanged = true;
 			SelectedPrimary = newPrimaryName;
+
 		}
 
 		if ( SelectedSecondary != newSecondaryName )
 		{
+			WeaponAsset weapon;
+			if ( ( weapon = ItemUtils.GetWeaponAsset( newSecondaryName ) ) == null
+				|| weapon.InventorySlot != WeaponAsset.InventorySlots.Secondary )
+				return;
+			
 			wasLoadoutChanged = true;
 			SelectedSecondary = newSecondaryName;
 		}
@@ -68,6 +78,9 @@ partial class FortwarsPlayer
 
 		Class?.Cleanup( Inventory as Inventory );
 		Class = TypeLibrary.Create<Class>( SelectedClass );
+
+		if ( Class == null )
+			return;
 
 		Reset();
 		Game.Instance.Round.SetupInventory( this );

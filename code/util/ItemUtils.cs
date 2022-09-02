@@ -21,6 +21,9 @@ public static class ItemUtils
 
 	public static WeaponAsset GetWeaponAsset( string weaponName )
 	{
-		return ResourceLibrary.Get<WeaponAsset>( $"data/{weaponName}.fwweapon" );
+		if ( weaponName.StartsWith( "fw:" ) )
+			weaponName = weaponName.Remove( 0, 3 );
+		
+		return ResourceLibrary.Get<WeaponAsset>( $"{weaponName}" );
 	}
 }
