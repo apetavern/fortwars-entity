@@ -9,7 +9,9 @@
   "ResourcePaths": [
     "/ui/*",
     "/fonts/*",
-    "/code/ui/*"
+    "/code/ui/*",
+    "/shaders/*",
+    "/shaders/vfx/*"
   ],
   "HasCode": true,
   "CodePath": "code",
