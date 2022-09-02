@@ -16,7 +16,7 @@ partial class Game
 
 	public override void OnVoicePlayed( Client cl )
 	{
-		cl.VoiceStereo = true;
+		cl.VoiceStereo = false;
 		VoiceFeed.Current?.OnVoicePlayed( cl.PlayerId, cl.VoiceLevel );
 	}
 }
