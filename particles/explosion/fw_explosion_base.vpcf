@@ -579,7 +579,7 @@
 					m_vDomainMaxs = [ 0.0, 0.0 ]
 				}
 			}
-			m_hTexture = resource:"particles/explosion/fw_explosion_base_png_cdb47666.generated.vtex"
+			m_hTexture = resource:"particles/explosion/fw_explosion_base.vtex"
 			m_bGammaCorrectVertexColors = false
 			m_bSaturateColorPreAlphaBlend = false
 			m_bAdditiveAlpha = true
@@ -632,7 +632,7 @@
 				}
 			}
 			m_bOnlyRenderInEffectsBloomPass = true
-			m_hTexture = resource:"particles/explosion/fw_explosion_base_png_cdb47666.generated.vtex"
+			m_hTexture = resource:"particles/explosion/fw_explosion_base.vtex"
 			m_bGammaCorrectVertexColors = false
 			m_bSaturateColorPreAlphaBlend = false
 			m_bAdditiveAlpha = true
@@ -1198,15 +1198,19 @@
 	[
 		{
 			m_ChildRef = resource:"particles/explosion/fw_explosion_shockwave.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/explosion/fw_explosion_fire.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/explosion/fw_explosion_smoke.vpcf"
+			m_bDisableChild = true
 		},
 		{
 			m_ChildRef = resource:"particles/explosion/fw_explosion_sparks.vpcf"
+			m_bDisableChild = true
 		},
 	]
 }
