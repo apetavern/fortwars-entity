@@ -639,7 +639,8 @@ public partial class FortwarsWalkController : BasePlayerController
 
 		if ( GroundEntity != null )
 		{
-			BaseVelocity = GroundEntity.Velocity;
+			if(GroundEntity is not FortwarsBlock)
+				BaseVelocity = GroundEntity.Velocity;
 		}
 	}
 
