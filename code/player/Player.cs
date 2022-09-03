@@ -68,7 +68,8 @@ public partial class FortwarsPlayer : Sandbox.Player
 			return;
 		}
 
-		Client.VoiceStereo = false;
+		if(Client != null)
+			Client.VoiceStereo = false;
 
 		Controller = new FortwarsWalkController();
 		Animator = new FortwarsPlayerAnimator();
