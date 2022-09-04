@@ -13,9 +13,9 @@
 		SpeedMultiplier = 1.25
 		JumpMultiplier = 1.25
 		TakesFallDamage = false
-		UsesWeaponGadget = true
+		UsesWeaponGadget = false
 		WeaponGadget = resource:"data/weapons/rpg.fwweapon"
-		LibraryGadget = ""
+		LibraryGadget = "jumppadtool"
 		PreviewWeapon = resource:"models/items/jumppad/jumppad.vmdl"
 		PreviewHoldType = "HoldItem"
 		PreviewHoldHandedness = "TwoHands"
