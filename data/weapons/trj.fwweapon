@@ -30,8 +30,8 @@
 		MaxAmmo = 6
 		ExtraAmmo = 36
 		ReloadTime = 4
-		MaxDamage = 50
-		MinDamage = 25
+		MaxDamage = 75
+		MinDamage = 30
 		DamageDropOffDistance = 1024
 		HeadshotMultiplier = 2.5
 		BuildingDamageMultiplier = 0.25
