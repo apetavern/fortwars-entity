@@ -11,7 +11,7 @@
 				[
 					{
 						_class = "ModelModifier_Translate"
-						translation = [ 10.0, 0.0, -125.0 ]
+						translation = [ 30.0, 0.0, -150.0 ]
 					},
 				]
 			},
@@ -175,5 +175,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = "models/items/medkit/medkit_v.vanmgrph"
+		base_model_name = ""
 	}
 }
