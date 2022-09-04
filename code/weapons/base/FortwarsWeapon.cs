@@ -93,6 +93,8 @@ public partial class FortwarsWeapon : Carriable
 
 	public override void Simulate( Client player )
 	{
+		SimulateViewmodelAnimator();
+
 		Bloom = Bloom.LerpTo( 0, Time.Delta * WeaponAsset.SpreadChangeTime );
 		if ( Bloom.AlmostEqual( 0 ) )
 			Bloom = 0;
@@ -101,8 +103,6 @@ public partial class FortwarsWeapon : Carriable
 
 		if ( DebugSpread )
 			ShowSpreadPattern();
-
-		ViewModelEntity?.SetAnimParameter( "aiming", IsAiming );
 
 		if ( IsReloading )
 		{
@@ -210,6 +210,16 @@ public partial class FortwarsWeapon : Carriable
 		StartReloadEffects();
 	}
 
+	private void SimulateViewmodelAnimator()
+	{
+		if ( ViewModelEntity == null )
+			return;
+
+		ViewModelEntity.SetAnimParameter( "aiming", IsAiming );
+		ViewModelEntity.SetAnimParameter( "reload", IsReloading );
+		ViewModelEntity.SetAnimParameter( "endreload", !IsReloading );
+	}
+
 	public override void SimulateAnimator( PawnAnimator anim )
 	{
 		anim.SetAnimParameter( "holdtype", (int)WeaponAsset.HoldType );
@@ -237,7 +247,6 @@ public partial class FortwarsWeapon : Carriable
 
 	private void StopReload()
 	{
-		ViewModelEntity?.SetAnimParameter( "endreload", true );
 		IsReloading = false;
 	}
 
@@ -337,7 +346,6 @@ public partial class FortwarsWeapon : Carriable
 		if ( !TakeAmmo() )
 			return;
 
-		ViewModelEntity?.SetAnimParameter( "endreload", true );
 		IsReloading = false;
 
 		ShootEffectsLocal( Vector3.Zero );
@@ -457,7 +465,6 @@ public partial class FortwarsWeapon : Carriable
 	[ClientRpc]
 	public virtual void StartReloadEffects()
 	{
-		ViewModelEntity?.SetAnimParameter( "reload", true );
 	}
 
 	public virtual IEnumerable<TraceResult> TraceBullet( Vector3 start, Vector3 end, float radius = 2.0f )
