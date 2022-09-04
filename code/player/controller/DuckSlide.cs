@@ -90,8 +90,10 @@ public partial class DuckSlide : BaseNetworkable
 	{
 		IsActive = true;
 
+		float mul = ( Controller.Pawn as FortwarsPlayer )?.Class.SpeedMultiplier ?? 1.0f;		
+
 		var direction = Controller.Pawn.EyeRotation.Forward;
-		Controller.Velocity += direction * SlideForce;
+		Controller.Velocity += direction * SlideForce * mul;
 
 		IsActiveSlide = true;
 	}
