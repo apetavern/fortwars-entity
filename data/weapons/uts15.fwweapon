@@ -22,7 +22,7 @@
 		ShotCount = 11
 		RecoilX = 0.1
 		RecoilY = 1
-		Spread = 0.1
+		Spread = 0.2
 		SpreadShotIncrease = 0.025
 		SpreadChangeTime = 3
 		AimPosition = "-20,23.95,3.5"
