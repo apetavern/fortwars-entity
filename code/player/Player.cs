@@ -91,6 +91,11 @@ public partial class FortwarsPlayer : Sandbox.Player
 		base.Respawn();
 	}
 
+	public override void CreateHull()
+	{
+		EnableHitboxes = true;
+	}
+
 	public void DressPlayerClothing()
 	{
 

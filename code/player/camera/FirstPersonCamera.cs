@@ -88,7 +88,7 @@ public class FirstPersonCamera : Sandbox.FirstPersonCamera
 		input.ViewAngles.yaw -= delta.x;
 
 		rollMul += weapon.Recoil.Length / 10f;
-		rollMul = rollMul.LerpTo( 0.0f, 10f * Time.Delta );
+		rollMul = rollMul.LerpTo( 0.0f, 10f * deltaTime );
 		rollMul = rollMul.Clamp( 0, 1 );
 
 		//
@@ -102,7 +102,7 @@ public class FirstPersonCamera : Sandbox.FirstPersonCamera
 		targetRoll = ( -1.0f ).LerpTo( 1.0f, targetRoll );
 		targetRoll *= weapon.WeaponAsset.KickbackStrength * Easing.BounceInOut( rollMul );
 
-		roll = roll.LerpTo( targetRoll, 30f * Time.Delta );
+		roll = roll.LerpTo( targetRoll, 30f * deltaTime );
 
 		input.ViewAngles = new Angles(
 			input.ViewAngles.pitch.Clamp( -89, 89 ),
