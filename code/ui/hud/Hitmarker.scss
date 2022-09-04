@@ -15,7 +15,7 @@ hitmarker {
         height: 128px;
         opacity: 1;
         position: absolute;
-        transition: all 100ms ease;
+        transition: all 150ms ease;
         background-image: url( /ui/misc/hit.png );
         background-size: 100%;
 
@@ -29,7 +29,7 @@ hitmarker {
 
         &:intro {
             opacity: 0;
-            transform: scale( 2 );
+            transform: scale( 3 );
         }
 
         &:outro {

@@ -230,7 +230,9 @@ public partial class FortwarsPlayer : Sandbox.Player
 	{
 		LastDamage = info;
 
-		if ( (HitboxIndex)info.HitboxIndex == HitboxIndex.Head )
+		bool isHeadshot = (HitboxIndex)info.HitboxIndex == HitboxIndex.Head;
+
+		if ( isHeadshot )
 			info.Damage *= 2.0f;
 
 		if ( info.Attacker is FortwarsPlayer attacker && attacker != this )
@@ -241,7 +243,7 @@ public partial class FortwarsPlayer : Sandbox.Player
 			Killer = attacker.Client.Name;
 
 			// Note - sending this only to the attacker!
-			attacker.DidDamage( To.Single( attacker ), info.Position, info.Damage, ( (float)Health ).LerpInverse( 100, 0 ) );
+			attacker.DidDamage( To.Single( attacker ), info.Position, isHeadshot, info.Damage, ( (float)Health ).LerpInverse( 100, 0 ) );
 		}
 		else
 		{
@@ -255,12 +257,10 @@ public partial class FortwarsPlayer : Sandbox.Player
 	}
 
 	[ClientRpc]
-	public void DidDamage( Vector3 pos, float amount, float healthinv )
+	public void DidDamage( Vector3 pos, bool isHeadshot, float amount, float healthinv )
 	{
-		Sound.FromScreen( "dm.ui_attacker" )
-			.SetPitch( 1 + healthinv * 1 );
-
-		Hitmarker.Instance.OnHit( amount, false );
+		Sound.FromScreen( "dm.ui_attacker" ).SetVolume( 0.5f );
+		Hitmarker.Instance.OnHit( amount, isHeadshot );
 	}
 
 	[ClientRpc]
