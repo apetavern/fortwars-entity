@@ -10,7 +10,7 @@
 		EyesMaterial = null
 		MaterialGroup = ""
 		SlotsUnder = "LeftThigh, RightThigh, LeftKnee, RightKnee, LeftShin, RightShin, LeftFoot, RightFoot, Waist"
-		SlotsOver = 0
+		SlotsOver = "LeftKnee, RightKnee, LeftFoot, RightFoot"
 		HideBody = "Legs, Feet"
 	}
 }
