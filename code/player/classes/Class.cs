@@ -20,6 +20,9 @@ public abstract class Class
 	public virtual HoldHandedness PreviewHoldHandedness { get; set; } = HoldHandedness.TwoHands;
 	public virtual float PreviewHandpose { get; set; } = 0f;
 	public virtual bool Selectable => true;
+	public virtual float SpeedMultiplier => 1.0f;
+	public virtual float JumpMultiplier => 1.0f;
+	public virtual bool TakesFallDamage => true;
 
 	public virtual void AssignBuildLoadout( Inventory inventory )
 	{

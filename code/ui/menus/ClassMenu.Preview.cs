@@ -13,7 +13,7 @@ partial class ClassMenu
 	public class ClassPreviewPanel : Panel
 	{
 		private Rotation CameraRot => Rotation.From( 0, 210, 0 );
-		private Vector3 CameraPos => new Vector3( 50, 30, 52 );
+		private Vector3 CameraPos => new Vector3( 70, 40, 45 );
 
 		public ClothingContainer Container = new();
 		private List<SceneModel> clothes = new List<SceneModel>();

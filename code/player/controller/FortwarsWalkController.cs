@@ -174,6 +174,11 @@ public partial class FortwarsWalkController : BasePlayerController
 
 		WishVelocity *= jumpDecayMul;
 
+		//
+		// Wish velocity: player class speed multiplier
+		//
+		WishVelocity *= ( Pawn as FortwarsPlayer ).Class.SpeedMultiplier;
+
 		DuckSlide.PreTick();
 
 		bool bStayOnGround = false;
@@ -277,6 +282,9 @@ public partial class FortwarsWalkController : BasePlayerController
 
 	private void TakeFallDamage()
 	{
+		if ( !( Pawn as FortwarsPlayer ).Class.TakesFallDamage )
+			return;
+
 		float fallDamage = ( FallVelocity - PlayerMaxSafeFallSpeed ) * DamageForFallSpeed;
 		Pawn.TakeDamage( DamageInfoExtension.FromFall( fallDamage, Pawn ) );
 	}
@@ -457,6 +465,11 @@ public partial class FortwarsWalkController : BasePlayerController
 
 		if ( DuckSlide.IsActive )
 			flMul *= 0.8f;
+
+		//
+		// Jump: player class jump multiplier
+		//
+		flMul *= ( Pawn as FortwarsPlayer ).Class.JumpMultiplier;
 
 		Velocity = Velocity.WithZ( startz + flMul * flGroundFactor );
 

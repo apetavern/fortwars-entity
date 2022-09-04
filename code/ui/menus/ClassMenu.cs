@@ -49,7 +49,7 @@ public partial class ClassMenu : Menu
 			"fwclass_medic",
 			"fwclass_support",
 			"fwclass_engineer",
-			"fwclass_mystery"
+			"fwclass_flagrunner"
 		};
 
 		foreach ( var className in classArray )
