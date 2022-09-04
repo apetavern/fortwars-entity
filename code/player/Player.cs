@@ -3,6 +3,7 @@
 
 using Sandbox;
 using System.ComponentModel;
+using System.Linq;
 
 namespace Fortwars;
 
@@ -168,11 +169,21 @@ public partial class FortwarsPlayer : Sandbox.Player
 		}
 
 		SimulateActiveChild( cl, ActiveChild );
+		SimulateDeployables( cl );
 
 		if ( LifeState != LifeState.Alive )
 			return;
 
 		TickPlayerUse();
+	}
+
+	private void SimulateDeployables( Client cl )
+	{
+		Entity.All
+			.OfType<Deployable>()
+			.Where( x => x.Owner == this )
+			.ToList()
+			.ForEach( x => x.Simulate( cl ) );
 	}
 
 	protected override void TickPlayerUse()

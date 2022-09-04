@@ -28,8 +28,7 @@ public partial class Deployable : Pickup
 		timeSinceSpawn = 0;
 	}
 
-	[Event.Tick]
-	public void OnTick()
+	public override void Simulate( Client cl )
 	{
 		if ( IsServer )
 		{
