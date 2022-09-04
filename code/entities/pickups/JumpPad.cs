@@ -27,9 +27,35 @@ public partial class JumpPad : Deployable
 	{
 		Log.Trace( $"Jumping player {player}" );
 
+		SetAnimParameter( "jump", true );
+
 		player.GroundEntity = null;
 		player.Controller.GroundEntity = null;
 
 		player.Velocity = (player.EyeRotation.Forward * HorizontalSpeed).WithZ( VerticalSpeed );
+	}
+
+	public override void Move()
+	{
+		if ( !IsAuthority )
+			return;
+
+		var moveHelper = new MoveHelper( Position, Velocity );
+		moveHelper.Trace = moveHelper.Trace.WorldOnly();
+
+		moveHelper.Velocity += ThrowSpeed * Rotation.Forward * Time.Delta;
+		moveHelper.Velocity += Vector3.Down * 800f * Time.Delta;
+
+		bool grounded = moveHelper.TraceDirection( Vector3.Down ).Hit;
+		if ( grounded )
+		{
+			moveHelper.ApplyFriction( 8.0f, Time.Delta );
+			HasLanded = true;
+		}
+
+		moveHelper.TryMove( Time.Delta );
+
+		Position = moveHelper.Position;
+		Velocity = moveHelper.Velocity;
 	}
 }

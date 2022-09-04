@@ -90,7 +90,7 @@ public partial class Deployable : Pickup
 		}
 	}
 
-	private void Move()
+	public virtual void Move()
 	{
 		if ( !IsAuthority )
 			return;
