@@ -5,18 +5,20 @@
 		ClassName = "Assault"
 		ShortDescription = "Go around clearing groups of enemies"
 		IconPath = resource:"ui/icons/assault.png"
-		Gadget = resource:"data/weapons/rpg.fwweapon"
-		SpeedMultiplier = 1
-		JumpMultiplier = 1
-		TakesFallDamage = true
+		IsSelectable = true
 		Cosmetics = 
 		[
 			resource:"models/citizen_clothes/hat/tactical_helmet/tactical_helmet_army.clothing",
 			resource:"models/citizen_clothes/vest/tactical_vest/models/tactical_vest_army.clothing",
 		]
+		SpeedMultiplier = 1
+		JumpMultiplier = 1
+		TakesFallDamage = true
+		UsesWeaponGadget = true
+		WeaponGadget = resource:"data/weapons/rpg.fwweapon"
+		LibraryGadget = ""
 		PreviewWeapon = resource:"models/weapons/rpg/rpg_w.vmdl"
 		PreviewHoldType = "Rifle"
 		PreviewHoldHandedness = "TwoHands"
-		IsSelectable = true
 	}
 }
