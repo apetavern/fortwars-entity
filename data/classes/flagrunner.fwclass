@@ -18,7 +18,7 @@
 		LibraryGadget = "jumppadtool"
 		PreviewWeapon = resource:"models/items/jumppad/jumppad.vmdl"
 		PreviewHoldType = "HoldItem"
-		PreviewHoldHandedness = "TwoHands"
+		PreviewHoldHandedness = "OverHead"
 		PreviewHandPose = 0
 	}
 }
