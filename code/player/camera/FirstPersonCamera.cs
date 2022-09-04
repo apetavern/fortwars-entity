@@ -88,7 +88,7 @@ public class FirstPersonCamera : Sandbox.FirstPersonCamera
 		input.ViewAngles.yaw -= delta.x;
 
 		rollMul += weapon.Recoil.Length / 10f;
-		rollMul = rollMul.LerpTo( 0.0f, 10f * deltaTime );
+		rollMul = rollMul.LerpTo( 0.0f, 5f * deltaTime );
 		rollMul = rollMul.Clamp( 0, 1 );
 
 		//
