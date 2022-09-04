@@ -18,11 +18,11 @@ public partial class Hitmarker : Panel
 		StyleSheet.Load( "/ui/hud/Hitmarker.scss" );
 	}
 
-	public void OnHit( float amount, bool isKill, bool isBlock = false )
+	public void OnHit( float amount, bool isHeadshot, bool isBlock = false )
 	{
 		currentHitmarkerInstance?.Delete();
 		currentHitmarkerInstance = new HitmarkerInstance( amount, this );
-		currentHitmarkerInstance.SetClass( "kill", isKill );
+		currentHitmarkerInstance.SetClass( "headshot", isHeadshot );
 		currentHitmarkerInstance.SetClass( "block", isBlock );
 	}
 

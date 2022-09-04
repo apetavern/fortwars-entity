@@ -19,12 +19,16 @@ hitmarker {
         background-image: url( /ui/misc/hit.png );
         background-size: 100%;
 
+        mix-blend-mode: lighten;
+
         &.block {
             background-image: url( /ui/misc/hit-block.png );
         }
 
-        &.kill {
-            background-image-tint: #f00;
+        &.headshot {
+            background-image: url( /ui/misc/hit-headshot.png );
+            width: 196px;
+            height: 196px;
         }
 
         &:intro {
