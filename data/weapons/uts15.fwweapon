@@ -11,6 +11,7 @@
 		HoldType = "Shotgun"
 		ProceduralViewmodelStrength = 0.5
 		AimedProceduralViewmodelStrength = 0.1
+		KickbackStrength = 15
 		Flags = 
 		{
 			ContinuousLoading = true

@@ -10,6 +10,9 @@ public class FirstPersonCamera : Sandbox.FirstPersonCamera
 	private float desiredFov;
 	private Vector2 totalRecoil; // Get ready for a surprise!
 
+	private float roll;
+	private float rollMul = 0.0f;
+
 	public override void Build( ref CameraSetup camSetup )
 	{
 		desiredFov = camSetup.FieldOfView;
@@ -84,10 +87,27 @@ public class FirstPersonCamera : Sandbox.FirstPersonCamera
 		input.ViewAngles.pitch -= delta.y;
 		input.ViewAngles.yaw -= delta.x;
 
+		rollMul += weapon.Recoil.Length / 10f;
+		rollMul = rollMul.LerpTo( 0.0f, 10f * Time.Delta );
+		rollMul = rollMul.Clamp( 0, 1 );
+
+		//
+		// Roll:
+		// This applies some perlin noise multiplied by a bounce value to help things
+		// feel a lot meatier while still feeling natural
+		//
+		var rollCoords = weapon.Recoil + ( Time.Now * 100 );
+		var targetRoll = Noise.Perlin( rollCoords.x, rollCoords.y );
+
+		targetRoll = ( -1.0f ).LerpTo( 1.0f, targetRoll );
+		targetRoll *= weapon.WeaponAsset.KickbackStrength * Easing.BounceInOut( rollMul );
+
+		roll = roll.LerpTo( targetRoll, 30f * Time.Delta );
+
 		input.ViewAngles = new Angles(
 			input.ViewAngles.pitch.Clamp( -89, 89 ),
 			input.ViewAngles.yaw.NormalizeDegrees(),
-			0
-		);
+			roll
+		); ;
 	}
 }

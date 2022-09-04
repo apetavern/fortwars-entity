@@ -11,6 +11,7 @@
 		HoldType = "Pistol"
 		ProceduralViewmodelStrength = 1
 		AimedProceduralViewmodelStrength = 2
+		KickbackStrength = 25
 		Flags = 
 		{
 			ShotgunAmmo = true

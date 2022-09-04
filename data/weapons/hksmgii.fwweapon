@@ -11,6 +11,7 @@
 		HoldType = "Rifle"
 		ProceduralViewmodelStrength = 1
 		AimedProceduralViewmodelStrength = 0.1
+		KickbackStrength = 5
 		Flags = 
 		{
 			AutomaticFire = true
