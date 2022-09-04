@@ -534,6 +534,7 @@ public partial class FortwarsWeapon : Carriable
 	public override void ActiveEnd( Entity ent, bool dropped )
 	{
 		base.ActiveEnd( ent, dropped );
+		StopReload();
 
 		Recoil = 0;
 	}
