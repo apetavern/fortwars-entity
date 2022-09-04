@@ -10,9 +10,9 @@ namespace Fortwars;
 
 partial class FortwarsPlayer
 {
-	public Class Class { get; set; } = new AssaultClass();
+	public ClassAsset Class { get; set; } = ClassAsset.Default;
 
-	[Net] public string SelectedClass { get; set; } = "fwclass_assault";
+	[Net] public string SelectedClass { get; set; } = "data/classes/assault.fwclass";
 	[Net] public string SelectedPrimary { get; set; } = "fw:data/weapons/ksr1.fwweapon";
 	[Net] public string SelectedSecondary { get; set; } = "fw:data/weapons/trj.fwweapon";
 
@@ -59,7 +59,6 @@ partial class FortwarsPlayer
 			
 			wasLoadoutChanged = true;
 			SelectedPrimary = newPrimaryName;
-
 		}
 
 		if ( SelectedSecondary != newSecondaryName )
@@ -77,7 +76,7 @@ partial class FortwarsPlayer
 			return;
 
 		Class?.Cleanup( Inventory as Inventory );
-		Class = TypeLibrary.Create<Class>( SelectedClass );
+		Class = ClassAsset.FromPath( SelectedClass );
 
 		if ( Class == null )
 			return;

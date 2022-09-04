@@ -19,6 +19,7 @@
 		LibraryGadget = "repairtool"
 		PreviewWeapon = resource:"models/weapons/amhammer/amhammer_w.vmdl"
 		PreviewHoldType = "HoldItem"
-		PreviewHoldHandedness = "TwoHands"
+		PreviewHoldHandedness = "RightHand"
+		PreviewHandPose = 0.07
 	}
 }

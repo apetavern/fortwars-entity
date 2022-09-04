@@ -18,7 +18,7 @@ public partial class ClassMenu : Menu
 	private Panel primaries;
 	private Panel secondaries;
 
-	private string selectedClass = "fwclass_assault";
+	private string selectedClass = "data/classes/assault.fwclass";
 	private string selectedPrimary = "fw:data/weapons/ksr1.fwweapon";
 	private string selectedSecondary = "fw:data/weapons/trj.fwweapon";
 
@@ -43,76 +43,57 @@ public partial class ClassMenu : Menu
 
 		classes.Add.Label( "Classes", "subtitle" );
 
-		var classArray = new string[]
+		foreach ( var classAsset in ResourceLibrary.GetAll<ClassAsset>() )
 		{
-			"fwclass_assault",
-			"fwclass_medic",
-			"fwclass_support",
-			"fwclass_engineer",
-			"fwclass_mystery"
-		};
-
-		foreach ( var className in classArray )
-		{
-			var classType = TypeLibrary.Create<Class>( className );
 			var classButton = classes.Add.Button( "", "class", () =>
 			{
-				selectedClass = className;
-				previewpanel.ShowClass( classType );
+				selectedClass = classAsset.ResourcePath;
+				previewpanel.ShowClass( classAsset );
 			} );
 
-			classButton.SetClass( "disabled", !classType.Selectable );
+			classButton.SetClass( "disabled", !classAsset.IsSelectable );
 
 			var classInner = classButton.Add.Panel( "inner" );
-			classInner.Add.Label( classType.Name, "name" );
-			classInner.Add.Label( classType.ShortDescription, "description" );
+			classInner.Add.Label( classAsset.ClassName, "name" );
+			classInner.Add.Label( classAsset.ShortDescription, "description" );
 
-			classButton.Add.Image( classType.IconPath, "class-icon" );
-
-			classButton.BindClass( "selected", () => selectedClass == className );
+			classButton.Add.Image( classAsset.IconPath, "class-icon" );
+			classButton.BindClass( "selected", () => selectedClass == classAsset.ResourcePath );
 		}
 
 		weaponSelect.Add.Label( "Weapons", "subtitle" );
 		primaries = weaponSelect.Add.Panel( "weapons primaries" );
 		secondaries = weaponSelect.Add.Panel( "weapons secondaries" );
 
-		foreach ( var file in FileSystem.Mounted.FindFile( "data/", "*.fwweapon_c", true ) )
+		foreach ( var weaponAsset in ResourceLibrary.GetAll<WeaponAsset>() )
 		{
-			var fullPath = "data/" + file;
-			var asset = ResourceLibrary.Get<WeaponAsset>( fullPath );
-			if ( asset == null )
-				continue;
-
-			Log.Trace( $"{asset.WeaponName}, {asset.InventorySlot}" );
-
 			Button CreateButton( Panel parent, Action onClick, Func<bool> binding )
 			{
 				var btn = parent.Add.Button( "", onClick );
 
-				btn.Add.Image( asset.IconPath, "weapon-icon" );
-				btn.Add.Label( asset.WeaponName );
+				btn.Add.Image( weaponAsset.IconPath, "weapon-icon" );
+				btn.Add.Label( weaponAsset.WeaponName );
 				btn.BindClass( "selected", binding );
 
 				return btn;
 			}
 
-			if ( asset.InventorySlot == WeaponAsset.InventorySlots.Primary )
+			if ( weaponAsset.InventorySlot == WeaponAsset.InventorySlots.Primary )
 			{
 				CreateButton(
 					primaries,
-					() => selectedPrimary = "fw:" + fullPath,
-					() => selectedPrimary == "fw:" + fullPath
+					() => selectedPrimary = "fw:" + weaponAsset.ResourcePath,
+					() => selectedPrimary == "fw:" + weaponAsset.ResourcePath
 				);
 			}
-			else if ( asset.InventorySlot == WeaponAsset.InventorySlots.Secondary )
+			else if ( weaponAsset.InventorySlot == WeaponAsset.InventorySlots.Secondary )
 			{
 				CreateButton(
 					secondaries,
-					() => selectedSecondary = "fw:" + fullPath,
-					() => selectedSecondary == "fw:" + fullPath
+					() => selectedSecondary = "fw:" + weaponAsset.ResourcePath,
+					() => selectedSecondary == "fw:" + weaponAsset.ResourcePath
 				);
 			}
-
 		}
 
 		Add.Button( "Close", "close", () => Delete() );

@@ -4,6 +4,7 @@
 using Sandbox;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace Fortwars;
 
@@ -63,4 +64,29 @@ public class ClassAsset : GameResource
 
 	[Category( "Preview" )]
 	public HoldHandedness PreviewHoldHandedness { get; set; } = HoldHandedness.TwoHands;
+
+	[Category( "Preview" )]
+	public float PreviewHandPose { get; set; }
+
+	public static ClassAsset FromPath( string path )
+	{
+		return ResourceLibrary.Get<ClassAsset>( path );
+	}
+	
+	public static ClassAsset Default => FromPath( "data/classes/assault.fwclass" );
+
+	private async void AssignLoadout( List<string> items, Inventory inventory )
+	{
+		for ( int i = 0; i < items.Count; i++ )
+		{
+			string itemPath = items[i];
+			inventory.Add( ItemUtils.GetItem( itemPath ), i == 0 );
+			await Task.Delay( 100 ); //Gotta wait between each weapon added so OnChildAdded gets fired in the correct order...
+		}
+	}
+
+	public virtual void Cleanup( Inventory inventory )
+	{
+		inventory.DeleteContents();
+	}
 }

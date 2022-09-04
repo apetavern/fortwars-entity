@@ -90,7 +90,7 @@ partial class ClassMenu
 		HoldHandedness weaponHoldHandedness;
 		float handpose;
 
-		public void ShowClass( Class classType )
+		public void ShowClass( ClassAsset classAsset )
 		{
 			foreach ( var model in clothes )
 				model?.Delete();
@@ -100,8 +100,8 @@ partial class ClassMenu
 
 			Container.Deserialize( ConsoleSystem.GetValue( "avatar" ) );
 			citizen.SetMaterialGroup( "Skin01" );
-			
-			foreach ( var item in classType.Cosmetics )
+
+			foreach ( var item in classAsset.Cosmetics )
 			{
 				Clothing cloth = ResourceLibrary.Get<Clothing>( item );
 				Container.Clothing.RemoveAll( x => !x.CanBeWornWith( cloth ) );
@@ -111,21 +111,21 @@ partial class ClassMenu
 			clothes = Container.DressSceneObject( citizen );
 
 			Transform bone = citizen.GetBoneWorldTransform( "hold_R" );
-			if ( classType.PreviewWeapon.Contains( "medkit" ) )
+			if ( classAsset.PreviewWeapon.Contains( "medkit" ) )
 				bone = citizen.GetBoneWorldTransform( "hold_L" );
 
-			weaponModel = new SceneModel( citizen.World, classType.PreviewWeapon, bone );
-			weaponHoldtype = classType.PreviewHoldType;
-			weaponHoldHandedness = classType.PreviewHoldHandedness;
-			handpose = classType.PreviewHandpose;
+			weaponModel = new SceneModel( citizen.World, classAsset.PreviewWeapon, bone );
+			weaponHoldtype = classAsset.PreviewHoldType;
+			weaponHoldHandedness = classAsset.PreviewHoldHandedness;
+			// TODO handpose = classAsset.PreviewHandpose;
 
 			citizen.AddChild( "weapon", weaponModel );
 		}
 
 		public void ShowClass( string className )
 		{
-			var classType = TypeLibrary.Create<Class>( className );
-			ShowClass( classType );
+			var classAsset = ClassAsset.FromPath( className );
+			ShowClass( classAsset );
 		}
 
 		void DressModel()
