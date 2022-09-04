@@ -395,7 +395,7 @@
 		[
 			{
 				_class = "CBoolAnimParameter"
-				m_name = "deploy"
+				m_name = "deployed"
 				m_id = 
 				{
 					m_id = 2033485610
