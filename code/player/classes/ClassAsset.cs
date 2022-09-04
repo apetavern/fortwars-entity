@@ -3,6 +3,7 @@
 
 using Sandbox;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Fortwars;
 
@@ -12,39 +13,54 @@ public class ClassAsset : GameResource
 	//
 	// Meta
 	//
-	[Property, Category( "Meta" )]
+	[Category( "Meta" )]
 	public string ClassName { get; set; } = "My class";
 
-	[Property, Category( "Meta" )]
+	[Category( "Meta" )]
 	public string ShortDescription { get; set; } = "My class";
 
-	[Property, Category( "Meta" ), ResourceType( "png" )]
+	[Category( "Meta" ), ResourceType( "png" )]
 	public string IconPath { get; set; }
 
-	[Property, Category( "Meta" ), ResourceType( "fwweapon" )]
-	public string Gadget { get; set; }
+	[Category( "Meta" )]
+	public bool IsSelectable { get; set; } = true;
 
-	[Property, Category( "Meta" )]
-	public float SpeedMultiplier { get; set; } = 1.0f;
-
-	[Property, Category( "Meta" )]
-	public float JumpMultiplier { get; set; } = 1.0f;
-
-	[Property, Category( "Meta" )]
-	public bool TakesFallDamage { get; set; } = true;
-
-	[Property, Category( "Meta" ), ResourceType( "clothing" )]
+	[Category( "Meta" ), ResourceType( "clothing" )]
 	public List<string> Cosmetics { get; set; } = new();
 
-	[Property, Category( "Meta" ), ResourceType( "vmdl" )]
+	//
+	// Gameplay
+	//
+	[Category( "Gameplay" )]
+	public float SpeedMultiplier { get; set; } = 1.0f;
+
+	[Category( "Gameplay" )]
+	public float JumpMultiplier { get; set; } = 1.0f;
+
+	[Category( "Gameplay" )]
+	public bool TakesFallDamage { get; set; } = true;
+
+	[Category( "Gameplay" )]
+	public bool UsesWeaponGadget { get; set; }
+
+	[ShowIf( "UsesWeaponGadget", true ), Category( "Gameplay" ), ResourceType( "fwweapon" )]
+	public string WeaponGadget { get; set; }
+
+	[HideIf( "UsesWeaponGadget", true ), Category( "Gameplay" )]
+	public string LibraryGadget { get; set; }
+
+	[HideInEditor, JsonIgnore]
+	public string Gadget => UsesWeaponGadget ? "fw:" + WeaponGadget : LibraryGadget;
+
+	//
+	// Preview
+	//
+	[Category( "Preview" ), ResourceType( "vmdl" )]
 	public string PreviewWeapon { get; set; }
 
-	[Property, Category( "Meta" )]
+	[Category( "Preview" )]
 	public HoldTypes PreviewHoldType { get; set; } = HoldTypes.Pistol;
 
-	[Property, Category( "Meta" )]
+	[Category( "Preview" )]
 	public HoldHandedness PreviewHoldHandedness { get; set; } = HoldHandedness.TwoHands;
-
-	[Property, Category( "Meta" )]
-	public bool IsSelectable { get; set; } = true;
 }
