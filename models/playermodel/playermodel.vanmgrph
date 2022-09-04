@@ -45065,7 +45065,7 @@
 	m_boneMergeModels = 
 	[
 		{
-			m_name = "models/citizen_clothes/jacket/longsleeve/models/jeans.vmdl"
+			m_name = "models/cosmetics/robotparts/robolegs.vmdl"
 			m_bEnabled = true
 		},
 		{
@@ -45074,11 +45074,11 @@
 		},
 		{
 			m_name = "models/citizen_clothes/hair/scruffy_beard/models/scruffy_beard_brown.vmdl"
-			m_bEnabled = false
+			m_bEnabled = true
 		},
 		{
 			m_name = "models/citizen_clothes/shoes/smartshoes/smartshoes.vmdl"
-			m_bEnabled = true
+			m_bEnabled = false
 		},
 		{
 			m_name = "models/citizen_clothes/shirt/tanktop/models/tanktop.vmdl"
