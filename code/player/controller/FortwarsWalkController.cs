@@ -350,7 +350,7 @@ public partial class FortwarsWalkController : BasePlayerController
 	public virtual void StepMove()
 	{
 		MoveHelper mover = new MoveHelper( Position, Velocity );
-		mover.Trace = mover.Trace.Size( mins, maxs ).WithoutTags( "player" ).WithoutTags( "nocollide" ).Ignore( Pawn );
+		mover.Trace = mover.Trace.Size( mins, maxs ).WithoutTags( "nocollide" ).Ignore( Pawn );
 		mover.MaxStandableAngle = GroundAngle;
 
 		mover.TryMoveWithStep( Time.Delta, StepSize );
@@ -362,7 +362,7 @@ public partial class FortwarsWalkController : BasePlayerController
 	public virtual void Move()
 	{
 		MoveHelper mover = new MoveHelper( Position, Velocity );
-		mover.Trace = mover.Trace.Size( mins, maxs ).WithoutTags( "player" ).WithoutTags( "nocollide" ).Ignore( Pawn );
+		mover.Trace = mover.Trace.Size( mins, maxs ).WithoutTags( "nocollide" ).Ignore( Pawn );
 		mover.MaxStandableAngle = GroundAngle;
 
 		mover.TryMove( Time.Delta );

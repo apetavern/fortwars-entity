@@ -94,11 +94,6 @@ public partial class FortwarsPlayer : Sandbox.Player
 		base.Respawn();
 	}
 
-	public override void CreateHull()
-	{
-		EnableHitboxes = true;
-	}
-
 	public void DressPlayerClothing()
 	{
 
@@ -129,7 +124,7 @@ public partial class FortwarsPlayer : Sandbox.Player
 					 Velocity,
 					 LastDamage.Flags,
 					 LastDamage.Position,
-					 LastDamage.Force.Normal * 1024,
+					 LastDamage.Force,
 					 GetHitboxBone( LastDamage.HitboxIndex ) );
 
 		base.OnKilled();
