@@ -39,8 +39,9 @@ public class FirstPersonCamera : Sandbox.FirstPersonCamera
 	{
 		base.BuildInput( input );
 
-		const float RecoilTightnessFactor = 2.5f;
+		const float RecoilTightnessFactor = 20.0f;
 		const float RecoilRecoveryScaleFactor = 5f;
+		const float RecoilScale = 8.0f;
 
 		if ( Local.Pawn is not FortwarsPlayer player )
 			return;
@@ -51,17 +52,22 @@ public class FirstPersonCamera : Sandbox.FirstPersonCamera
 		if ( !weapon.IsValid() )
 			return;
 
+		float deltaTime = Time.Delta;
+		deltaTime = 1 / 120f; // Don't know why, but using actual deltatime for this fucks everything
+
+		var recoil = weapon.Recoil * RecoilScale;
+
 		var oldPitch = input.ViewAngles.pitch;
 		var oldYaw = input.ViewAngles.yaw;
 
-		totalRecoil -= weapon.Recoil * Time.Delta;
+		totalRecoil -= recoil * deltaTime;
 
 		//
 		// Apply recoil - move player's camera in the direction of weapon recoil,
 		// tracking how much we apply so that we can recover it later
 		//
-		input.ViewAngles.pitch -= weapon.Recoil.y * Time.Delta;
-		input.ViewAngles.yaw -= weapon.Recoil.x * Time.Delta;
+		input.ViewAngles.pitch -= recoil.y * deltaTime;
+		input.ViewAngles.yaw -= recoil.x * deltaTime;
 
 		weapon.Recoil -= weapon.Recoil
 			.WithY( ( oldPitch - input.ViewAngles.pitch ) * RecoilTightnessFactor * 1f )
@@ -72,10 +78,16 @@ public class FirstPersonCamera : Sandbox.FirstPersonCamera
 		// initial offset, based on the total recoil value we tracked
 		//
 		var delta = totalRecoil;
-		totalRecoil = Vector2.Lerp( totalRecoil, 0, RecoilRecoveryScaleFactor * Time.Delta );
+		totalRecoil = Vector2.Lerp( totalRecoil, 0, RecoilRecoveryScaleFactor * deltaTime );
 		delta -= totalRecoil;
 
 		input.ViewAngles.pitch -= delta.y;
 		input.ViewAngles.yaw -= delta.x;
+
+		input.ViewAngles = new Angles(
+			input.ViewAngles.pitch.Clamp( -89, 89 ),
+			input.ViewAngles.yaw.NormalizeDegrees(),
+			0
+		);
 	}
 }
