@@ -47,7 +47,7 @@ public class ViewModel : BaseViewModel
 	{
 		using ( Prediction.Off() )
 		{
-			float strength = 16f;
+			float strength = 8f;
 			ShootOffset += Vector3.Backward * strength;
 			ShootRotation *= Rotation.FromPitch( -strength );
 
@@ -86,7 +86,7 @@ public class ViewModel : BaseViewModel
 		TargetPos = 0;
 		TargetFov = ViewmodelFov;
 		TargetRot = Rotation.Identity;
-		LerpSpeed = 10f;
+		LerpSpeed = 20f;
 
 		if ( Weapon.IsValid() && DoTucking() )
 			return;
@@ -126,8 +126,6 @@ public class ViewModel : BaseViewModel
 	{
 		if ( Local.Pawn is Player { Controller: FortwarsWalkController { IsSprinting: true } } player )
 		{
-			LerpSpeed = 5f;
-
 			if ( Weapon == null || Weapon.WeaponAsset == null )
 			{
 				TargetRot = Rotation.Identity;
@@ -161,7 +159,6 @@ public class ViewModel : BaseViewModel
 		{
 			TargetRot = Rotation.From( 0f, 0, -10f );
 			TargetPos = Vector3.Backward * 16f;
-			LerpSpeed = 10;
 			return true;
 		}
 
@@ -218,6 +215,7 @@ public class ViewModel : BaseViewModel
 				offsetMultiplier = Weapon.WeaponAsset.AimedProceduralViewmodelStrength;
 			}
 		}
+
 		offset += ShootOffset * offsetMultiplier;
 		var rotationOffset = ShootRotation * rotationMultiplier;
 
@@ -256,8 +254,8 @@ public class ViewModel : BaseViewModel
 
 	private bool DoShootOffset()
 	{
-		ShootOffset = ShootOffset.LerpTo( Vector3.Zero, 20f * Time.Delta );
-		ShootRotation = Rotation.Lerp( ShootRotation, Rotation.Identity, 20f * Time.Delta );
+		ShootOffset = ShootOffset.LerpTo( Vector3.Zero, 20f * RealTime.Delta );
+		ShootRotation = Rotation.Lerp( ShootRotation, Rotation.Identity, 20f * RealTime.Delta );
 
 		return true;
 	}

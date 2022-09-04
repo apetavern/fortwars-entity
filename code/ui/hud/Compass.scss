@@ -5,7 +5,7 @@ compass {
     top: 0;
     left: 50%;
     height: 50px;
-    width: 750px;
+    width: 500px;
     transform: translate( -50% );
     background-image: radial-gradient( rgba( black, 0.5 ), rgba( black, 0 ) 50% );
     background-position: 0 -100%;
@@ -80,7 +80,6 @@ compass {
         }
     }
 }
-
 
 .red-team {
     labelledcompasspoint:not(.small) {

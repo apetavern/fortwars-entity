@@ -11,6 +11,7 @@
 		HoldType = "Rifle"
 		ProceduralViewmodelStrength = 1
 		AimedProceduralViewmodelStrength = 1
+		KickbackStrength = 20
 		Flags = 
 		{
 			UseRenderTarget = true

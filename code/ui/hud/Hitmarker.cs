@@ -18,11 +18,11 @@ public partial class Hitmarker : Panel
 		StyleSheet.Load( "/ui/hud/Hitmarker.scss" );
 	}
 
-	public void OnHit( float amount, bool isKill, bool isBlock = false )
+	public void OnHit( float amount, bool isHeadshot, bool isBlock = false )
 	{
 		currentHitmarkerInstance?.Delete();
 		currentHitmarkerInstance = new HitmarkerInstance( amount, this );
-		currentHitmarkerInstance.SetClass( "kill", isKill );
+		currentHitmarkerInstance.SetClass( "headshot", isHeadshot );
 		currentHitmarkerInstance.SetClass( "block", isBlock );
 	}
 
@@ -30,9 +30,6 @@ public partial class Hitmarker : Panel
 	{
 		public HitmarkerInstance( float amount, Panel parent )
 		{
-			float scale = 0.25f.LerpTo( 1.0f, amount / 15f );
-			Style.Width = scale * 96f;
-			Style.Height = scale * 96f;
 			Parent = parent;
 			_ = KillAfterTime();
 		}

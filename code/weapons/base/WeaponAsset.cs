@@ -49,6 +49,9 @@ public partial class WeaponAsset : GameResource
 	[Property, Category( "Meta" )]
 	public float AimedProceduralViewmodelStrength { get; set; } = 0.1f;
 
+	[Property, Category( "Meta" )]
+	public float KickbackStrength { get; set; } = 10f;
+
 	//
 	// TODO: No flag support in inspector?
 	//
