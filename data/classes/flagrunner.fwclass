@@ -16,9 +16,10 @@
 		UsesWeaponGadget = false
 		WeaponGadget = resource:"data/weapons/rpg.fwweapon"
 		LibraryGadget = "jumppadtool"
-		PreviewWeapon = resource:"models/items/jumppad/jumppad.vmdl"
+		PreviewWeapon = resource:"models/items/jumppad/jumppad_preview.vmdl"
 		PreviewHoldType = "HoldItem"
-		PreviewHoldHandedness = "OverHead"
-		PreviewHandPose = 0
+		PreviewHoldHandedness = "TwoHands"
+		PreviewHandPose = 0.1
+		PreviewHoldPose = 4
 	}
 }
