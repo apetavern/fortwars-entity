@@ -8,6 +8,10 @@ namespace Fortwars;
 [Library( "jumppadtool", Title = "Jump Pad" )]
 public partial class JumpPadTool : DropTool
 {
+	public override string ViewModelPath => "models/items/jumppad/jumppad_v.vmdl";
+
+	public override float DropTimeDelay => 5f;
+
 	public override void Spawn()
 	{
 		base.Spawn();
