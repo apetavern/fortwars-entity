@@ -10,77 +10,78 @@ namespace Fortwars;
 [Library( "droptool", Title = "Drop tool" )]
 public partial class DropTool : Carriable
 {
-    public virtual float PrimaryRate => 2.0f;
+	public virtual float PrimaryRate => 2.0f;
 
-    public float DropTimeDelay => 1f;
-    public override string ViewModelPath => "models/items/medkit/medkit_v.vmdl";
+	public virtual float DropTimeDelay => 1f;
 
-    public override void Spawn()
-    {
-        base.Spawn();
+	public override string ViewModelPath => "models/items/medkit/medkit_v.vmdl";
 
-        SetModel( "models/items/medkit/medkit_w.vmdl" );
-        Scale = 0.25f;
+	public override void Spawn()
+	{
+		base.Spawn();
 
-        TimeSinceLastDrop = DropTimeDelay;
-    }
+		SetModel( "models/items/medkit/medkit_w.vmdl" );
+		Scale = 0.25f;
 
-    [Net, Predicted]
-    public TimeSince TimeSincePrimaryAttack { get; set; }
+		TimeSinceLastDrop = DropTimeDelay;
+	}
 
-    [Net, Predicted]
-    public TimeSince TimeSinceLastDrop { get; set; }
+	[Net, Predicted]
+	public TimeSince TimeSincePrimaryAttack { get; set; }
 
-    [Net] bool Dropped { get; set; }
+	[Net, Predicted]
+	public TimeSince TimeSinceLastDrop { get; set; }
 
-    public override void Simulate( Client player )
-    {
-        if ( !Owner.IsValid() )
-            return;
+	[Net] bool Dropped { get; set; }
 
-        if ( CanPrimaryAttack() )
-        {
-            using ( LagCompensation() )
-            {
-                TimeSincePrimaryAttack = 0;
-                AttackPrimary();
-            }
-        }
+	public override void Simulate( Client player )
+	{
+		if ( !Owner.IsValid() )
+			return;
 
-        if ( IsServer )
-        {
-            if ( TimeSinceLastDrop < DropTimeDelay )
-            {
-                Dropped = false;
-            }
+		if ( CanPrimaryAttack() )
+		{
+			using ( LagCompensation() )
+			{
+				TimeSincePrimaryAttack = 0;
+				AttackPrimary();
+			}
+		}
 
-            if ( TimeSincePrimaryAttack > 0.4f && Dropped )
-            {
-                using ( LagCompensation() )
-                {
-                    TimeSinceLastDrop = 0;
-                    DoDrop();
-                }
-            }
-        }
+		if ( IsServer )
+		{
+			if ( TimeSinceLastDrop < DropTimeDelay )
+			{
+				Dropped = false;
+			}
 
-        if ( IsClient )
-        {
-            if ( TimeSincePrimaryAttack > 0.6f )
-            {
-                ViewModelEntity?.SetAnimParameter( "noammo", true );
-            }
+			if ( TimeSincePrimaryAttack > 0.4f && Dropped )
+			{
+				using ( LagCompensation() )
+				{
+					TimeSinceLastDrop = 0;
+					DoDrop();
+				}
+			}
+		}
 
-            if ( TimeSinceLastDrop > DropTimeDelay )
-            {
-                ViewModelEntity?.SetAnimParameter( "noammo", false );
-            }
-        }
-    }
+		if ( IsClient )
+		{
+			if ( TimeSinceLastDrop < DropTimeDelay )
+			{
+				ViewModelEntity?.SetAnimParameter( "noammo", true );
+			}
 
-    public virtual void SpawnPickup()
-    {
-    }
+			if ( TimeSinceLastDrop > DropTimeDelay )
+			{
+				ViewModelEntity?.SetAnimParameter( "noammo", false );
+			}
+		}
+	}
+
+	public virtual void SpawnPickup()
+	{
+	}
 
 	protected void ThrowProjectile<T>( T projectile ) where T : Entity
 	{
@@ -88,7 +89,7 @@ public partial class DropTool : Carriable
 		// thrown from the player's hands, rather than directly out of
 		// their face.
 		var offset = Vector3.Down * 32f;
-		
+
 		projectile.Rotation = Owner.EyeRotation;
 		projectile.Position = Owner.EyePosition + offset;
 		projectile.Velocity = projectile.Rotation.Forward * 256f + projectile.Rotation.Up * 256f + Owner.Velocity;
