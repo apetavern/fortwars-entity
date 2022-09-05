@@ -12,7 +12,7 @@ public partial class JumpPadTool : DropTool
 	{
 		base.Spawn();
 
-		SetModel( "models/items/jumppad/jumppad.vmdl" );
+		SetModel( "models/items/jumppad/jumppad_w.vmdl" );
 		TimeSinceLastDrop = DropTimeDelay;
 	}
 
