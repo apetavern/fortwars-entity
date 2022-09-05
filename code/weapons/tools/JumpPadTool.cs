@@ -39,5 +39,9 @@ public partial class JumpPadTool : DropTool
 			anim.SetAnimParameter( "holdtype_pose_hand", 0f );
 			anim.SetAnimParameter( "holdtype_attack", 1 );
 		}
+
+		anim.SetAnimParameter( "useleftik", false );
+		anim.SetAnimParameter( "gunup", 0f );
+		anim.SetAnimParameter( "gundown", 0f );
 	}
 }
