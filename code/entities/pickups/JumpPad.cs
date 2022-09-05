@@ -32,7 +32,13 @@ public partial class JumpPad : Deployable
 		player.GroundEntity = null;
 		player.Controller.GroundEntity = null;
 
-		player.Velocity = (player.EyeRotation.Forward * HorizontalSpeed).WithZ( VerticalSpeed );
+		player.Velocity = ( player.EyeRotation.Forward * HorizontalSpeed ) + ( Rotation.Up * VerticalSpeed );//.WithZ( VerticalSpeed );
+	}
+
+	public override void SetLandedAppearance()
+	{
+		SetAnimParameter( "deployed", true );
+		Rotation = Rotation.LookAt( Trace.Ray( Position + Vector3.Up, Position - Vector3.Up ).WithAnyTags( "solid", "playerclip" ).Radius( 4f ).Run().Normal, Vector3.Up ) * new Angles( 90, 0, 0 ).ToRotation();
 	}
 
 	public override void Move()
@@ -41,7 +47,7 @@ public partial class JumpPad : Deployable
 			return;
 
 		var moveHelper = new MoveHelper( Position, Velocity );
-		moveHelper.Trace = moveHelper.Trace.WorldOnly();
+		moveHelper.Trace = moveHelper.Trace.WorldOnly().WithAnyTags( "solid", "playerclip" );
 
 		moveHelper.Velocity += ThrowSpeed * Rotation.Forward * Time.Delta;
 		moveHelper.Velocity += Vector3.Down * 800f * Time.Delta;

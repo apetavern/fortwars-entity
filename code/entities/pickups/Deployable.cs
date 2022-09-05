@@ -52,7 +52,7 @@ public partial class Deployable : Pickup
 		}
 	}
 
-	private void SetLandedAppearance()
+	public virtual void SetLandedAppearance()
 	{
 		SetAnimParameter( "deployed", true );
 		Rotation = Rotation.Angles().WithPitch( 0 ).ToRotation();
