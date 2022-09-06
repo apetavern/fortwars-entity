@@ -33,7 +33,7 @@ Layer0
 	TextureMetalness "models/cosmetics/robotparts/materials/robolegs_metal.psd"
 
 	//---- Normal ----
-	TextureNormal "materials/default/default_normal.tga"
+	TextureNormal "models/cosmetics/robotparts/materials/robolegs_normal.psd"
 
 	//---- Roughness ----
 	TextureRoughness "models/cosmetics/robotparts/materials/robolegs_rough.psd"
