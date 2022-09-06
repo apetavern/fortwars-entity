@@ -59,7 +59,7 @@
 						_class = "RenderMeshFile"
 						name = "hands"
 						filename = "models/items/medkit/medkit_w.fbx"
-						import_translation = [ -17.0, -17.0, 0.0 ]
+						import_translation = [ -17.0, -17.0, -320.0 ]
 						import_rotation = [ 0.0, -45.0, 0.0 ]
 						import_scale = 0.27
 						align_origin_x_type = "None"
@@ -145,6 +145,13 @@
 					{
 						_class = "Bone"
 						name = "hold_R"
+						origin = [ 0.0, 0.0, 0.0 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						do_not_discard = true
+					},
+					{
+						_class = "Bone"
+						name = "lhand_ik"
 						origin = [ 0.0, 0.0, 0.0 ]
 						angles = [ 0.0, 0.0, 0.0 ]
 						do_not_discard = true

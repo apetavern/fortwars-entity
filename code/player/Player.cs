@@ -122,7 +122,7 @@ public partial class FortwarsPlayer : Sandbox.Player
 					 Velocity,
 					 LastDamage.Flags,
 					 LastDamage.Position,
-					 LastDamage.Force,
+					 LastDamage.Force.Normal * 1024,
 					 GetHitboxBone( LastDamage.HitboxIndex ) );
 
 		base.OnKilled();
