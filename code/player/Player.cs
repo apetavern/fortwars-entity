@@ -10,6 +10,7 @@ namespace Fortwars;
 public partial class FortwarsPlayer : Sandbox.Player
 {
 	[Net] public string Killer { get; set; }
+	[Net] public string SkinMaterialPath { get; set; }
 
 	public DamageInfo LastDamage { get; private set; }
 	public ClothingContainer Clothing = new();
@@ -32,6 +33,9 @@ public partial class FortwarsPlayer : Sandbox.Player
 	{
 		// Load clothing from client data
 		CleanClothing.LoadFromClient( cl );
+
+		// Get skin material.. this is a bit shit
+		SkinMaterialPath = CleanClothing.Clothing.Select( x => x.SkinMaterial ).Where( x => !string.IsNullOrWhiteSpace( x ) ).FirstOrDefault();
 	}
 
 	public override void Respawn()
