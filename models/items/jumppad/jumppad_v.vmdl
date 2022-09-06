@@ -25,7 +25,7 @@
 						[
 							{
 								from = "apetavern_toiletroll:citizen_skin.vmat"
-								to = "models/citizen/skin/citizen_skin04.vmat"
+								to = "models/citizen/skin/citizen_skin01.vmat"
 							},
 						]
 						use_global_default = false

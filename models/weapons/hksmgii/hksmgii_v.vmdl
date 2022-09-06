@@ -15,7 +15,7 @@
 						[
 							{
 								from = "citizen_skin.vmat"
-								to = "models/citizen/skin/citizen_skin04.vmat"
+								to = "models/citizen/skin/citizen_skin01.vmat"
 							},
 							{
 								from = "magbullet.vmat"
@@ -328,5 +328,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = "models/weapons/hksmgii/hksmgii_v.vanmgrph"
+		base_model_name = ""
 	}
 }

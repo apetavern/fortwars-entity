@@ -25,7 +25,7 @@
 						[
 							{
 								from = "citizen_skin.vmat"
-								to = "models/citizen/skin/citizen_skin04.vmat"
+								to = "models/citizen/skin/citizen_skin01.vmat"
 							},
 							{
 								from = "phong1.vmat"
@@ -275,5 +275,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = "models/weapons/rpg/rpg_v.vanmgrph"
+		base_model_name = ""
 	}
 }

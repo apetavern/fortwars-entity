@@ -29,7 +29,7 @@
 							},
 							{
 								from = "citizen_skin1.vmat"
-								to = "models/citizen/skin/citizen_skin04.vmat"
+								to = "models/citizen/skin/citizen_skin01.vmat"
 							},
 							{
 								from = "mag1.vmat"
@@ -279,5 +279,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = "models/weapons/hkusp/hkusp_v.vanmgrph"
+		base_model_name = ""
 	}
 }

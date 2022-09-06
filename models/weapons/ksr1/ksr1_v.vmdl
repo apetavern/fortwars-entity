@@ -33,7 +33,7 @@
 							},
 							{
 								from = "citizen_skin.vmat"
-								to = "models/citizen/skin/citizen_skin04.vmat"
+								to = "models/citizen/skin/citizen_skin01.vmat"
 							},
 						]
 						use_global_default = false
@@ -263,5 +263,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = "models/weapons/ksr1/ksr1_v.vanmgrph"
+		base_model_name = ""
 	}
 }
