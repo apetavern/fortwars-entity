@@ -10,10 +10,11 @@ public partial class Deployable : Pickup
 {
 	[Net] public bool HasLanded { get; set; }
 
-	private float ResupplyRadius => 96f;
-	private float ThrowSpeed => 100f;
-	private float TimeBetweenResupplies => 15f;
-	private float MaxLifetime => 60f; // Seconds
+	protected virtual float ResupplyRadius => 96f;
+	protected virtual float ThrowSpeed => 100f;
+	protected virtual float TimeBetweenResupplies => 15f;
+	protected virtual float MaxLifetime => 60f; // Seconds
+	protected virtual bool CreateParticles => true;
 
 	private Particles radiusParticles;
 	private Dictionary<long, TimeSince> playerResupplyPairs = new();
@@ -27,8 +28,7 @@ public partial class Deployable : Pickup
 		timeSinceSpawn = 0;
 	}
 
-	[Event.Tick]
-	public void OnTick()
+	public override void Simulate( Client cl )
 	{
 		if ( IsServer )
 		{
@@ -52,7 +52,7 @@ public partial class Deployable : Pickup
 		}
 	}
 
-	private void SetLandedAppearance()
+	public virtual void SetLandedAppearance()
 	{
 		SetAnimParameter( "deployed", true );
 		Rotation = Rotation.Angles().WithPitch( 0 ).ToRotation();
@@ -60,7 +60,7 @@ public partial class Deployable : Pickup
 
 	private void SetRadiusParticleAppearance()
 	{
-		if ( IsServer )
+		if ( IsServer && CreateParticles )
 			radiusParticles ??= Particles.Create( "particles/deployable/deployable.vpcf", this );
 
 		radiusParticles?.SetPosition( 0, Position );
@@ -79,6 +79,8 @@ public partial class Deployable : Pickup
 			if ( entity is not FortwarsPlayer player )
 				continue;
 
+			Log.Trace( entity );
+
 			if ( !playerResupplyPairs.ContainsKey( player.Client.PlayerId )
 				|| playerResupplyPairs[player.Client.PlayerId] > TimeBetweenResupplies )
 			{
@@ -88,7 +90,7 @@ public partial class Deployable : Pickup
 		}
 	}
 
-	private void Move()
+	public virtual void Move()
 	{
 		if ( !IsAuthority )
 			return;

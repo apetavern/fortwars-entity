@@ -6,18 +6,89 @@
 		children = 
 		[
 			{
+				_class = "ModelModifierList"
+				children = 
+				[
+					{
+						_class = "ModelModifier_Translate"
+						translation = [ 10.0, 0.0, -125.0 ]
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "apetavern_toiletroll:citizen_skin.vmat"
+								to = "models/citizen/skin/citizen_skin04.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "models/items/jumppad/jumppad_v.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
 				_class = "AnimationList"
 				children = 
 				[
 					{
 						_class = "AnimFile"
-						name = "gundown"
+						name = "deploy"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/items/jumppad/jumppad_v.fbx"
+						start_frame = 21
+						end_frame = 30
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "idle"
 						children = 
 						[
 							{
-								_class = "AnimSubtract"
-								anim_name = "gunbind"
-								frame = 0
+								_class = "AnimSmoothLoop"
+								frames_from_start = 0
+								frames_from_end = 1
 							},
 						]
 						activity_name = ""
@@ -31,24 +102,16 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/playermodel/gunupdown.fbx"
-						start_frame = -1
-						end_frame = 9
-						framerate = -1.0
+						source_filename = "models/items/jumppad/jumppad_v.fbx"
+						start_frame = 29
+						end_frame = 31
+						framerate = 0.25
 						take = 0
 						reverse = false
 					},
 					{
 						_class = "AnimFile"
-						name = "gunup"
-						children = 
-						[
-							{
-								_class = "AnimSubtract"
-								anim_name = "gunbind"
-								frame = 0
-							},
-						]
+						name = "throw"
 						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
@@ -60,16 +123,16 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/playermodel/gunupdown.fbx"
-						start_frame = 15
-						end_frame = 24
+						source_filename = "models/items/jumppad/jumppad_v.fbx"
+						start_frame = 30
+						end_frame = 42
 						framerate = -1.0
 						take = 0
 						reverse = false
 					},
 					{
 						_class = "AnimFile"
-						name = "gunbind"
+						name = "noammo"
 						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
@@ -81,30 +144,9 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/playermodel/gunupdown.fbx"
+						source_filename = "models/items/jumppad/jumppad_v.fbx"
 						start_frame = -1
-						end_frame = 9
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "overhead_hold"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						source_filename = "models/playermodel/overhead_hold.fbx"
-						start_frame = -1
-						end_frame = 9
+						end_frame = 0
 						framerate = -1.0
 						take = 0
 						reverse = false
@@ -115,7 +157,7 @@
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
-		anim_graph_name = "models/playermodel/playermodel.vanmgrph"
-		base_model_name = "models/citizen/citizen.vmdl"
+		anim_graph_name = "models/items/jumppad/jumppad_v.vanmgrph"
+		base_model_name = ""
 	}
 }

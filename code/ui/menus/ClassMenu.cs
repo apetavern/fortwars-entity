@@ -43,7 +43,7 @@ public partial class ClassMenu : Menu
 
 		classes.Add.Label( "Classes", "subtitle" );
 
-		foreach ( var classAsset in ResourceLibrary.GetAll<ClassAsset>() )
+		foreach ( var classAsset in ResourceLibrary.GetAll<ClassAsset>().ToList() )
 		{
 			var classButton = classes.Add.Button( "", "class", () =>
 			{
@@ -65,7 +65,7 @@ public partial class ClassMenu : Menu
 		primaries = weaponSelect.Add.Panel( "weapons primaries" );
 		secondaries = weaponSelect.Add.Panel( "weapons secondaries" );
 
-		foreach ( var weaponAsset in ResourceLibrary.GetAll<WeaponAsset>() )
+		foreach ( var weaponAsset in ResourceLibrary.GetAll<WeaponAsset>().ToList() )
 		{
 			Button CreateButton( Panel parent, Action onClick, Func<bool> binding )
 			{

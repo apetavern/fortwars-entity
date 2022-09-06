@@ -18,5 +18,6 @@ public enum HoldHandedness
 {
 	TwoHands,
 	RightHand,
-	LeftHand
+	LeftHand,
+	OverHead
 }

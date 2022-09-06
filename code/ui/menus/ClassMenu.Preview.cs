@@ -13,7 +13,7 @@ partial class ClassMenu
 	public class ClassPreviewPanel : Panel
 	{
 		private Rotation CameraRot => Rotation.From( 0, 210, 0 );
-		private Vector3 CameraPos => new Vector3( 50, 30, 52 );
+		private Vector3 CameraPos => new Vector3( 70, 40, 45 );
 
 		public ClothingContainer Container = new();
 		private List<SceneModel> clothes = new List<SceneModel>();
@@ -75,6 +75,7 @@ partial class ClassMenu
 			citizen.SetAnimParameter( "holdtype", (int)weaponHoldtype );
 			citizen.SetAnimParameter( "holdtype_handedness", (int)weaponHoldHandedness );
 			citizen.SetAnimParameter( "holdtype_pose_hand", handpose );
+			citizen.SetAnimParameter( "holdtype_pose", holdpose );
 
 			/*citizen.SetAnimParameter( "useleftik", weaponModel.GetAttachment( "lhand_ik" ).HasValue ); //Uncomment this shit when https://github.com/Facepunch/sbox-issues/issues/2256 that issue has be resolved
 
@@ -89,6 +90,7 @@ partial class ClassMenu
 		HoldTypes weaponHoldtype;
 		HoldHandedness weaponHoldHandedness;
 		float handpose;
+		float holdpose;
 
 		public void ShowClass( ClassAsset classAsset )
 		{
@@ -117,7 +119,8 @@ partial class ClassMenu
 			weaponModel = new SceneModel( citizen.World, classAsset.PreviewWeapon, bone );
 			weaponHoldtype = classAsset.PreviewHoldType;
 			weaponHoldHandedness = classAsset.PreviewHoldHandedness;
-			// TODO handpose = classAsset.PreviewHandpose;
+			handpose = classAsset.PreviewHandPose;
+			holdpose = classAsset.PreviewHoldPose;
 
 			citizen.AddChild( "weapon", weaponModel );
 		}

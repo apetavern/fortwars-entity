@@ -68,11 +68,14 @@ public class ClassAsset : GameResource
 	[Category( "Preview" )]
 	public float PreviewHandPose { get; set; }
 
+	[Category( "Preview" )]
+	public float PreviewHoldPose { get; set; }
+
 	public static ClassAsset FromPath( string path )
 	{
 		return ResourceLibrary.Get<ClassAsset>( path );
 	}
-	
+  
 	public static ClassAsset Default => FromPath( "data/classes/assault.fwclass" );
 
 	private async void AssignLoadout( List<string> items, Inventory inventory )

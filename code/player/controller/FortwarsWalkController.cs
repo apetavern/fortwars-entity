@@ -174,6 +174,11 @@ public partial class FortwarsWalkController : BasePlayerController
 
 		WishVelocity *= jumpDecayMul;
 
+		//
+		// Wish velocity: player class speed multiplier
+		//
+		WishVelocity *= ( Pawn as FortwarsPlayer ).Class.SpeedMultiplier;
+
 		DuckSlide.PreTick();
 
 		bool bStayOnGround = false;
@@ -277,6 +282,9 @@ public partial class FortwarsWalkController : BasePlayerController
 
 	private void TakeFallDamage()
 	{
+		if ( !( Pawn as FortwarsPlayer ).Class.TakesFallDamage )
+			return;
+
 		float fallDamage = ( FallVelocity - PlayerMaxSafeFallSpeed ) * DamageForFallSpeed;
 		Pawn.TakeDamage( DamageInfoExtension.FromFall( fallDamage, Pawn ) );
 	}
@@ -342,7 +350,7 @@ public partial class FortwarsWalkController : BasePlayerController
 	public virtual void StepMove()
 	{
 		MoveHelper mover = new MoveHelper( Position, Velocity );
-		mover.Trace = mover.Trace.Size( mins, maxs ).WithoutTags( "player" ).WithoutTags( "nocollide" ).Ignore( Pawn );
+		mover.Trace = mover.Trace.Size( mins, maxs ).WithoutTags( "nocollide" ).Ignore( Pawn );
 		mover.MaxStandableAngle = GroundAngle;
 
 		mover.TryMoveWithStep( Time.Delta, StepSize );
@@ -354,7 +362,7 @@ public partial class FortwarsWalkController : BasePlayerController
 	public virtual void Move()
 	{
 		MoveHelper mover = new MoveHelper( Position, Velocity );
-		mover.Trace = mover.Trace.Size( mins, maxs ).WithoutTags( "player" ).WithoutTags( "nocollide" ).Ignore( Pawn );
+		mover.Trace = mover.Trace.Size( mins, maxs ).WithoutTags( "nocollide" ).Ignore( Pawn );
 		mover.MaxStandableAngle = GroundAngle;
 
 		mover.TryMove( Time.Delta );
@@ -457,6 +465,11 @@ public partial class FortwarsWalkController : BasePlayerController
 
 		if ( DuckSlide.IsActive )
 			flMul *= 0.8f;
+
+		//
+		// Jump: player class jump multiplier
+		//
+		flMul *= ( Pawn as FortwarsPlayer ).Class.JumpMultiplier;
 
 		Velocity = Velocity.WithZ( startz + flMul * flGroundFactor );
 

@@ -3,6 +3,7 @@
 
 using Sandbox;
 using System.ComponentModel;
+using System.Linq;
 
 namespace Fortwars;
 
@@ -68,9 +69,6 @@ public partial class FortwarsPlayer : Sandbox.Player
 			return;
 		}
 
-		if(Client != null)
-			Client.VoiceStereo = false;
-
 		Controller = new FortwarsWalkController();
 		Animator = new FortwarsPlayerAnimator();
 		CameraMode = new FirstPersonCamera();
@@ -92,11 +90,6 @@ public partial class FortwarsPlayer : Sandbox.Player
 		InSpawnRoom = true;
 
 		base.Respawn();
-	}
-
-	public override void CreateHull()
-	{
-		EnableHitboxes = true;
 	}
 
 	public void DressPlayerClothing()
@@ -176,11 +169,21 @@ public partial class FortwarsPlayer : Sandbox.Player
 		}
 
 		SimulateActiveChild( cl, ActiveChild );
+		SimulateDeployables( cl );
 
 		if ( LifeState != LifeState.Alive )
 			return;
 
 		TickPlayerUse();
+	}
+
+	private void SimulateDeployables( Client cl )
+	{
+		Entity.All
+			.OfType<Deployable>()
+			.Where( x => x.Owner == this )
+			.ToList()
+			.ForEach( x => x.Simulate( cl ) );
 	}
 
 	protected override void TickPlayerUse()
