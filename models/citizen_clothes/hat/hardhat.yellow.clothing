@@ -1,0 +1,21 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Title = "Hard Hat"
+		Subtitle = "Yellow"
+		Category = "Hat"
+		SubCategory = ""
+		Model = resource:"models/citizen_clothes/hat/hat_hardhat.vmdl"
+		SkinMaterial = null
+		EyesMaterial = null
+		MaterialGroup = "yellow"
+		SlotsUnder = "HeadTop"
+		SlotsOver = "HeadTop"
+		HideBody = 0
+		Icon = 
+		{
+			Path = resource:"models/citizen_clothes/hat/hardhat.yellow.clothing.jpg"
+		}
+	}
+}
