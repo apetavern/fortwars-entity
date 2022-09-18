@@ -31,7 +31,7 @@
 		AimFovMult = 0.1
 		MaxAmmo = 4
 		ExtraAmmo = 8
-		ReloadTime = 3
+		ReloadTime = 2.3
 		MaxDamage = 50
 		MinDamage = 50
 		DamageDropOffDistance = 100000

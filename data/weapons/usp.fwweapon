@@ -11,6 +11,7 @@
 		HoldType = "Pistol"
 		ProceduralViewmodelStrength = 1
 		AimedProceduralViewmodelStrength = 0.5
+		KickbackStrength = 10
 		Flags = 
 		{
 		}
@@ -28,7 +29,7 @@
 		AimFovMult = 0.5
 		MaxAmmo = 18
 		ExtraAmmo = 36
-		ReloadTime = 2
+		ReloadTime = 1.6
 		MaxDamage = 25
 		MinDamage = 10
 		DamageDropOffDistance = 512
