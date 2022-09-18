@@ -77,14 +77,14 @@ partial class ClassMenu
 			citizen.SetAnimParameter( "holdtype_pose_hand", handpose );
 			citizen.SetAnimParameter( "holdtype_pose", holdpose );
 
-			/*citizen.SetAnimParameter( "useleftik", weaponModel.GetAttachment( "lhand_ik" ).HasValue ); //Uncomment this shit when https://github.com/Facepunch/sbox-issues/issues/2256 that issue has be resolved
+			citizen.SetAnimParameter( "useleftik", weaponModel.GetAttachment( "lhand_ik" ).HasValue ); //Uncomment this shit when https://github.com/Facepunch/sbox-issues/issues/2256 that issue has be resolved
 
 			if ( weaponModel.GetAttachment( "lhand_ik" ).HasValue )
 			{
 				Transform attachment = weaponModel.GetAttachment( "lhand_ik" ).Value;
 				citizen.SetAnimParameter( "left_hand_ik.position", attachment.Position );
 				citizen.SetAnimParameter( "left_hand_ik.rotation", attachment.Rotation );
-			}*/
+			}
 		}
 
 		HoldTypes weaponHoldtype;
