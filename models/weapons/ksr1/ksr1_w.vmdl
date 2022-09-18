@@ -34,7 +34,7 @@
 					{
 						_class = "Attachment"
 						name = "muzzle"
-						parent_bone = ""
+						parent_bone = "hold_R"
 						relative_origin = [ 44.166515, 0.0, 2.743141 ]
 						relative_angles = [ -0.0, 0.0, 0.0 ]
 						weight = 1.0
@@ -43,7 +43,7 @@
 					{
 						_class = "Attachment"
 						name = "lhand_ik"
-						parent_bone = ""
+						parent_bone = "hold_R"
 						relative_origin = [ 11.88204, 2.832714, -2.713354 ]
 						relative_angles = [ -3.263246, -47.916283, 83.989891 ]
 						weight = 1.0

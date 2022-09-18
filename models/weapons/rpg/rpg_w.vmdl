@@ -70,8 +70,8 @@
 					{
 						_class = "Attachment"
 						name = "lhand_ik"
-						parent_bone = ""
-						relative_origin = [ 9.387768, 2.727445, -2.308173 ]
+						parent_bone = "hold_R"
+						relative_origin = [ 10.26831, 2.727445, -2.986212 ]
 						relative_angles = [ 2.664523, -19.882185, 78.762825 ]
 						weight = 1.0
 						ignore_rotation = false
