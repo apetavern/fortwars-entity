@@ -2,20 +2,20 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
+using Sandbox.Effects;
 
 namespace Fortwars;
 
 partial class FortwarsPlayer
 {
-	private static StandardPostProcess postProcess;
+	private static ScreenEffects postProcess;
 
 	private static void SetupPostProcessing()
 	{
 		if ( !Host.IsClient )
 			return;
 
-		PostProcess.Add<StandardPostProcess>( new() );
-		postProcess = PostProcess.Get<StandardPostProcess>();
+		postProcess = Map.Camera.FindOrCreateHook<ScreenEffects>();
 	}
 
 	[Event.Frame]
@@ -29,29 +29,21 @@ partial class FortwarsPlayer
 			SetupPostProcessing();
 		}
 
-		postProcess.FilmGrain.Enabled = true;
-		postProcess.FilmGrain.Intensity = 0.15f;
-		postProcess.FilmGrain.Response = 1f;
+		postProcess.Enabled = true;
 
-		postProcess.LensDistortion.Enabled = true;
-		postProcess.LensDistortion.K1 = 0f;
-		postProcess.LensDistortion.K2 = -0.005f;
-
-		postProcess.ChromaticAberration.Enabled = true;
+		postProcess.ChromaticAberration.Scale = 1.0f;
 		postProcess.ChromaticAberration.Offset = Vector3.Up * 0.0005f;
-
-		postProcess.Vignette.Enabled = true;
 
 		float vignette;
 		if ( Local.Pawn is FortwarsPlayer { ActiveChild: FortwarsWeapon { IsAiming: true } } )
-			vignette = 1.0f;
+			vignette = 0.5f;
 		else
 			vignette = 0.0f;
 
 		postProcess.Vignette.Intensity = postProcess.Vignette.Intensity.LerpTo( vignette, 10 * Time.Delta );
-
-		postProcess.Vignette.Roundness = 1.5f;
-		postProcess.Vignette.Smoothness = 100f;
+		
+		postProcess.Vignette.Roundness = 1.0f;
+		postProcess.Vignette.Smoothness = 1.0f;
 		postProcess.Vignette.Color = Color.Black;
 
 		if ( Local.Pawn is FortwarsPlayer player )
@@ -61,16 +53,18 @@ partial class FortwarsPlayer
 			if ( healthT > 0 )
 			{
 				postProcess.Vignette.Color = Color.Lerp( postProcess.Vignette.Color, Color.Red, healthT );
-				postProcess.Vignette.Intensity = healthT * 10f;
+				postProcess.Vignette.Intensity = healthT;
 			}
 
-			postProcess.Blur.Enabled = healthT > 0;
-			postProcess.Blur.Strength = healthT * 0.25f;
+			// postProcess.Blur.Enabled = healthT > 0;
+			// postProcess.Blur.Strength = healthT * 0.25f;
 
-			postProcess.MotionBlur.Enabled = false;
-
-			postProcess.Saturate.Enabled = healthT > 0;
-			postProcess.Saturate.Amount = 1.0f - healthT;
+			postProcess.Pixelation = healthT * 0.25f;
+			postProcess.Saturation = 1.0f - healthT;
+			postProcess.MotionBlur.Scale = healthT;
+			postProcess.MotionBlur.Samples = 32;
 		}
+
+		postProcess.Vignette.Intensity = 0.0f;
 	}
 }
