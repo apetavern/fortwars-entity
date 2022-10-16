@@ -29,11 +29,11 @@ public partial class Deployable : Pickup
 
 		Health = 50;
 	}
-	
+
 	public override void TakeDamage( DamageInfo info )
 	{
 		base.TakeDamage( info );
-		
+
 		if ( info.Attacker is FortwarsPlayer attacker )
 		{
 			DidDamage( To.Single( attacker ), info.Position, info.Damage, ( (float)Health ).LerpInverse( 100, 0 ) );

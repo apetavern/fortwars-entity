@@ -97,73 +97,73 @@ public partial class DropTool : Carriable
 		projectile.Owner = Owner;
 	}
 
-    public void DoDrop()
-    {
-        if ( IsServer )
-        {
-            All.OfType<Pickup>().Where( e => e.Client == Client ).ToList().ForEach( e => e.Delete() );
-        }
+	public void DoDrop()
+	{
+		if ( IsServer )
+		{
+			All.OfType<Pickup>().Where( e => e.Client == Client ).ToList().ForEach( e => e.Delete() );
+		}
 
-        SpawnPickup();
+		SpawnPickup();
 
-        Dropped = false;
-    }
+		Dropped = false;
+	}
 
-    public virtual bool CanPrimaryAttack()
-    {
-        if ( !Owner.IsValid() || !Input.Down( InputButton.PrimaryAttack ) ) return false;
+	public virtual bool CanPrimaryAttack()
+	{
+		if ( !Owner.IsValid() || !Input.Down( InputButton.PrimaryAttack ) ) return false;
 
-        var rate = PrimaryRate;
-        if ( rate <= 0 ) return true;
+		var rate = PrimaryRate;
+		if ( rate <= 0 ) return true;
 
-        return TimeSincePrimaryAttack > ( 1 / rate );
-    }
+		return TimeSincePrimaryAttack > ( 1 / rate );
+	}
 
-    public virtual void AttackPrimary()
-    {
-        var player = Owner as FortwarsPlayer;
-        player.SetAnimParameter( "b_attack", true );
+	public virtual void AttackPrimary()
+	{
+		var player = Owner as FortwarsPlayer;
+		player.SetAnimParameter( "b_attack", true );
 
-        Dropped = true;
+		Dropped = true;
 
-        ViewModelEntity?.SetAnimParameter( "fire", true );
-    }
+		ViewModelEntity?.SetAnimParameter( "fire", true );
+	}
 
-    public virtual IEnumerable<TraceResult> TraceHit( Vector3 start, Vector3 end, float radius = 2.0f )
-    {
-        var tr = Trace.Ray( start, end )
-                .UseHitboxes()
-                .WorldOnly()
-				.Ignore(Owner)
-				.Ignore(this)
-                .Size( radius )
-                .Run();
+	public virtual IEnumerable<TraceResult> TraceHit( Vector3 start, Vector3 end, float radius = 2.0f )
+	{
+		var tr = Trace.Ray( start, end )
+				.UseHitboxes()
+				.WorldOnly()
+				.Ignore( Owner )
+				.Ignore( this )
+				.Size( radius )
+				.Run();
 
-        yield return tr;
-    }
+		yield return tr;
+	}
 
-    public override void ActiveStart( Entity ent )
-    {
-        base.ActiveStart( ent );
-    }
+	public override void ActiveStart( Entity ent )
+	{
+		base.ActiveStart( ent );
+	}
 
-    public override void SimulateAnimator( PawnAnimator anim )
-    {
-        if ( TimeSinceLastDrop < DropTimeDelay )
-        {
-            EnableDrawing = false;
-            anim.SetAnimParameter( "holdtype", (int)HoldTypes.None );
-            anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.TwoHands );
-            anim.SetAnimParameter( "holdtype_pose_hand", 0f );
-            anim.SetAnimParameter( "holdtype_attack", 1 );
-        }
-        else
-        {
-            EnableDrawing = true;
-            anim.SetAnimParameter( "holdtype", (int)HoldTypes.HoldItem );
-            anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.TwoHands );
-            anim.SetAnimParameter( "holdtype_pose_hand", 0f );
-            anim.SetAnimParameter( "holdtype_attack", 1 );
-        }
-    }
+	public override void SimulateAnimator( PawnAnimator anim )
+	{
+		if ( TimeSinceLastDrop < DropTimeDelay )
+		{
+			EnableDrawing = false;
+			anim.SetAnimParameter( "holdtype", (int)HoldTypes.None );
+			anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.TwoHands );
+			anim.SetAnimParameter( "holdtype_pose_hand", 0f );
+			anim.SetAnimParameter( "holdtype_attack", 1 );
+		}
+		else
+		{
+			EnableDrawing = true;
+			anim.SetAnimParameter( "holdtype", (int)HoldTypes.HoldItem );
+			anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.TwoHands );
+			anim.SetAnimParameter( "holdtype_pose_hand", 0f );
+			anim.SetAnimParameter( "holdtype_attack", 1 );
+		}
+	}
 }

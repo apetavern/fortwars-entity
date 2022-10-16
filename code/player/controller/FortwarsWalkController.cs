@@ -543,7 +543,7 @@ public partial class FortwarsWalkController : BasePlayerController
 
 		var pm = Trace.Ray( start, end )
 					.Size( mins, maxs )
-					.WithTag("solid")
+					.WithTag( "solid" )
 					.Ignore( Pawn )
 					.WithoutTags( "nocollide" )
 					.Run();

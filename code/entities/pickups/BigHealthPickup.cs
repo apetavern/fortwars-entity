@@ -14,7 +14,7 @@ public partial class BigHealthPickup : Deployable
 		SetModel( "models/items/medkit/medkit_w.vmdl" );
 		SetBodyGroup( 0, 1 );
 		SetMaterialGroup( "health" );
-		
+
 		Components.Get<BobbingComponent>().NoPitch = true;
 	}
 

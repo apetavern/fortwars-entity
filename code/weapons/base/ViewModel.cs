@@ -3,7 +3,6 @@
 
 using Sandbox;
 using System;
-using System.Linq;
 
 namespace Fortwars;
 
@@ -45,7 +44,7 @@ public class ViewModel : BaseViewModel
 	public override void OnNewModel( Model model )
 	{
 		var player = Owner as FortwarsPlayer;
-		
+
 		var SkinMaterial = Material.Load( player.SkinMaterialPath );
 		SetMaterialOverride( SkinMaterial, "skin" );
 	}

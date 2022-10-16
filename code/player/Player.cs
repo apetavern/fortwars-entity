@@ -2,7 +2,6 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
-using System.ComponentModel;
 using System.Linq;
 
 namespace Fortwars;
@@ -48,8 +47,6 @@ public partial class FortwarsPlayer : Sandbox.Player
 				Team = Game.Instance.BlueTeam;
 			else
 				Team = Game.Instance.RedTeam;
-
-			// ChatBox.AddInformation( To.Everyone, $"{Name} has joined {Team.Name}", $"avatar:{Client.PlayerId}" );
 		}
 
 		SetModel( "models/playermodel/playermodel.vmdl" );
@@ -285,7 +282,7 @@ public partial class FortwarsPlayer : Sandbox.Player
 	}
 
 	TimeSince timeSinceLastFootstep = 0;
-	
+
 	public override void OnAnimEventFootstep( Vector3 pos, int foot, float volume )
 	{
 		if ( LifeState != LifeState.Alive )

@@ -13,26 +13,26 @@ namespace Fortwars;
 [HammerEntity]
 public partial class FuncWallToggle : BrushEntity
 {
-    public override void Spawn()
-    {
-        base.Spawn();
+	public override void Spawn()
+	{
+		base.Spawn();
 
-        SetupPhysicsFromModel( PhysicsMotionType.Keyframed ); 
-        EnableAllCollisions = true;
-        EnableTouch = true;
-    }
+		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
+		EnableAllCollisions = true;
+		EnableTouch = true;
+	}
 
-    public void Show()
-    {
-        // TODO: Why does changing EnableAllCollisions do fuck all
-        EnableAllCollisions = true;
-        EnableDrawing = true;
-    }
+	public void Show()
+	{
+		// TODO: Why does changing EnableAllCollisions do fuck all
+		EnableAllCollisions = true;
+		EnableDrawing = true;
+	}
 
-    public void Hide()
-    {
-        // TODO: Ditto
-        EnableAllCollisions = false;
-        EnableDrawing = false;
-    }
+	public void Hide()
+	{
+		// TODO: Ditto
+		EnableAllCollisions = false;
+		EnableDrawing = false;
+	}
 }

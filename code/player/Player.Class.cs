@@ -4,7 +4,6 @@
 using Sandbox;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using static Fortwars.RadialWheel;
 
 namespace Fortwars;
 
@@ -53,10 +52,10 @@ partial class FortwarsPlayer
 		if ( SelectedPrimary != newPrimaryName )
 		{
 			WeaponAsset weapon;
-			if ( ( weapon = ItemUtils.GetWeaponAsset( newPrimaryName ) ) == null 
+			if ( ( weapon = ItemUtils.GetWeaponAsset( newPrimaryName ) ) == null
 				|| weapon.InventorySlot != WeaponAsset.InventorySlots.Primary )
 				return;
-			
+
 			wasLoadoutChanged = true;
 			SelectedPrimary = newPrimaryName;
 		}
@@ -67,7 +66,7 @@ partial class FortwarsPlayer
 			if ( ( weapon = ItemUtils.GetWeaponAsset( newSecondaryName ) ) == null
 				|| weapon.InventorySlot != WeaponAsset.InventorySlots.Secondary )
 				return;
-			
+
 			wasLoadoutChanged = true;
 			SelectedSecondary = newSecondaryName;
 		}

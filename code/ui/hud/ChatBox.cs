@@ -2,7 +2,6 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
-using Sandbox.Hooks;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 

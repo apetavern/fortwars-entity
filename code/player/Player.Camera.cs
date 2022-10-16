@@ -2,7 +2,6 @@
 // without permission of its author (insert_email_here)
 
 using Sandbox;
-using System;
 
 namespace Fortwars;
 
@@ -40,7 +39,7 @@ partial class FortwarsPlayer
 	private void AddCameraEffects( ref CameraSetup setup )
 	{
 		var fovTarget = 0f;
-		
+
 		if ( Controller is FortwarsWalkController { IsSprinting: true } )
 			fovTarget = 10f;
 		if ( Controller is FortwarsWalkController { DuckSlide: DuckSlide { IsActiveSlide: true } } )

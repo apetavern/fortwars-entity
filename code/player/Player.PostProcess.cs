@@ -41,7 +41,7 @@ partial class FortwarsPlayer
 			vignette = 0.0f;
 
 		postProcess.Vignette.Intensity = postProcess.Vignette.Intensity.LerpTo( vignette, 10 * Time.Delta );
-		
+
 		postProcess.Vignette.Roundness = 1.0f;
 		postProcess.Vignette.Smoothness = 1.0f;
 		postProcess.Vignette.Color = Color.Black;

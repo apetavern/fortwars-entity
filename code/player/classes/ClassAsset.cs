@@ -75,7 +75,7 @@ public class ClassAsset : GameResource
 	{
 		return ResourceLibrary.Get<ClassAsset>( path );
 	}
-  
+
 	public static ClassAsset Default => FromPath( "data/classes/assault.fwclass" );
 
 	private async void AssignLoadout( List<string> items, Inventory inventory )
