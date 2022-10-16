@@ -88,9 +88,12 @@ public partial class DuckSlide : BaseNetworkable
 
 	protected virtual void TrySlide()
 	{
+		if ( timeSinceSlide < 2 )
+			return;
+
 		IsActive = true;
 
-		float mul = ( Controller.Pawn as FortwarsPlayer )?.Class.SpeedMultiplier ?? 1.0f;		
+		float mul = ( Controller.Pawn as FortwarsPlayer )?.Class.SpeedMultiplier ?? 1.0f;
 
 		var direction = Controller.Pawn.EyeRotation.Forward;
 		Controller.Velocity += direction * SlideForce * mul;
