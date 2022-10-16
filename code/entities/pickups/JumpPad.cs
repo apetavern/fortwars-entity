@@ -27,6 +27,9 @@ public partial class JumpPad : Deployable
 	{
 		Log.Trace( $"Jumping player {player}" );
 
+		if ( !player.IsAuthority )
+			return;
+
 		SetAnimParameter( "jump", true );
 
 		player.GroundEntity = null;
@@ -47,6 +50,7 @@ public partial class JumpPad : Deployable
 			return;
 
 		var moveHelper = new MoveHelper( Position, Velocity );
+		moveHelper.WallBounce = 0.5f;
 		moveHelper.Trace = moveHelper.Trace.WorldOnly().WithAnyTags( "solid", "playerclip" );
 
 		moveHelper.Velocity += ThrowSpeed * Rotation.Forward * Time.Delta;
