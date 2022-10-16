@@ -17,7 +17,7 @@
 			ShotgunAmmo = true
 		}
 		SprintAnimationType = "Pistol"
-		RPM = 300
+		RPM = 90
 		Range = 16384
 		ShotCount = 1
 		RecoilX = 0.3
