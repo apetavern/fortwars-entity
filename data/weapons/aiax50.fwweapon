@@ -39,7 +39,7 @@
 		BuildingDamageMultiplier = 0.5
 		FireSound = "aiax50_fire"
 		FireParticles = resource:"particles/flash_medium.vpcf"
-		TracerParticles = resource:"particles/tracer_large.vpcf"
+		TracerParticles = resource:"particles/tracer.vpcf"
 		ProjectileModel = resource:"models/weapons/rpg/rpgrocket.vmdl"
 		ProjectileSpeed = 10000
 	}

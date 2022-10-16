@@ -11,6 +11,7 @@
 		HoldType = "Rifle"
 		ProceduralViewmodelStrength = 1
 		AimedProceduralViewmodelStrength = 0.1
+		KickbackStrength = 10
 		Flags = 
 		{
 			UseProjectile = true
@@ -38,7 +39,7 @@
 		BuildingDamageMultiplier = 6
 		FireSound = "rust_pumpshotgun.shootdouble"
 		FireParticles = resource:"particles/flash_medium.vpcf"
-		TracerParticles = resource:"particles/tracer_large.vpcf"
+		TracerParticles = resource:"particles/tracer.vpcf"
 		ProjectileModel = resource:"models/weapons/rpg/rpgrocket.vmdl"
 		ProjectileSpeed = 1000
 	}

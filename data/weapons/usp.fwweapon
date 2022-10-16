@@ -37,7 +37,7 @@
 		BuildingDamageMultiplier = 0.25
 		FireSound = "hkusp_fire"
 		FireParticles = resource:"particles/muzzleflash/fw_muzzleflash.vpcf"
-		TracerParticles = resource:"particles/tracer_large.vpcf"
+		TracerParticles = resource:"particles/tracer.vpcf"
 		ProjectileModel = ""
 		ProjectileSpeed = 1
 	}

@@ -328,7 +328,7 @@ public partial class FortwarsWeapon : Carriable
 
 	public virtual void AttackPrimary()
 	{
-		StopReload();		
+		StopReload();
 		FireBullets();
 	}
 
@@ -487,8 +487,8 @@ public partial class FortwarsWeapon : Carriable
 	private void CreateTracerEffects( Vector3 end )
 	{
 		var tracer = Particles.Create( WeaponAsset.TracerParticles );
-		tracer.SetPosition( 1, EffectEntity.GetAttachment( "muzzle" )?.Position ?? default );
-		tracer.SetPosition( 2, end );
+		tracer.SetPosition( 0, EffectEntity.GetAttachment( "muzzle" )?.Position ?? default );
+		tracer.SetPosition( 1, end );
 	}
 
 	[ClientRpc]

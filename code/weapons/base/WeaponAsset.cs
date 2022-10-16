@@ -3,7 +3,6 @@
 
 using Sandbox;
 using System;
-using System.ComponentModel;
 
 namespace Fortwars;
 
@@ -161,7 +160,7 @@ public partial class WeaponAsset : GameResource
 	public string FireParticles { get; set; } = "particles/flash_medium.vpcf";
 
 	[Property, Category( "Effects" ), ResourceType( "vpcf" )]
-	public string TracerParticles { get; set; } = "particles/tracer_large.vpcf";
+	public string TracerParticles { get; set; } = "particles/tracer.vpcf";
 
 	//
 	// Projectile
