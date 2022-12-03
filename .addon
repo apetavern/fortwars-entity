@@ -3,7 +3,7 @@
   "Type": "game",
   "Org": "apetavern",
   "Ident": "fortwars",
-  "Tags": null,
+  "Tags": "",
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
@@ -161,6 +161,11 @@
       "DefineConstants": "SANDBOX;ADDON;DEBUG",
       "NoWarn": "1701;1702;1591;"
     },
-    "GameCategory": "Shooter"
+    "GameCategory": "Shooter",
+    "DefaultLeaderboards": null,
+    "Summary": "Build a fort. Defend the flag. Destroy the enemy.",
+    "Description": "# FortWars\n\nBuild a fort, defend your flag, destroy the enemy.\n\n## \uD83D\uDD27 Classes\n\nThere are four classes available. Each class has its own specific loadout and role within the battlefield.\n\n## \uD83E\uDDF1 Building\n\nDuring the build phase, hold [Q] to open the build wheel. From here, you can select a block to create. You are given a finite number of blocks you can place. You can view your remaining resources in the bottom left of the screen. Use the manipulator to move blocks you\u0027ve created.\n\n## \uD83D\uDD2B Combat\n\nCombat will differ depending on the class you have chosen. Some classes are played best in an offensive role, whereas others are better for defence. Communicate with your team in order to strategize and build a good class balance.\n\n## \uD83C\uDFC6 Winning\n\nThe team with the most captures during a round will win the round. These rounds are played out of a best of three, and therefore the first team to win two of these rounds will win the game.\n\n## \u2B50 Changes\n\n### \uD83D\uDCC5 v0.0.1\n\n* Initial release",
+    "Public": true,
+    "ReplaceTags": "basebuilding sourceforts firstperson shooter building"
   }
 }
