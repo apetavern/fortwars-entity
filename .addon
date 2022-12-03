@@ -3,6 +3,7 @@
   "Type": "game",
   "Org": "apetavern",
   "Ident": "fortwars",
+  "Tags": null,
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",

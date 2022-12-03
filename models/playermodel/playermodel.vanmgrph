@@ -2128,7 +2128,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 3120.0, -80.0 ]
+					m_vecPosition = [ 3120.0, 16.0 ]
 					m_nNodeID = 
 					{
 						m_id = 43087104
@@ -12756,7 +12756,7 @@
 				{
 					_class = "CStateMachineAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 3440.0, -400.0 ]
+					m_vecPosition = [ 3584.0, -384.0 ]
 					m_nNodeID = 
 					{
 						m_id = 396972072
@@ -12812,7 +12812,7 @@
 							{
 								m_nodeID = 
 								{
-									m_id = 1288500645
+									m_id = 634694870
 								}
 								m_outputID = 
 								{
@@ -13594,7 +13594,7 @@
 				{
 					_class = "CAddAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 3312.0, -160.0 ]
+					m_vecPosition = [ 3120.0, -176.0 ]
 					m_nNodeID = 
 					{
 						m_id = 479086054
@@ -16134,6 +16134,60 @@
 			{
 				key = 
 				{
+					m_id = 634694870
+				}
+				value = 
+				{
+					_class = "CBoneMaskAnimNode"
+					m_sName = "Unnamed"
+					m_vecPosition = [ 3328.0, -240.0 ]
+					m_nNodeID = 
+					{
+						m_id = 634694870
+					}
+					m_networkMode = "ClientPredicted"
+					m_sNote = ""
+					m_weightListName = "Only_LeftArm"
+					m_inputConnection1 = 
+					{
+						m_nodeID = 
+						{
+							m_id = 133143364
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_inputConnection2 = 
+					{
+						m_nodeID = 
+						{
+							m_id = 1288500645
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_blendSpace = "BlendSpace_Parent"
+					m_bUseBlendScale = false
+					m_blendValueSource = "Parameter"
+					m_blendParameter = 
+					{
+						m_id = 4294967295
+					}
+					m_timingBehavior = "UseChild2"
+					m_flTimingBlend = 0.5
+					m_flRootMotionBlend = 0.0
+					m_footMotionTiming = "Child1"
+					m_bResetChild1 = true
+					m_bResetChild2 = true
+				}
+			},
+			{
+				key = 
+				{
 					m_id = 635779278
 				}
 				value = 
@@ -16271,7 +16325,7 @@
 				{
 					_class = "CCycleControlAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 3312.0, -80.0 ]
+					m_vecPosition = [ 3120.0, -96.0 ]
 					m_nNodeID = 
 					{
 						m_id = 645913289
@@ -23262,7 +23316,7 @@
 				{
 					_class = "CCycleControlAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 3136.0, -144.0 ]
+					m_vecPosition = [ 3120.0, -48.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1177676084
@@ -24776,7 +24830,7 @@
 				{
 					_class = "CAddAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 3520.0, -160.0 ]
+					m_vecPosition = [ 3328.0, -176.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1288500645
@@ -37384,7 +37438,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 2960.0, -144.0 ]
+					m_vecPosition = [ 2944.0, -64.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1663216297

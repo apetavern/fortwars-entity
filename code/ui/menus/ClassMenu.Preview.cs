@@ -30,6 +30,7 @@ partial class ClassMenu
 			Style.Padding = 0;
 
 			var world = new SceneWorld();
+
 			citizen = new SceneModel( world, "models/playermodel/playermodel.vmdl", Transform.Zero );
 			citizen.Position += Vector3.Up * 5f;
 
