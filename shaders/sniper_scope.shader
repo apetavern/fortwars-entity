@@ -117,10 +117,9 @@ PS
 	//
 	// Main
 	//
-	PixelOutput MainPs( PixelInput i )
+	float4 MainPs( PixelInput i ) : SV_Target0
 	{
-		Material material = GatherMaterial( i );
-		PixelOutput o = FinalizePixelMaterial( i, material );
+		float4 o = float4( 0, 0, 0, 1 );
 
 		float2 vPositionUvWithOffset = ( ( i.vPositionSs.xy ) - g_vViewportOffset ) / g_vRenderTargetSize;
 		float fAspectRatio = g_vViewportSize.y / g_vViewportSize.x;
@@ -146,12 +145,12 @@ PS
 		// Put it all together
 		//
 		float2 vScreenUvs = vPositionUvWithOffset - ( g_vMaskOffset * g_flScreenLiveOffsetMul );
-		o.vColor = Tex2D( g_tScopeRT, vScreenUvs );
-		o.vColor.xyz = SrgbGammaToLinear( o.vColor.xyz * vReticleColor.xyz );
-		o.vColor.xyz *= fMaskMix;
-		o.vColor.xy *= sqrt( fMaskMix );
+		o = Tex2D( g_tScopeRT, vScreenUvs );
+		o.xyz = SrgbGammaToLinear( o.xyz * vReticleColor.xyz );
+		o.xyz *= fMaskMix;
+		o.xy *= sqrt( fMaskMix );
 
-		o.vColor.a = 1.0;
+		o.a = 1.0;
 
 		return o;
 	}

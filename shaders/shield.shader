@@ -150,11 +150,9 @@ PS
 	//
 	// Main
 	//
-	PixelOutput MainPs( PixelInput i )
+	float4 MainPs( PixelInput i ) : SV_Target0
 	{
-		Material m = GatherMaterial( i );
-		ShadingModelStandard sm;
-		PixelOutput o= FinalizePixelMaterial( i, m, sm );
+		float4 o = float4( 0, 0, 0, 1 );
 
         float3 vPositionWs = i.vPositionWithOffsetWs.xyz + g_vHighPrecisionLightingOffsetWs.xyz;
         float2 vPositionUv = (i.vPositionSs.xy - g_vViewportOffset) / g_vRenderTargetSize;
@@ -167,7 +165,7 @@ PS
 		//
 		float2 bumpNoise = noise( (noisePos * 0.5)+ timeOffset ) + noise( (noisePos * 0.05)+ timeOffset );
 		bumpNoise *= 0.01f;
-		o.vColor.xyz = GaussianBlur( o.vColor.xyz, vPositionUv + bumpNoise, 0.01f );
+		o.xyz = GaussianBlur( o.xyz, vPositionUv + bumpNoise, 0.01f );
 
 		//
 		// off-angle fresnel color warping
@@ -175,7 +173,7 @@ PS
         float fresnel = CalculateNormalizedFresnel( g_flFresnelReflectance, g_flFresnelExponent, vPositionWs, i.vNormalWs );
 		fresnel += 1.0f;
 		fresnel = pow( fresnel, 2 );
-		o.vColor.xyz *= fresnel * g_vColor;
+		o.xyz *= fresnel * g_vColor;
 
 		//
 		// noise for color distortion effect
@@ -183,13 +181,13 @@ PS
 		float2 colNoise = noise( (noisePos * 1.0)+ timeOffset ) + noise( (noisePos * 10.0)+ timeOffset  ) + noise( (noisePos * 0.1)+ timeOffset	);
 		colNoise /= 3.0f;
 		colNoise = (colNoise + 1.0f) / 2.0f;
-		o.vColor.xyz = Lighten( o.vColor, o.vColor * ( colNoise.x + colNoise.y ) ).xyz;
+		o.xyz = Lighten( o, o * ( colNoise.x + colNoise.y ) ).xyz;
 
 		float distance = length( vPositionWs - g_vCameraPositionWs );
 		distance -= 8;
 		distance /= 8;
 		distance = clamp( distance, 0, 1 );
-		o.vColor.a *= distance;
+		o.a *= distance;
 
 		return o;
 	}
