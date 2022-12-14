@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System;
-
 namespace Fortwars;
 
 [Library]
@@ -93,7 +90,7 @@ public partial class FortwarsWalkController : BasePlayerController
 	{
 		base.FrameSimulate();
 
-		EyeRotation = Input.Rotation;
+		EyeRotation = Input.AnalogLook.ToRotation();
 	}
 
 	public float FallVelocity { get; private set; } = 0;
@@ -106,13 +103,13 @@ public partial class FortwarsWalkController : BasePlayerController
 		UpdateBBox();
 
 		EyeLocalPosition += TraceOffset;
-		EyeRotation = Input.Rotation;
+		EyeRotation = Input.AnalogLook.ToRotation();
 
 		if ( Unstuck.TestAndFix() )
 			return;
 
 		CheckLadder();
-		IsSwimming = Pawn.WaterLevel > 0.6f;
+		IsSwimming = Pawn.GetWaterLevel() > 0.6f;
 
 		//
 		// Start Gravity
@@ -147,9 +144,9 @@ public partial class FortwarsWalkController : BasePlayerController
 		//
 		// Work out wish velocity.. just take input, rotate it to view, clamp to -1, 1
 		//
-		WishVelocity = new Vector3( Input.Forward, Input.Left, 0 );
+		WishVelocity = new Vector3( Input.AnalogMove.x, Input.AnalogMove.y, 0 );
 		var inSpeed = WishVelocity.Length.Clamp( 0, 1 );
-		WishVelocity *= Input.Rotation.Angles().WithPitch( 0 ).ToRotation();
+		WishVelocity *= Input.AnalogLook.WithPitch( 0 ).ToRotation();
 
 		if ( !IsSwimming && !IsTouchingLadder )
 		{
@@ -222,7 +219,7 @@ public partial class FortwarsWalkController : BasePlayerController
 			DebugOverlay.Box( Position, mins, maxs, Color.Blue );
 
 			var lineOffset = 0;
-			if ( Host.IsServer ) lineOffset = 10;
+			if ( Game.IsServer ) lineOffset = 10;
 
 			DebugOverlay.ScreenText( $"        Position: {Position}", lineOffset + 0 );
 			DebugOverlay.ScreenText( $"        Velocity: {Velocity}", lineOffset + 1 );
@@ -249,14 +246,14 @@ public partial class FortwarsWalkController : BasePlayerController
 
 		if ( Pawn.LifeState != LifeState.Dead
 			&& fallVelocity >= FallPunchThreshold
-			&& !( Pawn.WaterLevel >= 1f ) )
+			&& !( Pawn.GetWaterLevel() >= 1f ) )
 		{
 			float punchStrength = fallVelocity.LerpInverse( FallPunchThreshold, FallPunchThreshold * 2 );
 
 			// TODO
 			// _ = new Sandbox.ScreenShake.ViewPunch( 1f, punchStrength * 2f );
 
-			if ( GroundEntity.WaterLevel >= 1f )
+			if ( GroundEntity.GetWaterLevel() >= 1f )
 			{
 				FallVelocity -= PlayerLandOnFloatingObject;
 			}
@@ -376,7 +373,7 @@ public partial class FortwarsWalkController : BasePlayerController
 	/// </summary>
 	public virtual void Accelerate( Vector3 wishdir, float wishspeed, float speedLimit, float acceleration )
 	{
-		// This gets overridden because some games (CSPort) want to allow dead (observer) players
+		// This gets overridden because some FortwarsGames (CSPort) want to allow dead (observer) players
 		// to be able to move around.
 		// if ( !CanAccelerate() )
 		//     return;
@@ -515,8 +512,8 @@ public partial class FortwarsWalkController : BasePlayerController
 
 	public virtual void CheckLadder()
 	{
-		var wishvel = new Vector3( Input.Forward, Input.Left, 0 );
-		wishvel *= Input.Rotation.Angles().WithPitch( 0 ).ToRotation();
+		var wishvel = new Vector3( Input.AnalogMove.x, Input.AnalogMove.y, 0 );
+		wishvel *= Input.AnalogLook.WithPitch( 0 ).ToRotation();
 		wishvel = wishvel.Normal;
 
 		if ( IsTouchingLadder )

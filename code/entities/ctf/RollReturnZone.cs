@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System;
 using System.Collections.Generic;
 
 
@@ -101,7 +99,7 @@ public partial class RollReturnZone : ModelEntity
 		if ( other.IsWorld )
 			return;
 
-		if ( Game.Instance.Round is not CombatRound )
+		if ( FortwarsGame.Instance.Round is not CombatRound )
 			return;
 
 		if ( other is FortwarsPlayer player )
@@ -131,7 +129,7 @@ public partial class RollReturnZone : ModelEntity
 		if ( other.IsWorld )
 			return;
 
-		if ( Game.Instance.Round is not CombatRound )
+		if ( FortwarsGame.Instance.Round is not CombatRound )
 			return;
 
 		if ( other is FortwarsPlayer player )

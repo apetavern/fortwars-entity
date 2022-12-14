@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System.Linq;
-
 namespace Fortwars;
 
 public class BuildRound : BaseRound
@@ -17,7 +14,7 @@ public class BuildRound : BaseRound
 	{
 		Log.Info( "Started Build Round" );
 
-		if ( Host.IsServer )
+		if ( Game.IsServer )
 		{
 			Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) =>
 			{
@@ -45,7 +42,7 @@ public class BuildRound : BaseRound
 
 	protected override void OnTimeUp()
 	{
-		Game.Instance.ChangeRound( new CombatRound() );
+		FortwarsGame.Instance.ChangeRound( new CombatRound() );
 	}
 
 	public override void OnPlayerKilled( FortwarsPlayer player )

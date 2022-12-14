@@ -1,12 +1,9 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System.Linq;
-
 namespace Fortwars;
 
-partial class Game
+partial class FortwarsGame
 {
 	[Net] public int RedTeamScore { get; set; }
 	[Net] public int BlueTeamScore { get; set; }
@@ -82,7 +79,7 @@ partial class Game
 
 		HideFlag( enemyTeam.ID );
 
-		ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
+		ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.SteamId}", true );
 
 
 		foreach ( FortwarsPlayer ply in All.OfType<FortwarsPlayer>() )
@@ -121,7 +118,7 @@ partial class Game
 			BlueFlagCarrier = player;
 		}
 
-		ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
+		ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} picked up {enemyTeam.Name} flag", $"avatar:{player.Client.SteamId}", true );
 
 		player.PlaySound( "ctf_flag_pickup" );
 	}
@@ -162,7 +159,7 @@ partial class Game
 			// Announce
 			PlayAnnouncerSound( "announcer.enemy_flag_captured", Team.Red );
 			PlayAnnouncerSound( "announcer.your_flag_captured", Team.Blue );
-			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {RedTeam.Name}", $"avatar:{player.Client.PlayerId}", true );
+			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {RedTeam.Name}", $"avatar:{player.Client.SteamId}", true );
 		}
 
 		if ( player == RedFlagCarrier )
@@ -178,7 +175,7 @@ partial class Game
 			// Announce
 			PlayAnnouncerSound( "announcer.your_flag_captured", Team.Red );
 			PlayAnnouncerSound( "announcer.enemy_flag_captured", Team.Blue );
-			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {BlueTeam.Name}", $"avatar:{player.Client.PlayerId}", true );
+			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} scored for {BlueTeam.Name}", $"avatar:{player.Client.SteamId}", true );
 		}
 	}
 
@@ -189,7 +186,7 @@ partial class Game
 			PlayAnnouncerSound( "announcer.enemy_flag_dropped", Team.Red );
 			PlayAnnouncerSound( "announcer.your_flag_dropped", Team.Blue );
 
-			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {BlueTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
+			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {BlueTeam.Name} flag", $"avatar:{player.Client.SteamId}", true );
 			BlueFlagCarrier = null;
 			ShowFlag( Team.Blue );
 			return;
@@ -199,7 +196,7 @@ partial class Game
 			PlayAnnouncerSound( "announcer.enemy_flag_dropped", Team.Blue );
 			PlayAnnouncerSound( "announcer.your_flag_dropped", Team.Red );
 
-			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {RedTeam.Name} flag", $"avatar:{player.Client.PlayerId}", true );
+			ChatBox.AddInformation( To.Everyone, $"{player.Client.Name} dropped {RedTeam.Name} flag", $"avatar:{player.Client.SteamId}", true );
 			RedFlagCarrier = null;
 			ShowFlag( Team.Red );
 			return;

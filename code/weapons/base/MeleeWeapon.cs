@@ -1,7 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
 using System.Collections.Generic;
 
 namespace Fortwars;
@@ -11,7 +10,7 @@ public partial class MeleeWeapon : Carriable
 	public virtual float PrimaryRate => 2.0f;
 	[Net, Predicted] public TimeSince TimeSincePrimaryAttack { get; set; }
 
-	public override void Simulate( Client player )
+	public override void Simulate( IClient player )
 	{
 		if ( !Owner.IsValid() )
 			return;

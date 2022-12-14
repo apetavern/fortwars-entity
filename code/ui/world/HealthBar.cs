@@ -1,10 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-
 namespace Fortwars;
 
 public class HealthBar : Panel
@@ -17,7 +13,7 @@ public class HealthBar : Panel
 
 	public HealthBar( FortwarsBlock block )
 	{
-		Parent = Local.Hud;
+		Parent = FortwarsHUD.Root;
 		this.block = block;
 
 		StyleSheet.Load( "/ui/world/HealthBar.scss" );

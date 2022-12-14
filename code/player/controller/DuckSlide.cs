@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-
 namespace Fortwars;
 
 [Library]
@@ -95,7 +93,7 @@ public partial class DuckSlide : BaseNetworkable
 
 		float mul = ( Controller.Pawn as FortwarsPlayer )?.Class.SpeedMultiplier ?? 1.0f;
 
-		var direction = Controller.Pawn.EyeRotation.Forward;
+		var direction = ( Controller.Pawn as FortwarsPlayer ).EyeRotation.Forward;
 		Controller.Velocity += direction * SlideForce * mul;
 
 		IsActiveSlide = true;

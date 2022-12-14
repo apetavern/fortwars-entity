@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-
 namespace Fortwars;
 
 public class Projectile : ModelEntity
@@ -32,7 +30,7 @@ public class Projectile : ModelEntity
 		trailParticle.SetPosition( 0, GetAttachment( "trail" ).Value.Position ); //Have to keep positioning it...
 
 		Velocity += Speed * Rotation.Forward * Time.Delta;
-		Velocity += Map.Physics.Gravity * 0.5f * Time.Delta;
+		Velocity += Game.PhysicsWorld.Gravity * 0.5f * Time.Delta;
 
 		Rotation = Rotation.LookAt( Velocity.Normal, Vector3.Up );
 
@@ -50,7 +48,7 @@ public class Projectile : ModelEntity
 
 	private void Explode( TraceResult tr )
 	{
-		Game.Explode( tr.EndPosition, Owner, Weapon.WeaponAsset.MaxDamage );
+		FortwarsGame.Explode( tr.EndPosition, Owner, Weapon.WeaponAsset.MaxDamage );
 
 		Delete();
 	}

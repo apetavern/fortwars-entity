@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System;
-
 namespace Fortwars;
 
 /// <summary>
@@ -23,7 +20,7 @@ public partial class BobbingComponent : EntityComponent
 	{
 		// random offsets help make things look less uniform, adds variety
 		// this is mostly for ents that spawn on map load
-		RandomOffset = Rand.Float( 0, 360 );
+		RandomOffset = Game.Random.Float( 0, 360 );
 	}
 
 	[Event.PreRender]

@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-
 namespace Fortwars;
 
 partial class FortwarsPlayer
@@ -24,7 +22,7 @@ partial class FortwarsPlayer
 				// make sure our player loadouts are set
 				_team.OnPlayerSpawn( this );
 
-				if ( IsServer )
+				if ( Game.IsServer )
 				{
 					TeamID = _team.ID;
 					// Remove opposite team tag (for team swaps)

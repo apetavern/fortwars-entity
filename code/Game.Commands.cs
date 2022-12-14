@@ -1,15 +1,13 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Fortwars;
 
-partial class Game
+partial class FortwarsGame
 {
-	public static List<Client> Votes = new();
+	public static List<IClient> Votes = new();
 
 	[ConCmd.Server( "fw_rtv" )]
 	public static void RockTheVote()
@@ -96,7 +94,7 @@ partial class Game
 			}
 			delay = ( delay / 3f ).CeilToInt();
 
-			if ( delay < Global.TickRate * 3 && playerLogs.Count() > 3 )
+			if ( delay < Game.TickRate * 3 && playerLogs.Count() > 3 )
 			{
 				MessageFeed.AddMessage( To.Single( player ), "clear", "You're building too fast! Slow down!" );
 				return;

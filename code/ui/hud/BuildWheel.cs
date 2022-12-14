@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System.Threading.Tasks;
-
 namespace Fortwars;
 
 public partial class BuildWheel : RadialWheel
@@ -21,9 +18,9 @@ public partial class BuildWheel : RadialWheel
 	{
 		VirtualCursor.OnClick += OnClick;
 
-		BindClass( "active", () => ( ( Input.UsingController && Input.Down( InputButton.Slot4 ) && !Input.Down( InputButton.SecondaryAttack ) ) // Gamepad compatible bind
+		BindClass( "active", () => ( ( Input.UsingController && Input.Down( InputButton.Slot4 ) && !Input.Down( InputButton.SecondaryAttack ) ) // FortwarsGamepad compatible bind
 								|| ( !Input.UsingController && Input.Down( InputButton.Menu ) && !Input.Down( InputButton.Use ) ) )
-								&& Game.Instance.Round is BuildRound );
+								&& FortwarsGame.Instance.Round is BuildRound );
 	}
 
 	private void OnClick()
@@ -33,7 +30,7 @@ public partial class BuildWheel : RadialWheel
 			return;
 		}
 
-		Game.Spawn( GetCurrentItem()?.Name );
+		FortwarsGame.Spawn( GetCurrentItem()?.Name );
 		_ = ApplyShrinkEffect();
 	}
 

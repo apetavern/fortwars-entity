@@ -1,10 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-
 namespace Fortwars;
 
 public partial class ChatBox : Panel
@@ -110,7 +106,7 @@ public partial class ChatBox : Panel
 		Instance?.AddEntry( name, message, avatar, className );
 
 		// Only log clientside if we're not the listen server host
-		if ( !Global.IsListenServer )
+		if ( !Game.IsListenServer )
 		{
 			Log.Info( $"{name}: {message}" );
 		}
@@ -129,7 +125,7 @@ public partial class ChatBox : Panel
 
 		if ( message.StartsWith( "!rtv" ) )
 		{
-			Game.RockTheVote();
+			FortwarsGame.RockTheVote();
 		}
 
 		// todo - reject more stuff
@@ -142,6 +138,6 @@ public partial class ChatBox : Panel
 			className = $"{player.TeamID}-team";
 
 		Log.Info( $"{ConsoleSystem.Caller}: {message}" );
-		AddChatEntry( To.Everyone, ConsoleSystem.Caller.Name, message, $"avatar:{ConsoleSystem.Caller.PlayerId}", className );
+		AddChatEntry( To.Everyone, ConsoleSystem.Caller.Name, message, $"avatar:{ConsoleSystem.Caller.SteamId}", className );
 	}
 }

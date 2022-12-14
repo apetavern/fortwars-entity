@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-
 namespace Fortwars;
 
 [Library( "ammokittool", Title = "Ammokit" )]
@@ -21,12 +19,12 @@ public partial class AmmoKitTool : DropTool
 		ThrowProjectile( new BigAmmoPickup() );
 	}
 
-	public override void Simulate( Client player )
+	public override void Simulate( IClient player )
 	{
 		base.Simulate( player );
 
 		// Why the fuck is this even in simulate to begin with
-		if ( IsClient )
+		if ( Game.IsClient )
 		{
 			ViewModelEntity?.SetMaterialGroup( "ammo" );
 			SetMaterialGroup( "ammo" );

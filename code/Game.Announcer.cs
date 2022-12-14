@@ -1,21 +1,18 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System.Collections.Generic;
-
 namespace Fortwars;
 
-partial class Game
+partial class FortwarsGame
 {
 	private Queue<string> SoundQueue { get; set; } = new();
 	private Sound CurrentlyPlayingSound { get; set; }
 
-	public Player Player { get; set; }
+	public FortwarsPlayer Player { get; set; }
 
 	private void QueueAnnouncerSound( string soundId )
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 		SoundQueue.Enqueue( soundId );
 	}
 
@@ -41,7 +38,7 @@ partial class Game
 
 	public void PlayAnnouncerSound( string name, Team team = Team.Invalid )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		var to = ( team == Team.Invalid ) ?
 			To.Everyone : ToExtension.Team( team );

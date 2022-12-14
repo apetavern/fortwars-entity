@@ -1,10 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System;
-using System.Linq;
-
 namespace Fortwars;
 
 public struct BlockMaterial : IEquatable<BlockMaterial>
@@ -20,13 +16,13 @@ public struct BlockMaterial : IEquatable<BlockMaterial>
 	public int BaseHealth { get; set; }
 	public int PlayerLimit { get; set; }
 
-	public int GetBuiltCount( Client client )
+	public int GetBuiltCount( IClient client )
 	{
 		var blockMaterial = this;
 		return Entity.All.OfType<FortwarsBlock>().Where( e => e.Client == client && e.BlockMaterial == blockMaterial ).Count();
 	}
 
-	public int GetRemainingCount( Client client ) => PlayerLimit - GetBuiltCount( client );
+	public int GetRemainingCount( IClient client ) => PlayerLimit - GetBuiltCount( client );
 
 	/// <summary>
 	/// Basic, has lower health but you can spawn lots of them

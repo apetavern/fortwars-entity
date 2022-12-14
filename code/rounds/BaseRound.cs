@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System;
-
 namespace Fortwars;
 
 public abstract partial class BaseRound : BaseNetworkable
@@ -16,9 +13,9 @@ public abstract partial class BaseRound : BaseNetworkable
 	{
 		get
 		{
-			if ( Host.IsClient )
+			if ( Game.IsClient )
 			{
-				return RoundEndTime - Game.Instance.ServerTime;
+				return RoundEndTime - FortwarsGame.Instance.ServerTime;
 			}
 
 			return RoundEndTime - Time.Now;
@@ -27,7 +24,7 @@ public abstract partial class BaseRound : BaseNetworkable
 
 	public void Start()
 	{
-		if ( Host.IsServer && RoundDuration > 0 )
+		if ( Game.IsServer && RoundDuration > 0 )
 		{
 			RoundEndTime = (float)Math.Floor( Time.Now + RoundDuration );
 		}
@@ -37,7 +34,7 @@ public abstract partial class BaseRound : BaseNetworkable
 
 	public void Finish()
 	{
-		if ( Host.IsServer )
+		if ( Game.IsServer )
 		{
 			RoundEndTime = 0f;
 		}
@@ -58,7 +55,7 @@ public abstract partial class BaseRound : BaseNetworkable
 
 	public virtual void OnSecond()
 	{
-		if ( Host.IsServer )
+		if ( Game.IsServer )
 		{
 			if ( skipRound || ( RoundEndTime > 0 && Time.Now >= RoundEndTime ) )
 			{
@@ -67,8 +64,8 @@ public abstract partial class BaseRound : BaseNetworkable
 				skipRound = false;
 			}
 
-			if ( Client.All.Count < Game.Instance.MinPlayers && Game.Instance.Round is not LobbyRound )
-				Game.Instance.ChangeRound( new LobbyRound() );
+			if ( Game.Clients.Count < FortwarsGame.Instance.MinPlayers && FortwarsGame.Instance.Round is not LobbyRound )
+				FortwarsGame.Instance.ChangeRound( new LobbyRound() );
 
 		}
 	}
@@ -78,13 +75,13 @@ public abstract partial class BaseRound : BaseNetworkable
 	[ConCmd.Admin( "fw_round_skip" )]
 	public static void SkipRound()
 	{
-		Game.Instance.Round.skipRound = true;
+		FortwarsGame.Instance.Round.skipRound = true;
 	}
 
 	[ConCmd.Admin( "fw_round_extend" )]
 	public static void ExtendRound()
 	{
-		Game.Instance.Round.RoundEndTime += 600;
+		FortwarsGame.Instance.Round.RoundEndTime += 600;
 	}
 
 	protected virtual void OnStart() { }

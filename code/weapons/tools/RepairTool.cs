@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-
 namespace Fortwars;
 
 [Library( "repairtool", Title = "Repair Tool" )]
@@ -18,7 +16,7 @@ public partial class RepairTool : MeleeWeapon
 		SetModel( "models/weapons/amhammer/amhammer_w.vmdl" );
 	}
 
-	public override void Simulate( Client player )
+	public override void Simulate( IClient player )
 	{
 		if ( !Owner.IsValid() )
 			return;
@@ -57,11 +55,11 @@ public partial class RepairTool : MeleeWeapon
 		ViewModelEntity?.SetAnimParameter( "fire", true );
 	}
 
-	public override void SimulateAnimator( PawnAnimator anim )
+	public override void SimulateAnimator( CitizenAnimationHelper animHelper )
 	{
-		anim.SetAnimParameter( "holdtype", (int)HoldTypes.HoldItem );
-		anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.RightHand );
-		anim.SetAnimParameter( "holdtype_pose_hand", 0.07f );
-		anim.SetAnimParameter( "holdtype_attack", 1 );
+		animHelper.HoldType = CitizenAnimationHelper.HoldTypes.HoldItem;
+		animHelper.Handedness = CitizenAnimationHelper.Hand.Right;
+		// animHelper.Pose = 0.07f;
+		//animHelper.HoldTypeAttack = 1;
 	}
 }

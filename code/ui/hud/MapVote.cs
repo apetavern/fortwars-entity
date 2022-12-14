@@ -1,12 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
 namespace Fortwars;
 
 public class MapVote : Panel
@@ -15,13 +9,13 @@ public class MapVote : Panel
 	{
 		StyleSheet.Load( "ui/hud/MapVote.scss" );
 
-		List<string> maps = Game.GetMaps();
+		List<string> maps = FortwarsGame.GetMaps();
 
-		List<string> fullMaplist = Game.GetMaps();
+		List<string> fullMaplist = FortwarsGame.GetMaps();
 
-		if ( maps.Contains( Global.MapName ) )
+		if ( maps.Contains( Game.Server.MapIdent ) )
 		{
-			maps.Remove( Global.MapName );
+			maps.Remove( Game.Server.MapIdent );
 		}
 
 		for ( int i = 0; i < maps.Count; i++ )
@@ -33,7 +27,7 @@ public class MapVote : Panel
 
 		/*for ( int i = 0; i < 4; i++ )
 	{
-		int selectedMap = Rand.Int( maps.Count - 1 );
+		int selectedMap = Game.Random.Int( maps.Count - 1 );
 		string mapName = maps[selectedMap];
 		var mapPanel = MapVotePanel.FromPackage( mapName, fullMaplist.IndexOf( mapName ) );
 		maps.RemoveAt( selectedMap );
@@ -43,7 +37,7 @@ public class MapVote : Panel
 
 	public override void Tick()
 	{
-		var game = Game.Instance;
+		var game = FortwarsGame.Instance;
 		if ( game == null ) return;
 
 		SetClass( "show", game.Round is VoteRound );
@@ -80,7 +74,7 @@ public class MapVotePanel : Panel
 		{
 			if ( HasClass( "disabled" ) )
 				return;
-			Game.VoteMap( index );
+			FortwarsGame.VoteMap( index );
 			Sound.FromScreen( "vote_confirm" );
 			_ = SetClickClass();
 		} );
@@ -93,10 +87,10 @@ public class MapVotePanel : Panel
 		base.Tick();
 		int votes = 0;
 
-		foreach ( var mapVote in Game.Instance?.MapVotes )
+		foreach ( var mapVote in FortwarsGame.Instance?.MapVotes )
 		{
-			SetClass( "disabled", mapVote.PlayerId == Local.Client.PlayerId );
-			SetClass( "voted-for", mapVote.PlayerId == Local.Client.PlayerId && mapVote.MapIndex == Index );
+			SetClass( "disabled", mapVote.SteamId == Game.LocalClient.SteamId );
+			SetClass( "voted-for", mapVote.SteamId == Game.LocalClient.SteamId && mapVote.MapIndex == Index );
 
 			if ( mapVote.MapIndex == Index )
 				votes++;

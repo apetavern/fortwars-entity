@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-
 namespace Fortwars;
 
 public partial class FlagDisplay : ModelEntity, IShowIcon
@@ -20,10 +18,10 @@ public partial class FlagDisplay : ModelEntity, IShowIcon
 				carrier = null;
 				break;
 			case Team.Red:
-				carrier = Game.Instance.RedFlagCarrier;
+				carrier = FortwarsGame.Instance.RedFlagCarrier;
 				break;
 			case Team.Blue:
-				carrier = Game.Instance.BlueFlagCarrier;
+				carrier = FortwarsGame.Instance.BlueFlagCarrier;
 				break;
 		}
 

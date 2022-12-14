@@ -1,7 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
 using System.Collections.Generic;
 
 namespace Fortwars;
@@ -46,9 +45,9 @@ public partial class Deployable : Pickup
 		Hitmarker.Instance.OnHit( amount, false, true );
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			if ( timeSinceSpawn > MaxLifetime )
 			{
@@ -78,7 +77,7 @@ public partial class Deployable : Pickup
 
 	private void SetRadiusParticleAppearance()
 	{
-		if ( IsServer && CreateParticles )
+		if ( Game.IsServer && CreateParticles )
 			radiusParticles ??= Particles.Create( "particles/deployable/deployable.vpcf", this );
 
 		radiusParticles?.SetPosition( 0, Position );
@@ -99,11 +98,11 @@ public partial class Deployable : Pickup
 
 			Log.Trace( entity );
 
-			if ( !playerResupplyPairs.ContainsKey( player.Client.PlayerId )
-				|| playerResupplyPairs[player.Client.PlayerId] > TimeBetweenResupplies )
+			if ( !playerResupplyPairs.ContainsKey( player.Client.SteamId )
+				|| playerResupplyPairs[player.Client.SteamId] > TimeBetweenResupplies )
 			{
 				Resupply( player );
-				playerResupplyPairs[player.Client.PlayerId] = 0;
+				playerResupplyPairs[player.Client.SteamId] = 0;
 			}
 		}
 	}

@@ -1,10 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-
 namespace Fortwars;
 
 public class DevMenu : Panel
@@ -27,15 +23,15 @@ public class DevMenu : Panel
 		// UI
 		//
 		buttons.Add.Label( "UI", "subtitle" );
-		buttons.Add.ButtonWithIcon( "Show shop UI", "storefront", "button", () => Local.Hud.AddChild<ShopMenu>() );
-		buttons.Add.ButtonWithIcon( "Show class select", "sports_martial_arts", "button", () => Local.Hud.AddChild<ClassMenu>() );
+		buttons.Add.ButtonWithIcon( "Show shop UI", "storefront", "button", () => FortwarsHUD.Root.AddChild<ShopMenu>() );
+		buttons.Add.ButtonWithIcon( "Show class select", "sports_martial_arts", "button", () => FortwarsHUD.Root.AddChild<ClassMenu>() );
 		buttons.Add.ButtonWithIcon( "Reload HUD", "refresh", "button", () => ConsoleSystem.Run( "recreatehud" ) );
-		buttons.Add.ButtonWithIcon( "Show crosshair customization", "palette", "button", () => Local.Hud.AddChild<CrosshairCustomizer>() );
+		buttons.Add.ButtonWithIcon( "Show crosshair customization", "palette", "button", () => FortwarsHUD.Root.AddChild<CrosshairCustomizer>() );
 
 		//
-		// Game
+		// FortwarsGame
 		//
-		buttons.Add.Label( "Game", "subtitle" );
+		buttons.Add.Label( "FortwarsGame", "subtitle" );
 		buttons.Add.ButtonWithIcon( "Skip round", "fast_forward", "button", () => ConsoleSystem.Run( "fw_round_skip" ) );
 		buttons.Add.ButtonWithIcon( "Force vote round", "map", "button", () => ConsoleSystem.Run( "fw_force_voteround" ) );
 		buttons.Add.ButtonWithIcon( "Extend round", "timer", "button", () => ConsoleSystem.Run( "fw_round_extend" ) );
@@ -47,7 +43,7 @@ public class DevMenu : Panel
 		//
 		buttons.Add.Label( "Weapons", "subtitle" );
 
-		buttons.Add.ButtonWithIcon( "Give ammo", "gamepad", "button", () => ConsoleSystem.Run( "fw_give_ammo 10000" ) );
+		buttons.Add.ButtonWithIcon( "Give ammo", "FortwarsGamepad", "button", () => ConsoleSystem.Run( "fw_give_ammo 10000" ) );
 		buttons.Add.ButtonWithIcon( "Give physgun", "add", "button", () => ConsoleSystem.Run( "fw_inventory_give physgun" ) );
 		buttons.Add.ButtonWithIcon( "Give repair tool", "add", "button", () => ConsoleSystem.Run( "fw_inventory_give repairtool" ) );
 		buttons.Add.ButtonWithIcon( "Give medkit", "add", "button", () => ConsoleSystem.Run( "fw_inventory_give medkittool" ) );
@@ -70,7 +66,7 @@ public class DevMenu : Panel
 
 		buttons.Add.ButtonWithIcon( "Give", "backpack", "button", () => ConsoleSystem.Run( $"give_weapon data/{dropdown.Value}" ) );
 
-		BindClass( "visible", () => Input.Down( InputButton.Flashlight ) && Global.CheatsEnabled() );
+		BindClass( "visible", () => Input.Down( InputButton.Flashlight ) && GameX.CheatsEnabled() );
 	}
 
 	public override void Tick()
@@ -87,7 +83,7 @@ public class DevMenu : Panel
 	public static void SpawnWeapon( string path )
 	{
 		var caller = ConsoleSystem.Caller;
-		var player = caller.Pawn;
+		var player = caller.Pawn as FortwarsPlayer;
 
 		var tr = Trace.Ray( player.EyePosition, player.EyePosition + player.EyeRotation.Forward * 1024 ).WorldOnly().Run();
 

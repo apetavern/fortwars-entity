@@ -1,17 +1,19 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-
 namespace Fortwars;
 
 [Library]
 public partial class FortwarsHUD : HudEntity<RootPanel>
 {
+	public static FortwarsHUD Instance { get; private set; }
+	public static RootPanel Root => Instance?.RootPanel;
+
 	public FortwarsHUD()
 	{
-		if ( !IsClient ) return;
+		if ( !Game.IsClient ) return;
+
+		Instance = this;
 
 		RootPanel.StyleSheet.Load( "/ui/Hud.scss" );
 		RootPanel.StyleSheet.Load( "/ui/hud/BuildHelp.scss" );
@@ -43,7 +45,7 @@ public partial class FortwarsHUD : HudEntity<RootPanel>
 		RootPanel.AddChild<DevMenu>();
 		RootPanel.AddChild<ClassMenu>();
 
-		hud.BindClass( "red-team", () => ( Local.Pawn as FortwarsPlayer ).TeamID == Team.Red );
-		hud.BindClass( "blue-team", () => ( Local.Pawn as FortwarsPlayer ).TeamID == Team.Blue );
+		hud.BindClass( "red-team", () => ( Game.LocalPawn as FortwarsPlayer ).TeamID == Team.Red );
+		hud.BindClass( "blue-team", () => ( Game.LocalPawn as FortwarsPlayer ).TeamID == Team.Blue );
 	}
 }

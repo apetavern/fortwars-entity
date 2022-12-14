@@ -1,7 +1,7 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
+using static Sandbox.CitizenAnimationHelper;
 
 namespace Fortwars;
 
@@ -25,27 +25,31 @@ public partial class JumpPadTool : DropTool
 		ThrowProjectile( new JumpPad() );
 	}
 
-	public override void SimulateAnimator( PawnAnimator anim )
+	public override void SimulateAnimator( CitizenAnimationHelper animHelper )
 	{
 		if ( TimeSinceLastDrop < DropTimeDelay )
 		{
 			EnableDrawing = false;
-			anim.SetAnimParameter( "holdtype", (int)HoldTypes.None );
-			anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.TwoHands );
-			anim.SetAnimParameter( "holdtype_pose_hand", 0f );
-			anim.SetAnimParameter( "holdtype_attack", 1 );
+			animHelper.HoldType = HoldTypes.None;
+			animHelper.Handedness = Hand.Both;
+			// anim.SetAnimParameter( "holdtype_pose_hand", 0f );
+			// anim.SetAnimParameter( "holdtype_attack", 1 );
 		}
 		else
 		{
 			EnableDrawing = true;
-			anim.SetAnimParameter( "holdtype", (int)HoldTypes.HoldItem );
-			anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.OverHead );
-			anim.SetAnimParameter( "holdtype_pose_hand", 0f );
-			anim.SetAnimParameter( "holdtype_attack", 1 );
+			animHelper.HoldType = HoldTypes.HoldItem;
+			animHelper.Handedness = Hand.Both;
+
+			// anim.SetAnimParameter( "holdtype", (int)HoldTypes.HoldItem );
+			// anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.OverHead );
+			// anim.SetAnimParameter( "holdtype_pose_hand", 0f );
+			// anim.SetAnimParameter( "holdtype_attack", 1 );
+
 		}
 
-		anim.SetAnimParameter( "useleftik", false );
-		anim.SetAnimParameter( "gunup", 0f );
-		anim.SetAnimParameter( "gundown", 0f );
+		// anim.SetAnimParameter( "useleftik", false );
+		// anim.SetAnimParameter( "gunup", 0f );
+		// anim.SetAnimParameter( "gundown", 0f );
 	}
 }

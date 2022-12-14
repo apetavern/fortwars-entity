@@ -1,11 +1,6 @@
 // Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System;
-
 namespace Fortwars;
 
 [UseTemplate]
@@ -14,7 +9,7 @@ public partial class InputHint : Panel
 	// @ref
 	public Image Glyph { get; set; }
 	public InputButton Button { get; set; }
-	public InputButton gamepadButton { get; set; }
+	public InputButton FortwarsGamepadButton { get; set; }
 	public string Text { get; set; }
 	public Label ActionLabel { get; set; }
 
@@ -62,7 +57,7 @@ public partial class InputHint : Panel
 		}
 		else
 		{
-			glyphTexture = Input.GetGlyph( gamepadButton, InputGlyphSize.Small, GlyphStyle.Knockout.WithSolidABXY().WithNeutralColorABXY() );
+			glyphTexture = Input.GetGlyph( FortwarsGamepadButton, InputGlyphSize.Small, GlyphStyle.Knockout.WithSolidABXY().WithNeutralColorABXY() );
 		}
 
 		if ( glyphTexture != null )
@@ -80,13 +75,13 @@ public partial class InputHint : Panel
 
 public static class InputHintExtensions
 {
-	public static InputHint InputHint( this PanelCreator self, InputButton button, InputButton gamepadButton, string action = null, string classname = null )
+	public static InputHint InputHint( this PanelCreator self, InputButton button, InputButton FortwarsGamepadButton, string action = null, string classname = null )
 	{
 		var control = self.panel.AddChild<InputHint>();
 
 		control.Button = button;
 
-		control.gamepadButton = gamepadButton;
+		control.FortwarsGamepadButton = FortwarsGamepadButton;
 
 		if ( action != null )
 			control.Text = action;

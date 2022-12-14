@@ -1,12 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System;
-using System.Collections.Generic;
-
 namespace Fortwars;
 
 public class InventoryBar : Panel
@@ -27,7 +21,7 @@ public class InventoryBar : Panel
 	{
 		base.Tick();
 
-		var player = Local.Pawn;
+		var player = Game.LocalPawn;
 		if ( player == null ) return;
 		if ( ( player as FortwarsPlayer ).Inventory == null ) return;
 
@@ -60,16 +54,16 @@ public class InventoryBar : Panel
 			inventoryIcon.AmmoLabel.SetClass( "visible", false );
 		}
 
-		var player = Local.Pawn;
+		var player = Game.LocalPawn;
 		if ( player == null ) return;
 
 		inventoryIcon.SetClass( "active", ( player as FortwarsPlayer ).ActiveChild == ent );
 	}
 
-	[Event( "buildinput" )]
-	public void ProcessClientInput( InputBuilder input )
+	[Event.Client.BuildInput]
+	public void ProcessClientInput()
 	{
-		var player = Local.Pawn as Player;
+		var player = Game.LocalPawn as FortwarsPlayer;
 		if ( player == null )
 			return;
 
@@ -82,16 +76,16 @@ public class InventoryBar : Panel
 			return;
 		}
 
-		if ( input.Pressed( InputButton.Slot1 ) ) SetActiveSlot( input, inventory, 0 );
-		if ( input.Pressed( InputButton.Slot2 ) ) SetActiveSlot( input, inventory, 1 );
-		if ( input.Pressed( InputButton.Slot3 ) ) SetActiveSlot( input, inventory, 2 );
+		if ( Input.Pressed( InputButton.Slot1 ) ) SetActiveSlot( inventory, 0 );
+		if ( Input.Pressed( InputButton.Slot2 ) ) SetActiveSlot( inventory, 1 );
+		if ( Input.Pressed( InputButton.Slot3 ) ) SetActiveSlot( inventory, 2 );
 
-		if ( input.MouseWheel != 0 ) SwitchActiveSlot( input, inventory, -input.MouseWheel );
+		if ( Input.MouseWheel != 0 ) SwitchActiveSlot( inventory, -Input.MouseWheel );
 	}
 
-	private static void SetActiveSlot( InputBuilder input, IBaseInventory inventory, int i )
+	private static void SetActiveSlot( IBaseInventory inventory, int i )
 	{
-		var player = Local.Pawn;
+		var player = Game.LocalPawn as FortwarsPlayer;
 		if ( player == null )
 			return;
 
@@ -102,10 +96,10 @@ public class InventoryBar : Panel
 		if ( ent == null )
 			return;
 
-		input.ActiveChild = ent;
+		player.ActiveChild = ent;
 	}
 
-	private static void SwitchActiveSlot( InputBuilder input, IBaseInventory inventory, int idelta )
+	private static void SwitchActiveSlot( IBaseInventory inventory, int idelta )
 	{
 		var count = inventory.Count();
 		if ( count == 0 ) return;
@@ -116,7 +110,7 @@ public class InventoryBar : Panel
 		while ( nextSlot < 0 ) nextSlot += count;
 		while ( nextSlot >= count ) nextSlot -= count;
 
-		SetActiveSlot( input, inventory, nextSlot );
+		SetActiveSlot( inventory, nextSlot );
 	}
 }
 

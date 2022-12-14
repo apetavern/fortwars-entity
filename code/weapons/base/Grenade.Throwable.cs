@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System.Threading.Tasks;
-
 namespace Fortwars;
 
 partial class Grenade
@@ -24,7 +21,7 @@ partial class Grenade
 		{
 			await Task.DelaySeconds( seconds );
 
-			Game.Explode( Position, Owner );
+			FortwarsGame.Explode( Position, Owner );
 
 			Delete();
 		}

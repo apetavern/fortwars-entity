@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using SandboxEditor;
-
 namespace Fortwars;
 
 /// <summary>
@@ -39,11 +36,11 @@ public partial class FuncFlagzone : BrushEntity
 		if ( other.IsWorld )
 			return;
 
-		if ( Game.Instance.Round is not CombatRound )
+		if ( FortwarsGame.Instance.Round is not CombatRound )
 			return;
 
-		if ( other is Player )
-			Game.Instance.OnPlayerTouchFlagzone( other as FortwarsPlayer, Team );
+		if ( other is FortwarsPlayer )
+			FortwarsGame.Instance.OnPlayerTouchFlagzone( other as FortwarsPlayer, Team );
 	}
 
 	public override void EndTouch( Entity other )

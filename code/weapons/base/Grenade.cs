@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-
 namespace Fortwars;
 
 [Library( "fw_grenade", Title = "Grenade" )]
@@ -28,7 +26,7 @@ partial class Grenade : Carriable
 		Model = WorldModel;
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
 
@@ -39,7 +37,7 @@ partial class Grenade : Carriable
 			PlayerThrown = true;
 			TimeSinceThrow = 0;
 
-			if ( IsClient )
+			if ( Game.IsClient )
 				ViewModelEntity?.SetAnimParameter( "fire", true );
 		}
 
@@ -67,9 +65,9 @@ partial class Grenade : Carriable
 		// TODO
 		// _ = new Sandbox.ScreenShake.Perlin( 1.0f, 0.5f, 4.0f, 0.6f );
 
-		Rand.SetSeed( Time.Tick );
+		Game.SetRandomSeed( Time.Tick );
 
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			using ( Prediction.Off() )
 			{
@@ -88,12 +86,11 @@ partial class Grenade : Carriable
 			}
 		}
 	}
-
-	public override void SimulateAnimator( PawnAnimator anim )
+	public override void SimulateAnimator( CitizenAnimationHelper animHelper )
 	{
-		anim.SetAnimParameter( "holdtype", (int)HoldTypes.HoldItem );
-		anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.RightHand );
-		anim.SetAnimParameter( "holdtype_pose_hand", 0.11f );
-		anim.SetAnimParameter( "aim_body_weight", 1.0f );
+		animHelper.HoldType = CitizenAnimationHelper.HoldTypes.HoldItem;
+		animHelper.Handedness = CitizenAnimationHelper.Hand.Right;
+		// animHelper.Pose = 0.11f;
+		// animHelper.AimBodyWeight = 1;
 	}
 }

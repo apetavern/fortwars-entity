@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System;
 using System.Collections.Generic;
 
 namespace Fortwars;
@@ -29,7 +27,7 @@ partial class FortwarsPlayer
 	public bool SetAmmo( AmmoType type, int amount )
 	{
 		var iType = (int)type;
-		if ( !Host.IsServer ) return false;
+		if ( !Game.IsServer ) return false;
 		if ( Ammo == null ) return false;
 
 		while ( Ammo.Count <= iType )
@@ -43,7 +41,7 @@ partial class FortwarsPlayer
 
 	public bool GiveAmmo( AmmoType type, int amount )
 	{
-		if ( !Host.IsServer ) return false;
+		if ( !Game.IsServer ) return false;
 		if ( Ammo == null ) return false;
 
 		SetAmmo( type, AmmoCount( type ) + amount );

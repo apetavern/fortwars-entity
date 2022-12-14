@@ -1,10 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System;
 using System.Collections.Generic;
 
 namespace Fortwars;
@@ -41,17 +37,17 @@ public class RoundStatus : Panel
 			//
 			BlueScore = scores.Add.Label( "0", "score blue" );
 			BlueScore.Add.Icon( "warning", "warning-icon" )
-				.BindClass( "visible", () => Game.Instance.BlueFlagRoll.IsValid() );
+				.BindClass( "visible", () => FortwarsGame.Instance.BlueFlagRoll.IsValid() );
 
 			//
 			// Red
 			//
 			RedScore = scores.Add.Label( "0", "score red" );
 			RedScore.Add.Icon( "warning", "warning-icon" )
-				.BindClass( "visible", () => Game.Instance.RedFlagRoll.IsValid() );
+				.BindClass( "visible", () => FortwarsGame.Instance.RedFlagRoll.IsValid() );
 		}
 
-		var game = Game.Instance;
+		var game = FortwarsGame.Instance;
 		if ( game == null ) return;
 
 		Wins = Add.Panel( "wins" );
@@ -64,7 +60,7 @@ public class RoundStatus : Panel
 
 	public override void Tick()
 	{
-		var game = Game.Instance;
+		var game = FortwarsGame.Instance;
 		if ( game == null ) return;
 
 		var round = game.Round;

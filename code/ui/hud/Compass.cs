@@ -1,21 +1,14 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Fortwars;
 
 public static class PlayerExtensions
 {
-	public static float CalcRelativeYaw( this Player player, float angle )
+	public static float CalcRelativeYaw( this FortwarsPlayer player, float angle )
 	{
 		float mod( float a, float n ) => ( a % n + n ) % n;
-		float length = CurrentView.Rotation.Yaw() - Compass.AngleOffset - angle;
+		float length = Camera.Rotation.Yaw() - Compass.AngleOffset - angle;
 
 		float d = mod( Math.Abs( length ), 360 );
 		float r = ( d > 180 ) ? 360 - d : d;
@@ -86,7 +79,7 @@ public class Compass : Panel
 			worldIcons.Add( iconCompassPoint );
 		}
 
-		if ( Local.Pawn is FortwarsPlayer player )
+		if ( Game.LocalPawn is FortwarsPlayer player )
 		{
 			float relativeAngle = player.CalcRelativeYaw( 0 ).NormalizeDegrees();
 			relativeAngle = 360 - relativeAngle;
@@ -110,7 +103,7 @@ class CompassPoint : Panel
 	{
 		const float maxAngle = 110;
 
-		if ( Local.Pawn is FortwarsPlayer player )
+		if ( Game.LocalPawn is FortwarsPlayer player )
 		{
 			float relativeAngle = player.CalcRelativeYaw( Angle );
 
@@ -140,9 +133,9 @@ class IconCompassPoint : CompassPoint
 
 	public override void Tick()
 	{
-		Angle = ( showIcon.IconWorldPosition() - CurrentView.Position ).EulerAngles.yaw - Compass.AngleOffset;
+		Angle = ( showIcon.IconWorldPosition() - Camera.Position ).EulerAngles.yaw - Compass.AngleOffset;
 
-		float distance = Vector3.DistanceBetween( showIcon.IconWorldPosition(), CurrentView.Position );
+		float distance = Vector3.DistanceBetween( showIcon.IconWorldPosition(), Camera.Position );
 		float scale = distance.LerpInverse( 1024, 0 ) + 1.0f;
 
 		Icon.Style.FontSize = 32 * scale;

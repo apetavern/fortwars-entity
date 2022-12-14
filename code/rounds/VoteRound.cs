@@ -1,9 +1,7 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Fortwars;
 
@@ -33,7 +31,7 @@ public partial class VoteRound : BaseRound
 
 	protected override void OnTimeUp()
 	{
-		var game = Game.Instance;
+		var game = FortwarsGame.Instance;
 		if ( game == null ) return;
 
 		Dictionary<int, int> voteCount = new();
@@ -53,11 +51,11 @@ public partial class VoteRound : BaseRound
 
 		if ( sortedMapVotePairs.Count() == 0 )
 		{
-			Global.ChangeLevel( Rand.FromList( Game.GetMaps() ) );
+			Game.ChangeLevel( Game.Random.FromList( FortwarsGame.GetMaps() ) );
 			return;
 		}
 
 		var votedMap = sortedMapVotePairs.First();
-		Global.ChangeLevel( Game.GetMaps()[votedMap.Key] );
+		Game.ChangeLevel( FortwarsGame.GetMaps()[votedMap.Key] );
 	}
 }

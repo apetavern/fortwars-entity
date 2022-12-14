@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System.Threading.Tasks;
-
 namespace Fortwars;
 
 // TODO: we shouldn't need a separate wheel for this; implement scrollability in RadialWheel
@@ -22,9 +19,9 @@ public partial class BuildWheelMetal : RadialWheel
 	{
 		VirtualCursor.OnClick += OnClick;
 
-		BindClass( "active", () => ( ( Input.UsingController && Input.Down( InputButton.Slot4 ) && Input.Down( InputButton.SecondaryAttack ) ) // Gamepad compatible bind
+		BindClass( "active", () => ( ( Input.UsingController && Input.Down( InputButton.Slot4 ) && Input.Down( InputButton.SecondaryAttack ) ) // FortwarsGamepad compatible bind
 								|| ( !Input.UsingController && Input.Down( InputButton.Menu ) && Input.Down( InputButton.Use ) ) )
-								&& Game.Instance.Round is BuildRound );
+								&& FortwarsGame.Instance.Round is BuildRound );
 
 	}
 
@@ -35,7 +32,7 @@ public partial class BuildWheelMetal : RadialWheel
 			return;
 		}
 
-		Game.Spawn( $"steel_{GetCurrentItem()?.Name}" ); // ???
+		FortwarsGame.Spawn( $"steel_{GetCurrentItem()?.Name}" ); // ???
 		_ = ApplyShrinkEffect();
 	}
 

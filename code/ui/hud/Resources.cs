@@ -1,10 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-
 namespace Fortwars;
 
 public class Resources : Panel
@@ -47,7 +43,7 @@ public class Resources : Panel
 		{
 			base.Tick();
 
-			count.Text = resourceType.GetRemainingCount( Local.Client ).ToString();
+			count.Text = resourceType.GetRemainingCount( Game.LocalClient ).ToString();
 			limit.Text = resourceType.PlayerLimit.ToString();
 		}
 	}

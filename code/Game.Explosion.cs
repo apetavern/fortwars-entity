@@ -1,17 +1,13 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System;
-using System.Linq;
-
 namespace Fortwars;
 
-partial class Game
+partial class FortwarsGame
 {
 	public static void Explode( Vector3 position, Entity owner, float maxDamage = 100 )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		var sourcePos = position;
 		var radius = 256f;
@@ -34,7 +30,7 @@ partial class Game
 			if ( ent.GroundEntity != null )
 			{
 				ent.GroundEntity = null;
-				if ( ent is Player { Controller: WalkController playerController } )
+				if ( ent is FortwarsPlayer { Controller: FortwarsWalkController playerController } )
 					playerController.ClearGroundEntity();
 			}
 

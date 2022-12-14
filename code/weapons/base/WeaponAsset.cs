@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System;
-
 namespace Fortwars;
 
 [GameResource( "Weapon Definition", "fwweapon", "Describes a FortWars weapon", Icon = "💀", IconBgColor = "#fe71dc", IconFgColor = "black" )]
@@ -40,7 +37,7 @@ public partial class WeaponAsset : GameResource
 	public InventorySlots InventorySlot { get; set; } = InventorySlots.Primary;
 
 	[Property, Category( "Meta" )]
-	public HoldTypes HoldType { get; set; } = HoldTypes.Pistol;
+	public CitizenAnimationHelper.HoldTypes HoldType { get; set; } = CitizenAnimationHelper.HoldTypes.Pistol;
 
 	[Property, Category( "Meta" )]
 	public float ProceduralViewmodelStrength { get; set; } = 1.0f;

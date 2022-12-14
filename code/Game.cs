@@ -1,18 +1,24 @@
 // Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+global using Editor;
+global using Sandbox;
+global using Sandbox.Diagnostics;
+global using Sandbox.UI;
+global using Sandbox.UI.Construct;
+global using Sandbox.Utility;
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Threading.Tasks;
 
 namespace Fortwars;
 
-partial class Game : Sandbox.Game
+partial class FortwarsGame : Sandbox.GameManager
 {
-	public static Game Instance
+	public static FortwarsGame Instance
 	{
-		get => Current as Game;
+		get => Current as FortwarsGame;
 	}
 
 	// shit hack, ideally Time.Now should be synced with server
@@ -20,12 +26,12 @@ partial class Game : Sandbox.Game
 
 	private static FortwarsHUD hud;
 
-	public Game()
+	public FortwarsGame()
 	{
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			hud = new FortwarsHUD();
-			Global.TickRate = 30;
+			Game.TickRate = 30;
 		}
 
 		ChangeRound( new LobbyRound() );
@@ -47,7 +53,7 @@ partial class Game : Sandbox.Game
 		base.PostLevelLoaded();
 	}
 
-	public override void ClientJoined( Client cl )
+	public override void ClientJoined( IClient cl )
 	{
 		base.ClientJoined( cl );
 
@@ -57,7 +63,7 @@ partial class Game : Sandbox.Game
 		cl.Pawn = player;
 	}
 
-	public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )
+	public override void ClientDisconnect( IClient cl, NetworkDisconnectionReason reason )
 	{
 		base.ClientDisconnect( cl, reason );
 
@@ -89,35 +95,21 @@ partial class Game : Sandbox.Game
 				if ( pawn.LastAttackerWeapon is FortwarsWeapon weapon )
 					method = weapon.WeaponAsset.WeaponName;
 
-				if ( player.LastDamage.Flags.HasFlag( DamageFlags.Fall ) )
-				{
-					KillFeed.AddEntry(
-						0,
-						"Fall Damage",
-						pawn.Client.PlayerId,
-						pawn.Client.Name,
-						"killed",
-						"",
-						player.Team.GetCssClass() );
-				}
-				else
-				{
-					KillFeed.AddEntry(
-						attackPlayer.Client.PlayerId,
-						attackPlayer.Client.Name,
-						pawn.Client.PlayerId,
-						pawn.Client.Name,
-						method,
-						attackPlayer.Team.GetCssClass(),
-						player.Team.GetCssClass() );
-				}
+				KillFeed.AddEntry(
+					attackPlayer.Client.SteamId,
+					attackPlayer.Client.Name,
+					pawn.Client.SteamId,
+					pawn.Client.Name,
+					method,
+					attackPlayer.Team.GetCssClass(),
+					player.Team.GetCssClass() );
 			}
 			else
 			{
 				KillFeed.AddEntry(
 					pawn.LastAttacker.NetworkIdent,
 					pawn.LastAttacker.ToString(),
-					pawn.Client.PlayerId,
+					pawn.Client.SteamId,
 					pawn.Client.Name,
 					"killed",
 					"",
@@ -129,7 +121,7 @@ partial class Game : Sandbox.Game
 			KillFeed.AddEntry(
 				0,
 				"Suicide",
-				pawn.Client.PlayerId,
+				pawn.Client.SteamId,
 				pawn.Client.Name,
 				"killed",
 				"",
@@ -143,7 +135,7 @@ partial class Game : Sandbox.Game
 	{
 		// TODO: Validate this
 		// this is shite, need Time.Now to reflect server time clientside
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			ServerTime = Time.Now;
 		}

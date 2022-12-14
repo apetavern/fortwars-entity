@@ -2,9 +2,7 @@
 // without permission of its author (insert_email_here)
 
 using Fortwars;
-using Sandbox;
 using Sandbox.Component;
-using System.Linq;
 
 public partial class PhysGun
 {
@@ -14,7 +12,7 @@ public partial class PhysGun
 	Vector3 lastBeamPos;
 	ModelEntity lastGrabbedEntity;
 
-	[Event.Frame]
+	[Event.Client.Frame]
 	public void OnFrame()
 	{
 		UpdateEffects();
@@ -33,18 +31,18 @@ public partial class PhysGun
 		{
 			foreach ( var child in lastGrabbedEntity.Children.OfType<ModelEntity>() )
 			{
-				if ( child is Player )
+				if ( child is FortwarsPlayer )
 					continue;
 
 				if ( child.Components.TryGet<Glow>( out var childglow ) )
 				{
-					childglow.Active = false;
+					childglow.Enabled = false;
 				}
 			}
 
 			if ( lastGrabbedEntity.Components.TryGet<Glow>( out var glow ) )
 			{
-				glow.Active = false;
+				glow.Enabled = false;
 			}
 
 			lastGrabbedEntity = null;
@@ -94,11 +92,11 @@ public partial class PhysGun
 			DesiredDialPos = 0.5f;
 			if ( !rotating )
 			{
-				DesiredDialPos += Rand.Float() * 0.1f;
+				DesiredDialPos += Game.Random.Float() * 0.1f;
 			}
 			else
 			{
-				DesiredDialPos += Rand.Float() * 0.15f * ( 1 + ( Input.MouseDelta.Length / 20f ) );
+				DesiredDialPos += Game.Random.Float() * 0.15f * ( 1 + ( Input.MouseDelta.Length / 20f ) );
 			}
 
 			DidFreeze = false;
@@ -171,20 +169,16 @@ public partial class PhysGun
 				lastGrabbedEntity = modelEnt;
 
 				var glow = modelEnt.Components.GetOrCreate<Glow>();
-				glow.Active = true;
-				glow.RangeMin = 0;
-				glow.RangeMax = 1000;
+				glow.Enabled = true;
 				glow.Color = new Color( 0.1f, 1.0f, 1.0f, 1.0f );
 
 				foreach ( var child in lastGrabbedEntity.Children.OfType<ModelEntity>() )
 				{
-					if ( child is Player )
+					if ( child is FortwarsPlayer )
 						continue;
 
 					glow = child.Components.GetOrCreate<Glow>();
-					glow.Active = true;
-					glow.RangeMin = 0;
-					glow.RangeMax = 1000;
+					glow.Enabled = true;
 					glow.Color = new Color( 0.1f, 1.0f, 1.0f, 1.0f );
 				}
 			}

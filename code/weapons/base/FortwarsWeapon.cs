@@ -1,10 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System;
-using System.Collections.Generic;
-
 namespace Fortwars;
 
 public partial class FortwarsWeapon : Carriable
@@ -59,7 +55,7 @@ public partial class FortwarsWeapon : Carriable
 
 	private void ShowSpreadPattern()
 	{
-		if ( IsServer )
+		if ( Game.IsServer )
 			return;
 
 		for ( int i = 0; i < 32; i++ )
@@ -91,7 +87,7 @@ public partial class FortwarsWeapon : Carriable
 		Inaccuracy = Inaccuracy.LerpTo( spread, 25f * Time.Delta );
 	}
 
-	public override void Simulate( Client player )
+	public override void Simulate( IClient player )
 	{
 		SimulateViewmodelAnimator();
 
@@ -145,7 +141,7 @@ public partial class FortwarsWeapon : Carriable
 		if ( WeaponAsset.Flags.UseRenderTarget )
 		{
 			scopePanel = new FallbackScope();
-			scopePanel.Parent = Local.Hud;
+			scopePanel.Parent = FortwarsHUD.Root;
 		}
 	}
 
@@ -158,7 +154,7 @@ public partial class FortwarsWeapon : Carriable
 
 	public override void CreateViewModel()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 
 		if ( string.IsNullOrEmpty( WeaponAsset.ViewModel ) )
 			return;
@@ -223,28 +219,28 @@ public partial class FortwarsWeapon : Carriable
 		ViewModelEntity.SetAnimParameter( "endreload", !IsReloading );
 	}
 
-	public override void SimulateAnimator( PawnAnimator anim )
+	public override void SimulateAnimator( CitizenAnimationHelper anim )
 	{
-		anim.SetAnimParameter( "holdtype", (int)WeaponAsset.HoldType );
-		anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.TwoHands );
-		anim.SetAnimParameter( "useleftik", GetAttachment( "lhand_ik" ).HasValue );
+		anim.HoldType = WeaponAsset.HoldType;
+		anim.Handedness = CitizenAnimationHelper.Hand.Both;
+		// anim.SetAnimParameter( "useleftik", GetAttachment( "lhand_ik" ).HasValue );
 
 		if ( GetAttachment( "lhand_ik" ).HasValue )
 		{
 			Transform attachment = GetAttachment( "lhand_ik" ).Value;
-			anim.SetAnimParameter( "left_hand_ik.position", attachment.Position + anim.Velocity * Time.Delta * 2f );
-			anim.AnimPawn.SetAnimParameter( "left_hand_ik.rotation", attachment.Rotation );
+			// anim.SetAnimParameter( "left_hand_ik.position", attachment.Position + anim.Velocity * Time.Delta * 2f );
+			// anim.AnimPawn.SetAnimParameter( "left_hand_ik.rotation", attachment.Rotation );
 		}
 
-		if ( WeaponAsset.HoldType == HoldTypes.Rifle )
+		if ( WeaponAsset.HoldType == CitizenAnimationHelper.HoldTypes.Rifle )
 		{
-			anim.SetAnimParameter( "gunup", MathX.Lerp( anim.AnimPawn.GetAnimParameterFloat( "gunup" ), IsAiming ? 1f : 0f, Time.Delta * 10f ) );//Only looks good on rifle hold pose at the moment.
-			anim.SetAnimParameter( "gundown", 0f );
+			// anim.SetAnimParameter( "gunup", MathX.Lerp( anim.AnimPawn.GetAnimParameterFloat( "gunup" ), IsAiming ? 1f : 0f, Time.Delta * 10f ) );//Only looks good on rifle hold pose at the moment.
+			// anim.SetAnimParameter( "gundown", 0f );
 		}
 		else
 		{
-			anim.SetAnimParameter( "gunup", 0f );
-			anim.SetAnimParameter( "gundown", 0f );
+			// anim.SetAnimParameter( "gunup", 0f );
+			// anim.SetAnimParameter( "gundown", 0f );
 		}
 	}
 
@@ -354,7 +350,7 @@ public partial class FortwarsWeapon : Carriable
 		ShootEffectsLocal( Vector3.Zero );
 		PlaySound( WeaponAsset.FireSound ).SetVolume( 0.5f );
 
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return;
 
 		ShootEffectsRemote( Vector3.Zero );
@@ -394,8 +390,8 @@ public partial class FortwarsWeapon : Carriable
 		{
 			if ( DebugShots )
 			{
-				var color = IsServer ? Color.Blue : Color.Red;
-				var size = IsServer ? new Vector3( 2f ) : new Vector3( 2.5f );
+				var color = Game.IsServer ? Color.Blue : Color.Red;
+				var size = Game.IsServer ? new Vector3( 2f ) : new Vector3( 2.5f );
 
 				DebugOverlay.Box( tr.EndPosition, -size, size, color, 5f, false );
 			}
@@ -404,7 +400,7 @@ public partial class FortwarsWeapon : Carriable
 
 			ShootEffectsLocal( tr.EndPosition );
 
-			if ( !IsServer )
+			if ( !Game.IsServer )
 				continue;
 
 			ShootEffectsRemote( tr.EndPosition );
@@ -436,7 +432,7 @@ public partial class FortwarsWeapon : Carriable
 		//
 		// Seed rand using the tick, so bullet cones match on client and server
 		//
-		Rand.SetSeed( Time.Tick );
+		Game.SetRandomSeed( Time.Tick );
 
 		if ( WeaponAsset.Flags.ShotgunAmmo )
 		{
@@ -516,12 +512,12 @@ public partial class FortwarsWeapon : Carriable
 		CreateTracerEffects( traceEnd );
 	}
 
-	public override void BuildInput( InputBuilder inputBuilder )
+	public override void BuildInput()
 	{
-		base.BuildInput( inputBuilder );
+		base.BuildInput();
 
 		if ( IsAiming )
-			inputBuilder.ViewAngles = Angles.Lerp( inputBuilder.OriginalViewAngles, inputBuilder.ViewAngles, WeaponAsset.AimFovMult );
+			Input.AnalogLook = Angles.Lerp( Input.AnalogLook, Input.AnalogLook, WeaponAsset.AimFovMult );
 	}
 
 	private float CalcDamage( float distance, bool isHeadshot )

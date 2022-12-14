@@ -1,12 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System;
-using System.Linq;
-
 namespace Fortwars;
 
 public partial class ClassMenu : Menu
@@ -24,7 +18,7 @@ public partial class ClassMenu : Menu
 
 	public ClassMenu()
 	{
-		if ( Local.Pawn is FortwarsPlayer player )
+		if ( Game.LocalPawn is FortwarsPlayer player )
 		{
 			selectedClass = player.SelectedClass;
 			selectedPrimary = player.SelectedPrimary;
@@ -106,7 +100,7 @@ public partial class ClassMenu : Menu
 		ChangeLoadout( selectedClass, selectedPrimary, selectedSecondary );
 	}
 
-	[Event.Frame]
+	[Event.Client.Frame]
 	public static void OnFrame()
 	{
 		if ( Input.Pressed( InputButton.View ) )
@@ -118,7 +112,7 @@ public partial class ClassMenu : Menu
 	public static void Toggle()
 	{
 		// Do we already have the class menu shown?
-		var existingClassMenu = Local.Hud.Children.OfType<ClassMenu>().FirstOrDefault();
+		var existingClassMenu = FortwarsHUD.Root.Children.OfType<ClassMenu>().FirstOrDefault();
 		if ( existingClassMenu != null )
 		{
 			existingClassMenu.Delete();
@@ -126,7 +120,7 @@ public partial class ClassMenu : Menu
 		else
 		{
 			// No class menu, let's add one
-			Local.Hud.AddChild<ClassMenu>();
+			FortwarsHUD.Root.AddChild<ClassMenu>();
 		}
 	}
 

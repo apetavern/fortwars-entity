@@ -1,11 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System;
-using System.Linq;
 using static Fortwars.Crosshair;
 
 namespace Fortwars;
@@ -75,7 +70,7 @@ public class CrosshairCustomizer : Panel
 
 	public void Apply()
 	{
-		if ( ( Local.Pawn as FortwarsPlayer ).ActiveChild is not Carriable carriable )
+		if ( ( Game.LocalPawn as FortwarsPlayer ).ActiveChild is not Carriable carriable )
 			return;
 
 		var config = CrosshairConfig.Default;

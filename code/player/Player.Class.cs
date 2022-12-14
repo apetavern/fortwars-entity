@@ -1,9 +1,7 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Fortwars;
 
@@ -81,12 +79,20 @@ partial class FortwarsPlayer
 			return;
 
 		Reset();
-		Game.Instance.Round.SetupInventory( this );
+		FortwarsGame.Instance.Round.SetupInventory( this );
 	}
 
 	public override void StartTouch( Entity other )
 	{
-		base.StartTouch( other );
+		if ( Game.IsClient ) return;
+
+		if ( other is PickupTrigger )
+		{
+			StartTouch( other.Parent );
+			return;
+		}
+
+		Inventory?.Add( other, Inventory.Active == null );
 
 		if ( other is FuncSpawnArea )
 			InSpawnRoom = true;

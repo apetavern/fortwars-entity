@@ -1,7 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
 using Sandbox.Effects;
 
 namespace Fortwars;
@@ -12,16 +11,16 @@ partial class FortwarsPlayer
 
 	private static void SetupPostProcessing()
 	{
-		if ( !Host.IsClient )
+		if ( !Game.IsClient )
 			return;
 
-		postProcess = Map.Camera.FindOrCreateHook<ScreenEffects>();
+		postProcess = Camera.Main.FindOrCreateHook<ScreenEffects>();
 	}
 
-	[Event.Frame]
+	[Event.Client.Frame]
 	private static void UpdatePostProcessing()
 	{
-		if ( !Host.IsClient )
+		if ( !Game.IsClient )
 			return;
 
 		if ( postProcess == null )
@@ -35,7 +34,7 @@ partial class FortwarsPlayer
 		postProcess.ChromaticAberration.Offset = Vector3.Up * 0.0005f;
 
 		float vignette;
-		if ( Local.Pawn is FortwarsPlayer { ActiveChild: FortwarsWeapon { IsAiming: true } } )
+		if ( Game.LocalPawn is FortwarsPlayer { ActiveChild: FortwarsWeapon { IsAiming: true } } )
 			vignette = 0.5f;
 		else
 			vignette = 0.0f;
@@ -46,7 +45,7 @@ partial class FortwarsPlayer
 		postProcess.Vignette.Smoothness = 1.0f;
 		postProcess.Vignette.Color = Color.Black;
 
-		if ( Local.Pawn is FortwarsPlayer player )
+		if ( Game.LocalPawn is FortwarsPlayer player )
 		{
 			var healthT = player.Health.LerpInverse( 50f, 0f );
 

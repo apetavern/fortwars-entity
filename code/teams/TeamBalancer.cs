@@ -1,11 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Fortwars
 {
 	/// <summary>
@@ -63,10 +58,10 @@ namespace Fortwars
 				switch ( largestTeam )
 				{
 					case Team.Red:
-						player.Team = Game.Instance.BlueTeam;
+						player.Team = FortwarsGame.Instance.BlueTeam;
 						break;
 					case Team.Blue:
-						player.Team = Game.Instance.RedTeam;
+						player.Team = FortwarsGame.Instance.RedTeam;
 						break;
 				}
 

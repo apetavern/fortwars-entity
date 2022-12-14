@@ -1,8 +1,7 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using SandboxEditor;
+using Editor;
 
 namespace Fortwars;
 
@@ -35,7 +34,7 @@ public partial class InfoFlagSpawn : Entity
 
 	public void ShowFlag()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		Log.Trace( $"Showing {flag}" );
 		flag.EnableDrawing = true;
@@ -43,7 +42,7 @@ public partial class InfoFlagSpawn : Entity
 
 	public void HideFlag()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		Log.Trace( $"Hiding {flag}" );
 		flag.EnableDrawing = false;

@@ -3,10 +3,10 @@
 
 namespace Fortwars;
 
-partial class Game
+partial class FortwarsGame
 {
-	// shit tier singleton hack since we can't init these in Game ctor
-	// CreatePlayer is called before Game ctor
+	// shit tier singleton hack since we can't init these in FortwarsGame ctor
+	// CreatePlayer is called before FortwarsGame ctor
 	private RedTeam redTeam;
 	private BlueTeam blueTeam;
 

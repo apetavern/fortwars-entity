@@ -1,10 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using System.Linq;
-
 namespace Fortwars;
 
 /// <summary>
@@ -25,7 +21,7 @@ public class HealthBarComponent : EntityComponent<FortwarsBlock>
 		healthBar = null;
 	}
 
-	[Event.Frame]
+	[Event.Client.Frame]
 	public void FrameUpdate()
 	{
 		var transform = Entity.Transform;
@@ -35,14 +31,14 @@ public class HealthBarComponent : EntityComponent<FortwarsBlock>
 		// whereas the former does - and therefore looks nice and smooth
 		var localCenter = Entity.PhysicsBody?.LocalMassCenter ?? Vector3.Zero;
 		transform.Position = transform.Position + ( localCenter * transform.Rotation );
-		transform.Rotation = Rotation.LookAt( -CurrentView.Rotation.Forward );
+		transform.Rotation = Rotation.LookAt( -Camera.Rotation.Forward );
 
 		var screenPos = transform.Position.ToScreen();
 		healthBar.Style.Left = Length.Fraction( screenPos.x );
 		healthBar.Style.Top = Length.Fraction( screenPos.y );
 	}
 
-	[Event.Frame]
+	[Event.Client.Frame]
 	public static void SystemUpdate()
 	{
 		// how far away can we see the health bars
@@ -56,15 +52,15 @@ public class HealthBarComponent : EntityComponent<FortwarsBlock>
 				existingHealthBar?.Remove();
 			}
 
-			if ( entity.Position.Distance( CurrentView.Position ) > maxDistance )
+			if ( entity.Position.Distance( Camera.Position ) > maxDistance )
 			{
 				Remove();
 				continue;
 			}
 
 			// can the camera actually SEE the entity - or is there something between us
-			var tr = Trace.Ray( CurrentView.Position, CurrentView.Position + CurrentView.Rotation.Forward * maxDistance )
-				.Ignore( Local.Pawn )
+			var tr = Trace.Ray( Camera.Position, Camera.Position + Camera.Rotation.Forward * maxDistance )
+				.Ignore( Game.LocalPawn )
 				.Run();
 
 			if ( tr.Entity != entity )

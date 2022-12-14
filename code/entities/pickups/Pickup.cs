@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-
 namespace Fortwars;
 
 public class Pickup : AnimatedEntity
@@ -21,12 +19,12 @@ public class Pickup : AnimatedEntity
 		EnableSolidCollisions = false;
 		EnableTouch = true;
 
-		Components.Add<BobbingComponent>( new() );
+		Components.Add( new BobbingComponent() );
 	}
 
 	protected override void OnDestroy()
 	{
-		if ( IsServer && Spawner.IsValid() )
+		if ( Game.IsServer && Spawner.IsValid() )
 			Spawner.ResetSpawnTimer();
 
 		base.OnDestroy();

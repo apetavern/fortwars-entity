@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System.Linq;
-
 namespace Fortwars;
 
 public class CombatRound : BaseRound
@@ -17,7 +14,7 @@ public class CombatRound : BaseRound
 	{
 		Log.Info( "Started Combat Round" );
 
-		if ( Host.IsServer )
+		if ( Game.IsServer )
 		{
 			Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) =>
 			{
@@ -43,7 +40,7 @@ public class CombatRound : BaseRound
 
 	protected override void OnTimeUp()
 	{
-		var game = Game.Instance;
+		var game = FortwarsGame.Instance;
 		if ( game == null ) return;
 
 		// Assign a score point to winning team. Do nothing on draw.
@@ -66,7 +63,7 @@ public class CombatRound : BaseRound
 			game.WinningTeam = Team.Red;
 		}
 
-		// Cleanup game.
+		// Cleanup FortwarsGame.
 		game.CleanupCTF();
 
 		// If a team one, set round to EndRound.

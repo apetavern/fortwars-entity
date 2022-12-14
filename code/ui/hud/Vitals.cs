@@ -1,10 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-
 namespace Fortwars;
 
 public class Vitals : Panel
@@ -18,7 +14,7 @@ public class Vitals : Panel
 
 	class VitalsPanel : Panel
 	{
-		public string PlayerHealth => Local.Pawn.Health.CeilToInt().ToString();
+		public string PlayerHealth => Game.LocalPawn.Health.CeilToInt().ToString();
 
 		public VitalsPanel( Panel parent, string icon )
 		{

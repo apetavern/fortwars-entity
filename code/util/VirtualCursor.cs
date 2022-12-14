@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-
 namespace Fortwars;
 
 public static class VirtualCursor
@@ -44,7 +42,7 @@ public static class VirtualCursor
 		}
 	}
 
-	[Event.Frame]
+	[Event.Client.Frame]
 	public static void OnFrame()
 	{
 		if ( !InUse )

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Fortwars;
 
-partial class Game
+partial class FortwarsGame
 {
 	private struct BuildLogEntry
 	{

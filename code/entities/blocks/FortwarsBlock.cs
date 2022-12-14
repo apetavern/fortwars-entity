@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System;
-
 namespace Fortwars;
 
 public partial class FortwarsBlock : Prop
@@ -42,7 +39,7 @@ public partial class FortwarsBlock : Prop
 	{
 		base.OnNewModel( model );
 
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			var blockNode = model.GetData<BlockNode>();
 
@@ -56,14 +53,14 @@ public partial class FortwarsBlock : Prop
 		}
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
 	}
 
 	public override void TakeDamage( DamageInfo info )
 	{
-		if ( Game.Instance.Round is not BuildRound )
+		if ( FortwarsGame.Instance.Round is not BuildRound )
 		{
 			base.TakeDamage( info );
 			UpdateRenderColor();

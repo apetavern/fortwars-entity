@@ -1,19 +1,16 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-
 namespace Fortwars;
 
 public static class PanelExtension
 {
 	public static void PositionAtCrosshair( this Panel panel )
 	{
-		panel.PositionAtCrosshair( Local.Pawn as Sandbox.Player );
+		panel.PositionAtCrosshair( Game.LocalPawn as FortwarsPlayer );
 	}
 
-	public static void PositionAtCrosshair( this Panel panel, Player player )
+	public static void PositionAtCrosshair( this Panel panel, FortwarsPlayer player )
 	{
 		if ( !player.IsValid() ) return;
 

@@ -1,10 +1,7 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Fortwars;
 
@@ -30,24 +27,24 @@ public class ClassAsset : GameResource
 	public List<string> Cosmetics { get; set; } = new();
 
 	//
-	// Gameplay
+	// FortwarsGameplay
 	//
-	[Category( "Gameplay" )]
+	[Category( "FortwarsGameplay" )]
 	public float SpeedMultiplier { get; set; } = 1.0f;
 
-	[Category( "Gameplay" )]
+	[Category( "FortwarsGameplay" )]
 	public float JumpMultiplier { get; set; } = 1.0f;
 
-	[Category( "Gameplay" )]
+	[Category( "FortwarsGameplay" )]
 	public bool TakesFallDamage { get; set; } = true;
 
-	[Category( "Gameplay" )]
+	[Category( "FortwarsGameplay" )]
 	public bool UsesWeaponGadget { get; set; }
 
-	[ShowIf( "UsesWeaponGadget", true ), Category( "Gameplay" ), ResourceType( "fwweapon" )]
+	[ShowIf( "UsesWeaponGadget", true ), Category( "FortwarsGameplay" ), ResourceType( "fwweapon" )]
 	public string WeaponGadget { get; set; }
 
-	[HideIf( "UsesWeaponGadget", true ), Category( "Gameplay" )]
+	[HideIf( "UsesWeaponGadget", true ), Category( "FortwarsGameplay" )]
 	public string LibraryGadget { get; set; }
 
 	[HideInEditor, JsonIgnore]
@@ -60,10 +57,10 @@ public class ClassAsset : GameResource
 	public string PreviewWeapon { get; set; }
 
 	[Category( "Preview" )]
-	public HoldTypes PreviewHoldType { get; set; } = HoldTypes.Pistol;
+	public CitizenAnimationHelper.HoldTypes PreviewHoldType { get; set; } = CitizenAnimationHelper.HoldTypes.Pistol;
 
 	[Category( "Preview" )]
-	public HoldHandedness PreviewHoldHandedness { get; set; } = HoldHandedness.TwoHands;
+	public CitizenAnimationHelper.Hand PreviewHoldHandedness { get; set; } = CitizenAnimationHelper.Hand.Both;
 
 	[Category( "Preview" )]
 	public float PreviewHandPose { get; set; }

@@ -1,10 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-
 namespace Fortwars;
 
 public class Dead : Panel
@@ -19,7 +15,7 @@ public class Dead : Panel
 		killer = Add.Label( "Killed by", "subtitle" );
 		timer = Add.Label( "Respawn in 0:00", "timer" );
 
-		BindClass( "visible", () => Local.Pawn.LifeState != LifeState.Alive );
+		BindClass( "visible", () => Game.LocalPawn.LifeState != LifeState.Alive );
 	}
 
 	public override void Tick()
@@ -29,7 +25,7 @@ public class Dead : Panel
 		if ( !IsVisible )
 			return;
 
-		if ( Local.Pawn is not FortwarsPlayer player )
+		if ( Game.LocalPawn is not FortwarsPlayer player )
 			return;
 
 		killer.Text = $"Killed by {player.Killer ?? "suicide"}";

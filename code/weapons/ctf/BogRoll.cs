@@ -1,7 +1,7 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
+using static Sandbox.CitizenAnimationHelper;
 
 namespace Fortwars;
 
@@ -27,7 +27,7 @@ public partial class BogRoll : MeleeWeapon
 		SetModel( "models/items/bogroll/bogroll_w.vmdl" );
 	}
 
-	public override void Simulate( Client player )
+	public override void Simulate( IClient player )
 	{
 		base.Simulate( player );
 
@@ -52,11 +52,11 @@ public partial class BogRoll : MeleeWeapon
 		{
 			player.Inventory.SetActive( this );
 
-			if ( Team == Team.Blue && Game.Instance.BlueFlagCarrier != player )
-				Game.Instance.PlayerPickupEnemyFlagFloor( player );
+			if ( Team == Team.Blue && FortwarsGame.Instance.BlueFlagCarrier != player )
+				FortwarsGame.Instance.PlayerPickupEnemyFlagFloor( player );
 
-			if ( Team == Team.Red && Game.Instance.BlueFlagCarrier != player )
-				Game.Instance.PlayerPickupEnemyFlagFloor( player );
+			if ( Team == Team.Red && FortwarsGame.Instance.BlueFlagCarrier != player )
+				FortwarsGame.Instance.PlayerPickupEnemyFlagFloor( player );
 
 			base.OnCarryStart( carrier );
 		}
@@ -83,13 +83,13 @@ public partial class BogRoll : MeleeWeapon
 
 		IsDropped = false;
 
-		if ( ReturnZone != null && IsServer )
+		if ( ReturnZone != null && Game.IsServer )
 			ReturnZone.Delete();
 	}
 
 	protected override void OnDestroy()
 	{
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			if ( ReturnZone != null )
 				ReturnZone.Delete();
@@ -111,8 +111,8 @@ public partial class BogRoll : MeleeWeapon
 
 		CanPickup = false;
 
-		if ( IsServer )
-			Game.Instance.PlayerDropFlag( player );
+		if ( Game.IsServer )
+			FortwarsGame.Instance.PlayerDropFlag( player );
 
 		Vector3 throwDir = ( player.EyeRotation.Forward + ( Vector3.Up / 3f ) ).Normal;
 
@@ -124,14 +124,13 @@ public partial class BogRoll : MeleeWeapon
 		Velocity = throwDir * 600f;
 	}
 
-	public override void SimulateAnimator( PawnAnimator anim )
+	public override void SimulateAnimator( CitizenAnimationHelper animHelper )
 	{
-		anim.SetAnimParameter( "holdtype", (int)HoldTypes.HoldItem );
-		anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.RightHand );
-		anim.SetAnimParameter( "holdtype_pose_hand", 0.07f );
-		anim.SetAnimParameter( "holdtype_attack", 1 );
+		animHelper.HoldType = HoldTypes.HoldItem;
+		animHelper.Handedness = Hand.Right;
+		// anim.SetAnimParameter( "holdtype_pose_hand", 0.07f );
+		// anim.SetAnimParameter( "holdtype_attack", 1 );
 	}
-
 
 	[Event.Tick.Server]
 	public void OnServerTick()
@@ -140,7 +139,7 @@ public partial class BogRoll : MeleeWeapon
 		{
 			PlaySound( "enemyflagreturned" );//Play sad flag return sounds
 			Delete();
-			Game.Instance.ReturnFlag( Team );
+			FortwarsGame.Instance.ReturnFlag( Team );
 		}
 	}
 

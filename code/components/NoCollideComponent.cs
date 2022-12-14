@@ -1,10 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Fortwars;
 
 /// <summary>
@@ -18,7 +14,7 @@ public class NoCollideComponent : EntityComponent<FortwarsBlock>
 	{
 		entity = Entity;
 
-		if ( Host.IsServer )
+		if ( Game.IsServer )
 		{
 			entity.Tags.Add( "nocollide" );
 		}
@@ -38,7 +34,7 @@ public class NoCollideComponent : EntityComponent<FortwarsBlock>
 	{
 		await Task.Delay( 500 );
 
-		if ( Host.IsServer )
+		if ( Game.IsServer )
 		{
 			entity.Tags.Remove( "nocollide" );
 		}

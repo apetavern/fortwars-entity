@@ -4,25 +4,20 @@
 // Based on the scoreboard from Hover, located at https://github.com/Facepunch/sbox-hover
 // Copyright (c) 2022 Facepunch
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Fortwars;
 
 [UseTemplate]
 public class Scoreboard : Panel
 {
-	public Dictionary<Client, ScoreboardEntry> Rows = new();
+	public Dictionary<IClient, ScoreboardEntry> Rows = new();
 
 	public Panel BlueSection { get; set; }
 	public Panel RedSection { get; set; }
 
-	public string RedTeamHeader => $"Red ({Game.Instance.RedTeam.GetPlayerCount()})";
-	public string BlueTeamHeader => $"Blue ({Game.Instance.BlueTeam.GetPlayerCount()})";
+	public string RedTeamHeader => $"Red ({FortwarsGame.Instance.RedTeam.GetPlayerCount()})";
+	public string BlueTeamHeader => $"Blue ({FortwarsGame.Instance.BlueTeam.GetPlayerCount()})";
 
 	public override void Tick()
 	{
@@ -33,13 +28,13 @@ public class Scoreboard : Panel
 		if ( !IsVisible )
 			return;
 
-		foreach ( var client in Client.All.Except( Rows.Keys ) )
+		foreach ( var client in Game.Clients.Except( Rows.Keys ) )
 		{
 			var entry = AddClient( client );
 			Rows[client] = entry;
 		}
 
-		foreach ( var client in Rows.Keys.Except( Client.All ) )
+		foreach ( var client in Rows.Keys.Except( Game.Clients ) )
 		{
 			if ( Rows.TryGetValue( client, out var row ) )
 			{
@@ -54,7 +49,7 @@ public class Scoreboard : Panel
 		}
 	}
 
-	protected virtual ScoreboardEntry AddClient( Client entry )
+	protected virtual ScoreboardEntry AddClient( IClient entry )
 	{
 		return new ScoreboardEntry()
 		{
@@ -64,12 +59,12 @@ public class Scoreboard : Panel
 
 	private string GetTimeLeftFormatted()
 	{
-		return TimeSpan.FromSeconds( Game.Instance.Round.TimeLeft ).ToString( @"mm\:ss" );
+		return TimeSpan.FromSeconds( FortwarsGame.Instance.Round.TimeLeft ).ToString( @"mm\:ss" );
 	}
 
 	private int GetFlagCaptures( Team team )
 	{
-		return team == Team.Blue ? Game.Instance.BlueTeamScore : Game.Instance.RedTeamScore;
+		return team == Team.Blue ? FortwarsGame.Instance.BlueTeamScore : FortwarsGame.Instance.RedTeamScore;
 	}
 
 	private Panel GetTeamSection( Team team )
@@ -91,7 +86,7 @@ public class Scoreboard : Panel
 
 public class ScoreboardEntry : Panel
 {
-	public Client Client { get; set; }
+	public IClient Client { get; set; }
 	public Label PlayerName { get; set; }
 	public Label Captures { get; set; }
 	public Label Kills { get; set; }
@@ -135,10 +130,10 @@ public class ScoreboardEntry : Panel
 		Kills.Text = Client.GetInt( "kills" ).ToString();
 		Deaths.Text = Client.GetInt( "deaths" ).ToString();
 		Ping.Text = Client.Ping.ToString();
-		SetClass( "me", Client == Local.Client );
+		SetClass( "me", Client == Game.LocalClient );
 	}
 
-	public virtual void UpdateFrom( Client client )
+	public virtual void UpdateFrom( IClient client )
 	{
 		Client = client;
 		UpdateData();

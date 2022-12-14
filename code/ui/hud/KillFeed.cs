@@ -1,11 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System.Threading.Tasks;
-
 namespace Fortwars;
 
 public partial class KillFeedEntry : Panel
@@ -53,7 +48,7 @@ public partial class KillFeed : Panel
 		var e = Current.AddChild<KillFeedEntry>();
 
 		e.AddClass( method );
-		e.SetClass( "me", lsteamid == ( Local.Client?.PlayerId ) || rsteamid == ( Local.Client?.PlayerId ) );
+		e.SetClass( "me", lsteamid == ( Game.LocalClient?.SteamId ) || rsteamid == ( Game.LocalClient?.SteamId ) );
 
 		e.Left.Text = left;
 		e.Left.AddClass( leftClass );

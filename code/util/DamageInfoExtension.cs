@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-
 namespace Fortwars;
 
 public static class DamageInfoExtension
@@ -11,7 +9,6 @@ public static class DamageInfoExtension
 	{
 		return new DamageInfo
 		{
-			Flags = DamageFlags.Fall,
 			Damage = damage,
 			Attacker = attacker
 		};
@@ -21,7 +18,6 @@ public static class DamageInfoExtension
 	{
 		return new DamageInfo
 		{
-			Flags = DamageFlags.Blast,
 			Position = position,
 			Damage = damage,
 			Attacker = attacker,

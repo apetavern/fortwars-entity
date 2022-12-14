@@ -1,9 +1,7 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System.Collections.Generic;
-using System.Linq;
+using static Sandbox.CitizenAnimationHelper;
 
 namespace Fortwars;
 
@@ -34,7 +32,7 @@ public partial class DropTool : Carriable
 
 	[Net] bool Dropped { get; set; }
 
-	public override void Simulate( Client player )
+	public override void Simulate( IClient player )
 	{
 		if ( !Owner.IsValid() )
 			return;
@@ -48,7 +46,7 @@ public partial class DropTool : Carriable
 			}
 		}
 
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			if ( TimeSinceLastDrop < DropTimeDelay )
 			{
@@ -65,7 +63,7 @@ public partial class DropTool : Carriable
 			}
 		}
 
-		if ( IsClient )
+		if ( Game.IsClient )
 		{
 			if ( TimeSinceLastDrop < DropTimeDelay )
 			{
@@ -99,7 +97,7 @@ public partial class DropTool : Carriable
 
 	public void DoDrop()
 	{
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			All.OfType<Pickup>().Where( e => e.Client == Client ).ToList().ForEach( e => e.Delete() );
 		}
@@ -147,23 +145,23 @@ public partial class DropTool : Carriable
 		base.ActiveStart( ent );
 	}
 
-	public override void SimulateAnimator( PawnAnimator anim )
+	public override void SimulateAnimator( CitizenAnimationHelper animHelper )
 	{
 		if ( TimeSinceLastDrop < DropTimeDelay )
 		{
 			EnableDrawing = false;
-			anim.SetAnimParameter( "holdtype", (int)HoldTypes.None );
-			anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.TwoHands );
-			anim.SetAnimParameter( "holdtype_pose_hand", 0f );
-			anim.SetAnimParameter( "holdtype_attack", 1 );
+			animHelper.HoldType = HoldTypes.None;
+			animHelper.Handedness = Hand.Both;
+			// anim.SetAnimParameter( "holdtype_pose_hand", 0f );
+			// anim.SetAnimParameter( "holdtype_attack", 1 );
 		}
 		else
 		{
 			EnableDrawing = true;
-			anim.SetAnimParameter( "holdtype", (int)HoldTypes.HoldItem );
-			anim.SetAnimParameter( "holdtype_handedness", (int)HoldHandedness.TwoHands );
-			anim.SetAnimParameter( "holdtype_pose_hand", 0f );
-			anim.SetAnimParameter( "holdtype_attack", 1 );
+			animHelper.HoldType = HoldTypes.HoldItem;
+			animHelper.Handedness = Hand.Both;
+			// anim.SetAnimParameter( "holdtype_pose_hand", 0f );
+			// anim.SetAnimParameter( "holdtype_attack", 1 );
 		}
 	}
 }

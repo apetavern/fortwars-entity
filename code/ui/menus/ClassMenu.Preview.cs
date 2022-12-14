@@ -1,11 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System.Collections.Generic;
-
 namespace Fortwars;
 
 partial class ClassMenu
@@ -42,7 +37,7 @@ partial class ClassMenu
 			sceneLights.Add( new SceneLight( world, Vector3.Up * 100.0f + Vector3.Up, 200, Color.White * 15.0f ) );
 
 			renderScene = Add.ScenePanel( world, CameraPos, CameraRot, 50 );
-			renderScene.AmbientColor = new Color( .25f, .15f, .15f ) * 2.0f;
+			// renderScene.AmbientColor = new Color( .25f, .15f, .15f ) * 2.0f;
 
 			Log.Trace( className );
 			ShowClass( className );
@@ -88,8 +83,8 @@ partial class ClassMenu
 			}
 		}
 
-		HoldTypes weaponHoldtype;
-		HoldHandedness weaponHoldHandedness;
+		CitizenAnimationHelper.HoldTypes weaponHoldtype;
+		CitizenAnimationHelper.Hand weaponHoldHandedness;
 		float handpose;
 		float holdpose;
 
@@ -145,8 +140,8 @@ partial class ClassMenu
 		{
 			base.Tick();
 
-			renderScene.CameraPosition = CameraPos;
-			renderScene.CameraRotation = CameraRot;
+			renderScene.Camera.Position = CameraPos;
+			renderScene.Camera.Rotation = CameraRot;
 
 			Animate();
 

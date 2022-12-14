@@ -1,9 +1,7 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
 using Sandbox.Component;
-using System.Linq;
 
 namespace Fortwars;
 
@@ -12,7 +10,7 @@ public partial class FortwarsPlayer
 	[Event.Tick.Client]
 	public static void OnClientTick()
 	{
-		var localPlayer = Local.Pawn as FortwarsPlayer;
+		var localPlayer = Game.LocalPawn as FortwarsPlayer;
 
 		All.OfType<FortwarsPlayer>().ToList().ForEach( player =>
 		{

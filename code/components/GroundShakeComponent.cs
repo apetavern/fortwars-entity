@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System.Linq;
-
 namespace Fortwars;
 
 /// <summary>
@@ -20,7 +17,7 @@ public class GroundShakeComponent : EntityComponent<FortwarsBlock>
 	private float strengthScale => 0.01f;
 	private float strengthMax => 10;
 
-	[Event.Frame]
+	[Event.Client.Frame]
 	public void FrameUpdate()
 	{
 		var velocity = Entity.Velocity;
@@ -36,7 +33,7 @@ public class GroundShakeComponent : EntityComponent<FortwarsBlock>
 
 		if ( tr.Hit && velocity.Length > 1 && !wasShakingLastFrame )
 		{
-			var shakeStrength = Vector3.DistanceBetween( CurrentView.Position, Entity.PhysicsBody.MassCenter ).LerpInverse( 512, 0 );
+			var shakeStrength = Vector3.DistanceBetween( Camera.Position, Entity.PhysicsBody.MassCenter ).LerpInverse( 512, 0 );
 			shakeStrength *= velocity.Length;
 			shakeStrength *= Entity.PhysicsBody.Mass * massScale;
 			shakeStrength *= strengthScale;
@@ -54,7 +51,7 @@ public class GroundShakeComponent : EntityComponent<FortwarsBlock>
 		}
 	}
 
-	[Event.Frame]
+	[Event.Client.Frame]
 	public static void SystemUpdate()
 	{
 		foreach ( var entity in Sandbox.Entity.All.OfType<FortwarsBlock>() )

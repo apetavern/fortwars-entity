@@ -1,12 +1,11 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
 using System.Collections.Generic;
 
 namespace Fortwars;
 
-partial class Game
+partial class FortwarsGame
 {
 	[Net, Change( nameof( OnRoundChange ) )] public BaseRound Round { get; private set; }
 
@@ -24,11 +23,11 @@ partial class Game
 	public struct MapVote
 	{
 		public int MapIndex { get; set; }
-		public long PlayerId { get; set; }
-		public MapVote( int mapIndex, long playerId )
+		public long SteamId { get; set; }
+		public MapVote( int mapIndex, long SteamId )
 		{
 			MapIndex = mapIndex;
-			PlayerId = playerId;
+			SteamId = SteamId;
 		}
 	}
 
@@ -46,20 +45,20 @@ partial class Game
 	[ConCmd.Server( "vote_map" )]
 	public static void VoteMap( int index )
 	{
-		var playerId = ConsoleSystem.Caller.PlayerId;
+		var SteamId = ConsoleSystem.Caller.SteamId;
 		var mapVotes = Instance?.MapVotes;
 
 		foreach ( var vote in mapVotes )
 		{
-			if ( vote.PlayerId == playerId ) return;
+			if ( vote.SteamId == SteamId ) return;
 		}
 
-		Instance?.MapVotes.Add( new MapVote( index, playerId ) );
+		Instance?.MapVotes.Add( new MapVote( index, SteamId ) );
 	}
 
 	public static List<string> GetMaps()
 	{
-		var packageTask = Package.Fetch( Global.GameIdent, true ).ContinueWith( t =>
+		var packageTask = Package.Fetch( Game.Server.GameIdent, true ).ContinueWith( t =>
 		{
 			Package package = t.Result;
 			return package.GetMeta<List<string>>( "MapList" );

@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System;
-
 namespace Fortwars;
 
 public class ViewModel : BaseViewModel
@@ -64,23 +61,18 @@ public class ViewModel : BaseViewModel
 		}
 	}
 
-	public override void PostCameraSetup( ref CameraSetup camSetup )
+	public override void PlaceViewmodel()
 	{
-		base.PostCameraSetup( ref camSetup );
-
-		if ( !Local.Pawn.IsValid() )
+		if ( !Game.LocalPawn.IsValid() )
 			return;
 
 		if ( !activated )
 		{
-			lastPitch = camSetup.Rotation.Pitch();
-			lastYaw = camSetup.Rotation.Yaw();
+			lastPitch = Rotation.Pitch();
+			lastYaw = Rotation.Yaw();
 
 			activated = true;
 		}
-
-		Position = camSetup.Position;
-		Rotation = camSetup.Rotation;
 
 		FinalRot = Rotation.Lerp( FinalRot, TargetRot, LerpSpeed * Time.Delta );
 		Rotation *= FinalRot;
@@ -89,7 +81,7 @@ public class ViewModel : BaseViewModel
 		Position += FinalPos * Rotation;
 
 		FinalFov = FinalFov.LerpTo( TargetFov, LerpSpeed * Time.Delta );
-		camSetup.ViewModel.FieldOfView = FinalFov;
+		Camera.Main.SetViewModelCamera( FinalFov );
 
 		TargetPos = 0;
 		TargetFov = ViewmodelFov;
@@ -132,7 +124,7 @@ public class ViewModel : BaseViewModel
 
 	private bool DoSprinting()
 	{
-		if ( Local.Pawn is Player { Controller: FortwarsWalkController { IsSprinting: true } } player )
+		if ( Game.LocalPawn is FortwarsPlayer { Controller: FortwarsWalkController { IsSprinting: true } } player )
 		{
 			if ( Weapon == null || Weapon.WeaponAsset == null )
 			{
@@ -163,7 +155,7 @@ public class ViewModel : BaseViewModel
 
 	private bool DoSliding()
 	{
-		if ( Local.Pawn is Player { Controller: FortwarsWalkController { DuckSlide.IsActiveSlide: true } } player )
+		if ( Game.LocalPawn is FortwarsPlayer { Controller: FortwarsWalkController { DuckSlide.IsActiveSlide: true } } player )
 		{
 			TargetRot = Rotation.From( 0f, 0, -10f );
 			TargetPos = Vector3.Backward * 16f;
@@ -175,7 +167,7 @@ public class ViewModel : BaseViewModel
 
 	private bool DoDucking()
 	{
-		if ( Local.Pawn is Player { Controller: FortwarsWalkController { DuckSlide: { IsActive: true, IsActiveSlide: false } } } player )
+		if ( Game.LocalPawn is FortwarsPlayer { Controller: FortwarsWalkController { DuckSlide: { IsActive: true, IsActiveSlide: false } } } player )
 		{
 			TargetRot = Rotation.From( -2f, 0, 0 );
 			TargetPos = Vector3.Zero;
@@ -193,7 +185,7 @@ public class ViewModel : BaseViewModel
 		var pitchDelta = Angles.NormalizeAngle( newPitch - lastPitch );
 		var yawDelta = Angles.NormalizeAngle( lastYaw - newYaw );
 
-		var playerVelocity = Local.Pawn.Velocity;
+		var playerVelocity = Game.LocalPawn.Velocity;
 		var verticalDelta = playerVelocity.z * Time.Delta;
 		var viewDown = Rotation.FromPitch( newPitch ).Up * -1.0f;
 		verticalDelta *= 1.0f - MathF.Abs( viewDown.Cross( Vector3.Down ).y );

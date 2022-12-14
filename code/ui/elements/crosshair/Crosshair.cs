@@ -1,10 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using Sandbox.UI;
-using System;
-
 namespace Fortwars;
 
 public partial class Crosshair : Panel
@@ -36,7 +32,7 @@ public partial class Crosshair : Panel
 
 		BindClass( "ads", () =>
 		{
-			if ( ( Local.Pawn as FortwarsPlayer ).ActiveChild is FortwarsWeapon weapon && ( weapon.GetTuckDist() != -1 || weapon.IsAiming ) )
+			if ( ( Game.LocalPawn as FortwarsPlayer ).ActiveChild is FortwarsWeapon weapon && ( weapon.GetTuckDist() != -1 || weapon.IsAiming ) )
 				return true;
 
 			return false;
@@ -47,10 +43,10 @@ public partial class Crosshair : Panel
 			if ( VirtualCursor.InUse )
 				return false;
 
-			if ( ( Local.Pawn as FortwarsPlayer ).ActiveChild is FortwarsWeapon weapon && ( weapon.GetTuckDist() != -1 || weapon.IsAiming ) )
+			if ( ( Game.LocalPawn as FortwarsPlayer ).ActiveChild is FortwarsWeapon weapon && ( weapon.GetTuckDist() != -1 || weapon.IsAiming ) )
 				return false;
 
-			if ( Local.Pawn is FortwarsPlayer { Controller: FortwarsWalkController { IsSprinting: true } } )
+			if ( Game.LocalPawn is FortwarsPlayer { Controller: FortwarsWalkController { IsSprinting: true } } )
 				return false;
 
 			return true;
@@ -120,7 +116,7 @@ public partial class Crosshair : Panel
 	{
 		base.Tick();
 
-		if ( ( Local.Pawn as FortwarsPlayer ).ActiveChild is not FortwarsWeapon weapon )
+		if ( ( Game.LocalPawn as FortwarsPlayer ).ActiveChild is not FortwarsWeapon weapon )
 			return;
 
 		float size = Config.Gap + ( Config.Size * 2 ) + weapon.GetCrosshairSize();

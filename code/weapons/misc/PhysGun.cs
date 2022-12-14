@@ -2,9 +2,6 @@
 // without permission of its author (insert_email_here)
 
 using Fortwars;
-using Sandbox;
-using System;
-using System.Linq;
 
 [Library( "physgun", Title = "Manipulator" )]
 public partial class PhysGun : Carriable, IUse
@@ -46,7 +43,7 @@ public partial class PhysGun : Carriable, IUse
 		SetModel( "models/weapons/manipulator/manipulator_w.vmdl" );
 	}
 
-	public bool CheckCanGrab( Player owner, Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )
+	public bool CheckCanGrab( FortwarsPlayer owner, Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )
 	{
 		if ( GrabbedEntity.IsValid() )
 			return true;
@@ -85,11 +82,11 @@ public partial class PhysGun : Carriable, IUse
 		return true;
 	}
 
-	public override void Simulate( Client client )
+	public override void Simulate( IClient client )
 	{
 		UpdateViewmodel();
 
-		if ( Owner is not Player owner ) return;
+		if ( Owner is not FortwarsPlayer owner ) return;
 
 		var EyePosition = owner.EyePosition;
 		var eyeDir = owner.EyeRotation.Forward;
@@ -109,7 +106,7 @@ public partial class PhysGun : Carriable, IUse
 
 		BeamActive = grabEnabled;
 
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			using ( Prediction.Off() )
 			{
@@ -142,7 +139,7 @@ public partial class PhysGun : Carriable, IUse
 		}
 	}
 
-	private void TryDelete( Player owner, Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )
+	private void TryDelete( FortwarsPlayer owner, Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )
 	{
 		var tr = Trace.Ray( EyePosition, EyePosition + eyeDir * MaxTargetDistance )
 			.UseHitboxes()
@@ -156,7 +153,7 @@ public partial class PhysGun : Carriable, IUse
 
 	private static bool IsBodyGrabbed( PhysicsBody body ) => All.OfType<PhysGun>().Any( x => x?.HeldBody?.PhysicsGroup == body?.PhysicsGroup );
 
-	private void TryStartGrab( Player owner, Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )
+	private void TryStartGrab( FortwarsPlayer owner, Vector3 EyePosition, Rotation EyeRotation, Vector3 eyeDir )
 	{
 		if ( !CanGrab ) return;
 
@@ -217,13 +214,13 @@ public partial class PhysGun : Carriable, IUse
 
 	private void Activate()
 	{
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return;
 	}
 
 	private void Deactivate()
 	{
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			GrabEnd();
 		}
@@ -296,15 +293,14 @@ public partial class PhysGun : Carriable, IUse
 	[Event.Physics.PreStep]
 	public void OnPrePhysicsStep()
 	{
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return;
 
 		if ( !heldBody.IsValid() )
 			return;
 
-		if ( GrabbedEntity is Player )
+		if ( GrabbedEntity is FortwarsPlayer )
 			return;
-
 
 		var velocity = heldBody.Velocity;
 		Vector3.SmoothDamp( heldBody.Position, holdPos, ref velocity, 0.075f, Time.Delta );
@@ -336,7 +332,7 @@ public partial class PhysGun : Carriable, IUse
 			holdPos = walltr.EndPosition + walltr.Normal;//Snap to the trace sweep position.
 		}
 
-		if ( GrabbedEntity is Player player )
+		if ( GrabbedEntity is FortwarsPlayer player )
 		{
 			var velocity = player.Velocity;
 			Vector3.SmoothDamp( player.Position, holdPos, ref velocity, 0.075f, Time.Delta );
@@ -376,28 +372,32 @@ public partial class PhysGun : Carriable, IUse
 		heldRot = localRot * heldRot;
 	}
 
-	public override void BuildInput( InputBuilder owner )
+	public override void BuildInput()
 	{
 		if ( !GrabbedEntity.IsValid() )
 			return;
 
-		if ( !owner.Down( InputButton.PrimaryAttack ) )
+		if ( !Input.Down( InputButton.PrimaryAttack ) )
 			return;
 
-		if ( Input.UsingController )
-		{
-			if ( owner.Down( InputButton.SecondaryAttack ) )
-			{
-				owner.ViewAngles = owner.OriginalViewAngles;
-			}
-		}
-		else
-		{
-			if ( owner.Down( InputButton.Use ) )
-			{
-				owner.ViewAngles = owner.OriginalViewAngles;
-			}
-		}
+		// I have no idea how to handle this shit now and
+		// I am too fucking lazy after ~10589123578982358 changes
+		// to check so this will have to be taken care of later
+
+		// if ( Input.UsingController )
+		// {
+		// 	if ( Input.Down( InputButton.SecondaryAttack ) )
+		// 	{
+		// 		Input.ViewAngles = Input.OriginalViewAngles;
+		// 	}
+		// }
+		// else
+		// {
+		// 	if ( Input.Down( InputButton.Use ) )
+		// 	{
+		// 		Input.ViewAngles = Input.OriginalViewAngles;
+		// 	}
+		// }
 	}
 
 	public bool OnUse( Entity user )

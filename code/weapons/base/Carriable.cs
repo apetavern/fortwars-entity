@@ -2,9 +2,8 @@
 // without permission of its author (insert_email_here)
 
 using Fortwars;
-using Sandbox;
 
-public partial class Carriable : BaseCarriable
+public partial class Carriable : Fortwars.BaseCarriable
 {
 	public Sandbox.UI.Panel CrosshairPanel { get; set; }
 
@@ -19,7 +18,7 @@ public partial class Carriable : BaseCarriable
 
 	public override void CreateViewModel()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 
 		if ( string.IsNullOrEmpty( ViewModelPath ) )
 			return;
@@ -35,10 +34,10 @@ public partial class Carriable : BaseCarriable
 	{
 		base.CreateHudElements();
 
-		if ( Local.Hud == null ) return;
+		if ( FortwarsHUD.Root == null ) return;
 
 		CrosshairPanel = new Crosshair();
-		CrosshairPanel.Parent = Local.Hud;
+		CrosshairPanel.Parent = FortwarsHUD.Root;
 		CrosshairPanel.AddClass( ClassName );
 	}
 

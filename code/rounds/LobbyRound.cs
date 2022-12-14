@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify
 // without permission of its author (insert_email_here)
 
-using Sandbox;
-using System.Linq;
-
 namespace Fortwars;
 
 public class LobbyRound : BaseRound
@@ -15,7 +12,7 @@ public class LobbyRound : BaseRound
 	{
 		Log.Info( "Started Lobby Round" );
 
-		if ( Host.IsServer )
+		if ( Game.IsServer )
 		{
 			Entity.All.OfType<FortwarsPlayer>().ToList().ForEach( ( player ) =>
 			{
@@ -32,10 +29,10 @@ public class LobbyRound : BaseRound
 
 	protected override void OnTimeUp()
 	{
-		if ( Client.All.Count >= Game.Instance.MinPlayers )
-			Game.Instance.ChangeRound( new BuildRound() );
+		if ( Game.Clients.Count >= FortwarsGame.Instance.MinPlayers )
+			FortwarsGame.Instance.ChangeRound( new BuildRound() );
 		else
-			Game.Instance.ChangeRound( new LobbyRound() );
+			FortwarsGame.Instance.ChangeRound( new LobbyRound() );
 	}
 
 	public override void OnPlayerKilled( FortwarsPlayer player )

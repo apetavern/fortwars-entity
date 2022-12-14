@@ -5,7 +5,7 @@ namespace Fortwars;
 
 public partial class EndRound : BaseRound
 {
-	public override string RoundName => "Game Over";
+	public override string RoundName => "FortwarsGame Over";
 	public override int RoundDuration => 8;
 
 	protected override void OnStart()
@@ -15,7 +15,7 @@ public partial class EndRound : BaseRound
 
 	protected override void OnTimeUp()
 	{
-		Game.Instance.WinningTeam = Team.Invalid;
-		Game.Instance.ChangeRound( new VoteRound() );
+		FortwarsGame.Instance.WinningTeam = Team.Invalid;
+		FortwarsGame.Instance.ChangeRound( new VoteRound() );
 	}
 }
