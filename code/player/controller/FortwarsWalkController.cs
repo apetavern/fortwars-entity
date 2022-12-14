@@ -97,6 +97,7 @@ public partial class FortwarsWalkController : BasePlayerController
 
 	public override void Simulate()
 	{
+		var pl = Pawn as FortwarsPlayer;
 		FallVelocity = -Pawn.Velocity.z;
 
 		// EyeLocalPosition = Vector3.Up * ( EyeHeight * Pawn.Scale );
@@ -144,9 +145,9 @@ public partial class FortwarsWalkController : BasePlayerController
 		//
 		// Work out wish velocity.. just take input, rotate it to view, clamp to -1, 1
 		//
-		WishVelocity = new Vector3( Input.AnalogMove.x, Input.AnalogMove.y, 0 );
+		WishVelocity = new Vector3( pl.InputDirection.x.Clamp( -1f, 1f ), pl.InputDirection.y.Clamp( -1f, 1f ), 0 );
 		var inSpeed = WishVelocity.Length.Clamp( 0, 1 );
-		WishVelocity *= Input.AnalogLook.WithPitch( 0 ).ToRotation();
+		WishVelocity *= pl.ViewAngles.WithPitch( 0 ).ToRotation();
 
 		if ( !IsSwimming && !IsTouchingLadder )
 		{

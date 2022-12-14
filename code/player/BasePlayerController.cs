@@ -55,7 +55,6 @@ public abstract class BasePlayerController : PawnController
 		return new BBox( -10, 10 );
 	}
 
-
 	public override void FrameSimulate()
 	{
 		base.FrameSimulate();
