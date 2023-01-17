@@ -2,6 +2,12 @@
 
 public partial class Player : AnimatedEntity
 {
+	[BindComponent]
+	public PlayerController Controller { get; }
+
+	[BindComponent]
+	public Inventory Inventory { get; }
+
 	public PlayerCamera PlayerCamera { get; protected set; }
 
 	public ClothingContainer Clothing = new();
@@ -49,6 +55,9 @@ public partial class Player : AnimatedEntity
 		EnableAllCollisions = true;
 		EnableDrawing = true;
 
+		Components.Create<PlayerController>();
+		Components.Create<Inventory>();
+
 		ClientRespawn( To.Single( Client ) );
 
 		DressPlayerClothing();
@@ -60,9 +69,11 @@ public partial class Player : AnimatedEntity
 		PlayerCamera = new PlayerCamera();
 	}
 
-	public override void Simulate( IClient cl )
+	public override void Simulate( IClient client )
 	{
-		base.Simulate( cl );
+		Rotation = LookInput.WithPitch( 0f ).ToRotation();
+
+		Controller?.Simulate( client );
 	}
 
 	public override void FrameSimulate( IClient client )
