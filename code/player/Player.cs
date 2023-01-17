@@ -56,6 +56,11 @@ public partial class Player : AnimatedEntity
 		EnableDrawing = true;
 
 		Components.Create<PlayerController>();
+
+		Components.RemoveAny<PlayerControllerMechanic>();
+
+		Components.Create<WalkMechanic>();
+
 		Components.Create<Inventory>();
 
 		ClientRespawn( To.Single( Client ) );
