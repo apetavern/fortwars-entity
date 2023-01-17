@@ -2,6 +2,8 @@
 
 public partial class Player : AnimatedEntity
 {
+	public PlayerCamera PlayerCamera { get; protected set; }
+
 	public ClothingContainer Clothing = new();
 	public ClothingContainer ClientClothing = new();
 
@@ -47,7 +49,27 @@ public partial class Player : AnimatedEntity
 		EnableAllCollisions = true;
 		EnableDrawing = true;
 
+		ClientRespawn( To.Single( Client ) );
+
 		DressPlayerClothing();
+	}
+
+	[ClientRpc]
+	public void ClientRespawn()
+	{
+		PlayerCamera = new PlayerCamera();
+	}
+
+	public override void Simulate( IClient cl )
+	{
+		base.Simulate( cl );
+	}
+
+	public override void FrameSimulate( IClient client )
+	{
+		Rotation = LookInput.WithPitch( 0f ).ToRotation();
+
+		PlayerCamera?.Update( this );
 	}
 
 	public void DressPlayerClothing()

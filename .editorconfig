@@ -21,9 +21,6 @@ insert_final_newline = true
 
 #### C# Coding Conventions ####
 
-# File preferences
-file_header_template = Copyright (c) 2022 Ape Tavern, do not share, re-distribute or modify\nwithout permission of its author (insert_email_here)
-
 # Namespaces
 csharp_style_namespace_declarations = file_scoped:suggestion
 

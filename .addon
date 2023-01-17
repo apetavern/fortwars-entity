@@ -17,7 +17,6 @@
   ],
   "HasCode": true,
   "CodePath": "code",
-  "RootNamespace": "Fortwars",
   "Metadata": {
     "MapList": [
       "apetavern.fw_easter",
