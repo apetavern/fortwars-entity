@@ -55,12 +55,7 @@ public partial class Player : AnimatedEntity
 		EnableAllCollisions = true;
 		EnableDrawing = true;
 
-		Components.Create<PlayerController>();
-
-		Components.RemoveAny<PlayerControllerMechanic>();
-
-		Components.Create<WalkMechanic>();
-		Components.Create<AirMoveMechanic>();
+		SetupController();
 
 		Components.Create<Inventory>();
 
