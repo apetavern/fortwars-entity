@@ -11,7 +11,7 @@ public class WalkMechanic : PlayerControllerMechanic
 	public static float MaxNonJumpVelocity => 128.0f;
 	public static float StopSpeed => 50.0f;
 
-	public float SurfaceFriction { get; protected set; } = 1f;
+	public float SurfaceFriction { get; protected set; } = 1.0f;
 
 	protected override bool ShouldStart()
 	{

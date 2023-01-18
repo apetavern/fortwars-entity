@@ -4,11 +4,23 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 {
 	public Player Player => Entity;
 
-	public Vector3 Position { get; set; }
-	public Vector3 Velocity { get; set; }
+	public Vector3 Position
+	{
+		get => Player.Position; 
+		set => Player.Position = value;
+	}
+
+	public Vector3 Velocity
+	{
+		get => Player.Velocity;
+		set => Player.Velocity = value;
+	}
+
 	public Vector3 BaseVelocity { get; set; }
+	public Vector3 LastVelocity { get; set; }
 	public Vector3 WishVelocity { get; set; }
 	public Entity GroundEntity { get; set; }
+	public Entity LastGroundEntity { get; set; }
 	public Vector3 GroundNormal { get; set; }
 	public float CurrentGroundAngle { get; set; }
 
@@ -107,6 +119,8 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 					.WithAnyTags( "solid", "playerclip", "passbullets", "player" )
 					.Ignore( Player )
 					.Run();
+
+		DebugOverlay.TraceResult( tr );
 
 		return tr;
 	}

@@ -16,11 +16,35 @@ public class PlayerControllerMechanic : EntityComponent<Player>
 
 	public virtual int SortOrder { get; set; } = 0;
 
-	public Vector3 Position { get; set; }
-	public Vector3 Velocity { get; set; }
-	public Vector3 LastVelocity { get; set; }
-	public Entity GroundEntity { get; set; }
-	public Entity LastGroundEntity { get; set; }
+	public Vector3 Position
+	{
+		get => Controller.Position;
+		set => Controller.Position = value;
+	}
+
+	public Vector3 Velocity
+	{
+		get => Controller.Velocity;
+		set => Controller.Velocity = value;
+	}
+
+	public Vector3 LastVelocity
+	{
+		get => Controller.LastVelocity;
+		set => Controller.LastVelocity = value;
+	}
+
+	public Entity GroundEntity
+	{
+		get => Controller.GroundEntity;
+		set => Controller.GroundEntity = value;
+	}
+
+	public Entity LastGroundEntity
+	{
+		get => Controller.LastGroundEntity;
+		set => Controller.LastGroundEntity = value;
+	}
 
 	public PlayerControllerMechanic()
 	{

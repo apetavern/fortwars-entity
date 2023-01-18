@@ -60,6 +60,7 @@ public partial class Player : AnimatedEntity
 		Components.RemoveAny<PlayerControllerMechanic>();
 
 		Components.Create<WalkMechanic>();
+		Components.Create<AirMoveMechanic>();
 
 		Components.Create<Inventory>();
 
