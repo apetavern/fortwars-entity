@@ -2,7 +2,7 @@
 
 public class SprintMechanic : PlayerControllerMechanic
 {
-	public override float WishSpeed { get; protected set; } = 375f;
+	public override float WishSpeed => 375f * Player.Class.SpeedMultiplier;
 
 	public override int SortOrder { get; set; } = 25;
 

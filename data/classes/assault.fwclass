@@ -12,5 +12,6 @@
 			resource:"models/citizen_clothes/vest/tactical_vest/models/tactical_vest_army.clothing",
 		]
 		JumpMultiplier = 1
+		SpeedMultiplier = 1
 	}
 }

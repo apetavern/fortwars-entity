@@ -11,5 +11,6 @@
 			resource:"models/cosmetics/robotparts/robolegs.clothing",
 		]
 		JumpMultiplier = 1.25
+		SpeedMultiplier = 1.25
 	}
 }

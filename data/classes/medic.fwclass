@@ -12,5 +12,6 @@
 			resource:"models/cosmetics/doctor/headmirror.clothing",
 		]
 		JumpMultiplier = 1
+		SpeedMultiplier = 1
 	}
 }
