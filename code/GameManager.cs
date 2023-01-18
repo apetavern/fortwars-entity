@@ -28,4 +28,21 @@ public partial class FortwarsManager : Sandbox.GameManager
 		client.Pawn = player;
 		player.Respawn();
 	}
+
+	public override void MoveToSpawnpoint( Entity pawn )
+	{
+		Log.Info( $"Finding spawnpoint for {pawn.Name}" );
+
+		var spawnpoints = All.OfType<InfoPlayerTeamspawn>();
+		var randomSpawn = spawnpoints.OrderBy( x => Guid.NewGuid() ).FirstOrDefault();
+
+		if ( randomSpawn == null )
+		{
+			Log.Warning( "Couldn't find spawnpoint!" );
+			return;
+		}
+
+		pawn.Position = randomSpawn.Position;
+		pawn.Rotation = randomSpawn.Rotation;
+	}
 }

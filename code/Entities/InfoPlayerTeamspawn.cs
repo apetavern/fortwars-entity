@@ -1,0 +1,28 @@
+﻿namespace Fortwars;
+
+/// <summary>
+/// This is where players spawn.
+/// </summary>
+[Library( "info_player_teamspawn" )]
+[Title( "Team Spawn" ), Category( "FortWars" )]
+[EditorModel( "models/citizen/citizen.vmdl" )]
+[HammerEntity]
+public partial class InfoPlayerTeamspawn : Entity
+{
+	[Property]
+	public Team Team { get; set; }
+
+	public override void Spawn()
+	{
+		base.Spawn();
+
+		Transmit = TransmitType.Never;
+	}
+}
+
+public enum Team
+{
+	Invalid = -1,
+	Red,
+	Blue
+}
