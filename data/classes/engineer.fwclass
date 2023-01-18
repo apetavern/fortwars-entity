@@ -11,15 +11,5 @@
 			resource:"models/citizen_clothes/hat/hardhat.yellow.clothing",
 			resource:"models/citizen_clothes/shirt/tanktop/tanktop.clothing",
 		]
-		SpeedMultiplier = 1
-		JumpMultiplier = 1
-		TakesFallDamage = true
-		UsesWeaponGadget = false
-		WeaponGadget = null
-		LibraryGadget = "repairtool"
-		PreviewWeapon = resource:"models/weapons/amhammer/amhammer_w.vmdl"
-		PreviewHoldType = "HoldItem"
-		PreviewHoldHandedness = "RightHand"
-		PreviewHandPose = 0.07
 	}
 }

@@ -6,6 +6,9 @@ public partial class Player : AnimatedEntity
 	public PlayerController Controller { get; }
 
 	[BindComponent]
+	public PlayerAnimator Animator { get; }
+
+	[BindComponent]
 	public Inventory Inventory { get; }
 
 	public PlayerCamera PlayerCamera { get; protected set; }
@@ -57,6 +60,7 @@ public partial class Player : AnimatedEntity
 
 		SetupController();
 
+		Components.Create<PlayerAnimator>();
 		Components.Create<Inventory>();
 
 		ClientRespawn( To.Single( Client ) );
@@ -77,6 +81,7 @@ public partial class Player : AnimatedEntity
 		Rotation = LookInput.WithPitch( 0f ).ToRotation();
 
 		Controller?.Simulate( client );
+		Animator?.Simulate( client );
 	}
 
 	public override void FrameSimulate( IClient client )

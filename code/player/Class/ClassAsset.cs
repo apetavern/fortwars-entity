@@ -22,6 +22,8 @@ public class ClassAsset : GameResource
 	[Category( "Meta" ), ResourceType( "clothing" )]
 	public List<string> Cosmetics { get; set; } = new();
 
+	public static ClassAsset Default => FromPath( "data/classes/assault.fwclass" );
+
 	public static ClassAsset FromPath( string path )
 	{
 		return ResourceLibrary.Get<ClassAsset>( path );

@@ -11,14 +11,5 @@
 			resource:"data/labcoat.clothing",
 			resource:"models/cosmetics/doctor/headmirror.clothing",
 		]
-		SpeedMultiplier = 1
-		JumpMultiplier = 1
-		TakesFallDamage = true
-		UsesWeaponGadget = false
-		WeaponGadget = null
-		LibraryGadget = "medkittool"
-		PreviewWeapon = resource:"models/items/medkit/medkit_w/medkit_preview.vmdl"
-		PreviewHoldType = "HoldItem"
-		PreviewHoldHandedness = "TwoHands"
 	}
 }

@@ -10,16 +10,5 @@
 		[
 			resource:"models/cosmetics/robotparts/robolegs.clothing",
 		]
-		SpeedMultiplier = 1.25
-		JumpMultiplier = 1.25
-		TakesFallDamage = false
-		UsesWeaponGadget = false
-		WeaponGadget = resource:"data/weapons/rpg.fwweapon"
-		LibraryGadget = "jumppadtool"
-		PreviewWeapon = resource:"models/items/jumppad/jumppad_preview.vmdl"
-		PreviewHoldType = "HoldItem"
-		PreviewHoldHandedness = "TwoHands"
-		PreviewHandPose = 0.1
-		PreviewHoldPose = 4
 	}
 }
