@@ -120,8 +120,6 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 					.Ignore( Player )
 					.Run();
 
-		DebugOverlay.TraceResult( tr );
-
 		return tr;
 	}
 

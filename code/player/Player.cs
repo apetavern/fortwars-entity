@@ -88,6 +88,8 @@ public partial class Player : AnimatedEntity
 	{
 		Rotation = LookInput.WithPitch( 0f ).ToRotation();
 
+		Controller?.FrameSimulate( client );
+
 		PlayerCamera?.Update( this );
 	}
 
