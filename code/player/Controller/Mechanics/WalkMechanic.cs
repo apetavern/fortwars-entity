@@ -116,11 +116,6 @@ public class WalkMechanic : PlayerControllerMechanic
 			Velocity = Velocity.WithZ( 0 );
 			Controller.BaseVelocity = GroundEntity.Velocity;
 		}
-
-		if ( LastGroundEntity == null && GroundEntity != null )
-		{
-			// RunGameEvent( $"{Name}.land" );
-		}
 	}
 
 	public void CategorizePosition( bool bStayOnGround )
@@ -181,5 +176,10 @@ public class WalkMechanic : PlayerControllerMechanic
 		if ( SurfaceFriction > 1 ) SurfaceFriction = 1;
 
 		SetGroundEntity( tr.Entity );
+	}
+
+	public void SetWishSpeed( float speed )
+	{
+		WishSpeed = speed;
 	}
 }

@@ -25,7 +25,7 @@ public class JumpMechanic : PlayerControllerMechanic
 		var jumpMultiplier = Player.Class.JumpMultiplier * JumpPower;
 		var wish = Controller.GetWishInput();
 
-		Velocity += wish * 50f;
+		Velocity += wish * 10f;
 
 		Velocity = Velocity.WithZ( jumpMultiplier );
 		Velocity -= new Vector3( 0, 0, Gravity * 0.5f ) * Time.Delta;

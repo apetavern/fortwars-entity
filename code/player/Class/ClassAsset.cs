@@ -28,6 +28,9 @@ public class ClassAsset : GameResource
 	[Category( "Gameplay" )]
 	public float JumpMultiplier { get; set; } = 1.0f;
 
+	[Category( "Gameplay" )]
+	public float SpeedMultiplier { get; set; } = 1.0f;
+
 	public static ClassAsset Default => FromPath( "data/classes/assault.fwclass" );
 
 	public static ClassAsset FromPath( string path )

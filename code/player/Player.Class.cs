@@ -2,6 +2,7 @@
 
 public partial class Player
 {
+	[Net]
 	public ClassAsset Class { get; set; } = ClassAsset.Default;
 
 	[Net]
@@ -16,11 +17,13 @@ public partial class Player
 		Components.Create<WalkMechanic>();
 		Components.Create<AirMoveMechanic>();
 		Components.Create<JumpMechanic>();
+		Components.Create<SprintMechanic>();
 
-		// Apply controller mechanics specific to classes.
+		// Create or remove controller mechanics specific to classes.
 		switch ( Class.ClassName )
 		{
 			case "Assault":
+				Components.RemoveAny<SprintMechanic>();
 				break;
 			case "Engineer":
 				break;
@@ -33,5 +36,19 @@ public partial class Player
 			default:
 				break;
 		}
+	}
+
+	[ConCmd.Admin( "fw_set_class" )]
+	public static void SetClass( string classname )
+	{
+		if ( ConsoleSystem.Caller is not IClient caller )
+			return;
+
+		if ( caller.Pawn is not Player player )
+			return;
+
+		var preppedClassString = $"data/classes/{classname}.fwclass";
+		player.Class = ClassAsset.FromPath( preppedClassString );
+		player.Respawn();
 	}
 }
