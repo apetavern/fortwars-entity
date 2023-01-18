@@ -11,5 +11,6 @@
 			resource:"data/labcoat.clothing",
 			resource:"models/cosmetics/doctor/headmirror.clothing",
 		]
+		JumpMultiplier = 1
 	}
 }

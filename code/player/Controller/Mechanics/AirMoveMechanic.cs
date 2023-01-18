@@ -2,7 +2,6 @@
 
 public class AirMoveMechanic : PlayerControllerMechanic
 {
-	public static float Gravity => 800.0f;
 	public static float AirControl => 32.0f;
 	public static float AirAcceleration => 8.0f;
 

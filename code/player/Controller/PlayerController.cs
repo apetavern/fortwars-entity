@@ -33,6 +33,21 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 	public IEnumerable<PlayerControllerMechanic> Mechanics => Entity.Components.GetAll<PlayerControllerMechanic>();
 	public PlayerControllerMechanic BestMechanic => Mechanics.OrderByDescending( x => x.SortOrder ).FirstOrDefault( x => x.IsActive );
 
+	public T GetMechanic<T>() where T : PlayerControllerMechanic
+	{
+		foreach ( var mechanic in Mechanics )
+		{
+			if ( mechanic is T val ) return val;
+		}
+
+		return null;
+	}
+
+	public bool IsMechanicActive<T>() where T : PlayerControllerMechanic
+	{
+		return GetMechanic<T>()?.IsActive ?? false;
+	}
+
 	public BBox Hull
 	{
 		get

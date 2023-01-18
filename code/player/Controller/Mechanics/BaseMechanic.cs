@@ -4,6 +4,7 @@ public class PlayerControllerMechanic : EntityComponent<Player>
 {
 	protected PlayerController Controller => Entity.Controller;
 	protected Player Player => Entity;
+	protected static float Gravity => 800.0f;
 
 	public bool IsActive { get; protected set; }
 

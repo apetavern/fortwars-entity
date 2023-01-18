@@ -22,6 +22,12 @@ public class ClassAsset : GameResource
 	[Category( "Meta" ), ResourceType( "clothing" )]
 	public List<string> Cosmetics { get; set; } = new();
 
+	//
+	// Gameplay
+	//
+	[Category( "Gameplay" )]
+	public float JumpMultiplier { get; set; } = 1.0f;
+
 	public static ClassAsset Default => FromPath( "data/classes/assault.fwclass" );
 
 	public static ClassAsset FromPath( string path )

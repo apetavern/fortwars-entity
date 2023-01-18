@@ -15,8 +15,7 @@ public partial class Player
 		// Apply controller mechanics common to all classes.
 		Components.Create<WalkMechanic>();
 		Components.Create<AirMoveMechanic>();
-
-		Log.Info( $"Game IsServer: {Game.IsServer} -- {Class}" );
+		Components.Create<JumpMechanic>();
 
 		// Apply controller mechanics specific to classes.
 		switch ( Class.ClassName )
