@@ -245,6 +245,6 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 		Velocity = mover.Velocity;
 	}
 
-	[ConVar.Replicated( "playercontroller_debug" )]
+	[ConVar.Replicated( "fw_debug_playercontroller" )]
 	public static bool Debug { get; set; } = false;
 }
