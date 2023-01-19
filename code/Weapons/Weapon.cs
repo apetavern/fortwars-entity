@@ -20,9 +20,7 @@ public partial class Weapon : AnimatedEntity
 		EnableDrawing = true;
 
 		if ( Game.IsServer )
-		{
 			CreateViewModel( To.Single( player ) );
-		}
 	}
 
 	public void OnHolster( Player player )
@@ -34,9 +32,7 @@ public partial class Weapon : AnimatedEntity
 	public void CreateViewModel()
 	{
 		var viewModel = new WeaponViewModel( this );
-
-		// TODO: Set the model...
-
+		viewModel.Model = WeaponAsset.CachedViewModel;
 		ViewModelEntity = viewModel;
 	}
 }

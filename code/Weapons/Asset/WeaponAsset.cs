@@ -24,6 +24,9 @@ public partial class WeaponAsset : GameResource
 	[Category( "Meta" ), Range( 0.1f, 2.0f )]
 	public float MovementSpeedMultiplier { get; set; } = 1.0f;
 
+	[Category( "Meta" )]
+	public InventorySlots InventorySlot { get; set; } = InventorySlots.Primary;
+
 	//
 	// Animation
 	//

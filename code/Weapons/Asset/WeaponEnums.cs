@@ -17,3 +17,12 @@ public enum Handedness
 	Right,
 	Left,
 }
+
+public enum InventorySlots
+{
+	Primary,
+	Secondary,
+	Equipment,
+	Other,
+	Flag
+}
