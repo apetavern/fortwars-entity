@@ -13,5 +13,6 @@
 		]
 		JumpMultiplier = 1
 		SpeedMultiplier = 1
+		HealthMultiplier = 1.25
 	}
 }

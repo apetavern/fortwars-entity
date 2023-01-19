@@ -14,6 +14,18 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 	public int GetSlotFromWeapon( Weapon weapon ) => Weapons.IndexOf( weapon );
 	public int ActiveWeaponSlot => GetSlotFromWeapon( ActiveWeapon );
 
+	public bool AddWeapon( Weapon weapon, bool makeActive = true )
+	{
+		if ( Weapons.Contains( weapon ) )
+			return false;
+
+		Weapons.Add( weapon );
+
+		if ( makeActive )
+			SetActiveWeapon( weapon );
+
+		return true;
+	}
 
 	public void SetActiveWeapon ( Weapon weapon )
 	{

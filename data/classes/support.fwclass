@@ -11,7 +11,8 @@
 			resource:"models/citizen_clothes/hat/tactical_helmet/tactical_helmet.clothing",
 			resource:"models/citizen_clothes/vest/tactical_vest/models/tactical_vest.clothing",
 		]
-		JumpMultiplier = 1
-		SpeedMultiplier = 1
+		JumpMultiplier = 0.8
+		SpeedMultiplier = 0.9
+		HealthMultiplier = 1.25
 	}
 }

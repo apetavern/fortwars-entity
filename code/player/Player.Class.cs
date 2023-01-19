@@ -8,6 +8,12 @@ public partial class Player
 	[Net]
 	public string SelectedClass { get; set; } = "data/classes/assault.fwclass";
 
+	[Net]
+	public string SelectedPrimaryWeapon { get; set; } = "data/weapons/ksr1.fwweapon";
+
+	[Net]
+	public string SelectedSecondaryWeapon { get; set; } = "data/weapons/trj.fwweapon";
+
 	protected void SetupController()
 	{
 		Components.Create<PlayerController>();
@@ -36,6 +42,14 @@ public partial class Player
 			default:
 				break;
 		}
+	}
+
+	/// <summary>
+	/// /////////
+	/// </summary>
+	protected void SetupInventory()
+	{
+		Components.Create<Inventory>();
 	}
 
 	[ConCmd.Admin( "fw_set_class" )]

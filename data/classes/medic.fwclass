@@ -11,7 +11,8 @@
 			resource:"data/labcoat.clothing",
 			resource:"models/cosmetics/doctor/headmirror.clothing",
 		]
-		JumpMultiplier = 1
+		JumpMultiplier = 0.8
 		SpeedMultiplier = 1
+		HealthMultiplier = 1.25
 	}
 }

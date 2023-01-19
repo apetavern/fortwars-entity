@@ -16,6 +16,9 @@ public partial class Player : AnimatedEntity
 	public ClothingContainer Clothing = new();
 	public ClothingContainer ClientClothing = new();
 
+	[Net]
+	public TimeUntil TimeUntilRespawn { get; set; }
+
 	private static readonly Model CitizenModel = Model.Load( "models/playermodel/playermodel.vmdl" );
 
 	[Net]
@@ -45,7 +48,7 @@ public partial class Player : AnimatedEntity
 		EnableShadowInFirstPerson = true;
 		EnableLagCompensation = true;
 		EnableHitboxes = true;
-		
+
 		Tags.Add( "player" );
 	}
 
@@ -53,7 +56,7 @@ public partial class Player : AnimatedEntity
 	{
 		SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, new Vector3( -16, -16, 0 ), new Vector3( 16, 16, 72 ) );
 
-		Health = 100;
+		Health = 100 * Class.HealthMultiplier;
 		LifeState = LifeState.Alive;
 		EnableAllCollisions = true;
 		EnableDrawing = true;
@@ -78,6 +81,16 @@ public partial class Player : AnimatedEntity
 
 	public override void Simulate( IClient client )
 	{
+		if ( LifeState == LifeState.Dead )
+		{
+			if ( TimeUntilRespawn <= 0 && Game.IsServer )
+			{
+				Respawn();
+			}
+
+			return;
+		}
+
 		Rotation = LookInput.WithPitch( 0f ).ToRotation();
 
 		Controller?.Simulate( client );
@@ -93,6 +106,24 @@ public partial class Player : AnimatedEntity
 		PlayerCamera?.Update( this );
 	}
 
+	public override void OnKilled()
+	{
+		// TODO: Consult active gamemode for death timer / mechanics.
+		LifeState = LifeState.Dead;
+		TimeUntilRespawn = 5f;
+
+		EnableAllCollisions = false;
+		EnableDrawing = false;
+
+		Controller.Remove();
+		Animator.Remove();
+		Inventory.Remove();
+
+		Children.OfType<ModelEntity>()
+			.ToList()
+			.ForEach( x => x.EnableDrawing = false );
+	}
+
 	public void DressPlayerClothing()
 	{
 		Clothing.ClearEntities();
@@ -104,5 +135,21 @@ public partial class Player : AnimatedEntity
 		}
 
 		Clothing.DressEntity( this );
+	}
+
+	[ConCmd.Admin( "fw_kill" )]
+	public static void KillPlayer()
+	{
+		if ( ConsoleSystem.Caller is not IClient caller )
+			return;
+
+		if ( caller.Pawn is not Player player )
+			return;
+
+		if ( player.LifeState == LifeState.Dead )
+			return;
+
+		player.Health = 0f;
+		player.OnKilled();
 	}
 }
