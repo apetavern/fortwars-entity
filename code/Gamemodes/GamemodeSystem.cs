@@ -2,7 +2,7 @@
 
 public class GamemodeSystem
 {
-	[ConVar.Replicated]
+	[ConVar.Replicated( "fortwars_gamemode" )]
 	public static string SelectedGamemode { get; set; } = "";
 
 	private static Gamemode _instance;
@@ -31,14 +31,19 @@ public class GamemodeSystem
 
 		if ( !gamemode.IsValid() && !string.IsNullOrEmpty( SelectedGamemode ) )
 		{
+			Log.Info( $"Fortwars: Attempting to find gamemode from Type - {SelectedGamemode}" );
 			var gamemodeEntity = TypeLibrary.Create<Gamemode>( SelectedGamemode );
 			if ( gamemodeEntity.IsValid() )
 			{
 				Log.Info( $"Fortwars: Found gamemode from Type - {SelectedGamemode}" );
 				return gamemodeEntity;
 			}
-
-			Log.Warning( "Fortwars: No gamemode found while fetching." );
+		}
+		else
+		{
+			Log.Info( "Fortwars: Creating default gamemode - CTF" );
+			var gamemodeEntity = TypeLibrary.Create<Gamemode>( "CaptureTheFlag" );
+			return gamemodeEntity;
 		}
 
 		return gamemode;

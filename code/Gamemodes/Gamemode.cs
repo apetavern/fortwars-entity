@@ -2,6 +2,8 @@
 
 public partial class Gamemode : Entity
 {
+	public virtual string GamemodeName => "";
+
 	public virtual bool AllowMovement => true;
 	public virtual bool AllowDamage => true;
 	public virtual bool AllowFriendlyFire => false;
@@ -28,4 +30,6 @@ public partial class Gamemode : Entity
 	internal virtual void OnClientDisconnect( IClient cl, NetworkDisconnectionReason reason ) { }
 
 	internal virtual void OnPlayerKilled( Player player ) { }
+
+	internal virtual void MoveToSpawnpoint( Entity pawn ) { }
 }

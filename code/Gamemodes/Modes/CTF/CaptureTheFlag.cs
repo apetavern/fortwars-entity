@@ -2,6 +2,8 @@
 
 public partial class CaptureTheFlag : Gamemode
 {
+	public override string GamemodeName => "Capture the Flag";
+
 	/// <summary>
 	/// Define the Game State's possible in Capture the Flag mode.
 	/// </summary>
@@ -63,5 +65,20 @@ public partial class CaptureTheFlag : Gamemode
 	internal override void OnClientJoined( IClient client )
 	{
 		base.OnClientJoined( client );
+	}
+
+	internal override void MoveToSpawnpoint( Entity pawn )
+	{
+		var spawnpoints = All.OfType<InfoPlayerTeamspawn>();
+		var randomSpawn = spawnpoints.OrderBy( x => Guid.NewGuid() ).FirstOrDefault();
+
+		if ( randomSpawn == null )
+		{
+			Log.Warning( "Couldn't find spawnpoint!" );
+			return;
+		}
+
+		pawn.Position = randomSpawn.Position;
+		pawn.Rotation = randomSpawn.Rotation;
 	}
 }

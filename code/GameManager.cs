@@ -45,16 +45,12 @@ public partial class FortwarsManager : Sandbox.GameManager
 	{
 		Log.Info( $"Finding spawnpoint for {pawn.Name}" );
 
-		var spawnpoints = All.OfType<InfoPlayerTeamspawn>();
-		var randomSpawn = spawnpoints.OrderBy( x => Guid.NewGuid() ).FirstOrDefault();
+		GamemodeSystem.Instance?.MoveToSpawnpoint( pawn );
+	}
 
-		if ( randomSpawn == null )
-		{
-			Log.Warning( "Couldn't find spawnpoint!" );
-			return;
-		}
-
-		pawn.Position = randomSpawn.Position;
-		pawn.Rotation = randomSpawn.Rotation;
+	[Event.Entity.PostSpawn]
+	public void PostEntitySpawn()
+	{
+		GamemodeSystem.SetupGamemode();
 	}
 }
