@@ -2,45 +2,32 @@
 {
 	data = 
 	{
-		WeaponName = "Shotgun"
+		Name = "My weapon"
 		WorldModel = resource:"models/weapons/uts15/uts15_w.vmdl"
 		ViewModel = resource:"models/weapons/uts15/uts15_v.vmdl"
 		IconPath = resource:"ui/icons/weapons/shotgun.png"
 		MovementSpeedMultiplier = 0.8
 		InventorySlot = "Primary"
-		HoldType = "Shotgun"
-		ProceduralViewmodelStrength = 0.5
-		AimedProceduralViewmodelStrength = 0.1
-		KickbackStrength = 15
-		Flags = 
+		ViewModelData = 
 		{
-			ContinuousLoading = true
-			ShotgunAmmo = true
+			OverallWeight = 0.5
+			WeightReturnForce = 100
+			WeightDamping = 18
+			AccelerationDamping = 15
+			VelocityScale = 10
+			RotationalPivotForce = 10
+			RotationalScale = 5
+			WalkCycleOffset = "-5,100,100"
+			GlobalLerpPower = 1
+			CrouchPositionOffset = "-3,1,0"
+			CrouchAngleOffset = "2,0,-15"
+			AvoidancePositionOffset = "-5,0,0"
+			AvoidanceAngleOffset = "2,0,-25"
+			SprintPositionOffset = "1,3.23,8"
+			SprintAngleOffset = "20,6.53,-12.2"
+			AimPositionOffset = "1.4,8.26,3.37"
 		}
-		SprintAnimationType = "Default"
-		RPM = 60
-		Range = 16384
-		ShotCount = 11
-		RecoilX = 0.1
-		RecoilY = 1
-		Spread = 0.2
-		SpreadShotIncrease = 0.025
-		SpreadChangeTime = 3
-		AimPosition = "-20,23.95,3.5"
-		AimRotation = "-1.75,-4.35,-0.5"
-		AimFovMult = 0.5
-		MaxAmmo = 8
-		ExtraAmmo = 16
-		ReloadTime = 0.5
-		MaxDamage = 20
-		MinDamage = 3
-		DamageDropOffDistance = 768
-		HeadshotMultiplier = 1.5
-		BuildingDamageMultiplier = 0.25
-		FireSound = "uts15_fire"
-		FireParticles = resource:"particles/muzzleflash/fw_muzzleflash.vpcf"
-		TracerParticles = resource:"particles/tracer.vpcf"
-		ProjectileModel = ""
-		ProjectileSpeed = 1
+		HoldType = "Shotgun"
+		Handedness = "Both"
 	}
 }

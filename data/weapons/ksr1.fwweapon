@@ -2,44 +2,33 @@
 {
 	data = 
 	{
-		WeaponName = "Assault Rifle"
+		Name = "My weapon"
 		WorldModel = resource:"models/weapons/ksr1/ksr1_w.vmdl"
 		ViewModel = resource:"models/weapons/ksr1/ksr1_v.vmdl"
 		IconPath = resource:"ui/icons/weapons/assaultrifle.png"
 		MovementSpeedMultiplier = 0.95
 		InventorySlot = "Primary"
-		HoldType = "Rifle"
-		ProceduralViewmodelStrength = 0.5
-		AimedProceduralViewmodelStrength = 0.1
-		KickbackStrength = 5
-		Flags = 
+		ViewModelData = 
 		{
-			AutomaticFire = true
+			OverallWeight = 0.1
+			WeightReturnForce = 100
+			WeightDamping = 18
+			AccelerationDamping = 15
+			VelocityScale = 10
+			RotationalPivotForce = 10
+			RotationalScale = 5
+			WalkCycleOffset = "-4,150,0"
+			BobAmount = "100,200"
+			GlobalLerpPower = 1
+			CrouchPositionOffset = "-3,1,0"
+			CrouchAngleOffset = "2,0,-15"
+			AvoidancePositionOffset = "-5,0,0"
+			AvoidanceAngleOffset = "2,0,-25"
+			SprintPositionOffset = "1,3.23,8"
+			SprintAngleOffset = "20,6.53,-12.2"
+			AimPositionOffset = "1.4,8.26,3.37"
 		}
-		SprintAnimationType = "Default"
-		RPM = 550
-		Range = 16384
-		ShotCount = 1
-		RecoilX = 0.5
-		RecoilY = 1
-		Spread = 0.1
-		SpreadShotIncrease = 0.05
-		SpreadChangeTime = 4
-		AimPosition = "-40,23.45,4.75"
-		AimRotation = "0.75,-2.75,0"
-		AimFovMult = 0.5
-		MaxAmmo = 30
-		ExtraAmmo = 90
-		ReloadTime = 2.9
-		MaxDamage = 25
-		MinDamage = 20
-		DamageDropOffDistance = 1024
-		HeadshotMultiplier = 1.5
-		BuildingDamageMultiplier = 0.25
-		FireSound = "ksr1_fire"
-		FireParticles = resource:"particles/muzzleflash/fw_muzzleflash.vpcf"
-		TracerParticles = resource:"particles/tracer.vpcf"
-		ProjectileModel = ""
-		ProjectileSpeed = 1
+		HoldType = "Rifle"
+		Handedness = "Both"
 	}
 }
