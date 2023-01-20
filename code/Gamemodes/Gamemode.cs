@@ -16,7 +16,16 @@ public partial class Gamemode : Entity
 		Transmit = TransmitType.Always;
 	}
 
+	public virtual string GetGameStateLabel()
+	{
+		return "";
+	}
+
 	internal virtual void Initialize() { }
+
+	internal virtual void OnClientJoined( IClient client ) { }
+
+	internal virtual void OnClientDisconnect( IClient cl, NetworkDisconnectionReason reason ) { }
 
 	internal virtual void OnPlayerKilled( Player player ) { }
 }
