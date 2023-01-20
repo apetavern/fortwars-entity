@@ -1,6 +1,6 @@
 ﻿namespace Fortwars;
 
-[Category( "Jortwars" )]
+[Category( "Fortwars" )]
 public partial class Gamemode : Entity
 {
 	public virtual string GamemodeName => "";
