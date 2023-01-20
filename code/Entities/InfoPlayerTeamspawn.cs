@@ -4,7 +4,7 @@
 /// This is where players spawn.
 /// </summary>
 [Library( "info_player_teamspawn" )]
-[Title( "Team Spawn" ), Category( "FortWars" )]
+[Title( "Team Spawn" ), Category( "Fortwars" )]
 [EditorModel( "models/citizen/citizen.vmdl" )]
 [HammerEntity]
 public partial class InfoPlayerTeamspawn : Entity

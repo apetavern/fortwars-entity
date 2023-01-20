@@ -62,9 +62,9 @@ public partial class Player : AnimatedEntity
 		EnableDrawing = true;
 
 		SetupController();
+		SetupInventory();
 
 		Components.Create<PlayerAnimator>();
-		Components.Create<Inventory>();
 
 		ClientRespawn( To.Single( Client ) );
 

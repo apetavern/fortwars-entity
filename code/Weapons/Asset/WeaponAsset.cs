@@ -27,6 +27,8 @@ public partial class WeaponAsset : GameResource
 	[Category( "Meta" )]
 	public InventorySlots InventorySlot { get; set; } = InventorySlots.Primary;
 
+	public ViewModelData ViewModelData { get; set; }
+
 	//
 	// Animation
 	//
@@ -38,6 +40,15 @@ public partial class WeaponAsset : GameResource
 
 
 	public static List<WeaponAsset> All { get; set; } = new();
+
+	public static Weapon CreateInstance( WeaponAsset asset )
+	{
+		var weapon = new Weapon
+		{
+			WeaponAsset = asset
+		};
+		return weapon;
+	}
 
 	protected override void PostLoad()
 	{

@@ -35,4 +35,9 @@ public partial class Weapon : AnimatedEntity
 		viewModel.Model = WeaponAsset.CachedViewModel;
 		ViewModelEntity = viewModel;
 	}
+
+	protected override void OnDestroy()
+	{
+		ViewModelEntity?.Delete();
+	}
 }

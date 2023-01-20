@@ -44,12 +44,14 @@ public partial class Player
 		}
 	}
 
-	/// <summary>
-	/// /////////
-	/// </summary>
 	protected void SetupInventory()
 	{
 		Components.Create<Inventory>();
+
+		foreach ( var weapon in WeaponAsset.All )
+		{
+			Inventory.AddWeapon( WeaponAsset.CreateInstance( weapon ) );
+		}
 	}
 
 	[ConCmd.Admin( "fw_set_class" )]

@@ -1,6 +1,6 @@
 ﻿namespace Fortwars;
 
-public class WeaponViewModel : AnimatedEntity
+public partial class WeaponViewModel : AnimatedEntity
 {
 	public static WeaponViewModel Current { get; set; }
 
@@ -28,5 +28,6 @@ public class WeaponViewModel : AnimatedEntity
 	public void PlaceViewModel()
 	{
 		Camera.Main.SetViewModelCamera( 80f, 1f, 500f );
+		AddEffects();
 	}
 }
