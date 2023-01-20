@@ -152,4 +152,19 @@ public partial class Player : AnimatedEntity
 		player.Health = 0f;
 		player.OnKilled();
 	}
+
+	[ConCmd.Admin( "fw_set_health" )]
+	public static void SetHealth( int health )
+	{
+		if ( ConsoleSystem.Caller is not IClient caller )
+			return;
+
+		if ( caller.Pawn is not Player player )
+			return;
+
+		if ( player.LifeState == LifeState.Dead )
+			return;
+
+		player.Health = health;
+	}
 }

@@ -17,7 +17,10 @@ public partial class FortwarsManager : Sandbox.GameManager
 
 	public FortwarsManager()
 	{
-
+		if ( Game.IsClient )
+		{
+			_ = new Hud();
+		}
 	}
 
 	public override void ClientJoined( IClient client )
