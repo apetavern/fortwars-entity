@@ -1,12 +1,18 @@
 ﻿namespace Fortwars;
 
+[Category( "Jortwars" )]
 public partial class Gamemode : Entity
 {
 	public virtual string GamemodeName => "";
 
+	[Net]
+	public int PlayerCount { get; private set; }
+
 	public virtual bool AllowMovement => true;
 	public virtual bool AllowDamage => true;
 	public virtual bool AllowFriendlyFire => false;
+
+	public virtual int MinimumPlayers => 2;
 
 	/// <summary>
 	/// Specify the list of teams that are supported in this mode.
@@ -25,9 +31,15 @@ public partial class Gamemode : Entity
 
 	internal virtual void Initialize() { }
 
-	internal virtual void OnClientJoined( IClient client ) { }
+	internal virtual void OnClientJoined( IClient client ) 
+	{
+		PlayerCount++;
+	}
 
-	internal virtual void OnClientDisconnect( IClient cl, NetworkDisconnectionReason reason ) { }
+	internal virtual void OnClientDisconnect( IClient cl, NetworkDisconnectionReason reason ) 
+	{
+		PlayerCount--;
+	}
 
 	internal virtual void OnPlayerKilled( Player player ) { }
 

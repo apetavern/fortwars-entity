@@ -60,7 +60,47 @@ public partial class CaptureTheFlag : Gamemode
 	[Net]
 	public GameState CurrentState { get; set; }
 
+	[Net]
+	public TimeUntil TimeUntilNextState { get; set; }
+
 	public override bool AllowDamage => CurrentState == GameState.Combat;
+
+	internal override void Initialize()
+	{
+		_ = GameLoop();
+	}
+
+	protected async Task GameLoop()
+	{
+		CurrentState = GameState.Lobby;
+		await WaitForPlayers();
+
+		CurrentState = GameState.Countdown;
+		await WaitAsync( CountdownDuration );
+
+		CurrentState = GameState.Build;
+		await WaitAsync( BuildPhaseDuration );
+
+		CurrentState = GameState.Combat;
+		await WaitAsync( CombatPhaseDuration );
+
+		CurrentState = GameState.GameOver;
+		await WaitAsync( GameOverDuration );
+	}
+
+	private async Task WaitForPlayers()
+	{
+		while ( PlayerCount < MinimumPlayers )
+		{
+			await Task.DelayRealtimeSeconds( 1f );
+		}
+	}
+
+	private async Task WaitAsync( float time )
+	{
+		TimeUntilNextState = time;
+		await Task.DelayRealtimeSeconds( time );
+	}
 
 	internal override void OnClientJoined( IClient client )
 	{
