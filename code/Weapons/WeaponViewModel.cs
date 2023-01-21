@@ -27,7 +27,7 @@ public partial class WeaponViewModel : AnimatedEntity
 	[Event.Client.PostCamera]
 	public void PlaceViewModel()
 	{
-		Camera.Main.SetViewModelCamera( Game.Preferences.FieldOfView );
+		Camera.Main.SetViewModelCamera( 80f );
 		AddEffects();
 	}
 }

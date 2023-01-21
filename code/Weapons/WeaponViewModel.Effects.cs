@@ -199,7 +199,7 @@ public partial class WeaponViewModel
 		Position += realPositionOffset;
 
 		Camera.FieldOfView -= Data.AimFovOffset * aimLerp;
-		Camera.Main.SetViewModelCamera( Game.Preferences.FieldOfView, 1, 2048 );
+		Camera.Main.SetViewModelCamera( 80f, 1, 2048 );
 	}
 }
 

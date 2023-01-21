@@ -44,5 +44,21 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		weapon?.OnDeploy( Entity );
 	}
 
-	
+	[ConCmd.Admin( 
+		Name = "fw_set_weapon", 
+		Help = "Set the caller's weapon by asset name (e.g. `fw_set_weapon ksr1`)." )]
+	public static void SetWeapon( string weaponPath )
+	{
+		if ( ConsoleSystem.Caller is not IClient caller )
+			return;
+
+		if ( caller.Pawn is not Player player )
+			return;
+
+		var preppedWeaponPath = $"data/weapons/{weaponPath}.fwweapon";
+		var weaponAsset = WeaponAsset.FromPath( preppedWeaponPath );
+		var weapon = WeaponAsset.CreateInstance( weaponAsset );
+
+		player.Inventory.AddWeapon( weapon, true );
+	}
 }

@@ -50,6 +50,11 @@ public partial class WeaponAsset : GameResource
 		return weapon;
 	}
 
+	public static WeaponAsset FromPath( string path )
+	{
+		return ResourceLibrary.Get<WeaponAsset>( path );
+	}
+
 	protected override void PostLoad()
 	{
 		base.PostLoad();
