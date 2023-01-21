@@ -10,6 +10,9 @@ public partial class Player
 	[ClientInput]
 	public Angles LookInput { get; protected set; }
 
+	[ClientInput]
+	public Entity ActiveWeaponInput { get; set; }
+
 	[Browsable( false )]
 	public Vector3 EyePosition
 	{
@@ -41,6 +44,10 @@ public partial class Player
 	public override void BuildInput()
 	{
 		if ( Input.StopProcessing )
+			return;
+
+		Inventory?.BuildInput();
+		if ( Input.StopProcessing ) 
 			return;
 
 		MoveInput = Input.AnalogMove;

@@ -95,6 +95,7 @@ public partial class Player : AnimatedEntity
 
 		Controller?.Simulate( client );
 		Animator?.Simulate( client );
+		Inventory?.Simulate( client );
 	}
 
 	public override void FrameSimulate( IClient client )
@@ -102,6 +103,7 @@ public partial class Player : AnimatedEntity
 		Rotation = LookInput.WithPitch( 0f ).ToRotation();
 
 		Controller?.FrameSimulate( client );
+		Inventory?.FrameSimulate( client );
 
 		PlayerCamera?.Update( this );
 	}

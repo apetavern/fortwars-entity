@@ -44,6 +44,88 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		weapon?.OnDeploy( Entity );
 	}
 
+	public Weapon GetWeaponFromSlot( int slot )
+	{
+		return slot switch
+		{
+			0 => Weapons
+				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Primary )
+				.FirstOrDefault(),
+			1 => Weapons
+				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Secondary)
+				.FirstOrDefault(),
+			2 => Weapons
+				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Equipment)
+				.FirstOrDefault(),
+			3 => Weapons
+				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Other)
+				.FirstOrDefault(),
+			4 => Weapons
+				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Flag )
+				.FirstOrDefault(),
+			_ => null
+		};
+	}
+
+	protected static int GetSlotIndexFromInput( InputButton slot )
+	{
+		return slot switch
+		{
+			InputButton.Slot1 => 0,
+			InputButton.Slot2 => 1,
+			InputButton.Slot3 => 2,
+			InputButton.Slot4 => 3,
+			InputButton.Slot5 => 4,
+			_ => -1
+		};
+	}
+
+	public void SetWeaponFromSlot( int slot )
+	{
+		if ( GetWeaponFromSlot( slot ) is Weapon weapon )
+		{
+			Entity.ActiveWeaponInput = weapon;
+		}
+	}
+
+	protected void TrySlotFromInput( InputButton slot )
+	{
+		if ( Input.Pressed( slot ))
+		{
+			Input.SuppressButton( slot );
+
+			SetWeaponFromSlot( GetSlotIndexFromInput( slot ) );
+		}
+	}
+
+	public void BuildInput()
+	{
+		TrySlotFromInput( InputButton.Slot1 );
+		TrySlotFromInput( InputButton.Slot2 );
+		TrySlotFromInput( InputButton.Slot3 );
+		TrySlotFromInput( InputButton.Slot4 );
+		TrySlotFromInput( InputButton.Slot5 );
+
+		if ( Input.Pressed( InputButton.Menu ) )
+			SetWeaponFromSlot( LastActiveWeaponSlot );
+	}
+
+	public void Simulate( IClient client )
+	{
+		if ( Entity.ActiveWeaponInput != null && ActiveWeapon != Entity.ActiveWeaponInput )
+		{
+			SetActiveWeapon( Entity.ActiveWeaponInput as Weapon );
+			Entity.ActiveWeaponInput = null;
+		}
+
+		ActiveWeapon?.Simulate( client );
+	}
+
+	public void FrameSimulate( IClient client )
+	{
+		ActiveWeapon?.FrameSimulate( client );
+	}
+
 	[ConCmd.Admin( 
 		Name = "fw_set_weapon", 
 		Help = "Set the caller's weapon by asset name (e.g. `fw_set_weapon ksr1`)." )]
