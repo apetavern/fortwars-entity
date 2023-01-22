@@ -6,5 +6,6 @@ public class Hud : RootPanel
 	{
 		StyleSheet.Load( "/UI/Styles/Hud.scss" );
 		AddChild<Health>();
+		AddChild<State>();
 	}
 }

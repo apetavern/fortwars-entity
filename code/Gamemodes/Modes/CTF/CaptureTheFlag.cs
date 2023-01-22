@@ -28,6 +28,11 @@ public partial class CaptureTheFlag : Gamemode
 		};
 	}
 
+	public override float GetTimeRemaining()
+	{
+		return TimeUntilNextState;
+	}
+
 	/// <summary>
 	/// How long the countdown lasts before the game starts.
 	/// </summary>

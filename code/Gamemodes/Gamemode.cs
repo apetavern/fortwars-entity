@@ -29,6 +29,11 @@ public partial class Gamemode : Entity
 		return "";
 	}
 
+	public virtual float GetTimeRemaining()
+	{
+		return -1;
+	}
+
 	internal virtual void Initialize() { }
 
 	internal virtual void OnClientJoined( IClient client ) 

@@ -47,7 +47,7 @@ public partial class Player
 	protected void SetupInventory()
 	{
 		Components.Create<Inventory>();
-
+		
 		foreach ( var weapon in WeaponAsset.All )
 		{
 			Inventory.AddWeapon( WeaponAsset.CreateInstance( weapon ) );
