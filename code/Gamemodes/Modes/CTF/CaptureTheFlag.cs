@@ -112,6 +112,26 @@ public partial class CaptureTheFlag : Gamemode
 		base.OnClientJoined( client );
 	}
 
+	/// <summary>
+	/// PrepareLoadout for the CTF gamemode will load in the player's primary and secondary,
+	/// plus the equipment from their chosen class.
+	/// </summary>
+	/// <param name="player">The player whose loadout we are preparing.</param>
+	/// <param name="inventory">The inventory to add the items to.</param>
+	internal override void PrepareLoadout( Player player, Inventory inventory )
+	{
+		inventory.AddWeapon(
+			WeaponAsset.CreateInstance( WeaponAsset.FromPath( player.SelectedPrimaryWeapon ) ), true );
+		inventory.AddWeapon(
+			WeaponAsset.CreateInstance( WeaponAsset.FromPath( player.SelectedSecondaryWeapon ) ), false );
+
+		if ( player.Class.Equipment == null )
+			return;
+
+		inventory.AddWeapon(
+			WeaponAsset.CreateInstance( player.Class.Equipment ), false );
+	}
+
 	internal override void MoveToSpawnpoint( Entity pawn )
 	{
 		var spawnpoints = All.OfType<InfoPlayerTeamspawn>();

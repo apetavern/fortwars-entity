@@ -46,6 +46,8 @@ public partial class Gamemode : Entity
 		PlayerCount--;
 	}
 
+	internal virtual void PrepareLoadout( Player player, Inventory inventory ) { }
+
 	internal virtual void OnPlayerKilled( Player player ) { }
 
 	internal virtual void MoveToSpawnpoint( Entity pawn ) { }

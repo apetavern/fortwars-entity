@@ -14,5 +14,6 @@
 		JumpMultiplier = 0.75
 		SpeedMultiplier = 1
 		HealthMultiplier = 2.5
+		Equipment = resource:"data/weapons/rpg.fwweapon"
 	}
 }
