@@ -12,6 +12,11 @@ public partial class Weapon : AnimatedEntity
 		EnableDrawing = false;
 	}
 
+	public override void Simulate( IClient client )
+	{
+		SimulateComponents( client );
+	}
+
 	public void OnDeploy( Player player )
 	{
 		SetParent( player, true );

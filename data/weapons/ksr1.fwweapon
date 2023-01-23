@@ -8,6 +8,10 @@
 		IconPath = resource:"ui/icons/weapons/assaultrifle.png"
 		MovementSpeedMultiplier = 0.95
 		InventorySlot = "Primary"
+		Components = 
+		[
+			"ShootComponent",
+		]
 		ViewModelData = 
 		{
 			OverallWeight = 0.1

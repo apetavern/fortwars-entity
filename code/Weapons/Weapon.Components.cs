@@ -26,6 +26,9 @@ public partial class Weapon
 
 	protected void CreateComponents()
 	{
+		if ( WeaponAsset.Components == null )
+			return;
+
 		foreach ( var name in WeaponAsset.Components )
 		{
 			var component = TypeLibrary.Create<WeaponComponent>( name );

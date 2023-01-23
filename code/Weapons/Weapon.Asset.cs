@@ -18,5 +18,7 @@ public partial class Weapon
 	protected void SetupAsset( WeaponAsset asset )
 	{
 		Model = asset.CachedWorldModel;
+
+		CreateComponents();
 	}
 }
