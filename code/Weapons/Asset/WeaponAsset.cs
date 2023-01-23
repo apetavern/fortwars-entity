@@ -27,6 +27,9 @@ public partial class WeaponAsset : GameResource
 	[Category( "Meta" )]
 	public InventorySlots InventorySlot { get; set; } = InventorySlots.Primary;
 
+	[Category( "Meta" )]
+	public List<string> Components { get; set; }
+
 	public ViewModelData ViewModelData { get; set; }
 
 	//
