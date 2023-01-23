@@ -1,6 +1,4 @@
-﻿using static Sandbox.Event;
-
-namespace Fortwars;
+﻿namespace Fortwars;
 
 public partial class PlayerAnimator : EntityComponent<Player>, ISingletonComponent
 {
@@ -16,5 +14,11 @@ public partial class PlayerAnimator : EntityComponent<Player>, ISingletonCompone
 		helper.AimAngle = player.EyeRotation;
 		helper.IsGrounded = ctrl.GroundEntity != null;
 
+		var weapon = player.ActiveWeapon;
+		if ( weapon.IsValid() )
+		{
+			player.SetAnimParameter( "holdtype", (int)weapon.WeaponAsset.HoldType );
+			player.SetAnimParameter( "holdtype_handedness", (int)weapon.WeaponAsset.Handedness );
+		}
 	}
 }

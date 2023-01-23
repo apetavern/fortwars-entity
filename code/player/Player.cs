@@ -11,6 +11,8 @@ public partial class Player : AnimatedEntity
 	[BindComponent]
 	public Inventory Inventory { get; }
 
+	public Weapon ActiveWeapon => Inventory?.ActiveWeapon;
+
 	public PlayerCamera PlayerCamera { get; protected set; }
 
 	public ClothingContainer Clothing = new();
