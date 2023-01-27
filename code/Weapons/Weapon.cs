@@ -24,6 +24,8 @@ public partial class Weapon : AnimatedEntity
 	{
 		SimulateComponents( client );
 
+		// Hacky workaround for when the Asset doesn't propogate
+		// fast enough to load the ViewModel successfully.
 		if ( Game.IsServer && TryRemakeViewModel )
 			CreateViewModel( To.Single( client ) );
 	}
@@ -42,9 +44,6 @@ public partial class Weapon : AnimatedEntity
 	public void OnHolster( Player player )
 	{
 		EnableDrawing = false;
-
-		if ( Game.IsClient )
-			ViewModelEntity = null;
 	}
 
 	[ClientRpc]
