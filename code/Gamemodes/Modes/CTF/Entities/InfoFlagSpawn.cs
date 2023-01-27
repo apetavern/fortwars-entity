@@ -38,4 +38,22 @@ public partial class InfoFlagSpawn : ModelEntity
 				break;
 		}
 	}
+
+	const float pitchAngle = 45f;
+	const float rotateSpeed = 90f;
+	const float bobSpeed = 2f;
+	const float bobPower = 5f;
+
+	[Event.PreRender]
+	protected void PreRender()
+	{
+		if ( !SceneObject.IsValid() )
+			return;
+
+		// Set the pitch to a 45 degree angle, and slowly rotate around axis.
+		SceneObject.Rotation = Rotation.From( pitchAngle, Time.Now * rotateSpeed, 0 );
+
+		// Bob with a sin wave.
+		SceneObject.Position = Position + ( Vector3.Up * MathF.Sin( Time.Now * bobSpeed ) * bobPower );
+	}
 }
