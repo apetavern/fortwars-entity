@@ -4,6 +4,8 @@ public partial class CaptureTheFlag : Gamemode
 {
 	public override string GamemodeName => "Capture the Flag";
 
+	private const string BogRollPath = "data/weapons/ctf/bogroll.fwweapon";
+
 	/// <summary>
 	/// Define the Game State's possible in Capture the Flag mode.
 	/// </summary>
@@ -175,6 +177,11 @@ public partial class CaptureTheFlag : Gamemode
 		}
 
 		// Player is touching the enemy flagzone.
+		if ( player.HasFlag )
+			return;
+
+		player.Inventory.AddWeapon(
+			WeaponAsset.CreateInstance( WeaponAsset.FromPath( BogRollPath ) ), true );
 
 		// If flag is not missing, pick it up.
 

@@ -2,7 +2,7 @@
 {
 	data = 
 	{
-		Name = "My weapon"
+		Name = "KSR-1"
 		WorldModel = resource:"models/weapons/ksr1/ksr1_w.vmdl"
 		ViewModel = resource:"models/weapons/ksr1/ksr1_v.vmdl"
 		IconPath = resource:"ui/icons/weapons/assaultrifle.png"

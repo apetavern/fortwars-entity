@@ -1,5 +1,6 @@
 ﻿namespace Fortwars;
 
+[Category( "Weapons" )]
 public partial class WeaponViewModel : AnimatedEntity
 {
 	public static WeaponViewModel Current { get; set; }
