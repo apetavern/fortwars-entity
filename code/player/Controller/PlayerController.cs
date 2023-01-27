@@ -221,8 +221,7 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 	{
 		MoveHelper mover = new MoveHelper( Position, Velocity );
 		mover.Trace = mover.Trace.Size( Hull )
-			.Ignore( Player )
-			.WithoutTags( "player" );
+			.Ignore( Player );
 		mover.MaxStandableAngle = groundAngle;
 
 		mover.TryMoveWithStep( Time.Delta, stepSize );
@@ -235,8 +234,7 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 	{
 		MoveHelper mover = new MoveHelper( Position, Velocity );
 		mover.Trace = mover.Trace.Size( Hull )
-			.Ignore( Player )
-			.WithoutTags( "player" );
+			.Ignore( Player );
 		mover.MaxStandableAngle = groundAngle;
 
 		mover.TryMove( Time.Delta );
