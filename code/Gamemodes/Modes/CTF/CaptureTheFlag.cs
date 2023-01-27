@@ -208,16 +208,17 @@ public partial class CaptureTheFlag : Gamemode
 		if ( player.HasFlag )
 			return;
 
+		// If flag is not missing, pick it up.
 		player.Inventory.AddWeapon(
 			WeaponAsset.CreateInstance( WeaponAsset.FromPath( BogRollPath ) ), true );
-
-		// If flag is not missing, pick it up.
-
 	}
 
 	[Event.Tick]
 	public void Tick()
 	{
+		if ( !Debug )
+			return;
+
 		int i = 0;
 		foreach ( var team in Teams )
 		{
@@ -237,4 +238,7 @@ public partial class CaptureTheFlag : Gamemode
 			ctf.TimeUntilNextState = 500f;
 		}
 	}
+
+	[ConVar.Replicated( "fw_debug_ctf" )]
+	public static bool Debug { get; set; } = false;
 }
