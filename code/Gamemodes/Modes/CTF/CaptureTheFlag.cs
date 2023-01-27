@@ -158,4 +158,38 @@ public partial class CaptureTheFlag : Gamemode
 		client.Pawn.Position = randomSpawn.Position;
 		client.Pawn.Rotation = randomSpawn.Rotation;
 	}
+
+	public void OnTouchFlagzone( Player player, Team team )
+	{
+		var playerTeam = player.Client.Components.Get<TeamComponent>().Team;
+		Log.Info( $"Fortwars CTF: {player.Client.Name} with team {playerTeam} touched flagzone {team}" );
+
+		// Player is touching their own flagzone.
+		if ( playerTeam == team )
+		{
+			if ( !player.HasFlag )
+				return;
+
+			// If the player's ActiveWeapon is a flag, score for the player's team.
+			return;
+		}
+
+		// Player is touching the enemy flagzone.
+
+		// If flag is not missing, pick it up.
+
+	}
+
+	[ConCmd.Admin( "fw_ctf_set_state" )]
+	public static void SetGameState( string state )
+	{
+		if ( GamemodeSystem.Instance is not CaptureTheFlag ctf )
+			return;
+
+		if ( Enum.TryParse<GameState>( state, true, out GameState newState ) )
+		{
+			ctf.CurrentState = newState;
+			ctf.TimeUntilNextState = 500f;
+		}
+	}
 }

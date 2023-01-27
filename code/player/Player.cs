@@ -13,6 +13,9 @@ public partial class Player : AnimatedEntity
 
 	public Weapon ActiveWeapon => Inventory?.ActiveWeapon;
 
+	private const int FlagSlot = 4;
+	public bool HasFlag => Inventory?.GetWeaponFromSlot( FlagSlot ) != null;
+
 	public PlayerCamera PlayerCamera { get; protected set; }
 
 	public ClothingContainer Clothing = new();
