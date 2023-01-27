@@ -17,6 +17,7 @@ public partial class CaptureTheFlag : Gamemode
 		Combat,
 		GameOver
 	}
+
 	public override string GetGameStateLabel()
 	{
 		return CurrentState switch
@@ -65,6 +66,9 @@ public partial class CaptureTheFlag : Gamemode
 	}
 
 	[Net]
+	public IDictionary<Team, int> Scores { get; set; }
+
+	[Net]
 	public GameState CurrentState { get; set; }
 
 	[Net]
@@ -75,6 +79,10 @@ public partial class CaptureTheFlag : Gamemode
 	internal override void Initialize()
 	{
 		_ = GameLoop();
+
+		Scores = null;
+		foreach ( var team in Teams )
+			Scores.Add( team, 0 );
 	}
 
 	protected async Task GameLoop()
@@ -187,6 +195,12 @@ public partial class CaptureTheFlag : Gamemode
 				return;
 
 			// If the player's ActiveWeapon is a flag, score for the player's team.
+			if ( player.ActiveWeapon.WeaponAsset.Name != "Bog Roll" )
+				return;
+
+			// Score for the player's team.
+			Scores[playerTeam] += 1;
+			player.Inventory.RemoveActiveWeapon();
 			return;
 		}
 
@@ -199,6 +213,16 @@ public partial class CaptureTheFlag : Gamemode
 
 		// If flag is not missing, pick it up.
 
+	}
+
+	[Event.Tick]
+	public void Tick()
+	{
+		int i = 0;
+		foreach ( var team in Teams )
+		{
+			DebugOverlay.ScreenText( $"{team}: {Scores[team]}", i++ );
+		}
 	}
 
 	[ConCmd.Admin( "fw_ctf_set_state" )]

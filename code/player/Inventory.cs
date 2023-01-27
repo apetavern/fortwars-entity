@@ -50,6 +50,19 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		weapon?.OnDeploy( Entity );
 	}
 
+	public void RemoveActiveWeapon()
+	{
+		var currentWeapon = ActiveWeapon;
+		if ( currentWeapon.IsValid() )
+		{
+			currentWeapon.OnHolster( Entity );
+			Weapons.Remove( currentWeapon );
+			ActiveWeapon = null;
+		}
+
+		SetWeaponFromSlot( LastActiveWeaponSlot );
+	}
+
 	public Weapon GetWeaponFromSlot( int slot )
 	{
 		return slot switch
