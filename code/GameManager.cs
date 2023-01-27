@@ -41,13 +41,6 @@ public partial class FortwarsManager : Sandbox.GameManager
 		GamemodeSystem.Instance?.OnClientDisconnect( client, reason );
 	}
 
-	public override void MoveToSpawnpoint( Entity pawn )
-	{
-		Log.Info( $"Finding spawnpoint for {pawn.Name}" );
-
-		GamemodeSystem.Instance?.MoveToSpawnpoint( pawn );
-	}
-
 	[Event.Entity.PostSpawn]
 	public void PostEntitySpawn()
 	{

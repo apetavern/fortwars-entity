@@ -50,5 +50,5 @@ public partial class Gamemode : Entity
 
 	internal virtual void OnPlayerKilled( Player player ) { }
 
-	internal virtual void MoveToSpawnpoint( Entity pawn ) { }
+	internal virtual void MoveToSpawnpoint( IClient client ) { }
 }

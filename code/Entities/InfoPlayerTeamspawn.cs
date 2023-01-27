@@ -19,10 +19,3 @@ public partial class InfoPlayerTeamspawn : Entity
 		Transmit = TransmitType.Never;
 	}
 }
-
-public enum Team
-{
-	Invalid = -1,
-	Red,
-	Blue
-}

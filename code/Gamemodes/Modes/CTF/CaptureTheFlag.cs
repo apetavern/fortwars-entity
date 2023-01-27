@@ -110,6 +110,17 @@ public partial class CaptureTheFlag : Gamemode
 	internal override void OnClientJoined( IClient client )
 	{
 		base.OnClientJoined( client );
+
+		// Assign the client a team.
+		var teamComponent = client.Components.GetOrCreate<TeamComponent>();
+		if ( teamComponent != null )
+		{
+			teamComponent.Team = TeamSystem.GetTeamWithFewestPlayers();
+		}
+
+		Log.Info( $"Fortwars: Assigned {client} to team {teamComponent.Team}" );
+
+		MoveToSpawnpoint( client );
 	}
 
 	/// <summary>
@@ -132,9 +143,10 @@ public partial class CaptureTheFlag : Gamemode
 			WeaponAsset.CreateInstance( player.Class.Equipment ), false );
 	}
 
-	internal override void MoveToSpawnpoint( Entity pawn )
+	internal override void MoveToSpawnpoint( IClient client )
 	{
-		var spawnpoints = All.OfType<InfoPlayerTeamspawn>();
+		var clientTeam = client.Components.Get<TeamComponent>().Team;
+		var spawnpoints = All.OfType<InfoPlayerTeamspawn>().Where( x => x.Team == clientTeam);
 		var randomSpawn = spawnpoints.OrderBy( x => Guid.NewGuid() ).FirstOrDefault();
 
 		if ( randomSpawn == null )
@@ -143,7 +155,7 @@ public partial class CaptureTheFlag : Gamemode
 			return;
 		}
 
-		pawn.Position = randomSpawn.Position;
-		pawn.Rotation = randomSpawn.Rotation;
+		client.Pawn.Position = randomSpawn.Position;
+		client.Pawn.Rotation = randomSpawn.Rotation;
 	}
 }
