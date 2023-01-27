@@ -38,6 +38,12 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 				LastActiveWeaponSlot = ActiveWeaponSlot;
 
 			ActiveWeapon = null;
+
+			if ( currentWeapon.Components.TryGet<DropOnUnequipComponent>( out DropOnUnequipComponent _ ) )
+			{
+				Weapons.Remove( currentWeapon );
+				GamemodeSystem.Instance.OnWeaponDropped( Entity, currentWeapon );
+			}
 		}
 
 		ActiveWeapon = weapon;

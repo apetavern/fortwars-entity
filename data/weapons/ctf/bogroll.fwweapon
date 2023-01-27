@@ -8,7 +8,10 @@
 		IconPath = null
 		MovementSpeedMultiplier = 0.8
 		InventorySlot = "Flag"
-		Components = [  ]
+		Components = 
+		[
+			"DropOnUnequipComponent",
+		]
 		ViewModelData = 
 		{
 		}

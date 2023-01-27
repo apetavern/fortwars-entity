@@ -145,10 +145,24 @@ public partial class CaptureTheFlag : Gamemode
 			WeaponAsset.CreateInstance( player.Class.Equipment ), false );
 	}
 
+	internal override void OnWeaponDropped( Player player, Weapon weapon )
+	{
+		if ( Game.IsClient )
+			return;
+
+		if ( weapon.WeaponAsset.Name != "Bog Roll" )
+			return;
+
+		_ = new BogRoll()
+		{
+			Position = player.EyePosition + ( player.EyeRotation.Forward * 50f ),
+		};
+	}
+
 	internal override void MoveToSpawnpoint( IClient client )
 	{
 		var clientTeam = client.Components.Get<TeamComponent>().Team;
-		var spawnpoints = All.OfType<InfoPlayerTeamspawn>().Where( x => x.Team == clientTeam);
+		var spawnpoints = All.OfType<InfoPlayerTeamspawn>().Where( x => x.Team == clientTeam );
 		var randomSpawn = spawnpoints.OrderBy( x => Guid.NewGuid() ).FirstOrDefault();
 
 		if ( randomSpawn == null )
