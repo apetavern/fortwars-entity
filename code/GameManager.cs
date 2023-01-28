@@ -29,9 +29,10 @@ public partial class FortwarsManager : Sandbox.GameManager
 
 		var player = new Player( client );
 		client.Pawn = player;
-		player.Respawn();
 
 		GamemodeSystem.Instance?.OnClientJoined( client );
+
+		player.Respawn();
 	}
 
 	public override void ClientDisconnect( IClient client, NetworkDisconnectionReason reason )

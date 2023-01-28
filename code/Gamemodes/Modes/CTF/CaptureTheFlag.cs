@@ -149,8 +149,6 @@ public partial class CaptureTheFlag : Gamemode
 		}
 
 		Log.Info( $"Fortwars: Assigned {client} to team {teamComponent.Team}" );
-
-		MoveToSpawnpoint( client );
 	}
 
 	/// <summary>

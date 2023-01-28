@@ -72,6 +72,7 @@ public partial class Player : AnimatedEntity
 		Components.Create<PlayerAnimator>();
 
 		ClientRespawn( To.Single( Client ) );
+		GamemodeSystem.Instance.MoveToSpawnpoint( Client );
 
 		DressPlayerClothing();
 	}
