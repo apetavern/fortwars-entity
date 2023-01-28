@@ -47,7 +47,7 @@ public partial class Player
 			return;
 
 		Inventory?.BuildInput();
-		if ( Input.StopProcessing ) 
+		if ( Input.StopProcessing )
 			return;
 
 		MoveInput = Input.AnalogMove;

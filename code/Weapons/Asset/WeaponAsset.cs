@@ -1,6 +1,6 @@
 ﻿namespace Fortwars;
 
-[GameResource( "Weapon Asset", "fwweapon", "A Fortwars Weapon Asset", 
+[GameResource( "Weapon Asset", "fwweapon", "A Fortwars Weapon Asset",
 	Icon = "💀", IconBgColor = "#fe71dc", IconFgColor = "black" )]
 public partial class WeaponAsset : GameResource
 {

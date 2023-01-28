@@ -6,7 +6,7 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 
 	public Vector3 Position
 	{
-		get => Player.Position; 
+		get => Player.Position;
 		set => Player.Position = value;
 	}
 
@@ -110,13 +110,13 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 		}
 	}
 
-	public virtual TraceResult TraceBBox( 
-		Vector3 start, 
-		Vector3 end, 
+	public virtual TraceResult TraceBBox(
+		Vector3 start,
+		Vector3 end,
 		Vector3 mins,
-		Vector3 maxs, 
+		Vector3 maxs,
 		float liftFeet = 0.0f,
-		float liftHead = 0.0f)
+		float liftHead = 0.0f )
 	{
 		if ( liftFeet > 0 )
 		{
@@ -138,9 +138,9 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 		return tr;
 	}
 
-	public virtual TraceResult TraceBBox( 
-		Vector3 start, 
-		Vector3 end, 
+	public virtual TraceResult TraceBBox(
+		Vector3 start,
+		Vector3 end,
 		float liftFeet = 0.0f,
 		float liftHead = 0.0f )
 	{

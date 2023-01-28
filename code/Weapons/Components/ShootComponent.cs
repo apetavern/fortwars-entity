@@ -16,11 +16,16 @@ public class ShootComponent : WeaponComponent
 
 		// Check player input for fire input and act accordingly.
 		if ( Input.Down( FireButton ) )
+		{
 			if ( CanFire() )
 				StartFiring();
+		}
 		else
+		{
 			if ( IsFiring )
 				StopFiring();
+		}
+
 
 		if ( !IsFiring )
 			return;
@@ -33,20 +38,20 @@ public class ShootComponent : WeaponComponent
 		if ( !Game.IsClient )
 			return;
 
-/*		if ( TracerParticle != null || ImpactTrailParticle != null )
-		{
-			var pos = Weapon.EffectEntity.GetAttachment( "muzzle" ) ?? Weapon.Transform;
-			TracerParticle?.SetPosition( 0, pos.Position );
+		/*		if ( TracerParticle != null || ImpactTrailParticle != null )
+				{
+					var pos = Weapon.EffectEntity.GetAttachment( "muzzle" ) ?? Weapon.Transform;
+					TracerParticle?.SetPosition( 0, pos.Position );
 
-			var tr = Trace.Ray( Player.EyePosition, Player.EyePosition + Player.EyeRotation.Forward * Data.BulletRange )
-				.WithAnyTags( "solid", "glass" )
-				.Ignore( player )
-				.Run();
+					var tr = Trace.Ray( Player.EyePosition, Player.EyePosition + Player.EyeRotation.Forward * Data.BulletRange )
+						.WithAnyTags( "solid", "glass" )
+						.Ignore( player )
+						.Run();
 
-			TracerParticle?.SetPosition( 1, tr.EndPosition );
-			ImpactTrailParticle?.SetPosition( 0, tr.EndPosition + ( tr.Normal * 1f ) );
-			ImpactTrailParticle?.SetForward( 0, tr.Normal );
-		}*/
+					TracerParticle?.SetPosition( 1, tr.EndPosition );
+					ImpactTrailParticle?.SetPosition( 0, tr.EndPosition + ( tr.Normal * 1f ) );
+					ImpactTrailParticle?.SetForward( 0, tr.Normal );
+				}*/
 	}
 
 	public void StartFiring()
@@ -97,6 +102,6 @@ public class ShootComponent : WeaponComponent
 
 		player?.SetAnimParameter( "b_attack", true );
 
-		
+
 	}
 }

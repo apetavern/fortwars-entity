@@ -36,12 +36,12 @@ public partial class Gamemode : Entity
 
 	internal virtual void Initialize() { }
 
-	internal virtual void OnClientJoined( IClient client ) 
+	internal virtual void OnClientJoined( IClient client )
 	{
 		PlayerCount++;
 	}
 
-	internal virtual void OnClientDisconnect( IClient cl, NetworkDisconnectionReason reason ) 
+	internal virtual void OnClientDisconnect( IClient cl, NetworkDisconnectionReason reason )
 	{
 		PlayerCount--;
 	}
