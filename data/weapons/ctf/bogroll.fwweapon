@@ -10,7 +10,7 @@
 		InventorySlot = "Flag"
 		Components = 
 		[
-			"DropOnUnequipComponent",
+			"BogRollComponent",
 		]
 		ViewModelData = 
 		{

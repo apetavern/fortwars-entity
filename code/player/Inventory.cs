@@ -27,7 +27,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		return true;
 	}
 
-	public void SetActiveWeapon ( Weapon weapon )
+	public void SetActiveWeapon( Weapon weapon )
 	{
 		var currentWeapon = ActiveWeapon;
 		if ( currentWeapon.IsValid() )
@@ -39,7 +39,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 
 			ActiveWeapon = null;
 
-			if ( currentWeapon.Components.TryGet<DropOnUnequipComponent>( out DropOnUnequipComponent _ ) )
+			if ( currentWeapon.Components.TryGet<BogRollComponent>( out BogRollComponent _ ) )
 			{
 				Weapons.Remove( currentWeapon );
 				GamemodeSystem.Instance.OnWeaponDropped( Entity, currentWeapon );
@@ -71,13 +71,13 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Primary )
 				.FirstOrDefault(),
 			1 => Weapons
-				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Secondary)
+				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Secondary )
 				.FirstOrDefault(),
 			2 => Weapons
-				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Equipment)
+				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Equipment )
 				.FirstOrDefault(),
 			3 => Weapons
-				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Other)
+				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Other )
 				.FirstOrDefault(),
 			4 => Weapons
 				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Flag )
@@ -109,7 +109,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 
 	protected void TrySlotFromInput( InputButton slot )
 	{
-		if ( Input.Pressed( slot ))
+		if ( Input.Pressed( slot ) )
 		{
 			Input.SuppressButton( slot );
 
@@ -145,8 +145,8 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		ActiveWeapon?.FrameSimulate( client );
 	}
 
-	[ConCmd.Admin( 
-		Name = "fw_set_weapon", 
+	[ConCmd.Admin(
+		Name = "fw_set_weapon",
 		Help = "Set the caller's weapon by asset name (e.g. `fw_set_weapon ksr1`)." )]
 	public static void SetWeapon( string weaponPath )
 	{
