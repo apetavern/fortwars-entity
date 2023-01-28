@@ -38,12 +38,6 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 				LastActiveWeaponSlot = ActiveWeaponSlot;
 
 			ActiveWeapon = null;
-
-			if ( currentWeapon.Components.TryGet<BogRollComponent>( out BogRollComponent _ ) )
-			{
-				Weapons.Remove( currentWeapon );
-				GamemodeSystem.Instance.OnWeaponDropped( Entity, currentWeapon );
-			}
 		}
 
 		ActiveWeapon = weapon;
@@ -61,6 +55,15 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		}
 
 		SetWeaponFromSlot( LastActiveWeaponSlot );
+	}
+
+	public void RemoveWeapon( Weapon weapon )
+	{
+		Weapons.Remove( weapon );
+		if ( weapon == ActiveWeapon )
+		{
+			SetActiveWeapon( GetWeaponFromSlot( LastActiveWeaponSlot ) );
+		}
 	}
 
 	public Weapon GetWeaponFromSlot( int slot )
@@ -103,6 +106,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 	{
 		if ( GetWeaponFromSlot( slot ) is Weapon weapon )
 		{
+			RunGameEventSv( "inv.switchweapon" );
 			Entity.ActiveWeaponInput = weapon;
 		}
 	}
@@ -143,6 +147,23 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 	public void FrameSimulate( IClient client )
 	{
 		ActiveWeapon?.FrameSimulate( client );
+	}
+
+	public void RunGameEvent( string eventName )
+	{
+		Entity?.RunGameEvent( eventName );
+	}
+
+	[ConCmd.Server]
+	public static void RunGameEventSv( string eventName )
+	{
+		if ( ConsoleSystem.Caller is not IClient caller )
+			return;
+
+		if ( caller.Pawn is not Player player )
+			return;
+
+		player?.RunGameEvent( eventName );
 	}
 
 	[ConCmd.Admin(

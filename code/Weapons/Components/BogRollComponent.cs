@@ -7,4 +7,18 @@ public class BogRollComponent : WeaponComponent
 		var team = player.Client.Components.Get<TeamComponent>().Team;
 		BogRoll.SetMaterialGroup( TeamSystem.GetOpposingTeam( team ), Weapon );
 	}
+
+	public override void OnGameEvent( string eventName )
+	{
+		if ( eventName == "inv.switchweapon" )
+		{
+			var inv = Player.Inventory;
+
+			if ( inv.ActiveWeapon != Weapon )
+				return;
+
+			inv.RemoveWeapon( Weapon );
+			GamemodeSystem.Instance.OnWeaponDropped( Player, Weapon );
+		}
+	}
 }

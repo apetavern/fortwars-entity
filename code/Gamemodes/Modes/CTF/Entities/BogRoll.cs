@@ -1,10 +1,13 @@
 ﻿namespace Fortwars;
 
 [Category( "Fortwars" )]
-public class BogRoll : ModelEntity
+public partial class BogRoll : ModelEntity
 {
 	public Team Team { get; set; }
 	private readonly string _modelPath = "models/items/bogroll/bogroll_w.vmdl";
+
+	[Net]
+	public TimeUntil TimeUntilPlayerCanPickup { get; set; }
 
 	public override void Spawn()
 	{
@@ -12,13 +15,16 @@ public class BogRoll : ModelEntity
 
 		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 		EnableAllCollisions = true;
+		TimeUntilPlayerCanPickup = 3f;
 
 		SetMaterialGroup( Team, this );
 	}
 
 	public override void StartTouch( Entity other )
 	{
-		Log.Info( $"Fortwars CTF: Touched BogRoll belonging to {Team}" );
+		if ( other is WorldEntity )
+			return;
+
 		if ( GamemodeSystem.Instance is not CaptureTheFlag ctf )
 			return;
 
@@ -26,6 +32,9 @@ public class BogRoll : ModelEntity
 			return;
 
 		if ( other is not Player player )
+			return;
+
+		if ( TimeUntilPlayerCanPickup > 0 )
 			return;
 
 		ctf.OnTouchFlag( player, Team, fromGround: true );

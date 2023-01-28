@@ -119,6 +119,9 @@ public partial class CaptureTheFlag : Gamemode
 		CurrentState = GameState.Combat;
 		await WaitAsync( CombatPhaseDuration );
 
+		var winningTeam = Scores.MaxBy( v => v.Value ).Key;
+		Log.Info( $"Fortwars CTF: {winningTeam} Team Wins!" );
+
 		CurrentState = GameState.GameOver;
 		await WaitAsync( GameOverDuration );
 	}
@@ -200,6 +203,21 @@ public partial class CaptureTheFlag : Gamemode
 			};
 			RedFlagCarrier = null;
 		}
+	}
+
+	public void OnWeaponThrown( Player player, BogRoll flag )
+	{
+		var team = player.Client.Components.Get<TeamComponent>().Team;
+		if ( team == Team.Red )
+		{
+			BlueFlag = flag;
+			BlueFlagCarrier = null;
+		}
+		else
+		{
+			RedFlag = flag;
+			RedFlagCarrier = null;
+		}
 
 	}
 
@@ -221,6 +239,9 @@ public partial class CaptureTheFlag : Gamemode
 
 	public void OnTouchFlag( Player player, Team team, bool fromGround = false )
 	{
+		if ( Game.IsClient )
+			return;
+
 		var playerTeam = player.Client.Components.Get<TeamComponent>().Team;
 		Log.Info( $"Fortwars CTF: {player.Client.Name} with team {playerTeam} touched flagzone {team}" );
 
