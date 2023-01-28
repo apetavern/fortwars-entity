@@ -6,7 +6,7 @@
 [HammerEntity]
 public partial class InfoFlagSpawn : ModelEntity
 {
-	[Net, Property, Change( nameof(OnTeamChanged) )]
+	[Net, Property]
 	public Team Team { get; set; }
 
 	private static readonly Model FlagModel = Model.Load( "models/items/bogroll/bogroll_w.vmdl" );
@@ -21,22 +21,8 @@ public partial class InfoFlagSpawn : ModelEntity
 		EnableShadowInFirstPerson = true;
 
 		Model = FlagModel;
-	}
 
-	protected void OnTeamChanged()
-	{
-		switch ( Team )
-		{
-			case Team.Invalid: break;
-			case Team.Blue: 
-				SetMaterialGroup( 0 );
-				break;
-			case Team.Red:
-				SetMaterialGroup( 1 );
-				break;
-			default:
-				break;
-		}
+		BogRoll.SetMaterialGroup( Team, this );
 	}
 
 	const float pitchAngle = 45f;

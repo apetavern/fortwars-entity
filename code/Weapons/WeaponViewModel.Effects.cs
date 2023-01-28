@@ -84,8 +84,11 @@ public partial class WeaponViewModel
 	{
 		var player = Weapon.Player;
 		var controller = player?.Controller;
+		var team = player.Client.Components.Get<TeamComponent>().Team;
 		if ( controller == null )
 			return;
+
+		BogRoll.SetMaterialGroup( TeamSystem.GetOpposingTeam( team ), this );
 
 		SmoothedVelocity += ( controller.Velocity - SmoothedVelocity ) * 5f * Time.Delta;
 

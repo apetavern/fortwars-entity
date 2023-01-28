@@ -161,9 +161,12 @@ public partial class CaptureTheFlag : Gamemode
 		if ( weapon.WeaponAsset.Name != "Bog Roll" )
 			return;
 
+		var team = player.Client.Components.Get<TeamComponent>().Team;
+
 		_ = new BogRoll()
 		{
 			Position = player.EyePosition + ( player.EyeRotation.Forward * 50f ),
+			Team = TeamSystem.GetOpposingTeam( team ),
 		};
 	}
 

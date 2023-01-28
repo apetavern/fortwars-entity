@@ -14,6 +14,14 @@ public partial class TeamSystem
 		return client?.Components.Get<TeamComponent>()?.Team ?? Team.Invalid;
 	}
 
+	public static Team GetOpposingTeam( Team team )
+	{
+		if ( team == Team.Red )
+			return Team.Blue;
+		else
+			return Team.Red;
+	}
+
 	public static IEnumerable<Team> GetTeams()
 	{
 		return GamemodeSystem.Instance?.Teams;
