@@ -36,6 +36,6 @@ public partial class FuncFlagzone : BrushEntity
 		if ( other is not Player player )
 			return;
 
-		ctf.OnTouchFlagzone( player, Team );
+		ctf.OnTouchFlag( player, Team );
 	}
 }

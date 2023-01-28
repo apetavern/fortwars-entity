@@ -219,10 +219,13 @@ public partial class CaptureTheFlag : Gamemode
 		client.Pawn.Rotation = randomSpawn.Rotation;
 	}
 
-	public void OnTouchFlagzone( Player player, Team team )
+	public void OnTouchFlag( Player player, Team team, bool fromGround = false )
 	{
 		var playerTeam = player.Client.Components.Get<TeamComponent>().Team;
 		Log.Info( $"Fortwars CTF: {player.Client.Name} with team {playerTeam} touched flagzone {team}" );
+
+		if ( fromGround )
+			PickupFlag( player, playerTeam );
 
 		// Player is touching their own flagzone.
 		if ( playerTeam == team )
@@ -281,10 +284,14 @@ public partial class CaptureTheFlag : Gamemode
 		if ( team == Team.Red )
 		{
 			BlueFlagCarrier = player;
+			BlueFlag?.Delete();
+			BlueFlag = null;
 		}
 		else if ( team == Team.Blue )
 		{
 			RedFlagCarrier = player;
+			RedFlag?.Delete();
+			RedFlag = null;
 		}
 
 		Log.Info( $"Fortwars CTF: The flag for team {team} has been stolen by {player.Client.Name}." );
