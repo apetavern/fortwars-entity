@@ -25,6 +25,15 @@ public partial class InfoFlagSpawn : ModelEntity
 		BogRoll.SetMaterialGroup( Team, this );
 	}
 
+	[Event.Tick.Client]
+	public void Tick()
+	{
+		if ( GamemodeSystem.Instance is not CaptureTheFlag ctf )
+			return;
+
+		EnableDrawing = ctf.FlagIsHome( Team );
+	}
+
 	const float pitchAngle = 45f;
 	const float rotateSpeed = 90f;
 	const float bobSpeed = 2f;

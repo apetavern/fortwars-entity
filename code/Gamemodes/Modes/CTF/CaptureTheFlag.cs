@@ -1,4 +1,6 @@
-﻿namespace Fortwars;
+﻿using static Sandbox.Event;
+
+namespace Fortwars;
 
 public partial class CaptureTheFlag : Gamemode
 {
@@ -180,12 +182,27 @@ public partial class CaptureTheFlag : Gamemode
 			return;
 
 		var team = player.Client.Components.Get<TeamComponent>().Team;
+		var dropPos = player.EyePosition + ( player.EyeRotation.Forward * 50f );
 
-		_ = new BogRoll()
+		if ( team == Team.Red )
 		{
-			Position = player.EyePosition + ( player.EyeRotation.Forward * 50f ),
-			Team = TeamSystem.GetOpposingTeam( team ),
-		};
+			BlueFlag = new BogRoll()
+			{
+				Position = dropPos,
+				Team = Team.Blue,
+			};
+			BlueFlagCarrier = null;
+		}
+		else
+		{
+			RedFlag = new BogRoll()
+			{
+				Position = dropPos,
+				Team = Team.Red,
+			};
+			RedFlagCarrier = null;
+		}
+
 	}
 
 	internal override void MoveToSpawnpoint( IClient client )
@@ -220,12 +237,11 @@ public partial class CaptureTheFlag : Gamemode
 				return;
 
 			// Ensure the player's team flag is home.
-			if ( !FlagIsHome( team ) )
+			if ( !FlagIsHome( playerTeam ) )
 				return;
 
 			// Score for the player's team.
-			Scores[playerTeam] += 1;
-			player.Inventory.RemoveActiveWeapon();
+			ScoreFlag( player, playerTeam );
 			return;
 		}
 
@@ -246,17 +262,15 @@ public partial class CaptureTheFlag : Gamemode
 	/// </summary>
 	/// <param name="team">The team whose flagzone is being touched.</param>
 	/// <returns>True, if the flag is home. Otherwise, false.</returns>
-	private bool FlagIsHome( Team team )
+	public bool FlagIsHome( Team team )
 	{
-		Log.Info( $"Flagzone {team} flag is being checked." );
-
 		if ( team == Team.Red )
 		{
-			return RedFlagCarrier is null;
+			return RedFlagCarrier is null && RedFlag is null;
 		}
 		else if ( team == Team.Blue )
 		{
-			return BlueFlagCarrier is null;
+			return BlueFlagCarrier is null && BlueFlag is null;
 		}
 
 		// How did we get here?
@@ -282,6 +296,21 @@ public partial class CaptureTheFlag : Gamemode
 			WeaponAsset.CreateInstance( WeaponAsset.FromPath( BogRollPath ) ), true );
 	}
 
+	private void ScoreFlag( Player player, Team team )
+	{
+		if ( player == BlueFlagCarrier )
+		{
+			BlueFlagCarrier = null;
+		}
+		else if ( player == RedFlagCarrier )
+		{
+			RedFlagCarrier = null;
+		}
+
+		Scores[team] += 1;
+		player.Inventory.RemoveActiveWeapon();
+	}
+
 	[Event.Tick]
 	public void Tick()
 	{
@@ -293,6 +322,10 @@ public partial class CaptureTheFlag : Gamemode
 		{
 			DebugOverlay.ScreenText( $"{team}: {Scores[team]}", i++ );
 		}
+		DebugOverlay.ScreenText( $"RedFlagCarrier: {RedFlagCarrier}", i++ );
+		DebugOverlay.ScreenText( $"BlueFlagCarrier: {BlueFlagCarrier}", i++ );
+		DebugOverlay.ScreenText( $"RedFlag: {RedFlag}", i++ );
+		DebugOverlay.ScreenText( $"BlueFlag: {BlueFlag}", i++ );
 	}
 
 	[ConCmd.Admin( "fw_ctf_set_state" )]
