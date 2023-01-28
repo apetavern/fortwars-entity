@@ -68,6 +68,24 @@ public partial class CaptureTheFlag : Gamemode
 	[Net]
 	public IDictionary<Team, int> Scores { get; set; }
 
+	/// <summary>
+	/// The Red Flag Carrier is a member of Team Blue.
+	/// </summary>
+	[Net]
+	public Player RedFlagCarrier { get; set; }
+
+	/// <summary>
+	/// The Blue Flag Carrier is a member of Team Red.
+	/// </summary>
+	[Net]
+	public Player BlueFlagCarrier { get; set; }
+
+	[Net]
+	public BogRoll RedFlag { get; set; }
+
+	[Net]
+	public BogRoll BlueFlag { get; set; }
+
 	[Net]
 	public GameState CurrentState { get; set; }
 
@@ -197,8 +215,12 @@ public partial class CaptureTheFlag : Gamemode
 			if ( !player.HasFlag )
 				return;
 
-			// If the player's ActiveWeapon is a flag, score for the player's team.
+			// Ensure the player's active weapon is a Bog Roll.
 			if ( player.ActiveWeapon.WeaponAsset.Name != "Bog Roll" )
+				return;
+
+			// Ensure the player's team flag is home.
+			if ( !FlagIsHome( team ) )
 				return;
 
 			// Score for the player's team.
@@ -212,6 +234,50 @@ public partial class CaptureTheFlag : Gamemode
 			return;
 
 		// If flag is not missing, pick it up.
+		if ( !FlagIsHome( team ) )
+			return;
+
+		PickupFlag( player, playerTeam );
+
+	}
+
+	/// <summary>
+	/// Whether the flag for given team is in the flagzone.
+	/// </summary>
+	/// <param name="team">The team whose flagzone is being touched.</param>
+	/// <returns>True, if the flag is home. Otherwise, false.</returns>
+	private bool FlagIsHome( Team team )
+	{
+		Log.Info( $"Flagzone {team} flag is being checked." );
+
+		if ( team == Team.Red )
+		{
+			return RedFlagCarrier is null;
+		}
+		else if ( team == Team.Blue )
+		{
+			return BlueFlagCarrier is null;
+		}
+
+		// How did we get here?
+		return false;
+	}
+
+	private void PickupFlag( Player player, Team team )
+	{
+		// Assign the carrier based on their team.
+		if ( team == Team.Red )
+		{
+			BlueFlagCarrier = player;
+		}
+		else if ( team == Team.Blue )
+		{
+			RedFlagCarrier = player;
+		}
+
+		Log.Info( $"Fortwars CTF: The flag for team {team} has been stolen by {player.Client.Name}." );
+
+		// Add the flag to the player's inventory.
 		player.Inventory.AddWeapon(
 			WeaponAsset.CreateInstance( WeaponAsset.FromPath( BogRollPath ) ), true );
 	}
