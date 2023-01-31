@@ -30,9 +30,6 @@ public partial class Player
 		set => EyeLocalRotation = Transform.RotationToLocal( value );
 	}
 
-	/// <summary>
-	/// Rotation of the entity's "eyes", i.e. rotation for the camera when this entity is used as the view entity. In local to the entity coordinates.
-	/// </summary>
 	[Net, Predicted, Browsable( false )]
 	public Rotation EyeLocalRotation { get; set; }
 

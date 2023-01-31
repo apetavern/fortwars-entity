@@ -53,17 +53,11 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 			Weapons.Remove( currentWeapon );
 			ActiveWeapon = null;
 		}
-
-		SetWeaponFromSlot( LastActiveWeaponSlot );
 	}
 
 	public void RemoveWeapon( Weapon weapon )
 	{
 		Weapons.Remove( weapon );
-		if ( weapon == ActiveWeapon )
-		{
-			SetActiveWeapon( GetWeaponFromSlot( LastActiveWeaponSlot ) );
-		}
 	}
 
 	public Weapon GetWeaponFromSlot( int slot )
@@ -104,6 +98,9 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 
 	public void SetWeaponFromSlot( int slot )
 	{
+		if ( slot == ActiveWeaponSlot )
+			return;
+
 		if ( GetWeaponFromSlot( slot ) is Weapon weapon )
 		{
 			RunGameEventSv( "inv.switchweapon" );
@@ -142,6 +139,14 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		}
 
 		ActiveWeapon?.Simulate( client );
+
+		if ( Debug )
+		{
+			var lineOffset = 22;
+			DebugOverlay.ScreenText( $"ActiveWeapon {ActiveWeapon.WeaponAsset.ResourceName}", lineOffset++ );
+			DebugOverlay.ScreenText( $"ActiveWeaponSlot {ActiveWeaponSlot}", lineOffset++ );
+			DebugOverlay.ScreenText( $"LastActiveWeaponSlot {LastActiveWeaponSlot}", lineOffset++ );
+		}
 	}
 
 	public void FrameSimulate( IClient client )
@@ -183,4 +188,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 
 		player.Inventory.AddWeapon( weapon, true );
 	}
+
+	[ConVar.Replicated( "fw_debug_inv" )]
+	public static bool Debug { get; set; } = false;
 }

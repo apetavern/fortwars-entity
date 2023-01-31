@@ -15,7 +15,7 @@ public partial class BogRoll : ModelEntity
 
 		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 		EnableAllCollisions = true;
-		TimeUntilPlayerCanPickup = 3f;
+		TimeUntilPlayerCanPickup = 1f;
 
 		SetMaterialGroup( Team, this );
 	}

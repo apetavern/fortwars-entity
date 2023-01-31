@@ -246,7 +246,18 @@ public partial class CaptureTheFlag : Gamemode
 		Log.Info( $"Fortwars CTF: {player.Client.Name} with team {playerTeam} touched flagzone {team}" );
 
 		if ( fromGround )
-			PickupFlag( player, playerTeam );
+		{
+			if ( playerTeam == team )
+			{
+				ReturnFlag( playerTeam );
+			}
+			else
+			{
+				PickupFlag( player, playerTeam );
+			}
+
+			return;
+		}
 
 		// Player is touching their own flagzone.
 		if ( playerTeam == team )
@@ -320,6 +331,22 @@ public partial class CaptureTheFlag : Gamemode
 		// Add the flag to the player's inventory.
 		player.Inventory.AddWeapon(
 			WeaponAsset.CreateInstance( WeaponAsset.FromPath( BogRollPath ) ), true );
+	}
+
+	private void ReturnFlag( Team team )
+	{
+		if ( team == Team.Red )
+		{
+			RedFlagCarrier = null;
+			RedFlag?.Delete();
+			RedFlag = null;
+		}
+		else
+		{
+			BlueFlagCarrier = null;
+			BlueFlag?.Delete();
+			BlueFlag = null;
+		}
 	}
 
 	private void ScoreFlag( Player player, Team team )
