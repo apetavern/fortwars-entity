@@ -8,6 +8,9 @@ public partial class PlayerAnimator : EntityComponent<Player>, ISingletonCompone
 		var ctrl = player.Controller;
 		var helper = new CitizenAnimationHelper( player );
 
+		if ( ctrl is null )
+			return;
+
 		helper.WithWishVelocity( ctrl.GetWishVelocity() );
 		helper.WithVelocity( ctrl.Velocity );
 		helper.WithLookAt( player.EyePosition + player.EyeRotation.Forward * 100f, 1.0f, 1.0f, 0.5f );

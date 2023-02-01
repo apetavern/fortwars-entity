@@ -85,7 +85,7 @@ public partial class Player : AnimatedEntity
 
 	public override void Simulate( IClient client )
 	{
-		if ( LifeState == LifeState.Dead )
+		if ( LifeState == LifeState.Respawning )
 		{
 			if ( TimeUntilRespawn <= 0 && Game.IsServer )
 			{
@@ -114,15 +114,15 @@ public partial class Player : AnimatedEntity
 
 	public override void OnKilled()
 	{
-		// TODO: Consult active gamemode for death timer / mechanics.
-		LifeState = LifeState.Dead;
-		TimeUntilRespawn = 5f;
+		GamemodeSystem.Instance?.OnPlayerKilled( this );
+
+		ActiveWeapon.Delete();
 
 		EnableAllCollisions = false;
 		EnableDrawing = false;
 
-		Controller.Remove();
 		Animator.Remove();
+		Controller.Remove();
 		Inventory.Remove();
 
 		Children.OfType<ModelEntity>()

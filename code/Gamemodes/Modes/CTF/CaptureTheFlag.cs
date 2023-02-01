@@ -113,6 +113,14 @@ public partial class CaptureTheFlag : Gamemode
 		CurrentState = GameState.Countdown;
 		await WaitAsync( CountdownDuration );
 
+		foreach ( var client in Game.Clients )
+		{
+			if ( client.Pawn is not Player player )
+				return;
+
+			player.Respawn();
+		}
+
 		CurrentState = GameState.Build;
 		await WaitAsync( BuildPhaseDuration );
 
@@ -152,6 +160,12 @@ public partial class CaptureTheFlag : Gamemode
 		}
 
 		Log.Info( $"Fortwars: Assigned {client} to team {teamComponent.Team}" );
+	}
+
+	internal override void OnPlayerKilled( Player player )
+	{
+		player.LifeState = LifeState.Respawning;
+		player.TimeUntilRespawn = 5f;
 	}
 
 	/// <summary>
