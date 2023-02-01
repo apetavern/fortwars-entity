@@ -22,6 +22,11 @@ public partial class PlayerAnimator : EntityComponent<Player>, ISingletonCompone
 		{
 			player.SetAnimParameter( "holdtype", (int)weapon.WeaponAsset.HoldType );
 			player.SetAnimParameter( "holdtype_handedness", (int)weapon.WeaponAsset.Handedness );
+
+			foreach ( var component in weapon.Components.GetAll<WeaponComponent>() )
+			{
+				component.SimulateAnimator( player );
+			}
 		}
 		else
 		{

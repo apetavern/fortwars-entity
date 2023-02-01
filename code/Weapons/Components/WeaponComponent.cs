@@ -83,4 +83,6 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	public virtual void OnGameEvent( string eventName ) { }
 
 	public virtual void BuildInput() { }
+
+	public virtual void SimulateAnimator( Player player ) { }
 }
