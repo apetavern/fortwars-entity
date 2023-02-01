@@ -3,11 +3,22 @@
 [Category( "Fortwars" )]
 public partial class BogRoll : ModelEntity
 {
+	[Net, Change( nameof( OnTeamChange ) )]
 	public Team Team { get; set; }
 	private readonly string _modelPath = "models/items/bogroll/bogroll_w.vmdl";
 
 	[Net]
 	public TimeUntil TimeUntilPlayerCanPickup { get; set; }
+
+	public BogRoll()
+	{
+
+	}
+
+	public BogRoll( Team team )
+	{
+		Team = team;
+	}
 
 	public override void Spawn()
 	{
@@ -38,6 +49,11 @@ public partial class BogRoll : ModelEntity
 			return;
 
 		ctf.OnTouchFlag( player, Team, fromGround: true );
+	}
+
+	private void OnTeamChange( Team old, Team @new )
+	{
+		SetMaterialGroup( @new, this );
 	}
 
 	public static void SetMaterialGroup( Team team, ModelEntity entity )

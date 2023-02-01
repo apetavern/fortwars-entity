@@ -37,7 +37,6 @@ public partial class Weapon
 
 			component.Initialize( this );
 			Components.Add( component );
-			Log.Info( $"Adding component {component} to {this}" );
 		}
 	}
 

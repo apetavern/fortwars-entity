@@ -34,7 +34,9 @@ public class ThrowComponent : WeaponComponent
 		_thrown = true;
 		var throwDir = ( Player.EyeRotation.Forward + ( Vector3.Up / 3f ) ).Normal;
 
-		var flag = new BogRoll()
+		var team = Player.Client.Components.Get<TeamComponent>().Team;
+
+		var flag = new BogRoll( TeamSystem.GetOpposingTeam( team ) )
 		{
 			Position = Player.EyePosition + ( Player.EyeRotation.Forward * 50f ),
 			Velocity = throwDir * 600f,

@@ -46,12 +46,12 @@ public partial class CaptureTheFlag : Gamemode
 	/// <summary>
 	/// How long the build phase lasts.
 	/// </summary>
-	public static float BuildPhaseDuration => 90f;
+	public static float BuildPhaseDuration => 5f; // 90
 
 	/// <summary>
 	/// How long the combat phase lasts.
 	/// </summary>
-	public static float CombatPhaseDuration => 180f;
+	public static float CombatPhaseDuration => 300f; // 180
 
 	/// <summary>
 	/// How long the game over phase lasts before the game is restarted.
@@ -404,7 +404,11 @@ public partial class CaptureTheFlag : Gamemode
 		}
 
 		Scores[team] += 1;
-		player.Inventory.RemoveActiveWeapon();
+
+		var inv = player.Inventory;
+		var lastActiveWeapon = inv.LastActiveWeaponSlot;
+		inv.RemoveWeapon( player.ActiveWeapon );
+		inv.SetActiveWeapon( inv.GetWeaponFromSlot( lastActiveWeapon ) );
 	}
 
 	[Event.Tick]
