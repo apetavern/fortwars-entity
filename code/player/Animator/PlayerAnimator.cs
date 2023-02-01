@@ -23,5 +23,9 @@ public partial class PlayerAnimator : EntityComponent<Player>, ISingletonCompone
 			player.SetAnimParameter( "holdtype", (int)weapon.WeaponAsset.HoldType );
 			player.SetAnimParameter( "holdtype_handedness", (int)weapon.WeaponAsset.Handedness );
 		}
+		else
+		{
+			player.SetAnimParameter( "holdtype", (int)HoldType.None );
+		}
 	}
 }

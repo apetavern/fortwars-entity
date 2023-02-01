@@ -66,6 +66,8 @@ public partial class Player : AnimatedEntity
 		EnableAllCollisions = true;
 		EnableDrawing = true;
 
+		ActiveWeapon?.Delete();
+
 		SetupController();
 		SetupInventory();
 

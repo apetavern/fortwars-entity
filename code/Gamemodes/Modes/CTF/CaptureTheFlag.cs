@@ -113,18 +113,12 @@ public partial class CaptureTheFlag : Gamemode
 		CurrentState = GameState.Countdown;
 		await WaitAsync( CountdownDuration );
 
-		foreach ( var client in Game.Clients )
-		{
-			if ( client.Pawn is not Player player )
-				return;
-
-			player.Respawn();
-		}
-
 		CurrentState = GameState.Build;
+		RespawnAllPlayers();
 		await WaitAsync( BuildPhaseDuration );
 
 		CurrentState = GameState.Combat;
+		RespawnAllPlayers();
 		await WaitAsync( CombatPhaseDuration );
 
 		var winningTeam = Scores.MaxBy( v => v.Value ).Key;
@@ -146,6 +140,17 @@ public partial class CaptureTheFlag : Gamemode
 	{
 		TimeUntilNextState = time;
 		await Task.DelayRealtimeSeconds( time );
+	}
+
+	private static void RespawnAllPlayers()
+	{
+		foreach ( var client in Game.Clients )
+		{
+			if ( client.Pawn is not Player player )
+				return;
+
+			player.Respawn();
+		}
 	}
 
 	internal override void OnClientJoined( IClient client )
@@ -175,6 +180,30 @@ public partial class CaptureTheFlag : Gamemode
 	/// <param name="player">The player whose loadout we are preparing.</param>
 	/// <param name="inventory">The inventory to add the items to.</param>
 	internal override void PrepareLoadout( Player player, Inventory inventory )
+	{
+		switch ( CurrentState )
+		{
+			case GameState.Lobby:
+				GiveCombatLoadout( player, inventory );
+				break;
+			case GameState.Build:
+				GiveBuildLoadout( player, inventory );
+				break;
+			case GameState.Combat:
+				GiveCombatLoadout( player, inventory );
+				break;
+			default:
+				GiveCombatLoadout( player, inventory );
+				break;
+		}
+	}
+
+	private void GiveBuildLoadout( Player player, Inventory inventory )
+	{
+		// TODO: Give player a phygun.
+	}
+
+	private void GiveCombatLoadout( Player player, Inventory inventory )
 	{
 		inventory.AddWeapon(
 			WeaponAsset.CreateInstance( WeaponAsset.FromPath( player.SelectedPrimaryWeapon ) ), true );
