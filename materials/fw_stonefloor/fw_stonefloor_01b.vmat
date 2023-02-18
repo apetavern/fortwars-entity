@@ -15,6 +15,10 @@ Layer0
 	//---- Fog ----
 	g_bFogEnabled "1"
 
+	//---- Material ----
+	TextureColor "materials/fw_stonefloor/StoneFloor_01_color.png"
+	TextureTintMask "materials/default/default.tga"
+
 	//---- Material A ----
 	g_flTintColorA "[1.000000 1.000000 1.000000 1.000000]"
 	TextureAmbientOcclusionA "materials/fw_stonefloor/StoneFloor_01_ao.png"
