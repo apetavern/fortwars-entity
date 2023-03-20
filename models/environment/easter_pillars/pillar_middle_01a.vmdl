@@ -18,8 +18,8 @@
 								to = "models/environment/easter_pillars/easter_pillars_01a.vmat"
 							},
 						]
-						use_global_default = false
-						global_default_material = ""
+						use_global_default = true
+						global_default_material = "models/environment/easter_pillars/easter_pillars_01a.vmat"
 					},
 				]
 			},
@@ -28,12 +28,31 @@
 				children = 
 				[
 					{
-						_class = "PhysicsHullFromRender"
+						_class = "PhysicsHullFile"
+						name = "pillar_middle_01a"
 						parent_bone = ""
 						surface_prop = "default"
 						collision_tags = "solid"
-						faceMergeAngle = 21.02
-						maxHullVertices = 18
+						recenter_on_parent_bone = false
+						offset_origin = [ 0.0, 0.0, 0.0 ]
+						offset_angles = [ 0.0, 0.0, 0.0 ]
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						filename = "models/environment/easter_pillars/pillar_middle_01a.fbx"
+						import_scale = 1.0
+						faceMergeAngle = 10.0
+						maxHullVertices = 0
+						import_mode = "SingleHull"
+						optimization_algorithm = "QEM"
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"pillar_middle_01a_LOD2",
+							]
+						}
 					},
 				]
 			},
@@ -43,6 +62,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
+						name = "lod0"
 						filename = "models/environment/easter_pillars/pillar_middle_01a.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -57,8 +77,81 @@
 							exception_list = 
 							[
 								"pillar_middle_01a_low",
+								"pillar_middle_01a_LOD0",
 							]
 						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "lod1"
+						filename = "models/environment/easter_pillars/pillar_middle_01a.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"pillar_middle_01a_low",
+								"pillar_middle_01a_LOD1",
+							]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "lod2"
+						filename = "models/environment/easter_pillars/pillar_middle_01a.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"pillar_middle_01a_low",
+								"pillar_middle_01a_LOD2",
+							]
+						}
+					},
+				]
+			},
+			{
+				_class = "LODGroupList"
+				children = 
+				[
+					{
+						_class = "LODGroup"
+						switch_threshold = 0.0
+						meshes = 
+						[
+							"lod0",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 35.0
+						meshes = 
+						[
+							"lod1",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 75.0
+						meshes = 
+						[
+							"lod2",
+						]
 					},
 				]
 			},
