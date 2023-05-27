@@ -42,7 +42,7 @@ public partial class FortwarsManager : Sandbox.GameManager
 		GamemodeSystem.Instance?.OnClientDisconnect( client, reason );
 	}
 
-	[Event.Entity.PostSpawn]
+	[GameEvent.Entity.PostSpawn]
 	public void PostEntitySpawn()
 	{
 		GamemodeSystem.SetupGamemode();

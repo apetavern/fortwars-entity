@@ -25,7 +25,7 @@ public partial class InfoFlagSpawn : ModelEntity
 		BogRoll.SetMaterialGroup( Team, this );
 	}
 
-	[Event.Tick.Client]
+	[GameEvent.Tick.Client]
 	public void Tick()
 	{
 		if ( GamemodeSystem.Instance is not CaptureTheFlag ctf )
@@ -39,7 +39,7 @@ public partial class InfoFlagSpawn : ModelEntity
 	const float bobSpeed = 2f;
 	const float bobPower = 5f;
 
-	[Event.PreRender]
+	[GameEvent.PreRender]
 	protected void PreRender()
 	{
 		if ( !SceneObject.IsValid() )

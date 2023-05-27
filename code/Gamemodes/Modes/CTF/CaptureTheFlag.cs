@@ -411,7 +411,7 @@ public partial class CaptureTheFlag : Gamemode
 		inv.SetActiveWeapon( inv.GetWeaponFromSlot( lastActiveWeapon ) );
 	}
 
-	[Event.Tick]
+	[GameEvent.Tick]
 	public void Tick()
 	{
 		if ( !Debug )

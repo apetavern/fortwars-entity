@@ -25,7 +25,7 @@ public partial class WeaponViewModel : AnimatedEntity
 		Current = null;
 	}
 
-	[Event.Client.PostCamera]
+	[GameEvent.Client.PostCamera]
 	public void PlaceViewModel()
 	{
 		Camera.Main.SetViewModelCamera( 80f );
