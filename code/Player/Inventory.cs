@@ -83,15 +83,15 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		};
 	}
 
-	protected static int GetSlotIndexFromInput( InputButton slot )
+	protected static int GetSlotIndexFromInput( string slot )
 	{
 		return slot switch
 		{
-			InputButton.Slot1 => 0,
-			InputButton.Slot2 => 1,
-			InputButton.Slot3 => 2,
-			InputButton.Slot4 => 3,
-			InputButton.Slot5 => 4,
+			InputAction.Slot1 => 0,
+			InputAction.Slot2 => 1,
+			InputAction.Slot3 => 2,
+			InputAction.Slot4 => 3,
+			InputAction.Slot5 => 4,
 			_ => -1
 		};
 	}
@@ -108,25 +108,23 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		}
 	}
 
-	protected void TrySlotFromInput( InputButton slot )
+	protected void TrySlotFromInput( string slot )
 	{
 		if ( Input.Pressed( slot ) )
 		{
-			Input.SuppressButton( slot );
-
 			SetWeaponFromSlot( GetSlotIndexFromInput( slot ) );
 		}
 	}
 
 	public void BuildInput()
 	{
-		TrySlotFromInput( InputButton.Slot1 );
-		TrySlotFromInput( InputButton.Slot2 );
-		TrySlotFromInput( InputButton.Slot3 );
-		TrySlotFromInput( InputButton.Slot4 );
-		TrySlotFromInput( InputButton.Slot5 );
+		TrySlotFromInput( InputAction.Slot1 );
+		TrySlotFromInput( InputAction.Slot2 );
+		TrySlotFromInput( InputAction.Slot3 );
+		TrySlotFromInput( InputAction.Slot4 );
+		TrySlotFromInput( InputAction.Slot5 );
 
-		if ( Input.Pressed( InputButton.Menu ) )
+		if ( Input.Pressed( InputAction.Menu ) )
 			SetWeaponFromSlot( LastActiveWeaponSlot );
 	}
 

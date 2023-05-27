@@ -8,12 +8,12 @@ public class JumpMechanic : PlayerControllerMechanic
 	{
 		if ( GroundEntity.IsValid() )
 		{
-			if ( !Input.Down( InputButton.Jump ) )
+			if ( !Input.Down( InputAction.Jump ) )
 				return false;
 		}
 		else
 		{
-			if ( !Input.Pressed( InputButton.Jump ) )
+			if ( !Input.Pressed( InputAction.Jump ) )
 				return false;
 		}
 

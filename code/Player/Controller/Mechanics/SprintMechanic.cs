@@ -8,6 +8,6 @@ public class SprintMechanic : PlayerControllerMechanic
 
 	protected override bool ShouldStart()
 	{
-		return Input.Down( InputButton.Run ) && GroundEntity != null;
+		return Input.Down( InputAction.Run ) && GroundEntity != null;
 	}
 }

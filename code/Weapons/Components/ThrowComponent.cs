@@ -2,7 +2,7 @@
 
 public class ThrowComponent : WeaponComponent
 {
-	public virtual InputButton ThrowButton => InputButton.PrimaryAttack;
+	public virtual string ThrowButton => InputAction.PrimaryAttack;
 
 	protected Particles TracerParticle { get; set; }
 

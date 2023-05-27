@@ -2,7 +2,7 @@
 
 public class ShootComponent : WeaponComponent
 {
-	public virtual InputButton FireButton => InputButton.PrimaryAttack;
+	public virtual string FireButton => InputAction.PrimaryAttack;
 
 	public TimeUntil TimeUntilCanFire { get; set; }
 	protected Particles TracerParticle { get; set; }
