@@ -1,33 +1,19 @@
-// THIS FILE IS AUTO-GENERATED
-
-Layer0
+"Layer0"
 {
-	shader "fortwars_glow.vfx"
-
-	//---- Blending ----
-	F_ADDITIVE_BLEND 1
-
-	//---- Color ----
-	g_flModelTintAmount "1.000"
-	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-
-	//---- Fade ----
-	g_flFadeExponent "1.000"
-
-	//---- Material ----
-	TextureColor "[1.000000 1.000000 1.000000 1.000000]"
-	TextureTintMask "materials/default/default.tga"
-
-	//---- Outline Settings ----
-	g_bResolutionDependentOutline "0"
-	g_bScaleByDistance "0"
-	g_flOffset "1.000"
-	g_flOutlineSize "0.500"
-
-	//---- Texture Coordinates ----
-	g_nScaleTexCoordUByModelScaleAxis "0"
-	g_nScaleTexCoordVByModelScaleAxis "0"
-	g_vTexCoordOffset "[0.000 0.000]"
-	g_vTexCoordScale "[1.000 1.000]"
-	g_vTexCoordScrollSpeed "[0.000 0.000]"
+	"shader"		"shaders/fortwars_glow.shader_c"
+	"F_ADDITIVE_BLEND"		"1"
+	"g_flModelTintAmount"		"1.000000"
+	"g_vColorTint"		"[1.000000 1.000000 1.000000 0.000000]"
+	"g_flFadeExponent"		"1.000000"
+	"TextureColor"		"[1.000000 1.000000 1.000000 1.000000]"
+	"TextureTintMask"		"materials/default/default.tga"
+	"g_bResolutionDependentOutline"		"0"
+	"g_bScaleByDistance"		"0"
+	"g_flOffset"		"1.000000"
+	"g_flOutlineSize"		"0.500000"
+	"g_nScaleTexCoordUByModelScaleAxis"		"0"
+	"g_nScaleTexCoordVByModelScaleAxis"		"0"
+	"g_vTexCoordOffset"		"[0.000 0.000]"
+	"g_vTexCoordScale"		"[1.000 1.000]"
+	"g_vTexCoordScrollSpeed"		"[0.000 0.000]"
 }

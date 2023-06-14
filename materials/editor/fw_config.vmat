@@ -1,16 +1,10 @@
-// THIS FILE IS AUTO-GENERATED
-
-Layer0
+"Layer0"
 {
-	shader "tools_sprite.vfx"
-
-	F_ALPHA_TEST 2 // Embedded Alpha (RGBA)
-	F_TEXTURED 1
-	F_WORLD_SPACE_SIZE 1 // Size In World Space
-
-	g_flAlphaTestReference "0.300"
-	g_flUniformPointSize "16.000"
-
-	//---- Color ----
-	TextureColor "textures/editor/fw_config.png"
+	"shader"		"shaders/tools_sprite.shader_c"
+	"F_ALPHA_TEST"		"2"
+	"F_TEXTURED"		"1"
+	"F_WORLD_SPACE_SIZE"		"1"
+	"g_flAlphaTestReference"		"0.300000"
+	"g_flUniformPointSize"		"16.000000"
+	"TextureColor"		"textures/editor/fw_config.png"
 }

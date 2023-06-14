@@ -1,49 +1,34 @@
-// THIS FILE IS AUTO-GENERATED
-
-Layer0
+"Layer0"
 {
-	shader "shaders/blendable.shader"
-
-	F_MULTIBLEND 1 // 2 Layers
-
-	//---- Use Tint Masks In Vertex Paint ----
-	F_USE_TINT_MASKS_IN_VERTEX_PAINT 1
-
-	g_flDirectionalLightmapMinZ "0.050"
-	g_flDirectionalLightmapStrength "1.000"
-
-	//---- Fog ----
-	g_bFogEnabled "1"
-
-	//---- Material ----
-	TextureColor "materials/fw_stonefloor/StoneFloor_01_color.png"
-	TextureTintMask "materials/default/default.tga"
-
-	//---- Material A ----
-	g_flTintColorA "[1.000000 1.000000 1.000000 1.000000]"
-	TextureAmbientOcclusionA "materials/fw_stonefloor/StoneFloor_01_ao.png"
-	TextureBlendMaskA "materials/default/default_blend.tga"
-	TextureColorA "materials/fw_stonefloor/StoneFloor_01_color.png"
-	TextureMetalnessA "materials/default/default_metal.tga"
-	TextureNormalA "materials/fw_stonefloor/StoneFloor_01_normal.png"
-	TextureRoughnessA "materials/fw_stonefloor/StoneFloor_01_rough.png"
-	TextureTintMaskA "materials/default/default.tga"
-
-	//---- Material B ----
-	g_flBlendSoftnessB "0.500"
-	g_flTintColorB "[1.000000 1.000000 1.000000 0.000000]"
-	g_vTexCoordScale2 "[1.000 1.000]"
-	TextureAmbientOcclusionB "materials/fw_sand/fw_sand_01a_ao.png"
-	TextureBlendMaskB "materials/fw_stonefloor/StoneFloor_01_height.png"
-	TextureColorB "materials/fw_sand/fw_sand_01a_color.png"
-	TextureMetalnessB "materials/default/default_metal.tga"
-	TextureNormalB "materials/fw_sand/fw_sand_01a_normal.png"
-	TextureRoughnessB "materials/fw_sand/fw_sand_01a_rough.png"
-	TextureTintMaskB "materials/default/default.tga"
-
-	SystemAttributes
+	"shader"		"shaders/blendable.shader_c"
+	"F_MULTIBLEND"		"1"
+	"F_USE_TINT_MASKS_IN_VERTEX_PAINT"		"1"
+	"g_flDirectionalLightmapMinZ"		"0.050000"
+	"g_flDirectionalLightmapStrength"		"1.000000"
+	"g_bFogEnabled"		"1"
+	"TextureColor"		"materials/fw_stonefloor/StoneFloor_01_color.png"
+	"TextureTintMask"		"materials/default/default.tga"
+	"g_flTintColorA"		"[1.000000 1.000000 1.000000 1.000000]"
+	"TextureAmbientOcclusionA"		"materials/fw_stonefloor/StoneFloor_01_ao.png"
+	"TextureBlendMaskA"		"materials/default/default_blend.tga"
+	"TextureColorA"		"materials/fw_stonefloor/StoneFloor_01_color.png"
+	"TextureMetalnessA"		"materials/default/default_metal.tga"
+	"TextureNormalA"		"materials/fw_stonefloor/StoneFloor_01_normal.png"
+	"TextureRoughnessA"		"materials/fw_stonefloor/StoneFloor_01_rough.png"
+	"TextureTintMaskA"		"materials/default/default.tga"
+	"g_flBlendSoftnessB"		"0.500000"
+	"g_flTintColorB"		"[1.000000 1.000000 1.000000 0.000000]"
+	"g_vTexCoordScale2"		"[1.000 1.000]"
+	"TextureAmbientOcclusionB"		"materials/fw_sand/fw_sand_01a_ao.png"
+	"TextureBlendMaskB"		"materials/fw_stonefloor/StoneFloor_01_height.png"
+	"TextureColorB"		"materials/fw_sand/fw_sand_01a_color.png"
+	"TextureMetalnessB"		"materials/default/default_metal.tga"
+	"TextureNormalB"		"materials/fw_sand/fw_sand_01a_normal.png"
+	"TextureRoughnessB"		"materials/fw_sand/fw_sand_01a_rough.png"
+	"TextureTintMaskB"		"materials/default/default.tga"
+	"SystemAttributes"
 	{
-		WorldMappingWidth "128"
-		WorldMappingHeight "128"
+		"WorldMappingWidth"		"128"
+		"WorldMappingHeight"		"128"
 	}
 }

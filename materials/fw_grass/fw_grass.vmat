@@ -1,43 +1,29 @@
-// THIS FILE IS AUTO-GENERATED
-
-Layer0
+"Layer0"
 {
-	shader "blendable.shader"
-
-	F_MULTIBLEND 1 // 2 Layers
-
-	//---- Use Tint Masks In Vertex Paint ----
-	F_USE_TINT_MASKS_IN_VERTEX_PAINT 1
-
-	g_flDirectionalLightmapMinZ "0.050"
-	g_flDirectionalLightmapStrength "1.000"
-
-	//---- Fog ----
-	g_bFogEnabled "1"
-
-	//---- Material ----
-	TextureColor "materials/default/default_color.tga"
-	TextureTintMask "materials/default/default.tga"
-
-	//---- Material A ----
-	g_flTintColorA "[0.411765 0.278431 0.192157 1.000000]"
-	TextureAmbientOcclusionA "materials/default/default_ao.tga"
-	TextureBlendMaskA "materials/fw_stone/fw_stone_roughness.png"
-	TextureColorA "[0.662745 0.498039 0.400000 1.000000]"
-	TextureMetalnessA "materials/default/default_metal.tga"
-	TextureNormalA "materials/fw_stone/fw_stone_normal.png"
-	TextureRoughnessA "[0.894000 0.894000 0.894000 0.000000]"
-	TextureTintMaskA "[1.000000 1.000000 1.000000 0.000000]"
-
-	//---- Material B ----
-	g_flBlendSoftnessB "0.100"
-	g_flTintColorB "[1.000000 1.000000 1.000000 0.000000]"
-	g_vTexCoordScale2 "[2.500 2.500]"
-	TextureAmbientOcclusionB "materials/fw_grass/fw_grass_ambientocclusion.png"
-	TextureBlendMaskB "materials/fw_grass/fw_grass_height.png"
-	TextureColorB "materials/fw_grass/fw_grass_basecolor.png"
-	TextureMetalnessB "[0.649000 0.649000 0.649000 0.000000]"
-	TextureNormalB "materials/fw_grass/fw_grass_normal.png"
-	TextureRoughnessB "materials/fw_grass/fw_grass_roughness.png"
-	TextureTintMaskB "[0.000000 0.000000 0.000000 0.000000]"
+	"shader"		"shaders/blendable.shader_c"
+	"F_MULTIBLEND"		"1"
+	"F_USE_TINT_MASKS_IN_VERTEX_PAINT"		"1"
+	"g_flDirectionalLightmapMinZ"		"0.050000"
+	"g_flDirectionalLightmapStrength"		"1.000000"
+	"g_bFogEnabled"		"1"
+	"TextureColor"		"materials/default/default_color.tga"
+	"TextureTintMask"		"materials/default/default.tga"
+	"g_flTintColorA"		"[0.411765 0.278431 0.192157 1.000000]"
+	"TextureAmbientOcclusionA"		"materials/default/default_ao.tga"
+	"TextureBlendMaskA"		"materials/fw_stone/fw_stone_roughness.png"
+	"TextureColorA"		"[0.662745 0.498039 0.400000 1.000000]"
+	"TextureMetalnessA"		"materials/default/default_metal.tga"
+	"TextureNormalA"		"materials/fw_stone/fw_stone_normal.png"
+	"TextureRoughnessA"		"[0.894000 0.894000 0.894000 0.000000]"
+	"TextureTintMaskA"		"[1.000000 1.000000 1.000000 0.000000]"
+	"g_flBlendSoftnessB"		"0.100000"
+	"g_flTintColorB"		"[1.000000 1.000000 1.000000 0.000000]"
+	"g_vTexCoordScale2"		"[2.500 2.500]"
+	"TextureAmbientOcclusionB"		"materials/fw_grass/fw_grass_ambientocclusion.png"
+	"TextureBlendMaskB"		"materials/fw_grass/fw_grass_height.png"
+	"TextureColorB"		"materials/fw_grass/fw_grass_basecolor.png"
+	"TextureMetalnessB"		"[0.649000 0.649000 0.649000 0.000000]"
+	"TextureNormalB"		"materials/fw_grass/fw_grass_normal.png"
+	"TextureRoughnessB"		"materials/fw_grass/fw_grass_roughness.png"
+	"TextureTintMaskB"		"[0.000000 0.000000 0.000000 0.000000]"
 }
