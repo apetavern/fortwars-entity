@@ -203,6 +203,7 @@ public partial class CaptureTheFlag : Gamemode
 
 	private void GiveCombatLoadout( Player player, Inventory inventory )
 	{
+		inventory.AddWeapon( Weapon.FromPrefab( "data/weapons/ctf/usp.prefab" ), true );
 		/*		inventory.AddWeapon(
 					WeaponAsset.CreateInstance( WeaponAsset.FromPath( player.SelectedPrimaryWeapon ) ), true );
 				inventory.AddWeapon(

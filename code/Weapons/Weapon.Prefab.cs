@@ -23,10 +23,41 @@ public partial class Weapon
 	/// <summary>
 	/// The HoldType of this weapon.
 	/// </summary>
-	[Prefab] public HoldType HoldType { get; set; } = HoldType.None;
+	[Prefab, Net] public HoldType HoldType { get; set; } = HoldType.None;
 
 	/// <summary>
 	/// The handedness of this weapon.
 	/// </summary>
-	[Prefab] public Handedness Handedness { get; set; } = Handedness.Both;
+	[Prefab, Net] public Handedness Handedness { get; set; } = Handedness.Both;
+
+	/// <summary>
+	/// Spawns and returns a Weapon from the Prefab Library.
+	/// </summary>
+	/// <param name="prefabName">The asset path to the prefab.</param>
+	/// <returns>The weapon if spawned successfully, otherwise null.</returns>
+	public static Weapon FromPrefab( string prefabName )
+	{
+		if ( PrefabLibrary.TrySpawn<Weapon>( prefabName, out var weapon ) )
+		{
+			return weapon;
+		}
+
+		return null;
+	}
+
+	/// <summary>
+	/// Returns all prefabs from the Prefab Library that are of Weapon type.
+	/// </summary>
+	/// <returns>A collection of Prefabs with the Weapon type.</returns>
+	public static IEnumerable<Prefab> GetAllWeaponPrefabs()
+	{
+		foreach ( var prefab in ResourceLibrary.GetAll<Prefab>() )
+		{
+			var prefabType = TypeLibrary.GetType( prefab.Root.Class );
+			if ( prefabType is not null && prefabType.TargetType == typeof( Weapon ) )
+			{
+				yield return prefab;
+			}
+		}
+	}
 }
