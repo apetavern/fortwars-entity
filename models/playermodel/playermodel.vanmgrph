@@ -57,6 +57,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -92,6 +95,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -161,6 +167,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -1422,6 +1431,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 												{
 													_class = "CAnimStateTransition"
@@ -1452,6 +1464,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = [  ]
@@ -1521,6 +1536,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 												{
 													_class = "CAnimStateTransition"
@@ -1560,6 +1578,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = [  ]
@@ -1629,6 +1650,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 												{
 													_class = "CAnimStateTransition"
@@ -1668,6 +1692,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = [  ]
@@ -6206,6 +6233,12 @@
 					{
 						m_id = 1677366560
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.0
 					m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 					m_bResetOnChange = true
@@ -6215,6 +6248,7 @@
 						m_vControlPoint1 = [ 0.388889, 0.0 ]
 						m_vControlPoint2 = [ 0.148148, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -6529,6 +6563,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -6563,6 +6600,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -6597,6 +6637,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -6692,6 +6735,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -6722,6 +6768,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -6791,6 +6840,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -6821,6 +6873,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -6958,6 +7013,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -6992,6 +7050,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -7057,6 +7118,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -7087,6 +7151,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -7170,6 +7237,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -7200,6 +7270,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -7269,6 +7342,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -7299,6 +7375,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -7359,6 +7438,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -7389,6 +7471,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -7527,6 +7612,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -7561,6 +7649,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -7595,6 +7686,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -7690,6 +7784,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -7720,6 +7817,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -7789,6 +7889,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -7819,6 +7922,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -7930,6 +8036,12 @@
 					{
 						m_id = 4294967295
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.2
 					m_tagBehavior = "SelectorTagBehavior_OffWhenFinished"
 					m_bResetOnChange = true
@@ -7939,6 +8051,7 @@
 						m_vControlPoint1 = [ 0.5, 0.0 ]
 						m_vControlPoint2 = [ 0.5, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -8453,6 +8566,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -8513,6 +8629,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -11523,6 +11642,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -11583,6 +11705,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = true
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -11613,6 +11738,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -11643,6 +11771,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = true
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -11673,6 +11804,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = true
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -11703,6 +11837,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = true
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -11737,6 +11874,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = true
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -11842,6 +11982,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -11872,6 +12015,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -11902,6 +12048,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -11932,6 +12081,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -11962,6 +12114,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -11996,6 +12151,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -12056,6 +12214,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -12086,6 +12247,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -12116,6 +12280,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -12146,6 +12313,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -12180,6 +12350,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -12342,6 +12515,12 @@
 					{
 						m_id = 1322758033
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.3
 					m_tagBehavior = "SelectorTagBehavior_OffWhenFinished"
 					m_bResetOnChange = true
@@ -12351,6 +12530,7 @@
 						m_vControlPoint1 = [ 0.333333, 0.0 ]
 						m_vControlPoint2 = [ 0.111111, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -12803,6 +12983,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -12867,6 +13050,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -12897,6 +13083,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -13493,6 +13682,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -13553,6 +13745,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -13826,6 +14021,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = true
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -13860,6 +14058,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -13894,6 +14095,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -13966,6 +14170,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = true
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -14030,6 +14237,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -14064,6 +14274,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -14136,6 +14349,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -14170,6 +14386,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -14261,6 +14480,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -14295,6 +14517,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -14360,6 +14585,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -14390,6 +14618,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -14473,6 +14704,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -14503,6 +14737,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -14572,6 +14809,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -14602,6 +14842,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -14671,6 +14914,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -14701,6 +14947,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -14913,6 +15162,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -14943,6 +15195,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -15008,6 +15263,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -15281,6 +15539,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -15308,6 +15569,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -15943,6 +16207,12 @@
 					{
 						m_id = 4294967295
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.5
 					m_tagBehavior = "SelectorTagBehavior_OffWhenFinished"
 					m_bResetOnChange = true
@@ -15952,6 +16222,7 @@
 						m_vControlPoint1 = [ 0.5, 0.0 ]
 						m_vControlPoint2 = [ 0.5, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -16589,6 +16860,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -16651,6 +16925,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -16847,6 +17124,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -16907,6 +17187,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -17425,6 +17708,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -17485,6 +17771,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -17610,6 +17899,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -17670,6 +17962,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -18103,6 +18398,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -18133,6 +18431,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -18202,6 +18503,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -18232,6 +18536,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -18292,6 +18599,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -18322,6 +18632,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -18409,6 +18722,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -18473,6 +18789,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -18499,6 +18818,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -18563,6 +18885,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -18632,6 +18957,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -18666,6 +18994,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -18693,6 +19024,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -18727,6 +19061,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -19082,6 +19419,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -19151,6 +19491,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = true
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -19178,6 +19521,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -19242,6 +19588,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -19306,6 +19655,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -19340,6 +19692,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = true
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -19374,6 +19729,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -20489,6 +20847,12 @@
 									{
 										m_id = 1677366560
 									}
+									m_intParamID = 
+									{
+										m_id = 4294967295
+									}
+									m_intParamMinValue = 0
+									m_intParamMaxValue = 2
 									m_blendDuration = 0.3
 									m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 									m_bResetOnChange = true
@@ -20498,6 +20862,7 @@
 										m_vControlPoint1 = [ 0.388889, 0.0 ]
 										m_vControlPoint2 = [ 0.148148, 1.0 ]
 									}
+									m_intParamNames = [  ]
 								}
 							},
 							{
@@ -20548,6 +20913,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = 
@@ -20617,6 +20985,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = [  ]
@@ -21120,6 +21491,12 @@
 									{
 										m_id = 1677366560
 									}
+									m_intParamID = 
+									{
+										m_id = 4294967295
+									}
+									m_intParamMinValue = 0
+									m_intParamMaxValue = 2
 									m_blendDuration = 0.3
 									m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 									m_bResetOnChange = true
@@ -21129,6 +21506,7 @@
 										m_vControlPoint1 = [ 0.388889, 0.0 ]
 										m_vControlPoint2 = [ 0.148148, 1.0 ]
 									}
+									m_intParamNames = [  ]
 								}
 							},
 							{
@@ -21179,6 +21557,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = 
@@ -21248,6 +21629,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = [  ]
@@ -21801,6 +22185,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -21870,6 +22257,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -23014,6 +23404,12 @@
 					{
 						m_id = 1677366560
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.3
 					m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 					m_bResetOnChange = true
@@ -23023,6 +23419,7 @@
 						m_vControlPoint1 = [ 0.388889, 0.0 ]
 						m_vControlPoint2 = [ 0.148148, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -23131,6 +23528,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -23191,6 +23591,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -23419,6 +23822,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -23479,6 +23885,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -23509,6 +23918,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -23543,6 +23955,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -23600,6 +24015,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -23660,6 +24078,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -23690,6 +24111,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -23724,6 +24148,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -23733,11 +24160,11 @@
 							{
 								m_nodeID = 
 								{
-									m_id = 76447608
+									m_id = 1166763061
 								}
 								m_outputID = 
 								{
-									m_id = 1196928891
+									m_id = 711010685
 								}
 							}
 							m_stateID = 
@@ -23923,6 +24350,12 @@
 					{
 						m_id = 1677366560
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.4
 					m_tagBehavior = "SelectorTagBehavior_OffWhenFinished"
 					m_bResetOnChange = true
@@ -23932,6 +24365,7 @@
 						m_vControlPoint1 = [ 0.5, 0.0 ]
 						m_vControlPoint2 = [ 0.166667, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -24166,6 +24600,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -24196,6 +24633,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -24265,6 +24705,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -24295,6 +24738,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -24355,6 +24801,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -24385,6 +24834,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -24518,6 +24970,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -24583,6 +25038,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -24698,6 +25156,12 @@
 					{
 						m_id = 1677366560
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.4
 					m_tagBehavior = "SelectorTagBehavior_OffWhenFinished"
 					m_bResetOnChange = true
@@ -24707,6 +25171,7 @@
 						m_vControlPoint1 = [ 0.5, 0.0 ]
 						m_vControlPoint2 = [ 0.166667, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -24756,6 +25221,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -24922,6 +25390,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -24984,6 +25455,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -25449,6 +25923,12 @@
 									{
 										m_id = 1677366560
 									}
+									m_intParamID = 
+									{
+										m_id = 4294967295
+									}
+									m_intParamMinValue = 0
+									m_intParamMaxValue = 2
 									m_blendDuration = 0.35
 									m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 									m_bResetOnChange = false
@@ -25458,6 +25938,7 @@
 										m_vControlPoint1 = [ 0.388889, 0.0 ]
 										m_vControlPoint2 = [ 0.092593, 1.0 ]
 									}
+									m_intParamNames = [  ]
 								}
 							},
 							{
@@ -25750,6 +26231,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = [  ]
@@ -25814,6 +26298,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 												{
 													_class = "CAnimStateTransition"
@@ -25844,6 +26331,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 												{
 													_class = "CAnimStateTransition"
@@ -25874,6 +26364,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = [  ]
@@ -25976,6 +26469,12 @@
 									{
 										m_id = 1677366560
 									}
+									m_intParamID = 
+									{
+										m_id = 4294967295
+									}
+									m_intParamMinValue = 0
+									m_intParamMaxValue = 2
 									m_blendDuration = 0.4
 									m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 									m_bResetOnChange = false
@@ -25985,6 +26484,7 @@
 										m_vControlPoint1 = [ 0.333333, 0.0 ]
 										m_vControlPoint2 = [ 0.092593, 1.0 ]
 									}
+									m_intParamNames = [  ]
 								}
 							},
 							{
@@ -26548,6 +27048,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 												{
 													_class = "CAnimStateTransition"
@@ -26591,6 +27094,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = 
@@ -26662,6 +27168,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 												{
 													_class = "CAnimStateTransition"
@@ -26698,6 +27207,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = 
@@ -27111,6 +27623,12 @@
 									{
 										m_id = 1677366560
 									}
+									m_intParamID = 
+									{
+										m_id = 4294967295
+									}
+									m_intParamMinValue = 0
+									m_intParamMaxValue = 2
 									m_blendDuration = 0.4
 									m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 									m_bResetOnChange = false
@@ -27120,6 +27638,7 @@
 										m_vControlPoint1 = [ 0.351852, 0.0 ]
 										m_vControlPoint2 = [ 0.111111, 1.0 ]
 									}
+									m_intParamNames = [  ]
 								}
 							},
 							{
@@ -27192,6 +27711,12 @@
 									{
 										m_id = 1677366560
 									}
+									m_intParamID = 
+									{
+										m_id = 4294967295
+									}
+									m_intParamMinValue = 0
+									m_intParamMaxValue = 2
 									m_blendDuration = 0.3
 									m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 									m_bResetOnChange = true
@@ -27201,6 +27726,7 @@
 										m_vControlPoint1 = [ 0.388889, 0.0 ]
 										m_vControlPoint2 = [ 0.148148, 1.0 ]
 									}
+									m_intParamNames = [  ]
 								}
 							},
 							{
@@ -27716,6 +28242,12 @@
 													{
 														m_id = 1677366560
 													}
+													m_intParamID = 
+													{
+														m_id = 4294967295
+													}
+													m_intParamMinValue = 0
+													m_intParamMaxValue = 2
 													m_blendDuration = 0.3
 													m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 													m_bResetOnChange = true
@@ -27725,6 +28257,7 @@
 														m_vControlPoint1 = [ 0.388889, 0.0 ]
 														m_vControlPoint2 = [ 0.092593, 1.0 ]
 													}
+													m_intParamNames = [  ]
 												}
 											},
 											{
@@ -28380,6 +28913,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 																{
 																	_class = "CAnimStateTransition"
@@ -28410,6 +28946,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 															]
 															m_tags = [  ]
@@ -28479,6 +29018,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 																{
 																	_class = "CAnimStateTransition"
@@ -28527,6 +29069,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 																{
 																	_class = "CAnimStateTransition"
@@ -28557,6 +29102,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 															]
 															m_tags = [  ]
@@ -28617,6 +29165,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 																{
 																	_class = "CAnimStateTransition"
@@ -28647,6 +29198,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 																{
 																	_class = "CAnimStateTransition"
@@ -28681,6 +29235,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 															]
 															m_tags = [  ]
@@ -29763,6 +30320,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -29823,6 +30383,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -30143,6 +30706,12 @@
 									{
 										m_id = 1677366560
 									}
+									m_intParamID = 
+									{
+										m_id = 4294967295
+									}
+									m_intParamMinValue = 0
+									m_intParamMaxValue = 2
 									m_blendDuration = 0.35
 									m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 									m_bResetOnChange = false
@@ -30152,6 +30721,7 @@
 										m_vControlPoint1 = [ 0.388889, 0.0 ]
 										m_vControlPoint2 = [ 0.092593, 1.0 ]
 									}
+									m_intParamNames = [  ]
 								}
 							},
 							{
@@ -30360,6 +30930,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = [  ]
@@ -30424,6 +30997,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 												{
 													_class = "CAnimStateTransition"
@@ -30454,6 +31030,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 												{
 													_class = "CAnimStateTransition"
@@ -30484,6 +31063,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = [  ]
@@ -30586,6 +31168,12 @@
 									{
 										m_id = 1677366560
 									}
+									m_intParamID = 
+									{
+										m_id = 4294967295
+									}
+									m_intParamMinValue = 0
+									m_intParamMaxValue = 2
 									m_blendDuration = 0.3
 									m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 									m_bResetOnChange = true
@@ -30595,6 +31183,7 @@
 										m_vControlPoint1 = [ 0.388889, 0.0 ]
 										m_vControlPoint2 = [ 0.148148, 1.0 ]
 									}
+									m_intParamNames = [  ]
 								}
 							},
 							{
@@ -30983,6 +31572,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 												{
 													_class = "CAnimStateTransition"
@@ -31026,6 +31618,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = 
@@ -31097,6 +31692,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 												{
 													_class = "CAnimStateTransition"
@@ -31133,6 +31731,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = 
@@ -31546,6 +32147,12 @@
 									{
 										m_id = 1677366560
 									}
+									m_intParamID = 
+									{
+										m_id = 4294967295
+									}
+									m_intParamMinValue = 0
+									m_intParamMaxValue = 2
 									m_blendDuration = 0.3
 									m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 									m_bResetOnChange = true
@@ -31555,6 +32162,7 @@
 										m_vControlPoint1 = [ 0.388889, 0.0 ]
 										m_vControlPoint2 = [ 0.148148, 1.0 ]
 									}
+									m_intParamNames = [  ]
 								}
 							},
 							{
@@ -31627,6 +32235,12 @@
 									{
 										m_id = 1677366560
 									}
+									m_intParamID = 
+									{
+										m_id = 4294967295
+									}
+									m_intParamMinValue = 0
+									m_intParamMaxValue = 2
 									m_blendDuration = 0.3
 									m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 									m_bResetOnChange = true
@@ -31636,6 +32250,7 @@
 										m_vControlPoint1 = [ 0.388889, 0.0 ]
 										m_vControlPoint2 = [ 0.148148, 1.0 ]
 									}
+									m_intParamNames = [  ]
 								}
 							},
 							{
@@ -31988,6 +32603,12 @@
 													{
 														m_id = 1677366560
 													}
+													m_intParamID = 
+													{
+														m_id = 4294967295
+													}
+													m_intParamMinValue = 0
+													m_intParamMaxValue = 2
 													m_blendDuration = 0.3
 													m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 													m_bResetOnChange = true
@@ -31997,6 +32618,7 @@
 														m_vControlPoint1 = [ 0.388889, 0.0 ]
 														m_vControlPoint2 = [ 0.092593, 1.0 ]
 													}
+													m_intParamNames = [  ]
 												}
 											},
 											{
@@ -32353,6 +32975,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 																{
 																	_class = "CAnimStateTransition"
@@ -32383,6 +33008,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 															]
 															m_tags = [  ]
@@ -32452,6 +33080,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 																{
 																	_class = "CAnimStateTransition"
@@ -32500,6 +33131,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 																{
 																	_class = "CAnimStateTransition"
@@ -32530,6 +33164,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 															]
 															m_tags = [  ]
@@ -32590,6 +33227,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 																{
 																	_class = "CAnimStateTransition"
@@ -32620,6 +33260,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 																{
 																	_class = "CAnimStateTransition"
@@ -32654,6 +33297,9 @@
 																	}
 																	m_bForceFootPlant = false
 																	m_bDisabled = false
+																	m_bRandomTimeBetween = false
+																	m_flRandomTimeStart = 0.0
+																	m_flRandomTimeEnd = 0.0
 																},
 															]
 															m_tags = [  ]
@@ -33201,6 +33847,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = [  ]
@@ -33258,6 +33907,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = [  ]
@@ -33482,6 +34134,12 @@
 									{
 										m_id = 1677366560
 									}
+									m_intParamID = 
+									{
+										m_id = 4294967295
+									}
+									m_intParamMinValue = 0
+									m_intParamMaxValue = 2
 									m_blendDuration = 0.1
 									m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 									m_bResetOnChange = false
@@ -33491,6 +34149,7 @@
 										m_vControlPoint1 = [ 0.388889, 0.0 ]
 										m_vControlPoint2 = [ 0.148148, 1.0 ]
 									}
+									m_intParamNames = [  ]
 								}
 							},
 							{
@@ -33916,6 +34575,12 @@
 					{
 						m_id = 1677366560
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.3
 					m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 					m_bResetOnChange = true
@@ -33925,6 +34590,7 @@
 						m_vControlPoint1 = [ 0.388889, 0.0 ]
 						m_vControlPoint2 = [ 0.148148, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -35098,6 +35764,12 @@
 									{
 										m_id = 1677366560
 									}
+									m_intParamID = 
+									{
+										m_id = 4294967295
+									}
+									m_intParamMinValue = 0
+									m_intParamMaxValue = 2
 									m_blendDuration = 0.3
 									m_tagBehavior = "SelectorTagBehavior_OffWhenFinished"
 									m_bResetOnChange = true
@@ -35107,6 +35779,7 @@
 										m_vControlPoint1 = [ 0.388889, 0.0 ]
 										m_vControlPoint2 = [ 0.148148, 1.0 ]
 									}
+									m_intParamNames = [  ]
 								}
 							},
 							{
@@ -35881,6 +36554,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -35943,6 +36619,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -36004,6 +36683,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -36038,6 +36720,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -36100,6 +36785,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -36258,6 +36946,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -36292,6 +36983,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -36326,6 +37020,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -36360,6 +37057,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -36424,6 +37124,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -36488,6 +37191,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -36552,6 +37258,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -37241,6 +37950,12 @@
 					{
 						m_id = 1677366560
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.0
 					m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 					m_bResetOnChange = true
@@ -37250,6 +37965,7 @@
 						m_vControlPoint1 = [ 0.388889, 0.0 ]
 						m_vControlPoint2 = [ 0.148148, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -38589,6 +39305,12 @@
 					{
 						m_id = 1677366560
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.3
 					m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 					m_bResetOnChange = true
@@ -38598,6 +39320,7 @@
 						m_vControlPoint1 = [ 0.314815, 0.0 ]
 						m_vControlPoint2 = [ 0.111111, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -38838,6 +39561,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -38872,6 +39598,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -38936,6 +39665,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -38970,6 +39702,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -39039,6 +39774,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -39073,6 +39811,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -40330,6 +41071,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -40390,6 +41134,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -40522,6 +41269,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -40556,6 +41306,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -40590,6 +41343,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -40660,6 +41416,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -40707,6 +41466,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -40776,6 +41538,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -40810,6 +41575,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -40844,6 +41612,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -40883,6 +41654,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -40945,6 +41719,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -40979,6 +41756,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -41043,6 +41823,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -41131,6 +41914,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -41161,6 +41947,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -41191,6 +41980,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -41247,6 +42039,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -41476,6 +42271,12 @@
 					{
 						m_id = 1322758033
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.3
 					m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 					m_bResetOnChange = true
@@ -41485,6 +42286,7 @@
 						m_vControlPoint1 = [ 0.388889, 0.0 ]
 						m_vControlPoint2 = [ 0.148148, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -41557,6 +42359,12 @@
 					{
 						m_id = 1677366560
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.1
 					m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 					m_bResetOnChange = false
@@ -41566,6 +42374,7 @@
 						m_vControlPoint1 = [ 0.314815, 0.0 ]
 						m_vControlPoint2 = [ 0.111111, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -41641,6 +42450,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -41675,6 +42487,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -41709,6 +42524,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -41804,6 +42622,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -41834,6 +42655,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -41903,6 +42727,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -41933,6 +42760,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -42693,6 +43523,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -42723,6 +43556,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -42792,6 +43628,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -42822,6 +43661,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -42891,6 +43733,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 								{
 									_class = "CAnimStateTransition"
@@ -42921,6 +43766,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -43281,6 +44129,12 @@
 					{
 						m_id = 1322758033
 					}
+					m_intParamID = 
+					{
+						m_id = 4294967295
+					}
+					m_intParamMinValue = 0
+					m_intParamMaxValue = 2
 					m_blendDuration = 0.3
 					m_tagBehavior = "SelectorTagBehavior_OffWhenFinished"
 					m_bResetOnChange = true
@@ -43290,6 +44144,7 @@
 						m_vControlPoint1 = [ 0.259259, 0.0 ]
 						m_vControlPoint2 = [ 0.12963, 1.0 ]
 					}
+					m_intParamNames = [  ]
 				}
 			},
 			{
@@ -43513,6 +44368,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = [  ]
@@ -43570,6 +44428,9 @@
 													}
 													m_bForceFootPlant = false
 													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
 												},
 											]
 											m_tags = [  ]
@@ -43772,6 +44633,12 @@
 									{
 										m_id = 1677366560
 									}
+									m_intParamID = 
+									{
+										m_id = 4294967295
+									}
+									m_intParamMinValue = 0
+									m_intParamMaxValue = 2
 									m_blendDuration = 0.1
 									m_tagBehavior = "SelectorTagBehavior_OnWhileCurrent"
 									m_bResetOnChange = false
@@ -43781,6 +44648,7 @@
 										m_vControlPoint1 = [ 0.388889, 0.0 ]
 										m_vControlPoint2 = [ 0.148148, 1.0 ]
 									}
+									m_intParamNames = [  ]
 								}
 							},
 							{
@@ -44171,6 +45039,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -44284,6 +45155,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = 
@@ -44353,6 +45227,9 @@
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
+									m_bRandomTimeBetween = false
+									m_flRandomTimeStart = 0.0
+									m_flRandomTimeEnd = 0.0
 								},
 							]
 							m_tags = [  ]
@@ -45648,6 +46525,14 @@
 				m_tagID = 
 				{
 					m_id = 562499854
+				}
+			},
+			{
+				_class = "CStringAnimTag"
+				m_name = "Disable global feet IK (done over 200ms)"
+				m_tagID = 
+				{
+					m_id = 2097192094
 				}
 			},
 		]
