@@ -62,25 +62,26 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 
 	public Weapon GetWeaponFromSlot( int slot )
 	{
-		return slot switch
-		{
-			0 => Weapons
-				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Primary )
-				.FirstOrDefault(),
-			1 => Weapons
-				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Secondary )
-				.FirstOrDefault(),
-			2 => Weapons
-				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Equipment )
-				.FirstOrDefault(),
-			3 => Weapons
-				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Other )
-				.FirstOrDefault(),
-			4 => Weapons
-				.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Flag )
-				.FirstOrDefault(),
-			_ => null
-		};
+		/*		return slot switch
+				{
+					0 => Weapons
+						.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Primary )
+						.FirstOrDefault(),
+					1 => Weapons
+						.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Secondary )
+						.FirstOrDefault(),
+					2 => Weapons
+						.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Equipment )
+						.FirstOrDefault(),
+					3 => Weapons
+						.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Other )
+						.FirstOrDefault(),
+					4 => Weapons
+						.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Flag )
+						.FirstOrDefault(),
+					_ => null
+				};*/
+		return null;
 	}
 
 	protected static int GetSlotIndexFromInput( string slot )
@@ -141,7 +142,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		if ( Debug )
 		{
 			var lineOffset = 22;
-			DebugOverlay.ScreenText( $"ActiveWeapon {ActiveWeapon.WeaponAsset.ResourceName}", lineOffset++ );
+			// DebugOverlay.ScreenText( $"ActiveWeapon {ActiveWeapon.WeaponAsset.ResourceName}", lineOffset++ );
 			DebugOverlay.ScreenText( $"ActiveWeaponSlot {ActiveWeaponSlot}", lineOffset++ );
 			DebugOverlay.ScreenText( $"LastActiveWeaponSlot {LastActiveWeaponSlot}", lineOffset++ );
 		}
@@ -181,10 +182,10 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 			return;
 
 		var preppedWeaponPath = $"data/weapons/{weaponPath}.fwweapon";
-		var weaponAsset = WeaponAsset.FromPath( preppedWeaponPath );
-		var weapon = WeaponAsset.CreateInstance( weaponAsset );
+		/*		var weaponAsset = WeaponAsset.FromPath( preppedWeaponPath );
+				var weapon = WeaponAsset.CreateInstance( weaponAsset );*/
 
-		player.Inventory.AddWeapon( weapon, true );
+		// player.Inventory.AddWeapon( weapon, true );
 	}
 
 	[ConVar.Replicated( "fw_debug_inv" )]

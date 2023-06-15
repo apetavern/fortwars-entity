@@ -11,7 +11,7 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 	[Net, Predicted]
 	public TimeSince TimeSinceActivated { get; protected set; }
 
-	public virtual string Name => displayInfo.Name.Replace( " ", "" );
+	public virtual new string Name => displayInfo.Name.Replace( " ", "" );
 	protected virtual bool UseLagCompensation => false;
 	protected virtual bool EnableActivateEvents => true;
 
@@ -24,7 +24,7 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 
 	public T GetComponent<T>() where T : WeaponComponent
 	{
-		return Weapon.GetComponent<T>();
+		return null; //Weapon.GetComponent<T>();
 	}
 
 	public void RunGameEvent( string eventName )

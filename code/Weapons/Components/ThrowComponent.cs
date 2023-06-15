@@ -68,11 +68,11 @@ public class ThrowComponent : WeaponComponent
 
 	public override void SimulateAnimator( Player player )
 	{
-		if ( Game.IsClient )
-		{
-			Weapon.ViewModelEntity.SetAnimParameter( "pull", _charge > 0 );
-			Weapon.ViewModelEntity.SetAnimParameter( "pullamount", _charge / 100f );
-		}
+		/*		if ( Game.IsClient )
+				{
+					Weapon.ViewModelEntity.SetAnimParameter( "pull", _charge > 0 );
+					Weapon.ViewModelEntity.SetAnimParameter( "pullamount", _charge / 100f );
+				}*/
 
 	}
 }

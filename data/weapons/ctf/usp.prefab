@@ -1,0 +1,56 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "58e4385d-254f-4374-b82c-a901384c7b52",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [],
+    "Keys": {
+      "WeaponName": {
+        "Type": "String",
+        "Value": "\u0022HK USP\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/hkusp/hkusp_w.vmdl\u0022"
+      },
+      "ViewModel": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/hkusp/hkusp_v.vmdl\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022ui/icons/weapons/pistol.png\u0022"
+      },
+      "Handedness": {
+        "Type": "Handedness",
+        "Value": "\u0022Both\u0022"
+      },
+      "HoldType": {
+        "Type": "HoldType",
+        "Value": "\u0022Pistol\u0022"
+      },
+      "InventorySlot": {
+        "Type": "InventorySlot",
+        "Value": "\u0022Secondary\u0022"
+      },
+      "_name": {
+        "Value": "\u0022HK-USP\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022weapon\u0022"
+      }
+    }
+  }
+}

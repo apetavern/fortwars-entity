@@ -1,6 +1,4 @@
-﻿using static Sandbox.Event;
-
-namespace Fortwars;
+﻿namespace Fortwars;
 
 public partial class CaptureTheFlag : Gamemode
 {
@@ -205,16 +203,16 @@ public partial class CaptureTheFlag : Gamemode
 
 	private void GiveCombatLoadout( Player player, Inventory inventory )
 	{
-		inventory.AddWeapon(
-			WeaponAsset.CreateInstance( WeaponAsset.FromPath( player.SelectedPrimaryWeapon ) ), true );
-		inventory.AddWeapon(
-			WeaponAsset.CreateInstance( WeaponAsset.FromPath( player.SelectedSecondaryWeapon ) ), false );
+		/*		inventory.AddWeapon(
+					WeaponAsset.CreateInstance( WeaponAsset.FromPath( player.SelectedPrimaryWeapon ) ), true );
+				inventory.AddWeapon(
+					WeaponAsset.CreateInstance( WeaponAsset.FromPath( player.SelectedSecondaryWeapon ) ), false );
 
-		if ( player.Class.Equipment == null )
-			return;
+				if ( player.Class.Equipment == null )
+					return;
 
-		inventory.AddWeapon(
-			WeaponAsset.CreateInstance( player.Class.Equipment ), false );
+				inventory.AddWeapon(
+					WeaponAsset.CreateInstance( player.Class.Equipment ), false );*/
 	}
 
 	internal override void OnWeaponDropped( Player player, Weapon weapon )
@@ -222,8 +220,8 @@ public partial class CaptureTheFlag : Gamemode
 		if ( Game.IsClient )
 			return;
 
-		if ( weapon.WeaponAsset.Name != "Bog Roll" )
-			return;
+		/*		if ( weapon.WeaponAsset.Name != "Bog Roll" )
+					return;*/
 
 		var team = player.Client.Components.Get<TeamComponent>().Team;
 		var dropPos = player.EyePosition + ( player.EyeRotation.Forward * 50f );
@@ -309,8 +307,8 @@ public partial class CaptureTheFlag : Gamemode
 				return;
 
 			// Ensure the player's active weapon is a Bog Roll.
-			if ( player.ActiveWeapon.WeaponAsset.Name != "Bog Roll" )
-				return;
+			/*			if ( player.ActiveWeapon.WeaponAsset.Name != "Bog Roll" )
+							return;*/
 
 			// Ensure the player's team flag is home.
 			if ( !FlagIsHome( playerTeam ) )
@@ -372,8 +370,8 @@ public partial class CaptureTheFlag : Gamemode
 		Log.Info( $"Fortwars CTF: The flag for team {team} has been stolen by {player.Client.Name}." );
 
 		// Add the flag to the player's inventory.
-		player.Inventory.AddWeapon(
-			WeaponAsset.CreateInstance( WeaponAsset.FromPath( BogRollPath ) ), true );
+		/*		player.Inventory.AddWeapon(
+					WeaponAsset.CreateInstance( WeaponAsset.FromPath( BogRollPath ) ), true );*/
 	}
 
 	private void ReturnFlag( Team team )

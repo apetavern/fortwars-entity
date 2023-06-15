@@ -35,7 +35,7 @@ public class ClassAsset : GameResource
 	public float HealthMultiplier { get; set; } = 1.0f;
 
 	[Category( "Gameplay" ), ResourceType( "fwweapon" )]
-	public WeaponAsset Equipment { get; set; }
+	// public WeaponAsset Equipment { get; set; }
 
 	public static ClassAsset Default => FromPath( "data/classes/assault.fwclass" );
 

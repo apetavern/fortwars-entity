@@ -1,0 +1,26 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "a918fac5-56bf-4807-98b3-c064c5ed3b0c",
+    "Class": "WeaponViewModel",
+    "Entities": [],
+    "Components": [],
+    "Keys": {
+      "_name": {
+        "Value": "\u0022HK USP ViewModel\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {}
+    }
+  }
+}

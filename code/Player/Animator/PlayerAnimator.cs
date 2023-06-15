@@ -17,20 +17,20 @@ public partial class PlayerAnimator : EntityComponent<Player>, ISingletonCompone
 		helper.AimAngle = player.EyeRotation;
 		helper.IsGrounded = ctrl.GroundEntity != null;
 
-		var weapon = player.ActiveWeapon;
-		if ( weapon.IsValid() )
-		{
-			player.SetAnimParameter( "holdtype", (int)weapon.WeaponAsset.HoldType );
-			player.SetAnimParameter( "holdtype_handedness", (int)weapon.WeaponAsset.Handedness );
+		/*		var weapon = player.ActiveWeapon;
+				if ( weapon.IsValid() )
+				{
+					player.SetAnimParameter( "holdtype", (int)weapon.WeaponAsset.HoldType );
+					player.SetAnimParameter( "holdtype_handedness", (int)weapon.WeaponAsset.Handedness );
 
-			foreach ( var component in weapon.Components.GetAll<WeaponComponent>() )
-			{
-				component.SimulateAnimator( player );
-			}
-		}
-		else
-		{
-			player.SetAnimParameter( "holdtype", (int)HoldType.None );
-		}
+					foreach ( var component in weapon.Components.GetAll<WeaponComponent>() )
+					{
+						component.SimulateAnimator( player );
+					}
+				}
+				else
+				{
+					player.SetAnimParameter( "holdtype", (int)HoldType.None );
+				}*/
 	}
 }
