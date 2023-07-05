@@ -30,7 +30,7 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 	[Net, Predicted]
 	public float CurrentEyeHeight { get; set; } = 64f;
 
-	public IEnumerable<PlayerControllerMechanic> Mechanics => Entity.Components.GetAll<PlayerControllerMechanic>();
+	public IEnumerable<PlayerControllerMechanic> Mechanics => Entity.Components.GetAll<PlayerControllerMechanic>(true);
 	public PlayerControllerMechanic BestMechanic => Mechanics.OrderByDescending( x => x.SortOrder ).FirstOrDefault( x => x.IsActive );
 
 	public T GetMechanic<T>() where T : PlayerControllerMechanic
@@ -41,6 +41,21 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 		}
 
 		return null;
+	}
+
+	public bool TryGetMechanic<T>( out T m ) where T : PlayerControllerMechanic
+	{
+		foreach ( var mechanic in Mechanics )
+		{
+			if ( mechanic is T val )
+			{
+				m = (T)mechanic; 
+				return true;
+			}
+		}
+
+		m = null;
+		return false;
 	}
 
 	public bool IsMechanicActive<T>() where T : PlayerControllerMechanic
@@ -92,7 +107,7 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 			DebugOverlay.ScreenText( $"Mechanics", ++lineOffset );
 			foreach ( var mechanic in Mechanics )
 			{
-				DebugOverlay.ScreenText( $"{mechanic}", ++lineOffset );
+				DebugOverlay.ScreenText( $"{mechanic} : {mechanic.Enabled}", ++lineOffset );
 			}
 		}
 	}
@@ -106,6 +121,9 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 	{
 		foreach ( var mechanic in Mechanics )
 		{
+			if ( !mechanic.Enabled )
+				continue;
+
 			mechanic.TrySimulate( this );
 		}
 	}
