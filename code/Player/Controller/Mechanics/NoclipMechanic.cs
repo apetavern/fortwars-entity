@@ -7,8 +7,6 @@ public class NoclipMechanic : PlayerControllerMechanic
 		
 		if ( Controller.TryGetMechanic<AirMoveMechanic>( out var am ) )
 			am.Enabled = false;
-
-		Log.Info( am.Enabled );
 	}
 
 	protected override void OnDeactivate()
@@ -22,7 +20,6 @@ public class NoclipMechanic : PlayerControllerMechanic
 	protected override void Simulate()
 	{
 		base.Simulate();
-		Log.Info( "nocvlip" );
 		var fwd = Player.MoveInput.x.Clamp( -1f, 1f );
 		var left = Player.MoveInput.y.Clamp( -1f, 1f );
 		var rotation = Player.EyeRotation;
