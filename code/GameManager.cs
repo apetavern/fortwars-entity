@@ -47,4 +47,23 @@ public partial class FortwarsManager : Sandbox.GameManager
 	{
 		GamemodeSystem.SetupGamemode();
 	}
+
+	[ConCmd.Admin( "noclip" )]
+	private static void Noclip()
+	{
+		if ( ConsoleSystem.Caller.Pawn is not Player ply )
+			return;
+
+		if ( ply.Controller.TryGetMechanic<NoclipMechanic>( out var noclip ) )
+		{
+			noclip.Enabled = !noclip.Enabled;
+			return;
+		}
+		else
+		{
+			var nc = new NoclipMechanic();
+			nc.Enabled = true;
+			ply.Components.Add( nc );
+		}
+	}
 }
