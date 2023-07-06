@@ -54,6 +54,10 @@
       "ViewModelPrefab": {
         "Type": "Prefab",
         "Value": "\u0022data/weapons/ctf/usp_v.prefab\u0022"
+      },
+      "ViewModelAsset": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/hkusp/hkusp_v.vmdl\u0022"
       }
     }
   }

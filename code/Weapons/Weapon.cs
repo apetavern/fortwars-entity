@@ -3,8 +3,15 @@
 [Prefab, Category( "Weapons" )]
 public partial class Weapon : AnimatedEntity
 {
+	/// <summary>
+	/// The Owner of this Weapon as a Player.
+	/// </summary>
 	public Player Player => Owner as Player;
-	public WeaponViewModel ViewModel { get; private set; }
+
+	/// <summary>
+	/// The Entity holding our ViewModel. This should only exist clientside.
+	/// </summary>
+	public ViewModel ViewModelEntity { get; set; }
 
 	public Weapon()
 	{
@@ -23,11 +30,18 @@ public partial class Weapon : AnimatedEntity
 		base.Simulate( cl );
 	}
 
-	public void OnHolster( Player player )
+	/// <summary>
+	/// Handles any logic for holstering this weapon.
+	/// </summary>
+	public void OnHolster()
 	{
 		EnableDrawing = false;
 	}
 
+	/// <summary>
+	/// Handles any logic for deploying this weapon.
+	/// </summary>
+	/// <param name="player"></param>
 	public void OnDeploy( Player player )
 	{
 		SetParent( player, true );
@@ -41,10 +55,24 @@ public partial class Weapon : AnimatedEntity
 		EnableDrawing = true;
 	}
 
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+
+		if ( Game.IsClient )
+		{
+			ViewModelEntity?.Delete();
+		}
+	}
+
 	[ClientRpc]
 	public void CreateViewModel()
 	{
-		ViewModel = PrefabLibrary.Spawn<WeaponViewModel>( ViewModelPrefab );
-		ViewModel.Attach( this );
+		ViewModelEntity = new ViewModel( this )
+		{
+			Owner = Owner,
+			Model = ViewModel,
+			EnableViewmodelRendering = true,
+		};
 	}
 }

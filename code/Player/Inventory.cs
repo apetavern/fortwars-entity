@@ -33,7 +33,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		var currentWeapon = ActiveWeapon;
 		if ( currentWeapon.IsValid() )
 		{
-			currentWeapon.OnHolster( Entity );
+			currentWeapon.OnHolster();
 
 			if ( currentWeapon.IsValid )
 				LastActiveWeaponSlot = ActiveWeaponSlot;
@@ -50,7 +50,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		var currentWeapon = ActiveWeapon;
 		if ( currentWeapon.IsValid() )
 		{
-			currentWeapon.OnHolster( Entity );
+			currentWeapon.OnHolster();
 			Weapons.Remove( currentWeapon );
 			ActiveWeapon = null;
 		}
@@ -63,7 +63,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 
 	public Weapon GetWeaponFromSlot( int slot )
 	{
-		Log.Info( slot );
+		// Log.Info( slot );
 		return slot switch
 		{
 			0 => Weapons
@@ -143,7 +143,6 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		if ( Debug )
 		{
 			var lineOffset = 22;
-			// DebugOverlay.ScreenText( $"ActiveWeapon {ActiveWeapon.WeaponAsset.ResourceName}", lineOffset++ );
 			DebugOverlay.ScreenText( $"ActiveWeaponSlot {ActiveWeaponSlot}", lineOffset++ );
 			DebugOverlay.ScreenText( $"LastActiveWeaponSlot {LastActiveWeaponSlot}", lineOffset++ );
 		}

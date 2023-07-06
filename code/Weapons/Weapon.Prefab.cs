@@ -2,7 +2,7 @@
 
 public partial class Weapon
 {
-	[Prefab, Net] public Prefab ViewModelPrefab { get; set; }
+	[Prefab, Net] public Model ViewModel { get; set; }
 
 	/// <summary>
 	/// The icon for this weapon, if applicable.
