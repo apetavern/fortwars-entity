@@ -168,7 +168,6 @@ public partial class WeaponViewModel : AnimatedEntity
 		velocity = velocity.Normal * Math.Clamp( velocity.Length, 0, VelocityClamp );
 
 		var avoidanceTrace = Trace.Ray( Camera.Position, Camera.Position + forward * 50f )
-			.WorldAndEntities()
 			.WithoutTags( "trigger" )
 			.Ignore( Weapon )
 			.Ignore( this )
@@ -222,8 +221,6 @@ public partial class WeaponViewModel : AnimatedEntity
 
 		realRotationOffset = rotationOffsetTarget;
 		realPositionOffset = positionOffsetTarget;
-
-		Log.Info( realPositionOffset );
 
 		Rotation *= realRotationOffset;
 		Position += realPositionOffset;
