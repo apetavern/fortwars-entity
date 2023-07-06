@@ -1,0 +1,48 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "931c384e-bc62-41c5-ad6f-f3c88c6edd62",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [],
+    "Keys": {
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/ksr1/ksr1_w.vmdl\u0022"
+      },
+      "ViewModel": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/ksr1/ksr1_v.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Root Entity\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022ui/icons/weapons/assaultrifle.png\u0022"
+      },
+      "HoldType": {
+        "Type": "HoldType",
+        "Value": "\u0022Rifle\u0022"
+      },
+      "MovementSpeedMultiplier": {
+        "Type": "Single",
+        "Value": "0.95"
+      }
+    }
+  }
+}
