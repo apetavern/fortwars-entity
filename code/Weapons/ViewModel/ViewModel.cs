@@ -4,7 +4,7 @@
 public class ViewModel : AnimatedEntity
 {
 	[ConVar.Client( "fw_viewmodel_fov", Help = "ViewModel field of view", Min = 50f, Max = 90f )]
-	public static float ViewModelFov { get; set; } = 60f;
+	public static float ViewModelFov { get; set; } = 52f;
 
 	protected float SwingInfluence => 0.05f;
 	protected float ReturnSpeed => 5.0f;
@@ -13,8 +13,8 @@ public class ViewModel : AnimatedEntity
 
 	private Vector3 TargetPos = 0;
 	private Vector3 FinalPos = 0;
-	private float TargetFov = 60f;
-	private float FinalFov = 60f;
+	private float TargetFov = ViewModelFov;
+	private float FinalFov = ViewModelFov;
 	private Rotation TargetRot = Rotation.Identity;
 	private Rotation FinalRot = Rotation.Identity;
 
@@ -69,7 +69,7 @@ public class ViewModel : AnimatedEntity
 		Position += FinalPos * Rotation;
 
 		FinalFov = FinalFov.LerpTo( TargetFov, LerpSpeed * Time.Delta );
-		Camera.FieldOfView = Screen.CreateVerticalFieldOfView( FinalFov );
+		Camera.Main.SetViewModelCamera( FinalFov );
 
 		TargetPos = 0;
 		TargetFov = ViewModelFov;

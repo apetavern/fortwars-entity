@@ -9,7 +9,5 @@ public class PlayerCamera
 		Camera.FieldOfView = Screen.CreateVerticalFieldOfView( Game.Preferences.FieldOfView );
 		Camera.FirstPersonViewer = player;
 		Camera.ZNear = 0.5f;
-
-		Camera.Main.SetViewModelCamera( 50 );
 	}
 }
