@@ -28,6 +28,13 @@ public partial class Weapon : AnimatedEntity
 	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
+		foreach(var component in WeaponComponents)
+		{
+			if ( !component.Enabled )
+				continue;
+
+			component.Simulate( cl, Player );
+		}
 	}
 
 	/// <summary>

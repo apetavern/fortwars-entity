@@ -23,7 +23,7 @@ public partial class PlayerAnimator : EntityComponent<Player>, ISingletonCompone
 			player.SetAnimParameter( "holdtype", (int)weapon.HoldType );
 			player.SetAnimParameter( "holdtype_handedness", (int)weapon.Handedness );
 
-			foreach ( var component in weapon.Components.GetAll<WeaponComponent>() )
+			foreach ( var component in weapon.WeaponComponents )
 			{
 				component.SimulateAnimator( player );
 			}

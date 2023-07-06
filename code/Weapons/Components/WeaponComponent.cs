@@ -22,11 +22,6 @@ public partial class WeaponComponent : EntityComponent<Weapon>
 		displayInfo = DisplayInfo.For( this );
 	}
 
-	public T GetComponent<T>() where T : WeaponComponent
-	{
-		return null; //Weapon.GetComponent<T>();
-	}
-
 	public void RunGameEvent( string eventName )
 	{
 		Player?.RunGameEvent( eventName );
