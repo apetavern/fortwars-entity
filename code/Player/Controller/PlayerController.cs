@@ -30,11 +30,15 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 	[Net, Predicted]
 	public float CurrentEyeHeight { get; set; } = 64f;
 
-	public IEnumerable<PlayerControllerMechanic> Mechanics => Entity.Components.GetAll<PlayerControllerMechanic>( true );
+	private IEnumerable<PlayerControllerMechanic> Mechanics => Entity.Components.GetAll<PlayerControllerMechanic>( true );
+
 	public PlayerControllerMechanic BestMechanic => Mechanics.OrderByDescending( x => x.SortOrder ).FirstOrDefault( x => x.IsActive );
 
 	public T GetMechanic<T>() where T : PlayerControllerMechanic
 	{
+		if ( Entity is null || Entity.Components is null || Entity.Components.Count <= 0 )
+			return null;
+
 		foreach ( var mechanic in Mechanics )
 		{
 			if ( mechanic is T val ) return val;
@@ -43,18 +47,21 @@ public partial class PlayerController : EntityComponent<Player>, ISingletonCompo
 		return null;
 	}
 
-	public bool TryGetMechanic<T>( out T m ) where T : PlayerControllerMechanic
+	public bool TryGetMechanic<T>( out T mechanic ) where T : PlayerControllerMechanic
 	{
-		foreach ( var mechanic in Mechanics )
+		mechanic = null;
+		if ( Entity is null || Entity.Components is null || Entity.Components.Count <= 0 )
+			return false;
+
+		foreach ( var m in Mechanics )
 		{
-			if ( mechanic is T val )
+			if ( m is T val )
 			{
-				m = (T)mechanic;
+				mechanic = (T)m;
 				return true;
 			}
 		}
 
-		m = null;
 		return false;
 	}
 
