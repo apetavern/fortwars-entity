@@ -50,6 +50,6 @@ public partial class Player
 		MoveInput = Input.AnalogMove;
 
 		var lookInput = ( LookInput + Input.AnalogLook ).Normal;
-		LookInput = lookInput.WithPitch( lookInput.pitch.Clamp( -90f, 90f ) );
+		LookInput = lookInput.WithPitch( lookInput.pitch.Clamp( -89f, 89f ) );
 	}
 }
