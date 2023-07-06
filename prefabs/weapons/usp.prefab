@@ -79,6 +79,10 @@
       "TracerParticle": {
         "Type": "ParticleSystem",
         "Value": "\u0022particles/tracer.vpcf\u0022"
+      },
+      "ShootSound": {
+        "Type": "SoundEvent",
+        "Value": "\u0022audio/weapons/hkusp/hkusp_fire.sound\u0022"
       }
     }
   }

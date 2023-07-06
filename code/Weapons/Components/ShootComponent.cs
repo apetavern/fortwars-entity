@@ -83,7 +83,7 @@ public class ShootComponent : WeaponComponent
 		player?.SetAnimParameter( "b_attack", true );
 
 		using ( Prediction.Off() )
-			Weapon.PlaySound( "audio/weapons/aiax50/aiax50_fire.sound" );
+			Weapon.PlaySound( Weapon.ShootSound is not null ? Weapon.ShootSound.ResourcePath : "audio/weapons/aiax50/aiax50_fire.sound" );
 
 		if ( !Game.IsClient )
 			return;
