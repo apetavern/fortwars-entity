@@ -12,6 +12,7 @@ public partial class Weapon : AnimatedEntity
 	/// The Entity holding our ViewModel. This should only exist clientside.
 	/// </summary>
 	public ViewModel ViewModelEntity { get; set; }
+	public virtual ModelEntity EffectEntity => ( ViewModelEntity.IsValid() && IsFirstPersonMode ) ? ViewModelEntity : this;
 
 	public Weapon()
 	{

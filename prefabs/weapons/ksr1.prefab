@@ -6,7 +6,18 @@
     "Guid": "931c384e-bc62-41c5-ad6f-f3c88c6edd62",
     "Class": "Weapon",
     "Entities": [],
-    "Components": [],
+    "Components": [
+      {
+        "Guid": "85d124ff-2095-4f86-893a-83ad0f03b2eb",
+        "Class": "ShootComponent",
+        "Keys": {
+          "_name": {
+            "Value": "\u0022ShootComponent\u0022"
+          },
+          "_tags": {}
+        }
+      }
+    ],
     "Keys": {
       "Model": {
         "Type": "Model",

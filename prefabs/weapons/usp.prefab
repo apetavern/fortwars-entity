@@ -6,7 +6,20 @@
     "Guid": "58e4385d-254f-4374-b82c-a901384c7b52",
     "Class": "Weapon",
     "Entities": [],
-    "Components": [],
+    "Components": [
+      {
+        "Guid": "e1239e98-610f-4a27-84fb-c36e8532f0d9",
+        "Class": "ShootComponent",
+        "Keys": {
+          "_name": {
+            "Value": "\u0022ShootComponent\u0022"
+          },
+          "_tags": {
+            "Value": "[]"
+          }
+        }
+      }
+    ],
     "Keys": {
       "WeaponName": {
         "Type": "String",
@@ -62,6 +75,10 @@
       "PositionOffset": {
         "Type": "Vector3",
         "Value": "\u0022-10.5,3.5,-2.55\u0022"
+      },
+      "TracerParticle": {
+        "Type": "ParticleSystem",
+        "Value": "\u0022particles/tracer.vpcf\u0022"
       }
     }
   }

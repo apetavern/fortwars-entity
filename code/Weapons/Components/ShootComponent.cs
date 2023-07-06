@@ -1,5 +1,6 @@
 ﻿namespace Fortwars;
 
+[Prefab]
 public class ShootComponent : WeaponComponent
 {
 	public virtual string FireButton => InputAction.PrimaryAttack;
@@ -26,7 +27,6 @@ public class ShootComponent : WeaponComponent
 				StopFiring();
 		}
 
-
 		if ( !IsFiring )
 			return;
 
@@ -34,24 +34,28 @@ public class ShootComponent : WeaponComponent
 		if ( TimeSinceActivated > 1f )
 			Fire( player );
 
-
 		if ( !Game.IsClient )
 			return;
 
-		/*		if ( TracerParticle != null || ImpactTrailParticle != null )
-				{
-					var pos = Weapon.EffectEntity.GetAttachment( "muzzle" ) ?? Weapon.Transform;
-					TracerParticle?.SetPosition( 0, pos.Position );
+		if ( Weapon.TracerParticle is null )
+			TracerParticle ??= Particles.Create( "particles/tracer.vpcf" );
+		else
+			TracerParticle ??= Particles.Create( Weapon.TracerParticle.ResourcePath );
 
-					var tr = Trace.Ray( Player.EyePosition, Player.EyePosition + Player.EyeRotation.Forward * Data.BulletRange )
-						.WithAnyTags( "solid", "glass" )
-						.Ignore( player )
-						.Run();
+		if ( TracerParticle != null || ImpactTrailParticle != null )
+		{
+			var pos = Weapon.EffectEntity.GetAttachment( "muzzle" ) ?? Weapon.Transform;
+			TracerParticle?.SetPosition( 0, pos.Position );
 
-					TracerParticle?.SetPosition( 1, tr.EndPosition );
-					ImpactTrailParticle?.SetPosition( 0, tr.EndPosition + ( tr.Normal * 1f ) );
-					ImpactTrailParticle?.SetForward( 0, tr.Normal );
-				}*/
+			var tr = Trace.Ray( Player.EyePosition, Player.EyePosition + Player.EyeRotation.Forward * 5000f )
+				.WithAnyTags( "solid", "glass" )
+				.Ignore( player )
+				.Run();
+
+			TracerParticle?.SetPosition( 1, tr.EndPosition );
+			ImpactTrailParticle?.SetPosition( 0, tr.EndPosition + ( tr.Normal * 1f ) );
+			ImpactTrailParticle?.SetForward( 0, tr.Normal );
+		}
 	}
 
 	public void StartFiring()
@@ -99,9 +103,11 @@ public class ShootComponent : WeaponComponent
 	private void Fire( Player player )
 	{
 		TimeSinceActivated = 0;
-
 		player?.SetAnimParameter( "b_attack", true );
 
+		if ( Game.IsServer )
+			return;
 
+		Weapon.ViewModelEntity.SetAnimParameter( "fire", true );
 	}
 }

@@ -32,6 +32,9 @@ public partial class Weapon
 
 	[Prefab, Net] public Vector3 PositionOffset { get; set; } = Vector3.Zero;
 
+	[Prefab, Net]
+	public ParticleSystem TracerParticle { get; set; }
+
 	/// <summary>
 	/// Spawns and returns a Weapon from the Prefab Library.
 	/// </summary>
