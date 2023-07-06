@@ -42,6 +42,10 @@
       },
       "_tags": {
         "Value": "\u0022weapon\u0022"
+      },
+      "PositionOffset": {
+        "Type": "Vector3",
+        "Value": "\u0022-9.6,-2.85,7.5\u0022"
       }
     }
   }

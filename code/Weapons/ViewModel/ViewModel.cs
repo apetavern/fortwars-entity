@@ -129,7 +129,7 @@ public class ViewModel : AnimatedEntity
 
 		offset += new Vector3( t, 0, t / 2f ) * -4f * factor;
 
-		TargetPos += offset;
+		TargetPos += offset + Weapon.PositionOffset;
 		TargetRot *= rotationOffset;
 
 		lastPitch = newPitch;

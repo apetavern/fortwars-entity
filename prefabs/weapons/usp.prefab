@@ -58,6 +58,10 @@
       "ViewModelAsset": {
         "Type": "Model",
         "Value": "\u0022models/weapons/hkusp/hkusp_v.vmdl\u0022"
+      },
+      "PositionOffset": {
+        "Type": "Vector3",
+        "Value": "\u0022-10.5,3.5,-2.55\u0022"
       }
     }
   }

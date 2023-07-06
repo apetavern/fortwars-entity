@@ -30,6 +30,8 @@ public partial class Weapon
 	/// </summary>
 	[Prefab, Net] public Handedness Handedness { get; set; } = Handedness.Both;
 
+	[Prefab, Net] public Vector3 PositionOffset { get; set; } = Vector3.Zero;
+
 	/// <summary>
 	/// Spawns and returns a Weapon from the Prefab Library.
 	/// </summary>
