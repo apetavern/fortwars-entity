@@ -18,7 +18,7 @@ public partial class Weapon
 	/// <summary>
 	/// The inventory slot this weapon should belong to.
 	/// </summary>
-	[Prefab] public InventorySlot InventorySlot { get; set; } = InventorySlot.Primary;
+	[Prefab, Net] public InventorySlot InventorySlot { get; set; } = InventorySlot.Primary;
 
 	/// <summary>
 	/// The HoldType of this weapon.

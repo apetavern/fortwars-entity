@@ -29,7 +29,6 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 
 	public void SetActiveWeapon( Weapon weapon )
 	{
-		Log.Info( "set active" + weapon );
 		var currentWeapon = ActiveWeapon;
 		if ( currentWeapon.IsValid() )
 		{
@@ -63,7 +62,6 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 
 	public Weapon GetWeaponFromSlot( int slot )
 	{
-		// Log.Info( slot );
 		return slot switch
 		{
 			0 => Weapons

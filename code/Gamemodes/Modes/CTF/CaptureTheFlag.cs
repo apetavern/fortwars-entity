@@ -203,17 +203,14 @@ public partial class CaptureTheFlag : Gamemode
 
 	private void GiveCombatLoadout( Player player, Inventory inventory )
 	{
-		inventory.AddWeapon( Weapon.FromPrefab( "data/weapons/ctf/usp.prefab" ), true );
-		/*		inventory.AddWeapon(
-					WeaponAsset.CreateInstance( WeaponAsset.FromPath( player.SelectedPrimaryWeapon ) ), true );
-				inventory.AddWeapon(
-					WeaponAsset.CreateInstance( WeaponAsset.FromPath( player.SelectedSecondaryWeapon ) ), false );
+		inventory.AddWeapon( Weapon.FromPrefab( player.SelectedPrimaryWeapon ), true );
+		inventory.AddWeapon( Weapon.FromPrefab( player.SelectedSecondaryWeapon ), false );
 
-				if ( player.Class.Equipment == null )
-					return;
+		if ( player.Class.Equipment == null )
+			return;
 
-				inventory.AddWeapon(
-					WeaponAsset.CreateInstance( player.Class.Equipment ), false );*/
+		var equipment = PrefabLibrary.Spawn<Weapon>( player.Class.Equipment );
+		inventory.AddWeapon( equipment, false );
 	}
 
 	internal override void OnWeaponDropped( Player player, Weapon weapon )

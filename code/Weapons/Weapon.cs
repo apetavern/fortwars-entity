@@ -36,6 +36,8 @@ public partial class Weapon : AnimatedEntity
 	public void OnHolster()
 	{
 		EnableDrawing = false;
+
+		ViewModelEntity?.Delete();
 	}
 
 	/// <summary>

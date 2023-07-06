@@ -1,0 +1,48 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "e88a6445-4668-4938-9fd8-964583261750",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [],
+    "Keys": {
+      "HoldType": {
+        "Type": "HoldType",
+        "Value": "\u0022Rifle\u0022"
+      },
+      "InventorySlot": {
+        "Type": "InventorySlot",
+        "Value": "\u0022Equipment\u0022"
+      },
+      "Icon": {
+        "Type": "String",
+        "Value": "\u0022ui/icons/weapons/shotgun.png\u0022"
+      },
+      "ViewModel": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/rpg/rpg_v.vmdl\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/weapons/rpg/rpg_w.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Rocket Launcher\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022weapon\u0022"
+      }
+    }
+  }
+}

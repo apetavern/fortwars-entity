@@ -9,10 +9,10 @@ public partial class Player
 	public string SelectedClass { get; set; } = "data/classes/assault.fwclass";
 
 	[Net]
-	public string SelectedPrimaryWeapon { get; set; } = "data/weapons/ksr1.fwweapon";
+	public string SelectedPrimaryWeapon { get; set; } = "data/weapons/ctf/usp.prefab";
 
 	[Net]
-	public string SelectedSecondaryWeapon { get; set; } = "data/weapons/trj.fwweapon";
+	public string SelectedSecondaryWeapon { get; set; } = "data/weapons/ctf/usp.prefab";
 
 	protected void SetupController()
 	{
