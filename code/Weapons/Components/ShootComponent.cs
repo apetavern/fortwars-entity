@@ -37,6 +37,8 @@ public class ShootComponent : WeaponComponent
 		if ( !Game.IsClient )
 			return;
 
+		Weapon.ViewModelEntity.SetAnimParameter( "fire", true );
+
 		if ( Weapon.TracerParticle is null )
 			TracerParticle ??= Particles.Create( "particles/tracer.vpcf" );
 		else
@@ -104,10 +106,5 @@ public class ShootComponent : WeaponComponent
 	{
 		TimeSinceActivated = 0;
 		player?.SetAnimParameter( "b_attack", true );
-
-		if ( Game.IsServer )
-			return;
-
-		Weapon.ViewModelEntity.SetAnimParameter( "fire", true );
 	}
 }
