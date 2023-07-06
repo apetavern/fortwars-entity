@@ -11,7 +11,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 	[Net, Predicted]
 	public int LastActiveWeaponSlot { get; set; }
 
-	public int GetSlotFromWeapon( Weapon weapon ) => Weapons.IndexOf( weapon );
+	public int GetSlotFromWeapon( Weapon weapon ) => (int)weapon.InventorySlot;
 	public int ActiveWeaponSlot => GetSlotFromWeapon( ActiveWeapon );
 
 	public bool AddWeapon( Weapon weapon, bool makeActive = true )
@@ -63,26 +63,26 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 
 	public Weapon GetWeaponFromSlot( int slot )
 	{
-		/*		return slot switch
-				{
-					0 => Weapons
-						.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Primary )
-						.FirstOrDefault(),
-					1 => Weapons
-						.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Secondary )
-						.FirstOrDefault(),
-					2 => Weapons
-						.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Equipment )
-						.FirstOrDefault(),
-					3 => Weapons
-						.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Other )
-						.FirstOrDefault(),
-					4 => Weapons
-						.Where( wep => wep.WeaponAsset.InventorySlot == InventorySlots.Flag )
-						.FirstOrDefault(),
-					_ => null
-				};*/
-		return null;
+		Log.Info( slot );
+		return slot switch
+		{
+			0 => Weapons
+				.Where( wep => wep.InventorySlot == InventorySlot.Primary )
+				.FirstOrDefault(),
+			1 => Weapons
+				.Where( wep => wep.InventorySlot == InventorySlot.Secondary )
+				.FirstOrDefault(),
+			2 => Weapons
+				.Where( wep => wep.InventorySlot == InventorySlot.Equipment )
+				.FirstOrDefault(),
+			3 => Weapons
+				.Where( wep => wep.InventorySlot == InventorySlot.Other )
+				.FirstOrDefault(),
+			4 => Weapons
+				.Where( wep => wep.InventorySlot == InventorySlot.Flag )
+				.FirstOrDefault(),
+			_ => null
+		};
 	}
 
 	protected static int GetSlotIndexFromInput( string slot )

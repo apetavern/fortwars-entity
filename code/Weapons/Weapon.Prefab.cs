@@ -2,7 +2,7 @@
 
 public partial class Weapon
 {
-	[Prefab] public Prefab ViewModelPrefab { get; set; }
+	[Prefab, Net] public Prefab ViewModelPrefab { get; set; }
 
 	/// <summary>
 	/// The icon for this weapon, if applicable.
@@ -13,7 +13,7 @@ public partial class Weapon
 	/// <summary>
 	/// The multiplier this weapon has on the movement speed of its owner.
 	/// </summary>
-	[Prefab] public float MovementSpeedMultiplier { get; set; } = 1.0f;
+	[Prefab, Net] public float MovementSpeedMultiplier { get; set; } = 1.0f;
 
 	/// <summary>
 	/// The inventory slot this weapon should belong to.

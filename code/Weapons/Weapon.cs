@@ -4,6 +4,7 @@
 public partial class Weapon : AnimatedEntity
 {
 	public Player Player => Owner as Player;
+	public WeaponViewModel ViewModel { get; private set; }
 
 	public Weapon()
 	{
@@ -32,6 +33,18 @@ public partial class Weapon : AnimatedEntity
 		SetParent( player, true );
 		Owner = player;
 
+		if ( Game.IsServer )
+		{
+			CreateViewModel( To.Single( player ) );
+		}
+
 		EnableDrawing = true;
+	}
+
+	[ClientRpc]
+	public void CreateViewModel()
+	{
+		ViewModel = PrefabLibrary.Spawn<WeaponViewModel>( ViewModelPrefab );
+		ViewModel.Attach( this );
 	}
 }
