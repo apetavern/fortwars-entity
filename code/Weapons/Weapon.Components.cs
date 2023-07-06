@@ -10,7 +10,7 @@ public partial class Weapon
 		{
 			if ( c is T _ )
 			{
-				comp = c;
+				comp = (T)c;
 				return true;
 			}
 		}
