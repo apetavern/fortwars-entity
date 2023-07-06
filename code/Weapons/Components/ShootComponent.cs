@@ -33,31 +33,6 @@ public class ShootComponent : WeaponComponent
 		// Continue firing logic.
 		if ( TimeSinceActivated > 1f )
 			Fire( player );
-
-		if ( !Game.IsClient )
-			return;
-
-		Weapon.ViewModelEntity.SetAnimParameter( "fire", true );
-
-		if ( Weapon.TracerParticle is null )
-			TracerParticle ??= Particles.Create( "particles/tracer.vpcf" );
-		else
-			TracerParticle ??= Particles.Create( Weapon.TracerParticle.ResourcePath );
-
-		if ( TracerParticle != null || ImpactTrailParticle != null )
-		{
-			var pos = Weapon.EffectEntity.GetAttachment( "muzzle" ) ?? Weapon.Transform;
-			TracerParticle?.SetPosition( 0, pos.Position );
-
-			var tr = Trace.Ray( Player.EyePosition, Player.EyePosition + Player.EyeRotation.Forward * 5000f )
-				.WithAnyTags( "solid", "glass" )
-				.Ignore( player )
-				.Run();
-
-			TracerParticle?.SetPosition( 1, tr.EndPosition );
-			ImpactTrailParticle?.SetPosition( 0, tr.EndPosition + ( tr.Normal * 1f ) );
-			ImpactTrailParticle?.SetForward( 0, tr.Normal );
-		}
 	}
 
 	public void StartFiring()
@@ -106,5 +81,33 @@ public class ShootComponent : WeaponComponent
 	{
 		TimeSinceActivated = 0;
 		player?.SetAnimParameter( "b_attack", true );
+
+		using ( Prediction.Off() )
+			Weapon.PlaySound( "audio/weapons/aiax50/aiax50_fire.sound" );
+
+		if ( !Game.IsClient )
+			return;
+
+		Weapon.ViewModelEntity.SetAnimParameter( "fire", true );
+
+		if ( Weapon.TracerParticle is null )
+			TracerParticle ??= Particles.Create( "particles/tracer.vpcf" );
+		else
+			TracerParticle ??= Particles.Create( Weapon.TracerParticle.ResourcePath );
+
+		if ( TracerParticle != null || ImpactTrailParticle != null )
+		{
+			var pos = Weapon.EffectEntity.GetAttachment( "muzzle" ) ?? Weapon.Transform;
+			TracerParticle?.SetPosition( 0, pos.Position );
+
+			var tr = Trace.Ray( Player.EyePosition, Player.EyePosition + Player.EyeRotation.Forward * 5000f )
+				.WithAnyTags( "solid", "glass" )
+				.Ignore( player )
+				.Run();
+
+			TracerParticle?.SetPosition( 1, tr.EndPosition );
+			ImpactTrailParticle?.SetPosition( 0, tr.EndPosition + ( tr.Normal * 1f ) );
+			ImpactTrailParticle?.SetForward( 0, tr.Normal );
+		}
 	}
 }
