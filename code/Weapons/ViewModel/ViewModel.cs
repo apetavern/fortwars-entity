@@ -60,7 +60,7 @@ public class ViewModel : AnimatedEntity
 		}
 
 		Rotation = Camera.Rotation;
-		Position = Camera.Position + ( Rotation.Forward * 32f ) + ( Rotation.Up * 2f );
+		Position = Camera.Position; //  + ( Rotation.Forward * 32f ) + ( Rotation.Up * 2f );
 
 		FinalRot = Rotation.Lerp( FinalRot, TargetRot, LerpSpeed * Time.Delta );
 		Rotation *= FinalRot;
