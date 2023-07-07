@@ -1,23 +1,62 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"shader"		"shaders/complex.shader_c"
-	"F_SPECULAR"		"1"
-	"g_flAmbientOcclusionDirectDiffuse"		"0.000000"
-	"g_flAmbientOcclusionDirectSpecular"		"0.000000"
-	"TextureAmbientOcclusion"		"models/environment/easter_pillars/textures/easter_pillars_01a_ao.png"
-	"g_flModelTintAmount"		"1.000000"
-	"g_vColorTint"		"[1.000000 1.000000 1.000000 0.000000]"
-	"TextureColor"		"models/environment/easter_pillars/textures/easter_pillars_01a_color.png"
-	"g_flFadeExponent"		"1.000000"
-	"g_bFogEnabled"		"1"
-	"g_flDirectionalLightmapMinZ"		"0.050000"
-	"g_flDirectionalLightmapStrength"		"1.000000"
-	"g_flMetalness"		"0.000000"
-	"TextureNormal"		"models/environment/easter_pillars/textures/easter_pillars_01a_normal.png"
-	"TextureRoughness"		"models/environment/easter_pillars/textures/easter_pillars_01a_rough.png"
-	"g_nScaleTexCoordUByModelScaleAxis"		"0"
-	"g_nScaleTexCoordVByModelScaleAxis"		"0"
-	"g_vTexCoordOffset"		"[0.000 0.000]"
-	"g_vTexCoordScale"		"[1.000 1.000]"
-	"g_vTexCoordScrollSpeed"		"[0.000 0.000]"
+	shader "shaders/rgb_variation_masks.shader"
+
+	//---- Base Textures ----
+	g_bBaseUseSecondaryCoord "0"
+	g_vBaseTiling "[1.000 1.000]"
+	GlobalAlbedo "materials/fw_stone/fw_easter_stone_tile_01a_color.png"
+	GlobalNormal "models/environment/easter_pillars/textures/easter_pillars_01a_normal.png"
+	GlobalORM "materials/fw_stone/fw_easter_stone_tile_01a_orm_mask.png"
+
+	//---- Blue Channel ----
+	BlueAlbedo "materials/acg_moss002/moss002_1k_color.png"
+	BlueNormal "materials/acg_moss002/moss002_1k_normal.png"
+	BlueORM "materials/acg_moss002/moss002_1k_orm.png"
+	g_bBlueUseAlbedo "1"
+	g_bBlueUseAO "1"
+	g_bBlueUseMetallic "1"
+	g_bBlueUseNormal "1"
+	g_bBlueUseRoughness "1"
+	g_bBlueUseSecondaryCoord "0"
+	g_flBlueMaskStrength "1.893"
+	g_vBlueTiling "[1.000 1.000]"
+	g_vBlueTint "[1.000000 1.000000 1.000000 1.000000]"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Green Channel ----
+	g_bGreenUseAlbedo "1"
+	g_bGreenUseAO "0"
+	g_bGreenUseMetallic "0"
+	g_bGreenUseNormal "0"
+	g_bGreenUseRoughness "0"
+	g_bGreenUseSecondaryCoord "0"
+	g_flGreenMaskStrength "0.500"
+	g_vGreenTiling "[1.000 1.000]"
+	g_vGreenTint "[1.000000 1.000000 1.000000 1.000000]"
+	GreenAlbedo "[0.105882 0.039216 0.011765 1.000000]"
+	GreenNormal "materials/default/default_normal.tga"
+	GreenORM "materials/default/default_color.tga"
+
+	//---- Red Channel ----
+	g_bRedUseAlbedo "1"
+	g_bRedUseAO "0"
+	g_bRedUseMetallic "0"
+	g_bRedUseNormal "0"
+	g_bRedUseRoughness "0"
+	g_bRedUseSecondaryCoord "0"
+	g_flRedMaskStrength "0.750"
+	g_vRedTiling "[1.000 1.000]"
+	g_vRedTint "[1.000000 1.000000 1.000000 1.000000]"
+	RedAlbedo "[0.717647 0.713726 0.662745 1.000000]"
+	RedNormal "materials/default/default_normal.tga"
+	RedORM "materials/default/default_color.tga"
+
+	//---- Unique Textures ----
+	g_bUniqueUseSecondaryCoord "0"
+	RGBVariationMask "models/environment/easter_pillars/textures/easter_pillars_01a_mask.png"
 }
