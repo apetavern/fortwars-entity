@@ -96,8 +96,9 @@ public class ShootComponent : WeaponComponent
 
 		if ( TracerParticle != null || ImpactTrailParticle != null )
 		{
-			var pos = Weapon.EffectEntity.GetAttachment( "muzzle" ) ?? Weapon.Transform;
-			TracerParticle?.SetPosition( 0, pos.Position );
+			var xForm = Weapon.EffectEntity.GetAttachment( "muzzle" ) ?? Weapon.Transform;
+			DebugOverlay.Sphere( xForm.Position, 2, Color.Random, 20 );
+			TracerParticle?.SetPosition( 0, xForm.Position );
 
 			var tr = Trace.Ray( Player.EyePosition, Player.EyePosition + Player.EyeRotation.Forward * 5000f )
 				.WithAnyTags( "solid", "glass" )
