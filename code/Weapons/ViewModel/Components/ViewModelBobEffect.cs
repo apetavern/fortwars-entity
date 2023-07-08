@@ -16,6 +16,9 @@ public sealed class ViewModelBobEffect : EntityComponent<ViewModel>, IViewModelE
 			return;
 
 		var controller = Entity.Pawn.Controller;
+		if ( controller is null )
+			return;
+		
 		var playerVelocity = controller.Velocity;
 		
 		var offset = CalculateBobbingOffset( ref currentBob, playerVelocity, Entity.Pawn.Controller );

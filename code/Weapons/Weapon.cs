@@ -45,7 +45,7 @@ public partial class Weapon : AnimatedEntity
 	{
 		EnableDrawing = false;
 
-		ViewModelEntity?.Delete();
+		DestroyViewModel(To.Single(Player));
 	}
 
 	/// <summary>
@@ -76,7 +76,7 @@ public partial class Weapon : AnimatedEntity
 	}
 
 	[ClientRpc]
-	public void CreateViewModel()
+	void CreateViewModel()
 	{
 		ViewModelEntity = new ViewModel( this )
 		{
@@ -84,5 +84,11 @@ public partial class Weapon : AnimatedEntity
 			Model = ViewModel,
 			EnableViewmodelRendering = true,
 		};
+	}
+
+	[ClientRpc]
+	void DestroyViewModel()
+	{
+		ViewModelEntity?.Delete();
 	}
 }

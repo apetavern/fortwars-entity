@@ -1,0 +1,52 @@
+{
+  "SchemaVersion": 1,
+  "Name": null,
+  "Description": null,
+  "Root": {
+    "Guid": "abfca8a2-12a7-403c-87ac-72dc88c39e55",
+    "Class": "Weapon",
+    "Entities": [],
+    "Components": [],
+    "Keys": {
+      "PositionOffset": {
+        "Type": "Vector3",
+        "Value": "\u00220,0,0\u0022"
+      },
+      "ViewModel": {
+        "Type": "Model",
+        "Value": "\u0022models/items/bogroll/bogroll_v.vmdl\u0022"
+      },
+      "Model": {
+        "Type": "Model",
+        "Value": "\u0022models/items/bogroll/bogroll_w.vmdl\u0022"
+      },
+      "_name": {
+        "Value": "\u0022Bog Roll\u0022"
+      },
+      "_localposition": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_localrotation": {
+        "Value": "\u00220,0,0\u0022"
+      },
+      "_scale": {
+        "Value": "1"
+      },
+      "_tags": {
+        "Value": "\u0022\u0022"
+      },
+      "Handedness": {
+        "Type": "Handedness",
+        "Value": "\u0022Right\u0022"
+      },
+      "HoldType": {
+        "Type": "HoldType",
+        "Value": "\u0022HoldItem\u0022"
+      },
+      "InventorySlot": {
+        "Type": "InventorySlot",
+        "Value": "\u0022Flag\u0022"
+      }
+    }
+  }
+}

@@ -1,12 +1,10 @@
-﻿using Fortwars.UI;
-
-namespace Fortwars;
+﻿namespace Fortwars;
 
 public partial class CaptureTheFlag : Gamemode
 {
 	public override string GamemodeName => "Capture the Flag";
 
-	private const string BogRollPath = "data/weapons/ctf/bogroll.fwweapon";
+	private const string BogRollPath = "prefabs/ctf/bogroll.prefab";
 
 	/// <summary>
 	/// Define the Game State's possible in Capture the Flag mode.
@@ -99,7 +97,7 @@ public partial class CaptureTheFlag : Gamemode
 	public BogRoll BlueFlag { get; set; }
 
 	[Net]
-	public GameState CurrentState { get; set; }
+	public GameState CurrentState { get; private set; }
 
 	[Net]
 	public TimeUntil TimeUntilNextState { get; set; }
@@ -174,7 +172,7 @@ public partial class CaptureTheFlag : Gamemode
 			teamComponent.Team = TeamSystem.GetTeamWithFewestPlayers();
 		}
 
-		Log.Info( $"Fortwars: Assigned {client} to team {teamComponent.Team}" );
+		Log.Info( $"Fortwars: Assigned {client} to team {teamComponent?.Team}" );
 	}
 
 	internal override void OnPlayerKilled( Player player )
@@ -230,8 +228,8 @@ public partial class CaptureTheFlag : Gamemode
 		if ( Game.IsClient )
 			return;
 
-		/*		if ( weapon.WeaponAsset.Name != "Bog Roll" )
-					return;*/
+		if ( weapon.Name != "Bog Roll" )
+			return;
 
 		var team = player.Client.Components.Get<TeamComponent>().Team;
 		var dropPos = player.EyePosition + ( player.EyeRotation.Forward * 50f );
@@ -316,9 +314,9 @@ public partial class CaptureTheFlag : Gamemode
 			if ( !player.HasFlag )
 				return;
 
-			// Ensure the player's active weapon is a Bog Roll.
-			/*			if ( player.ActiveWeapon.WeaponAsset.Name != "Bog Roll" )
-							return;*/
+			// Ensure the player's active weapon is a flag.
+			if ( player.ActiveWeapon.InventorySlot is not InventorySlot.Flag )
+				return;
 
 			// Ensure the player's team flag is home.
 			if ( !FlagIsHome( playerTeam ) )
@@ -333,10 +331,11 @@ public partial class CaptureTheFlag : Gamemode
 		if ( player.HasFlag )
 			return;
 
-		// If flag is not missing, pick it up.
+		// Ensure flag is not already taken.
 		if ( !FlagIsHome( team ) )
 			return;
 
+		// If flag is not missing, pick it up.
 		PickupFlag( player, playerTeam );
 
 	}
@@ -380,8 +379,8 @@ public partial class CaptureTheFlag : Gamemode
 		Log.Info( $"Fortwars CTF: The flag for team {team} has been stolen by {player.Client.Name}." );
 
 		// Add the flag to the player's inventory.
-		/*		player.Inventory.AddWeapon(
-					WeaponAsset.CreateInstance( WeaponAsset.FromPath( BogRollPath ) ), true );*/
+		player.Inventory.AddWeapon(
+			Weapon.FromPrefab( BogRollPath ), true );
 	}
 
 	private void ReturnFlag( Team team )
@@ -425,7 +424,7 @@ public partial class CaptureTheFlag : Gamemode
 		if ( !Debug )
 			return;
 
-		int i = 0;
+		var i = 0;
 		foreach ( var team in Teams )
 		{
 			DebugOverlay.ScreenText( $"{team}: {Scores[team]}", i++ );
@@ -434,6 +433,7 @@ public partial class CaptureTheFlag : Gamemode
 		DebugOverlay.ScreenText( $"BlueFlagCarrier: {BlueFlagCarrier}", i++ );
 		DebugOverlay.ScreenText( $"RedFlag: {RedFlag}", i++ );
 		DebugOverlay.ScreenText( $"BlueFlag: {BlueFlag}", i++ );
+		DebugOverlay.ScreenText( $"State: {CurrentState.ToString()}", i++);
 	}
 
 	[ConCmd.Admin( "fw_ctf_set_state" )]
@@ -442,7 +442,7 @@ public partial class CaptureTheFlag : Gamemode
 		if ( GamemodeSystem.Instance is not CaptureTheFlag ctf )
 			return;
 
-		if ( Enum.TryParse<GameState>( state, true, out GameState newState ) )
+		if ( Enum.TryParse<GameState>( state, true, out var newState ) )
 		{
 			ctf.CurrentState = newState;
 			ctf.TimeUntilNextState = 500f;
