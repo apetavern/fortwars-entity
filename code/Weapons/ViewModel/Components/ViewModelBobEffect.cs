@@ -22,7 +22,8 @@ public sealed class ViewModelBobEffect : EntityComponent<ViewModel>, IViewModelE
 		var playerVelocity = controller.Velocity;
 		
 		var offset = CalculateBobbingOffset( ref currentBob, playerVelocity, Entity.Pawn.Controller );
-		var offsetMultiplier = 1.0f;
+		var offsetMultiplier = 1.0f ;
+		offsetMultiplier /= Entity.Pawn.Class.SpeedMultiplier;
 
 		if ( Entity.Weapon != null )
 		{
