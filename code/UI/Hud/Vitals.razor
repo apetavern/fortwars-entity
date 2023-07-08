@@ -1,0 +1,27 @@
+﻿@inherits Panel
+@namespace Fortwars.UI
+@attribute [StyleSheet]
+
+<root>
+    <div class="health-panel @GetTeamClass()">
+        <iconpanel icon="add_box">add_box</iconpanel>
+        <label>
+            @PlayerHealth
+        </label>
+    </div>
+</root>
+
+@code {
+    Player Player => Game.LocalPawn as Player;
+    string PlayerHealth => $"{Player.Health:F0}";
+
+    private string GetTeamClass()
+    {
+        return TeamSystem.GetTeam(Game.LocalClient) is Team.Blue ? "blue-team" : "red-team";
+    }
+    
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Player?.Health, TeamSystem.GetTeam(Game.LocalClient));
+    }
+}

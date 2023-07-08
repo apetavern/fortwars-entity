@@ -1,6 +1,6 @@
-﻿namespace Fortwars;
+namespace Fortwars;
 
-public partial class FortwarsManager : Sandbox.GameManager
+public class FortwarsManager : GameManager
 {
 	public static FortwarsManager Instance => Current as FortwarsManager;
 
@@ -8,7 +8,7 @@ public partial class FortwarsManager : Sandbox.GameManager
 	{
 		if ( Game.IsClient )
 		{
-			_ = new Hud();
+			_ = new UI.Hud();
 		}
 	}
 
@@ -40,19 +40,16 @@ public partial class FortwarsManager : Sandbox.GameManager
 	[ConCmd.Admin( "noclip" )]
 	private static void Noclip()
 	{
-		if ( ConsoleSystem.Caller.Pawn is not Player ply )
+		if ( ConsoleSystem.Caller.Pawn is not Player player )
 			return;
 
-		if ( ply.Controller.TryGetMechanic<NoclipMechanic>( out var noclip ) )
+		if ( player.Controller.TryGetMechanic<NoclipMechanic>( out var noclip ) )
 		{
 			noclip.Enabled = !noclip.Enabled;
 			return;
 		}
-		else
-		{
-			var nc = new NoclipMechanic();
-			nc.Enabled = true;
-			ply.Components.Add( nc );
-		}
+		
+		var nc = new NoclipMechanic { Enabled = true };
+		player.Components.Add( nc );
 	}
 }

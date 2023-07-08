@@ -1,11 +1,11 @@
-﻿namespace Fortwars;
+﻿namespace Fortwars.UI;
 
 public class Hud : RootPanel
 {
 	public Hud()
 	{
 		StyleSheet.Load( "/UI/Styles/Hud.scss" );
-		AddChild<Health>();
+		AddChild<Vitals>();
 		AddChild<State>();
 	}
 }

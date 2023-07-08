@@ -1,0 +1,37 @@
+﻿@import "../Styles/_vars.scss";
+
+vitals {
+  position: absolute;
+  left: $safe-area-x;
+  bottom: $safe-area-y;
+  
+  .health-panel {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 2px;
+    background: linear-gradient( to right, $background, rgba( $background, 0 ) );
+    border-left: 3px solid;
+    flex-direction: row;
+    align-items: center;
+    
+    label {
+      color: white;
+      margin-left: 16px;
+      font-size: 24px;
+    }
+    
+    iconpanel {
+      color: white;
+      font-size: 32px;
+    }
+  }
+}
+
+.red-team {
+    border-left: $red-team;
+}
+
+.blue-team {
+    border-left: $blue-team;
+}
