@@ -3,25 +3,37 @@
 @attribute [StyleSheet]
 
 <root>
-    <div class="health-panel @GetTeamClass()">
-        <iconpanel icon="add_box">add_box</iconpanel>
-        <label>
-            @PlayerHealth
-        </label>
+    <img src="/ui/misc/avatar_border.png" class="avatar-border @GetTeamClass()"/>
+    <div class="vitals-info">
+        <div class="vitals-panel vitals-class">
+            @PlayerClass
+        </div>
+        <div class="vitals-panel vitals-health">
+            <iconpanel icon="add_box">add_box</iconpanel>
+            <div class="bar">
+                <div class="current" style="width: @GetHealthPercentage()%"></div>
+            </div>
+        </div>
     </div>
+    
 </root>
 
 @code {
-    Player Player => Game.LocalPawn as Player;
-    string PlayerHealth => $"{Player.Health:F0}";
+    static Player Player => Game.LocalPawn as Player;
+    static string PlayerClass => $"{Player.Class.ClassName.ToUpper()}";
 
-    private string GetTeamClass()
+    private static int GetHealthPercentage()
+    {
+        return (Player.Health / (Player.Class.HealthMultiplier * 100) * 100 ).CeilToInt();
+    }
+
+    private static string GetTeamClass()
     {
         return TeamSystem.GetTeam(Game.LocalClient) is Team.Blue ? "blue-team" : "red-team";
     }
     
     protected override int BuildHash()
     {
-        return HashCode.Combine(Player?.Health, TeamSystem.GetTeam(Game.LocalClient));
+        return HashCode.Combine(Player?.Health, Player?.Class, TeamSystem.GetTeam(Game.LocalClient));
     }
 }

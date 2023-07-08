@@ -5,33 +5,77 @@ vitals {
   left: $safe-area-x;
   bottom: $safe-area-y;
   
+  .avatar-border {
+    height: 200px;
+    aspect-ratio: 0.87;
+    filter: drop-shadow( 0 0 10px rgba( black, 0.7 ) );
+    z-index: 1;
+  }
+  
+  .vitals-panel {
+    background: linear-gradient( to right, $background, rgba( $background, 0 ) 95% );
+    padding: 5px 10px;
+  }
+  
+  .vitals-info {
+    flex-direction: column;
+  }
+  
+  .vitals-class {
+    top: 5px;
+    left: -90px;
+    width: 400px;
+    
+    label {
+      margin-left: 90px;
+    }
+  }
+  
+  .vitals-health {
+    width: 310px;
+    margin-top: 20px;
+    left: -2px;
+    align-items: center;
+
+    .bar {
+      background-color: rgba(black, 0.6);
+      border-right: white;
+      border-right-width: 1px;
+      width: 200px;
+      height: 20px;
+      margin-left: 8px;
+      
+      .current {
+        width: 50%;
+        background-color: rgba(#88000E, 0.6);
+        transition: all 1s ease-in-out;
+      }
+    }
+    
+    iconpanel {
+      color: white;
+      font-size: 26px;
+    }
+  }
+  
   .health-panel {
     margin-top: 20px;
-    width: 100%;
-    padding: 10px 20px;
     border-radius: 2px;
     background: linear-gradient( to right, $background, rgba( $background, 0 ) );
     border-left: 3px solid;
     flex-direction: row;
     align-items: center;
     
-    label {
-      color: white;
-      margin-left: 16px;
-      font-size: 24px;
-    }
     
-    iconpanel {
-      color: white;
-      font-size: 32px;
-    }
+    
+    
   }
 }
 
 .red-team {
-    border-left: $red-team;
+  border-left: $red-team;
 }
 
 .blue-team {
-    border-left: $blue-team;
+  border-left: $blue-team;
 }
