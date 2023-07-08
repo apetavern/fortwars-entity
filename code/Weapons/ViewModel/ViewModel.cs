@@ -20,7 +20,8 @@ public sealed class ViewModel : AnimatedEntity
 		base.Spawn();
 		
 		// This shouldn't be defined here, but it is here for now.
-		Components.Create<ViewModelBobEffect>();
+		// Components.Create<ViewModelBobEffect>();
+		Components.Create<ViewModelSwingEffect>();
 	}
 
 	public List<IViewModelEffect> Effects { get; } = new();

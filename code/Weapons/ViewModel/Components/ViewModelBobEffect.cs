@@ -2,10 +2,6 @@
 
 public sealed class ViewModelBobEffect : EntityComponent<ViewModel>, IViewModelEffect
 {
-	private float SwingInfluence { get; init; } = 0.05f;
-	private float ReturnSpeed { get; init; } = 5.0f;
-	private float MaxOffsetLength { get; init; } = 20.0f;
-	private Vector3 BobDirection { get; init; } = new(0.0f, 0.5f, 1.0f);
 
 
 	// Not entirely sure what these do..?
@@ -23,23 +19,13 @@ public sealed class ViewModelBobEffect : EntityComponent<ViewModel>, IViewModelE
 		if ( !Entity.Weapon.IsValid() )
 			return;
 
-		var controller = Entity.Pawn;
+		var controller = Entity.Pawn.Controller;
 		var rot = setup.Angles;
 		var newPitch = rot.Pitch();
 		var newYaw = rot.Yaw();
 
-		var pitchDelta = Angles.NormalizeAngle( newPitch - lastPitch );
-		var yawDelta = Angles.NormalizeAngle( lastYaw - newYaw );
-
 		var playerVelocity = controller.Velocity;
-		var verticalDelta = playerVelocity.z * Time.Delta;
-
-		var viewDown = Rotation.FromPitch( newPitch ).Up * -1.0f;
-		verticalDelta *= 1.0f - MathF.Abs( viewDown.Cross( Vector3.Down ).y );
-		pitchDelta -= verticalDelta * 1;
-
-		var offset = CalculateSwingOffset( pitchDelta, yawDelta );
-		offset += CalculateBobbingOffset( ref currentBob, playerVelocity, Entity.Pawn.Controller );
+		var offset = CalculateBobbingOffset( ref currentBob, playerVelocity, Entity.Pawn.Controller );
 		if ( Entity.Pawn.GroundEntity == null )
 		{
 			offset += new Vector3( 0, 0, -2.5f );
@@ -81,23 +67,6 @@ public sealed class ViewModelBobEffect : EntityComponent<ViewModel>, IViewModelE
 
 		var maskOffset = new Vector2( offset.y, offset.z ) * 0.1f * ( 10 * offset.x + 1f );
 		Entity.SceneObject.Attributes.Set( "maskOffset", new Vector2( maskOffset.x, maskOffset.y ) );
-	}
-
-	private Vector3 swingOffset;
-
-	private Vector3 CalculateSwingOffset( float pitchDelta, float yawDelta )
-	{
-		var swingVelocity = new Vector3( 0, yawDelta, pitchDelta );
-
-		swingOffset -= swingOffset * ReturnSpeed * Time.Delta;
-		swingOffset += swingVelocity * SwingInfluence;
-
-		if ( swingOffset.Length > MaxOffsetLength )
-		{
-			swingOffset = swingOffset.Normal * MaxOffsetLength;
-		}
-
-		return swingOffset;
 	}
 
 	public static Vector3 CalculateBobbingOffset( ref float currentBob, Vector3 velocity, PlayerController controller )
