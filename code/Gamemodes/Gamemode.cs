@@ -29,9 +29,24 @@ public partial class Gamemode : Entity
 		return "";
 	}
 
+	public virtual string GetGameStateName()
+	{
+		return "";
+	}
+
 	public virtual float GetTimeRemaining()
 	{
 		return -1;
+	}
+
+	public virtual bool ShouldShowScore()
+	{
+		return true;
+	}
+
+	public virtual Panel GetScorePanel()
+	{
+		return null;
 	}
 
 	internal virtual void Initialize() { }

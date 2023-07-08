@@ -1,4 +1,6 @@
-﻿namespace Fortwars;
+﻿using Fortwars.UI;
+
+namespace Fortwars;
 
 public partial class CaptureTheFlag : Gamemode
 {
@@ -31,9 +33,19 @@ public partial class CaptureTheFlag : Gamemode
 		};
 	}
 
+	public override string GetGameStateName()
+	{
+		return CurrentState.ToString();
+	}
+
 	public override float GetTimeRemaining()
 	{
 		return TimeUntilNextState;
+	}
+
+	public override bool ShouldShowScore()
+	{
+		return CurrentState is GameState.Combat or GameState.GameOver;
 	}
 
 	/// <summary>
@@ -100,7 +112,7 @@ public partial class CaptureTheFlag : Gamemode
 
 		Scores = null;
 		foreach ( var team in Teams )
-			Scores.Add( team, 0 );
+			Scores?.Add( team, 0 );
 	}
 
 	protected async Task GameLoop()

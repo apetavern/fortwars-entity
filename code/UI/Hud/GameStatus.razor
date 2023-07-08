@@ -1,0 +1,35 @@
+﻿@inherits Panel
+@namespace Fortwars.UI
+@attribute [StyleSheet]
+
+<root>
+    <div class="round-info">
+        <label class="phase">@Gamemode.GetGameStateName()</label>
+        <label class="time">@GetTimeString()</label>
+    </div>
+    @if (Gamemode.ShouldShowScore())
+    {
+        <div class="scores">
+            <label class="score blue">@CaptureTheFlag.Scores[Team.Red]</label>
+            <label class="score red">@CaptureTheFlag.Scores[Team.Blue]</label>
+        </div>
+    }
+</root>
+
+@code {
+    static Gamemode Gamemode => GamemodeSystem.Instance;
+    static CaptureTheFlag CaptureTheFlag => Gamemode as CaptureTheFlag;
+
+    static string GetTimeString()
+    {
+        return Gamemode.GetTimeRemaining() < 0f 
+            ? "-" 
+            : TimeSpan.FromSeconds(Math.Floor(Gamemode.GetTimeRemaining())).ToString(@"mm\:ss");
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(Gamemode.GetGameStateName(), Gamemode.GetTimeRemaining());
+    }
+
+}
