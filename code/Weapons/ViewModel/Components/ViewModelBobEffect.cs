@@ -2,8 +2,6 @@
 
 public sealed class ViewModelBobEffect : EntityComponent<ViewModel>, IViewModelEffect
 {
-
-
 	// Not entirely sure what these do..?
 	private Vector3 ShootOffset { get; set; }
 	private Rotation ShootRotation { get; set; } = Rotation.Identity;
@@ -11,8 +9,6 @@ public sealed class ViewModelBobEffect : EntityComponent<ViewModel>, IViewModelE
 	public ViewModelBobEffect() { }
 
 	private float currentBob;
-	private float lastPitch;
-	private float lastYaw;
 
 	public void OnApplyEffect( ref ViewModelSetup setup )
 	{
@@ -20,26 +16,20 @@ public sealed class ViewModelBobEffect : EntityComponent<ViewModel>, IViewModelE
 			return;
 
 		var controller = Entity.Pawn.Controller;
-		var rot = setup.Angles;
-		var newPitch = rot.Pitch();
-		var newYaw = rot.Yaw();
-
 		var playerVelocity = controller.Velocity;
+		
 		var offset = CalculateBobbingOffset( ref currentBob, playerVelocity, Entity.Pawn.Controller );
 		if ( Entity.Pawn.GroundEntity == null )
 		{
 			offset += new Vector3( 0, 0, -2.5f );
-			newPitch -= 2.5f;
 		}
 
-		offset *= 0.1f;
+		offset *= 1f;
 
 		var offsetMultiplier = 1.0f;
-		var rotationMultiplier = 1.0f;
 
 		if ( Entity.Weapon != null )
 		{
-			rotationMultiplier = 0.5f;
 			offsetMultiplier = 0.5f;
 
 			/*
@@ -52,18 +42,13 @@ public sealed class ViewModelBobEffect : EntityComponent<ViewModel>, IViewModelE
 		}
 
 		offset += ShootOffset * offsetMultiplier;
-		var rotationOffset = ShootRotation * rotationMultiplier;
 
 		var t = playerVelocity.Length.LerpInverse( 0, 350 );
 		const float factor = 0.1f;
 
 		offset += new Vector3( t, 0, t / 2f ) * -4f * factor;
 
-		setup.Offset += offset + Entity.Weapon.PositionOffset;
-		setup.Angles *= rotationOffset;
-
-		lastPitch = newPitch;
-		lastYaw = newYaw;
+		setup.Offset += setup.Camera.Rotation * (offset + Entity.Weapon.PositionOffset);
 
 		var maskOffset = new Vector2( offset.y, offset.z ) * 0.1f * ( 10 * offset.x + 1f );
 		Entity.SceneObject.Attributes.Set( "maskOffset", new Vector2( maskOffset.x, maskOffset.y ) );

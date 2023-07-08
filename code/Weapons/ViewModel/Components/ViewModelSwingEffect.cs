@@ -19,7 +19,7 @@ public sealed class ViewModelSwingEffect : EntityComponent<ViewModel>, IViewMode
 
 		var swing = CalculateSwingOffset( offset.y, offset.x );
 		setup.Offset += setup.Camera.Rotation * swing;
-		setup.Angles *= Rotation.FromPitch( swing.z / 4 ) * Rotation.FromYaw( -swing.y / 4 );
+		setup.Angles *= Rotation.FromPitch( swing.z * 0.25f ) * Rotation.FromYaw( -swing.y * 0.25f );
 	}
 
 	private Vector3 swingOffset;
