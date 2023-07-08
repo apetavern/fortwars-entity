@@ -3,7 +3,9 @@
 @attribute [StyleSheet]
 
 <root>
-    <img src="/ui/misc/avatar_border.png" class="avatar-border @GetTeamClass()"/>
+    <img src="/ui/misc/avatar_border.png" class="avatar border"/>
+    <img src="/ui/misc/avatar_background.png" class="avatar background"/>
+    <img src=@GetClassIconUrl() class="avatar avatar-img"/>
     <div class="vitals-info">
         <div class="vitals-panel vitals-class">
             @PlayerClass
@@ -14,8 +16,10 @@
                 <div class="current" style="width: @GetHealthPercentage()%"></div>
             </div>
         </div>
+        <div class="vitals-panel vitals-name">
+            @Game.LocalClient.Name
+        </div>
     </div>
-    
 </root>
 
 @code {
@@ -31,9 +35,14 @@
     {
         return TeamSystem.GetTeam(Game.LocalClient) is Team.Blue ? "blue-team" : "red-team";
     }
+
+    private static string GetClassIconUrl()
+    {
+        return Player.Class.IconPath;
+    }
     
     protected override int BuildHash()
     {
-        return HashCode.Combine(Player?.Health, Player?.Class, TeamSystem.GetTeam(Game.LocalClient));
+        return HashCode.Combine(Player?.Health, Player?.Class.ClassName, TeamSystem.GetTeam(Game.LocalClient));
     }
 }
