@@ -19,39 +19,20 @@ public sealed class ViewModelBobEffect : EntityComponent<ViewModel>, IViewModelE
 		var playerVelocity = controller.Velocity;
 		
 		var offset = CalculateBobbingOffset( ref currentBob, playerVelocity, Entity.Pawn.Controller );
-		if ( Entity.Pawn.GroundEntity == null )
-		{
-			offset += new Vector3( 0, 0, -2.5f );
-		}
-
-		offset *= 1f;
-
 		var offsetMultiplier = 1.0f;
 
 		if ( Entity.Weapon != null )
 		{
 			offsetMultiplier = 0.5f;
-
-			/*
-			if ( Weapon.IsAiming )
-			{
-				rotationMultiplier = Weapon.WeaponAsset.AimedProceduralViewmodelStrength;
-				offsetMultiplier = Weapon.WeaponAsset.AimedProceduralViewmodelStrength;
-			}
-			*/
 		}
 
 		offset += ShootOffset * offsetMultiplier;
 
 		var t = playerVelocity.Length.LerpInverse( 0, 350 );
 		const float factor = 0.1f;
-
+		
 		offset += new Vector3( t, 0, t / 2f ) * -4f * factor;
-
 		setup.Offset += setup.Camera.Rotation * (offset + Entity.Weapon.PositionOffset);
-
-		var maskOffset = new Vector2( offset.y, offset.z ) * 0.1f * ( 10 * offset.x + 1f );
-		Entity.SceneObject.Attributes.Set( "maskOffset", new Vector2( maskOffset.x, maskOffset.y ) );
 	}
 
 	public static Vector3 CalculateBobbingOffset( ref float currentBob, Vector3 velocity, PlayerController controller )

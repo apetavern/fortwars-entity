@@ -12,13 +12,14 @@ public sealed class ViewModel : AnimatedEntity
 	public ViewModel( Weapon weapon )
 	{
 		Game.AssertClient();
+
 		Weapon = weapon;
 	}
 
 	public override void Spawn()
 	{
 		base.Spawn();
-		
+
 		// This shouldn't be defined here, but it is here for now.
 		Components.Create<ViewModelBobEffect>();
 		Components.Create<ViewModelSwingEffect>();
@@ -52,12 +53,14 @@ public sealed class ViewModel : AnimatedEntity
 		Rotation = Camera.Rotation;
 		Position = Camera.Position;
 
+		// Iterate over each effect we have and apply it to this struct
 		var setup = new ViewModelSetup( new Transform( Camera.Position, Camera.Rotation ) );
 		foreach ( var effect in Effects )
 		{
 			effect.OnApplyEffect( ref setup );
 		}
 
+		// Apply the setup to ourselves
 		Position += setup.Offset;
 		Rotation *= setup.Angles;
 
