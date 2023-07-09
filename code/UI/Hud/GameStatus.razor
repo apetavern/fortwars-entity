@@ -7,11 +7,11 @@
         <label class="phase">@Gamemode.GetGameStateName()</label>
         <label class="time">@GetTimeString()</label>
     </div>
-    @if (Gamemode.ShouldShowScore())
+    @if ( Gamemode.ShouldShowScore() )
     {
         <div class="scores">
-            <label class="score blue">@CaptureTheFlag.Scores[Team.Red]</label>
-            <label class="score red">@CaptureTheFlag.Scores[Team.Blue]</label>
+            <label class="score blue">@CaptureTheFlag.Scores[Team.Blue]</label>
+            <label class="score red">@CaptureTheFlag.Scores[Team.Red]</label>
         </div>
     }
 </root>
@@ -22,14 +22,14 @@
 
     static string GetTimeString()
     {
-        return Gamemode.GetTimeRemaining() < 0f 
-            ? "-" 
-            : TimeSpan.FromSeconds(Math.Floor(Gamemode.GetTimeRemaining())).ToString(@"mm\:ss");
+        return Gamemode.GetTimeRemaining() < 0f
+            ? "-"
+            : TimeSpan.FromSeconds( Math.Floor( Gamemode.GetTimeRemaining() ) ).ToString( @"mm\:ss" );
     }
 
     protected override int BuildHash()
     {
-        return HashCode.Combine(Gamemode.GetGameStateName(), Gamemode.GetTimeRemaining());
+        return HashCode.Combine( Gamemode.GetGameStateName(), Gamemode.GetTimeRemaining() );
     }
 
 }

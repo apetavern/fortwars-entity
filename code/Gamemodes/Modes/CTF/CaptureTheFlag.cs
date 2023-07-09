@@ -54,12 +54,12 @@ public partial class CaptureTheFlag : Gamemode
 	/// <summary>
 	/// How long the build phase lasts.
 	/// </summary>
-	public static float BuildPhaseDuration => 5f; // 90
+	public static float BuildPhaseDuration => 5f;// 90
 
 	/// <summary>
 	/// How long the combat phase lasts.
 	/// </summary>
-	public static float CombatPhaseDuration => 300f; // 180
+	public static float CombatPhaseDuration => 300f;// 180
 
 	/// <summary>
 	/// How long the game over phase lasts before the game is restarted.
@@ -208,7 +208,7 @@ public partial class CaptureTheFlag : Gamemode
 
 	private void GiveBuildLoadout( Player player, Inventory inventory )
 	{
-		// TODO: Give player a phygun.
+		// TODO: Give player a physgun.
 	}
 
 	private void GiveCombatLoadout( Player player, Inventory inventory )
@@ -238,8 +238,7 @@ public partial class CaptureTheFlag : Gamemode
 		{
 			BlueFlag = new BogRoll()
 			{
-				Position = dropPos,
-				Team = Team.Blue,
+				Position = dropPos, Team = Team.Blue,
 			};
 			BlueFlagCarrier = null;
 		}
@@ -247,8 +246,7 @@ public partial class CaptureTheFlag : Gamemode
 		{
 			RedFlag = new BogRoll()
 			{
-				Position = dropPos,
-				Team = Team.Red,
+				Position = dropPos, Team = Team.Red,
 			};
 			RedFlagCarrier = null;
 		}
@@ -274,7 +272,7 @@ public partial class CaptureTheFlag : Gamemode
 	{
 		var clientTeam = client.Components.Get<TeamComponent>().Team;
 		var spawnpoints = All.OfType<InfoPlayerTeamspawn>().Where( x => x.Team == clientTeam );
-		var randomSpawn = spawnpoints.OrderBy( x => Guid.NewGuid() ).FirstOrDefault();
+		var randomSpawn = spawnpoints.MinBy( x => Guid.NewGuid() );
 
 		if ( randomSpawn == null )
 		{
@@ -433,7 +431,7 @@ public partial class CaptureTheFlag : Gamemode
 		DebugOverlay.ScreenText( $"BlueFlagCarrier: {BlueFlagCarrier}", i++ );
 		DebugOverlay.ScreenText( $"RedFlag: {RedFlag}", i++ );
 		DebugOverlay.ScreenText( $"BlueFlag: {BlueFlag}", i++ );
-		DebugOverlay.ScreenText( $"State: {CurrentState.ToString()}", i++);
+		DebugOverlay.ScreenText( $"State: {CurrentState.ToString()}", i++ );
 	}
 
 	[ConCmd.Admin( "fw_ctf_set_state" )]
