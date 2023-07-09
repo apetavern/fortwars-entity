@@ -2,47 +2,63 @@
 
 Layer0
 {
-	shader "shaders/complex.shader"
+	shader "shaders/rgb_variation_masks.shader"
 
-	//---- Color ----
-	F_TINT_MASK 1
+	//---- Base Textures ----
+	g_bBaseUseSecondaryCoord "0"
+	g_vBaseTiling "[1.000 1.000]"
+	GlobalAlbedo "materials/fw_stone/fw_easter_stone_tile_01a_color.png"
+	GlobalNormal "materials/fw_stone/easter_stone_wall_01a_normal.png"
+	GlobalORM "materials/fw_stone/fw_easter_stone_tile_01a_orm_mask.png"
 
-	//---- PBR ----
-	F_SPECULAR 1
-
-	//---- Ambient Occlusion ----
-	g_flAmbientOcclusionDirectDiffuse "0.000"
-	g_flAmbientOcclusionDirectSpecular "0.000"
-	TextureAmbientOcclusion "materials/fw_stone/easter_stone_wall_01a_ao.png"
-
-	//---- Color ----
-	g_flModelTintAmount "1.000"
-	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "materials/fw_stone/easter_stone_wall_01a_color.png"
-	TextureTintMask "materials/default/default_mask.tga"
-
-	//---- Fade ----
-	g_flFadeExponent "1.000"
+	//---- Blue Channel ----
+	BlueAlbedo "[0.427451 0.309804 0.149020 1.000000]"
+	BlueNormal "materials/default/default_normal.tga"
+	BlueORM "materials/default/default_color.tga"
+	g_bBlueUseAlbedo "1"
+	g_bBlueUseAO "0"
+	g_bBlueUseMetallic "0"
+	g_bBlueUseNormal "0"
+	g_bBlueUseRoughness "0"
+	g_bBlueUseSecondaryCoord "0"
+	g_flBlueMaskStrength "0.300"
+	g_vBlueTiling "[1.000 1.000]"
+	g_vBlueTint "[1.000000 1.000000 1.000000 1.000000]"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
 
-	//---- Metalness ----
-	g_flMetalness "0.000"
+	//---- Green Channel ----
+	g_bGreenUseAlbedo "1"
+	g_bGreenUseAO "0"
+	g_bGreenUseMetallic "0"
+	g_bGreenUseNormal "0"
+	g_bGreenUseRoughness "1"
+	g_bGreenUseSecondaryCoord "0"
+	g_flGreenMaskStrength "2.000"
+	g_vGreenTiling "[1.000 1.000]"
+	g_vGreenTint "[1.000000 1.000000 1.000000 1.000000]"
+	GreenAlbedo "[0.000000 0.000000 0.000000 1.000000]"
+	GreenNormal "materials/default/default_normal.tga"
+	GreenORM "[1.000000 1.000000 0.000000 1.000000]"
 
-	//---- Normal ----
-	TextureNormal "materials/fw_stone/easter_stone_wall_01a_normal.png"
+	//---- Red Channel ----
+	g_bRedUseAlbedo "1"
+	g_bRedUseAO "0"
+	g_bRedUseMetallic "0"
+	g_bRedUseNormal "0"
+	g_bRedUseRoughness "1"
+	g_bRedUseSecondaryCoord "0"
+	g_flRedMaskStrength "0.500"
+	g_vRedTiling "[1.000 1.000]"
+	g_vRedTint "[1.000000 1.000000 1.000000 1.000000]"
+	RedAlbedo "[0.694118 0.776471 0.827451 1.000000]"
+	RedNormal "materials/default/default_normal.tga"
+	RedORM "[1.000000 0.501961 1.000000 1.000000]"
 
-	//---- Roughness ----
-	g_flRoughnessScaleFactor "1.000"
-	TextureRoughness "materials/fw_stone/easter_stone_wall_01a_rough.png"
-
-	//---- Texture Coordinates ----
-	g_nScaleTexCoordUByModelScaleAxis "0"
-	g_nScaleTexCoordVByModelScaleAxis "0"
-	g_vTexCoordOffset "[0.000 0.000]"
-	g_vTexCoordScale "[1.000 1.000]"
-	g_vTexCoordScrollSpeed "[0.000 0.000]"
+	//---- Unique Textures ----
+	g_bUniqueUseSecondaryCoord "0"
+	RGBVariationMask "materials/fw_stone/easter_stone_wall_01a_mask.png"
 
 	SystemAttributes
 	{
