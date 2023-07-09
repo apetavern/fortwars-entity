@@ -8,12 +8,6 @@ public partial class Weapon : AnimatedEntity
 	/// </summary>
 	public Player Player => Owner as Player;
 
-	/// <summary>
-	/// The Entity holding our ViewModel. This should only exist clientside.
-	/// </summary>
-	public ViewModel ViewModelEntity { get; set; }
-	public virtual ModelEntity EffectEntity => ( ViewModelEntity.IsValid() && IsFirstPersonMode ) ? ViewModelEntity : this;
-
 	public Weapon()
 	{
 		Transmit = TransmitType.Always;
@@ -29,7 +23,7 @@ public partial class Weapon : AnimatedEntity
 	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
-		foreach(var component in WeaponComponents)
+		foreach ( var component in WeaponComponents )
 		{
 			if ( !component.Enabled )
 				continue;
@@ -44,8 +38,6 @@ public partial class Weapon : AnimatedEntity
 	public void OnHolster()
 	{
 		EnableDrawing = false;
-
-		DestroyViewModel(To.Single(Player));
 	}
 
 	/// <summary>
@@ -56,39 +48,6 @@ public partial class Weapon : AnimatedEntity
 	{
 		SetParent( player, true );
 		Owner = player;
-
-		if ( Game.IsServer )
-		{
-			CreateViewModel( To.Single( player ) );
-		}
-
 		EnableDrawing = true;
-	}
-
-	protected override void OnDestroy()
-	{
-		base.OnDestroy();
-
-		if ( Game.IsClient )
-		{
-			ViewModelEntity?.Delete();
-		}
-	}
-
-	[ClientRpc]
-	void CreateViewModel()
-	{
-		ViewModelEntity = new ViewModel( this )
-		{
-			Owner = Owner,
-			Model = ViewModel,
-			EnableViewmodelRendering = true,
-		};
-	}
-
-	[ClientRpc]
-	void DestroyViewModel()
-	{
-		ViewModelEntity?.Delete();
 	}
 }

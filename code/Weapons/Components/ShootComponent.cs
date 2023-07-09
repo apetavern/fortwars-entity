@@ -79,15 +79,18 @@ public class ShootComponent : WeaponComponent
 
 	private void Fire( Player player )
 	{
+		if ( player is null )
+			return;
+
 		TimeSinceActivated = 0;
-		player?.SetAnimParameter( "b_attack", true );
+		player.SetAnimParameter( "b_attack", true );
 
 		Weapon.PlaySound( Weapon.ShootSound is not null ? Weapon.ShootSound.ResourcePath : "audio/weapons/aiax50/aiax50_fire.sound" );
 
 		if ( !Game.IsClient )
 			return;
 
-		Weapon.ViewModelEntity.SetAnimParameter( "fire", true );
+		player.ViewModel.SetAnimParameter( "fire", true );
 
 		if ( Weapon.TracerParticle is null )
 			TracerParticle ??= Particles.Create( "particles/tracer.vpcf" );
@@ -96,7 +99,7 @@ public class ShootComponent : WeaponComponent
 
 		if ( TracerParticle != null || ImpactTrailParticle != null )
 		{
-			var xForm = Weapon.EffectEntity.GetAttachment( "muzzle" ) ?? Weapon.Transform;
+			var xForm = player.ViewModel.GetAttachment( "muzzle" ) ?? Weapon.Transform;
 			DebugOverlay.Sphere( xForm.Position, 2, Color.Random, 20 );
 			TracerParticle?.SetPosition( 0, xForm.Position );
 

@@ -29,6 +29,8 @@ public partial class Player : AnimatedEntity
 	[Net]
 	public string SkinMaterialPath { get; set; }
 
+	public ViewModel ViewModel { get; private set; }
+
 	public Player()
 	{
 
@@ -102,6 +104,11 @@ public partial class Player : AnimatedEntity
 		Controller?.Simulate( client );
 		Animator?.Simulate( client );
 		Inventory?.Simulate( client );
+
+		if ( Game.IsClient )
+		{
+			HandleViewModelUpdate();
+		}
 	}
 
 	public override void FrameSimulate( IClient client )
@@ -112,6 +119,23 @@ public partial class Player : AnimatedEntity
 		Inventory?.FrameSimulate( client );
 
 		PlayerCamera?.Update( this );
+	}
+
+	void HandleViewModelUpdate()
+	{
+		Game.AssertClient();
+
+		if ( Inventory?.ActiveWeapon != ViewModel?.Weapon )
+		{
+			var weapon = Inventory?.ActiveWeapon;
+			if ( weapon is null )
+				return;
+			ViewModel?.Delete();
+			ViewModel = new ViewModel( Inventory?.ActiveWeapon )
+			{
+				Owner = Owner, Model = weapon.ViewModel, EnableViewmodelRendering = true,
+			};
+		}
 	}
 
 	public override void OnKilled()
