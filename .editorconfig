@@ -1,7 +1,7 @@
+root = true
 # EditorConfig: https://EditorConfig.org
 
 # top-most EditorConfig file
-root = true
 
 # YAML
 [*.{yaml,yml}]
@@ -120,36 +120,39 @@ dotnet_style_qualification_for_property = false:warning
 #
 
 # CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
-dotnet_diagnostic.CS1998.severity = none
+dotnet_diagnostic.cs1998.severity = none
 
 # CS8632: Nullable in non nullable context
-dotnet_diagnostic.CS8632.severity = none
+dotnet_diagnostic.cs8632.severity = none
 
 #
 # Microsoft.CodeAnalysis.CSharp.Features
 #
 
 # IDE0001: Simplify name
-dotnet_diagnostic.IDE0001.severity = none
+dotnet_diagnostic.ide0001.severity = none
 
 # IDE0002: Simplify member access
-dotnet_diagnostic.IDE0002.severity = warning
+dotnet_diagnostic.ide0002.severity = warning
 
 # IDE0003: Remove this or Me qualification
-dotnet_diagnostic.IDE0003.severity = warning
+dotnet_diagnostic.ide0003.severity = warning
 
 # IDE0004: Remove unnecessary cast
-dotnet_diagnostic.IDE0004.severity = warning
+dotnet_diagnostic.ide0004.severity = warning
 
 # IDE0005: Remove unnecessary import
-dotnet_diagnostic.IDE0005.severity = suggestion
+dotnet_diagnostic.ide0005.severity = suggestion
 
 # IDE0047: Remove unnecessary parentheses
-dotnet_diagnostic.IDE0047.severity = warning
+dotnet_diagnostic.ide0047.severity = warning
 
 #
 # StyleCop.Analyzers
 #
 
 # SA1636: FileHeaderCopyrightTextMustMatch
-dotnet_diagnostic.SA1636.severity = warning
+dotnet_diagnostic.sa1636.severity = warning
+
+# ReSharper properties
+resharper_wrap_object_and_collection_initializer_style = chop_always

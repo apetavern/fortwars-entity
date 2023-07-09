@@ -125,17 +125,20 @@ public partial class Player : AnimatedEntity
 	{
 		Game.AssertClient();
 
-		if ( Inventory?.ActiveWeapon != ViewModel?.Weapon )
+		if ( Inventory?.ActiveWeapon == ViewModel?.Weapon )
+			return;
+
+		var weapon = Inventory?.ActiveWeapon;
+		if ( weapon is null )
+			return;
+
+		ViewModel?.Delete();
+		ViewModel = new ViewModel( Inventory?.ActiveWeapon )
 		{
-			var weapon = Inventory?.ActiveWeapon;
-			if ( weapon is null )
-				return;
-			ViewModel?.Delete();
-			ViewModel = new ViewModel( Inventory?.ActiveWeapon )
-			{
-				Owner = Owner, Model = weapon.ViewModel, EnableViewmodelRendering = true,
-			};
-		}
+			Owner = this,
+			Model = weapon.ViewModel,
+			EnableViewmodelRendering = true
+		};
 	}
 
 	public override void OnKilled()
