@@ -1,5 +1,25 @@
 {
-  "cloud_packages": [],
-  "game_packages": [],
-  "addon_packages": []
+  "publish": {
+    "Allowed": true,
+    "Enabled": false,
+    "ProjectConfig": {
+      "Title": "easter_pillar_tileset",
+      "Type": "map",
+      "Org": "local",
+      "Ident": "easter_pillar_tileset",
+      "Tags": null,
+      "Schema": 0,
+      "HasAssets": false,
+      "AssetsPath": null,
+      "Resources": null,
+      "MenuResources": null,
+      "HasCode": false,
+      "CodePath": null,
+      "PackageReferences": [],
+      "EditorReferences": [],
+      "Metadata": {
+        "SingleAssetSource": "maps/tilesets/easter_pillar_tileset.vmap"
+      }
+    }
+  }
 }

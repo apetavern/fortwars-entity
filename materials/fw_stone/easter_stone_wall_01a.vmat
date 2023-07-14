@@ -59,10 +59,4 @@ Layer0
 	//---- Unique Textures ----
 	g_bUniqueUseSecondaryCoord "0"
 	RGBVariationMask "materials/fw_stone/easter_stone_wall_01a_mask.png"
-
-	SystemAttributes
-	{
-		WorldMappingWidth "128"
-		WorldMappingHeight "128"
-	}
 }
