@@ -10,7 +10,7 @@ Layer0
 	//---- Ambient Occlusion ----
 	g_flAmbientOcclusionDirectDiffuse "0.000"
 	g_flAmbientOcclusionDirectSpecular "0.000"
-	TextureAmbientOcclusion "[1.000000 1.000000 1.000000 0.000000]"
+	TextureAmbientOcclusion "materials/hotspots/fw_wood_hs/fw_easter_wood_hs_01a_ao.png"
 
 	//---- Color ----
 	g_flModelTintAmount "1.000"

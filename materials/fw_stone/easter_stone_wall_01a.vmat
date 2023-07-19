@@ -8,7 +8,7 @@ Layer0
 	g_bBaseUseSecondaryCoord "0"
 	g_vBaseTiling "[1.000 1.000]"
 	GlobalAlbedo "materials/fw_stone/fw_easter_stone_tile_01a_color.png"
-	GlobalNormal "materials/fw_stone/easter_stone_wall_01a_normal.png"
+	GlobalNormal "materials/fw_stone/fw_easter_stone_tile_01a_normal.png"
 	GlobalORM "materials/fw_stone/fw_easter_stone_tile_01a_orm_mask.png"
 
 	//---- Blue Channel ----
@@ -57,6 +57,8 @@ Layer0
 	RedORM "[1.000000 0.501961 1.000000 1.000000]"
 
 	//---- Unique Textures ----
+	BakedNormal "materials/fw_stone/easter_stone_wall_01a_normal.png"
 	g_bUniqueUseSecondaryCoord "0"
+	g_flBakedNormalBlend "1.000"
 	RGBVariationMask "materials/fw_stone/easter_stone_wall_01a_mask.png"
 }

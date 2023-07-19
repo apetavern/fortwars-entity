@@ -6,24 +6,24 @@ Layer0
 
 	//---- Base Textures ----
 	g_bBaseUseSecondaryCoord "0"
-	g_vBaseTiling "[1.000 1.000]"
+	g_vBaseTiling "[2.000 3.000]"
 	GlobalAlbedo "materials/fw_stone/fw_easter_stone_tile_01a_color.png"
-	GlobalNormal "models/environment/easter_pillars/textures/easter_pillars_01a_normal.png"
+	GlobalNormal "materials/fw_stone/fw_easter_stone_tile_01a_normal.png"
 	GlobalORM "materials/fw_stone/fw_easter_stone_tile_01a_orm_mask.png"
 
 	//---- Blue Channel ----
-	BlueAlbedo "[0.290196 0.545098 0.223529 1.000000]"
-	BlueNormal "[1.000000 1.000000 1.000000 1.000000]"
-	BlueORM "[1.000000 1.000000 1.000000 1.000000]"
+	BlueAlbedo "materials/fw_moss/fw_moss_color.png"
+	BlueNormal "materials/fw_moss/fw_moss_normal.png"
+	BlueORM "materials/fw_moss/fw_moss_mask.png"
 	g_bBlueUseAlbedo "1"
-	g_bBlueUseAO "0"
+	g_bBlueUseAO "1"
 	g_bBlueUseMetallic "0"
-	g_bBlueUseNormal "0"
-	g_bBlueUseRoughness "0"
+	g_bBlueUseNormal "1"
+	g_bBlueUseRoughness "1"
 	g_bBlueUseSecondaryCoord "0"
-	g_flBlueMaskStrength "1.000"
-	g_vBlueTiling "[1.000 1.000]"
-	g_vBlueTint "[0.619608 0.745098 0.549020 1.000000]"
+	g_flBlueMaskStrength "1.500"
+	g_vBlueTiling "[2.000 2.000]"
+	g_vBlueTint "[1.000000 1.000000 1.000000 1.000000]"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
@@ -57,6 +57,8 @@ Layer0
 	RedORM "[1.000000 0.501961 1.000000 1.000000]"
 
 	//---- Unique Textures ----
+	BakedNormal "models/environment/easter_pillars/textures/easter_pillars_01a_normal.png"
 	g_bUniqueUseSecondaryCoord "0"
+	g_flBakedNormalBlend "1.000"
 	RGBVariationMask "models/environment/easter_pillars/textures/easter_pillars_01a_mask.png"
 }
