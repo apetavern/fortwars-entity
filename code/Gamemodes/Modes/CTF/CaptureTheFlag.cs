@@ -223,7 +223,7 @@ public partial class CaptureTheFlag : Gamemode
 		// inventory.AddWeapon( equipment, false );
 	}
 
-	internal override void OnWeaponDropped( Player player, Weapon weapon )
+	internal override void OnWeaponDropped( Player player, Item weapon )
 	{
 		if ( Game.IsClient )
 			return;
@@ -313,7 +313,7 @@ public partial class CaptureTheFlag : Gamemode
 				return;
 
 			// Ensure the player's active weapon is a flag.
-			if ( player.ActiveWeapon.Slot is not InventorySlot.Flag )
+			if ( player.ActiveWeapon.Slot is not InventorySlot.Gamemode )
 				return;
 
 			// Ensure the player's team flag is home.

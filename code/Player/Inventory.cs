@@ -67,7 +67,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 			1 => Weapons.FirstOrDefault( wep => wep.Slot == InventorySlot.Secondary ),
 			2 => Weapons.FirstOrDefault( wep => wep.Slot == InventorySlot.Equipment ),
 			3 => Weapons.FirstOrDefault( wep => wep.Slot == InventorySlot.Other ),
-			4 => Weapons.FirstOrDefault( wep => wep.Slot == InventorySlot.Flag ),
+			4 => Weapons.FirstOrDefault( wep => wep.Slot == InventorySlot.Gamemode ),
 			_ => null
 		};
 	}

@@ -12,7 +12,7 @@ public sealed class ViewModelBobEffect : EntityComponent<ViewModel>, IViewModelE
 
 	public void OnApplyEffect( ref ViewModelSetup setup )
 	{
-		if ( !Entity.Weapon.IsValid() )
+		if ( !Entity.Item.IsValid() )
 			return;
 
 		var controller = Entity.Pawn.Controller;
@@ -25,7 +25,7 @@ public sealed class ViewModelBobEffect : EntityComponent<ViewModel>, IViewModelE
 		var offsetMultiplier = 1.0f ;
 		offsetMultiplier /= Entity.Pawn.Class.SpeedMultiplier;
 
-		if ( Entity.Weapon != null )
+		if ( Entity.Item != null )
 		{
 			offsetMultiplier = 0.5f;
 		}
@@ -36,7 +36,7 @@ public sealed class ViewModelBobEffect : EntityComponent<ViewModel>, IViewModelE
 		const float factor = 0.1f;
 		
 		offset += new Vector3( t, 0, t / 2f ) * -4f * factor;
-		setup.Offset += setup.Camera.Rotation * (offset + Entity.Weapon.PositionOffset);
+		setup.Offset += setup.Camera.Rotation * ( offset ); //+ Entity.Weapon.PositionOffset);
 	}
 
 	public static Vector3 CalculateBobbingOffset( ref float currentBob, Vector3 velocity, PlayerController controller )

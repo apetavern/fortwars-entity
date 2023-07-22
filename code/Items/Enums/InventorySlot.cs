@@ -6,5 +6,5 @@ public enum InventorySlot
 	Secondary,
 	Equipment,
 	Other,
-	Flag
+	Gamemode
 }

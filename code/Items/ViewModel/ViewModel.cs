@@ -7,18 +7,19 @@
 [Title( "View Model" ), Category( "ViewModel" )]
 public sealed class ViewModel : AnimatedEntity
 {
-	public Weapon Weapon { get; }
+	public Item Item { get; }
 
-	public ViewModel( Weapon weapon )
+	public ViewModel( Item item )
 	{
 		Game.AssertClient();
-
-		Weapon = weapon;
+		Item = item;
 	}
 
 	public override void Spawn()
 	{
 		base.Spawn();
+
+		EnableViewmodelRendering = true;
 
 		// This shouldn't be defined here, but it is here for now.
 		Components.Create<ViewModelBobEffect>();
@@ -44,7 +45,7 @@ public sealed class ViewModel : AnimatedEntity
 	[GameEvent.Client.PostCamera]
 	private void OnPostCamera()
 	{
-		if ( Weapon.Root is not Player player || !player.IsValid() )
+		if ( Item.Root is not Player player || !player.IsValid() )
 			return;
 
 		// Allow view model effects to get the pawn easily 

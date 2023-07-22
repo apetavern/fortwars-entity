@@ -65,7 +65,7 @@ public partial class Gamemode : Entity
 
 	internal virtual void OnPlayerKilled( Player player ) { }
 
-	internal virtual void OnWeaponDropped( Player player, Weapon weapon ) { }
+	internal virtual void OnWeaponDropped( Player player, Item weapon ) { }
 
 	internal virtual void MoveToSpawnpoint( IClient client ) { }
 }
