@@ -8,5 +8,5 @@ public sealed partial class AssaultRifleGun : Gun
 		MoveSpeedMultiplier = 1,
 	};
 
-	protected override Model ViewModel => Model.Load( "weapons/rust_pumpshotgun/v_rust_pumpshotgun.vmdl" );
+	protected override Model ViewModel => Model.Load( "models/weapons/ksr1/ksr1_v.vmdl" );
 }

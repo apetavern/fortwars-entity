@@ -214,7 +214,8 @@ public partial class CaptureTheFlag : Gamemode
 	private void GiveCombatLoadout( Player player, Inventory inventory )
 	{
 		inventory.AddWeapon( new AssaultRifleGun(), true );
-		// inventory.AddWeapon( Weapon.FromPrefab( player.SelectedSecondaryWeapon ), false );
+		inventory.AddWeapon( new UspPistolGun(), false );
+		inventory.AddWeapon( new SniperRifleGun(), false );
 
 		if ( player.Class.Equipment == null )
 			return;
