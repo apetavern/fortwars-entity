@@ -1,9 +1,7 @@
 namespace Fortwars;
 
-public class FortwarsManager : GameManager
+public sealed class FortwarsManager : GameManager
 {
-	public static FortwarsManager Instance => Current as FortwarsManager;
-
 	public FortwarsManager()
 	{
 		if ( Game.IsClient )

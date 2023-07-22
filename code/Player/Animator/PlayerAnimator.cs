@@ -1,8 +1,8 @@
 ﻿namespace Fortwars;
 
-public partial class PlayerAnimator : EntityComponent<Player>, ISingletonComponent
+public sealed class PlayerAnimator : EntityComponent<Player>, ISingletonComponent
 {
-	public virtual void Simulate( IClient client )
+	public void Simulate( IClient client )
 	{
 		var player = Entity;
 		var ctrl = player.Controller;
@@ -21,12 +21,14 @@ public partial class PlayerAnimator : EntityComponent<Player>, ISingletonCompone
 		if ( weapon.IsValid() )
 		{
 			player.SetAnimParameter( "holdtype", (int)weapon.HoldType );
-			player.SetAnimParameter( "holdtype_handedness", (int)weapon.Handedness );
+			// player.SetAnimParameter( "holdtype_handedness", (int)weapon.Handedness );
 
+			/*
 			foreach ( var component in weapon.WeaponComponents )
 			{
 				component.SimulateAnimator( player );
 			}
+			*/
 		}
 		else
 		{

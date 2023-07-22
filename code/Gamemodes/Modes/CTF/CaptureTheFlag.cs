@@ -213,14 +213,14 @@ public partial class CaptureTheFlag : Gamemode
 
 	private void GiveCombatLoadout( Player player, Inventory inventory )
 	{
-		inventory.AddWeapon( Weapon.FromPrefab( player.SelectedPrimaryWeapon ), true );
-		inventory.AddWeapon( Weapon.FromPrefab( player.SelectedSecondaryWeapon ), false );
+		inventory.AddWeapon( new AssaultRifleGun(), true );
+		// inventory.AddWeapon( Weapon.FromPrefab( player.SelectedSecondaryWeapon ), false );
 
 		if ( player.Class.Equipment == null )
 			return;
 
-		var equipment = PrefabLibrary.Spawn<Weapon>( player.Class.Equipment );
-		inventory.AddWeapon( equipment, false );
+		// var equipment = PrefabLibrary.Spawn<Weapon>( player.Class.Equipment );
+		// inventory.AddWeapon( equipment, false );
 	}
 
 	internal override void OnWeaponDropped( Player player, Weapon weapon )
@@ -313,7 +313,7 @@ public partial class CaptureTheFlag : Gamemode
 				return;
 
 			// Ensure the player's active weapon is a flag.
-			if ( player.ActiveWeapon.InventorySlot is not InventorySlot.Flag )
+			if ( player.ActiveWeapon.Slot is not InventorySlot.Flag )
 				return;
 
 			// Ensure the player's team flag is home.
@@ -377,8 +377,8 @@ public partial class CaptureTheFlag : Gamemode
 		Log.Info( $"Fortwars CTF: The flag for team {team} has been stolen by {player.Client.Name}." );
 
 		// Add the flag to the player's inventory.
-		player.Inventory.AddWeapon(
-			Weapon.FromPrefab( BogRollPath ), true );
+		throw new NotImplementedException();
+		// player.Inventory.AddWeapon( Weapon.FromPrefab( BogRollPath ), true );
 	}
 
 	private void ReturnFlag( Team team )

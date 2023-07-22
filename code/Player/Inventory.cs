@@ -2,24 +2,22 @@
 
 public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 {
-	[Net]
-	protected IList<Weapon> Weapons { get; set; }
+	[Net] protected IList<Item> Weapons { get; set; }
 
-	[Net, Predicted]
-	public Weapon ActiveWeapon { get; set; }
+	[Net, Predicted] public Item ActiveWeapon { get; set; }
 
-	[Net, Predicted]
-	public int LastActiveWeaponSlot { get; set; }
+	[Net, Predicted] public int LastActiveWeaponSlot { get; set; }
 
-	public int GetSlotFromWeapon( Weapon weapon ) => (int)weapon.InventorySlot;
+	public int GetSlotFromWeapon( Item weapon ) => (int)weapon.Slot;
 	public int ActiveWeaponSlot => GetSlotFromWeapon( ActiveWeapon );
 
-	public bool AddWeapon( Weapon weapon, bool makeActive = true )
+	public bool AddWeapon( Item weapon, bool makeActive = true )
 	{
 		if ( Weapons.Contains( weapon ) )
 			return false;
 
 		Weapons.Add( weapon );
+		weapon.OnPickup( Entity );
 
 		if ( makeActive )
 			SetActiveWeapon( weapon );
@@ -27,12 +25,12 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		return true;
 	}
 
-	public void SetActiveWeapon( Weapon weapon )
+	public void SetActiveWeapon( Item weapon )
 	{
 		var currentWeapon = ActiveWeapon;
 		if ( currentWeapon.IsValid() )
 		{
-			currentWeapon.OnHolster();
+			currentWeapon.OnHolster( false );
 
 			if ( currentWeapon.IsValid )
 				LastActiveWeaponSlot = ActiveWeaponSlot;
@@ -41,7 +39,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		}
 
 		ActiveWeapon = weapon;
-		weapon?.OnDeploy( Entity );
+		weapon?.OnDeploy();
 	}
 
 	public void RemoveActiveWeapon()
@@ -49,36 +47,27 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		var currentWeapon = ActiveWeapon;
 		if ( currentWeapon.IsValid() )
 		{
-			currentWeapon.OnHolster();
-			Weapons.Remove( currentWeapon );
+			currentWeapon.OnHolster( true );
+			RemoveWeapon( ActiveWeapon );
 			ActiveWeapon = null;
 		}
 	}
 
-	public void RemoveWeapon( Weapon weapon )
+	public void RemoveWeapon( Item weapon )
 	{
+		weapon.OnDrop();
 		Weapons.Remove( weapon );
 	}
 
-	public Weapon GetWeaponFromSlot( int slot )
+	public Item GetWeaponFromSlot( int slot )
 	{
 		return slot switch
 		{
-			0 => Weapons
-				.Where( wep => wep.InventorySlot == InventorySlot.Primary )
-				.FirstOrDefault(),
-			1 => Weapons
-				.Where( wep => wep.InventorySlot == InventorySlot.Secondary )
-				.FirstOrDefault(),
-			2 => Weapons
-				.Where( wep => wep.InventorySlot == InventorySlot.Equipment )
-				.FirstOrDefault(),
-			3 => Weapons
-				.Where( wep => wep.InventorySlot == InventorySlot.Other )
-				.FirstOrDefault(),
-			4 => Weapons
-				.Where( wep => wep.InventorySlot == InventorySlot.Flag )
-				.FirstOrDefault(),
+			0 => Weapons.FirstOrDefault( wep => wep.Slot == InventorySlot.Primary ),
+			1 => Weapons.FirstOrDefault( wep => wep.Slot == InventorySlot.Secondary ),
+			2 => Weapons.FirstOrDefault( wep => wep.Slot == InventorySlot.Equipment ),
+			3 => Weapons.FirstOrDefault( wep => wep.Slot == InventorySlot.Other ),
+			4 => Weapons.FirstOrDefault( wep => wep.Slot == InventorySlot.Flag ),
 			_ => null
 		};
 	}
@@ -101,7 +90,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		if ( slot == ActiveWeaponSlot )
 			return;
 
-		if ( GetWeaponFromSlot( slot ) is Weapon weapon )
+		if ( GetWeaponFromSlot( slot ) is Item weapon )
 		{
 			RunGameEventSv( "inv.switchweapon" );
 			Entity.ActiveWeaponInput = weapon;
@@ -132,7 +121,7 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 	{
 		if ( Entity.ActiveWeaponInput != null && ActiveWeapon != Entity.ActiveWeaponInput )
 		{
-			SetActiveWeapon( Entity.ActiveWeaponInput as Weapon );
+			SetActiveWeapon( Entity.ActiveWeaponInput as Item );
 			Entity.ActiveWeaponInput = null;
 		}
 
@@ -170,7 +159,8 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 
 	[ConCmd.Admin(
 		Name = "fw_set_weapon",
-		Help = "Set the caller's weapon by asset name (e.g. `fw_set_weapon ksr1`)." )]
+		Help = "Set the caller's weapon by asset name (e.g. `fw_set_weapon ksr1`)."
+	)]
 	public static void SetWeapon( string weaponPath )
 	{
 		if ( ConsoleSystem.Caller is not IClient caller )
@@ -186,6 +176,5 @@ public partial class Inventory : EntityComponent<Player>, ISingletonComponent
 		// player.Inventory.AddWeapon( weapon, true );
 	}
 
-	[ConVar.Replicated( "fw_debug_inv" )]
-	public static bool Debug { get; set; } = false;
+	[ConVar.Replicated( "fw_debug_inv" )] public static bool Debug { get; set; } = false;
 }

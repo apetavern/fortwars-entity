@@ -2,16 +2,13 @@
 
 public partial class Player : AnimatedEntity
 {
-	[BindComponent]
-	public PlayerController Controller { get; }
+	[BindComponent] public PlayerController Controller { get; }
 
-	[BindComponent]
-	public PlayerAnimator Animator { get; }
+	[BindComponent] public PlayerAnimator Animator { get; }
 
-	[BindComponent]
-	public Inventory Inventory { get; }
+	[BindComponent] public Inventory Inventory { get; }
 
-	public Weapon ActiveWeapon => Inventory?.ActiveWeapon;
+	public Item ActiveWeapon => Inventory?.ActiveWeapon;
 
 	private const int FlagSlot = 4;
 	public bool HasFlag => Inventory?.GetWeaponFromSlot( FlagSlot ) != null;
@@ -21,29 +18,20 @@ public partial class Player : AnimatedEntity
 	public ClothingContainer Clothing = new();
 	public ClothingContainer ClientClothing = new();
 
-	[Net]
-	public TimeUntil TimeUntilRespawn { get; set; }
+	[Net] public TimeUntil TimeUntilRespawn { get; set; }
 
 	private static readonly Model CitizenModel = Model.Load( "models/playermodel/playermodel.vmdl" );
 
-	[Net]
-	public string SkinMaterialPath { get; set; }
+	[Net] public string SkinMaterialPath { get; set; }
 
 	public ViewModel ViewModel { get; private set; }
 
-	public Player()
-	{
-
-	}
+	public Player() { }
 
 	public Player( IClient client ) : this()
 	{
 		ClientClothing.LoadFromClient( client );
-
-		SkinMaterialPath = ClientClothing.Clothing
-			.Select( x => x.SkinMaterial )
-			.Where( x => !string.IsNullOrWhiteSpace( x ) )
-			.FirstOrDefault();
+		SkinMaterialPath = ClientClothing.Clothing.Select( x => x.SkinMaterial ).FirstOrDefault( x => !string.IsNullOrWhiteSpace( x ) );
 	}
 
 	public override void Spawn()
@@ -104,11 +92,6 @@ public partial class Player : AnimatedEntity
 		Controller?.Simulate( client );
 		Animator?.Simulate( client );
 		Inventory?.Simulate( client );
-
-		if ( Game.IsClient )
-		{
-			HandleViewModelUpdate();
-		}
 	}
 
 	public override void FrameSimulate( IClient client )
@@ -119,26 +102,6 @@ public partial class Player : AnimatedEntity
 		Inventory?.FrameSimulate( client );
 
 		PlayerCamera?.Update( this );
-	}
-
-	void HandleViewModelUpdate()
-	{
-		Game.AssertClient();
-
-		if ( Inventory?.ActiveWeapon == ViewModel?.Weapon )
-			return;
-
-		var weapon = Inventory?.ActiveWeapon;
-		if ( weapon is null )
-			return;
-
-		ViewModel?.Delete();
-		ViewModel = new ViewModel( Inventory?.ActiveWeapon )
-		{
-			Owner = this,
-			Model = weapon.ViewModel,
-			EnableViewmodelRendering = true
-		};
 	}
 
 	public override void OnKilled()
