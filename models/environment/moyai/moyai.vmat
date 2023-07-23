@@ -1,0 +1,64 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/rgb_variation_masks.shader"
+
+	//---- Base Textures ----
+	g_bBaseUseSecondaryCoord "0"
+	g_vBaseTiling "[4.000 4.000]"
+	GlobalAlbedo "materials/fw_stone/fw_easter_stone_tile_01a_color.png"
+	GlobalNormal "materials/fw_stone/fw_easter_stone_tile_01a_normal.png"
+	GlobalORM "materials/fw_stone/fw_easter_stone_tile_01a_orm_mask.png"
+
+	//---- Blue Channel ----
+	BlueAlbedo "materials/fw_moss/fw_moss_color.png"
+	BlueNormal "materials/fw_moss/fw_moss_normal.png"
+	BlueORM "materials/fw_moss/fw_moss_mask.png"
+	g_bBlueUseAlbedo "1"
+	g_bBlueUseAO "1"
+	g_bBlueUseMetallic "0"
+	g_bBlueUseNormal "1"
+	g_bBlueUseRoughness "1"
+	g_bBlueUseSecondaryCoord "0"
+	g_flBlueMaskStrength "5.000"
+	g_vBlueTiling "[1.000 1.000]"
+	g_vBlueTint "[1.000000 1.000000 1.000000 1.000000]"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Green Channel ----
+	g_bGreenUseAlbedo "1"
+	g_bGreenUseAO "0"
+	g_bGreenUseMetallic "0"
+	g_bGreenUseNormal "0"
+	g_bGreenUseRoughness "0"
+	g_bGreenUseSecondaryCoord "0"
+	g_flGreenMaskStrength "1.000"
+	g_vGreenTiling "[1.000 1.000]"
+	g_vGreenTint "[1.000000 1.000000 1.000000 1.000000]"
+	GreenAlbedo "[0.309804 0.200000 0.082353 1.000000]"
+	GreenNormal "materials/default/default_normal.tga"
+	GreenORM "materials/default/default_color.tga"
+
+	//---- Red Channel ----
+	g_bRedUseAlbedo "1"
+	g_bRedUseAO "0"
+	g_bRedUseMetallic "0"
+	g_bRedUseNormal "0"
+	g_bRedUseRoughness "0"
+	g_bRedUseSecondaryCoord "0"
+	g_flRedMaskStrength "0.500"
+	g_vRedTiling "[1.000 1.000]"
+	g_vRedTint "[1.000000 1.000000 1.000000 1.000000]"
+	RedAlbedo "[0.827451 0.807843 0.768628 1.000000]"
+	RedNormal "materials/default/default_normal.tga"
+	RedORM "materials/default/default_color.tga"
+
+	//---- Unique Textures ----
+	BakedNormal "models/environment/moyai/textures/moyai_normal.png"
+	g_bUniqueUseSecondaryCoord "0"
+	g_flBakedNormalBlend "0.500"
+	RGBVariationMask "models/environment/moyai/textures/moyai_mask.png"
+}
