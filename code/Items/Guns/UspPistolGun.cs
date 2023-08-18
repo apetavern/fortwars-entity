@@ -7,7 +7,7 @@ public sealed partial class UspPistolGun : Gun
 	
 	protected override Setup Default => new Setup()
 	{
-		
+		RateOfFire = 650,
 	};
 	
 	protected override Model ViewModel => Model.Load( "models/weapons/hkusp/hkusp_v.vmdl" );

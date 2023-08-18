@@ -5,6 +5,8 @@ public sealed partial class AssaultRifleGun : Gun
 {
 	protected override Setup Default => new Setup()
 	{
+		Automatic = true,
+		RateOfFire = 550,
 		MoveSpeedMultiplier = 1,
 	};
 
