@@ -1,14 +1,4 @@
 # Acknowledgements
-
-### Ape Tavern
-Jake K - Programmer  
-Trundler - Programmer  
-Alex - Programmer  
-ShadowBrain - Artist (Models, Animations)   
-Willow - Artist (Maps, Particles)
-
-### Other
-
 *Announcer voice*
 Gvarados - [Twitter](https://twitter.com/gvarados) | [YouTube](https://www.youtube.com/gvarados)
 
