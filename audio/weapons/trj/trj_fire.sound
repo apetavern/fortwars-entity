@@ -1,21 +1,17 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
 {
-	data = 
-	{
-		UI = false
-		Volume = 1
-		VolumeRandom = 0
-		Pitch = 1
-		PitchRandom = 0.02
-		Decibels = 110
-		Sounds = 
-		[
-			resource:"audio/weapons/trj/trj.fire-01.vsnd",
-			resource:"audio/weapons/trj/trj.fire-02.vsnd",
-			resource:"audio/weapons/trj/trj.fire-03.vsnd",
-		]
-		SelectionMode = "Random"
-		MaximumDistance = 2777.795
-		MinimumDistance = 138.88976
-	}
+	"UI": false,
+	"Volume": 1,
+	"VolumeRandom": 0,
+	"Pitch": 1,
+	"PitchRandom": 0.020000,
+	"Decibels": 110,
+	"Sounds":
+	[
+		"audio/weapons/trj/trj.fire-01.vsnd",
+		"audio/weapons/trj/trj.fire-02.vsnd",
+		"audio/weapons/trj/trj.fire-03.vsnd"
+	],
+	"SelectionMode": "Random",
+	"MaximumDistance": 2777.795000,
+	"MinimumDistance": 138.889760
 }

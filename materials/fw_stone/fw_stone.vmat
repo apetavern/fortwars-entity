@@ -1,54 +1,35 @@
-// THIS FILE IS AUTO-GENERATED
-
-Layer0
+"Layer0"
 {
-	shader "blendable.vfx"
-
-	F_MULTIBLEND 1 // 2 Layers
-
-	//---- Use Tint Masks In Vertex Paint ----
-	F_USE_TINT_MASKS_IN_VERTEX_PAINT 1
-
-	//---- Color ----
-	g_flModelTintAmount "1.000"
-	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-
-	//---- Fade ----
-	g_flFadeExponent "1.000"
-
-	//---- Fog ----
-	g_bFogEnabled "1"
-
-	//---- Lighting ----
-	g_flDirectionalLightmapMinZ "0.050"
-	g_flDirectionalLightmapStrength "1.000"
-
-	//---- Material A ----
-	g_flTintColorA "[1.000000 1.000000 1.000000 0.000000]"
-	TextureAmbientOcclusionA "materials/default/default_ao.tga"
-	TextureBlendMaskA "materials/fw_stone/fw_stone_roughness.png"
-	TextureColorA "materials/fw_stone/fw_stone_basecolor.png"
-	TextureMetalnessA "materials/default/default_metal.tga"
-	TextureNormalA "materials/fw_stone/fw_stone_normal.png"
-	TextureRoughnessA "materials/fw_stone/fw_stone_roughness.png"
-	TextureTintMaskA "[1.000000 1.000000 1.000000 0.000000]"
-
-	//---- Material B ----
-	g_flBlendSoftnessB "0.100"
-	g_flTintColorB "[1.000000 1.000000 1.000000 0.000000]"
-	g_vTexCoordScale2 "[2.500 2.500]"
-	TextureAmbientOcclusionB "materials/fw_grass/fw_grass_ambientocclusion.png"
-	TextureBlendMaskB "materials/fw_grass/fw_grass_height.png"
-	TextureColorB "materials/fw_grass/fw_grass_basecolor.png"
-	TextureMetalnessB "[0.649000 0.649000 0.649000 0.000000]"
-	TextureNormalB "materials/fw_grass/fw_grass_normal.png"
-	TextureRoughnessB "materials/fw_grass/fw_grass_roughness.png"
-	TextureTintMaskB "[0.000000 0.000000 0.000000 0.000000]"
-
-	//---- Texture Coordinates ----
-	g_nScaleTexCoordUByModelScaleAxis "0"
-	g_nScaleTexCoordVByModelScaleAxis "0"
-	g_vTexCoordOffset "[0.000 0.000]"
-	g_vTexCoordScale "[1.000 1.000]"
-	g_vTexCoordScrollSpeed "[0.000 0.000]"
+	"shader"		"shaders/blendable.shader"
+	"F_MULTIBLEND"		"1"
+	"F_USE_TINT_MASKS_IN_VERTEX_PAINT"		"1"
+	"g_flModelTintAmount"		"1.000000"
+	"g_vColorTint"		"[1.000000 1.000000 1.000000 0.000000]"
+	"g_flFadeExponent"		"1.000000"
+	"g_bFogEnabled"		"1"
+	"g_flDirectionalLightmapMinZ"		"0.050000"
+	"g_flDirectionalLightmapStrength"		"1.000000"
+	"g_flTintColorA"		"[1.000000 1.000000 1.000000 0.000000]"
+	"TextureAmbientOcclusionA"		"materials/default/default_ao.tga"
+	"TextureBlendMaskA"		"materials/fw_stone/fw_stone_roughness.png"
+	"TextureColorA"		"materials/fw_stone/fw_stone_basecolor.png"
+	"TextureMetalnessA"		"materials/default/default_metal.tga"
+	"TextureNormalA"		"materials/fw_stone/fw_stone_normal.png"
+	"TextureRoughnessA"		"materials/fw_stone/fw_stone_roughness.png"
+	"TextureTintMaskA"		"[1.000000 1.000000 1.000000 0.000000]"
+	"g_flBlendSoftnessB"		"0.100000"
+	"g_flTintColorB"		"[1.000000 1.000000 1.000000 0.000000]"
+	"g_vTexCoordScale2"		"[2.500 2.500]"
+	"TextureAmbientOcclusionB"		"materials/fw_grass/fw_grass_ambientocclusion.png"
+	"TextureBlendMaskB"		"materials/fw_grass/fw_grass_height.png"
+	"TextureColorB"		"materials/fw_grass/fw_grass_basecolor.png"
+	"TextureMetalnessB"		"[0.649000 0.649000 0.649000 0.000000]"
+	"TextureNormalB"		"materials/fw_grass/fw_grass_normal.png"
+	"TextureRoughnessB"		"materials/fw_grass/fw_grass_roughness.png"
+	"TextureTintMaskB"		"[0.000000 0.000000 0.000000 0.000000]"
+	"g_nScaleTexCoordUByModelScaleAxis"		"0"
+	"g_nScaleTexCoordVByModelScaleAxis"		"0"
+	"g_vTexCoordOffset"		"[0.000 0.000]"
+	"g_vTexCoordScale"		"[1.000 1.000]"
+	"g_vTexCoordScrollSpeed"		"[0.000 0.000]"
 }

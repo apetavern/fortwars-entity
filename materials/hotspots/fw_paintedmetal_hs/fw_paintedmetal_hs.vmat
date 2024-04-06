@@ -1,55 +1,30 @@
-// THIS FILE IS AUTO-GENERATED
-
-Layer0
+"Layer0"
 {
-	shader "complex.vfx"
-
-	//---- Color ----
-	F_TINT_MASK 1
-
-	//---- PBR ----
-	F_METALNESS_TEXTURE 1
-	F_SPECULAR 1
-
-	//---- Ambient Occlusion ----
-	g_flAmbientOcclusionDirectDiffuse "0.000"
-	g_flAmbientOcclusionDirectSpecular "0.000"
-	TextureAmbientOcclusion "materials/hotspots/fw_paintedmetal_hs/atlastsheet_fw_paintedmetal_hs_ao.png"
-
-	//---- Color ----
-	g_flModelTintAmount "1.000"
-	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "[1.000000 1.000000 1.000000 0.000000]"
-	TextureTintMask "materials/hotspots/fw_paintedmetal_hs/fw_paintedmetal_m.png"
-
-	//---- Fade ----
-	g_flFadeExponent "1.000"
-
-	//---- Fog ----
-	g_bFogEnabled "1"
-
-	//---- Lighting ----
-	g_flDirectionalLightmapMinZ "0.050"
-	g_flDirectionalLightmapStrength "1.000"
-
-	//---- Metalness ----
-	TextureMetalness "[1.000000 1.000000 1.000000 0.000000]"
-
-	//---- Normal ----
-	TextureNormal "materials/hotspots/fw_paintedmetal_hs/atlastsheet_fw_paintedmetal_hs_Normal.png"
-
-	//---- Roughness ----
-	TextureRoughness "materials/hotspots/fw_paintedmetal_hs/atlastsheet_fw_paintedmetal_hs_Rough.png"
-
-	//---- Texture Coordinates ----
-	g_nScaleTexCoordUByModelScaleAxis "0"
-	g_nScaleTexCoordVByModelScaleAxis "0"
-	g_vTexCoordOffset "[0.000 0.000]"
-	g_vTexCoordScale "[1.000 1.000]"
-	g_vTexCoordScrollSpeed "[0.000 0.000]"
-
-	ToolAttributes
+	"shader"		"shaders/complex.shader"
+	"F_TINT_MASK"		"1"
+	"F_METALNESS_TEXTURE"		"1"
+	"F_SPECULAR"		"1"
+	"g_flAmbientOcclusionDirectDiffuse"		"0.000000"
+	"g_flAmbientOcclusionDirectSpecular"		"0.000000"
+	"TextureAmbientOcclusion"		"materials/hotspots/fw_paintedmetal_hs/atlastsheet_fw_paintedmetal_hs_ao.png"
+	"g_flModelTintAmount"		"1.000000"
+	"g_vColorTint"		"[1.000000 1.000000 1.000000 0.000000]"
+	"TextureColor"		"[1.000000 1.000000 1.000000 0.000000]"
+	"TextureTintMask"		"materials/hotspots/fw_paintedmetal_hs/fw_paintedmetal_m.png"
+	"g_flFadeExponent"		"1.000000"
+	"g_bFogEnabled"		"1"
+	"g_flDirectionalLightmapMinZ"		"0.050000"
+	"g_flDirectionalLightmapStrength"		"1.000000"
+	"TextureMetalness"		"[1.000000 1.000000 1.000000 0.000000]"
+	"TextureNormal"		"materials/hotspots/fw_paintedmetal_hs/atlastsheet_fw_paintedmetal_hs_Normal.png"
+	"TextureRoughness"		"materials/hotspots/fw_paintedmetal_hs/atlastsheet_fw_paintedmetal_hs_Rough.png"
+	"g_nScaleTexCoordUByModelScaleAxis"		"0"
+	"g_nScaleTexCoordVByModelScaleAxis"		"0"
+	"g_vTexCoordOffset"		"[0.000 0.000]"
+	"g_vTexCoordScale"		"[1.000 1.000]"
+	"g_vTexCoordScrollSpeed"		"[0.000 0.000]"
+	"ToolAttributes"
 	{
-		SubrectDefinition "materials/hotspots/fw_wood_hs/fw_wood_hs.rect"
+		"SubrectDefinition"		"materials/hotspots/fw_wood_hs/fw_wood_hs.rect"
 	}
 }

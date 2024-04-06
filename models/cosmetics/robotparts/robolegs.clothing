@@ -1,16 +1,12 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
 {
-	data = 
-	{
-		Title = "Robot Legs"
-		Subtitle = "they make you go fast and jump high"
-		Category = "Bottoms"
-		Model = resource:"models/cosmetics/robotparts/robolegs.vmdl"
-		SkinMaterial = null
-		EyesMaterial = null
-		MaterialGroup = ""
-		SlotsUnder = "LeftThigh, RightThigh, LeftKnee, RightKnee, LeftShin, RightShin, LeftFoot, RightFoot, Waist"
-		SlotsOver = "LeftKnee, RightKnee, LeftFoot, RightFoot"
-		HideBody = "Legs, Feet"
-	}
+	"Title": "Robot Legs",
+	"Subtitle": "they make you go fast and jump high",
+	"Category": "Bottoms",
+	"Model": "models/cosmetics/robotparts/robolegs.vmdl",
+	"SkinMaterial": null,
+	"EyesMaterial": null,
+	"MaterialGroup": "",
+	"SlotsUnder": "LeftThigh, RightThigh, LeftKnee, RightKnee, LeftShin, RightShin, LeftFoot, RightFoot, Waist",
+	"SlotsOver": "LeftKnee, RightKnee, LeftFoot, RightFoot",
+	"HideBody": "Legs, Feet"
 }
